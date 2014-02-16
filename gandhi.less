@@ -1,6 +1,34 @@
 /* CSS declarations go here */
 .flow {
-	position: relative;
-	font-family: Helvetica;
-	font-size: 14px;
+  position: relative;
+  font-family: Helvetica;
+  font-size: 14px;
+
+  .link {
+    cursor: pointer;
+    fill: none;
+    stroke: #ccc;
+    stroke-width: 2px;
+  }
+
+  .node {
+    cursor: pointer;
+
+    > rect {
+      fill: #81ade2;
+    }
+
+    > circle {
+      cursor: move;
+      fill: #81ade2;
+      stroke: #fff;
+      stroke-width: 2;
+      opacity: 0;
+    }
+
+    &:hover > circle {
+      opacity: 1;
+    }
+  }
+
 }

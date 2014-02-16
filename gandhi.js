@@ -32,7 +32,7 @@ if (Meteor.isClient) {
       ]
     },
     "73d6a11b3c13e868bb9fb284": {
-      title: "Rejected (after Board 1)",
+      title: "Rejected",
       next: []
     },
     "ebcf121a5107f9e0be547d5d": {
@@ -55,7 +55,7 @@ if (Meteor.isClient) {
       ]
     },
     "a6118a4991705414ce20ec0e": {
-      title: "Rejected (after Board 2)",
+      title: "Rejected",
       next: []
     },
     "aac2d5537a8e52a0d811cab2": {
@@ -73,21 +73,14 @@ if (Meteor.isClient) {
 
   Template.hello.rendered = function(){
 
-    // relate nodes
-    for(key in flow){
-      var node = flow[key];
-
-      if(!node.previous)
-        node.previous = [];
-
-      node.next.forEach(function(id, i, list){
-        var next = list[i] = flow[id];
-        if(next.previous)
-          next.previous.push(node);
-        else
-          next.previous = [node]
-      })
-    };
+    var options = {
+      nodeWidth: 140,
+      nodeHeight: 36,
+      nodeMarginX: 20,
+      nodeMarginY: 10,
+      nodeRadius: 5,
+      circleRaduis: 6
+    }
 
     // find the distances of all upstream path
     function upstream(node){
@@ -127,69 +120,20 @@ if (Meteor.isClient) {
       return node.downstream;
     };
 
-    // find the distances of all upstream divergences
-    function divergences(node){
-      if(node.divergences)
-        return node.divergences;
-
-      // if this is a head node
-      if(node.previous.length == 0)
-        return node.divergences = [];
-
-      node.divergences = [];
-      node.previous.forEach(function(previous){
-        divergences(previous).forEach(function(distance){
-          if(node.divergences.indexOf(distance) == -1)
-            node.divergences.push(distance+1);
-        })
-      });
-
-      // if the flow diverges here
-      if(node.next.length > 1)
-        node.divergences.push(0)
-
-      return node.divergences;
-    };
-
-    // find the distances of all downstream convergences
-    function convergences(node){
-      if(node.convergences)
-        return node.convergences;
-
-      // if this is a tail node
-      if(node.next.length == 0)
-        return node.convergences = [];
-
-      node.convergences = [];
-      node.next.forEach(function(next){
-        convergences(next).forEach(function(distance){
-          if(node.convergences.indexOf(distance) == -1)
-            node.convergences.push(distance+1);
-        })
-      });
-
-      // if the flow converges here
-      if(node.previous.length > 1)
-        node.convergences.push(0)
-
-      return node.convergences;
-    };
-
     function calculateX(node){
-      node.x = Math.max.apply(Math, node.upstream);
+      node.x = Math.max.apply(Math, node.upstream) * (options.nodeWidth + options.nodeMarginX * 2);
     }
-
 
     function calculateScore(node){
       node.score = node.upstream.reduce(function(a,b){return a+b;})+node.downstream.reduce(function(a,b){return a+b;});
     };
 
-
     function calculateY(node, level){
-      if(node.y != null)
+      if(node.level != null)
         return;
 
-      node.y = level;
+      node.level = level;
+      node.y = -level * (options.nodeHeight + options.nodeMarginY * 2);
 
       node.next.sort(function(a,b){
         return a.score < b.score ? 1 : -1;
@@ -204,15 +148,31 @@ if (Meteor.isClient) {
       });
     };
 
-    var flowArray = [];
+    var nodes = [];
+    var links = [];
+
+    // relate nodes
+    for(key in flow){
+      var node = flow[key];
+
+      if(!node.previous)
+        node.previous = [];
+
+      node.next.forEach(function(id, i, list){
+        // build the relationships
+        var next = list[i] = flow[id];
+        if(next.previous)
+          next.previous.push(node);
+        else
+          next.previous = [node]
+      })
+    };
 
     // calculate distances
     for(key in flow){
       var node = flow[key];
       upstream(node);
       downstream(node);
-      // divergences(node);
-      // convergences(node);
 
       // calculate x
       calculateX(node);
@@ -220,61 +180,102 @@ if (Meteor.isClient) {
       // calculate score from total upstream and downstream
       calculateScore(node);
 
-      // we need flow as an array for d3
-      flowArray.push(node)
+      // add node to nodes array
+      nodes.push(node);
     };
 
-    flowArray = flowArray.sort(function(a,b){
+    // sort by score
+    nodes.sort(function(a,b){
       return a.score < b.score ? 1 : -1;
     });
 
+    // assign y values, beginning with the lowest score
+    calculateY(nodes[0], 0);
 
-    calculateY(flowArray[0], 0);
+    // build links
+    for(key in flow){
+      var node = flow[key];
+      node.next.forEach(function(next){
+        links.push({
+          // we need to swap "x" and "y" so d3's `diagonal` works horizontally
+          source: {
+            y: node.x + options.nodeWidth/2,
+            x: node.y
+          },
+          target: {
+            y: next.x - options.nodeWidth/2,
+            x: next.y
+          }
+        });
+      })
+    }
+
+
+    // ALL THE DRAWING HAPPENS HERE
+
+    var nodeConnector = d3.behavior.drag()
+      // .origin(Object)
+      .on("dragstart", function(d){
+        d3.select(this)
+      }).on("drag", function(d){
+        d3.select(this)
+          .attr("cx", d3.event.x)
+          .attr("cy", d3.event.y);
+      });
+
+
 
 
     var baseSvg = d3.select('.flow').append("svg")
     .attr("width", 2000)
-    .attr("height", 300)
+    .attr("height", 300);
 
-    var svgGroup = baseSvg.append("g")
-      .attr("transform", function(d){ return "translate(100, 200)"})
+    var linkGroup = baseSvg.append("g")
+      .attr("transform", function(d){ return "translate(100, 200)"});
 
-    var node = svgGroup.selectAll("g.node").data(flowArray);
+    var nodeGroup = baseSvg.append("g")
+      .attr("transform", function(d){ return "translate(100, 200)"});
+
+
+    var diagonal = d3.svg.diagonal().projection(function(d) { return [d.y , d.x]; });
+
+    var link = linkGroup.selectAll(".link")
+      .data(links)
+      .enter().append("path")
+      .attr("class", "link")
+      .attr("d", diagonal);
+
+    var node = nodeGroup.selectAll("g.node").data(nodes);
 
     var nodeEnter = node.enter().append("g")
       .attr("class", "node")
       .attr("transform", function(d) {
-        return "translate(" + (d.x * 200) + "," + (-d.y * 40) + ")";
+        return "translate(" + d.x + "," + d.y + ")";
+      })
+      .on('click', function(d, i){
+        console.log(d.title)
       })
 
     nodeEnter.append("rect")
-      .attr("width", 140)
-      .attr("stroke", "#fff")
-      .attr("stroke-width", "2")
-      .attr("height", 24)
-      .attr("rx", 5)
-      .attr("ry", 5)
-      .attr("x", -70)
-      .attr("y",-12)
-      .style("fill", "#81ade2");
+      .attr("width", options.nodeWidth)
+      .attr("height", options.nodeHeight)
+      .attr("rx", options.nodeRadius)
+      .attr("ry", options.nodeRadius)
+      .attr("x", options.nodeWidth/-2)
+      .attr("y", options.nodeHeight/-2)
 
     nodeEnter.append("circle")
-      .attr("width", 140)
-      .attr("stroke", "#fff")
-      .attr("stroke-width", "2")
-      .attr("cx", 70)
+      .attr("class", "target")
+      .attr("cx", options.nodeWidth/-2)
       .attr("cy", 0)
-      .attr("r", 6)
-      .style("fill", "#81ade2");
+      .attr("r", options.circleRaduis)
 
     nodeEnter.append("circle")
-      .attr("width", 140)
-      .attr("stroke", "#fff")
-      .attr("stroke-width", "2")
-      .attr("cx", -70)
+      .attr("class", "source")
+      .attr("cx", options.nodeWidth/2)
       .attr("cy", 0)
-      .attr("r", 6)
-      .style("fill", "#81ade2");
+      .attr("r", options.circleRaduis)
+      .call(nodeConnector);
 
     nodeEnter.append("text")
       .attr("dy", 5)
@@ -282,14 +283,6 @@ if (Meteor.isClient) {
       .text(function(d) {
         return d.title;
       })
-      .style("fill-opacity", 1);
-
-    nodeEnter.append("path")
-      .attr("d", "M70 0 C 70 0, 95 0, 100 -20 S 110 -40, 130 -40")
-      .attr("stroke", "#2A557C")
-      .attr("stroke-width", "2")
-      .attr("fill", "transparent")
-
 
 
 
