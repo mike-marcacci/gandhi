@@ -15,15 +15,30 @@
     cursor: pointer;
 
     > rect {
-      fill: #81ade2;
+      fill: #A1B1C5;
+      stroke: #fff;
+      stroke-width: 2;
     }
 
     > circle {
       cursor: move;
-      fill: #81ade2;
+      fill: #A1B1C5;
       stroke: #fff;
       stroke-width: 2;
       opacity: 0;
+    }
+
+    .text > div {
+      text-align: center;
+      font-size: 14px;
+      padding: 10px 5px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  
+    &.private {
+      opacity: .5;
     }
 
     &:hover > circle {
