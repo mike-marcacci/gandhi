@@ -1,8 +1,42 @@
 /* CSS declarations go here */
-.flow {
+.flow-container {
   position: relative;
   font-family: Helvetica;
   font-size: 14px;
+  position: relative;
+
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 30px;
+    background: linear-gradient(to right, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%)
+  }
+
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 30px;
+    background: linear-gradient(to left, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%)
+  }
+
+  > div {
+    max-width: 100%;
+    overflow: auto;
+    padding: 10px;
+  }
+
+
+}
+
+.flow {
 
   .link {
     cursor: pointer;
@@ -28,22 +62,31 @@
       opacity: 0;
     }
 
-    .text > div {
-      text-align: center;
-      font-size: 14px;
-      padding: 10px 5px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
+    .text {
+      body {
+        padding: 0;
+        margin: 0;
+      }
+      div {
+        text-align: center;
+        font-size: 14px;
+        line-height: 16px;
+        padding: 10px 5px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        vertical-align: middle;
+      }
+    } 
   
     &.private {
-      opacity: .5;
+      > rect {
+        fill: rgb(204, 204, 204);
+      }
     }
 
     &:hover > circle {
       opacity: 1;
     }
   }
-
 }

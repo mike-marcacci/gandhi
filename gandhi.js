@@ -374,9 +374,10 @@ if (Meteor.isClient) {
       .attr("ry", options.nodeRadius)
       .attr("x", options.nodeWidth/-2)
       .attr("y", options.nodeHeight/-2)
-      .html(function(d) {
-        return '<div>'+d.title+'</div>';
-      })
+      .append("xhtml:body")
+        .html(function(d) {
+          return '<div>'+d.title+'</div>';
+        })
 
 
 
