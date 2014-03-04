@@ -1,23 +1,22 @@
 if (Meteor.isClient) {
   Template.flow.rendered = function(){
 
+    var self = this;
+
     if (self.drawer)
       return;
 
+    var options = {
+      mode: 'private',
+      nodeWidth: 140,
+      nodeHeight: 36,
+      nodeMarginX: 20,
+      nodeMarginY: 10,
+      nodeRadius: 5,
+      circleRaduis: 6
+    }
 
-    self.drawer = Meteor.autorun(function() {
-
-      var flow = Session.get('flow');
-
-      var options = {
-        mode: 'private',
-        nodeWidth: 140,
-        nodeHeight: 36,
-        nodeMarginX: 20,
-        nodeMarginY: 10,
-        nodeRadius: 5,
-        circleRaduis: 6
-      }
+    function processData(flow){
 
       // find the distances of all upstream path
       function upstream(node){
@@ -195,6 +194,34 @@ if (Meteor.isClient) {
         })
       }
 
+      return {
+        nodes: nodes,
+        links: links
+      }
+    }
+
+
+
+
+
+
+
+
+
+
+
+    var baseSvg = d3.select('#flow').append("svg")
+    var linkGroup = baseSvg.append("g")
+    var nodeGroup = baseSvg.append("g")
+
+
+    self.drawer = Meteor.autorun(function() {
+
+      flow = Session.get('flow');
+      var data = processData(flow);
+      var nodes = data.nodes;
+      var links = data.links;
+
 
       // ALL THE DRAWING HAPPENS HERE
 
@@ -223,15 +250,9 @@ if (Meteor.isClient) {
       }
 
 
-      var baseSvg = d3.select('.flow').append("svg")
-      .attr("width", getWidth())
-      .attr("height", getHeight());
-
-      var linkGroup = baseSvg.append("g")
-        .attr("transform", function(d){ return "translate(0, "+(getHeight()-.5*options.nodeHeight-options.nodeMarginY)+")"});
-
-      var nodeGroup = baseSvg.append("g")
-        .attr("transform", function(d){ return "translate(0, "+(getHeight()-.5*options.nodeHeight-options.nodeMarginY)+")"});
+      baseSvg.attr("width", getWidth()).attr("height", getHeight());
+      linkGroup.attr("transform", function(d){ return "translate(0, "+(getHeight()-.5*options.nodeHeight-options.nodeMarginY)+")"});
+      nodeGroup.attr("transform", function(d){ return "translate(0, "+(getHeight()-.5*options.nodeHeight-options.nodeMarginY)+")"});
 
 
       var diagonal = d3.svg.diagonal().projection(function(d) { return [d.y , d.x]; });
@@ -245,15 +266,24 @@ if (Meteor.isClient) {
       var node = nodeGroup.selectAll("g.node").data(nodes);
 
       var nodeEnter = node.enter().append("g")
-        .attr("class", function(d){
+
+      node.attr("class", function(d){
           return 'node' + (d.visible ? ' public' : ' private') + (d.active ? ' active' : '');
         })
         .attr("transform", function(d) {
           return "translate(" + d.x + "," + d.y + ")";
         })
-        .on('click', function(d, i){
-          console.log(d.title)
-        })
+
+      nodeEnter.on('click', function(d, i){
+        var flow = Session.get('flow');
+        _.each(flow, function(v, k, l){
+          v.active = false;
+        });
+        flow[d.id].active = true;
+        Session.set('flow', flow);
+
+        $('#node h1').text(d.title)
+      })
 
       nodeEnter.append("rect")
         .attr("width", options.nodeWidth)
@@ -262,19 +292,6 @@ if (Meteor.isClient) {
         .attr("ry", options.nodeRadius)
         .attr("x", options.nodeWidth/-2)
         .attr("y", options.nodeHeight/-2)
-
-      nodeEnter.append("circle")
-        .attr("class", "target")
-        .attr("cx", options.nodeWidth/-2)
-        .attr("cy", 0)
-        .attr("r", options.circleRaduis)
-
-      nodeEnter.append("circle")
-        .attr("class", "source")
-        .attr("cx", options.nodeWidth/2)
-        .attr("cy", 0)
-        .attr("r", options.circleRaduis)
-        .call(nodeConnector);
 
       nodeEnter.append("foreignObject")
         .attr("class", "text")
@@ -285,9 +302,31 @@ if (Meteor.isClient) {
         .attr("x", options.nodeWidth/-2)
         .attr("y", options.nodeHeight/-2)
         .append("xhtml:body")
-          .html(function(d) {
-            return '<div>'+d.title+'</div>';
-          })
+        .html(function(d) {
+          return '<div>'+d.title+'</div>';
+        })
+      node.select("foreignObject.text")
+        .attr("width", options.nodeWidth)
+        .attr("height", options.nodeHeight)
+        .attr("rx", options.nodeRadius)
+        .attr("ry", options.nodeRadius)
+        .attr("x", options.nodeWidth/-2)
+        .attr("y", options.nodeHeight/-2)
+
+      nodeEnter.append("circle")
+        .attr("class", "target")
+      node.select("circle.target")
+        .attr("cx", options.nodeWidth/-2)
+        .attr("cy", 0)
+        .attr("r", options.circleRaduis)
+
+      nodeEnter.append("circle")
+        .attr("class", "source")
+      node.select("circle.source")
+        .attr("cx", options.nodeWidth/2)
+        .attr("cy", 0)
+        .attr("r", options.circleRaduis)
+        .call(nodeConnector);
 
 
     });
