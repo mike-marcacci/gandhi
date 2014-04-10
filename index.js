@@ -1,6 +1,8 @@
 'use strict';
 
-var express = require('express');
+var app = require('express')();
+
+var api = require('./lib/api/index.js')(config.api);
 
 // set up the app
 
