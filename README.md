@@ -1,4 +1,4 @@
 gandhi
 ======
 
-Open source, online, realtime grant management system.
+Open source, online, grant management system.
