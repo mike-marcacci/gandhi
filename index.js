@@ -1,15 +1,30 @@
 'use strict';
 
-var app = require('express')();
+var express = require('express'); require('express-namespace');
+var fs = require('fs');
 
-var api = require('./lib/api/index.js')(config.api);
+var config = require('./config.json');
+var app = express();
 
-// set up the app
+// components
+var components = {};
+require("fs").readdirSync(__dirname + '/components').forEach(function(dir){
 
-// set up the API
+	// require them server side
+	if(fs.existsSync(dir+'/api/index.js')){
+		components[dir] = require(__dirname + '/components/' + dir+'/api/index.js');
+	}
 
-// set up each component
+	// serve them for client side
+	if(fs.existsSync(dir+'/portal')){
+		app.use('/components/'+dir, express.static(__dirname + '/components/'+dir+'/portal'));
+	}
+});
 
-// set up the app server
+// add the api
+app.namespace('/api',function(){ require('./api/index.js')(config, app, components); })
 
-// run the app
+// serve the portal
+app.use(express.static(__dirname + '/portal/'));
+
+app.listen(3000);

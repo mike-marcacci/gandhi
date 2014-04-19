@@ -12,7 +12,7 @@ module.exports = function(options, max, min, idleTimeoutMillis) {
 		destroy: function(connection) {
 			return connection.close();
 		},
-		log: true,
+		log: false,
 		min: min || 2,
 		max: max || 10,
 		idleTimeoutMillis: idleTimeoutMillis || 30000
