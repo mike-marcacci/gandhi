@@ -123,8 +123,8 @@ module.exports = function(config, app, resources){
 
 					var user = result.new_val;
 
-					// if not currently logged, authenticate as this user
-					var meta = req.headers.authentication ? {} : {token: jwt.sign(user, config.auth.secret, { expiresInMinutes: 24*60 })};
+					// if this user just edited his own profile, update his token
+					var meta = (req.user.id == user.id) ? {} : {token: jwt.sign(user, config.auth.secret, { expiresInMinutes: 24*60 })};
 
 					// generate a token for the newly created user
 					return res.data(203, user, meta);
