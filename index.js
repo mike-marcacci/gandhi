@@ -1,4 +1,6 @@
-'use strict';
+// 'use strict';
+
+global.console = require('winston');
 
 var express = require('express'); require('express-namespace');
 var fs = require('fs');
@@ -22,7 +24,7 @@ require("fs").readdirSync(__dirname + '/components').forEach(function(dir){
 });
 
 // add the api
-app.namespace('/api',function(){ require('./api/index.js')(config, app, components); })
+require('./api/index.js')(config, app, components);
 
 // serve the portal
 app.use(express.static(__dirname + '/portal/'));

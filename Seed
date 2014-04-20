@@ -1,0 +1,46 @@
+{
+	"title": "The Psychology of Cuteness",
+	"profile": {
+		"pi": {
+			"name": "Mike Marcacci",
+			"department": "Office of Awesome",
+			"rank": "Dude"
+		},
+		"ci": [
+		{
+			"name": "Dustin Towery",
+			"department": "Cool Department",
+			"rank": "Dude"
+		}
+		],
+		"focus": ["Information","Cognition"],
+		"contant": {
+			"name": "Mike Marcacci",
+			"phone": "6192276795",
+			"email": "mike.marcacci@gmail.com"
+		},
+		"amount": 15000
+	}
+}
+
+{
+	"Executive-Summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget nibh ac sapien volutpat molestie. Maecenas est mi, pellentesque vulputate viverra at, accumsan et est. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nunc eget vestibulum nibh, pretium fermentum metus. Vivamus vulputate blandit diam nec suscipit. Praesent et bibendum neque. Praesent a felis neque. Aenean semper mauris at cursus pretium. Duis porttitor eu dui vel posuere. Duis volutpat sem id bibendum aliquet.",
+	"Short-Answer-1": "What is the Big Question you are proposing to address?",
+	"Short-Answer-2": "How can the project's potential inform an  research agenda?",
+	"Short-Answer-3": "What are the proposed activities and why are they crucial for accomplishing the goals of the project?",
+	"Short-Answer-4": "What is the project team’s capacity for success, including relevant expertise and access to resources?",
+	"Outputs-and-Outcomes": "It's going to do awesome!",
+	"CVs": [
+		{
+			"Investigator": "Mike Marcacci",
+			"CV": "I've done a ton of stuff"
+		},
+		{
+			"Investigator": "Dustin Towery",
+			"CV": "I've done a ton of different stuff"
+		}
+	],
+	"Budget": "$1500 for food",
+	"Budget-Narrative": "We eat lots of food!"
+}
+

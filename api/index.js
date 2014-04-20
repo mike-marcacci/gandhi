@@ -2,9 +2,8 @@
 
 var express = require('express');
 var bodyParser = require('body-parser');
-var jwt = require('jsonwebtoken');
 var expressJwt = require('express-jwt');
-var r = require('rethinkdb');
+
 
 module.exports = function(config, app, components){
 	var resources = {
@@ -14,11 +13,16 @@ module.exports = function(config, app, components){
 	// generic middleware
 	app.use(bodyParser());
 
+
+	// add res helpers
+	app.use(require('./lib/util/res.js'));
+
+
 	// add authentication
-	app.use(expressJwt({ secret: config.auth.secret, skip: [config.root+'/token']}));
+	app.use(expressJwt({ secret: config.auth.secret, skip: ['/tokens','/tokens/','/users','/users/']}));
 	app.use(function(err, req, res, next){
 		if (err.constructor.name === 'UnauthorizedError')
-			return res.send(401, {message: 'Unauthorized'});
+			return res.error(401, {message: 'Unauthorized'});
 		next();
 	});
 

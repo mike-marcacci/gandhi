@@ -19,14 +19,17 @@ function encrypt(password, options){
     options.salt = crypto.randomBytes(64);
   }
 
-  return [generateHash(password, options).toString('base64'), options.salt.toString('base64'), options.iterations, options.algo].join(':')
+  return [generateHash(password || new Buffer(''), options).toString('base64'), options.salt.toString('base64'), options.iterations, options.algo].join(':')
 };
 
 function test(password, truth){
+  if(!password || !truth)
+    return false;
+
   var params = truth.split(':');
   var trueKey = new Buffer(params[0], 'base64');
   var options = {
-    salt: new Buffer(params[1], 'base64'),
+    salt: new Buffer(params[1] || '', 'base64'),
     iterations: Number(params[2]),
     keylen: trueKey.length,
     algo: params[3]
