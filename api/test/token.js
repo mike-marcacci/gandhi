@@ -1,6 +1,6 @@
 var assert = require("assert");
 var request = require('request');
-var apiUrl = 'http://localhost:3000';
+var apiUrl = 'http://localhost:3000/api';
 
 describe('Tokens', function(){
 		

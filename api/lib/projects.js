@@ -9,7 +9,7 @@ var schema = require('./schema/project.json');
 
 module.exports = function(config, app, resources){
 
-	app.post('/projects', function(req, res, next){
+	app.post('/api/projects', function(req, res, next){
 
 		// validate the input
 		var err = env.validate(schema, req.body, {checkRequired: true, useDefault: true});
@@ -41,7 +41,7 @@ module.exports = function(config, app, resources){
 		});
 	});
 
-	app.get('/projects', expressJwt({ secret: config.auth.secret }), function(req, res, next){
+	app.get('/api/projects', expressJwt({ secret: config.auth.secret }), function(req, res, next){
 		resources.db.acquire(function(err, connection) {
 			if(err)
 				return res.error(err);
@@ -65,7 +65,7 @@ module.exports = function(config, app, resources){
 		});
 	});
 
-	app.get('/project/:id', function(req, res, next){
+	app.get('/api/project/:id', function(req, res, next){
 		resources.db.acquire(function(err, connection) {
 			if(err)
 				return res.error(err);
@@ -79,7 +79,7 @@ module.exports = function(config, app, resources){
 		});
 	});
 
-	app.patch('/project/:id', function(req, res, next){
+	app.patch('/api/project/:id', function(req, res, next){
 
 		// validate the input
 		var err = env.validate(schema, req.body, {checkRequired: false, useDefault: true});

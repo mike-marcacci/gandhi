@@ -19,7 +19,7 @@ module.exports = function(config, app, components){
 
 
 	// add authentication
-	app.use(expressJwt({ secret: config.auth.secret, skip: ['/tokens','/tokens/','/users','/users/']}));
+	app.use(expressJwt({ secret: config.auth.secret, skip: ['/api/tokens','/api/tokens/','/api/users','/api/users/']}));
 	app.use(function(err, req, res, next){
 		if (err.constructor.name === 'UnauthorizedError')
 			return res.error(401, {message: 'Unauthorized'});

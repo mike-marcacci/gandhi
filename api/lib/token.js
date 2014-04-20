@@ -3,7 +3,7 @@ var passwords = require('./util/passwords.js');
 var jwt = require('jsonwebtoken');
 
 module.exports = function(config, app, resources){
-	app.post('/tokens', function(req, res, next){
+	app.post('/api/tokens', function(req, res, next){
 
 		// validate request
 		if (!req.body.email || !req.body.password)

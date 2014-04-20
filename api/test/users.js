@@ -1,6 +1,6 @@
 var assert = require("assert");
 var request = require('request');
-var apiUrl = 'http://localhost:3000';
+var apiUrl = 'http://localhost:3000/api';
 
 
 request({ uri: apiUrl + '/tokens', form: {email: 'test@gandhi.io', password: '123456'}, method: 'post', json: true}, function(err, res, body) {
