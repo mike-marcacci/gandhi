@@ -11,6 +11,19 @@ module.exports = function(config, app, components){
 		db: require('./lib/util/db.js')(config.db)
 	}
 
+	app.use(function(req, res, next) {
+		res.header('Access-Control-Allow-Origin', '*');
+		res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,PATCH,DELETE,OPTIONS');
+		res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+
+		// intercept OPTIONS method
+		if ('OPTIONS' == req.method) {
+			res.send(200);
+		} else {
+			next();
+		}
+	});
+
 	// generic middleware
 	app.use(bodyParser());
 
@@ -52,10 +65,10 @@ module.exports = function(config, app, components){
 
 
 	// projects
-	// require('./lib/users.js')(config, app, resources);
+	require('./lib/projects.js')(config, app, resources);
 
 
 	// flows
-	// require('./lib/users.js')(config, app, resources);
+	// require('./lib/flows.js')(config, app, resources);
 
 };

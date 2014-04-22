@@ -5,14 +5,14 @@ var password = require('./util/passwords.js');
 var expressJwt = require('express-jwt');
 
 var env = jjv();
-var schema = require('./schema/project.json');
+// var schema = require('./schema/project.json');
 
 module.exports = function(config, app, resources){
 
 	app.post('/api/projects', function(req, res, next){
 
 		// validate the input
-		var err = env.validate(schema, req.body, {checkRequired: true, useDefault: true});
+		// var err = env.validate(schema, req.body, {checkRequired: true, useDefault: true});
 
 		if(err){
 			err.message = "Invalid request";
@@ -46,7 +46,7 @@ module.exports = function(config, app, resources){
 			if(err)
 				return res.error(err);
 					
-			r.table('projects').run(connection, function(err, cursor){
+			r.table('projects').filter({user_id: req.user.id}).run(connection, function(err, cursor){
 				if(err){
 					resources.db.release(connection);
 					return res.error(err);

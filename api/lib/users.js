@@ -31,8 +31,10 @@ module.exports = function(config, app, resources){
 
 			// verify email is not already taken
 			r.table('users').filter({email: req.body.email}).limit(1).run(connection, function(err, cursor){
-				if(err)
+				if(err) {
+					resources.db.release(connection);
 					return res.error(err);
+				}
 
 				if(cursor.hasNext())
 					return res.error(409, "An account already exists with this email");
@@ -92,6 +94,7 @@ module.exports = function(config, app, resources){
 
 			// get the user by id
 			r.table('users').get(id).run(connection, function(err, user){
+				resources.db.release(connection);
 				return res.data(200, user);
 			});
 		});
@@ -118,16 +121,18 @@ module.exports = function(config, app, resources){
 
 			// get the user by id
 			r.table('users').get(id).update(req.body, {returnVals: true}).run(connection, function(err, result){
+				resources.db.release(connection);
+				
 				if(err)
 					return res.error(err);
 
-					var user = result.new_val;
+				var user = result.new_val;
 
-					// if this user just edited his own profile, update his token
-					var meta = (req.user.id == user.id) ? {} : {token: jwt.sign(user, config.auth.secret, { expiresInMinutes: 24*60 })};
+				// if this user just edited his own profile, update his token
+				var meta = (req.user.id == user.id) ? {} : {token: jwt.sign(user, config.auth.secret, { expiresInMinutes: 24*60 })};
 
-					// generate a token for the newly created user
-					return res.data(203, user, meta);
+				// generate a token for the newly created user
+				return res.data(203, user, meta);
 			});
 		});
 	});

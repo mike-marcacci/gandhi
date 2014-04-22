@@ -62,25 +62,30 @@ module.exports = function(req, res, next){
 	// time the request
 	req.start = process.hrtime();
 
-	res.error = function error(code, message, raw){
-		if(!message){
-			if(typeof code == 'number'){
-				message = error_codes[code];
+	res.error = function error(code, err, message){
+		if(!err){
+			if(message){
+				err = message;
+			} else if(typeof code == 'number'){
+				err = message = error_codes[code];
 			} else {
-				message = code;
+				err = message = code;
 				code = 500;
 			}
+		} else if(!message){
+			message = err.message || error_codes[code];
 		}
 
 		// log the error
-		console.error(message);
+		console.error(err);
 
-		// sanitize the message to output, unless flagged to output the raw error
-		if(!raw && typeof message != 'string')
-			message = error_codes[code];
 
 		if(typeof message == 'string')
 			message = {message: message};
+
+		if(req.start)
+			message.took = (process.hrtime(req.start)[1] / 1000000).toFixed(4) + "ms";
+
 
 		res.send(code, message);
 	};
