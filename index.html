@@ -1,12 +1,30 @@
 <!DOCTYPE html>
-<html lang="en" ngl-app="gandhi">
+<html lang="en" ng-app="portal">
 	<head>
-		<link rel="stylesheet" href="assets/stylesheets/index.css">
+		<link rel="stylesheet" href="assets/style/index.css">
+		<script type="text/javascript" src="assets/bower/lodash/dist/lodash.js"></script>
+		<script type="text/javascript" src="assets/bower/angular/angular.js"></script>
+		<script type="text/javascript" src="assets/bower/angular-ui-router/release/angular-ui-router.js"></script>
+		<script type="text/javascript" src="assets/bower/restangular/dist/restangular.js"></script>
+		<script type="text/javascript" src="app/index.js"></script>
 	</head>
 	<body>
-		
-		<script type="text/javascript" src="assets/bower/angular/angular.js"></script>
-		<script type="text/javascript" src="assets/bower/angular-ui-router/angular-ui-router.js"></script>
-		<script type="text/javascript" src="assets/scripts/index.js"></script>
+		<nav ng-controller="navigation">
+			{{ user.id }}
+			<ul>
+				<li ui-sref-active="active"><a ui-sref="dashboard">Dashboard</a></li>
+				<li ui-sref-active="active"><a ui-sref="user">My Account</a></li>
+			</ul>
+			Projects:
+			<ul>
+				<li ui-sref-active="active" ng-repeat="program in programs">
+					<a ui-sref="program({ id: program.id })">{{ program.title }}</a>
+					<ul>
+						<li ui-sref-active="active" ng-repeat="project in program.projects"><a ui-sref="project({ id: project.id })">{{ project.title }}</a>
+					</ul>
+				</li>
+			</ul>
+		</nav>
+		<div ui-view></div>
 	</body>
 </html>
