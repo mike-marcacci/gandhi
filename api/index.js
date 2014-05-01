@@ -1,7 +1,8 @@
 'use strict';
 
+var _ = require('lodash');
+var fs = require('fs');
 var express = require('express');
-var bodyParser = require('body-parser');
 var expressJwt = require('express-jwt');
 var pathToRegex = require('./lib/util/pathToRegex.js');
 
@@ -25,7 +26,7 @@ module.exports = function(config, app, components){
 	});
 
 	// generic middleware
-	app.use(bodyParser());
+	app.use(express.bodyParser());
 
 
 	// add res helpers
@@ -70,5 +71,29 @@ module.exports = function(config, app, components){
 
 	// flows
 	// require('./lib/flows.js')(config, app, resources);
+
+	app.post('/files/', function(req, res){
+
+		var response = {};
+		_.each(req.files, function(file){
+
+			console.log(file)
+
+			var data = fs.readFileSync(file.path);
+
+			// TODO: hash the file
+
+			response[file.fieldName] = {
+				path: '/files/' + Date.now() + '-' + file.originalFilename
+			};
+
+			fs.writeFileSync(__dirname + response[file.fieldName].path);
+		});
+
+		// TODO: record this in the DB along with the user, etc
+
+		res.send(200, response);
+
+	});
 
 };

@@ -138,4 +138,47 @@ module.exports = function(config, app, resources){
 			});
 		});
 	});
+
+	app.post('/api/project/:id', function(req, res, next){
+
+		// validate the input
+		// var err = env.validate(schema, req.body, {checkRequired: false, useDefault: true});
+
+		// if(err){
+		// 	err.message = "Invalid request";
+		// 	return res.error(400, err, true);
+		// }
+
+		resources.db.acquire(function(err, connection) {
+			if(err)
+				return res.error(err);
+
+			// get the project by id
+			r.table('projects').get(req.params.id).run(connection, function(err, project){
+				if(err)
+					return res.error(err);
+
+				if(!project)
+					return res.error(404);
+
+				if(!project.users[req.user.id] && !req.user.admin)
+					return res.error(403);
+
+				// TODO: pass to components.update
+				
+				// update the project
+				r.table('projects').get(req.params.id).update(req.body, {returnVals: true}).run(connection, function(err, result){
+					if(err)
+						return res.error(err);
+
+						// TODO: pass to components.read
+
+						return res.data(200, result.new_val);
+				});
+			});
+		});
+	});
+
+
+
 };
