@@ -3,7 +3,7 @@ angular.module('portal')
 .config(function($stateProvider, $urlRouterProvider, RestangularProvider) {
 
 	$stateProvider
-		.state('apply', {
+		.state('portal.apply', {
 			url: '/apply/:program',
 			templateUrl: 'app/projects/apply.html',
 			resolve: {
@@ -17,7 +17,7 @@ angular.module('portal')
 			}
 		})
 
-		.state('projects', {
+		.state('portal.projects', {
 			url: '/projects/:project',
 			templateUrl: 'app/projects/projects.html',
 			abstract: true,
@@ -41,7 +41,7 @@ angular.module('portal')
 			}
 		})
 
-		.state('projects.stage', {
+		.state('portal.projects.stage', {
 			url: '/stage/:stage',
 			template: '<ng-include src="\'components/\'+component+\'/\'+component+\'.html\'"></ng-include>',
 			controller: function($scope, $stateParams){

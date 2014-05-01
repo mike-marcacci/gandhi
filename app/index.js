@@ -5,7 +5,7 @@ angular.module('portal', [
 ])
 
 .config(function($stateProvider, $urlRouterProvider, RestangularProvider) {
-	$urlRouterProvider.otherwise("/dashboard");
+	$urlRouterProvider.otherwise("/portal");
 
 	RestangularProvider.setBaseUrl('http://localhost:3000/api');
 	RestangularProvider.addFullRequestInterceptor(function(element, operation, route, url, headers, params, httpConfig) {  
@@ -23,15 +23,26 @@ angular.module('portal', [
 	// TODO: this comes from sessionStorage
 	$rootScope.userId = 'a5901ab6-bf17-49cd-981d-c25875aec8e9';
 
-	Restangular.one("users", $rootScope.userId).get().then(function(user){
-		$rootScope.user = user;
-	})
+	// Restangular.one("users", $rootScope.userId).get().then(function(user){
+	// 	$rootScope.user = user;
+	// })
 
 	$rootScope.logout = function(){
 		alert("Logged Out...");
 	}
 
 })
+
+// .run(function($rootScope, validateCookie) {
+//     $rootScope.$on('$routeChangeSuccess', function () {
+//         validateCookie($rootScope);
+//     })
+// })
+// .factory('validateCookie', function($cookieStore, $http){
+//     return function(scope) {
+//         // Validate the cookie here...
+//     }
+// })
 
 .controller('navigation', function($scope, Restangular, $q) {
 

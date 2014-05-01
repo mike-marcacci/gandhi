@@ -1,5 +1,8 @@
 <div ng-controller="Components.BqiSeedApplication">
-	<form ng-submit="submit()">
+
+	<div ng-show="project">Thank you for submitting your application</div>
+
+	<form ng-submit="submit()" ng-hide="project">
 		<label for="title">Proposal Title</label>
 		<input type="text" required name="title" id="title" ng-model="application.title">
 

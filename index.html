@@ -11,7 +11,7 @@
 
 
 		<script type="text/javascript" src="app/index.js"></script>
-		<script type="text/javascript" src="app/dashboard/dashboard.js"></script>
+		<script type="text/javascript" src="app/portal/portal.js"></script>
 		<script type="text/javascript" src="app/users/users.js"></script>
 		<script type="text/javascript" src="app/projects/projects.js"></script>
 
@@ -22,23 +22,6 @@
 		<script type="text/javascript" src="components/message/message.js"></script>
 	</head>
 	<body>
-		<nav ng-controller="navigation">
-			<ul>
-				<li ui-sref-active="active"><a ui-sref="dashboard">Dashboard</a></li>
-				<li ui-sref-active="active"><a ui-sref="user">My Account</a></li>
-				<li ui-sref-active="active"><a href ng-click="logout()">Log Out</a></li>
-			</ul>
-			Projects:
-			<ul>
-				<li ui-sref-active="active" ng-repeat="program in nav">
-					<a ui-sref="programs({ program: program.id })">{{ program.title }}</a>
-					<ul>
-						<li ui-sref-active="active" ng-repeat="project in program.projects"><a ui-sref="projects.stage({ project: project.id, stage: project.flow.active })">{{ project.title || project.id }}</a>
-						<li ui-srec-active="active"><a ui-sref="apply({ program: program.id})">+ Apply</a></li>
-					</ul>
-				</li>
-			</ul>
-		</nav>
 		<div ui-view></div>
 	</body>
 </html>
