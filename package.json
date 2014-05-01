@@ -1,0 +1,19 @@
+{
+  "name": "gandhi",
+  "version": "0.0.1",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "mocha tests/*.js"
+  },
+  "dependencies": {
+    "generic-pool": "~2.0.4",
+    "rethinkdb": "^1.12.0-0",
+    "express": "^3.5.2",
+    "express-namespace": "^0.1.1",
+    "lodash": "^2.4.1"
+  },
+  "devDependencies": {
+    "mocha": "~1.18.2"
+  }
+}
