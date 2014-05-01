@@ -1,43 +1,45 @@
-[{
-  "id": "128f2348-99d4-40a1-b5ab-91d9019f272d",
-  "title": "Open Source Grants",
-  "description": "This is a fund for awesome projects that will change the world!",
-  "open": "Thu Apr 10 2014 02:14:42 GMT-0700 (PDT)",
-  "close": "Thu Apr 17 2014 02:14:42 GMT-0700 (PDT)",
-  "roles": {
-    "owner": {
-      "list": true
+[
+  {
+    "id": "128f2348-99d4-40a1-b5ab-91d9019f272d",
+    "title": "Open Source Grants",
+    "description": "This is a fund for awesome projects that will change the world!",
+    "open": "Thu Apr 10 2014 02:14:42 GMT-0700 (PDT)",
+    "close": "Thu Apr 17 2014 02:14:42 GMT-0700 (PDT)",
+    "roles": {
+      "owner": {
+        "list": true
+      },
+      "reviewer": {
+        "list": true
+      }
     },
-    "reviewer": {
-      "list": true
-    }
-  },
-  "flow": {
-    "stages": {
-      "application": {
-        "id": "application",
-        "description": "Submit the application.",
-        "title": "Application",
-        "component": "application",
-        "next": ["external_review"],
-        "config": {}
-      },
-      "external_review": {
-        "id": "external_review",
-        "component": "review",
-        "description": "Application is critiqued by external reviewers.",
-        "next": ["internal_decision"],
-        "config": {},
-        "title": "External Review"
-      },
-      "internal_decision": {
-        "id": "internal_decision",
-        "component": "task",
-        "description": "Funding decision is made.",
-        "next": [],
-        "config": {},
-        "title": "Internal Decision"
+    "flow": {
+      "stages": {
+        "application": {
+          "id": "application",
+          "description": "Submit the application.",
+          "title": "Application",
+          "component": "application",
+          "next": ["external_review"],
+          "config": {}
+        },
+        "external_review": {
+          "id": "external_review",
+          "component": "review",
+          "description": "Application is critiqued by external reviewers.",
+          "next": ["internal_decision"],
+          "config": {},
+          "title": "External Review"
+        },
+        "internal_decision": {
+          "id": "internal_decision",
+          "component": "task",
+          "description": "Funding decision is made.",
+          "next": [],
+          "config": {},
+          "title": "Internal Decision"
+        }
       }
     }
   }
-}]
+]

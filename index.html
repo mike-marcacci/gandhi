@@ -2,25 +2,39 @@
 <html lang="en" ng-app="portal">
 	<head>
 		<link rel="stylesheet" href="assets/style/index.css">
+		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/ckeditor/4.3.2/ckeditor.js"></script>
 		<script type="text/javascript" src="assets/bower/lodash/dist/lodash.js"></script>
 		<script type="text/javascript" src="assets/bower/angular/angular.js"></script>
 		<script type="text/javascript" src="assets/bower/angular-ui-router/release/angular-ui-router.js"></script>
 		<script type="text/javascript" src="assets/bower/restangular/dist/restangular.js"></script>
+		<script type="text/javascript" src="assets/bower/ng-ckeditor/ng-ckeditor.js"></script>
+
+
 		<script type="text/javascript" src="app/index.js"></script>
+		<script type="text/javascript" src="app/dashboard/dashboard.js"></script>
+		<script type="text/javascript" src="app/users/users.js"></script>
+		<script type="text/javascript" src="app/projects/projects.js"></script>
+
+
+		<!-- TODO: load these programatically via the API -->
+		<script type="text/javascript" src="components/bqi_seed_application/bqi_seed_application.js"></script>
+		<script type="text/javascript" src="components/bqi_seed_supplement/bqi_seed_supplement.js"></script>
+		<script type="text/javascript" src="components/message/message.js"></script>
 	</head>
 	<body>
 		<nav ng-controller="navigation">
-			{{ user.id }}
 			<ul>
 				<li ui-sref-active="active"><a ui-sref="dashboard">Dashboard</a></li>
 				<li ui-sref-active="active"><a ui-sref="user">My Account</a></li>
+				<li ui-sref-active="active"><a href ng-click="logout()">Log Out</a></li>
 			</ul>
 			Projects:
 			<ul>
-				<li ui-sref-active="active" ng-repeat="program in programs">
-					<a ui-sref="program({ id: program.id })">{{ program.title }}</a>
+				<li ui-sref-active="active" ng-repeat="program in nav">
+					<a ui-sref="programs({ program: program.id })">{{ program.title }}</a>
 					<ul>
-						<li ui-sref-active="active" ng-repeat="project in program.projects"><a ui-sref="project({ id: project.id })">{{ project.title }}</a>
+						<li ui-sref-active="active" ng-repeat="project in program.projects"><a ui-sref="projects.stage({ project: project.id, stage: project.flow.active })">{{ project.title || project.id }}</a>
+						<li ui-srec-active="active"><a ui-sref="apply({ program: program.id})">+ Apply</a></li>
 					</ul>
 				</li>
 			</ul>

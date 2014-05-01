@@ -1,79 +1,67 @@
 angular.module('portal', [
-	// 'portal.dashboard',
 	'ui.router',
-	'restangular'
+	'restangular',
+	'ngCkeditor' // TODO: somehow allow components to add their own dependencies
 ])
 
-
-.config(['$stateProvider', '$urlRouterProvider', 'RestangularProvider', function($stateProvider, $urlRouterProvider, RestangularProvider) {
+.config(function($stateProvider, $urlRouterProvider, RestangularProvider) {
 	$urlRouterProvider.otherwise("/dashboard");
 
-	$stateProvider
-		.state('dashboard', {
-			url: "/dashboard",
-			templateUrl: "app/dashboard/dashboard.html"
-		})
-		.state('dashboard.alerts', {
-			url: "/alerts",
-			templateUrl: "app/dashboard/dashboard.alerts.html",
-			controller: function($scope) {
-				$scope.alerts = ["A", "List", "Of", "Items"];
-			}
-		})
-		.state('user', {
-			url: "/user",
-			templateUrl: "app/user/user.html"
-		})
-
-
-	RestangularProvider.setBaseUrl('/api');
+	RestangularProvider.setBaseUrl('http://localhost:3000/api');
 	RestangularProvider.addFullRequestInterceptor(function(element, operation, route, url, headers, params, httpConfig) {  
-	  return {
-	    element: element,
-	    params: params,
-	    headers: headers, // TODO: put JWT here
-	    httpConfig: httpConfig
-	  };
+		return {
+			element: element,
+			params: params,
+			headers: headers, // TODO: put JWT here
+			httpConfig: httpConfig
+		};
 	});
 
+})
+.run(function($rootScope, Restangular) {
 
+	// TODO: this comes from sessionStorage
+	$rootScope.userId = 'a5901ab6-bf17-49cd-981d-c25875aec8e9';
+
+	Restangular.one("users", $rootScope.userId).get().then(function(user){
+		$rootScope.user = user;
+	})
+
+	$rootScope.logout = function(){
+		alert("Logged Out...");
 	}
-])
 
-.factory('user', ['$q', function($q){
-	var deferred = $q.defer();
-	deferred.resolve({"id": "a5901ab6-bf17-49cd-981d-c25875aec8e9"})
-	return deferred.promise;
-}])
+})
 
-.factory('programs',['$http', function($http){
-	return $http({method: 'GET', url: '/fixtures/programs.json'});
-}])
+.controller('navigation', function($scope, Restangular, $q) {
 
+	$scope.nav = {};
 
-.factory('projects',['$http', function($http){
-	return $http({method: 'GET', url: '/fixtures/projects.json'});
-}])
+	$q.all([
+		Restangular.all('programs').getList(),
+		Restangular.one('users', $scope.userId).all('projects').getList()
+	]).then(function(res){
 
-
-.controller('navigation', ['$scope', 'user', 'programs', 'projects', '$q', function($scope, user, programs, projects, $q) {
-	$scope.programs = {};
-	$q.all([programs, projects]).then(function(args){
-		var programs = args[0];
-		var projects = args[1];
-
-		programs.data.forEach(function(program){
-			$scope.programs[program.id] = program;
-			$scope.programs[program.id].projects = {};
+		// add programs to nav
+		res[0].forEach(function(program){
+			$scope.nav[program.id] = {
+				id: program.id,
+				title: program.title,
+				projects: {}
+			}
 		});
 
-		projects.data.forEach(function(project){
-			$scope.programs[project.program_id].projects[project.id] = project;
+		// map user's projects to corresponding program in nav
+		res[1].forEach(function(project){
+			$scope.nav[project.program_id].projects[project.id] = {
+				id: project.id,
+				title: project.title,
+				flow: project.flow
+			};
 		});
-	})
 
-	$scope.user = [];
-	user.then(function(u){
-		$scope.user = u;
-	})
-}])
+	// TODO: hide other ones
+	});
+
+})
+

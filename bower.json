@@ -10,6 +10,7 @@
     "angular": "1.3.x",
     "angular-ui-router": "0.2.x",
     "restangular": "~1.4.0",
-    "lodash": "~2.4.1"
+    "lodash": "~2.4.1",
+    "ng-ckeditor": "~0.2.1"
   }
 }

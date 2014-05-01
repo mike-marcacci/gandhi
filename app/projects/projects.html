@@ -1,0 +1,11 @@
+<h1>{{project.title}}</h1>
+<h2>{{program.title}}</h2>
+<div class="flow">
+	<div ng-repeat="id in program.flow.default" ui-sref-active="active" class="node"><a ui-sref=".stage({stage: id})"><span>{{program.flow.stages[id].title}}</span></a></div>
+</div>
+
+<hr/>
+
+[Project Content Here]
+
+<div ui-view></div>
