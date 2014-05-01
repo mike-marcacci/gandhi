@@ -1,1 +1,34 @@
-asdf
+<div ng-controller="Components.BqiSeedApplication">
+
+	<!-- <div ng-show="project.flow.stages.supplement">Thank you for submitting your supplemental documents.</div> -->
+
+	<form ng-submit="submit()" ng-hide="project.flow.stages.supplement && false">
+		<label>TEAM PUBLICATIONS</label>
+		<p>Please include 5 publications from the research team that are most representative of your research to date. </p>
+		<input type="file" ng-model="supplement.file"/>
+		<input type="file" />
+		<input type="file" />
+		<input type="file" />
+		<input type="file" />
+
+		<label>FIELD PUBLICATIONS</label>
+		<p>In addition, please include 5 publications that are most relevant to the research area that the project will address.</p>
+		<input type="file" />
+		<input type="file" />
+		<input type="file" />
+		<input type="file" />
+		<input type="file" />
+
+		<label>DETAILED BUDGET</label>
+		<p>Please attach a Budget Summary based on the <a href="http://bigquestions.uchicago.edu/sites/531ea09d5aea6d3cd20000ed/assets/536208b05aea6d5873015feb/Template_Budget_Seed.xlsx">Budget Summary Sheet template</a>.  The duration of the project should not exceed 6 months.</p>
+		<input type="file" ng-file-select="addBudget($files)"/>
+
+		<label>BUDGET JUSTIFICATION NARRATIVE</label>
+		<p>Please provide a brief justification for each line item in the proposed Budget. Note that while each investigator must include effort in the budget for his or her proposal, that effort can be completely cost-shared (i.e., the effort can be included in the budget at a cost of $0).</p>
+		<textarea ckeditor ng-model="supplement.budget_narrative"></textarea>
+
+		<br /><br />
+		<input type="submit" value="Submit">
+	</form>
+
+</div>
