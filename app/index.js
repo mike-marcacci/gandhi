@@ -50,21 +50,52 @@ angular.module('portal', [
 		email: 'mike.marcacci@gmail.com',
 		password: '654321',
 		submit: function(){
-			Restangular.service("tokens").post({email: this.email, password: this.password})
+			Restangular.service('tokens').post({email: this.email, password: this.password})
 				.then(function(data){
 					setUser(data.token);
+					$rootScope.login.reset();
 				}, function(err){
+					$rootScope.login.reset();
 					if(err.data && err.data.message)
 						alert(err.data.message);
 					else
 						alert('Unable to log in. Please try again.');
 				})
+		},
+		reset: function(){
+			this.password = '';
+		}
+	}
+
+	$rootScope.signup = {
+		name: 'Mike Marcacci',
+		email: 'mike.marcacci@gmail.com',
+		password: '654321',
+		password2: '654321',
+		submit: function(){
+			if(this.password != this.password2)
+				return alert('Passwords must match.');
+			
+			Restangular.service('users').post({name: this.name, email: this.email, password: this.password})
+				.then(function(data){
+					$rootScope.login.email = $rootScope.signup.email;
+					$rootScope.login.password = $rootScope.signup.password;
+					$rootScope.login.submit();
+					$rootScope.signup.reset();
+				}, function(err){
+					if(err.data && err.data.message)
+						alert(err.data.message);
+					else
+						alert('Unable to sign up. Please try again.');
+				})
+		},
+		reset: function(){
+			this.name = this.email = this.password = this.password2 = '';
 		}
 	}
 
 	$rootScope.logout = function(){
 		delete sessionStorage.token;
-		$rootScope.login.password = '';
 		$rootScope.user = null;
 	}
 
