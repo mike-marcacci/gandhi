@@ -18,7 +18,7 @@ angular.module('portal')
 
 					$q.all([
 						Restangular.all('programs').getList(),
-						Restangular.one('users', newValue.id).all('projects').getList()
+						newValue.getList('projects')
 					]).then(function(res){
 
 						// add programs to nav

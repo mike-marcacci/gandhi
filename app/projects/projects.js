@@ -11,9 +11,18 @@ angular.module('portal')
 					return Restangular.one('programs', $stateParams.program).get();
 				}
 			},
-			controller: function ($scope, $state, program) {
-				$scope.program = program;
-				$scope.stage = program.flow.stages[program.flow.root];
+			controller: function ($scope, $state, $stateParams) {
+				$scope.$watchCollection('programs', function(programs, old) {
+					if(!programs) return;
+
+					programs.get($stateParams.program).then(function(program){
+						$scope.program = program;
+						$scope.stage = program.flow.root;
+
+						var component = program.flow.stages[$scope.stage].component;
+						$scope.component = 'components/'+component+'/'+component+'.html';
+					})
+				})
 			}
 		})
 
@@ -21,19 +30,24 @@ angular.module('portal')
 			url: '/projects/:project',
 			templateUrl: 'app/projects/projects.html',
 			abstract: true,
-			resolve: {
-				project: function(Restangular, $stateParams){
-					return Restangular.one('projects', $stateParams.project).get();
-				},
-				program: function(Restangular, $stateParams){
-					return Restangular.one('projects', $stateParams.project).get().then(function(project){
-						return Restangular.one('programs', project.program_id).get();
+			resolve: {},
+			controller: function ($scope, $state, $stateParams) {
+				$scope.$watchCollection('[projects, programs]', function(newValues, oldValues) {
+					if(!newValues[0] || !newValues[1]) return;
+
+					var projects = newValues[0];
+					var programs = newValues[1];
+
+					// get the correct project
+					projects.get($stateParams.project).then(function(project){
+						$scope.project = project;
+
+						// get the correct program
+						programs.get(project.program_id).then(function(program){
+							$scope.program = program;
+						});
 					})
-				}
-			},
-			controller: function ($scope, $state, program, project) {
-				$scope.program = program;
-				$scope.project = project;
+				});
 
 				$scope.getClass = function(stageId){
 					return '';
@@ -43,10 +57,19 @@ angular.module('portal')
 
 		.state('portal.projects.stage', {
 			url: '/stage/:stage',
-			template: '<ng-include src="\'components/\'+component+\'/\'+component+\'.html\'"></ng-include>',
+			template: '<ng-include src="component"></ng-include>',
 			controller: function($scope, $stateParams){
 				$scope.stage = $stateParams.stage;
-				$scope.component = $scope.program.flow.stages[$stateParams.stage].component;
+
+				$scope.$watchCollection('[project, program]', function(newValues, oldValues) {
+					if(!newValues[0] || !newValues[1]) return;
+
+					var project = newValues[0];
+					var program = newValues[1];
+
+					var component = program.flow.stages[$scope.stage].component;
+					$scope.component = 'components/'+component+'/'+component+'.html';
+				});
 			}
 		})
 		

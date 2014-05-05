@@ -51,8 +51,8 @@ angular.module('portal', [
 		password: '654321',
 		submit: function(){
 			Restangular.service("tokens").post({email: this.email, password: this.password})
-				.then(function(token){
-					setUser(token);
+				.then(function(data){
+					setUser(data.token);
 				}, function(err){
 					if(err.data && err.data.message)
 						alert(err.data.message);
@@ -69,6 +69,33 @@ angular.module('portal', [
 	}
 
 })
+
+.factory('authInterceptor', function ($rootScope, $q, $window) {
+  return {
+    request: function (config) {
+      config.headers = config.headers || {};
+
+      if ($window.sessionStorage.token)
+        config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
+
+      return config;
+    },
+    response: function(response){
+      return response;
+    },
+    responseError: function (rejection) {
+      if (rejection.status === 401)
+      	$rootScopt.logout();
+
+      // TODO: alert the user somehow
+      return $q.reject(rejection);
+    }
+  };
+})
+
+.config(function($httpProvider) {
+  $httpProvider.interceptors.push('authInterceptor');
+});
 
 // .run(function($rootScope, validateUser) {
 //     $rootScope.$on('$routeChangeSuccess', function () {
