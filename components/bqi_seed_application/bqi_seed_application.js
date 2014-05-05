@@ -64,10 +64,9 @@ angular.module('portal')
 			data: $scope.application
 		}
 
-		Restangular.one('users', $scope.userId).all('projects').post(val)
-			.then(function(res){
-				console.log(res);
-			})
+		Restangular.one('users', $scope.user.id).all('projects').post(val).then(function(res){
+			console.log(res);
+		})
 
 		// $http.post('/api/projects', val)
 	};

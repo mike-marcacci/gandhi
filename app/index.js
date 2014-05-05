@@ -18,61 +18,65 @@ angular.module('portal', [
 	});
 
 })
-.run(function($rootScope, Restangular) {
 
-	// TODO: this comes from sessionStorage
-	$rootScope.userId = 'a5901ab6-bf17-49cd-981d-c25875aec8e9';
+.run(function($rootScope, Restangular, $window) {
 
-	// Restangular.one("users", $rootScope.userId).get().then(function(user){
-	// 	$rootScope.user = user;
-	// })
+	function setUser(token){
+		$rootScope.user = null;
+
+		if(token)
+			$window.sessionStorage.token = JSON.stringify(token);
+
+		if(typeof $window.sessionStorage.token == 'undefined')
+			return;
+
+	  var output = $window.sessionStorage.token.split('.')[1].replace('-', '+').replace('_', '/');
+	  while (output.length % 4 > 0){ output += "=" };
+	  
+	  var parsed = JSON.parse(window.atob(output));
+
+		Restangular.one("users", parsed.sub).get().then(function(user){
+			$rootScope.user = user;
+		}, function(err){
+			console.log(err);
+			$rootScope.logout();
+		})
+	}
+
+	// set the user
+	setUser();
+
+	$rootScope.login = {
+		email: 'mike.marcacci@gmail.com',
+		password: '654321',
+		submit: function(){
+			Restangular.service("tokens").post({email: this.email, password: this.password})
+				.then(function(token){
+					setUser(token);
+				}, function(err){
+					if(err.data && err.data.message)
+						alert(err.data.message);
+					else
+						alert('Unable to log in. Please try again.');
+				})
+		}
+	}
 
 	$rootScope.logout = function(){
-		alert("Logged Out...");
+		delete sessionStorage.token;
+		$rootScope.login.password = '';
+		$rootScope.user = null;
 	}
 
 })
 
-// .run(function($rootScope, validateCookie) {
+// .run(function($rootScope, validateUser) {
 //     $rootScope.$on('$routeChangeSuccess', function () {
-//         validateCookie($rootScope);
+//         validateUser($rootScope);
 //     })
 // })
-// .factory('validateCookie', function($cookieStore, $http){
+// .factory('validateUser', function($cookieStore, $http){
 //     return function(scope) {
 //         // Validate the cookie here...
 //     }
 // })
-
-.controller('navigation', function($scope, Restangular, $q) {
-
-	$scope.nav = {};
-
-	$q.all([
-		Restangular.all('programs').getList(),
-		Restangular.one('users', $scope.userId).all('projects').getList()
-	]).then(function(res){
-
-		// add programs to nav
-		res[0].forEach(function(program){
-			$scope.nav[program.id] = {
-				id: program.id,
-				title: program.title,
-				projects: {}
-			}
-		});
-
-		// map user's projects to corresponding program in nav
-		res[1].forEach(function(project){
-			$scope.nav[project.program_id].projects[project.id] = {
-				id: project.id,
-				title: project.title,
-				flow: project.flow
-			};
-		});
-
-	// TODO: hide other ones
-	});
-
-})
-

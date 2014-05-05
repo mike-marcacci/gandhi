@@ -22,6 +22,17 @@
 		<script type="text/javascript" src="components/message/message.js"></script>
 	</head>
 	<body>
-		<div ui-view></div>
+		<div ng-show="user">
+			<div ui-view></div>
+		</div>
+		<div ng-hide="user">
+			Log In Here!
+			
+			<form ng-submit="login.submit()">
+				<input ng-model="login.email" type="email">
+				<input ng-model="login.password" type="password">
+				<input type="submit" value="Log In">
+			</form>
+		</div>
 	</body>
 </html>
