@@ -4,5 +4,8 @@
 	"db": {
 		"host": "127.0.0.1",
 		"db": "gandhi"
+	},
+	"auth": {
+		"secret": "this is a terrible secret"
 	}
 }
