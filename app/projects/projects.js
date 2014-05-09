@@ -6,11 +6,7 @@ angular.module('portal')
 		.state('portal.apply', {
 			url: '/apply/:program',
 			templateUrl: 'app/projects/apply.html',
-			resolve: {
-				program: function(Restangular, $stateParams){
-					return Restangular.one('programs', $stateParams.program).get();
-				}
-			},
+			resolve: {},
 			controller: function ($scope, $state, $stateParams) {
 				$scope.$watchCollection('programs', function(programs, old) {
 					if(!programs) return;
@@ -30,7 +26,6 @@ angular.module('portal')
 			url: '/projects/:project',
 			templateUrl: 'app/projects/projects.html',
 			abstract: true,
-			resolve: {},
 			controller: function ($scope, $state, $stateParams) {
 				$scope.$watchCollection('[projects, programs]', function(newValues, oldValues) {
 					if(!newValues[0] || !newValues[1]) return;
@@ -46,12 +41,8 @@ angular.module('portal')
 						programs.get(project.program_id).then(function(program){
 							$scope.program = program;
 						});
-					})
+					});
 				});
-
-				$scope.getClass = function(stageId){
-					return '';
-				}
 			}
 		})
 

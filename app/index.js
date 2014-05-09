@@ -1,7 +1,10 @@
 angular.module('portal', [
 	'ui.router',
 	'restangular',
-	'ngCkeditor' // TODO: somehow allow components to add their own dependencies
+	
+	// TODO: somehow allow components to add their own dependencies
+	'angularFileUpload',
+	'ngCkeditor'
 ])
 
 .config(function($stateProvider, $urlRouterProvider, RestangularProvider) {

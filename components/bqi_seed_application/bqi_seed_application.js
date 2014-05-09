@@ -1,6 +1,6 @@
 angular.module('portal')
 
-.controller('Components.BqiSeedApplication', function($scope, Restangular) {
+.controller('Components.BqiSeedApplication', function($scope, $state, Restangular) {
 	$scope.application = {
 		title: "",
 		pi: {
@@ -64,8 +64,14 @@ angular.module('portal')
 			data: $scope.application
 		}
 
-		Restangular.one('users', $scope.user.id).all('projects').post(val).then(function(res){
-			console.log(res);
+		val.flow.active = $scope.program.flow.default[1];
+
+		$scope.projects.post(val).then(function(res){
+			$scope.projects.push(res);
+
+			$state.go('portal.projects.stage', {project: res.id, stage: res.flow.active})
+		}, function(err){
+			alert('err')
 		})
 
 		// $http.post('/api/projects', val)
