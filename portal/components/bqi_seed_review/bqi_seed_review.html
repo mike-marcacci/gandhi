@@ -3,111 +3,121 @@
 	<div ng-show="project">Thank you for submitting your application</div>
 
 	<form ng-submit="submit()" ng-hide="project">
-		<label for="title">Proposal Title</label>
-		<input type="text" required name="title" id="title" ng-model="application.title">
+		<h4>ID</h4>
+		<p>{{project.id}}</p>
+
+		<h4>Title</h4>
+		<p>{{project.title}}</p>
+
+		<h4>Amount</h4>
+		<p>{{project.flow.stages.application.data.amount}}</p>
+
+		<p>With respect to the Selection Criteria, please assign a score on a scale from 1 to 7 to each section. A score of 1 is the lowest score, which means that the section falls shortest from the Selection Criteria, while 7 is the highest score, which best meets the Selection Criteria.</p>
 
 		<fieldset>
-			<legend>Primary Investigator</legend>
-			<div class="third">
-				<label for="application-pi-name">Name</label>
-				<input type="text" required name="application[pi][name]" id="application-pi-name" ng-model="application.pi.name">
+			<legend>Abstract</legend>
+			<div class="instructions">
+				Please score the Abstract from 1 (lowest) to 7 (highest) to indicate whether the proposed hypothesis aligns with one of the guiding Big Questions, is a novel way to address the subject and can lead to an important research agenda:
 			</div>
-			<div class="third">
-				<label for="application-pi-rank">Rank</label>
-				<input type="text" required name="application[pi][rank]" id="application-pi-rank" ng-model="application.pi.rank">
+			<div class="value">
+				{{project.flow.stages.application.data.abstract}}
 			</div>
-			<div class="third">
-				<label for="application-pi-email">Email</label>
-				<input type="email" required name="application[pi][email]" id="application-pi-email" ng-model="application.pi.email">
-			</div>
-			<div class="half">
-				<label for="application-pi-department">Department</label>
-				<input type="text" required name="application[pi][department]" id="application-pi-department" ng-model="application.pi.department">
-			</div>
-			<div class="half">
-				<label for="application-pi-university">University</label>
-				<input type="text" required name="application[pi][university]" id="application-pi-university" ng-model="application.pi.university" disabled="disabled">
-			</div>
+			<input type="range" min="0" max="7" value="4" step="1" ng-model="form.abstract.rating" />
+			<textarea ng-model="form.abstract.explaination"></textarea>
+			Share with author(s)?<input type="checkbox" ng-model="form.abstract.share">
 		</fieldset>
 
-		<fieldset ng-repeat="ci in application.ci">
-			<legend>Co-Investigators <a href ng-click="removeCi($index)">- Remove</a></legend>
-			<div class="third">
-				<label for="application-ci-name">Name</label>
-				<input type="text" required name="application[ci][][name]" id="application-ci-name" ng-model="ci.name">
-			</div>
-			<div class="third">
-				<label for="application-ci-rank">Rank</label>
-				<input type="text" required name="application[ci][][rank]" id="application-ci-rank" ng-model="ci.rank">
-			</div>
-			<div class="third">
-				<label for="application-ci-email">Email</label>
-				<input type="email" required name="application[ci][][email]" id="application-ci-email" ng-model="ci.email">
-			</div>
-			<div class="half">
-				<label for="application-ci-department">Department</label>
-				<input type="text" required name="application[ci][][department]" id="application-ci-department" ng-model="ci.department">
-			</div>
-			<div class="half">
-				<label for="application-ci-university">University</label>
-				<input type="text" required name="application[ci][][university]" id="application-ci-university" ng-model="ci.university">
-			</div>
-		</fieldset>
-		<a href ng-click="addCi()" onclick="return false;">+ Add Co-Investigator</a>
-
-		<div></div>
-
-		<div class="pad">
-			<label style="margin-bottom: 10px;">Is this a new collaboration?</label>
-			<label class="value"><input type="checkbox" ng-model="application.collaboration.new"> Yes</label>
-
-		</div>
-
-		<div class="pad" ng-show="application.collaboration.new">
-			<label style="margin-bottom: 10px;">Did you connect because of a BQI event?</label>
-			<label class="value" ng-repeat="(key, value) in application.collaboration.activities"><input type="checkbox" ng-model="value"> &#123;&#123;key&#125;&#125;</label>
-			<label class="value" style="display: inline-block;"><input type="checkbox" ng-model="application.collaboration.other.active"></label> <input ng-model="application.collaboration.other.name" style="display: inline-block; width: 30%;">
-		</div>
-
-		<div class="pad">
-			<label style="margin-bottom: 10px;">Focus Areas</label>
-			<label class="value" ng-repeat="(key, value) in application.focuses"><input type="checkbox" ng-model="value"> &#123;&#123;key&#125;&#125;</label>
-		</div>
+		<h4>Short Answers</h4>
 
 		<fieldset>
-			<legend>Financial Contact</legend>
-			<div class="third">
-				<label for="application-financial_contact-name">Name</label>
-				<input type="text" required name="application[financial_contact][name]" id="application-financial_contact-name" ng-model="application.financial_contact.name">
+			<legend>Short Answer 1</legend>
+			<div class="instructions">
+				Do you think the proposed activities are crucial to the goals of the project?
 			</div>
-			<div class="third">
-				<label for="application-financial_contact-phone">Phone</label>
-				<input type="tel" name="application[financial_contact][phone]" id="application-financial_contact-phone" ng-model="application.financial_contact.phone">
+			<div class="value">
+				{{project.flow.stages.application.data.short_answer_1}}
 			</div>
-			<div class="third">
-				<label for="application-financial_contact-email">Email</label>
-				<input type="email" name="application[financial_contact][email]" id="application-financial_contact-email" ng-model="application.financial_contact.email">
-			</div>
+			<input type="range" min="0" max="7" value="4" step="1" ng-model="form.short_answer_1.rating" />
+			<textarea ng-model="form.short_answer_1.explaination"></textarea>
+			Share with author(s)?<input type="checkbox" ng-model="form.short_answer_1.share">
 		</fieldset>
 
-		<label for="application-amount">Requested Amount (USD)</label>
-		<input type="number" name="application[amount]" id="application-amount" ng-model="application.amount">
 
-		<label>ABSTRACT (250 WORDS MAX)</label>
-		<p>State your hypothesis and how it relates to one of the guiding Big Questions. Explain what is novel about your approach and how this project could lead to an important research agenda.</p>
-		<textarea ckeditor ng-model="application.abstract"></textarea>
+		<fieldset>
+			<legend>Short Answer 2</legend>
+			<div class="instructions">
+				Does the project’s team have a good capacity for success?
+			</div>
+			<div class="value">
+				{{project.flow.stages.application.data.short_answer_2}}
+			</div>
+			<input type="range" min="0" max="7" value="4" step="1" ng-model="form.short_answer_2.rating" />
+			<textarea ng-model="form.short_answer_2.explaination"></textarea>
+			Share with author(s)?<input type="checkbox" ng-model="form.short_answer_2.share">
+		</fieldset>
 
-		<label for="Short-Answer">Short Answer 1</label>
-		<p>What are the proposed activities and why are they crucial for accomplishing the goals of the project?</p>
-		<textarea ckeditor ng-model="application.short_answer_1"></textarea>
+		<h4>Project Outputs &amp; Outcomes</h4>
 
-		<label for="Short-Answer">Short Answer 2</label>
-		<p>What is the project team’s capacity for success, including relevant expertise and access to resources?</p>
-		<textarea ckeditor ng-model="application.short_answer_2"></textarea>
+		<fieldset>
+			<legend>Project Outputs &amp; Outcomes</legend>
+			<div class="instructions">
+				Do you think the proposed outputs and outcomes are reasonable and can be accomplished within the span of the project?
+			</div>
+			<div class="value">
+				{{project.flow.stages.application.data.outputs_and_outcomes}}
+			</div>
+			<input type="range" min="0" max="7" value="4" step="1" ng-model="form.outputs_and_outcomes.rating" />
+			<textarea ng-model="form.outputs_and_outcomes.explaination"></textarea>
+			Share with author(s)?<input type="checkbox" ng-model="form.outputs_and_outcomes.share">
+		</fieldset>
 
-		<label for="Project-Description">PROJECT OUTPUTS AND OUTCOMES (250 WORDS MAX)</label>
-		<p>Please detail the major activities of the project over the grant period, and timeframe for completion of at least 2 anticipated concrete outputs of the proposed activity. Outputs could include, but are not limited to: data sets, manuscripts, educational or training tools, press releases, and conferences. Outputs should be concrete or measurable products that will be generated during the course of this project. Please describe what potential outcomes this project will have. Outcomes should be short- and long-term impacts on areas of research and on society</p>
-		<textarea ckeditor ng-model="application.outputs_and_outcomes"></textarea>
+
+		<h4>Supplementary Materials</h4>
+
+		<fieldset>
+			<legend>Relevant Publications</legend>
+			<b>TBD</b>
+		</fieldset>
+
+		<fieldset>
+			<legend>Budget &amp; Budget Justification</legend>
+			<ul>
+				<li><a href>Download Budget</a></li>
+				<li><a href>Download Budget Justification</a></li>
+			</ul>
+
+			<label>Do you think the budget is justified?</label>
+			<select>
+				<option>---</option>
+				<option>Too High</option>
+				<option>Just Right</option>
+			</select>
+
+			<label>How much do you think the budget should be adjusted?</label>
+			<input type="number">
+
+			<label>Comments</label>
+			<textarea></textarea>
+		</fieldset>
+
+
+		<h4>DO YOU THINK THE PROJECT SHOULD BE FUNDED?</h4>
+		<div class="instructions">
+			1. I do not think the project should be funded   <br />
+			3. The project could be funded with significant adjustments to content - Revise and Resubmit  <br />
+			5. The project could be funded in the current state with budget adjustments  <br />
+			7. I strongly support funding this project as is<br />
+		</div>
+		<input type="range" min="0" max="7" value="4" step="1" ng-model="form.outputs_and_outcomes.rating" />
+
+		<label>Justification Narrative</label>
+		<p>Only mention points that justify your decision. Please do not summarize the project. Since these comments will not be shared with the author of the proposal, you may choose be more candid.</p>
+		<textarea ckeditor></textarea>
+
+
+		<label>Feedback to the Author</label>
+		<p>Applicants place great value on independent evaluations, and your observations may improve their study design or direct them to relevant literature. As you prepare your comments, please be sure that the statements are balanced, informative & concise.</p>
+		<textarea ckeditor></textarea>
 
 		<br /><br />
 		<input type="submit" value="Submit">
