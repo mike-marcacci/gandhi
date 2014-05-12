@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="portal">
+	<head>
+		<link rel="stylesheet" href="assets/style/index.css">
+		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/ckeditor/4.3.2/ckeditor.js"></script>
+		<script type="text/javascript" src="assets/bower/lodash/dist/lodash.js"></script>
+		<script type="text/javascript" src="assets/bower/angular/angular.js"></script>
+		<script type="text/javascript" src="assets/bower/angular-ui-router/release/angular-ui-router.js"></script>
+		<script type="text/javascript" src="assets/bower/restangular/dist/restangular.js"></script>
+		<script type="text/javascript" src="assets/bower/ng-file-upload/angular-file-upload.js"></script>
+		<script type="text/javascript" src="assets/bower/ng-ckeditor/ng-ckeditor.js"></script>
+
+
+		<script type="text/javascript" src="app/index.js"></script>
+		<script type="text/javascript" src="app/portal/portal.js"></script>
+		<script type="text/javascript" src="app/users/users.js"></script>
+		<script type="text/javascript" src="app/projects/projects.js"></script>
+
+
+		<!-- TODO: load these programatically via the API -->
+		<script type="text/javascript" src="components/bqi_seed_application/bqi_seed_application.js"></script>
+		<script type="text/javascript" src="components/bqi_seed_supplement/bqi_seed_supplement.js"></script>
+		<script type="text/javascript" src="components/message/message.js"></script>
+	</head>
+	<body>
+		<div ng-show="user">
+			<div ui-view></div>
+		</div>
+		<div ng-hide="user">
+			<h4>Log In</h4>
+			<form ng-submit="login.submit()">
+				<label>Email<input ng-model="login.email" type="email"></label><br />
+				<label>Password<input ng-model="login.password" type="password"></label><br />
+				<input type="submit" value="Log In">
+			</form>
+
+
+			<h4>Sign Up</h4>
+			<form ng-submit="signup.submit()">
+				<label>Name<input ng-model="signup.name" type="text"></label><br />
+				<label>Email<input ng-model="signup.email" type="email"></label><br />
+				<label>Password<input ng-model="signup.password" type="password"></label><br />
+				<label>Confirm Password<input ng-model="signup.password2" type="password"></label><br />
+				<input type="submit" value="Sign Up">
+			</form>
+		</div>
+	</body>
+</html>

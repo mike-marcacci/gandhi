@@ -1,0 +1,12 @@
+<h1>Apply</h1>
+<h2>{{program.title}}</h2>
+
+<div class="flow-container">
+	<div class="flow">
+		<div ng-repeat="id in program.flow.default" class="node {{ $first ? 'active': '' }}"><span>{{program.flow.stages[id].title}}</span></div>
+	</div>
+</div>
+
+<ng-include src="component"></ng-include>
+
+<div ui-view></div>

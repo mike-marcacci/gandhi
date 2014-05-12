@@ -1,0 +1,35 @@
+<div ng-controller="Components.BqiSeedSupplement">
+
+	<!-- <div ng-show="project.flow.stages.supplement">Thank you for submitting your supplemental documents.</div> -->
+
+	<form ng-submit="submit()" ng-hide="project.flow.stages.supplement && false">
+		<label>RELEVANT TEAM PUBLICATIONS</label>
+		<p>Please include 5 publications from the research team that are most representative of your research to date. </p>
+		<div ng-repeat="team in supplement.team">
+			<div class="input" ng-show="team.path">Uploaded <a href ng-click="removeFile('team', $index)">X</a></div>
+			<input ng-hide="team.path" type="file" ng-file-select="onFileSelect($files, 'team', $index)" />
+		</div>
+
+		<label>RELEVANT Field PUBLICATIONS</label>
+		<p>In addition, please include 5 publications that are most relevant to the research area that the project will address.</p>
+		<div ng-repeat="area in supplement.area">
+			<div class="input" ng-show="area.path">Uploaded <a href ng-click="removeFile('area', $index)">X</a></div>
+			<input ng-hide="area.path" type="file" ng-file-select="onFileSelect($files, 'area', $index)" />
+		</div>
+
+		<label>DETAILED BUDGET</label>
+		<p>Please attach a Budget Summary based on the <a href="http://bigquestions.uchicago.edu/sites/531ea09d5aea6d3cd20000ed/assets/536208b05aea6d5873015feb/Template_Budget_Seed.xlsx">Budget Summary Sheet template</a>. The duration of the project should not exceed 6 months.</p>
+		<div ng-repeat="budget in supplement.budget">
+			<div class="input" ng-show="budget.path">Uploaded <a href ng-click="removeFile('budget', $index)">X</a></div>
+			<input ng-hide="budget.path" type="file" ng-file-select="onFileSelect($files, 'budget', $index)" />
+		</div>
+
+		<label>BUDGET JUSTIFICATION NARRATIVE</label>
+		<p>Please provide a brief justification for each line item in the proposed Budget. Note that while each investigator must include effort in the budget for his or her proposal, that effort can be completely cost-shared (i.e., the effort can be included in the budget at a cost of $0).</p>
+		<textarea ckeditor ng-model="supplement.budget_narrative"></textarea>
+
+		<br /><br />
+		<input type="submit" value="Submit">
+	</form>
+
+</div>
