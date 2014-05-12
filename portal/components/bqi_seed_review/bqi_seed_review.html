@@ -1,13 +1,10 @@
 <div ng-controller="Components.BqiSeedApplication">
 
 	<form ng-submit="submit()">
-		<h4>ID</h4>
-		<p>{{project.id}}</p>
-
-		<h4>Title</h4>
+		<label>Project Title</label>
 		<p>{{project.title}}</p>
 
-		<h4>Amount</h4>
+		<label>Project Amount</label>
 		<p>{{project.flow.stages.application.data.amount}}</p>
 
 		<p>With respect to the Selection Criteria, please assign a score on a scale from 1 to 7 to each section. A score of 1 is the lowest score, which means that the section falls shortest from the Selection Criteria, while 7 is the highest score, which best meets the Selection Criteria.</p>
@@ -20,9 +17,13 @@
 			<div class="value">
 				{{project.flow.stages.application.data.abstract}}
 			</div>
+			<label>Rating</label>
 			<input type="range" min="0" max="7" value="4" step="1" ng-model="form.abstract.rating" />
+
+			<label>Explaination</label>
 			<textarea ng-model="form.abstract.explaination"></textarea>
-			Share with author(s)?<input type="checkbox" ng-model="form.abstract.share">
+
+			<input type="checkbox" ng-model="form.abstract.share">Share with author(s)?
 		</fieldset>
 
 		<h4>Short Answers</h4>
@@ -35,9 +36,12 @@
 			<div class="value">
 				{{project.flow.stages.application.data.short_answer_1}}
 			</div>
+			<label>Rating</label>
 			<input type="range" min="0" max="7" value="4" step="1" ng-model="form.short_answer_1.rating" />
+
+			<label>Explaination</label>
 			<textarea ng-model="form.short_answer_1.explaination"></textarea>
-			Share with author(s)?<input type="checkbox" ng-model="form.short_answer_1.share">
+			<input type="checkbox" ng-model="form.short_answer_1.share">Share with author(s)?
 		</fieldset>
 
 
@@ -49,9 +53,12 @@
 			<div class="value">
 				{{project.flow.stages.application.data.short_answer_2}}
 			</div>
+			<label>Rating</label>
 			<input type="range" min="0" max="7" value="4" step="1" ng-model="form.short_answer_2.rating" />
+
+			<label>Explaination</label>
 			<textarea ng-model="form.short_answer_2.explaination"></textarea>
-			Share with author(s)?<input type="checkbox" ng-model="form.short_answer_2.share">
+			<input type="checkbox" ng-model="form.short_answer_2.share">Share with author(s)?
 		</fieldset>
 
 		<h4>Project Outputs &amp; Outcomes</h4>
@@ -64,9 +71,12 @@
 			<div class="value">
 				{{project.flow.stages.application.data.outputs_and_outcomes}}
 			</div>
+			<label>Rating</label>
 			<input type="range" min="0" max="7" value="4" step="1" ng-model="form.outputs_and_outcomes.rating" />
+
+			<label>Explaination</label>
 			<textarea ng-model="form.outputs_and_outcomes.explaination"></textarea>
-			Share with author(s)?<input type="checkbox" ng-model="form.outputs_and_outcomes.share">
+			<input type="checkbox" ng-model="form.outputs_and_outcomes.share">Share with author(s)?
 		</fieldset>
 
 
@@ -106,6 +116,7 @@
 			5. The project could be funded in the current state with budget adjustments  <br />
 			7. I strongly support funding this project as is<br />
 		</div>
+		<label>Rating</label>
 		<input type="range" min="0" max="7" value="4" step="1" ng-model="form.outputs_and_outcomes.rating" />
 
 		<label>Justification Narrative</label>
