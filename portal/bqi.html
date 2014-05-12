@@ -34,13 +34,13 @@
 		<script type="text/javascript" src="components/bqi_seed_supplement/bqi_seed_supplement.js"></script>
 		<script type="text/javascript" src="components/message/message.js"></script>
 	</head>
-	<body>
+	<body class="portal">
 		<ng-include src="'/$header'"></ng-include>
 		<div id="main">
-			<div ng-show="user">
+			<div ng-show="user" class="container">
 				<div ui-view></div>
 			</div>
-			<div ng-hide="user">
+			<section ng-hide="user" class="center portal">
 				<h4>Log In</h4>
 				<form ng-submit="login.submit()">
 					<label>Email<input ng-model="login.email" type="email"></label><br />
@@ -57,7 +57,7 @@
 					<label>Confirm Password<input ng-model="signup.password2" type="password"></label><br />
 					<input type="submit" value="Sign Up">
 				</form>
-			</div>
+			</section>
 		</div>
 		<div class="clearfix"></div>
 		<ng-include src="'/footer'"></ng-include>

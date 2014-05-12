@@ -1,20 +1,29 @@
-<nav>
-	<ul>
-		<li ui-sref-active="active"><a ui-sref="portal">Dashboard</a></li>
-		<!-- <li ui-sref-active="active"><a ui-sref="user">My Account</a></li> -->
-		<li ui-sref-active="active"><a href ng-click="logout()">Log Out</a></li>
-	</ul>
-	Projects:
-	<ul>
-		<li ui-sref-active="active" ng-repeat="program in nav">
-			<a ui-sref="programs({ program: program.id })">{{ program.title }}</a>
+<aside>
+	<div class="widget">
+		<h3>Portal</h3>
+		<nav>
 			<ul>
-				<li ui-sref-active="active" ng-repeat="project in program.projects"><a ui-sref="portal.projects.stage({ project: project.id, stage: project.flow.active })">{{ project.title || project.id }}</a>
-				<li ui-srec-active="active"><a ui-sref="portal.apply({ program: program.id})">+ Apply</a></li>
+				<li ui-sref-active="active"><a ui-sref="portal">Dashboard</a></li>
+				<!-- <li ui-sref-active="active"><a ui-sref="user">My Account</a></li> -->
+				<li ui-sref-active="active"><a href ng-click="logout()">Log Out</a></li>
 			</ul>
-		</li>
-	</ul>
-</nav>
+		</nav>
+	</div>
+	<div class="widget">
+		<h3>Projects:</h3>
+		<nav>
+			<ul>
+				<li ui-sref-active="active" ng-repeat="program in nav">
+					<a ui-sref="programs({ program: program.id })">{{ program.title }}</a>
+					<ul>
+						<li ui-sref-active="active" ng-repeat="project in program.projects"><a ui-sref="portal.projects.stage({ project: project.id, stage: project.flow.active })">{{ project.title || project.id }}</a></li>
+						<li ui-srec-active="active"><a ui-sref="portal.apply({ program: program.id})">+ Apply</a></li>
+					</ul>
+				</li>
+			</ul
+		</nav>>
+	</div>
+</aside>
 
 Hello, {{user.name}}
 
