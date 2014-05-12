@@ -41,22 +41,30 @@
 				<div ui-view></div>
 			</div>
 			<section ng-hide="user" class="center portal">
-				<h4>Log In</h4>
-				<form ng-submit="login.submit()">
-					<label>Email<input ng-model="login.email" type="email"></label><br />
-					<label>Password<input ng-model="login.password" type="password"></label><br />
-					<input type="submit" value="Log In">
-				</form>
 
+			<h1>THE BQI GRANTEE PORTAL</h1>
+			<p>The BQI Grantee Portal will be turned on April 25th, 2014 alongside the launch of our first funding round.</p>
+			<p>For more information, please contact us at <a href="mailto:bigquestions@uchicago.edu">bigquestions@uchicago.edu</a>.</p>
 
-				<h4>Sign Up</h4>
-				<form ng-submit="signup.submit()">
-					<label>Name<input ng-model="signup.name" type="text"></label><br />
-					<label>Email<input ng-model="signup.email" type="email"></label><br />
-					<label>Password<input ng-model="signup.password" type="password"></label><br />
-					<label>Confirm Password<input ng-model="signup.password2" type="password"></label><br />
-					<input type="submit" value="Sign Up">
-				</form>
+				<div class="login-pane" style="float: left;">
+					<h2>Log In</h2>
+					<form ng-submit="login.submit()">
+						<label>Email<input ng-model="login.email" type="email"></label><br />
+						<label>Password<input ng-model="login.password" type="password"></label><br />
+						<input type="submit" value="Log In">
+					</form>
+				</div>
+
+				<div class="login-pane" style="float: right;">
+					<h2>Sign Up</h2>
+					<form ng-submit="signup.submit()">
+						<label>Name<input ng-model="signup.name" type="text"></label><br />
+						<label>Email<input ng-model="signup.email" type="email"></label><br />
+						<label>Password<input ng-model="signup.password" type="password"></label><br />
+						<label>Confirm Password<input ng-model="signup.password2" type="password"></label><br />
+						<input type="submit" value="Sign Up">
+					</form>
+				</div>
 			</section>
 		</div>
 		<div class="clearfix"></div>
