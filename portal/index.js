@@ -50,8 +50,8 @@ angular.module('portal', [
 	setUser();
 
 	$rootScope.login = {
-		email: 'mike.marcacci@gmail.com',
-		password: '654321',
+		email: '',
+		password: '',
 		submit: function(){
 			Restangular.service('tokens').post({email: this.email, password: this.password})
 				.then(function(data){
@@ -71,10 +71,10 @@ angular.module('portal', [
 	}
 
 	$rootScope.signup = {
-		name: 'Mike Marcacci',
-		email: 'mike.marcacci@gmail.com',
-		password: '654321',
-		password2: '654321',
+		name: '',
+		email: '',
+		password: '',
+		password2: '',
 		submit: function(){
 			if(this.password != this.password2)
 				return alert('Passwords must match.');
