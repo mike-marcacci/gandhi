@@ -73,7 +73,7 @@ module.exports = function(req, res, next){
 				code = 500;
 			}
 		} else if(!message){
-			message = err.message || error_codes[code];
+			message = 'string' == typeof err ? err : err.message || error_codes[code];
 		}
 
 		// log the error
@@ -84,18 +84,14 @@ module.exports = function(req, res, next){
 			message = {message: message};
 
 		if(req.start)
-			message.took = (process.hrtime(req.start)[1] / 1000000).toFixed(4) + "ms";
+			res.set( 'Took', (process.hrtime(req.start)[1] / 1000000).toFixed(4) + "ms");
 
 
 		res.send(code, message);
 	};
 
-	res.data = function data(code, data, meta){
+	res.data = function data(code, data){
 		
-		// allow flexible params
-		if(!meta)
-			meta = {};
-
 		if(!data && typeof code != 'number')
 				data = code;
 
@@ -103,18 +99,14 @@ module.exports = function(req, res, next){
 			code = 200;
 
 
-		// build the response
-		if(data)
-			meta.data = data;
-
 		if(req.start)
-			meta.took = (process.hrtime(req.start)[1] / 1000000).toFixed(4) + "ms";
+			res.set( 'Took', (process.hrtime(req.start)[1] / 1000000).toFixed(4) + "ms");
 
-		if(data && data.constructor.name == 'Array')
-			meta.count = data.length;
+		// if(data && data.constructor.name == 'Array')
+		// 	meta.count = data.length;
 
 		// send the response
-		return res.send(code, meta);
+		return res.send(code, data);
 	};
 	
 	next();
