@@ -1,0 +1,101 @@
+[
+  {
+    "id": "128f2348-99d4-40a1-b5ab-91d9019f272d",
+    "title": "Seed Funds",
+    "description": "Seed Funds provide flexible resources to explore promising research ideas that might otherwise be too uncertain for researchers to pursue at an early stage.",
+    "open": "Thu May 1 2014 02:14:42 GMT-0700 (PDT)",
+    "close": "Thu May 12 2014 02:14:42 GMT-0700 (PDT)",
+    "roles": {
+      "owner": {
+        "list": true
+      },
+      "advisor": {
+        "list": true
+      },
+      "reviewer": {
+        "list": true
+      }
+    },
+    "flow": {
+      "root": "application",
+      "default": [
+        "application",
+        "supplement",
+        "administrative_review",
+        "internal_decision",
+        "award_agreement",
+        "progress_report",
+        "final_report"
+      ],
+      "stages": {
+        "application": {
+          "id": "application",
+          "description": "Submit the application.",
+          "component": "bqi_seed_application",
+          "next": ["supplement"],
+          "config": {},
+          "title": "Application"
+        },
+        "supplement": {
+          "id": "supplement",
+          "description": "Upload supplemental documents.",
+          "component": "bqi_seed_supplement",
+          "next": ["administrative_review"],
+          "config": {},
+          "title": "Supplemental Documents"
+        },
+        "administrative_review": {
+          "id": "administrative_review",
+          "component": "message",
+          "description": "Application is critiqued by external reviewers.",
+          "next": ["internal_decision"],
+          "config": {
+            "active": "Your application is being considered by reviewers.",
+            "default": "Applications will be considered on May 12th, 2014."
+          },
+          "title": "Administrative Review"
+        },
+        "internal_decision": {
+          "id": "internal_decision",
+          "component": "message",
+          "description": "The funding decision is made.",
+          "next": ["award_agreement"],
+          "config": {
+            "default": "Decisions will be made in May of 2014."
+          },
+          "title": "Internal Decision"
+        },
+        "award_agreement": {
+          "id": "award_agreement",
+          "component": "message",
+          "description": "An award agreement must be signed if an award decision is made.",
+          "next": ["progress_report"],
+          "config": {
+            "default": "An award agreement must be signed if an award decision is made."
+          },
+          "title": "Award Agreement"
+        },
+        "progress_report": {
+          "id": "progress_report",
+          "component": "message",
+          "description": "A progress report must be submitted.",
+          "next": ["final_report"],
+          "config": {
+            "default": "A progress report will be due 3 months after an award."
+          },
+          "title": "Progress Report"
+        },
+        "final_report": {
+          "id": "final_report",
+          "component": "message",
+          "description": "The final report must be submitted.",
+          "next": [],
+          "config": {
+            "default": "The final report will be due 6 months after an award."
+          },
+          "title": "Final Report"
+        }
+      }
+    }
+  }
+]
