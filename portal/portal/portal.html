@@ -17,7 +17,8 @@
 			<nav>
 				<ul>
 					<li ui-sref-active="active" ng-repeat="program in nav">
-						<a ui-sref="programs({ program: program.id })">{{ program.title }}</a>
+						<!-- <a ui-sref="programs({ program: program.id })">{{ program.title }}</a> -->
+						{{ program.title }}
 						<ul>
 							<li ui-sref-active="active" ng-repeat="project in program.projects"><a ui-sref="portal.projects.stage({ project: project.id, stage: project.flow.active })">{{ project.title || project.id }}</a></li>
 							<li ui-srec-active="active"><a ui-sref="portal.apply({ program: program.id})">+ Apply</a></li>
