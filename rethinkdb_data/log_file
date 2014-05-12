@@ -11,3 +11,14 @@
 2014-05-01T01:45:43.082854000 0.635194s info: To fully expose RethinkDB on the network, bind to all addresses
 2014-05-01T01:45:43.082864000 0.635204s info: by running rethinkdb with the `--bind all` command line option.
 2014-05-01T01:45:43.082874000 0.635213s info: Server ready
+2014-05-11T21:56:29.569579000 0.369927s info: Running rethinkdb 1.12.4 (CLANG 5.1 (clang-503.0.40))...
+2014-05-11T21:56:29.575894000 0.376242s info: Running on Darwin 13.1.0 x86_64
+2014-05-11T21:56:29.576110000 0.376458s info: Using cache size of 3175 MB
+2014-05-11T21:56:29.576160000 0.376508s info: Loading data from directory /Users/michaelmarcacci/Documents/Projects/Gandhi/portal/rethinkdb_data
+2014-05-11T21:56:29.597827000 0.398175s info: Listening for intracluster connections on port 29015
+2014-05-11T21:56:29.601270000 0.401617s info: Listening for client driver connections on port 28015
+2014-05-11T21:56:29.601389000 0.401736s info: Listening for administrative HTTP connections on port 8080
+2014-05-11T21:56:29.601391000 0.401738s info: Listening on addresses: 127.0.0.1, ::1
+2014-05-11T21:56:29.601406000 0.401753s info: To fully expose RethinkDB on the network, bind to all addresses
+2014-05-11T21:56:29.601407000 0.401754s info: by running rethinkdb with the `--bind all` command line option.
+2014-05-11T21:56:29.601417000 0.401764s info: Server ready
