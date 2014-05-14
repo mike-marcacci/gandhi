@@ -98,19 +98,19 @@
 
 		<label>ABSTRACT (300 WORDS MAX)</label>
 		<p>State your hypothesis and how it relates to one of the guiding Big Questions. Explain what is truly bold about your approach – i. e., how it may transform the scholarship on the subject and lead to a substantial research agenda.</p>
-		<textarea ckeditor ng-model="application.abstract"></textarea>
+		<textarea ckeditor="limit_300" ng-model="application.abstract"></textarea>
 
 		<label for="Short-Answer">Short Answer 1 (150 Words Max)</label>
 		<p>Please provide the intellectual grounding of the hypothesis and explain its novelty.</p>
-		<textarea ckeditor ng-model="application.short_answer_1"></textarea>
+		<textarea ckeditor="limit_150" ng-model="application.short_answer_1"></textarea>
 
 		<label for="Short-Answer">Short Answer 2 (150 Words Max)</label>
 		<p>Please detail the major activities of the project over the grant period and how can the seed grant funds be leveraged by the research team.</p>
-		<textarea ckeditor ng-model="application.short_answer_2"></textarea>
+		<textarea ckeditor="limit_150" ng-model="application.short_answer_2"></textarea>
 
 		<label for="Project-Description">PROJECT OUTPUTS AND OUTCOMES (200 WORDS MAX)</label>
 		<p>Please explain how this line of inquiry may achieve short- and long-term impact on research and, perhaps, the society. Are there concrete short-term outputs that you anticipate? Can this research program become sustainable and attain external funding in the future? What are the important implications of this research?</p>
-		<textarea ckeditor ng-model="application.outputs_and_outcomes"></textarea>
+		<textarea ckeditor="limit_200" ng-model="application.outputs_and_outcomes"></textarea>
 
 		<br /><br />
 		<input type="submit" value="Submit">

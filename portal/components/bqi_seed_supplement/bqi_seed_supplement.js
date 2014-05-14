@@ -3,13 +3,23 @@ angular.module('portal')
 .controller('Components.BqiSeedSupplement', function($scope, $state, Restangular, $upload) {
 
 	$scope.supplement = {
-		// team_publications: [{}, {}, {}, {}, {}],
-		// area_publications: [{}, {}, {}, {}, {}],
-		team_publications: [{}],
-		area_publications: [{}],
+		biosketches: [
+			{
+				name: $scope.project.flow.stages.application.data.pi.name
+			}
+		],
+		team_publications: [{}, {}, {}, {}, {}],
+		area_publications: [{}, {}, {}, {}, {}],
 		budget: [{}],
-		budget_narrative: ""
+		budget_narrative: [{}]
 	};
+
+	// add CI biosketches
+	$scope.project.flow.stages.application.data.ci.forEach(function(ci){
+		$scope.supplement.biosketches.push({
+			name: ci.name
+		})
+	});
 
 	$scope.removeFile = function(field, index){
 		delete $scope.supplement[field][index].path;
@@ -30,11 +40,12 @@ angular.module('portal')
 			.success(function(data, status, headers, config) {
 				// file is uploaded successfully
 				console.log(data);
-				$scope.supplement[field][index] = data.file;
+				$scope.supplement[field][index].path = data.file.path;
+				$scope.supplement[field][index].filename = data.file.filename;
 			})
-			// .error(function(err){
-			// 	alert('Sorry, but there was an error uploading your file.');
-			// })
+			.error(function(err){
+				alert('Sorry, but there was an error uploading your file.');
+			})
 		}
 
 	};
@@ -51,16 +62,8 @@ angular.module('portal')
 		};
 
 
-		if($scope.supplement.team_publications.some(missingFile) || $scope.supplement.area_publications.some(missingFile) || $scope.supplement.budget.some(missingFile))
+		if($scope.supplement.team_publications.some(missingFile) || $scope.supplement.budget.some(missingFile))
 			return alert('Some files are missing. Please upload each file before submitting');
-
-
-
-
-
-
-
-
 
 
 
@@ -90,18 +93,6 @@ angular.module('portal')
 		}, function(err){
 			alert('Sorry, but there was an error submitting this application. Pleast contact us.');
 		})
-
-		// $http.post('http://bigquestions.uchicago.edu:3000/api/project/'+getParameterByName('id'), val)
-		// 	.success(function(data, status, headers, config) {
-		// 		// this callback will be called asynchronously
-		// 		// when the response is available
-		// 		window.location = '/portal/done?id='+getParameterByName('id')
-		// 	})
-		// 	.error(function(data, status, headers, config) {
-		// 		// called asynchronously if an error occurs
-		// 		// or server returns response with an error status.
-		// 		alert('There was an error submitting the form. Please contact us.');
-		// 	});
 
 	};
 	

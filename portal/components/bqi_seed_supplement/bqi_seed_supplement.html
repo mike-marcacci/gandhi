@@ -3,15 +3,23 @@
 	<div ng-show="project.flow.stages.supplement">Thank you for submitting your supplemental documents.</div>
 
 	<form ng-hide="project.flow.stages.supplement" ng-submit="submit()" ng-hide="project.flow.stages.supplement && false">
+		<label>BIOSKETCHES</label>
+		<p>Please submit a biosketch for each member of the research team. A biosketch should be one page long and provide the investigator’s expertise and the history of funding relevant for this line of research.</p>
+		<div ng-repeat="biosketch in supplement.biosketches">
+			<h4>{{biosketch.name}}:</h4>
+			<div class="input" ng-show="biosketch.path">Uploaded <a href ng-click="removeFile('biosketches', $index)">X</a></div>
+			<input ng-hide="biosketch.path" type="file" ng-file-select="onFileSelect($files, 'biosketches', $index)" />
+		</div>
+
 		<label>RELEVANT TEAM PUBLICATIONS</label>
-		<p>Please include 5 publications from the research team that are most representative of your research to date. </p>
+		<p>Please include 5 publications from the research team that are most representative of your research to date.</p>
 		<div ng-repeat="team_publication in supplement.team_publications">
 			<div class="input" ng-show="team_publication.path">Uploaded <a href ng-click="removeFile('team_publications', $index)">X</a></div>
 			<input ng-hide="team_publication.path" type="file" ng-file-select="onFileSelect($files, 'team_publications', $index)" />
 		</div>
 
 		<label>RELEVANT Field PUBLICATIONS</label>
-		<p>In addition, please include 5 publications that are most relevant to the research area that the project will address.</p>
+		<p>In addition, please include at most 5 publications that are most relevant to the research area that the project will address.</p>
 		<div ng-repeat="area_publication in supplement.area_publications">
 			<div class="input" ng-show="area_publication.path">Uploaded <a href ng-click="removeFile('area_publications', $index)">X</a></div>
 			<input ng-hide="area_publication.path" type="file" ng-file-select="onFileSelect($files, 'area_publications', $index)" />
@@ -26,7 +34,10 @@
 
 		<label>BUDGET JUSTIFICATION NARRATIVE</label>
 		<p>Please provide a brief justification for each line item in the proposed Budget. Note that while each investigator must include effort in the budget for his or her proposal, that effort can be completely cost-shared (i.e., the effort can be included in the budget at a cost of $0).</p>
-		<textarea ckeditor ng-model="supplement.budget_narrative"></textarea>
+		<div ng-repeat="budget_narrative in supplement.budget_narrative">
+			<div class="input" ng-show="budget_narrative.path">Uploaded <a href ng-click="removeFile('budget_narrative', $index)">X</a></div>
+			<input ng-hide="budget_narrative.path" type="file" ng-file-select="onFileSelect($files, 'budget_narrative', $index)" />
+		</div>
 
 		<br /><br />
 		<input type="submit" value="Submit">

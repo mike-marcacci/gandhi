@@ -1,6 +1,22 @@
 angular.module('portal')
 
 .controller('Components.BqiSeedApplication', function($scope, $state, Restangular) {
+
+	function limit(limit){
+		return {
+			wordcount: {
+				showWordCount: true,
+				showCharCount: true,
+				wordLimit: limit
+			}
+		}
+	};
+
+	$scope.limit_300 = limit(300);
+	$scope.limit_200 = limit(200);
+	$scope.limit_150 = limit(150);
+
+
 	$scope.application = {
 		title: "",
 		pi: {},
