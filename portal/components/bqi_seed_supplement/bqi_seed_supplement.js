@@ -62,7 +62,7 @@ angular.module('portal')
 		};
 
 
-		if($scope.supplement.team_publications.some(missingFile) || $scope.supplement.budget.some(missingFile))
+		if($scope.supplement.biosketches.some(missingFile) || $scope.supplement.team_publications.some(missingFile) || $scope.supplement.budget.some(missingFile) || $scope.supplement.budget_narrative.some(missingFile))
 			return alert('Some files are missing. Please upload each file before submitting');
 
 
@@ -86,7 +86,7 @@ angular.module('portal')
 		$scope.project.patch(val).then(function(res){
 
 			// update the local project record
-			$scope.project = res;
+			angular.extend($scope.project, res);
 
 			// redirect to the next stage
 			$state.go('portal.projects.stage', {project: res.id, stage: res.flow.active})
