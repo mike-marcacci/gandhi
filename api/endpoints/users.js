@@ -92,25 +92,36 @@ module.exports = function(config, app, resources){
 		});
 	});
 
+	app.get('/users/:user/files/:file', function(req, res){
+		var root = path.dirname(require.main.filename) + '/files/' + req.params.user + '/';
+		var file = root + '/' + req.params.file;
+
+		if(!fs.existsSync(file))
+			return res.error(404);
+
+		return res.sendfile(file);
+	})
+
 	app.post('/users/:user/files', function(req, res){
 		var response = {};
 		_.each(req.files, function(file){
-			var data = fs.readFileSync(file.path);
 
-			var p = path.dirname(require.main.filename) + '/files/'+req.params.user;
-
-			// make sure user files directory exists
-			if(!fs.existsSync(p))
-				fs.mkdirSync(p);
-
-			// TODO: use file hash instead of timestamp???
+			// build the destination root
+			var root = path.dirname(require.main.filename) + '/files/' + req.params.user + '/';
 
 			// name the file
-			p += '/' + Date.now() + '-' + file.originalFilename;
+			var filename = Date.now() + '-' + file.originalFilename;
 
-			fs.writeFileSync(p);
+			// make sure user files directory exists
+			if(!fs.existsSync(root))
+				fs.mkdirSync(root);
+
+			// move the file to its destination
+			fs.renameSync(file.path, root + filename)
+
 			response[file.fieldName] = {
-				path: p
+				path: '/users/' + req.params.user + '/files/' + filename,
+				filename: filename
 			};
 		});
 

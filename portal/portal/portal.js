@@ -5,6 +5,7 @@ angular.module('portal')
 		.state('portal', {
 			url: "/portal",
 			templateUrl: "portal/portal.html",
+			abstract: true,
 			resolve: {},
 			controller: function($scope, Restangular, $q){
 				$scope.nav = {};
@@ -58,7 +59,7 @@ angular.module('portal')
 			}
 		})
 		.state('portal.dashboard', {
-			url: "/",
+			url: "",
 			templateUrl: "portal/portal.dashboard.html",
 			controller: function($scope){
 				

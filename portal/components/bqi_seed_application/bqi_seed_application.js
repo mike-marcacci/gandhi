@@ -3,13 +3,9 @@ angular.module('portal')
 .controller('Components.BqiSeedApplication', function($scope, $state, Restangular) {
 	$scope.application = {
 		title: "",
-		pi: {
-			university: "University of Chicago"
-		},
+		pi: {},
 		ci: [
-			{
-				university: "University of Chicago"
-			}
+			{}
 		],
 		collaboration: {
 			'new': false,
@@ -41,39 +37,49 @@ angular.module('portal')
 		$scope.application.ci.push({
 			university: "University of Chicago"
 		});
-	}
+	};
 
 	$scope.removeCi = function(index){
 		$scope.application.ci.splice(index, 1)
-	}
+	};
 
 	$scope.submit = function() {
+
+		// create the base project
 		var val = {
 			title: $scope.application.title,
 			program_id: $scope.program.id,
-			users: [{
-				id: $scope.user.id,
-				roles: ['owner']
-			}],
+			users: {},
 			flow: {
 				stages: {}
 			}
 		};
 
+		// add stage data
 		val.flow.stages[$scope.stage] = {
 			data: $scope.application
 		}
 
+		// add user
+		val.users[$scope.user.id] = {
+			id: $scope.user.id,
+			roles: ['owner']
+		};
+
+		// set the active stage to the next stage
 		val.flow.active = $scope.program.flow.default[1];
 
+		// save
 		$scope.projects.post(val).then(function(res){
+
+			// update the local projects record
 			$scope.projects.push(res);
 
+			// redirect to the next stage
 			$state.go('portal.projects.stage', {project: res.id, stage: res.flow.active})
 		}, function(err){
-			alert('err')
+			alert('Sorry, but there was an error submitting this application. Pleast contact us.');
 		})
 
-		// $http.post('/api/projects', val)
 	};
 });

@@ -11,8 +11,10 @@ module.exports = function(config, app, resources){
 			var query = filter ? r.table('projects').filter(filter) : r.table('projects');
 
 			// restrict to user
-			if(req.params.user)
-				query = query.filter(r.row('users').contains(function(user){ return user('id').eq(req.params.user); }));
+			if(req.params.user){
+				var filter = {users: {}}; filter.users[req.params.user] = true;
+				query = query.hasFields(filter);
+			}
 
 			query.run(conn, function(err, cursor){
 				if(err) {
@@ -46,7 +48,7 @@ module.exports = function(config, app, resources){
 					return res.error(err);
 
 				// restrict to user
-				if(!project || (req.params.user && !project.users.some(function(user){ return user.id == req.params.user; })))
+				if(!project || (req.params.user && !project.users[req.params.user]))
 					return res.error(404);
 
 				return res.data(project);
@@ -92,13 +94,13 @@ module.exports = function(config, app, resources){
 				}
 
 				// restrict to user
-				if(!project || (req.params.user && !project.users.some(function(user){ return user.id == req.params.user; }))){
+				if(!project || (req.params.user && !project.users[req.params.user])){
 					resources.db.release(conn);
 					return res.error(404);
 				}
 
 				// update the project
-				r.table('projects').get(req.params.project).update(req.body).run(conn, function(err, result){
+				r.table('projects').get(req.params.project).update(req.body, {returnVals: true}).run(conn, function(err, result){
 					resources.db.release(conn);
 
 					if(err)

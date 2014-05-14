@@ -1,13 +1,16 @@
 [
 	{
 		"user_id": "a5901ab6-bf17-49cd-981d-c25875aec8e9",
-		"users": [{
-			"role": "owner",
-			"id": "a5901ab6-bf17-49cd-981d-c25875aec8e9"
-		}, {
-			"role": "reviewer",
-			"id": "847e085b-df0e-4dc7-9cbf-d485d6e2de96"
-		}],
+		"users": {
+			"a5901ab6-bf17-49cd-981d-c25875aec8e9": {
+				"role": "owner",
+				"id": "a5901ab6-bf17-49cd-981d-c25875aec8e9"
+			},
+			"847e085b-df0e-4dc7-9cbf-d485d6e2de96": {
+				"role": "reviewer",
+				"id": "847e085b-df0e-4dc7-9cbf-d485d6e2de96"
+			}
+		},
 		"title": "The Gandhi Grant Management System",
 		"flow": {
 			"active": "2e360108d95f3cda2e7467d3",
