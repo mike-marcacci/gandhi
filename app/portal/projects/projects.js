@@ -5,7 +5,7 @@ angular.module('portal')
 	$stateProvider
 		.state('portal.apply', {
 			url: '/apply/:program',
-			templateUrl: 'projects/apply.html',
+			templateUrl: 'portal/projects/apply.html',
 			resolve: {},
 			controller: function ($scope, $state, $stateParams) {
 				$scope.$watchCollection('programs', function(programs, old) {
@@ -16,7 +16,7 @@ angular.module('portal')
 						$scope.stage = program.flow.root;
 
 						var component = program.flow.stages[$scope.stage].component;
-						$scope.component = 'components/'+component+'/'+component+'.html';
+						$scope.component = 'portal/components/'+component+'/'+component+'.html';
 					})
 				})
 			}
@@ -24,7 +24,7 @@ angular.module('portal')
 
 		.state('portal.projects', {
 			url: '/projects/:project',
-			templateUrl: 'projects/projects.html',
+			templateUrl: 'portal/projects/projects.html',
 			abstract: true,
 			controller: function ($scope, $state, $stateParams) {
 				$scope.$watchCollection('[projects, programs]', function(newValues, oldValues) {
@@ -59,7 +59,7 @@ angular.module('portal')
 					var program = newValues[1];
 
 					var component = program.flow.stages[$scope.stage].component;
-					$scope.component = 'components/'+component+'/'+component+'.html';
+					$scope.component = 'portal/components/'+component+'/'+component+'.html';
 				});
 			}
 		})

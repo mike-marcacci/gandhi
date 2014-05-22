@@ -23,7 +23,7 @@ app.configure(function() {
 	app.use(require('./api/utils/res.js'));
 	app.use(require('./api/middleware/auth.js')(config.auth, resources));
 	app.use(app.router);
-	app.use(config.root + '/portal', express.static(__dirname + '/portal'));
+	app.use(config.root + '/app', express.static(__dirname + '/app'));
 	app.use(config.root + '/files', express.static(__dirname + '/files'));
 });
 
