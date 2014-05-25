@@ -1,4 +1,5 @@
 var r = require('rethinkdb');
+var passport = require('passport');
 
 module.exports = function(config, app, resources){
 
@@ -16,7 +17,7 @@ module.exports = function(config, app, resources){
 				query = query.hasFields(filter);
 			}
 
-			query.run(conn, function(err, cursor){
+			query.orderBy('created').run(conn, function(err, cursor){
 				if(err) {
 					resources.db.release(conn);
 					return res.error(err);
@@ -119,20 +120,29 @@ module.exports = function(config, app, resources){
 	// Root Projects
 	//////////////////////////////
 
-	app.get('/projects', function(req, res){
-		return list(req, res, req.query.filter);
-	});
+	app.namespace('/projects', passport.authenticate('bearer', { session: false }), function(req, res, next){
 
-	app.get('/projects/:project', function(req, res){
-		return show(req, res);
-	});
+		// restrict endpoint access to admin users
+		if(!req.user.admin)
+			return res.error(403);
+		return next();
 
-	app.post('/projects', function(req, res){
-		return create(req, res);
-	});
+	}, function(){
+		app.post('/', function(req, res){
+			return create(req, res);
+		});
 
-	app.patch('/projects/:project', function(req, res){
-		return update(req, res);
+		app.get('', function(req, res){
+			return list(req, res, req.query.filter);
+		});
+
+		app.get('/:project', function(req, res){
+			return show(req, res);
+		});
+
+		app.patch('/:project', function(req, res){
+			return update(req, res);
+		});
 	});
 
 
@@ -141,20 +151,29 @@ module.exports = function(config, app, resources){
 	// Projects by User
 	//////////////////////////////
 
-	app.get('/users/:user/projects', function(req, res){
-		return list(req, res, req.query.filter);
-	});
+	app.namespace('/users/:user/projects', passport.authenticate('bearer', { session: false }), function(req, res, next){
 
-	app.get('/users/:user/projects/:project', function(req, res){
-		return show(req, res);
-	});
+		// restrict access to self for non-admin users
+		if(!req.user.admin && req.user.id != req.params.user)
+			return res.error(403);
+		return next();
 
-	app.post('/users/:user/projects', function(req, res){
-		return create(req, res);
-	});
+	}, function(){
+		app.post('/', function(req, res){
+			return create(req, res);
+		});
 
-	app.patch('/users/:user/projects/:project', function(req, res){
-		return update(req, res);
+		app.get('/', function(req, res){
+			return list(req, res, req.query.filter);
+		});
+
+		app.get('/:project', function(req, res){
+			return show(req, res);
+		});
+
+		app.patch('/:project', function(req, res){
+			return update(req, res);
+		});
 	});
 
 };

@@ -36,9 +36,9 @@ module.exports = function(config, app, resources){
 					if(!passwords.test(req.body.password, user.password))
 						return res.error(400, "Incorrect password");
 
-					// send the entire user packaged in a token
+					// send the user a token
 					return res.data(201, {
-						token: jwt.sign({portal: true}, config.auth.secret, { expiresInMinutes: 24*60, subject: user.id })
+						token: jwt.sign({admin: user.admin}, config.auth.secret, { expiresInMinutes: 24*60, subject: user.id })
 					});
 				});
 			});

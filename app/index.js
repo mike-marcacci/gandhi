@@ -29,7 +29,7 @@ angular.module('gandhi', [
 		$rootScope.currentUser = null;
 
 		if(token)
-			$window.sessionStorage.token = JSON.stringify(token);
+			$window.sessionStorage.token = token;
 
 		if(typeof $window.sessionStorage.token == 'undefined')
 			return;

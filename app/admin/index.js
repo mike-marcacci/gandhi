@@ -4,7 +4,7 @@ angular.module('gandhi')
 	$stateProvider
 		.state('admin', {
 			url: "/admin",
-			templateUrl: "admin/admin.html",
+			templateUrl: "admin/index.html",
 			abstract: true,
 			resolve: {},
 			controller: function($scope, Restangular, $q){
@@ -60,7 +60,7 @@ angular.module('gandhi')
 		})
 		.state('admin.dashboard', {
 			url: "",
-			templateUrl: "admin/admin.dashboard.html",
+			templateUrl: "admin/dashboard.html",
 			controller: function($scope){
 				
 			}
