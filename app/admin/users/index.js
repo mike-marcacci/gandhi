@@ -52,6 +52,9 @@ angular.module('gandhi')
 
 						return $scope.user = user;
 					});
+
+					if($scope.user)
+						$scope.projects = Restangular.one('users', $scope.user.id).getList('projects').$object;
 				});
 
 			},

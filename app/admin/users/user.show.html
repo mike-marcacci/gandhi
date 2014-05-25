@@ -1,5 +1,17 @@
-<h1>{{user.name}}</h1>
-<h4><a href="mailto: {{user.email}}">{{user.email}}</a></h4>
+<div class="pull-right">
+	<button type="button" class="btn btn-sm btn-default" ui-sref="admin.users.user.edit">Edit</button>
+	<button type="button" class="btn btn-sm btn-danger" ng-click="delete()">Delete</button>
+</div>
 
-<button type="button" class="btn btn-default" ui-sref="admin.users.user.edit">Edit</button>
-<button type="button" class="btn btn-danger" ng-click="delete()">Delete</button>
+<h2>{{user.name}}</h2>
+<b><a href="mailto: {{user.email}}">{{user.email}}</a></b>
+
+<hr>
+
+<h3>Projects</h3>
+
+<div ng-hide="projects.length">This user has no projects.</div>
+
+<div style="margin-top: 20px;" ng-repeat="project in projects">
+	<h4><a ui-sref="admin.projects.project.show({project: project.id})">{{project.title}}</a></h4>
+</div>
