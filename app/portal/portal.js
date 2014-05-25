@@ -12,7 +12,7 @@ angular.module('gandhi')
 				$scope.programs = null;
 				$scope.projects = null;
 
-				$scope.$watch('user', function( newValue, oldValue ) {
+				$scope.$watch('currentUser', function( newValue, oldValue ) {
 
 					if(!newValue || !newValue.id)
 						return;

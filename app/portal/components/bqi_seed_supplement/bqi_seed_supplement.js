@@ -30,7 +30,7 @@ angular.module('gandhi')
 		for (var i = 0; i < $files.length; i++) {
 			var file = $files[i];
 			$scope.upload = $upload.upload({
-				url: '../api/users/'+$scope.user.id+'/files', //upload.php script, node.js route, or servlet url
+				url: '../api/users/'+$scope.currentUser.id+'/files', //upload.php script, node.js route, or servlet url
 				data: {},
 				file: file,
 			})

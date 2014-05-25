@@ -77,8 +77,8 @@ angular.module('gandhi')
 		}
 
 		// add user
-		val.users[$scope.user.id] = {
-			id: $scope.user.id,
+		val.users[$scope.currentUser.id] = {
+			id: $scope.currentUser.id,
 			roles: ['owner']
 		};
 

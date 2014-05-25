@@ -41,7 +41,12 @@ module.exports = function(config, app, resources){
 					if(err)
 						return res.error(err);
 
-					return res.data(203, result.new_val);
+					var user = result.new_val;
+
+					// sanatize sensitive fields
+					delete user.password;
+
+					return res.data(203, user);
 				});
 			});
 		});
@@ -65,6 +70,11 @@ module.exports = function(config, app, resources){
 					if(err)
 						return res.error(err);
 
+					// sanatize sensitive fields
+					users.forEach(function(user){
+						delete user.password;
+					});
+
 					return res.data(users);
 				});
 			});
@@ -84,7 +94,10 @@ module.exports = function(config, app, resources){
 					return res.error(err);
 
 				if(!user)
-					return res.error(400);
+					return res.error(404);
+
+				// sanatize sensitive fields
+				delete user.password;
 
 				return res.data(user);
 			});
@@ -109,26 +122,60 @@ module.exports = function(config, app, resources){
 				return res.error(err);
 
 			// verify email is not already taken by a different user
-			r.table('users').filter({email: req.body.email}).limit(1).nth(0).run(conn, function(err, existing){
+			r.table('users').filter({email: req.body.email}).limit(1).run(conn, function(err, cursor){
 				if(err) {
 					resources.db.release(conn);
 					return res.error(err);
 				}
 
-				if(existing && existing.id != req.params.user){
-					resources.db.release(conn);
-					return res.error(409, "An account already exists with this email");
-				}
-
-				// update the user
-				r.table('users').get(req.params.user).update(req.body, {returnVals: true}).run(conn, function(err, result){
-					resources.db.release(conn);
-
-					if(err)
+				cursor.toArray(function(err, existing){
+					if(err) {
+						resources.db.release(conn);
 						return res.error(err);
+					}
 
-					return res.data(200, result.new_val);
+					if(existing && existing[0] && existing[0].id != req.params.user){
+						resources.db.release(conn);
+						return res.error(409, "An account already exists with this email");
+					}
+
+					// update the user
+					r.table('users').get(req.params.user).update(req.body, {returnVals: true}).run(conn, function(err, result){
+						resources.db.release(conn);
+
+						if(err)
+							return res.error(err);
+
+						var user = result.new_val;
+
+						// sanatize sensitive fields
+						delete user.password;
+
+						return res.data(200, user);
+					});
 				});
+			});
+		});
+	});
+
+	app.del('/users/:user', function(req, res){
+		resources.db.acquire(function(err, conn) {
+			if(err)
+				return res.error(err);
+
+			// get users from the DB
+			r.table('users').get(req.params.user).delete({returnVals: true}).run(conn, function(err, result){
+				resources.db.release(conn);
+
+				if(err)
+					return res.error(err);
+
+				var user = result.old_val;
+
+				// sanatize sensitive fields
+				delete user.password;
+
+				return res.data(user);
 			});
 		});
 	});

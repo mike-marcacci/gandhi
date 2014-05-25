@@ -26,7 +26,7 @@ angular.module('gandhi', [
 .run(function($rootScope, Restangular, $window) {
 
 	function setUser(token){
-		$rootScope.user = null;
+		$rootScope.currentUser = null;
 
 		if(token)
 			$window.sessionStorage.token = JSON.stringify(token);
@@ -40,7 +40,7 @@ angular.module('gandhi', [
 	  var parsed = JSON.parse(window.atob(output));
 
 		Restangular.one("users", parsed.sub).get().then(function(user){
-			$rootScope.user = user;
+			$rootScope.currentUser = user;
 		}, function(err){
 			console.log(err);
 			$rootScope.logout();
@@ -100,7 +100,7 @@ angular.module('gandhi', [
 
 	$rootScope.logout = function(){
 		delete sessionStorage.token;
-		$rootScope.user = null;
+		$rootScope.currentUser = null;
 	}
 
 })

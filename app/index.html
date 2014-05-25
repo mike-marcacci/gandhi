@@ -42,7 +42,7 @@
 
 		<!-- BEGIN ADMIN -->
 		<script type="text/javascript" src="admin/admin.js"></script>
-		<script type="text/javascript" src="admin/users/users.js"></script>
+		<script type="text/javascript" src="admin/users/index.js"></script>
 		<script type="text/javascript" src="admin/programs/programs.js"></script>
 		<script type="text/javascript" src="admin/projects/projects.js"></script>
 
@@ -51,8 +51,8 @@
 	<body class="portal">
 		<ng-include src="'/$header'"></ng-include>
 		<div id="main">
-			<div ng-show="user" ui-view class="container"></div>
-			<section ng-hide="user" class="center portal">
+			<div ng-show="currentUser" ui-view class="container"></div>
+			<section ng-hide="currentUser" class="center portal">
 
 			<h1>THE BQI GRANTEE PORTAL</h1>
 			<p>The BQI Grantee Portal will be turned on April 25th, 2014 alongside the launch of our first funding round.</p>

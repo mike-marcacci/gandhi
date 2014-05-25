@@ -1,17 +1,19 @@
 <h1>Projects</h1>
 <hr/>
 
-<table ng-table class="table ng-table-responsive">
-    <tr ng-repeat="project in projects">
-        <td data-title="'Title'">
-            {{project.title}}
-        </td>
-        <td data-title="'Open'">
-            {{project.open}}
-        </td>
-        <td data-title="'Close'">
-            {{project.close}}
-        </td>
-    </tr>
-</table>
-<div ui-view></div>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-4 blog-main">
+			<table ng-table class="table ng-table-responsive">
+				<tr ui-sref-active="active" ng-repeat="project in projects">
+					<td data-title="'Title'">
+						<a ui-sref="admin.projects.show({project: project.id})">{{project.title}}</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="col-sm-7 col-sm-offset-1">
+			<div ui-view></div>
+		</div>
+	</div>
+</div>

@@ -11,7 +11,7 @@ angular.module('gandhi')
 		// 	title: $scope.application.title,
 		// 	program_id: $scope.program.id,
 		// 	users: [{
-		// 		id: $scope.user.id,
+		// 		id: $scope.currentUser.id,
 		// 		roles: ['owner']
 		// 	}],
 		// 	flow: {
