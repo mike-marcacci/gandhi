@@ -1,4 +1,4 @@
-angular.module('portal')
+angular.module('gandhi')
 
 .controller('Components.BqiSeedApplication', function($scope, $state, Restangular) {
 

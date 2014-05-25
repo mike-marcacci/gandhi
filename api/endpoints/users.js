@@ -6,12 +6,52 @@ var path = require('path');
 
 module.exports = function(config, app, resources){
 
-	app.get('/users', function(req, res){
+	app.post('/users', function(req, res){
+
+		// add timestamps
+		req.body.created = req.body.updated = r.now();
+
+		// encrypt the password
+		req.body.password = passwords.encrypt(req.body.password);
+
+
+		// TODO: validate against schema
+
+
 		resources.db.acquire(function(err, conn) {
 			if(err)
 				return res.error(err);
 
 			// verify email is not already taken
+			r.table('users').filter({email: req.body.email}).limit(1).run(conn, function(err, cursor){
+				if(err) {
+					resources.db.release(conn);
+					return res.error(err);
+				}
+
+				if(cursor.hasNext()){
+					resources.db.release(conn);
+					return res.error(409, "An account already exists with this email");
+				}
+
+				// insert the user
+				r.table('users').insert(req.body, {returnVals: true}).run(conn, function(err, result){
+					resources.db.release(conn);
+
+					if(err)
+						return res.error(err);
+
+					return res.data(203, result.new_val);
+				});
+			});
+		});
+	});
+
+	app.get('/users', function(req, res){
+		resources.db.acquire(function(err, conn) {
+			if(err)
+				return res.error(err);
+
 			r.table('users').run(conn, function(err, cursor){
 				if(err) {
 					resources.db.release(conn);
@@ -51,42 +91,43 @@ module.exports = function(config, app, resources){
 		});
 	});
 
-	app.post('/users', function(req, res){
+	app.patch('/users/:user', function(req, res){
 
 		// add timestamps
-		req.body.created = req.body.updated = r.now();
+		req.body.updated = r.now();
 
 		// encrypt the password
-		req.body.password = passwords.encrypt(req.body.password);
+		if(req.body.password)
+			req.body.password = passwords.encrypt(req.body.password);
 
 
 		// TODO: validate against schema
-
 
 
 		resources.db.acquire(function(err, conn) {
 			if(err)
 				return res.error(err);
 
-			// verify email is not already taken
-			r.table('users').filter({email: req.body.email}).limit(1).run(conn, function(err, cursor){
+			// verify email is not already taken by a different user
+			r.table('users').filter({email: req.body.email}).limit(1).nth(0).run(conn, function(err, existing){
 				if(err) {
 					resources.db.release(conn);
 					return res.error(err);
 				}
 
-				if(cursor.hasNext())
+				if(existing && existing.id != req.params.user){
+					resources.db.release(conn);
 					return res.error(409, "An account already exists with this email");
+				}
 
-				// insert the user
-				r.table('users').insert(req.body, {returnVals: true}).run(conn, function(err, result){
+				// update the user
+				r.table('users').get(req.params.user).update(req.body, {returnVals: true}).run(conn, function(err, result){
 					resources.db.release(conn);
 
 					if(err)
 						return res.error(err);
 
-					// generate a token for the newly created user
-					return res.data(203, result.new_val);
+					return res.data(200, result.new_val);
 				});
 			});
 		});

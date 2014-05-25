@@ -1,11 +1,11 @@
-angular.module('portal')
+angular.module('gandhi')
 
 .config(function($stateProvider, RestangularProvider) {
 
 	$stateProvider
 		.state('portal.user', {
 			url: "/user",
-			templateUrl: "users/users.html"
+			templateUrl: "portal/users/users.html"
 		})
 
 });

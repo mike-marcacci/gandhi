@@ -1,0 +1,17 @@
+<h1>Projects</h1>
+<hr/>
+
+<table ng-table class="table ng-table-responsive">
+    <tr ng-repeat="project in projects">
+        <td data-title="'Title'">
+            {{project.title}}
+        </td>
+        <td data-title="'Open'">
+            {{project.open}}
+        </td>
+        <td data-title="'Close'">
+            {{project.close}}
+        </td>
+    </tr>
+</table>
+<div ui-view></div>

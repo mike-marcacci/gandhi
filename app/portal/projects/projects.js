@@ -1,4 +1,4 @@
-angular.module('portal')
+angular.module('gandhi')
 
 .config(function($stateProvider, $urlRouterProvider, RestangularProvider) {
 

@@ -1,0 +1,17 @@
+<h1>Programs</h1>
+<hr/>
+
+<table ng-table class="table ng-table-responsive">
+    <tr ng-repeat="program in programs">
+        <td data-title="'Title'">
+            {{program.title}}
+        </td>
+        <td data-title="'Open'">
+            {{program.open}}
+        </td>
+        <td data-title="'Close'">
+            {{program.close}}
+        </td>
+    </tr>
+</table>
+<div ui-view></div>
