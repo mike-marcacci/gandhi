@@ -7,9 +7,14 @@ var path = require('path');
 
 module.exports = function(config, app, resources){
 
-	app.namespace('/users', passport.authenticate('bearer', { session: false }), function(){
+	app.post('/users', function(req, res){
 
-		app.post('/', function(req, res){
+		passport.authenticate('bearer', function(err, user, info) {
+
+			console.log('DDDDDD')
+			// only allow admins to create a new admin user
+			if (err || !user || !user.admin)
+				req.body.admin = false;
 
 			// add timestamps
 			req.body.created = req.body.updated = r.now();
@@ -53,7 +58,10 @@ module.exports = function(config, app, resources){
 					});
 				});
 			});
-		});
+		})(req, res);
+	});
+
+	app.namespace('/users', passport.authenticate('bearer', { session: false }), function(){
 
 		app.get('/', passport.authenticate('bearer', { session: false }), function(req, res){
 
@@ -122,6 +130,10 @@ module.exports = function(config, app, resources){
 			// restrict access to self for non-admin users
 			if(!req.user.admin && req.user.id != req.params.user)
 				return res.error(403);
+
+			// can't just make yourself an admin
+			if(!req.user.admin)
+				delete req.body.admin;
 
 			// add timestamps
 			req.body.updated = r.now();
