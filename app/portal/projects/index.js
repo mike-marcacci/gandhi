@@ -3,9 +3,9 @@ angular.module('gandhi')
 .config(function($stateProvider, $urlRouterProvider, RestangularProvider) {
 
 	$stateProvider
-		.state('portal.apply', {
-			url: '/apply/:program',
-			templateUrl: 'portal/projects/apply.html',
+		.state('portal.start', {
+			url: '/start/:program',
+			templateUrl: 'portal/projects/start.html',
 			resolve: {},
 			controller: function ($scope, $state, $stateParams) {
 				$scope.$watchCollection('programs', function(programs, old) {
@@ -47,7 +47,7 @@ angular.module('gandhi')
 		})
 
 		.state('portal.projects.stage', {
-			url: '/stage/:stage',
+			url: '/:stage',
 			template: '<ng-include src="component"></ng-include>',
 			controller: function($scope, $stateParams){
 				$scope.stage = $stateParams.stage;
@@ -59,7 +59,7 @@ angular.module('gandhi')
 					var program = newValues[1];
 
 					var component = program.flow.stages[$scope.stage].component;
-					$scope.component = 'portal/components/'+component+'/'+component+'.html';
+					$scope.component = 'portal/components/'+component+'/index.html';
 				});
 			}
 		})

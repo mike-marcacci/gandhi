@@ -5,7 +5,7 @@ angular.module('gandhi')
 	$stateProvider
 		.state('admin.projects', {
 			url: "/projects",
-			templateUrl: "admin/projects/projects.html",
+			templateUrl: "admin/projects/index.html",
 			controller: function($scope, Restangular){
 				$scope.projects = Restangular.all('projects').getList().$object;
 			}
@@ -13,7 +13,7 @@ angular.module('gandhi')
 
 		.state('admin.projects.show', {
 			url: "/:project",
-			templateUrl: "admin/projects/projects.show.html",
+			templateUrl: "admin/projects/show.html",
 			controller: function($scope, Restangular, $stateParams){
 				$scope.project = Restangular.one('projects', $stateParams.project).get().$object;
 			}

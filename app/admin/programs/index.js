@@ -5,7 +5,7 @@ angular.module('gandhi')
 	$stateProvider
 		.state('admin.programs', {
 			url: "/programs",
-			templateUrl: "admin/programs/programs.html",
+			templateUrl: "admin/programs/index.html",
 			controller: function($scope, Restangular){
 				$scope.programs = Restangular.all('programs').getList().$object;
 			}
