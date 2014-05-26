@@ -4,9 +4,6 @@
 
 		<link rel="stylesheet" href="assets/style/index.css">
 
-		<script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-
 		<script type="text/javascript" src="assets/ckeditor/ckeditor.js"></script>
 		<script type="text/javascript" src="assets/bower/lodash/dist/lodash.js"></script>
 		<script type="text/javascript" src="assets/bower/angular/angular.js"></script>
@@ -20,7 +17,7 @@
 
 		<!-- BEGIN PORTAL -->
 		<script type="text/javascript" src="portal/index.js"></script>
-		<script type="text/javascript" src="portal/users/index.js"></script>
+		<script type="text/javascript" src="portal/user/index.js"></script>
 		<script type="text/javascript" src="portal/projects/index.js"></script>
 
 
@@ -38,60 +35,62 @@
 		<script type="text/javascript" src="admin/projects/projects.js"></script>
 
 
+		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
 	</head>
 	<body class="portal">
 		<!-- <ng-include src="'/$header'"></ng-include> -->
-		<div id="main">
-			<div class="container">
-				<div ng-show="currentUser" ui-view class="container"></div>
-				<section ng-hide="currentUser" class="center portal">
+		<div id="main" class="container">
+			<div ng-show="currentUser" ui-view></div>
+			<div ng-hide="currentUser" class="center portal">
 
-					<div>
-						<h1>Welcome to Gandhi!</h1>
-						<p>Log in or sign up below:</p>
+				<div>
+					<h1>Welcome to Gandhi!</h1>
+					<p>Log in or sign up below:</p>
+				</div>
+
+				<div class="row">
+
+					<div class="well col-sm-5 col-md-4 col-md-offset-1">
+						<h2 style="margin-top: 0;">Log In</h2>
+						<form role="form" ng-submit="login.submit()">
+							<div class="form-group">
+								<label for="login-email">Email</label>
+								<input type="email" class="form-control" id="login-email" placeholder="email@example.com" ng-model="login.email">
+							</div>
+							<div class="form-group">
+								<label for="login-password">Password</label>
+								<input type="password" class="form-control" id="login-password" placeholder="password" ng-model="login	.password">
+							</div>
+							<button type="submit" class="btn btn-default">Submit</button>
+						</form>
 					</div>
 
-					<div class="row">
-
-						<div class="well col-sm-5 col-md-4 col-md-offset-1">
-							<h2 style="margin-top: 0;">Log In</h2>
-							<form role="form" ng-submit="login.submit()">
-								<div class="form-group">
-									<label for="login-email">Email</label>
-									<input type="email" class="form-control" id="login-email" placeholder="email@example.com" ng-model="login.email">
-								</div>
-								<div class="form-group">
-									<label for="login-password">Password</label>
-									<input type="password" class="form-control" id="login-password" placeholder="password" ng-model="login	.password">
-								</div>
-								<button type="submit" class="btn btn-default">Submit</button>
-							</form>
-						</div>
-
-						<div class="well col-sm-5 col-md-4 col-sm-offset-2">
-							<h2 style="margin-top: 0;">Sign Up</h2>
-							<form role="form" ng-submit="signup.submit()">
-								<div class="form-group">
-									<label for="signup-name">Name</label>
-									<input type="name" class="form-control" id="signup-name" placeholder="John Doe" ng-model="signup.name">
-								</div>
-								<div class="form-group">
-									<label for="signup-email">Email</label>
-									<input type="email" class="form-control" id="signup-email" placeholder="email@example.com" ng-model="signup.email">
-								</div>
-								<div class="form-group">
-									<label for="signup-password">Password</label>
-									<input type="password" class="form-control" id="signup-password" placeholder="password" ng-model="signup.password">
-								</div>
-								<div class="form-group">
-									<label for="signup-password">Confirm Password</label>
-									<input type="password" class="form-control" id="signup-password" placeholder="password" ng-model="signup.password2">
-								</div>
-								<button type="submit" class="btn btn-default">Submit</button>
-							</form>
-						</div>
+					<div class="well col-sm-5 col-md-4 col-sm-offset-2">
+						<h2 style="margin-top: 0;">Sign Up</h2>
+						<form role="form" ng-submit="signup.submit()">
+							<div class="form-group">
+								<label for="signup-name">Name</label>
+								<input type="name" class="form-control" id="signup-name" placeholder="John Doe" ng-model="signup.name">
+							</div>
+							<div class="form-group">
+								<label for="signup-email">Email</label>
+								<input type="email" class="form-control" id="signup-email" placeholder="email@example.com" ng-model="signup.email">
+							</div>
+							<div class="form-group">
+								<label for="signup-password">Password</label>
+								<input type="password" class="form-control" id="signup-password" placeholder="password" ng-model="signup.password">
+							</div>
+							<div class="form-group">
+								<label for="signup-password">Confirm Password</label>
+								<input type="password" class="form-control" id="signup-password" placeholder="password" ng-model="signup.password2">
+							</div>
+							<button type="submit" class="btn btn-default">Submit</button>
+						</form>
 					</div>
-				</section>
+				</div>
 			</div>
 		</div>
 		<div class="clearfix"></div>

@@ -9,3 +9,7 @@ body {
 .well > h5:first-child {
 	margin-top: 0;
 }
+
+#main {
+	width: 100%;
+}

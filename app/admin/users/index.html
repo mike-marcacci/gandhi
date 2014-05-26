@@ -6,7 +6,7 @@
 
 <div>
 	<div class="row">
-		<div class="col-md-4">
+		<div class="col-md-5">
 			<table ng-table class="table ng-table-responsive">
 				<tr ui-sref-active="active" ng-repeat="user in users" ui-sref="admin.users.user.show({user: user.id})" style="cursor: pointer;">
 					<td data-title="''">
@@ -21,7 +21,7 @@
 				</tr>
 			</table>
 		</div>
-		<div class="col-md-8">
+		<div class="col-md-7">
 			<div ui-view>Choose a user from the sidebar or create a new user.</div>
 		</div>
 	</div>

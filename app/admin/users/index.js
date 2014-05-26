@@ -21,7 +21,7 @@ angular.module('gandhi')
 
 				// save
 				$scope.save = function(){
-					Restangular.all('users').post($scope.userCreate).then(function(res){
+					$scope.users.post($scope.userCreate).then(function(res){
 
 						// update the local user
 						$scope.users.push(res);
@@ -54,7 +54,7 @@ angular.module('gandhi')
 					});
 
 					if($scope.user)
-						$scope.projects = Restangular.one('users', $scope.user.id).getList('projects').$object;
+						$scope.projects = $scope.user.getList('projects').$object;
 				});
 
 			},
@@ -71,7 +71,7 @@ angular.module('gandhi')
 					if(!$window.confirm("Are you sure you want to delete this user?"))
 						return;
 
-					Restangular.one('users', $scope.user.id).remove().then(function(res){
+					$scope.user.remove().then(function(res){
 
 						// remove user from list
 						$scope.users.some(function(user, i){
@@ -112,7 +112,7 @@ angular.module('gandhi')
 					if($scope.userEdit.password == '')
 						delete $scope.userEdit.password;
 
-					Restangular.one('users', $stateParams.user).patch($scope.userEdit).then(function(res){
+					$scope.user.patch($scope.userEdit).then(function(res){
 
 						// update the local user
 						angular.extend($scope.user, res)

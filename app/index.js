@@ -29,12 +29,12 @@ angular.module('gandhi', [
 		$rootScope.currentUser = null;
 
 		if(token)
-			$window.sessionStorage.token = token;
+			$window.localStorage.token = token;
 
-		if(typeof $window.sessionStorage.token == 'undefined')
+		if(typeof $window.localStorage.token == 'undefined')
 			return;
 
-	  var output = $window.sessionStorage.token.split('.')[1].replace('-', '+').replace('_', '/');
+	  var output = $window.localStorage.token.split('.')[1].replace('-', '+').replace('_', '/');
 	  while (output.length % 4 > 0){ output += "=" };
 	  
 	  var parsed = JSON.parse(window.atob(output));
@@ -99,7 +99,7 @@ angular.module('gandhi', [
 	}
 
 	$rootScope.logout = function(){
-		delete sessionStorage.token;
+		delete localStorage.token;
 		$rootScope.currentUser = null;
 	}
 
@@ -110,8 +110,8 @@ angular.module('gandhi', [
     request: function (config) {
       config.headers = config.headers || {};
 
-      if ($window.sessionStorage.token)
-        config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
+      if ($window.localStorage.token)
+        config.headers.Authorization = 'Bearer ' + $window.localStorage.token;
 
       return config;
     },

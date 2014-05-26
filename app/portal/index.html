@@ -1,7 +1,13 @@
 <div class="row" style="margin-top: 20px;">
 	<aside class="col-md-4">
 		<div class="well" ng-show="currentUser.admin">
-			<h3><a ui-sref="admin.dashboard">Admin</a></h3>
+			<h3>Admin</h3>
+			<ul>
+				<li><a ui-sref="admin.users">Users</a></li>
+				<li><a ui-sref="admin.programs">Programs</a></li>
+				<li><a ui-sref="admin.projects">Projects</a></li>
+				<li><a href ng-click="logout()">Log Out</a></li>
+			</ul>
 		</div>
 		<div class="well">
 			<h3>Portal</h3>
@@ -9,7 +15,7 @@
 				<nav>
 					<ul>
 						<li ui-sref-active="active"><a ui-sref="portal.dashboard">Dashboard</a></li>
-						<!-- <li ui-sref-active="active"><a ui-sref="user">My Account</a></li> -->
+						<li ui-sref-active="active"><a ui-sref="portal.user.show">My Account</a></li>
 						<li ui-sref-active="active"><a href ng-click="logout()">Log Out</a></li>
 					</ul>
 				</nav>
