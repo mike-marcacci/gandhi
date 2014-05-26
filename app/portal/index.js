@@ -4,7 +4,7 @@ angular.module('gandhi')
 	$stateProvider
 		.state('portal', {
 			url: "/portal",
-			templateUrl: "portal/portal.html",
+			templateUrl: "portal/index.html",
 			abstract: true,
 			resolve: {},
 			controller: function($scope, Restangular, $q){

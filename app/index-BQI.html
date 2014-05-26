@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="gandhi">
+	<head>
+
+		<!-- START BQI --><!--
+		<link rel="shortcut icon" href="/sites/531ea09d5aea6d3cd20000ed/theme/images/favicon.ico"/>
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400italic,400,600,700' rel='stylesheet' type='text/css'>
+		<link href="/sites/531ea09d5aea6d3cd20000ed/theme/stylesheets/animate.css" media="screen, projection" rel="stylesheet" type="text/css">
+		<link href="/sites/531ea09d5aea6d3cd20000ed/theme/stylesheets/styles.css" media="screen, projection" rel="stylesheet" type="text/css">
+		<script src="/sites/531ea09d5aea6d3cd20000ed/theme/javascripts/jquery.min.js" type="text/javascript" ></script>
+		<script src="/sites/531ea09d5aea6d3cd20000ed/theme/javascripts/modernizr.custom.52856.js" type="text/javascript" ></script>
+		--><!-- END BQI -->
+
+
+		<link rel="stylesheet" href="assets/style/index.css">
+		<!--<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/ckeditor/4.3.2/ckeditor.js"></script>-->
+
+		<script type="text/javascript" src="assets/ckeditor/ckeditor.js"></script>
+		<script type="text/javascript" src="assets/bower/lodash/dist/lodash.js"></script>
+		<script type="text/javascript" src="assets/bower/angular/angular.js"></script>
+		<script type="text/javascript" src="assets/bower/angular-ui-router/release/angular-ui-router.js"></script>
+		<script type="text/javascript" src="assets/bower/restangular/dist/restangular.js"></script>
+		<script type="text/javascript" src="assets/bower/ng-file-upload/angular-file-upload.js"></script>
+		<script type="text/javascript" src="assets/bower/ng-ckeditor/ng-ckeditor.js"></script>
+		<script type="text/javascript" src="assets/bower/ng-table/ng-table.js"></script>
+
+		<script type="text/javascript" src="index.js"></script>
+
+		<!-- BEGIN PORTAL -->
+		<script type="text/javascript" src="portal/portal.js"></script>
+		<script type="text/javascript" src="portal/users/users.js"></script>
+		<script type="text/javascript" src="portal/projects/projects.js"></script>
+
+
+		<!-- TODO: load these programatically via the API -->
+		<script type="text/javascript" src="portal/components/bqi_seed_application/bqi_seed_application.js"></script>
+		<script type="text/javascript" src="portal/components/bqi_seed_supplement/bqi_seed_supplement.js"></script>
+		<script type="text/javascript" src="portal/components/bqi_seed_review/bqi_seed_review.js"></script>
+		<script type="text/javascript" src="portal/components/message/message.js"></script>
+
+
+		<!-- BEGIN ADMIN -->
+		<script type="text/javascript" src="admin/index.js"></script>
+		<script type="text/javascript" src="admin/users/index.js"></script>
+		<script type="text/javascript" src="admin/programs/programs.js"></script>
+		<script type="text/javascript" src="admin/projects/projects.js"></script>
+
+
+	</head>
+	<body class="portal">
+		<!-- <ng-include src="'/$header'"></ng-include> -->
+		<div id="main">
+			<div ng-show="currentUser" ui-view class="container"></div>
+			<section ng-hide="currentUser" class="center portal">
+
+			<h1>THE BQI GRANTEE PORTAL</h1>
+			<p>The BQI Grantee Portal will be turned on April 25th, 2014 alongside the launch of our first funding round.</p>
+			<p>For more information, please contact us at <a href="mailto:bigquestions@uchicago.edu">bigquestions@uchicago.edu</a>.</p>
+
+				<div class="login-pane" style="float: left;">
+					<h2>Log In</h2>
+					<form ng-submit="login.submit()">
+						<label>Email<input ng-model="login.email" type="email"></label><br />
+						<label>Password<input ng-model="login.password" type="password"></label><br />
+						<input type="submit" value="Log In">
+					</form>
+				</div>
+
+				<div class="login-pane" style="float: right;">
+					<h2>Sign Up</h2>
+					<form ng-submit="signup.submit()">
+						<label>Name<input ng-model="signup.name" type="text"></label><br />
+						<label>Email<input ng-model="signup.email" type="email"></label><br />
+						<label>Password<input ng-model="signup.password" type="password"></label><br />
+						<label>Confirm Password<input ng-model="signup.password2" type="password"></label><br />
+						<input type="submit" value="Sign Up">
+					</form>
+				</div>
+			</section>
+		</div>
+		<div class="clearfix"></div>
+		<!-- <ng-include src="'/$footer'"></ng-include> -->
+	</body>
+</html>

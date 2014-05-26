@@ -5,7 +5,7 @@ angular.module('gandhi')
 	$stateProvider
 		.state('portal.user', {
 			url: "/user",
-			templateUrl: "portal/users/users.html"
+			templateUrl: "portal/users/index.html"
 		})
 
 });

@@ -24,7 +24,7 @@ angular.module('gandhi')
 
 		.state('portal.projects', {
 			url: '/projects/:project',
-			templateUrl: 'portal/projects/projects.html',
+			templateUrl: 'portal/projects/index.html',
 			abstract: true,
 			controller: function ($scope, $state, $stateParams) {
 				$scope.$watchCollection('[projects, programs]', function(newValues, oldValues) {
