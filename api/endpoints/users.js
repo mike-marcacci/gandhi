@@ -23,7 +23,7 @@ module.exports = function(config, app, resources){
 		return res.sendfile(file);
 	})
 
-	app.post('/users/:user/files', function(req, res){
+	app.post('/users/:user/files', passport.authenticate('bearer', { session: false }), function(req, res){
 
 		// restrict access to self for non-admin users
 		if(!req.user.admin && req.user.id != req.params.user)
