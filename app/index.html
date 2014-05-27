@@ -6,11 +6,8 @@
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400italic,400,600,700' rel='stylesheet' type='text/css'>
 		<link href="/sites/531ea09d5aea6d3cd20000ed/theme/stylesheets/animate.css" media="screen, projection" rel="stylesheet" type="text/css">
-		<link href="/sites/531ea09d5aea6d3cd20000ed/theme/stylesheets/styles.css" media="screen, projection" rel="stylesheet" type="text/css">
-		<script src="/sites/531ea09d5aea6d3cd20000ed/theme/javascripts/jquery.min.js" type="text/javascript" ></script>
-		<script src="/sites/531ea09d5aea6d3cd20000ed/theme/javascripts/modernizr.custom.52856.js" type="text/javascript" ></script>
 
-
+		<link ng-if="bqi" href="/sites/531ea09d5aea6d3cd20000ed/theme/stylesheets/styles.css" media="screen, projection" rel="stylesheet" type="text/css">
 
 		<link rel="stylesheet" href="assets/style/index.css">
 
@@ -56,12 +53,13 @@
 
 
 		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script src="/sites/531ea09d5aea6d3cd20000ed/theme/javascripts/modernizr.custom.52856.js" type="text/javascript" ></script>
 		<script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 
 	</head>
 	<body class="portal">
-		<ng-include src="'/$header'"></ng-include>
+		<ng-include ng-if="bqi" src="'/$header'"></ng-include>
 		<div class="container" style="width: 100%;">
 			<div ng-show="currentUser" ui-view></div>
 			<div ng-hide="currentUser" class="center portal">
@@ -114,6 +112,6 @@
 			</div>
 		</div>
 		<div class="clearfix"></div>
-		<ng-include src="'/$footer'"></ng-include>
+		<ng-include ng-if="bqi" src="'/$footer'"></ng-include>
 	</body>
 </html>
