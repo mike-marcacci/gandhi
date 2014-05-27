@@ -8,7 +8,7 @@ angular.module('gandhi')
 			abstract: true,
 			resolve: {},
 			controller: function($scope, Restangular, $q, $rootScope){
-				$rootScope.bqi = true;
+				$rootScope.bqi = false;
 
 				$scope.nav = {};
 				$scope.programs = null;
