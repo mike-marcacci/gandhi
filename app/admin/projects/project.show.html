@@ -1,0 +1,18 @@
+<div class="pull-right">
+	<button type="button" class="btn btn-sm btn-default" ui-sref="admin.projects.project.edit">Edit</button>
+	<button type="button" class="btn btn-sm btn-danger" ng-click="delete()">Delete</button>
+</div>
+
+<h2>{{project.title || '[No Title]'}}</h2>
+<b><a ui-sref="admin.programs.program.show({program: program.id})">{{program.title}}</a></b>
+
+<hr>
+
+<ol>
+	<li ng-repeat="stage in stages">
+		<b ng-show="stage.project.status" class="pull-right">({{stage.project.status}})</b>
+		<h4>{{stage.program.title}}</h4>
+		<ng-include src="'components/'+stage.program.component.name+'/admin/summary.html'"></ng-include>
+	</li>
+</ol>
+

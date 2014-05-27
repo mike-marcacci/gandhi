@@ -1,18 +1,25 @@
-<h1>Projects</h1>
+<div>
+	<h2>Projects</h2>
+</div>
 <hr/>
 
-<div class="container">
+<div>
 	<div class="row">
 		<div class="col-sm-4 blog-main">
+			<form role="form">
+				<select ng-change="filter()" class="form-control" ng-model="program" ng-options="program.title for program in programs">
+					<option value="">All Programs</option>
+				</select>
+			</form>
 			<table ng-table class="table ng-table-responsive">
 				<tr ui-sref-active="active" ng-repeat="project in projects">
 					<td data-title="'Title'">
-						<a ui-sref="admin.projects.show({project: project.id})">{{project.title}}</a>
+						<a ui-sref="admin.projects.project.show({project: project.id})">{{project.title || '[No Title]'}}</a>
 					</td>
 				</tr>
 			</table>
 		</div>
-		<div class="col-sm-7 col-sm-offset-1">
+		<div class="col-sm-8">
 			<div ui-view></div>
 		</div>
 	</div>

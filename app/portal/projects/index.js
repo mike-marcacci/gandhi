@@ -16,7 +16,7 @@ angular.module('gandhi')
 						$scope.stage = program.flow.root;
 
 						var component = program.flow.stages[$scope.stage].component.name;
-						$scope.component = 'portal/components/'+component+'/index.html';
+						$scope.component = 'components/'+component+'/portal/index.html';
 					})
 				})
 			}
@@ -98,7 +98,7 @@ angular.module('gandhi')
 					if(stageProgram.close && stageProgram.close.length && testProject(project, stageProgram.close))
 						$scope.lock = 1;
 
-					$scope.component = 'portal/components/'+stageProgram.component.name+'/index.html';
+					$scope.component = 'components/'+stageProgram.component.name+'/portal/index.html';
 				}, true);
 			}
 		})

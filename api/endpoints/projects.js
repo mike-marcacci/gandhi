@@ -50,8 +50,6 @@ module.exports = function(config, app, resources){
 							return res.error(err);
 						}
 
-						console.log(req.params.user, '------', programs)
-
 						return getProjects(programs);
 					});
 				});
@@ -139,6 +137,35 @@ module.exports = function(config, app, resources){
 	}
 
 
+	function remove(req, res){
+		resources.db.acquire(function(err, conn) {
+			if(err)
+				return res.error(err);
+
+			// get project from the DB
+			r.table('projects').get(req.params.project).run(conn, function(err, project){
+				if(err)
+					return res.error(err);
+
+				// restrict to user
+				if(!project || (req.params.user && !project.users[req.params.user]))
+					return res.error(404);
+
+				// remove project from the DB
+				r.table('projects').get(req.params.project).delete({returnVals: true}).run(conn, function(err, result){
+					resources.db.release(conn);
+
+					if(err)
+						return res.error(err);
+
+					var project = result.old_val;
+
+					return res.data(project);
+				});
+			});
+		});
+	};
+
 
 	//////////////////////////////
 	// Root Projects
@@ -166,6 +193,10 @@ module.exports = function(config, app, resources){
 
 		app.patch('/:project', function(req, res){
 			return update(req, res);
+		});
+
+		app.del('/:project', function(req, res){
+			return remove(req, res);
 		});
 	});
 
@@ -197,6 +228,10 @@ module.exports = function(config, app, resources){
 
 		app.patch('/:project', function(req, res){
 			return update(req, res);
+		});
+
+		app.del('/:project', function(req, res){
+			return remove(req, res);
 		});
 	});
 
