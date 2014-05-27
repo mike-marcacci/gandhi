@@ -1,45 +1,230 @@
 [
-  {
-    "id": "128f2348-99d4-40a1-b5ab-91d9019f272d",
-    "title": "Open Source Grants",
-    "description": "This is a fund for awesome projects that will change the world!",
-    "open": "Thu Apr 10 2014 02:14:42 GMT-0700 (PDT)",
-    "close": "Thu Apr 17 2014 02:14:42 GMT-0700 (PDT)",
-    "roles": {
-      "owner": {
-        "list": true
-      },
-      "reviewer": {
-        "list": true
-      }
-    },
-    "flow": {
-      "stages": {
-        "application": {
-          "id": "application",
-          "description": "Submit the application.",
-          "title": "Application",
-          "component": "application",
-          "next": ["external_review"],
-          "config": {}
-        },
-        "external_review": {
-          "id": "external_review",
-          "component": "review",
-          "description": "Application is critiqued by external reviewers.",
-          "next": ["internal_decision"],
-          "config": {},
-          "title": "External Review"
-        },
-        "internal_decision": {
-          "id": "internal_decision",
-          "component": "task",
-          "description": "Funding decision is made.",
-          "next": [],
-          "config": {},
-          "title": "Internal Decision"
-        }
-      }
-    }
-  }
+	{
+		"description": "Seed Funds provide flexible resources to explore promising research ideas that might otherwise be too uncertain for researchers to pursue at an early stage.",
+		"flow": {
+			"default": [
+				"start",
+				"application",
+				"supplement",
+				"submission",
+				"administrative_review",
+				"internal_decision",
+				"award_agreement",
+				"progress_report",
+				"final_report"
+			],
+			"root": "start",
+			"stages": {
+				"administrative_review": {
+					"component": {
+						"name": "bqi_seed_review",
+						"options": {
+							"owner": "Applications will be reviewed shortly."
+						}
+					},
+					"description": "Application is critiqued by external reviewers.",
+					"id": "administrative_review",
+					"next": [
+						"internal_decision"
+					],
+					"title": "Administrative Review",
+					"open": null,
+					"close": null
+				},
+				"application": {
+					"component": {
+						"name": "bqi_seed_application",
+						"options": {}
+					},
+					"description": "Submit the application.",
+					"id": "application",
+					"next": [
+						"supplement"
+					],
+					"title": "Application",
+					"open": null,
+					"close": [
+						[{
+							"name": "status",
+							"options": {
+								"stage": "submission",
+								"status": "submitted"
+							}
+						}]
+					]
+				},
+				"award_agreement": {
+					"component": {
+						"name": "message",
+						"options": {
+							"default": "An award agreement must be signed if an award decision is made."
+						}
+					},
+					"description": "An award agreement must be signed if an award decision is made.",
+					"id": "award_agreement",
+					"next": [
+						"progress_report"
+					],
+					"title": "Award Agreement",
+					"open": null,
+					"close": null
+				},
+				"final_report": {
+					"component": {
+						"name": "message",
+						"options": {
+							"default": "The final report will be due 6 months after an award."
+						}
+					},
+					"description": "The final report must be submitted.",
+					"id": "final_report",
+					"next": [],
+					"title": "Final Report",
+					"open": null,
+					"close": null
+				},
+				"internal_decision": {
+					"component": {
+						"name": "message",
+						"options": {
+							"default": "Decisions will be made in May of 2014."
+						}
+					},
+					"description": "The funding decision is made.",
+					"id": "internal_decision",
+					"next": [
+						"award_agreement"
+					],
+					"title": "Internal Decision",
+					"open": null,
+					"close": null
+				},
+				"progress_report": {
+					"component": {
+						"name": "message",
+						"options": {
+							"default": "A progress report will be due 3 months after an award."
+						}
+					},
+					"description": "A progress report must be submitted.",
+					"id": "progress_report",
+					"next": [
+						"final_report"
+					],
+					"title": "Progress Report",
+					"open": null,
+					"close": null
+				},
+				"start": {
+					"component": {
+						"name": "start",
+						"options": {}
+					},
+					"description": "Start the application.",
+					"id": "start",
+					"next": [
+						"application"
+					],
+					"title": "Start",
+					"open": null,
+					"close": [
+						[{
+							"name": "status",
+							"options": {
+								"stage": "submission",
+								"status": "submitted"
+							}
+						}]
+					]
+				},
+				"supplement": {
+					"component": {
+						"name": "bqi_seed_supplement",
+						"options": {}
+					},
+					"description": "Upload supplemental documents.",
+					"id": "supplement",
+					"next": [
+						"submission"
+					],
+					"title": "Supplemental Documents",
+					"open": null,
+					"close": [
+						[{
+							"name": "status",
+							"options": {
+								"stage": "submission",
+								"status": "submitted"
+							}
+						}]
+					]
+				},
+				"submission": {
+					"component": {
+						"name": "submission",
+						"options": {}
+					},
+					"description": "Officially submit your application.",
+					"id": "submission",
+					"next": [
+						"administrative_review"
+					],
+					"title": "Official Submission",
+					"open": [
+						[
+							{
+								"name": "status",
+								"options": {
+									"stage": "start",
+									"status": "submitted"
+								}
+							},
+							{
+								"name": "status",
+								"options": {
+									"stage": "application",
+									"status": "submitted"
+								}
+							},
+							{
+								"name": "status",
+								"options": {
+									"stage": "supplement",
+									"status": "submitted"
+								}
+							}
+						]
+					],
+					"close": [
+						[{
+							"name": "status",
+							"options": {
+								"stage": "submission",
+								"status": "submitted"
+							}
+						}]
+					]
+				}
+			}
+		},
+		"id": "128f2348-99d4-40a1-b5ab-91d9019f272d",
+		"roles": {
+			"advisor": {
+				"list": true
+			},
+			"owner": {
+				"list": true
+			},
+			"reviewer": {
+				"list": true
+			}
+		},
+		"title": "Seed Funds: Round 1",
+		"users": {
+			"847e085b-df0e-4dc7-9cbf-d485d6e2de96": {
+				"role": "reviewer",
+				"id": "847e085b-df0e-4dc7-9cbf-d485d6e2de96"
+			}
+		},
+	}
 ]

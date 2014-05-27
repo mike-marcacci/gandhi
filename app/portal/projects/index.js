@@ -46,6 +46,12 @@ angular.module('gandhi')
 						if($scope.project)
 							programs.get($scope.project.program_id).then(function(program){
 								$scope.program = program;
+
+								// decide the user's role in this project
+								if($scope.project.users[$scope.currentUser.id])
+									$scope.role = $scope.project.users[$scope.currentUser.id].role;
+								else
+									$scope.role = $scope.program.users[$scope.currentUser.id].role;
 							});
 					});
 				});
@@ -57,21 +63,18 @@ angular.module('gandhi')
 			template: '<ng-include src="component"></ng-include>',
 			controller: function($scope, $stateParams){
 				$scope.stage = $stateParams.stage;
-				$scope.open = false;
 
-				function testStage(stage, tests){
+				function testProject(project, tests){
 					return tests.some(function(set){
-						if(typeof set == 'array' && set.every(function(test){
+						return set.every(function(test){
 							// date
 							if(test.name == 'date' && (new Date(test.options.date)) >= (new Date()))
 								return true;
 
 							// submission
-							if(test.name == 'submission' && stage.flow.stages[test.options.stage].submitted)
+							if(test.name == 'status' && project.flow.stages[test.options.stage] && project.flow.stages[test.options.stage].status == test.options.status)
 								return true;
-						})) {
-							return true;
-						}
+						});
 					});
 				}
 
@@ -84,13 +87,16 @@ angular.module('gandhi')
 					var stageProject = project.flow.stages[$stateParams.stage];
 					var stageProgram = program.flow.stages[$stateParams.stage];
 
+					// decide if the stage is open or closed
+					$scope.lock = -1;
+
 					// OPEN
-					if(!stageProgram.open || !stageProgram.open.length || testStage(stageProgram.open, stageProject))
-						$scope.open = true;
+					if(!stageProgram.open || !stageProgram.open.length || testProject(project, stageProgram.open))
+						$scope.lock = 0;
 
 					// CLOSE
-					if(stageProgram.close && stageProgram.close.length && testStage(stageProgram.close, stageProject))
-						$scope.open = false;
+					if(stageProgram.close && stageProgram.close.length && testProject(project, stageProgram.close))
+						$scope.lock = 1;
 
 					$scope.component = 'portal/components/'+stageProgram.component.name+'/index.html';
 				}, true);

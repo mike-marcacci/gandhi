@@ -13,6 +13,11 @@ angular.module('gandhi')
 			// just take the edits directly for now...
 			var project = $scope.projectStart;
 
+			if(!project.flow.stages[$scope.stage])
+				project.flow.stages[$scope.stage] = {};
+
+			project.flow.stages[$scope.stage].status = 'submitted';
+
 			$scope.project.patch(project).then(function(res){
 
 				// update the local project
@@ -42,6 +47,12 @@ angular.module('gandhi')
 			project.users[$scope.currentUser.id] = {
 				id: $scope.currentUser.id,
 				role: 'owner'
+			};
+
+			// this stage has been submitted
+			project.flow.stages[$scope.stage] = {
+				status: 'submitted',
+				data: {}
 			};
 
 			// set the active stage to the next stage

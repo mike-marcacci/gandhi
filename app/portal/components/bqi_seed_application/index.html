@@ -1,11 +1,8 @@
 <div ng-controller="Components.BqiSeedApplication">
 
-	<div ng-show="project">Thank you for submitting your application</div>
+	<div ng-show="lock">Thank you for submitting your application.</div>
 
-	<form ng-submit="submit()" ng-hide="project">
-		<label for="title">Proposal Title</label>
-		<input type="text" required name="title" id="title" ng-model="application.title">
-
+	<form ng-submit="submit()" ng-hide="lock">
 		<fieldset>
 			<legend>Primary Investigator</legend>
 			<div class="third">
@@ -113,6 +110,6 @@
 		<textarea ckeditor="limit_200" ng-model="application.outputs_and_outcomes"></textarea>
 
 		<br /><br />
-		<input type="submit" value="Submit">
+		<input ng-hide="role != 'owner'" type="submit" value="Save and Continue">
 	</form>
 </div>

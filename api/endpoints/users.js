@@ -11,7 +11,6 @@ module.exports = function(config, app, resources){
 
 		passport.authenticate('bearer', function(err, user, info) {
 
-			console.log('DDDDDD')
 			// only allow admins to create a new admin user
 			if (err || !user || !user.admin)
 				req.body.admin = false;

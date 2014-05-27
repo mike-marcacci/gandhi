@@ -2,6 +2,7 @@ angular.module('gandhi', [
 	'ui.router',
 	'restangular',
 	'ngTable',
+	'ngSanitize',
 	
 	// TODO: somehow allow components to add their own dependencies
 	'angularFileUpload',

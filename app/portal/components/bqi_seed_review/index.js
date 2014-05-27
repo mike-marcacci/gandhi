@@ -1,9 +1,20 @@
 angular.module('gandhi')
 
 .controller('Components.BqiSeedReview', function($scope, $state, Restangular) {
+	var stageProgram = $scope.program.flow.stages[$scope.stage] || {};
+	var stageProject = $scope.project.flow.stages[$scope.stage] || {};
+
+	$scope.message = stageProgram.component.options[$scope.role] || '';
+
 	$scope.data = {
 
 	};
+
+	$scope.sandbox = {
+		toolbar: [],
+		removePlugins: 'elementspath,wordcount',
+		readOnly: true
+	}
 
 
 	$scope.submit = function() {

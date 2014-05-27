@@ -2,24 +2,53 @@ angular.module('gandhi')
 
 .controller('Components.BqiSeedSupplement', function($scope, $state, Restangular, $upload) {
 
-	$scope.supplement = {
-		biosketches: [
-			{
-				name: $scope.project.flow.stages.application.data.pi.name
-			}
-		],
+	$scope.supplement = $scope.project.flow.stages[$scope.stage] && $scope.project.flow.stages[$scope.stage].data ? angular.copy($scope.project.flow.stages[$scope.stage].data) : {
+		biosketches: [],
 		team_publications: [{}, {}, {}, {}, {}],
 		area_publications: [{}, {}, {}, {}, {}],
 		budget: [{}],
 		budget_narrative: [{}]
 	};
 
-	// add CI biosketches
-	$scope.project.flow.stages.application.data.ci.forEach(function(ci){
-		$scope.supplement.biosketches.push({
-			name: ci.name
+	// add CI biosketches that don't already exist
+	if($scope.project.flow.stages.application) {
+		$scope.project.flow.stages.application.data.ci.forEach(function(ci){
+			if($scope.supplement.biosketches.every(function(sketch){
+				if(sketch.name == ci.name)
+					return false;
+				return true;
+			}))
+				$scope.supplement.biosketches.push({
+					name: ci.name
+				})
+		});
+
+		// add PI biosketch if it doesn't already exist
+		if($scope.supplement.biosketches.every(function(sketch){
+			if(sketch.name == $scope.project.flow.stages.application.data.pi.name)
+				return false;
+			return true;
+		}))
+			$scope.supplement.biosketches.unshift({
+				name: $scope.project.flow.stages.application.data.pi.name
+			})
+
+		var slices = []
+		// remove biosketches that don't appear in the CI data
+		$scope.supplement.biosketches.forEach(function(sketch, i){
+			if($scope.project.flow.stages.application.data.ci.every(function(ci){
+				if(sketch.name == ci.name || sketch.name == $scope.project.flow.stages.application.data.pi.name)
+					return false;
+				return true;
+			}))
+				slices.unshift(i);
+		});
+
+		slices.forEach(function(i){
+			$scope.supplement.biosketches.splice(i, 1);
 		})
-	});
+
+	}
 
 	$scope.removeFile = function(field, index){
 		delete $scope.supplement[field][index].path;
@@ -35,11 +64,11 @@ angular.module('gandhi')
 				file: file,
 			})
 			.progress(function(evt) {
-				console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+				// console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
 			})
 			.success(function(data, status, headers, config) {
 				// file is uploaded successfully
-				console.log(data);
+				// console.log(data);
 				$scope.supplement[field][index].path = data.file.path;
 				$scope.supplement[field][index].filename = data.file.filename;
 			})
@@ -76,6 +105,7 @@ angular.module('gandhi')
 
 		// add the stage data
 		val.flow.stages[$scope.stage] = {
+			status: 'submitted',
 			data: $scope.supplement
 		}
 

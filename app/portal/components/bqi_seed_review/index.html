@@ -1,6 +1,8 @@
-<div ng-controller="Components.BqiSeedApplication">
+<div ng-controller="Components.BqiSeedReview">
 
-	<form ng-submit="submit()">
+	<div ng-show="role == 'owner'">{{message}}</div>
+
+	<form ng-submit="submit()" ng-show="role == 'reviewer'">
 		<label>Project Title</label>
 		<p>{{project.title}}</p>
 
@@ -16,9 +18,7 @@
 			<div class="instructions">
 				Please score the Abstract from 1 (lowest) to 7 (highest) to indicate whether the proposed hypothesis aligns with one of the guiding Big Questions, is a novel way to address the subject and can lead to an important research agenda:
 			</div>
-			<div class="value">
-				{{project.flow.stages.application.data.abstract}}
-			</div>
+			<textarea ckeditor="sandbox" class="sandbox" ng-model="project.flow.stages.application.data.abstract"></textarea>
 			<label>Rating</label>
 			<input type="range" min="0" max="7" value="4" step="1" ng-model="form.abstract.rating" />
 
@@ -35,9 +35,7 @@
 			<div class="instructions">
 				Do you think the proposed activities are crucial to the goals of the project?
 			</div>
-			<div class="value">
-				{{project.flow.stages.application.data.short_answer_1}}
-			</div>
+			<textarea ckeditor="sandbox" class="sandbox" ng-model="project.flow.stages.application.data.short_answer_1"></textarea>
 			<label>Rating</label>
 			<input type="range" min="0" max="7" value="4" step="1" ng-model="form.short_answer_1.rating" />
 
@@ -52,9 +50,7 @@
 			<div class="instructions">
 				Does the project’s team have a good capacity for success?
 			</div>
-			<div class="value">
-				{{project.flow.stages.application.data.short_answer_2}}
-			</div>
+			<textarea ckeditor="sandbox" class="sandbox" ng-model="project.flow.stages.application.data.short_answer_2"></textarea>
 			<label>Rating</label>
 			<input type="range" min="0" max="7" value="4" step="1" ng-model="form.short_answer_2.rating" />
 
@@ -70,9 +66,7 @@
 			<div class="instructions">
 				Do you think the proposed outputs and outcomes are reasonable and can be accomplished within the span of the project?
 			</div>
-			<div class="value">
-				{{project.flow.stages.application.data.outputs_and_outcomes}}
-			</div>
+			<textarea ckeditor="sandbox" class="sandbox" ng-model="project.flow.stages.application.data.outputs_and_outcomes"></textarea>
 			<label>Rating</label>
 			<input type="range" min="0" max="7" value="4" step="1" ng-model="form.outputs_and_outcomes.rating" />
 
@@ -123,14 +117,20 @@
 
 		<label>Justification Narrative</label>
 		<p>Only mention points that justify your decision. Please do not summarize the project. Since these comments will not be shared with the author of the proposal, you may choose be more candid.</p>
-		<textarea ckeditor></textarea>
+		<textarea ckeditor ng-model="a"></textarea>
 
 
 		<label>Feedback to the Author</label>
 		<p>Applicants place great value on independent evaluations, and your observations may improve their study design or direct them to relevant literature. As you prepare your comments, please be sure that the statements are balanced, informative & concise.</p>
-		<textarea ckeditor></textarea>
+		<textarea ckeditor ng-model="b"></textarea>
 
 		<br /><br />
 		<input type="submit" value="Submit">
 	</form>
+
+	<style type="text/css">
+		.sandbox + .cke .cke_top, .sandbox + .cke .cke_bottom {
+			display: none;
+		}
+	</style>
 </div>

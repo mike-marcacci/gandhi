@@ -16,8 +16,9 @@ angular.module('gandhi')
 	$scope.limit_200 = limit(200);
 	$scope.limit_150 = limit(150);
 
+	console.log($scope.project.flow.stages[$scope.stage])
 
-	$scope.application = {
+	$scope.application = $scope.project.flow.stages[$scope.stage] && $scope.project.flow.stages[$scope.stage].data ? angular.copy($scope.project.flow.stages[$scope.stage].data) : {
 		title: "",
 		pi: {},
 		ci: [
@@ -62,39 +63,26 @@ angular.module('gandhi')
 	$scope.submit = function() {
 
 		// create the base project
-		var val = {
-			title: $scope.application.title,
-			program_id: $scope.program.id,
-			users: {},
-			flow: {
-				stages: {}
-			}
-		};
+		var project = {flow: {stages: {}}};
 
 		// add stage data
-		val.flow.stages[$scope.stage] = {
+		project.flow.stages[$scope.stage] = {
+			status: 'submitted',
 			data: $scope.application
 		}
 
-		// add user
-		val.users[$scope.currentUser.id] = {
-			id: $scope.currentUser.id,
-			roles: ['owner']
-		};
+		// activate the next stage
+		project.flow.active = $scope.program.flow.default[$scope.program.flow.default.indexOf($scope.stage) + 1];
 
-		// set the active stage to the next stage
-		val.flow.active = $scope.program.flow.default[1];
-
-		// save
-		$scope.projects.post(val).then(function(res){
+		$scope.project.patch(project).then(function(res){
 
 			// update the local projects record
-			$scope.projects.push(res);
+			angular.extend($scope.project, res);
 
 			// redirect to the next stage
 			$state.go('portal.projects.stage', {project: res.id, stage: res.flow.active})
 		}, function(err){
-			alert('Sorry, but there was an error submitting this application. Pleast contact us.');
+			alert('Sorry, but there was an error saving your changes. Pleast contact us.');
 		})
 
 	};

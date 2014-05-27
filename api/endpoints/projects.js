@@ -8,34 +8,58 @@ module.exports = function(config, app, resources){
 			if(err)
 				return res.error(err);
 
-			// get projects from the DB
-			var query = filter ? r.table('projects').filter(filter) : r.table('projects');
+			function getProjects(programs){
+				programs = programs || [];
 
-			// restrict to user
-			if(req.params.user){
-				var filter = {users: {}}; filter.users[req.params.user] = true;
-				query = query.hasFields(filter);
-			}
+				// get projects from the DB
+				var query = filter ? r.table('projects').filter(filter) : r.table('projects');
 
-			query.orderBy('created').run(conn, function(err, cursor){
-				if(err) {
-					resources.db.release(conn);
-					return res.error(err);
+				// restrict to user
+				if(req.params.user){
+					var fields = {users: {}}; fields.users[req.params.user] = true;
+					query = query.filter(function(row){
+						return row.hasFields(fields).or(r.expr(programs).contains(row('program_id')));
+					});
 				}
 
-				// output as an array
-				cursor.toArray(function(err, projects){
-					resources.db.release(conn);
-
-					if(err)
+				query.orderBy('created').run(conn, function(err, cursor){
+					if(err) {
+						resources.db.release(conn);
 						return res.error(err);
+					}
 
-					return res.data(projects);
+					// output as an array
+					cursor.toArray(function(err, projects){
+						resources.db.release(conn);
+
+						if(err)
+							return res.error(err);
+
+						return res.data(projects);
+					});
 				});
+			};
 
-			});
+			// check if the user is assigned to an entire program
+			if(req.params.user){
+				var programsFields = {users: {}}; programsFields.users[req.params.user] = true;
+				return r.table('programs').hasFields(programsFields)('id').run(conn, function(err, cursor){
+					cursor.toArray(function(err, programs){
+						if(err){
+							resources.db.release(conn);
+							return res.error(err);
+						}
+
+						console.log(req.params.user, '------', programs)
+
+						return getProjects(programs);
+					});
+				});
+			}
+
+			return getProjects();
 		});
-	}
+	};
 
 	function show(req, res){
 		resources.db.acquire(function(err, conn) {
