@@ -15,8 +15,8 @@ angular.module('gandhi')
 						$scope.program = program;
 						$scope.stage = program.flow.root;
 
-						var component = program.flow.stages[$scope.stage].component;
-						$scope.component = 'portal/components/'+component+'/'+component+'.html';
+						var component = program.flow.stages[$scope.stage].component.name;
+						$scope.component = 'portal/components/'+component+'/index.html';
 					})
 				})
 			}
@@ -34,13 +34,19 @@ angular.module('gandhi')
 					var programs = newValues[1];
 
 					// get the correct project
-					projects.get($stateParams.project).then(function(project){
-						$scope.project = project;
+					$scope.$watchCollection('projects', function(newValue, oldValue){
+						$scope.projects.some(function(project){
+							if(project.id != $stateParams.project)
+								return false;
+
+							return $scope.project = project;
+						});
 
 						// get the correct program
-						programs.get(project.program_id).then(function(program){
-							$scope.program = program;
-						});
+						if($scope.project)
+							programs.get($scope.project.program_id).then(function(program){
+								$scope.program = program;
+							});
 					});
 				});
 			}
@@ -51,16 +57,43 @@ angular.module('gandhi')
 			template: '<ng-include src="component"></ng-include>',
 			controller: function($scope, $stateParams){
 				$scope.stage = $stateParams.stage;
+				$scope.open = false;
 
-				$scope.$watchCollection('[project, program]', function(newValues, oldValues) {
+				function testStage(stage, tests){
+					return tests.some(function(set){
+						if(typeof set == 'array' && set.every(function(test){
+							// date
+							if(test.name == 'date' && (new Date(test.options.date)) >= (new Date()))
+								return true;
+
+							// submission
+							if(test.name == 'submission' && stage.flow.stages[test.options.stage].submitted)
+								return true;
+						})) {
+							return true;
+						}
+					});
+				}
+
+				$scope.$watch('[project, program]', function(newValues, oldValues) {
 					if(!newValues[0] || !newValues[1]) return;
 
 					var project = newValues[0];
 					var program = newValues[1];
 
-					var component = program.flow.stages[$scope.stage].component;
-					$scope.component = 'portal/components/'+component+'/index.html';
-				});
+					var stageProject = project.flow.stages[$stateParams.stage];
+					var stageProgram = program.flow.stages[$stateParams.stage];
+
+					// OPEN
+					if(!stageProgram.open || !stageProgram.open.length || testStage(stageProgram.open, stageProject))
+						$scope.open = true;
+
+					// CLOSE
+					if(stageProgram.close && stageProgram.close.length && testStage(stageProgram.close, stageProject))
+						$scope.open = false;
+
+					$scope.component = 'portal/components/'+stageProgram.component.name+'/index.html';
+				}, true);
 			}
 		})
 		

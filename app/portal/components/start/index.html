@@ -1,118 +1,15 @@
-<div ng-controller="Components.BqiSeedApplication">
+<div ng-controller="Components.Start">
 
-	<div ng-show="project">Thank you for submitting your application</div>
+	<!-- <div ng-show="project">Thank you for submitting your application</div> -->
 
-	<form ng-submit="submit()" ng-hide="project">
-		<label for="title">Proposal Title</label>
-		<input type="text" required name="title" id="title" ng-model="application.title">
-
-		<fieldset>
-			<legend>Primary Investigator</legend>
-			<div class="third">
-				<label for="application-pi-name">Name</label>
-				<input type="text" required name="application[pi][name]" id="application-pi-name" ng-model="application.pi.name">
-			</div>
-			<div class="third">
-				<label for="application-pi-rank">Rank</label>
-				<input type="text" required name="application[pi][rank]" id="application-pi-rank" ng-model="application.pi.rank">
-			</div>
-			<div class="third">
-				<label for="application-pi-email">Email</label>
-				<input type="email" required name="application[pi][email]" id="application-pi-email" ng-model="application.pi.email">
-			</div>
-			<div>
-				<label for="application-pi-department">Department</label>
-				<input type="text" required name="application[pi][department]" id="application-pi-department" ng-model="application.pi.department">
-			</div>
-		</fieldset>
-
-		<fieldset ng-repeat="ci in application.ci">
-			<legend>Co-Investigators <a href ng-click="removeCi($index)">- Remove</a></legend>
-			<div class="third">
-				<label for="application-ci-name">Name</label>
-				<input type="text" required name="application[ci][{{$index}}][name]" id="application-{{$index}}-ci-name" ng-model="ci.name">
-			</div>
-			<div class="third">
-				<label for="application-ci-rank">Rank</label>
-				<input type="text" required name="application[ci][{{$index}}][rank]" id="application-{{$index}}-ci-rank" ng-model="ci.rank">
-			</div>
-			<div class="third">
-				<label for="application-ci-email">Email</label>
-				<input type="email" required name="application[ci][{{$index}}][email]" id="application-ci-{{$index}}-email" ng-model="ci.email">
-			</div>
-			<div class="half">
-				<label for="application-ci-department">Department</label>
-				<input type="text" required name="application[ci][{{$index}}][department]" id="application-ci-{{$index}}-department" ng-model="ci.department">
-			</div>
-			<div class="half">
-				<label>University</label>
-				<label class="value">
-					<input type="radio" selected name="application[ci][{{$index}}][university]" id="application-ci-{{$index}}-university" ng-model="ci.university" value="University of Chicago">
-					University of Chicago
-				</label>
-				<label class="value">
-					<input type="radio" selected name="application[ci][{{$index}}][university]" id="application-ci-{{$index}}-university" ng-model="ci.university" value="Other">
-					Other
-				</label>
-			</div>
-		</fieldset>
-		<a href ng-click="addCi()" onclick="return false;">+ Add Co-Investigator</a>
-
-		<div></div>
-
-		<div class="pad">
-			<label style="margin-bottom: 10px;">Is this a new collaboration?</label>
-			<label class="value"><input type="checkbox" ng-model="application.collaboration.new"> Yes</label>
-
+	<form role="form" ng-submit="save()">
+		<div class="form-group">
+			<label for="project-title">Title</label>
+			<input type="text" class="form-control" id="project-title" placeholder="Your Project Title Here" ng-model="projectStart.title" required>
 		</div>
 
-		<div class="pad" ng-show="application.collaboration.new">
-			<label style="margin-bottom: 10px;">If yes, is it due to any BQI-related activity?</label>
-			<label class="value" ng-repeat="(key, value) in application.collaboration.activities"><input type="checkbox" ng-model="value"> &#123;&#123;key&#125;&#125;</label>
-			<label class="value" style="display: inline-block;"><input type="checkbox" ng-model="application.collaboration.other.active"></label> <input ng-model="application.collaboration.other.name" style="display: inline-block; width: 30%;">
-		</div>
+		<!-- TODO: add collaborators by email address -->
 
-		<div class="pad">
-			<label style="margin-bottom: 10px;">Focus Areas</label>
-			<label class="value" ng-repeat="(key, value) in application.focuses"><input type="checkbox" ng-model="value"> &#123;&#123;key&#125;&#125;</label>
-		</div>
-
-		<fieldset>
-			<legend>Financial Contact</legend>
-			<div class="third">
-				<label for="application-financial_contact-name">Name</label>
-				<input type="text" required name="application[financial_contact][name]" id="application-financial_contact-name" ng-model="application.financial_contact.name">
-			</div>
-			<div class="third">
-				<label for="application-financial_contact-phone">Phone</label>
-				<input type="tel" name="application[financial_contact][phone]" id="application-financial_contact-phone" ng-model="application.financial_contact.phone">
-			</div>
-			<div class="third">
-				<label for="application-financial_contact-email">Email</label>
-				<input type="email" name="application[financial_contact][email]" id="application-financial_contact-email" ng-model="application.financial_contact.email">
-			</div>
-		</fieldset>
-
-		<label for="application-amount">Requested Amount (USD)</label>
-		<input type="number" name="application[amount]" id="application-amount" ng-model="application.amount">
-
-		<label>ABSTRACT (300 WORDS MAX)</label>
-		<p>State your hypothesis and how it relates to one of the guiding Big Questions. Explain what is truly bold about your approach – i. e., how it may transform the scholarship on the subject and lead to a substantial research agenda.</p>
-		<textarea ckeditor="limit_300" ng-model="application.abstract"></textarea>
-
-		<label for="Short-Answer">Short Answer 1 (150 Words Max)</label>
-		<p>Please provide the intellectual grounding of the hypothesis and explain its novelty.</p>
-		<textarea ckeditor="limit_150" ng-model="application.short_answer_1"></textarea>
-
-		<label for="Short-Answer">Short Answer 2 (150 Words Max)</label>
-		<p>Please detail the major activities of the project over the grant period and how can the seed grant funds be leveraged by the research team.</p>
-		<textarea ckeditor="limit_150" ng-model="application.short_answer_2"></textarea>
-
-		<label for="Project-Description">PROJECT OUTPUTS AND OUTCOMES (200 WORDS MAX)</label>
-		<p>Please explain how this line of inquiry may achieve short- and long-term impact on research and, perhaps, the society. Are there concrete short-term outputs that you anticipate? Can this research program become sustainable and attain external funding in the future? What are the important implications of this research?</p>
-		<textarea ckeditor="limit_200" ng-model="application.outputs_and_outcomes"></textarea>
-
-		<br /><br />
-		<input type="submit" value="Submit">
+		<button type="submit" class="btn btn-primary">{{project ? 'Update' : 'Start'}}</button>
 	</form>
 </div>
