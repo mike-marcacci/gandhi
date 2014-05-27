@@ -26,21 +26,21 @@ angular.module('gandhi')
 		],
 		collaboration: {
 			'new': false,
-			activities: {
-				"Chalk Talk": false,
-				"Monthly Reception": false,
-				"Big Questions Dinner": false
-			},
+			activities: [
+				{name: "Chalk Talk", value: false},
+				{name: "Monthly Reception", value: false},
+				{name: "Big Questions Dinner", value: false}
+			],
 			other: {
 				active: false,
 				name: "Other"
 			}
 		},
-		focuses: {
-			Information: false,
-			Complexity: false,
-			Cognition: false
-		},
+		focuses: [
+			{name:'Information', value: false},
+			{name:'Complexity', value: false},
+			{name:'Cognition', value: false}
+		],
 		financial_contact: {},
 		level: "Seed",
 		amount: "",

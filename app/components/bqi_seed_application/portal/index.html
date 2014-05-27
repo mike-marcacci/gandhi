@@ -65,13 +65,13 @@
 
 		<div class="pad" ng-show="application.collaboration.new">
 			<label style="margin-bottom: 10px;">If yes, is it due to any BQI-related activity?</label>
-			<label class="value" ng-repeat="(key, value) in application.collaboration.activities"><input type="checkbox" ng-model="value"> &#123;&#123;key&#125;&#125;</label>
+			<label class="value" ng-repeat="activity in application.collaboration.activities"><input type="checkbox" ng-model="activity.value"> &#123;&#123;activity.name&#125;&#125;</label>
 			<label class="value" style="display: inline-block;"><input type="checkbox" ng-model="application.collaboration.other.active"></label> <input ng-model="application.collaboration.other.name" style="display: inline-block; width: 30%;">
 		</div>
 
 		<div class="pad">
 			<label style="margin-bottom: 10px;">Focus Areas</label>
-			<label class="value" ng-repeat="(key, value) in application.focuses"><input type="checkbox" ng-model="value"> &#123;&#123;key&#125;&#125;</label>
+			<label class="value" ng-repeat="focus in application.focuses"><input type="checkbox" ng-model="focus.value"> &#123;&#123;focus.name&#125;&#125;</label>
 		</div>
 
 		<fieldset>

@@ -1,41 +1,45 @@
 <div class="row" style="margin-top: 20px;">
 	<aside class="col-sm-4 col-md-3">
-		<div class="well" ng-show="currentUser.admin">
-			<h3>Admin</h3>
-			<ul>
-				<li><a ui-sref="admin.users">Users</a></li>
-				<li><a ui-sref="admin.programs">Programs</a></li>
-				<li><a ui-sref="admin.projects">Projects</a></li>
-				<li><a href ng-click="logout()">Log Out</a></li>
-			</ul>
+		<div class="panel panel-default" ng-show="currentUser.admin">
+			<div class="panel-heading">
+				<h3 class="panel-title">Admin</h3>
+			</div>
+			<div class="panel-body">
+				<ul class="nav nav-pills nav-stacked">
+					<li><a ui-sref="admin.users">Users</a></li>
+					<li><a ui-sref="admin.programs">Programs</a></li>
+					<li><a ui-sref="admin.projects">Projects</a></li>
+					<li><a href ng-click="logout()">Log Out</a></li>
+				</ul>
+			</div>
 		</div>
-		<div class="well">
-			<h3>Portal</h3>
-			<div>
-				<nav>
-					<ul>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Portal</h3>
+			</div>
+			<div class="panel-body">
+				<ul class="nav nav-pills nav-stacked">
 						<li ui-sref-active="active"><a ui-sref="portal.dashboard">Dashboard</a></li>
 						<li ui-sref-active="active"><a ui-sref="portal.user.show">My Account</a></li>
 						<li ui-sref-active="active"><a href ng-click="logout()">Log Out</a></li>
-					</ul>
-				</nav>
+				</ul>
 			</div>
 		</div>
-		<div class="well">
-			<h3>Projects</h3>
-			<div>
-				<nav>
-					<ul>
-						<li ui-sref-active="active" ng-repeat="program in nav">
-							<!-- <a ui-sref="programs({ program: program.id })">{{ program.title }}</a> -->
-							<h4>{{ program.title }}</h4>
-							<ul>
-								<li ui-sref-active="active" ng-repeat="project in program.projects"><a ui-sref="portal.projects.stage({ project: project.id, stage: project.flow.active })">{{ project.title || project.id }}</a></li>
-								<li ui-srec-active="active"><a ui-sref="portal.start({ program: program.id})">+ New</a></li>
-							</ul>
-						</li>
-					</ul>
-				</nav>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Projects</h3>
+			</div>
+			<div class="panel-body">
+				<ul class="nav nav-pills nav-stacked">
+					<li ui-sref-active="active" ng-repeat="program in nav">
+						<!-- <a ui-sref="programs({ program: program.id })">{{ program.title }}</a> -->
+						<h4>{{ program.title }}</h4>
+						<ul class="nav nav-pills nav-stacked">
+							<li ui-sref-active="active" ng-repeat="project in program.projects"><a ui-sref="portal.projects.stage({ project: project.id, stage: project.flow.active })">{{ project.title || project.id }}</a></li>
+							<li ui-srec-active="active"><a ui-sref="portal.start({ program: program.id})">+ New</a></li>
+						</ul>
+					</li>
+				</ul>
 			</div>
 		</div>
 	</aside>
