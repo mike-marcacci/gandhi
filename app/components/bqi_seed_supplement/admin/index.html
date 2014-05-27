@@ -1,1 +1,58 @@
 <h2>{{stage.program.title}}</h2>
+<div ng-controller="Components.Admin.BqiSeedSupplement">
+
+	<form ng-submit="submit()">
+		<fieldset>
+			<legend>Biosketches</legend>
+			<p>Please submit a biosketch for each member of the research team. A biosketch should be one page long and provide the investigator’s expertise and the history of funding relevant for this line of research.</p>
+			<fieldset ng-repeat="biosketch in data.biosketches" ng-show="biosketch.path" style="margin-left: 20px;">
+				<legend>{{biosketch.name}}:</legend>
+				<a href="/api{{biosketch.path}}" target="_blank">Download</a>
+			</fieldset>
+		</fieldset>
+		<br>
+
+		<fieldset>
+			<legend>Relevant Team Publications</legend>
+			<p>Please include 5 publications from the research team that are most representative of your research to date.</p>
+			<div ng-repeat="team_publication in data.team_publications" ng-show="team_publication.path">
+				<a href="/api{{team_publication.path}}" target="_blank">Download</a>
+			</div>
+		</fieldset>
+		<br>
+
+		<fieldset>
+			<legend>Relevant Field Publications</legend>
+			<p>Please include 5 publications from the research team that are most representative of your research to date.</p>
+			<div ng-repeat="area_publication in data.area_publications" ng-show="area_publication.path">
+				<a href="/api{{area_publication.path}}" target="_blank">Download</a>
+			</div>
+		</fieldset>
+		<br>
+
+		<fieldset>
+			<legend>Detailed Budget</legend>
+			<p>Please attach a Budget Summary based on the <a href="http://bigquestions.uchicago.edu/sites/531ea09d5aea6d3cd20000ed/assets/536208b05aea6d5873015feb/Template_Budget_Seed.xlsx">Budget Summary Sheet template</a>. The duration of the project should not exceed 6 months.</p>
+			<div ng-repeat="budget in data.budget" ng-show="budget.path">
+				<a href="/api{{budget.path}}" target="_blank">Download</a>
+			</div>
+		</fieldset>
+		<br>
+
+		<fieldset>
+			<legend>Budget Justification Narrative</legend>
+		<p>Please provide a brief justification for each line item in the proposed Budget. Note that while each investigator must include effort in the budget for his or her proposal, that effort can be completely cost-shared (i.e., the effort can be included in the budget at a cost of $0).</p>
+			<div ng-repeat="budget_narrative in data.budget_narrative" ng-show="budget_narrative.path">
+				<a href="/api{{budget_narrative.path}}" target="_blank">Download</a>
+			</div>
+		</fieldset>
+
+		<!-- <button class="btn btn-primary" type="submit">Save and Continue</button> -->
+		<br><br />
+	</form>
+	<style type="text/css">
+		textarea[disabled] + .cke .cke_top, textarea[disabled] + .cke .cke_bottom {
+			display: none;
+		}
+	</style>
+</div>

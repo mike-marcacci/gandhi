@@ -7,6 +7,59 @@ var path = require('path');
 
 module.exports = function(config, app, resources){
 
+	//////////////
+	// Files
+	//////////////
+	app.get('/users/:user/files/:file', function(req, res){
+
+		// TODO: restrict access to self for non-admin users???
+
+		var root = path.dirname(require.main.filename) + '/files/' + req.params.user + '/';
+		var file = root + '/' + req.params.file;
+
+		if(!fs.existsSync(file))
+			return res.error(404);
+
+		return res.sendfile(file);
+	})
+
+	app.post('/users/:user/files', function(req, res){
+
+		// restrict access to self for non-admin users
+		if(!req.user.admin && req.user.id != req.params.user)
+			return res.error(403);
+
+		var response = {};
+		_.each(req.files, function(file){
+
+			// build the destination root
+			var root = path.dirname(require.main.filename) + '/files/' + req.params.user + '/';
+
+			// name the file
+			var filename = Date.now() + '-' + file.originalFilename;
+
+			// make sure user files directory exists
+			if(!fs.existsSync(root))
+				fs.mkdirSync(root);
+
+			// move the file to its destination
+			fs.renameSync(file.path, root + filename)
+
+			response[file.fieldName] = {
+				path: '/users/' + req.params.user + '/files/' + filename,
+				filename: filename
+			};
+		});
+
+		// TODO: record this in the DB along with the user, etc
+
+		res.send(200, response);
+	});
+
+	//////////////
+	// Users
+	//////////////
+
 	app.post('/users', function(req, res){
 
 		passport.authenticate('bearer', function(err, user, info) {
@@ -62,7 +115,7 @@ module.exports = function(config, app, resources){
 
 	app.namespace('/users', passport.authenticate('bearer', { session: false }), function(){
 
-		app.get('/', passport.authenticate('bearer', { session: false }), function(req, res){
+		app.get('/', function(req, res){
 
 			// restrict endpoint to admin users
 			if(!req.user.admin)
@@ -212,51 +265,5 @@ module.exports = function(config, app, resources){
 				});
 			});
 		});
-
-		app.get('/:user/files/:file', function(req, res){
-
-			// TODO: restrict access to self for non-admin users???
-
-			var root = path.dirname(require.main.filename) + '/files/' + req.params.user + '/';
-			var file = root + '/' + req.params.file;
-
-			if(!fs.existsSync(file))
-				return res.error(404);
-
-			return res.sendfile(file);
-		})
-
-		app.post('/:user/files', function(req, res){
-
-			// restrict access to self for non-admin users
-			if(!req.user.admin && req.user.id != req.params.user)
-				return res.error(403);
-
-			var response = {};
-			_.each(req.files, function(file){
-
-				// build the destination root
-				var root = path.dirname(require.main.filename) + '/files/' + req.params.user + '/';
-
-				// name the file
-				var filename = Date.now() + '-' + file.originalFilename;
-
-				// make sure user files directory exists
-				if(!fs.existsSync(root))
-					fs.mkdirSync(root);
-
-				// move the file to its destination
-				fs.renameSync(file.path, root + filename)
-
-				response[file.fieldName] = {
-					path: '/users/' + req.params.user + '/files/' + filename,
-					filename: filename
-				};
-			});
-
-			// TODO: record this in the DB along with the user, etc
-
-			res.send(200, response);
-		});
-	})
+	});
 };
