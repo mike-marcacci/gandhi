@@ -26,7 +26,7 @@
 		<fieldset>
 			<legend>Co-Investigators</legend>
 			<fieldset ng-repeat="ci in data.ci" style="margin-left: 20px;">
-				<legend><small>{{ci.name}}  <button class="btn btn-danger btn-xs" ng-click="removeCi($index)">Remove</button></small></legend>
+				<legend><small>{{ci.name}}  <a class="btn btn-danger btn-xs" ng-click="removeCi($index)">Remove</a></small></legend>
 				<div class="form-group">
 					<label for="data-ci-{{$index}}-name">Name</label>
 					<input type="text" class="form-control" id="data-ci-{{$index}}-name" ng-model="ci.name" disabled>
@@ -45,18 +45,18 @@
 				</div>
 				<div class="radio">
 					<label>
-						<input type="radio" name="optionsRadios" ng-model="ci.university" value="University of Chicago" disabled>
+						<input type="radio" name="data-ci-{{$index}}-university" ng-model="ci.university" value="University of Chicago" disabled>
 						University of Chicago
 					</label>
 				</div>
 				<div class="radio">
 					<label>
-						<input type="radio" name="optionsRadios" ng-model="ci.university" value="Other" disabled>
+						<input type="radio" name="data-ci-{{$index}}-university" ng-model="ci.university" value="Other" disabled>
 						Other
 					</label>
 				</div>
 			</fieldset>
-			<button class="btn btn-primary" ng-click="addCi()" onclick="return false;" disabled>+ Add Co-Investigator</button>
+			<a class="btn btn-primary" ng-click="addCi()" onclick="return false;" disabled>+ Add Co-Investigator</a>
 		</fieldset>
 		<br>
 		
