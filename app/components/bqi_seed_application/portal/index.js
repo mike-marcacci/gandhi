@@ -18,7 +18,7 @@ angular.module('gandhi')
 
 	console.log($scope.project.flow.stages[$scope.stage])
 
-	$scope.application = $scope.project.flow.stages[$scope.stage] && $scope.project.flow.stages[$scope.stage].data ? angular.copy($scope.project.flow.stages[$scope.stage].data) : {
+	$scope.data = $scope.project.flow.stages[$scope.stage] && $scope.project.flow.stages[$scope.stage].data ? angular.copy($scope.project.flow.stages[$scope.stage].data) : {
 		title: "",
 		pi: {},
 		ci: [
@@ -51,13 +51,13 @@ angular.module('gandhi')
 	};
 
 	$scope.addCi = function(){
-		$scope.application.ci.push({
+		$scope.data.ci.push({
 			university: "University of Chicago"
 		});
 	};
 
 	$scope.removeCi = function(index){
-		$scope.application.ci.splice(index, 1)
+		$scope.data.ci.splice(index, 1)
 	};
 
 	$scope.submit = function() {
@@ -68,7 +68,7 @@ angular.module('gandhi')
 		// add stage data
 		project.flow.stages[$scope.stage] = {
 			status: 'submitted',
-			data: $scope.application
+			data: $scope.data
 		}
 
 		// activate the next stage
