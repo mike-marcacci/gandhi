@@ -27,6 +27,11 @@ app.configure(function() {
 	app.use(config.root + '/files', express.static(__dirname + '/files'));
 });
 
+app.get(config.root, function(req, res){
+	res.set('Location', config.root + '/app');
+	res.send(302);
+})
+
 // add API endpoints
 app.namespace(config.root + '/api', function(){
 
