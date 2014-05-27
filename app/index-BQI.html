@@ -49,7 +49,7 @@
 
 	</head>
 	<body class="portal">
-		<!-- <ng-include src="'/$header'"></ng-include> -->
+		<ng-include src="'/$header'"></ng-include>
 		<div id="main">
 			<div ng-show="currentUser" ui-view class="container"></div>
 			<section ng-hide="currentUser" class="center portal">
@@ -80,6 +80,6 @@
 			</section>
 		</div>
 		<div class="clearfix"></div>
-		<!-- <ng-include src="'/$footer'"></ng-include> -->
+		<ng-include src="'/$footer'"></ng-include>
 	</body>
 </html>
