@@ -62,7 +62,6 @@
 	</head>
 	<body class="portal">
 		<ng-include src="'/$header'"></ng-include>
-		<div class="container" style="width: 100%;">
 			<div ng-show="currentUser" ui-view></div>
 			<div ng-hide="currentUser" class="center portal">
 
@@ -114,6 +113,5 @@
 			</div>
 		</div>
 		<div class="clearfix"></div>
-		<ng-include src="'/$footer'"></ng-include>
 	</body>
 </html>
