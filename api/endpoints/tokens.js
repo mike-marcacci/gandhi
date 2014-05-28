@@ -9,6 +9,9 @@ module.exports = function(config, app, resources){
 		if (!req.body.email || !req.body.password)
 			return res.error(400, 'Email and password are required to generate a token');
 
+		// make the email case insensitive
+		req.body.email = req.body.email.toLowerCase();
+
 		// grab a db connection
 		resources.db.acquire(function(err, connection) {
 			if(err)
