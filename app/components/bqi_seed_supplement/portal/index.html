@@ -7,35 +7,35 @@
 		<p>Please submit a biosketch for each member of the research team. A biosketch should be one page long and provide the investigator’s expertise and the history of funding relevant for this line of research.</p>
 		<div ng-repeat="biosketch in supplement.biosketches">
 			<h4>{{biosketch.name}}:</h4>
-			<div class="input" ng-show="biosketch.path">Uploaded <a href ng-click="removeFile('biosketches', $index)">X</a></div>
+			<div class="input" ng-show="biosketch.path">Uploaded <a href ng-click="removeFile('biosketches', $index)">X</a> <a href="{{biosketch.path}}" target="_blank">(download)</a></div>
 			<input ng-hide="biosketch.path" type="file" ng-file-select="onFileSelect($files, 'biosketches', $index)" />
 		</div>
 
 		<label>RELEVANT TEAM PUBLICATIONS</label>
 		<p>Please include 5 publications from the research team that are most representative of your research to date.</p>
 		<div ng-repeat="team_publication in supplement.team_publications">
-			<div class="input" ng-show="team_publication.path">Uploaded <a href ng-click="removeFile('team_publications', $index)">X</a></div>
+			<div class="input" ng-show="team_publication.path">Uploaded <a href ng-click="removeFile('team_publications', $index)">X</a> <a href="{{team_publication.path}}" target="_blank">(download)</a></div>
 			<input ng-hide="team_publication.path" type="file" ng-file-select="onFileSelect($files, 'team_publications', $index)" />
 		</div>
 
 		<label>RELEVANT Field PUBLICATIONS</label>
 		<p>In addition, please include at most 5 publications that are most relevant to the research area that the project will address.</p>
 		<div ng-repeat="area_publication in supplement.area_publications">
-			<div class="input" ng-show="area_publication.path">Uploaded <a href ng-click="removeFile('area_publications', $index)">X</a></div>
+			<div class="input" ng-show="area_publication.path">Uploaded <a href ng-click="removeFile('area_publications', $index)">X</a> <a href="{{area_publication.path}}" target="_blank">(download)</a></div>
 			<input ng-hide="area_publication.path" type="file" ng-file-select="onFileSelect($files, 'area_publications', $index)" />
 		</div>
 
 		<label>DETAILED BUDGET</label>
 		<p>Please attach a Budget Summary based on the <a href="http://bigquestions.uchicago.edu/sites/531ea09d5aea6d3cd20000ed/assets/536208b05aea6d5873015feb/Template_Budget_Seed.xlsx">Budget Summary Sheet template</a>. The duration of the project should not exceed 6 months.</p>
 		<div ng-repeat="budget in supplement.budget">
-			<div class="input" ng-show="budget.path">Uploaded <a href ng-click="removeFile('budget', $index)">X</a></div>
+			<div class="input" ng-show="budget.path">Uploaded <a href ng-click="removeFile('budget', $index)">X</a> <a href="{{budget.path}}" target="_blank">(download)</a></div>
 			<input ng-hide="budget.path" type="file" ng-file-select="onFileSelect($files, 'budget', $index)" />
 		</div>
 
 		<label>BUDGET JUSTIFICATION NARRATIVE</label>
 		<p>Please provide a brief justification for each line item in the proposed Budget. Note that while each investigator must include effort in the budget for his or her proposal, that effort can be completely cost-shared (i.e., the effort can be included in the budget at a cost of $0).</p>
 		<div ng-repeat="budget_narrative in supplement.budget_narrative">
-			<div class="input" ng-show="budget_narrative.path">Uploaded <a href ng-click="removeFile('budget_narrative', $index)">X</a></div>
+			<div class="input" ng-show="budget_narrative.path">Uploaded <a href ng-click="removeFile('budget_narrative', $index)">X</a> <a href="{{budget_narrative.path}}" target="_blank">(download)</a></div>
 			<input ng-hide="budget_narrative.path" type="file" ng-file-select="onFileSelect($files, 'budget_narrative', $index)" />
 		</div>
 
