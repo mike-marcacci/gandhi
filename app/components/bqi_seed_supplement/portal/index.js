@@ -36,8 +36,8 @@ angular.module('gandhi')
 		var slices = []
 		// remove biosketches that don't appear in the CI data
 		$scope.supplement.biosketches.forEach(function(sketch, i){
-			if($scope.project.flow.stages.application.data.ci.every(function(ci){
-				if(sketch.name == ci.name || sketch.name == $scope.project.flow.stages.application.data.pi.name)
+			if(sketch.name != $scope.project.flow.stages.application.data.pi.name && $scope.project.flow.stages.application.data.ci.every(function(ci){
+				if(sketch.name == ci.name)
 					return false;
 				return true;
 			}))
