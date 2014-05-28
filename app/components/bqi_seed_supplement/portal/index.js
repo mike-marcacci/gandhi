@@ -69,7 +69,7 @@ angular.module('gandhi')
 			.success(function(data, status, headers, config) {
 				// file is uploaded successfully
 				// console.log(data);
-				$scope.supplement[field][index].path = data.file.path;
+				$scope.supplement[field][index].path = encodeURIComponent(data.file.path);
 				$scope.supplement[field][index].filename = data.file.filename;
 			})
 			.error(function(err){
