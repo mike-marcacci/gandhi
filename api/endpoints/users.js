@@ -82,6 +82,13 @@ module.exports = function(config, app, resources){
 				if(err)
 					return res.error(err);
 
+				// validate input
+				if(!req.body.email || !req.body.password)
+					return res.error(400, "Email and password must be supplied.");
+
+				// make the email case insensitive
+				req.body.email = req.body.email.toLowerCase();
+
 				// verify email is not already taken
 				r.table('users').filter({email: req.body.email}).limit(1).run(conn, function(err, cursor){
 					if(err) {
