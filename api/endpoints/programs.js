@@ -1,4 +1,5 @@
 var r = require('rethinkdb');
+var _ = require('lodash');
 var passport = require('passport');
 
 module.exports = function(config, app, resources){
@@ -78,6 +79,7 @@ module.exports = function(config, app, resources){
 		});
 
 		app.patch('/:program', function(req, res){
+			var removeUsers = [];
 
 			// restrict endpoint access to admin users
 			if(!req.user.admin)
@@ -87,12 +89,28 @@ module.exports = function(config, app, resources){
 			// TODO: validate against schema
 
 
+			var query = r.table('programs').get(req.params.program);
+
+			// remove any users with a falsy value
+			if(req.body.users){
+				_.each(req.body.users, function(data, id){
+					if(!data)
+						removeUsers.push(id);
+				});
+
+				if(removeUsers.length)
+					query = query.replace(r.row.merge(req.body).without({users: removeUsers}), {returnVals: true});
+				else
+					query = query.update(req.body, {returnVals: true});
+			}
+
+
 			resources.db.acquire(function(err, conn) {
 				if(err)
 					return res.error(err);
 
 				// update program in the DB
-				r.table('programs').get(req.params.program).update(req.body, {returnVals: true}).run(conn, function(err, result){
+				query.run(conn, function(err, result){
 					resources.db.release(conn);
 
 					if(err)

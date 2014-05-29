@@ -46,7 +46,7 @@ angular.module('gandhi')
 			// add user
 			project.users[$scope.currentUser.id] = {
 				id: $scope.currentUser.id,
-				role: 'owner'
+				role: 'applicant'
 			};
 
 			// this stage has been submitted

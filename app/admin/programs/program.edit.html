@@ -1,8 +1,12 @@
-<h2>{{project.title || '[No Title]'}}</h2>
+<div>
+	<h2>{{program.title || '[No Title]'}}</h2>
+</div>
+<hr>
+
 <form role="form" ng-submit="save()">
 	<div class="form-group">
-		<label for="project-title">Title</label>
-		<input type="text" class="form-control" id="project-title" placeholder="Title Goes Here" ng-model="projectEdit.title">
+		<label for="program-title">Title</label>
+		<input type="text" class="form-control" id="program-title" placeholder="Title Goes Here" ng-model="programEdit.title">
 	</div>
 
 	<div class="panel panel-default">
@@ -23,7 +27,7 @@
 					<th>Role</th>
 					<th></th>
 				</tr>
-				<tr ng-repeat="(id, data) in projectEdit.users" ng-if="data != null">
+				<tr ng-repeat="(id, data) in programEdit.users" ng-if="data != null">
 					<td>{{data.name}}</td>
 					<td><select class="form-control" ng-model="data.role" ng-options="role for role in program.roles"></select></td>
 					<td><div ng-click="removeUser(id)" class="btn btn-danger btn-sm pull-right">Remove</div></td>
@@ -34,6 +38,6 @@
 
 	<hr>
 
-	<button type="button" class="btn btn-default" ui-sref="admin.projects.project.show">Cancel</button>
-	<button type="submit" class="btn btn-default">Submit</button>
+	<div type="button" class="btn btn-default" ui-sref="admin.programs.program.show">Cancel</div>
+	<button type="submit" class="btn btn-primary">Submit</button>
 </form>
