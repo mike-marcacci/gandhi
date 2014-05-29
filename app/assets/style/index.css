@@ -13,3 +13,8 @@ body {
 #main {
 	width: 100%;
 }
+
+.stage fieldset {
+	border: none !important;
+}
+
