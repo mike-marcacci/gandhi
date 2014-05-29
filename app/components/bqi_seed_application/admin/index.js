@@ -4,6 +4,8 @@ angular.module('gandhi')
 
 	$scope.data = $scope.stage.project.data;
 
+	$scope.disabled = true;
+
 	$scope.ckeditor = $scope.limit_300 = $scope.limit_200 = $scope.limit_150 = {
 		toolbar: [],
 		removePlugins: 'elementspath,wordcount',

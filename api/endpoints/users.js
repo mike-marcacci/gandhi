@@ -46,7 +46,7 @@ module.exports = function(config, app, resources){
 			fs.renameSync(file.path, root + filename)
 
 			response[file.fieldName] = {
-				path: '/users/' + req.params.user + '/files/' + filename,
+				path: '/users/' + req.params.user + '/files/' + encodeURIComponent(filename),
 				filename: filename
 			};
 		});
