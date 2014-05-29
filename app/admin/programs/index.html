@@ -1,11 +1,21 @@
-<h1>Programs</h1>
+<div>
+	<h2>Programs</h2>
+</div>
 <hr/>
 
-<table ng-table class="table ng-table-responsive">
-    <tr ng-repeat="program in programs">
-        <td data-title="'Title'">
-            {{program.title}}
-        </td>
-    </tr>
-</table>
-<div ui-view></div>
+<div>
+	<div class="row">
+		<div class="col-sm-4 blog-main">
+			<table ng-table class="table ng-table-responsive">
+				<tr ui-sref-active="active" ng-repeat="program in programs">
+					<td data-title="'Title'">
+						<a ui-sref="admin.programs.program.show({program: program.id})">{{program.title || '[No Title]'}}</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="col-sm-8">
+			<div ui-view>Choose a program from the sidebar.</div>
+		</div>
+	</div>
+</div>

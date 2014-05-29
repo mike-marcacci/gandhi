@@ -3,7 +3,7 @@ var passport = require('passport');
 
 module.exports = function(config, app, resources){
 
-	function list(req, res, filter){
+	function list(req, res){
 		resources.db.acquire(function(err, conn) {
 			if(err)
 				return res.error(err);
@@ -12,7 +12,7 @@ module.exports = function(config, app, resources){
 				programs = programs || [];
 
 				// get projects from the DB
-				var query = filter ? r.table('projects').filter(filter) : r.table('projects');
+				var query = r.table('projects');
 
 				// restrict to user
 				if(req.params.user){
@@ -21,6 +21,16 @@ module.exports = function(config, app, resources){
 						return row.hasFields(fields).or(r.expr(programs).contains(row('program_id')));
 					});
 				}
+
+				// restrict to program
+				if(req.params.program){
+					req.query.filter = req.query.filter || {};
+					req.query.filter.program_id = req.params.program;
+				}
+
+				// apply the filter
+				if(req.query.filter)
+					query = query.filter(req.query.filter);
 
 				query.orderBy('created').run(conn, function(err, cursor){
 					if(err) {
@@ -71,8 +81,11 @@ module.exports = function(config, app, resources){
 					return res.error(err);
 
 				// restrict to user
-				if(!project || (req.params.user && !project.users[req.params.user]))
-					return res.error(404);
+				// TODO: obey program assignments
+				// if(!project || (req.params.user && !project.users[req.params.user]))
+				// 	return res.error(404);
+
+				// TODO: restrict to project
 
 				return res.data(project);
 			});
@@ -117,10 +130,13 @@ module.exports = function(config, app, resources){
 				}
 
 				// restrict to user
-				if(!project || (req.params.user && !project.users[req.params.user])){
-					resources.db.release(conn);
-					return res.error(404);
-				}
+				// TODO: obey program assignments
+				// if(!project || (req.params.user && !project.users[req.params.user])){
+				// 	resources.db.release(conn);
+				// 	return res.error(404);
+				// }
+
+				// TODO: restrict to project
 
 				// update the project
 				r.table('projects').get(req.params.project).update(req.body, {returnVals: true}).run(conn, function(err, result){
@@ -148,8 +164,9 @@ module.exports = function(config, app, resources){
 					return res.error(err);
 
 				// restrict to user
-				if(!project || (req.params.user && !project.users[req.params.user]))
-					return res.error(404);
+				// TODO: obey program assignments
+				// if(!project || (req.params.user && !project.users[req.params.user]))
+				// 	return res.error(404);
 
 				// remove project from the DB
 				r.table('projects').get(req.params.project).delete({returnVals: true}).run(conn, function(err, result){
@@ -184,7 +201,7 @@ module.exports = function(config, app, resources){
 		});
 
 		app.get('', function(req, res){
-			return list(req, res, req.query.filter);
+			return list(req, res);
 		});
 
 		app.get('/:project', function(req, res){
@@ -215,11 +232,56 @@ module.exports = function(config, app, resources){
 
 	}, function(){
 		app.post('/', function(req, res){
+
+			// add the user as an applicant
+			req.body.users[req.params.user] = {
+				id: req.params.user,
+				role: 'applicant'
+			};
+
 			return create(req, res);
 		});
 
 		app.get('/', function(req, res){
-			return list(req, res, req.query.filter);
+			return list(req, res);
+		});
+
+		app.get('/:project', function(req, res){
+			return show(req, res);
+		});
+
+		app.patch('/:project', function(req, res){
+			return update(req, res);
+		});
+
+		app.del('/:project', function(req, res){
+			return remove(req, res);
+		});
+	});
+
+
+	//////////////////////////////
+	// Projects by Program
+	//////////////////////////////
+
+	app.namespace('/programs/:program/projects', passport.authenticate('bearer', { session: false }), function(req, res, next){
+
+		// restrict endpoint access to admin users
+		if(!req.user.admin)
+			return res.error(403);
+		return next();
+
+	}, function(){
+		app.post('/', function(req, res){
+
+			// add the project to this program
+			req.body.program_id = req.params.program;
+
+			return create(req, res);
+		});
+
+		app.get('/', function(req, res){
+			return list(req, res);
 		});
 
 		app.get('/:project', function(req, res){

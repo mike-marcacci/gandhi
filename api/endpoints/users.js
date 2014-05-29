@@ -7,6 +7,195 @@ var path = require('path');
 
 module.exports = function(config, app, resources){
 
+	function list(req, res){
+		resources.db.acquire(function(err, conn) {
+			if(err)
+				return res.error(err);
+
+			function getUsers(ids){
+				// get users from the DB
+				var query = r.table('users');
+
+				// restrict to ids
+				if(ids)
+					query = query.getAll.apply(query, ids);
+
+				// apply the filter
+				if(req.query.filter)
+					query = query.filter(req.query.filter);
+
+				query.orderBy('created').run(conn, function(err, cursor){
+					if(err) {
+						resources.db.release(conn);
+						return res.error(err);
+					}
+
+					// output as an array
+					cursor.toArray(function(err, users){
+						resources.db.release(conn);
+
+						if(err)
+							return res.error(err);
+
+						return res.data(users);
+					});
+				});
+			};
+
+			// check for users assigned to a particular program
+			if(req.params.program){
+				return r.table('programs').get(req.params.program).run(conn, function(err, program){
+					if(err){
+						resources.db.release(conn);
+						return res.error(err);
+					}
+
+					if(!program){
+						resources.db.release(conn);
+						return res.error(404);
+					}
+
+					// add all valid user IDs to the object
+					var ids = [];
+					Object.keys(program.users).forEach(function(id){
+						if(program.users[id])
+							ids.push(id);
+					});
+
+					return getUsers(ids);
+				});
+			}
+
+			// check for users assigned to a particular project
+			if(req.params.project){
+				return r.table('projects').get(req.params.project).run(conn, function(err, project){
+					if(err){
+						resources.db.release(conn);
+						return res.error(err);
+					}
+
+					if(!project){
+						resources.db.release(conn);
+						return res.error(404);
+					}
+
+					// add all valid user IDs to the object
+					var ids = [];
+					Object.keys(project.users).forEach(function(id){
+						if(project.users[id])
+							ids.push(id);
+					});
+
+					return getUsers(ids);
+				});
+			}
+
+			return getUsers();
+		});
+	};
+
+	function show(req, res){
+		resources.db.acquire(function(err, conn) {
+			if(err)
+				return res.error(err);
+
+			// get users from the DB
+			r.table('users').get(req.params.user).run(conn, function(err, user){
+				resources.db.release(conn);
+
+				if(err)
+					return res.error(err);
+
+				if(!user)
+					return res.error(404);
+
+				// sanatize sensitive fields
+				delete user.password;
+
+				return res.data(user);
+			});
+		});
+	};
+
+	function update(req, res){
+		// can't just make yourself an admin
+		if(!req.user.admin)
+			delete req.body.admin;
+
+		// add timestamps
+		req.body.updated = r.now();
+
+		// encrypt the password
+		if(req.body.password)
+			req.body.password = passwords.encrypt(req.body.password);
+
+
+		// TODO: validate against schema
+
+
+		resources.db.acquire(function(err, conn) {
+			if(err)
+				return res.error(err);
+
+			// verify email is not already taken by a different user
+			r.table('users').filter({email: req.body.email || null}).limit(1).run(conn, function(err, cursor){
+				if(err) {
+					resources.db.release(conn);
+					return res.error(err);
+				}
+
+				cursor.toArray(function(err, existing){
+					if(err) {
+						resources.db.release(conn);
+						return res.error(err);
+					}
+
+					if(existing && existing[0] && existing[0].id != req.params.user){
+						resources.db.release(conn);
+						return res.error(409, "An account already exists with this email");
+					}
+
+					// update the user
+					r.table('users').get(req.params.user).update(req.body, {returnVals: true}).run(conn, function(err, result){
+						resources.db.release(conn);
+
+						if(err)
+							return res.error(err);
+
+						var user = result.new_val;
+
+						// sanatize sensitive fields
+						delete user.password;
+
+						return res.data(200, user);
+					});
+				});
+			});
+		});
+	};
+
+	function remove(req, res){
+		resources.db.acquire(function(err, conn) {
+			if(err)
+				return res.error(err);
+
+			// get users from the DB
+			r.table('users').get(req.params.user).delete({returnVals: true}).run(conn, function(err, result){
+				resources.db.release(conn);
+
+				if(err)
+					return res.error(err);
+
+				var user = result.old_val;
+
+				// sanatize sensitive fields
+				delete user.password;
+
+				return res.data(user);
+			});
+		});
+	}
+
 	//////////////
 	// Files
 	//////////////
@@ -128,32 +317,7 @@ module.exports = function(config, app, resources){
 			if(!req.user.admin)
 				return res.error(403);
 
-			resources.db.acquire(function(err, conn) {
-				if(err)
-					return res.error(err);
-
-				r.table('users').orderBy('created').run(conn, function(err, cursor){
-					if(err) {
-						resources.db.release(conn);
-						return res.error(err);
-					}
-
-					// output as an array
-					cursor.toArray(function(err, users){
-						resources.db.release(conn);
-
-						if(err)
-							return res.error(err);
-
-						// sanatize sensitive fields
-						users.forEach(function(user){
-							delete user.password;
-						});
-
-						return res.data(users);
-					});
-				});
-			});
+			return list(req, res);
 		});
 
 		app.get('/:user', function(req, res){
@@ -162,26 +326,7 @@ module.exports = function(config, app, resources){
 			if(!req.user.admin && req.user.id != req.params.user)
 				return res.error(403);
 
-			resources.db.acquire(function(err, conn) {
-				if(err)
-					return res.error(err);
-
-				// get users from the DB
-				r.table('users').get(req.params.user).run(conn, function(err, user){
-					resources.db.release(conn);
-
-					if(err)
-						return res.error(err);
-
-					if(!user)
-						return res.error(404);
-
-					// sanatize sensitive fields
-					delete user.password;
-
-					return res.data(user);
-				});
-			});
+			return show(req, res);
 		});
 
 		app.patch('/:user', function(req, res){
@@ -190,60 +335,7 @@ module.exports = function(config, app, resources){
 			if(!req.user.admin && req.user.id != req.params.user)
 				return res.error(403);
 
-			// can't just make yourself an admin
-			if(!req.user.admin)
-				delete req.body.admin;
-
-			// add timestamps
-			req.body.updated = r.now();
-
-			// encrypt the password
-			if(req.body.password)
-				req.body.password = passwords.encrypt(req.body.password);
-
-
-			// TODO: validate against schema
-
-
-			resources.db.acquire(function(err, conn) {
-				if(err)
-					return res.error(err);
-
-				// verify email is not already taken by a different user
-				r.table('users').filter({email: req.body.email || null}).limit(1).run(conn, function(err, cursor){
-					if(err) {
-						resources.db.release(conn);
-						return res.error(err);
-					}
-
-					cursor.toArray(function(err, existing){
-						if(err) {
-							resources.db.release(conn);
-							return res.error(err);
-						}
-
-						if(existing && existing[0] && existing[0].id != req.params.user){
-							resources.db.release(conn);
-							return res.error(409, "An account already exists with this email");
-						}
-
-						// update the user
-						r.table('users').get(req.params.user).update(req.body, {returnVals: true}).run(conn, function(err, result){
-							resources.db.release(conn);
-
-							if(err)
-								return res.error(err);
-
-							var user = result.new_val;
-
-							// sanatize sensitive fields
-							delete user.password;
-
-							return res.data(200, user);
-						});
-					});
-				});
-			});
+			return update(req, res);
 		});
 
 		app.del('/:user', function(req, res){
@@ -252,25 +344,75 @@ module.exports = function(config, app, resources){
 			if(!req.user.admin && req.user.id != req.params.user)
 				return res.error(403);
 
-			resources.db.acquire(function(err, conn) {
-				if(err)
-					return res.error(err);
+			return remove(req, res);
+		});
+	});
 
-				// get users from the DB
-				r.table('users').get(req.params.user).delete({returnVals: true}).run(conn, function(err, result){
-					resources.db.release(conn);
 
-					if(err)
-						return res.error(err);
+	//////////////////////////////
+	// Users by Program
+	//////////////////////////////
 
-					var user = result.old_val;
+	app.namespace('/programs/:program/users', passport.authenticate('bearer', { session: false }), function(req, res, next){
 
-					// sanatize sensitive fields
-					delete user.password;
+		// restrict endpoint access to admin users
+		if(!req.user.admin)
+			return res.error(403);
+		return next();
 
-					return res.data(user);
-				});
-			});
+	}, function(){
+		app.post('/', function(req, res){
+			return create(req, res);
+		});
+
+		app.get('/', function(req, res){
+			return list(req, res);
+		});
+
+		app.get('/:project', function(req, res){
+			return show(req, res);
+		});
+
+		app.patch('/:project', function(req, res){
+			return update(req, res);
+		});
+
+		app.del('/:project', function(req, res){
+			return remove(req, res);
+		});
+	});
+
+
+	//////////////////////////////
+	// Users by Project
+	//////////////////////////////
+
+	app.namespace('/projects/:project/users', passport.authenticate('bearer', { session: false }), function(req, res, next){
+
+		// restrict endpoint access to admin users
+		if(!req.user.admin)
+			return res.error(403);
+		return next();
+
+	}, function(){
+		app.post('/', function(req, res){
+			return create(req, res);
+		});
+
+		app.get('/', function(req, res){
+			return list(req, res);
+		});
+
+		app.get('/:project', function(req, res){
+			return show(req, res);
+		});
+
+		app.patch('/:project', function(req, res){
+			return update(req, res);
+		});
+
+		app.del('/:project', function(req, res){
+			return remove(req, res);
 		});
 	});
 };

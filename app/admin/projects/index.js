@@ -35,10 +35,15 @@ angular.module('gandhi')
 		.state('admin.projects.project', {
 			url: "/:project",
 			abstract: true,
-			controller: function($scope, Restangular, $stateParams){
+			controller: function($scope, Restangular, $stateParams, $window){
 				$scope.program = null;
 				$scope.project = null;
-				$scope.stages = [];
+				$scope.stages = null;
+				$scope.users = null;
+
+				Restangular.all('users').getList().then(function(users){
+					$scope.users = users;
+				});
 
 				$scope.$watchCollection('projects', function(newValue, oldValue){
 					// set the project
@@ -64,7 +69,26 @@ angular.module('gandhi')
 							project: $scope.project.flow.stages[id] || null
 						});
 					});
+				});
 
+				$scope.$watchCollection('[project, users]', function(newValues, oldValues){
+					if(!newValues[0] || !newValues[1])
+						return;
+
+					// add user names along w/ roles
+					$window._.each(newValues[0].users, function(user, id){
+						var entry = $window._.find(newValues[1], {id: id});
+
+						// remove if the user no longer exists
+						if(!entry)
+							return newValues[0].users[id] = null;
+
+						// make sure the indexed ID is correct
+						user.id = id;
+
+						// add the user's name
+						user.name = entry.name;
+					});
 				});
 
 			},
@@ -106,7 +130,7 @@ angular.module('gandhi')
 		.state('admin.projects.project.edit', {
 			url: "/edit",
 			templateUrl: "admin/projects/project.edit.html",
-			controller: function($scope, Restangular, $stateParams, $state){
+			controller: function($scope, Restangular, $stateParams, $state, $window){
 				$scope.projectEdit = null;
 
 				// the model to edit
@@ -114,11 +138,24 @@ angular.module('gandhi')
 						$scope.projectEdit = angular.copy(newValue);
 				});
 
+				$scope.removeUser = function(id){
+					$scope.projectEdit.users[id] = null;
+				};
+
+				$scope.addUser = function(){
+					if(!$scope.addUserData)
+						return;
+
+					$scope.projectEdit.users[$scope.addUserData.id] = {};
+					$scope.projectEdit.users[$scope.addUserData.id].id = $scope.addUserData.id;
+					$scope.projectEdit.users[$scope.addUserData.id].name = $scope.addUserData.name;
+				};
+
 				$scope.save = function(){
 
 					$scope.project.patch($scope.projectEdit).then(function(res){
 
-						// update the local user
+						// update the local project
 						angular.extend($scope.project, res)
 
 						// redirect
