@@ -23,7 +23,7 @@ angular.module('gandhi')
 		// 	program_id: $scope.program.id,
 		// 	users: [{
 		// 		id: $scope.currentUser.id,
-		// 		roles: ['owner']
+		// 		roles: ['applicant']
 		// 	}],
 		// 	flow: {
 		// 		stages: {}

@@ -19,7 +19,7 @@
 					"component": {
 						"name": "bqi_seed_review",
 						"options": {
-							"owner": "Applications will be reviewed shortly."
+							"applicant": "Applications will be reviewed shortly."
 						}
 					},
 					"description": "Application is critiqued by external reviewers.",
@@ -212,7 +212,7 @@
 			"advisor": {
 				"list": true
 			},
-			"owner": {
+			"applicant": {
 				"list": true
 			},
 			"reviewer": {

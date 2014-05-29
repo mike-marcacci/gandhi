@@ -6,6 +6,13 @@
 <h2>{{project.title || '[No Title]'}}</h2>
 <b><a ui-sref="admin.programs.program.show({program: program.id})">{{program.title}}</a></b>
 
+<table ng-table class="table ng-table-responsive">
+	<tr ng-repeat="(id, data) in project.users" ng-if="data != null">
+		<td data-title="'Name'"><a ui-sref="admin.users.user.show({user: id})">{{data.name}}</a></td>
+		<td data-title="'Role'">{{data.role}}</td>
+	</tr>
+</table>
+
 <hr>
 
 <ol>

@@ -1,20 +1,21 @@
 body {
-	background: #fff;
-}
+  background: #fff; }
 
-.well > h1:first-child,
-.well > h2:first-child,
-.well > h3:first-child,
-.well > h4:first-child,
-.well > h5:first-child {
-	margin-top: 0;
-}
+.well > h1:first-child, .well h2:first-child, .well h3:first-child, .well h4:first-child, .well h5:first-child {
+  margin-top: 0; }
 
 #main {
-	width: 100%;
-}
+  width: 100%; }
 
-.stage fieldset {
-	border: none !important;
-}
+.x-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: nowrap; }
+  .x-scroll > * {
+    display: inline-block !important;
+    float: none !important; }
+  .x-scroll.nav-tabs > li.active > a, .x-scroll.nav-tabs > li.active > a:hover {
+    background: #ddd; }
 
+tfoot {
+  display: none; }
