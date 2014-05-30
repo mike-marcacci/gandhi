@@ -80,7 +80,7 @@ angular.module('gandhi')
 						var entry = $window._.find(newValues[1], {id: id});
 
 						// remove if the user no longer exists
-						if(!entry)
+						if(!entry || !user)
 							return newValues[0].users[id] = null;
 
 						// make sure the indexed ID is correct
