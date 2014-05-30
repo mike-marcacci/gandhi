@@ -24,7 +24,9 @@ angular.module('gandhi', [
 
 })
 
-.run(function($rootScope, Restangular, $window) {
+.run(function($rootScope, Restangular, $window, $state, $stateParams) {
+	$rootScope.$state = $state;
+	$rootScope.$stateParams = $stateParams;
 
 	function setUser(token){
 		$rootScope.currentUser = null;

@@ -2,6 +2,8 @@ angular.module('gandhi')
 
 .controller('Components.BqiSeedApplication', function($scope, $state, Restangular) {
 
+	// $scope.disabled = $scope.role != 'applicant'
+
 	function limit(limit){
 		return {
 			wordcount: {
@@ -15,8 +17,6 @@ angular.module('gandhi')
 	$scope.limit_300 = limit(300);
 	$scope.limit_200 = limit(200);
 	$scope.limit_150 = limit(150);
-
-	console.log($scope.project.flow.stages[$scope.stage])
 
 	$scope.data = $scope.project.flow.stages[$scope.stage] && $scope.project.flow.stages[$scope.stage].data ? angular.copy($scope.project.flow.stages[$scope.stage].data) : {
 		title: "",
@@ -72,7 +72,7 @@ angular.module('gandhi')
 		}
 
 		// activate the next stage
-		project.flow.active = $scope.program.flow.default[$scope.program.flow.default.indexOf($scope.stage) + 1];
+		project.flow.active = $scope.cycle.flow.default[$scope.cycle.flow.default.indexOf($scope.stage) + 1];
 
 		$scope.project.patch(project).then(function(res){
 

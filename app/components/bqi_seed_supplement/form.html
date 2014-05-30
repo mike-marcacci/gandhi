@@ -6,8 +6,8 @@
 
 		<div class="form-group">
 			<a ng-show="input.path" class="btn btn-default btn-sm" href="../api{{input.path}}" target="_blank"><span class="glyphicon glyphicon-download-alt"></span> Download</a>
-			<div ng-show="input.path" class="btn btn-sm btn-danger" ng-click="removeFile('biosketches', $index)" ng-disabled="disabled">Remove</div>
-			<input class="form-control" ng-hide="input.path" type="file" ng-file-select="onFileSelect($files, 'biosketches', $index)" ng-disabled="disabled">
+			<div ng-show="input.path" class="btn btn-sm btn-danger" ng-click="removeFile('biosketches', $index)" ng-disabled="lock || disabled">Remove</div>
+			<input class="form-control" ng-hide="input.path" type="file" ng-file-select="onFileSelect($files, 'biosketches', $index)" ng-disabled="lock || disabled">
 		</div>
 
 	</fieldset>
@@ -20,8 +20,8 @@
 
 	<div class="form-group" ng-repeat="input in data.team_publications">
 		<a ng-show="input.path" class="btn btn-default btn-sm" href="../api{{input.path}}" target="_blank"><span class="glyphicon glyphicon-download-alt"></span> Download</a>
-		<div ng-show="input.path" class="btn btn-sm btn-danger" ng-click="removeFile('team_publications', $index)" ng-disabled="disabled">Remove</div>
-		<input class="form-control" ng-hide="input.path" type="file" ng-file-select="onFileSelect($files, 'team_publications', $index)" ng-disabled="disabled">
+		<div ng-show="input.path" class="btn btn-sm btn-danger" ng-click="removeFile('team_publications', $index)" ng-disabled="lock || disabled">Remove</div>
+		<input class="form-control" ng-hide="input.path" type="file" ng-file-select="onFileSelect($files, 'team_publications', $index)" ng-disabled="lock || disabled">
 	</div>
 </fieldset>
 <br>
@@ -31,8 +31,8 @@
 	<p>Please include 5 publications from the research team that are most representative of your research to date.</p>
 	<div class="form-group" ng-repeat="input in data.area_publications">
 		<a ng-show="input.path" class="btn btn-default btn-sm" href="../api{{input.path}}" target="_blank"><span class="glyphicon glyphicon-download-alt"></span> Download</a>
-		<div ng-show="input.path" class="btn btn-sm btn-danger" ng-click="removeFile('area_publications', $index)" ng-disabled="disabled">Remove</div>
-		<input class="form-control" ng-hide="input.path" type="file" ng-file-select="onFileSelect($files, 'area_publications', $index)" ng-disabled="disabled">
+		<div ng-show="input.path" class="btn btn-sm btn-danger" ng-click="removeFile('area_publications', $index)" ng-disabled="lock || disabled">Remove</div>
+		<input class="form-control" ng-hide="input.path" type="file" ng-file-select="onFileSelect($files, 'area_publications', $index)" ng-disabled="lock || disabled">
 	</div>
 </fieldset>
 <br>
@@ -42,8 +42,8 @@
 	<p>Please attach a Budget Summary based on the <a href="http://bigquestions.uchicago.edu/sites/531ea09d5aea6d3cd20000ed/assets/536208b05aea6d5873015feb/Template_Budget_Seed.xlsx">Budget Summary Sheet template</a>. The duration of the project should not exceed 6 months.</p>
 	<div class="form-group" ng-repeat="input in data.budget">
 		<a ng-show="input.path" class="btn btn-default btn-sm" href="../api{{input.path}}" target="_blank"><span class="glyphicon glyphicon-download-alt"></span> Download</a>
-		<div ng-show="input.path" class="btn btn-sm btn-danger" ng-click="removeFile('budget', $index)" ng-disabled="disabled">Remove</div>
-		<input class="form-control" ng-hide="input.path" type="file" ng-file-select="onFileSelect($files, 'budget', $index)" ng-disabled="disabled">
+		<div ng-show="input.path" class="btn btn-sm btn-danger" ng-click="removeFile('budget', $index)" ng-disabled="lock || disabled">Remove</div>
+		<input class="form-control" ng-hide="input.path" type="file" ng-file-select="onFileSelect($files, 'budget', $index)" ng-disabled="lock || disabled">
 	</div>
 </fieldset>
 <br>
@@ -53,10 +53,10 @@
 <p>Please provide a brief justification for each line item in the proposed Budget. Note that while each investigator must include effort in the budget for his or her proposal, that effort can be completely cost-shared (i.e., the effort can be included in the budget at a cost of $0).</p>
 	<div class="form-group" ng-repeat="input in data.budget_narrative">
 		<a ng-show="input.path" class="btn btn-default btn-sm" href="../api{{input.path}}" target="_blank"><span class="glyphicon glyphicon-download-alt"></span> Download</a>
-		<div ng-show="input.path" class="btn btn-sm btn-danger" ng-click="removeFile('budget_narrative', $index)" ng-disabled="disabled">Remove</div>
-		<input class="form-control" ng-hide="input.path" type="file" ng-file-select="onFileSelect($files, 'budget_narrative', $index)" ng-disabled="disabled">
+		<div ng-show="input.path" class="btn btn-sm btn-danger" ng-click="removeFile('budget_narrative', $index)" ng-disabled="lock || disabled">Remove</div>
+		<input class="form-control" ng-hide="input.path" type="file" ng-file-select="onFileSelect($files, 'budget_narrative', $index)" ng-disabled="lock || disabled">
 	</div>
 </fieldset>
 
-<button class="btn btn-primary" type="submit" ng-disabled="disabled">Save and Continue</button>
+<button class="btn btn-primary" type="submit" ng-disabled="lock || disabled">Save and Continue</button>
 <br><br />

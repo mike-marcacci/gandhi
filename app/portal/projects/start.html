@@ -1,9 +1,9 @@
 <h1>Application</h1>
-<h2>{{program.title}}</h2>
+<h2>{{cycle.title}}</h2>
 
 <div class="flow-container">
 	<div class="flow">
-		<div ng-repeat="id in program.flow.default" class="node {{ $first ? 'active': '' }}"><span>{{program.flow.stages[id].title}}</span></div>
+		<div ng-repeat="id in cycle.flow.default" class="node {{ $first ? 'active': '' }}"><span>{{cycle.flow.stages[id].title}}</span></div>
 	</div>
 </div>
 

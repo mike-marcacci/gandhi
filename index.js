@@ -38,8 +38,8 @@ app.namespace(config.root + '/api', function(){
 	// add tokens endpoints
 	require('./api/endpoints/tokens.js')(config, app, resources);
 
-	// add programs endpoints
-	require('./api/endpoints/programs.js')(config, app, resources);
+	// add cycles endpoints
+	require('./api/endpoints/cycles.js')(config, app, resources);
 
 	// add users endpoints
 	require('./api/endpoints/users.js')(config, app, resources);

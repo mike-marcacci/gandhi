@@ -1,0 +1,18 @@
+<div ng-controller="Components.Admin.BqiSeedReview.summary">
+	<table ng-show="stage.project" class="table table-responsive">
+		<tr ng-repeat="review in reviews">
+			<td data-title="'Reviewer'">
+			{{review.user.name}}
+			</td>
+			<td data-title="'Rating'">
+				{{review.review.data.rating}}
+			</td>
+			<td data-title="''">
+				<a ng-click="setReview(review)" ui-sref="admin.projects.project.stage({stage: stage.cycle.id})">View Details</a>
+			</td>
+		</tr>
+	</table>
+	<div>
+		<b>Average Rating:</b> {{rating}}
+	</div>
+</div>

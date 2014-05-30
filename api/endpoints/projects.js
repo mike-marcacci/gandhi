@@ -8,8 +8,8 @@ module.exports = function(config, app, resources){
 			if(err)
 				return res.error(err);
 
-			function getProjects(programs){
-				programs = programs || [];
+			function getProjects(cycles){
+				cycles = cycles || [];
 
 				// get projects from the DB
 				var query = r.table('projects');
@@ -18,14 +18,14 @@ module.exports = function(config, app, resources){
 				if(req.params.user){
 					var fields = {users: {}}; fields.users[req.params.user] = true;
 					query = query.filter(function(row){
-						return row.hasFields(fields).or(r.expr(programs).contains(row('program_id')));
+						return row.hasFields(fields).or(r.expr(cycles).contains(row('cycle_id')));
 					});
 				}
 
-				// restrict to program
-				if(req.params.program){
+				// restrict to cycle
+				if(req.params.cycle){
 					req.query.filter = req.query.filter || {};
-					req.query.filter.program_id = req.params.program;
+					req.query.filter.cycle_id = req.params.cycle;
 				}
 
 				// apply the filter
@@ -50,17 +50,17 @@ module.exports = function(config, app, resources){
 				});
 			};
 
-			// check if the user is assigned to an entire program
+			// check if the user is assigned to an entire cycle
 			if(req.params.user){
-				var programsFields = {users: {}}; programsFields.users[req.params.user] = true;
-				return r.table('programs').hasFields(programsFields)('id').run(conn, function(err, cursor){
-					cursor.toArray(function(err, programs){
+				var cyclesFields = {users: {}}; cyclesFields.users[req.params.user] = true;
+				return r.table('cycles').hasFields(cyclesFields)('id').run(conn, function(err, cursor){
+					cursor.toArray(function(err, cycles){
 						if(err){
 							resources.db.release(conn);
 							return res.error(err);
 						}
 
-						return getProjects(programs);
+						return getProjects(cycles);
 					});
 				});
 			}
@@ -81,7 +81,7 @@ module.exports = function(config, app, resources){
 					return res.error(err);
 
 				// restrict to user
-				// TODO: obey program assignments
+				// TODO: obey cycle assignments
 				// if(!project || (req.params.user && !project.users[req.params.user]))
 				// 	return res.error(404);
 
@@ -130,7 +130,7 @@ module.exports = function(config, app, resources){
 				}
 
 				// restrict to user
-				// TODO: obey program assignments
+				// TODO: obey cycle assignments
 				// if(!project || (req.params.user && !project.users[req.params.user])){
 				// 	resources.db.release(conn);
 				// 	return res.error(404);
@@ -164,7 +164,7 @@ module.exports = function(config, app, resources){
 					return res.error(err);
 
 				// restrict to user
-				// TODO: obey program assignments
+				// TODO: obey cycle assignments
 				// if(!project || (req.params.user && !project.users[req.params.user]))
 				// 	return res.error(404);
 
@@ -261,10 +261,10 @@ module.exports = function(config, app, resources){
 
 
 	//////////////////////////////
-	// Projects by Program
+	// Projects by Cycle
 	//////////////////////////////
 
-	app.namespace('/programs/:program/projects', passport.authenticate('bearer', { session: false }), function(req, res, next){
+	app.namespace('/cycles/:cycle/projects', passport.authenticate('bearer', { session: false }), function(req, res, next){
 
 		// restrict endpoint access to admin users
 		if(!req.user.admin)
@@ -274,8 +274,8 @@ module.exports = function(config, app, resources){
 	}, function(){
 		app.post('/', function(req, res){
 
-			// add the project to this program
-			req.body.program_id = req.params.program;
+			// add the project to this cycle
+			req.body.cycle_id = req.params.cycle;
 
 			return create(req, res);
 		});

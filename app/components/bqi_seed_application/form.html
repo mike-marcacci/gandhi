@@ -2,19 +2,19 @@
 	<legend>Primary Investigator</legend>
 	<div class="form-group">
 		<label for="data-pi-name">Name</label>
-		<input type="text" class="form-control" id="data-pi-name" ng-model="data.pi.name" ng-disabled="disabled">
+		<input type="text" class="form-control" id="data-pi-name" ng-model="data.pi.name" ng-disabled="lock || disabled">
 	</div>
 	<div class="form-group">
 		<label for="data-pi-rank">Rank</label>
-		<input type="text" class="form-control" id="data-pi-rank" ng-model="data.pi.rank" ng-disabled="disabled">
+		<input type="text" class="form-control" id="data-pi-rank" ng-model="data.pi.rank" ng-disabled="lock || disabled">
 	</div>
 	<div class="form-group">
 		<label for="data-pi-email">Email</label>
-		<input type="email" class="form-control" id="data-pi-email" ng-model="data.pi.email" ng-disabled="disabled">
+		<input type="email" class="form-control" id="data-pi-email" ng-model="data.pi.email" ng-disabled="lock || disabled">
 	</div>
 	<div class="form-group">
 		<label for="data-pi-department">Department</label>
-		<input type="text" class="form-control" id="data-pi-department" ng-model="data.pi.department" ng-disabled="disabled">
+		<input type="text" class="form-control" id="data-pi-department" ng-model="data.pi.department" ng-disabled="lock || disabled">
 	</div>
 </fieldset>
 <br>
@@ -22,37 +22,37 @@
 <fieldset>
 	<legend>Co-Investigators</legend>
 	<fieldset ng-repeat="ci in data.ci" style="margin-left: 20px;">
-		<legend><small>{{ci.name}}  <a class="btn btn-danger btn-xs" ng-click="removeCi($index)" ng-disabled="disabled">Remove</a></small></legend>
+		<legend><small>{{ci.name}}  <a class="btn btn-danger btn-xs" ng-click="removeCi($index)" ng-disabled="lock || disabled">Remove</a></small></legend>
 		<div class="form-group">
 			<label for="data-ci-{{$index}}-name">Name</label>
-			<input type="text" class="form-control" id="data-ci-{{$index}}-name" ng-model="ci.name" ng-disabled="disabled">
+			<input type="text" class="form-control" id="data-ci-{{$index}}-name" ng-model="ci.name" ng-disabled="lock || disabled">
 		</div>
 		<div class="form-group">
 			<label for="data-ci-{{$index}}-rank">Rank</label>
-			<input type="text" class="form-control" id="data-ci-{{$index}}-rank" ng-model="ci.rank" ng-disabled="disabled">
+			<input type="text" class="form-control" id="data-ci-{{$index}}-rank" ng-model="ci.rank" ng-disabled="lock || disabled">
 		</div>
 		<div class="form-group">
 			<label for="data-ci-{{$index}}-email">Email</label>
-			<input type="email" class="form-control" id="data-ci-{{$index}}-email" ng-model="ci.email" ng-disabled="disabled">
+			<input type="email" class="form-control" id="data-ci-{{$index}}-email" ng-model="ci.email" ng-disabled="lock || disabled">
 		</div>
 		<div class="form-group">
 			<label for="data-ci-{{$index}}-department">Department</label>
-			<input type="text" class="form-control" id="data-ci-{{$index}}-department" ng-model="ci.department" ng-disabled="disabled">
+			<input type="text" class="form-control" id="data-ci-{{$index}}-department" ng-model="ci.department" ng-disabled="lock || disabled">
 		</div>
 		<div class="radio">
 			<label>
-				<input type="radio" name="data-ci-{{$index}}-university" ng-model="ci.university" value="University of Chicago" ng-disabled="disabled">
+				<input type="radio" name="data-ci-{{$index}}-university" ng-model="ci.university" value="University of Chicago" ng-disabled="lock || disabled">
 				University of Chicago
 			</label>
 		</div>
 		<div class="radio">
 			<label>
-				<input type="radio" name="data-ci-{{$index}}-university" ng-model="ci.university" value="Other" ng-disabled="disabled">
+				<input type="radio" name="data-ci-{{$index}}-university" ng-model="ci.university" value="Other" ng-disabled="lock || disabled">
 				Other
 			</label>
 		</div>
 	</fieldset>
-	<a class="btn btn-default" ng-click="addCi()" onclick="return false;" ng-disabled="disabled">+ Add Co-Investigator</a>
+	<a class="btn btn-default" ng-click="addCi()" onclick="return false;" ng-disabled="lock || disabled">+ Add Co-Investigator</a>
 </fieldset>
 <br>
 
@@ -60,7 +60,7 @@
 	<legend>Collaboration</legend>
 	<div class="checkbox">
 		<label>
-			<input type="checkbox" ng-model="data.collaboration.new" ng-disabled="disabled">
+			<input type="checkbox" ng-model="data.collaboration.new" ng-disabled="lock || disabled">
 			Is this a new collaboration?
 		</label>
 	</div>
@@ -68,15 +68,15 @@
 		<b>If yes, is it due to any BQI-related activity?</b>
 		<div class="checkbox" ng-repeat="activity in data.collaboration.activities">
 			<label class="value">
-				<input type="checkbox" ng-model="activity.value" ng-disabled="disabled">
+				<input type="checkbox" ng-model="activity.value" ng-disabled="lock || disabled">
 				{{activity.name}}
 			</label>
 		</div>
 		<div class="input-group">
 		  <span class="input-group-addon">
-		    <input type="checkbox" ng-model="data.collaboration.other.active" ng-disabled="disabled">
+		    <input type="checkbox" ng-model="data.collaboration.other.active" ng-disabled="lock || disabled">
 		  </span>
-		  <input type="text" class="form-control" ng-model="data.collaboration.other.name" ng-disabled="disabled">
+		  <input type="text" class="form-control" ng-model="data.collaboration.other.name" ng-disabled="lock || disabled">
 		</div>
 	</div>
 </fieldset>
@@ -86,7 +86,7 @@
 	<legend>Focus Areas</legend>
 	<div class="checkbox" ng-repeat="focus in data.focuses">
 		<label>
-			<input type="checkbox" ng-model="focus.value" ng-disabled="disabled">
+			<input type="checkbox" ng-model="focus.value" ng-disabled="lock || disabled">
 			{{focus.name}}
 		</label>
 	</div>
@@ -97,15 +97,15 @@
 	<legend>Financial Contact</legend>
 	<div class="form-group">
 		<label for="data-financial_contact-name">Name</label>
-		<input type="text" class="form-control" id="data-financial_contact-name" ng-model="data.financial_contact.name" ng-disabled="disabled">
+		<input type="text" class="form-control" id="data-financial_contact-name" ng-model="data.financial_contact.name" ng-disabled="lock || disabled">
 	</div>
 	<div class="form-group">
 		<label for="data-financial_contact-phone">Rank</label>
-		<input type="tel" class="form-control" id="data-financial_contact-phone" ng-model="data.financial_contact.phone" ng-disabled="disabled">
+		<input type="tel" class="form-control" id="data-financial_contact-phone" ng-model="data.financial_contact.phone" ng-disabled="lock || disabled">
 	</div>
 	<div class="form-group">
 		<label for="data-financial_contact-email">Email</label>
-		<input type="email" class="form-control" id="data-financial_contact-email" ng-model="data.financial_contact.email" ng-disabled="disabled">
+		<input type="email" class="form-control" id="data-financial_contact-email" ng-model="data.financial_contact.email" ng-disabled="lock || disabled">
 	</div>
 </fieldset>
 <br>
@@ -114,7 +114,7 @@
 	<legend>Requested Amount</legend>
 	<div class="input-group">
 	  <span class="input-group-addon">$</span>
-	  <input type="number" class="form-control" id="data-amount" ng-model="data.amount" ng-disabled="disabled">
+	  <input type="number" class="form-control" id="data-amount" ng-model="data.amount" ng-disabled="lock || disabled">
 	  <span class="input-group-addon">.00</span>
 	</div>
 </fieldset>
@@ -124,32 +124,32 @@
 <fieldset>
 	<legend>ABSTRACT (300 WORDS MAX)</legend>
 	<p>State your hypothesis and how it relates to one of the guiding Big Questions. Explain what is truly bold about your approach – i. e., how it may transform the scholarship on the subject and lead to a substantial research agenda.</p>
-	<textarea ckeditor="limit_300" ng-model="data.abstract" ng-disabled="disabled"></textarea>
+	<textarea ckeditor="limit_300" ng-model="data.abstract" ng-disabled="lock || disabled"></textarea>
 </fieldset>
 <br><br>
 
 <fieldset>
 	<legend for="Short-Answer">Short Answer 1 (150 Words Max)</legend>
 	<p>Please provide the intellectual grounding of the hypothesis and explain its novelty.</p>
-	<textarea ckeditor="limit_150" ng-model="data.short_answer_1" ng-disabled="disabled"></textarea>
+	<textarea ckeditor="limit_150" ng-model="data.short_answer_1" ng-disabled="lock || disabled"></textarea>
 </fieldset>
 <br><br>
 
 <fieldset>
 	<legend for="Short-Answer">Short Answer 2 (150 Words Max)</legend>
 	<p>Please detail the major activities of the project over the grant period and how can the seed grant funds be leveraged by the research team.</p>
-	<textarea ckeditor="limit_150" ng-model="data.short_answer_2" ng-disabled="disabled"></textarea>
+	<textarea ckeditor="limit_150" ng-model="data.short_answer_2" ng-disabled="lock || disabled"></textarea>
 </fieldset>
 <br><br>
 
 <fieldset>
 	<legend for="Project-Description">PROJECT OUTPUTS AND OUTCOMES (200 WORDS MAX)</legend>
-	<p>Please explain how this line of inquiry may achieve short- and long-term impact on research and, perhaps, the society. Are there concrete short-term outputs that you anticipate? Can this research program become sustainable and attain external funding in the future? What are the important implications of this research?</p>
-	<textarea ckeditor="limit_200" ng-model="data.outputs_and_outcomes" ng-disabled="disabled"></textarea>
+	<p>Please explain how this line of inquiry may achieve short- and long-term impact on research and, perhaps, the society. Are there concrete short-term outputs that you anticipate? Can this research cycle become sustainable and attain external funding in the future? What are the important implications of this research?</p>
+	<textarea ckeditor="limit_200" ng-model="data.outputs_and_outcomes" ng-disabled="lock || disabled"></textarea>
 </fieldset>
 <br><br>
 
-<button class="btn btn-primary" type="submit" ng-disabled="disabled">Save and Continue</button>
+<button class="btn btn-primary" type="submit" ng-disabled="lock || disabled">Save and Continue</button>
 <br><br />
 <style type="text/css">
 	textarea[disabled] + .cke .cke_top, textarea[disabled] + .cke .cke_bottom {

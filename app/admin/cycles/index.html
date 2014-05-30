@@ -1,5 +1,5 @@
 <div>
-	<h2>Programs</h2>
+	<h2>Cycles</h2>
 </div>
 <hr/>
 
@@ -7,15 +7,15 @@
 	<div class="row">
 		<div class="col-sm-4 blog-main">
 			<table ng-table class="table ng-table-responsive">
-				<tr ui-sref-active="active" ng-repeat="program in programs">
+				<tr ui-sref-active="active" ng-repeat="cycle in cycles">
 					<td data-title="'Title'">
-						<a ui-sref="admin.programs.program.show({program: program.id})">{{program.title || '[No Title]'}}</a>
+						<a ui-sref="admin.cycles.cycle.show({cycle: cycle.id})">{{cycle.title || '[No Title]'}}</a>
 					</td>
 				</tr>
 			</table>
 		</div>
 		<div class="col-sm-8">
-			<div ui-view>Choose a program from the sidebar.</div>
+			<div ui-view>Choose a cycle from the sidebar.</div>
 		</div>
 	</div>
 </div>

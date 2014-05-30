@@ -11,7 +11,7 @@ angular.module('gandhi')
 				$rootScope.bqi = false;
 
 				$scope.nav = {};
-				$scope.programs = null;
+				$scope.cycles = null;
 				$scope.projects = null;
 
 				$scope.$watch('user', function( newValue, oldValue ) {
@@ -20,36 +20,36 @@ angular.module('gandhi')
 						return;
 
 					$q.all([
-						Restangular.all('programs').getList(),
+						Restangular.all('cycles').getList(),
 						newValue.getList('projects')
 					]).then(function(res){
 
-						// add programs to nav
-						$scope.programs = res[0];
+						// add cycles to nav
+						$scope.cycles = res[0];
 
-						// map user's projects to corresponding program in nav
+						// map user's projects to corresponding cycle in nav
 						$scope.projects = res[1];
 
 					});
 				});
 
-				$scope.$watch('[projects, programs]', function(newValues, oldValues){
+				$scope.$watch('[projects, cycles]', function(newValues, oldValues){
 					if(!newValues[0] || !newValues[1]) return;
 
 
 					var projects = newValues[0]
-					var programs = newValues[1]
+					var cycles = newValues[1]
 
-					programs.forEach(function(program){
-						$scope.nav[program.id] = {
-							id: program.id,
-							title: program.title,
+					cycles.forEach(function(cycle){
+						$scope.nav[cycle.id] = {
+							id: cycle.id,
+							title: cycle.title,
 							projects: {}
 						}
 					});
 
 					projects.forEach(function(project){
-						$scope.nav[project.program_id].projects[project.id] = {
+						$scope.nav[project.cycle_id].projects[project.id] = {
 							id: project.id,
 							title: project.title,
 							flow: project.flow
