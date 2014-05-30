@@ -1,14 +1,13 @@
 <div ng-controller="Components.Start">
-	<div ng-show="lock">Thank you for submitting your application.</div>
-
-	<form role="form" ng-submit="save()" ng-hide="lock">
+	&nbsp;<div class="alert alert-success" ng-show="lock">Thank you for submitting your application.</div>
+	<form role="form" ng-submit="save()">
 		<div class="form-group">
 			<label for="project-title">Title</label>
-			<input type="text" class="form-control" id="project-title" placeholder="Your Project Title Here" ng-model="projectStart.title" required>
+			<input type="text" class="form-control" id="project-title" placeholder="Your Project Title Here" ng-model="projectStart.title" required ng-disabled="lock || disabled">
 		</div>
 
 		<!-- TODO: #16 add collaborators by email address -->
 
-		<button type="submit" class="btn btn-primary">{{project ? 'Update' : 'Start'}}</button>
+		<button type="submit" class="btn btn-primary" ng-disabled="lock || disabled">{{project ? 'Update' : 'Start'}}</button>
 	</form>
 </div>

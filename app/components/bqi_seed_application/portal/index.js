@@ -2,6 +2,8 @@ angular.module('gandhi')
 
 .controller('Components.BqiSeedApplication', function($scope, $state, Restangular) {
 
+	// $scope.disabled = $scope.role != 'applicant'
+
 	function limit(limit){
 		return {
 			wordcount: {
@@ -15,8 +17,6 @@ angular.module('gandhi')
 	$scope.limit_300 = limit(300);
 	$scope.limit_200 = limit(200);
 	$scope.limit_150 = limit(150);
-
-	console.log($scope.project.flow.stages[$scope.stage])
 
 	$scope.data = $scope.project.flow.stages[$scope.stage] && $scope.project.flow.stages[$scope.stage].data ? angular.copy($scope.project.flow.stages[$scope.stage].data) : {
 		title: "",

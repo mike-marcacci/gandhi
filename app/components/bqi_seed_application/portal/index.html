@@ -1,8 +1,8 @@
 <div ng-controller="Components.BqiSeedApplication">
 
-	<div ng-show="lock">Thank you for submitting your application.</div>
+	&nbsp;<div class="alert alert-success" ng-show="lock">Thank you for submitting your application.</div>
 
-	<form ng-submit="submit()" ng-hide="lock">
+	<form ng-submit="submit()">
 		<ng-include src="'components/bqi_seed_application/form.html'"></ng-include>
 	</form>
 </div>

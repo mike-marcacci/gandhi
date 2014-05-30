@@ -6,7 +6,7 @@
 <h2>{{project.title || '[No Title]'}}</h2>
 <b><a ui-sref="admin.cycles.cycle.show({cycle: cycle.id})">{{cycle.title}}</a></b>
 
-<table ng-table class="table ng-table-responsive">
+<table class="table ng-table-responsive">
 	<tr ng-repeat="(id, data) in project.users" ng-if="data != null">
 		<td data-title="'Name'"><a ui-sref="admin.users.user.show({user: id})">{{data.name}}</a></td>
 		<td data-title="'Role'">{{data.role}}</td>

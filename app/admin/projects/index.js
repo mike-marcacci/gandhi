@@ -54,6 +54,9 @@ angular.module('gandhi')
 						return $scope.project = project;
 					})) return;
 
+					// set a place for stage params
+					$scope.params = {};
+
 					// set the project's cycle
 					if(!$scope.cycles.some(function(cycle){
 						if(cycle.id != $scope.project.cycle_id)
