@@ -1,10 +1,8 @@
 <h1>Application</h1>
 <h2>{{cycle.title}}</h2>
 
-<div class="flow-container">
-	<div class="flow">
-		<div ng-repeat="id in cycle.flow.default" class="node {{ $first ? 'active': '' }}"><span>{{cycle.flow.stages[id].title}}</span></div>
-	</div>
-</div>
+<ul class="nav nav-tabs x-scroll">
+	<li ng-repeat="id in cycle.flow.default" class="{{ $first ? 'active': '' }}"><span>{{cycle.flow.stages[id].title}}</span></li>
+</ul>
 
 <ng-include src="component" class="stage"></ng-include>
