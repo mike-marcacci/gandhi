@@ -7,7 +7,7 @@ angular.module('gandhi')
 	$scope.message = stageCycle.component.options[$scope.role] || '';
 
 	$scope.rating = null;
-	$scope.data = stageProject && stageProject.data[$scope.currentUser.id] ? stageProject.data[$scope.currentUser.id].data : {
+	$scope.data = stageProject && stageProject.data && stageProject.data[$scope.currentUser.id] ? stageProject.data[$scope.currentUser.id].data : {
 		abstract: {
 			rating: 0,
 			explaination: ''
