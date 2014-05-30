@@ -47,7 +47,8 @@ angular.module('gandhi')
 		abstract: "",
 		short_answer_1: "",
 		short_answer_2: "",
-		outputs_and_outcomes: ""
+		outputs_and_outcomes: "",
+		citations: ""
 	};
 
 	$scope.addCi = function(){
