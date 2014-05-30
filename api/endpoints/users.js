@@ -221,6 +221,10 @@ module.exports = function(config, app, resources){
 		var response = {};
 		_.each(req.files, function(file){
 
+			// make sure files directory exists
+			if(!fs.existsSync(path.dirname(require.main.filename) + '/files/'))
+				fs.mkdirSync(path.dirname(require.main.filename) + '/files/');
+
 			// build the destination root
 			var root = path.dirname(require.main.filename) + '/files/' + req.params.user + '/';
 

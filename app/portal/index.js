@@ -8,10 +8,13 @@ angular.module('gandhi')
 			abstract: true,
 			resolve: {},
 			controller: function($scope, Restangular, $q){
-				$scope.nav = {};
 				$scope.cycles = null;
 				$scope.projects = null;
+				$scope.projectsByRole = null;
+				$scope.nav = null;
+				$scope.navByRole = null;
 
+				// current user
 				$scope.$watch('currentUser', function( newValue, oldValue ) {
 
 					if(!newValue || !newValue.id)
@@ -21,16 +24,12 @@ angular.module('gandhi')
 						Restangular.all('cycles').getList(),
 						newValue.getList('projects')
 					]).then(function(res){
-
-						// add cycles to nav
 						$scope.cycles = res[0];
-
-						// map user's projects to corresponding cycle in nav
 						$scope.projects = res[1];
-
 					});
 				});
 
+				// projects & cycles
 				$scope.$watch('[projects, cycles]', function(newValues, oldValues){
 					if(!newValues[0] || !newValues[1])
 						return;
@@ -38,24 +37,49 @@ angular.module('gandhi')
 					var projects = newValues[0]
 					var cycles = newValues[1]
 
-					cycles.forEach(function(cycle){
-						$scope.nav[cycle.id] = {
-							id: cycle.id,
-							title: cycle.title,
-							projects: {}
-						}
+					// index projects by current user's role
+					$scope.projectsByRole = {};
+					projects.forEach(function(project){
+						var cycle = _.find(cycles, {id: project.cycle_id});
+						var assignment = project.users[$scope.currentUser.id] || cycle.users[$scope.currentUser.id];
+
+						if(!assignment)
+							return;
+
+						if(!$scope.projectsByRole[assignment.role])
+							$scope.projectsByRole[assignment.role] = [];
+
+						$scope.projectsByRole[assignment.role].push(project);
 					});
 
-					projects.forEach(function(project){
-						$scope.nav[project.cycle_id].projects[project.id] = {
-							id: project.id,
-							title: project.title,
-							flow: project.flow
-						};
+					function buildNav(projects){
+						if(!$scope.cycles)
+							return;
+
+						var nav = {};
+
+						$scope.cycles.forEach(function(cycle){
+							nav[cycle.id] = {
+								id: cycle.id,
+								title: cycle.title,
+								projects: {}
+							}
+						});
+
+						projects.forEach(function(project){
+							nav[project.cycle_id].projects[project.id] = project;
+						});
+
+						return nav;
+					}
+
+					$scope.nav = buildNav(projects);
+					$scope.navByRole = {};
+					_.each($scope.projectsByRole, function(projects, role){
+						$scope.navByRole[role] = buildNav(projects);
 					});
 
 				}, true);
-
 			}
 		})
 		.state('portal.dashboard', {

@@ -1,3 +1,77 @@
 <h1>Dashboard</h1>
 
 <p>Welcome to the BQI grantee portal. Information about these BQI grants can be found in our <a href="http://bigquestions.uchicago.edu/funding">funding section</a>. If you have any questions, please feel free to contact us at <a href="mailto:bigquestions@uchicago.edu">bigquestions@uchicago.edu</a></p>
+
+<div class="row">
+	<div class="col-sm-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Your Projects</h3>
+			</div>
+			<div class="panel-body">
+				<ul class="nav nav-pills nav-stacked">
+					<li ui-sref-active="active" ng-repeat="cycle in navByRole.applicant">
+						<!-- <a ui-sref="cycles({ cycle: cycle.id })">{{ cycle.title }}</a> -->
+						<h4>{{ cycle.title }}</h4>
+						<ul class="nav nav-pills nav-stacked">
+							<li ui-sref-active="active" ng-repeat="project in cycle.projects">
+								<a ui-sref="portal.projects.stage({ project: project.id, stage: project.flow.active })">
+									<span class="glyphicon {{project.flow.stages.submission.status == 'submitted' ? 'glyphicon-star' : 'glyphicon-star-empty'}}"></span>
+									{{ project.title || project.id }}
+								</a>
+							</li>
+							<li ui-srec-active="active"><a ui-sref="portal.start({ cycle: cycle.id})">+ New</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-sm-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Assigned to Review</h3>
+			</div>
+			<div class="panel-body">
+				<ul class="nav nav-pills nav-stacked">
+					<li ui-sref-active="active" ng-repeat="cycle in navByRole['advisory-reviewer']">
+						<!-- <a ui-sref="cycles({ cycle: cycle.id })">{{ cycle.title }}</a> -->
+						<h4>{{ cycle.title }}</h4>
+						<ul class="nav nav-pills nav-stacked">
+							<li ui-sref-active="active" ng-repeat="project in cycle.projects">
+								<a ui-sref="portal.projects.stage({ project: project.id, stage: project.flow.active })">
+									<span class="glyphicon glyphicon-ok" ng-show="project.flow.stages.administrative_review.data[currentUser.id]"></span>
+									{{ project.title || project.id }}
+								</a>
+							</li>
+							<li ui-srec-active="active"><a ui-sref="portal.start({ cycle: cycle.id})">+ New</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">All Projects</h3>
+			</div>
+			<div class="panel-body">
+				<ul class="nav nav-pills nav-stacked">
+					<li ui-sref-active="active" ng-repeat="cycle in nav">
+						<!-- <a ui-sref="cycles({ cycle: cycle.id })">{{ cycle.title }}</a> -->
+						<h4>{{ cycle.title }}</h4>
+						<ul class="nav nav-pills">
+							<li ui-sref-active="active" ng-repeat="project in cycle.projects"><a ui-sref="portal.projects.stage({ project: project.id, stage: project.flow.active })">{{ project.title || project.id }}</a></li>
+							<li ui-srec-active="active"><a ui-sref="portal.start({ cycle: cycle.id})">+ New</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
