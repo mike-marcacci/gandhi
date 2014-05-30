@@ -7,7 +7,7 @@ angular.module('gandhi')
 			templateUrl: "portal/index.html",
 			abstract: true,
 			resolve: {},
-			controller: function($scope, Restangular, $q){
+			controller: function($scope, Restangular, $q, $rootScope){
 				$rootScope.bqi = true;
 
 				$scope.cycles = null;
