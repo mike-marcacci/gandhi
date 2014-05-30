@@ -15,7 +15,7 @@ angular.module('gandhi')
 		};
 
 		// activate the next stage
-		project.flow.active = $scope.program.flow.default[$scope.program.flow.default.indexOf($scope.stage) + 1];
+		project.flow.active = $scope.cycle.flow.default[$scope.cycle.flow.default.indexOf($scope.stage) + 1];
 
 		$scope.project.patch(project).then(function(res){
 

@@ -4,7 +4,7 @@
 </div>
 
 <h2>{{project.title || '[No Title]'}}</h2>
-<b><a ui-sref="admin.programs.program.show({program: program.id})">{{program.title}}</a></b>
+<b><a ui-sref="admin.cycles.cycle.show({cycle: cycle.id})">{{cycle.title}}</a></b>
 
 <table ng-table class="table ng-table-responsive">
 	<tr ng-repeat="(id, data) in project.users" ng-if="data != null">
@@ -18,8 +18,8 @@
 <ol>
 	<li ng-repeat="stage in stages">
 		<b ng-show="stage.project.status" class="pull-right">({{stage.project.status}})</b>
-		<h4>{{stage.program.title}}</h4>
-		<ng-include src="'components/'+stage.program.component.name+'/admin/summary.html'"></ng-include>
+		<h4>{{stage.cycle.title}}</h4>
+		<ng-include src="'components/'+stage.cycle.component.name+'/admin/summary.html'"></ng-include>
 	</li>
 </ol>
 

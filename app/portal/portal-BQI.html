@@ -16,12 +16,12 @@
 		<div>
 			<nav>
 				<ul>
-					<li ui-sref-active="active" ng-repeat="program in nav">
-						<!-- <a ui-sref="programs({ program: program.id })">{{ program.title }}</a> -->
-						<h4>{{ program.title }}</h4>
+					<li ui-sref-active="active" ng-repeat="cycle in nav">
+						<!-- <a ui-sref="cycles({ cycle: cycle.id })">{{ cycle.title }}</a> -->
+						<h4>{{ cycle.title }}</h4>
 						<ul>
-							<li ui-sref-active="active" ng-repeat="project in program.projects"><a ui-sref="portal.projects.stage({ project: project.id, stage: project.flow.active })">{{ project.title || project.id }}</a></li>
-							<li ui-srec-active="active"><a ui-sref="portal.apply({ program: program.id})">+ Apply</a></li>
+							<li ui-sref-active="active" ng-repeat="project in cycle.projects"><a ui-sref="portal.projects.stage({ project: project.id, stage: project.flow.active })">{{ project.title || project.id }}</a></li>
+							<li ui-srec-active="active"><a ui-sref="portal.apply({ cycle: cycle.id})">+ Apply</a></li>
 						</ul>
 					</li>
 				</ul>

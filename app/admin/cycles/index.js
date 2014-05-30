@@ -3,52 +3,52 @@ angular.module('gandhi')
 .config(function($stateProvider, RestangularProvider) {
 
 	$stateProvider
-		.state('admin.programs', {
-			url: "/programs",
-			templateUrl: "admin/programs/index.html",
+		.state('admin.cycles', {
+			url: "/cycles",
+			templateUrl: "admin/cycles/index.html",
 			controller: function($scope, Restangular){
-				$scope.programs = Restangular.all('programs').getList().$object;
+				$scope.cycles = Restangular.all('cycles').getList().$object;
 			}
 		})
 
-		.state('admin.programs.program', {
-			url: "/:program",
+		.state('admin.cycles.cycle', {
+			url: "/:cycle",
 			abstract: true,
 			controller: function($scope, Restangular, $stateParams, $window){
-				$scope.programProjects = null;
-				$scope.programUsers = null
+				$scope.cycleProjects = null;
+				$scope.cycleUsers = null
 				$scope.users = null;
 
 				Restangular.all('users').getList().then(function(users){
 					$scope.users = users;
 				});;
 
-				$scope.$watchCollection('programs', function(newValue, oldValue){
-					$scope.programs.some(function(program){
-						if(program.id != $stateParams.program)
+				$scope.$watchCollection('cycles', function(newValue, oldValue){
+					$scope.cycles.some(function(cycle){
+						if(cycle.id != $stateParams.cycle)
 							return false;
 
-						return $scope.program = program;
+						return $scope.cycle = cycle;
 					});
 
-					if(!$scope.program)
+					if(!$scope.cycle)
 						return;
 
 					// get related projects
-					$scope.programProjects = $scope.program.getList('projects').$object;
+					$scope.cycleProjects = $scope.cycle.getList('projects').$object;
 
 					// get related users
-					$scope.program.getList('users').then(function(users){
-						$scope.programUsers = users.map(function(user){
+					$scope.cycle.getList('users').then(function(users){
+						$scope.cycleUsers = users.map(function(user){
 							return {
 								user: user,
-								role: $scope.program.users[user.id].role
+								role: $scope.cycle.users[user.id].role
 							}
 						});
 					})
 				});
 
-				$scope.$watchCollection('[program, users]', function(newValues, oldValues){
+				$scope.$watchCollection('[cycle, users]', function(newValues, oldValues){
 					if(!newValues[0] || !newValues[1])
 						return;
 
@@ -71,47 +71,47 @@ angular.module('gandhi')
 			template: '<div ui-view></div>'
 		})
 
-		.state('admin.programs.program.show', {
+		.state('admin.cycles.cycle.show', {
 			url: "/show",
 			controller: function($scope, Restangular, $stateParams){
 
 			},
-			templateUrl: "admin/programs/program.show.html",
+			templateUrl: "admin/cycles/cycle.show.html",
 		})
 
-		.state('admin.programs.program.edit', {
+		.state('admin.cycles.cycle.edit', {
 			url: "/edit",
-			templateUrl: "admin/programs/program.edit.html",
+			templateUrl: "admin/cycles/cycle.edit.html",
 			controller: function($scope, Restangular, $stateParams, $state, $window){
-				$scope.programEdit = null;
+				$scope.cycleEdit = null;
 
 				// the model to edit
-				$scope.$watch('program', function(newValue, oldValue){
-						$scope.programEdit = angular.copy(newValue);
+				$scope.$watch('cycle', function(newValue, oldValue){
+						$scope.cycleEdit = angular.copy(newValue);
 				});
 
 				$scope.removeUser = function(id){
-					$scope.programEdit.users[id] = null;
+					$scope.cycleEdit.users[id] = null;
 				};
 
 				$scope.addUser = function(){
 					if(!$scope.addUserData)
 						return;
 
-					$scope.programEdit.users[$scope.addUserData.id] = {};
-					$scope.programEdit.users[$scope.addUserData.id].id = $scope.addUserData.id;
-					$scope.programEdit.users[$scope.addUserData.id].name = $scope.addUserData.name;
+					$scope.cycleEdit.users[$scope.addUserData.id] = {};
+					$scope.cycleEdit.users[$scope.addUserData.id].id = $scope.addUserData.id;
+					$scope.cycleEdit.users[$scope.addUserData.id].name = $scope.addUserData.name;
 				};
 
 				$scope.save = function(){
 
-					$scope.program.patch($scope.programEdit).then(function(res){
+					$scope.cycle.patch($scope.cycleEdit).then(function(res){
 
-						// update the local program
-						angular.extend($scope.program, res)
+						// update the local cycle
+						angular.extend($scope.cycle, res)
 
 						// redirect
-						$state.go('admin.programs.program.show');
+						$state.go('admin.cycles.cycle.show');
 
 					}, function(err){
 						if(err.data && err.data.message)

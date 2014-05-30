@@ -42,23 +42,23 @@ module.exports = function(config, app, resources){
 				});
 			};
 
-			// check for users assigned to a particular program
-			if(req.params.program){
-				return r.table('programs').get(req.params.program).run(conn, function(err, program){
+			// check for users assigned to a particular cycle
+			if(req.params.cycle){
+				return r.table('cycles').get(req.params.cycle).run(conn, function(err, cycle){
 					if(err){
 						resources.db.release(conn);
 						return res.error(err);
 					}
 
-					if(!program){
+					if(!cycle){
 						resources.db.release(conn);
 						return res.error(404);
 					}
 
 					// add all valid user IDs to the object
 					var ids = [];
-					Object.keys(program.users).forEach(function(id){
-						if(program.users[id])
+					Object.keys(cycle.users).forEach(function(id){
+						if(cycle.users[id])
 							ids.push(id);
 					});
 
@@ -350,10 +350,10 @@ module.exports = function(config, app, resources){
 
 
 	//////////////////////////////
-	// Users by Program
+	// Users by Cycle
 	//////////////////////////////
 
-	app.namespace('/programs/:program/users', passport.authenticate('bearer', { session: false }), function(req, res, next){
+	app.namespace('/cycles/:cycle/users', passport.authenticate('bearer', { session: false }), function(req, res, next){
 
 		// restrict endpoint access to admin users
 		if(!req.user.admin)

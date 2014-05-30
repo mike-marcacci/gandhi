@@ -36,7 +36,7 @@ angular.module('gandhi')
 			// create the base project
 			var project = {
 				title: $scope.projectStart.title,
-				program_id: $scope.program.id,
+				cycle_id: $scope.cycle.id,
 				users: {},
 				flow: {
 					stages: {}
@@ -56,7 +56,7 @@ angular.module('gandhi')
 			};
 
 			// set the active stage to the next stage
-			project.flow.active = $scope.program.flow.default[1];
+			project.flow.active = $scope.cycle.flow.default[1];
 
 			$scope.projects.post(project).then(function(res){
 

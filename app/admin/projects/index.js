@@ -4,30 +4,30 @@ angular.module('gandhi')
 
 	$stateProvider
 		.state('admin.projects', {
-			url: "/projects?program",
+			url: "/projects?cycle",
 			templateUrl: "admin/projects/index.html",
 			controller: function($scope, $stateParams, $state, Restangular){
-				$scope.program = null;
+				$scope.cycle = null;
 				$scope.projects = null;
-				$scope.programs = null;
+				$scope.cycles = null;
 
-				Restangular.all('programs').getList().then(function(programs){
-					$scope.programs = programs;
-					if($stateParams.program && $scope.programs)
-						$scope.programs.some(function(program){
-							if(program.id != $stateParams.program)
+				Restangular.all('cycles').getList().then(function(cycles){
+					$scope.cycles = cycles;
+					if($stateParams.cycle && $scope.cycles)
+						$scope.cycles.some(function(cycle){
+							if(cycle.id != $stateParams.cycle)
 								return false;
 
-							return $scope.program = program;
+							return $scope.cycle = cycle;
 						});
 				})
 
-				$scope.$watch('program', function(newValue, oldValue){
-					$scope.projects = Restangular.all('projects').getList($scope.program ? {'filter[program_id]': $scope.program.id} : null).$object;
+				$scope.$watch('cycle', function(newValue, oldValue){
+					$scope.projects = Restangular.all('projects').getList($scope.cycle ? {'filter[cycle_id]': $scope.cycle.id} : null).$object;
 				})
 
 				$scope.filter = function(){
-					$state.go('admin.projects', {program: $scope.program ? $scope.program.id : null});
+					$state.go('admin.projects', {cycle: $scope.cycle ? $scope.cycle.id : null});
 				}
 			}
 		})
@@ -36,7 +36,7 @@ angular.module('gandhi')
 			url: "/:project",
 			abstract: true,
 			controller: function($scope, Restangular, $stateParams, $window){
-				$scope.program = null;
+				$scope.cycle = null;
 				$scope.project = null;
 				$scope.stages = null;
 				$scope.users = null;
@@ -54,18 +54,18 @@ angular.module('gandhi')
 						return $scope.project = project;
 					})) return;
 
-					// set the project's program
-					if(!$scope.programs.some(function(program){
-						if(program.id != $scope.project.program_id)
+					// set the project's cycle
+					if(!$scope.cycles.some(function(cycle){
+						if(cycle.id != $scope.project.cycle_id)
 							return false;
 
-						return $scope.program = program;
+						return $scope.cycle = cycle;
 					})) return;
 
 					$scope.stages = [];
-					$scope.program.flow.default.forEach(function(id){
+					$scope.cycle.flow.default.forEach(function(id){
 						$scope.stages.push({
-							program: $scope.program.flow.stages[id],
+							cycle: $scope.cycle.flow.stages[id],
 							project: $scope.project.flow.stages[id] || null
 						});
 					});
@@ -180,13 +180,13 @@ angular.module('gandhi')
 				// set the stage
 				$scope.$watchCollection('stages', function(newValue, oldValue){
 					if(!newValue || !newValue.some(function(stage){
-						if(stage.program.id != $stateParams.stage)
+						if(stage.cycle.id != $stateParams.stage)
 							return false;
 
 						return $scope.stage = stage;
 					})) return;
 
-					$scope.src = 'components/'+$scope.stage.program.component.name+'/admin/index.html'
+					$scope.src = 'components/'+$scope.stage.cycle.component.name+'/admin/index.html'
 				})
 			}
 		})

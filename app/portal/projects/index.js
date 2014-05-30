@@ -4,18 +4,18 @@ angular.module('gandhi')
 
 	$stateProvider
 		.state('portal.start', {
-			url: '/start/:program',
+			url: '/start/:cycle',
 			templateUrl: 'portal/projects/start.html',
 			resolve: {},
 			controller: function ($scope, $state, $stateParams) {
-				$scope.$watchCollection('programs', function(programs, old) {
-					if(!programs) return;
+				$scope.$watchCollection('cycles', function(cycles, old) {
+					if(!cycles) return;
 
-					programs.get($stateParams.program).then(function(program){
-						$scope.program = program;
-						$scope.stage = program.flow.root;
+					cycles.get($stateParams.cycle).then(function(cycle){
+						$scope.cycle = cycle;
+						$scope.stage = cycle.flow.root;
 
-						var component = program.flow.stages[$scope.stage].component.name;
+						var component = cycle.flow.stages[$scope.stage].component.name;
 						$scope.component = 'components/'+component+'/portal/index.html';
 					})
 				})
@@ -27,11 +27,11 @@ angular.module('gandhi')
 			templateUrl: 'portal/projects/index.html',
 			abstract: true,
 			controller: function ($scope, $state, $stateParams) {
-				$scope.$watchCollection('[projects, programs]', function(newValues, oldValues) {
+				$scope.$watchCollection('[projects, cycles]', function(newValues, oldValues) {
 					if(!newValues[0] || !newValues[1]) return;
 
 					var projects = newValues[0];
-					var programs = newValues[1];
+					var cycles = newValues[1];
 
 					// get the correct project
 					$scope.$watchCollection('projects', function(newValue, oldValue){
@@ -42,16 +42,16 @@ angular.module('gandhi')
 							return $scope.project = project;
 						});
 
-						// get the correct program
+						// get the correct cycle
 						if($scope.project)
-							programs.get($scope.project.program_id).then(function(program){
-								$scope.program = program;
+							cycles.get($scope.project.cycle_id).then(function(cycle){
+								$scope.cycle = cycle;
 
 								// decide the user's role in this project
 								if($scope.project.users[$scope.currentUser.id])
 									$scope.role = $scope.project.users[$scope.currentUser.id].role;
 								else
-									$scope.role = $scope.program.users[$scope.currentUser.id].role;
+									$scope.role = $scope.cycle.users[$scope.currentUser.id].role;
 							});
 					});
 				});
@@ -78,27 +78,27 @@ angular.module('gandhi')
 					});
 				}
 
-				$scope.$watch('[project, program]', function(newValues, oldValues) {
+				$scope.$watch('[project, cycle]', function(newValues, oldValues) {
 					if(!newValues[0] || !newValues[1]) return;
 
 					var project = newValues[0];
-					var program = newValues[1];
+					var cycle = newValues[1];
 
 					var stageProject = project.flow.stages[$stateParams.stage];
-					var stageProgram = program.flow.stages[$stateParams.stage];
+					var stageCycle = cycle.flow.stages[$stateParams.stage];
 
 					// decide if the stage is open or closed
 					$scope.lock = -1;
 
 					// OPEN
-					if(!stageProgram.open || !stageProgram.open.length || testProject(project, stageProgram.open))
+					if(!stageCycle.open || !stageCycle.open.length || testProject(project, stageCycle.open))
 						$scope.lock = 0;
 
 					// CLOSE
-					if(stageProgram.close && stageProgram.close.length && testProject(project, stageProgram.close))
+					if(stageCycle.close && stageCycle.close.length && testProject(project, stageCycle.close))
 						$scope.lock = 1;
 
-					$scope.component = 'components/'+stageProgram.component.name+'/portal/index.html';
+					$scope.component = 'components/'+stageCycle.component.name+'/portal/index.html';
 				}, true);
 			}
 		})

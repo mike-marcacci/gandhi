@@ -1,10 +1,10 @@
 angular.module('gandhi')
 
 .controller('Components.BqiSeedReview', function($scope, $state, Restangular) {
-	var stageProgram = $scope.program.flow.stages[$scope.stage] || {};
+	var stageCycle = $scope.cycle.flow.stages[$scope.stage] || {};
 	var stageProject = $scope.project.flow.stages[$scope.stage] || {};
 
-	$scope.message = stageProgram.component.options[$scope.role] || '';
+	$scope.message = stageCycle.component.options[$scope.role] || '';
 
 	$scope.data = {
 
@@ -20,7 +20,7 @@ angular.module('gandhi')
 	$scope.submit = function() {
 		// var val = {
 		// 	title: $scope.application.title,
-		// 	program_id: $scope.program.id,
+		// 	cycle_id: $scope.cycle.id,
 		// 	users: [{
 		// 		id: $scope.currentUser.id,
 		// 		roles: ['applicant']
@@ -34,7 +34,7 @@ angular.module('gandhi')
 		// 	data: $scope.application
 		// }
 
-		// val.flow.active = $scope.program.flow.default[1];
+		// val.flow.active = $scope.cycle.flow.default[1];
 
 		// $scope.projects.post(val).then(function(res){
 		// 	$scope.projects.push(res);

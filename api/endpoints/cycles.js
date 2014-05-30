@@ -4,7 +4,7 @@ var passport = require('passport');
 
 module.exports = function(config, app, resources){
 
-	app.namespace('/programs', passport.authenticate('bearer', { session: false }), function(){
+	app.namespace('/cycles', passport.authenticate('bearer', { session: false }), function(){
 
 		app.post('/', function(req, res){
 
@@ -20,8 +20,8 @@ module.exports = function(config, app, resources){
 				if(err)
 					return res.error(err);
 
-				// insert program into the DB
-				r.table('programs').insert(req.body, {returnVals: true}).run(conn, function(err, result){
+				// insert cycle into the DB
+				r.table('cycles').insert(req.body, {returnVals: true}).run(conn, function(err, result){
 					resources.db.release(conn);
 
 					if(err)
@@ -37,48 +37,48 @@ module.exports = function(config, app, resources){
 				if(err)
 					return res.error(err);
 
-				// get programs from the DB
-				r.table('programs').orderBy('created').run(conn, function(err, cursor){
+				// get cycles from the DB
+				r.table('cycles').orderBy('created').run(conn, function(err, cursor){
 					if(err) {
 						resources.db.release(conn);
 						return res.error(err);
 					}
 
 					// output as an array
-					cursor.toArray(function(err, programs){
+					cursor.toArray(function(err, cycles){
 						resources.db.release(conn);
 
 						if(err)
 							return res.error(err);
 
-						return res.data(programs);
+						return res.data(cycles);
 					});
 
 				});
 			});
 		});
 
-		app.get('/:program', function(req, res){
+		app.get('/:cycle', function(req, res){
 			resources.db.acquire(function(err, conn) {
 				if(err)
 					return res.error(err);
 
-				// get programs from the DB
-				r.table('programs').get(req.params.program).run(conn, function(err, program){
+				// get cycles from the DB
+				r.table('cycles').get(req.params.cycle).run(conn, function(err, cycle){
 					resources.db.release(conn);
 
 					if(err)
 						return res.error(err);
 
-					if(!program)
+					if(!cycle)
 						return res.error(400);
 
-					return res.data(program);
+					return res.data(cycle);
 				});
 			});
 		});
 
-		app.patch('/:program', function(req, res){
+		app.patch('/:cycle', function(req, res){
 			var removeUsers = [];
 
 			// restrict endpoint access to admin users
@@ -89,7 +89,7 @@ module.exports = function(config, app, resources){
 			// TODO: validate against schema
 
 
-			var query = r.table('programs').get(req.params.program);
+			var query = r.table('cycles').get(req.params.cycle);
 
 			// remove any users with a falsy value
 			if(req.body.users){
@@ -109,7 +109,7 @@ module.exports = function(config, app, resources){
 				if(err)
 					return res.error(err);
 
-				// update program in the DB
+				// update cycle in the DB
 				query.run(conn, function(err, result){
 					resources.db.release(conn);
 
