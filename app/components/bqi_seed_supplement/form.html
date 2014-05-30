@@ -28,7 +28,7 @@
 
 <fieldset>
 	<legend>Relevant Field Publications</legend>
-	<p>Please include 5 publications from the research team that are most representative of your research to date.</p>
+	<p>In addition, please include at most 5 publications that are most relevant to the research area that the project will address.</p>
 	<div class="form-group" ng-repeat="input in data.area_publications">
 		<a ng-show="input.path" class="btn btn-default btn-sm" href="../api{{input.path}}" target="_blank"><span class="glyphicon glyphicon-download-alt"></span> Download</a>
 		<div ng-show="input.path" class="btn btn-sm btn-danger" ng-click="removeFile('area_publications', $index)" ng-disabled="lock || disabled">Remove</div>
