@@ -35,6 +35,9 @@ angular.module('gandhi')
 		var stage = newValues[0];
 		var users = newValues[1];
 
+		if(!stage || !stage.project || !stage.project.data || !stage.project.data.length)
+			return;
+
 		$scope.reviews = [];
 		_.each(stage.project.data, function(review, user_id){
 			$scope.reviews.push({
