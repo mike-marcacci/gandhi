@@ -28,16 +28,18 @@ angular.module('gandhi')
 		'I strongly support funding this project as is'
 	]
 
-	$scope.reviews = [];
-	_.each($scope.project.flow.stages[$scope.stage].data, function(review, user_id){
-		$scope.reviews.push({
-			review: review,
-			// user: _.find(users, {id: user_id})
+	if($scope.project.flow.stages[$scope.stage] && $scope.project.flow.stages[$scope.stage].data){
+		$scope.reviews = [];
+		_.each($scope.project.flow.stages[$scope.stage].data, function(review, user_id){
+			$scope.reviews.push({
+				review: review,
+				// user: _.find(users, {id: user_id})
+			})
 		})
-	})
 
-	$scope.avgRating = $scope.reviews.map(function(r){return r.review.data.rating;}).reduce(function(sum,num){return sum+num;}) / $scope.reviews.length;
-	$scope.avgRecommendation = $scope.recommendations[Math.round($scope.reviews.map(function(r){return r.review.data.recommendation;}).reduce(function(sum,num){return sum+num;}) / $scope.reviews.length)];
+		$scope.avgRating = $scope.reviews.map(function(r){return r.review.data.rating;}).reduce(function(sum,num){return sum+num;}) / $scope.reviews.length;
+		$scope.avgRecommendation = $scope.recommendations[Math.round($scope.reviews.map(function(r){return r.review.data.recommendation;}).reduce(function(sum,num){return sum+num;}) / $scope.reviews.length)];
+	}
 
 
 

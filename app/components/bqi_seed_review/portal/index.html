@@ -7,8 +7,8 @@
 		<h3>Reviews</h3>
 
 		<ul class="nav nav-tabs">
-		  <li ng-class="{active: tab == 'write'}"><a href ng-click="setTab('write')">Write Your Review</a></li>
-		  <li ng-class="{active: tab == 'read'}"><a href ng-click="setTab('read')">Read Others' Reviews</a></li>
+		  <li ng-show="write" ng-class="{active: tab == 'write'}"><a href ng-click="setTab('write')">Write Your Review</a></li>
+		  <li ng-show="read" ng-class="{active: tab == 'read'}"><a href ng-click="setTab('read')">Read Others' Reviews</a></li>
 		</ul>
 
 		<form ng-if="write" ng-show="tab == 'write'" ng-submit="submit()" style="padding: 10px;">
