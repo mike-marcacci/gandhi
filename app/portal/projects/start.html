@@ -1,8 +1,8 @@
-<h1>Application</h1>
-<h2>{{cycle.title}}</h2>
+<h1>Start</h1>
 
-<ul class="nav nav-tabs x-scroll">
-	<li ng-repeat="id in cycle.flow.default" class="{{ $first ? 'active': '' }}"><span>{{cycle.flow.stages[id].title}}</span></li>
-</ul>
+<label>Funding Cycle</label>
+<select class="form-control" ng-change="chooseCycle()" ng-model="cycle" ng-options="cycle.title for cycle in cycles">
+	<option value="">Select Cycle</option>
+</select>
 
 <ng-include src="component" class="stage"></ng-include>

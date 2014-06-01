@@ -2,6 +2,8 @@ angular.module('gandhi')
 
 .controller('Components.BqiSeedSupplement', function($scope, $state, Restangular, $upload) {
 
+	$scope.disabled = ($scope.role != 'applicant');
+
 	$scope.data = $scope.project.flow.stages[$scope.stage] && $scope.project.flow.stages[$scope.stage].data ? angular.copy($scope.project.flow.stages[$scope.stage].data) : {
 		biosketches: [],
 		team_publications: [{}, {}, {}, {}, {}],
