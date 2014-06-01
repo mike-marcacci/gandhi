@@ -2,7 +2,7 @@ angular.module('gandhi')
 
 .controller('Components.BqiSeedApplication', function($scope, $state, Restangular) {
 
-	// $scope.disabled = $scope.role != 'applicant'
+	$scope.disabled = ($scope.role != 'applicant');
 
 	function limit(limit){
 		return {

@@ -1,18 +1,36 @@
-<div ng-controller="Components.Admin.BqiSeedReview.summary">
-	<table ng-show="stage.project" class="table table-responsive">
-		<tr ng-repeat="review in reviews">
-			<td data-title="'Reviewer'">
-			{{review.user.name}}
-			</td>
-			<td data-title="'Rating'">
-				{{review.review.data.rating}}
-			</td>
-			<td data-title="''">
-				<a ng-click="setReview(review)" ui-sref="admin.projects.project.stage({stage: stage.cycle.id})">View Details</a>
-			</td>
-		</tr>
+<div ng-controller="Components.Admin.BqiSeedReview.summary" ng-show="stage.project.data">
+	<table class="table table-responsive">
+		<thead>
+			<tr>
+				<th>Reviewer</th>
+				<th>Rating</th>
+				<th>Recommendation</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="review in reviews">
+				<td>
+					{{review.user.name}}
+				</td>
+				<td>
+					{{review.review.data.rating}}
+				</td>
+				<td>
+					{{recommendations[review.review.data.recommendation]}}
+				</td>
+				<td>
+					<a ng-click="setReview(review)" ui-sref="admin.projects.project.stage({stage: stage.cycle.id})">View Details</a>
+				</td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr class="info">
+				<td><b></b></td>
+				<td><b>{{rating}}</b></td>
+				<td><b>{{recommendation}}</b></td>
+				<td><b></b></td>
+			</tr>
+		</tfoot>
 	</table>
-	<div>
-		<b>Average Rating:</b> {{rating}}
-	</div>
 </div>

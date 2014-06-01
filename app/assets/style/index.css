@@ -17,9 +17,6 @@ body {
   .x-scroll.nav-tabs > li.active > a, .x-scroll.nav-tabs > li.active > a:hover {
     background: #ddd; }
 
-tfoot {
-  display: none; }
-
 .stage fieldset {
   border: none !important;
   margin: auto !important; }

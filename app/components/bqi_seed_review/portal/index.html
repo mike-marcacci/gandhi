@@ -2,7 +2,45 @@
 
 	<div>{{message}}</div>
 
-	<form ng-submit="submit()" ng-show="role == 'advisory-reviewer'">
-		<ng-include src="'components/bqi_seed_review/form.html'"></ng-include>
-	</form>
+	<div ng-if="read">
+
+		<h3>Reviews</h3>
+
+		<ul class="nav nav-tabs">
+		  <li ng-class="{active: tab == 'write'}"><a href ng-click="setTab('write')">Write Your Review</a></li>
+		  <li ng-class="{active: tab == 'read'}"><a href ng-click="setTab('read')">Read Others' Reviews</a></li>
+		</ul>
+
+		<form ng-if="write" ng-show="tab == 'write'" ng-submit="submit()" style="padding: 10px;">
+			<ng-include src="'components/bqi_seed_review/form.html'"></ng-include>
+		</form>
+
+		<div ng-if="read" ng-show="tab == 'read'">
+			<table class="table table-responsive">
+				<thead>
+					<tr>
+						<th>Rating</th>
+						<th>Recommendation</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="review in project.flow.stages[stage].data">
+						<td>
+							{{review.data.rating}}
+						</td>
+						<td>
+							{{recommendations[review.data.recommendation]}}
+						</td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr class="info">
+						<td><b>{{avgRating}}</b></td>
+						<td><b>{{avgRecommendation}}</b></td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+
+	</div>
 </div>

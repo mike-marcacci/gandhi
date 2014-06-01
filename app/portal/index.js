@@ -60,15 +60,12 @@ angular.module('gandhi')
 
 						var nav = {};
 
-						$scope.cycles.forEach(function(cycle){
-							nav[cycle.id] = {
-								id: cycle.id,
-								title: cycle.title,
+						projects.forEach(function(project){
+							nav[project.cycle_id] = {
+								id: project.cycle_id,
+								title: _.find($scope.cycles, {id: project.cycle_id}).title,
 								projects: {}
 							}
-						});
-
-						projects.forEach(function(project){
 							nav[project.cycle_id].projects[project.id] = project;
 						});
 

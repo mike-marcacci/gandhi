@@ -8,16 +8,23 @@ angular.module('gandhi')
 			templateUrl: 'portal/projects/start.html',
 			resolve: {},
 			controller: function ($scope, $state, $stateParams) {
+				$scope.chooseCycle = function(){
+					$state.go('portal.start',{cycle: $scope.cycle ? $scope.cycle.id : null});
+				}
+
+
 				$scope.$watchCollection('cycles', function(cycles, old) {
-					if(!cycles) return;
+					if(!cycles)
+						return;
 
-					cycles.get($stateParams.cycle).then(function(cycle){
-						$scope.cycle = cycle;
-						$scope.stage = cycle.flow.root;
+					if(!$stateParams.cycle)
+						return;
 
-						var component = cycle.flow.stages[$scope.stage].component.name;
-						$scope.component = 'components/'+component+'/portal/index.html';
-					})
+					$scope.cycle = _.find(cycles, {id: $stateParams.cycle});
+					$scope.stage = $scope.cycle.flow.root;
+
+					var component = $scope.cycle.flow.stages[$scope.stage].component.name;
+					$scope.component = 'components/'+component+'/portal/index.html';
 				})
 			}
 		})
