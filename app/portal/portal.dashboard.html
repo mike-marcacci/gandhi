@@ -16,7 +16,7 @@
 						<h4>{{ cycle.title }}</h4>
 						<table class="table">
 							<tr><th>Title</th><th>Submitted</th></tr>
-							<tr ng-repeat="project in cycle.projects">
+							<tr ng-repeat="project in cycle.projects" class="{{ project.flow.stages.submission.status == 'submitted' ? 'success' : ''}}">
 								<td>
 									<a ui-sref="portal.projects.stage({ project: project.id, stage: project.flow.active })">
 										{{ project.title || project.id }}
@@ -71,9 +71,8 @@
 				<h3 class="panel-title">All Projects</h3>
 			</div>
 			<div class="panel-body">
-				<div ng-hide="navByRole.applicant">No Projects</div>
 				<ul class="nav nav-pills nav-stacked">
-					<li ui-sref-active="active" ng-repeat="cycle in nav">
+					<li ui-sref-active="active" ng-repeat="cycle in nav" ng-show="cycle.projects">
 						<!-- <a ui-sref="cycles({ cycle: cycle.id })">{{ cycle.title }}</a> -->
 						<h4>{{ cycle.title }}</h4>
 						<table class="table">

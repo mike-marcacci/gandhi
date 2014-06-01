@@ -28,6 +28,13 @@ angular.module('gandhi')
 	$scope.reviews = [];
 	$scope.rating = null;
 
+	$scope.recommendations = [
+		'I do not think the project should be funded',
+		'The project could be funded with significant adjustments to content - Revise and Resubmit',
+		'The project could be funded in the current state with budget adjustments',
+		'I strongly support funding this project as is'
+	]
+
 	$scope.$watchCollection('[stage, users]', function(newValues, oldValues){
 		if(!newValues[0] || !newValues[1])
 			return;
@@ -35,7 +42,7 @@ angular.module('gandhi')
 		var stage = newValues[0];
 		var users = newValues[1];
 
-		if(!stage || !stage.project || !stage.project.data || !stage.project.data.length)
+		if(!stage || !stage.project || !stage.project.data)
 			return;
 
 		$scope.reviews = [];
@@ -46,8 +53,11 @@ angular.module('gandhi')
 			})
 		})
 
-		if($scope.reviews.length)
-			$scope.rating = $scope.reviews.map(function(r){return r.review.data.rating;}).reduce(function(sum,num){return sum+num;}) / $scope.reviews.length;
+		if(!$scope.reviews.length)
+			return;
+
+		$scope.rating = $scope.reviews.map(function(r){return r.review.data.rating;}).reduce(function(sum,num){return sum+num;}) / $scope.reviews.length;
+		$scope.recommendation = $scope.recommendations[Math.round($scope.reviews.map(function(r){return r.review.data.recommendation;}).reduce(function(sum,num){return sum+num;}) / $scope.reviews.length)];
 	})
 
 	$scope.setReview = function(review){

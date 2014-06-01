@@ -16,6 +16,3 @@ body {
     float: none !important; }
   .x-scroll.nav-tabs > li.active > a, .x-scroll.nav-tabs > li.active > a:hover {
     background: #ddd; }
-
-tfoot {
-  display: none; }

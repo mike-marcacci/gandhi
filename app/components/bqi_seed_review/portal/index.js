@@ -24,6 +24,7 @@ angular.module('gandhi')
 			rating: 1,
 			explaination: ''
 		},
+		recommendation: 0
 	};
 
 	$scope.$watch('data',function(newValue, oldValue){
