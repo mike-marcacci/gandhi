@@ -9,19 +9,19 @@ angular.module('gandhi')
 	$scope.rating = null;
 	$scope.data = stageProject && stageProject.data && stageProject.data[$scope.currentUser.id] ? stageProject.data[$scope.currentUser.id].data : {
 		abstract: {
-			rating: 0,
+			rating: 1,
 			explaination: ''
 		},
 		short_answer_1: {
-			rating: 0,
+			rating: 1,
 			explaination: ''
 		},
 		short_answer_2: {
-			rating: 0,
+			rating: 1,
 			explaination: ''
 		},
 		outputs_and_outcomes: {
-			rating: 0,
+			rating: 1,
 			explaination: ''
 		},
 	};
