@@ -2,6 +2,8 @@ angular.module('gandhi')
 
 .controller('Components.Start', function($scope, $state, Restangular) {
 
+	$scope.lock = true;
+
 	// the model
 	$scope.projectStart = $scope.project ? angular.copy($scope.project) : {};
 
