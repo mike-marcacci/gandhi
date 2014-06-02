@@ -71,20 +71,6 @@ angular.module('gandhi')
 			controller: function($scope, $stateParams){
 				$scope.stage = $stateParams.stage;
 
-				function testProject(project, tests){
-					return tests.some(function(set){
-						return set.every(function(test){
-							// date
-							if(test.name == 'date' && (new Date(test.options.date)) >= (new Date()))
-								return true;
-
-							// submission
-							if(test.name == 'status' && project.flow.stages[test.options.stage] && project.flow.stages[test.options.stage].status == test.options.status)
-								return true;
-						});
-					});
-				}
-
 				$scope.$watch('[project, cycle]', function(newValues, oldValues) {
 					if(!newValues[0] || !newValues[1]) return;
 
@@ -94,16 +80,11 @@ angular.module('gandhi')
 					var stageProject = project.flow.stages[$stateParams.stage];
 					var stageCycle = cycle.flow.stages[$stateParams.stage];
 
-					// decide if the stage is open or closed
-					$scope.lock = -1;
+					// the lock is now set server side
+					// TODO: remove references to this in the views?
+					$scope.lock = stageProject.lock;
 
-					// OPEN
-					if(!stageCycle.open || !stageCycle.open.length || testProject(project, stageCycle.open))
-						$scope.lock = 0;
-
-					// CLOSE
-					if(stageCycle.close && stageCycle.close.length && testProject(project, stageCycle.close))
-						$scope.lock = 1;
+					console.log($scope.lock)
 
 					$scope.component = 'components/'+stageCycle.component.name+'/portal/index.html';
 				}, true);

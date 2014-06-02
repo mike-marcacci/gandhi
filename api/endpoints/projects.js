@@ -1,7 +1,44 @@
 var r = require('rethinkdb');
 var passport = require('passport');
+var _ = require('lodash');
 
 module.exports = function(config, app, resources){
+
+	function applyLocks(project, cycle){
+
+		function test(tests){
+			return tests.some(function(set){
+				return set.every(function(test){
+					// date
+					if(test.name == 'date' && (new Date(test.options.date)) >= (new Date()))
+						return true;
+
+					// submission
+					if(test.name == 'status' && project.flow.stages[test.options.stage] && project.flow.stages[test.options.stage].status == test.options.status)
+						return true;
+				});
+			});
+		}
+
+		// TODO: apply a lock to the whole project itself?
+
+		// apply lock to each stage in a project
+		_.each(cycle.flow.stages, function(settings, id){
+			var data = project.flow.stages[id] = project.flow.stages[id] || {};
+
+			data.lock = -1;
+
+			// OPEN
+			if(!settings.open || !settings.open.length || test(settings.open))
+				data.lock = 0;
+
+			// CLOSE
+			if(settings.close && settings.close.length && test(settings.close))
+				data.lock = 1;
+		});
+
+		return project;
+	}
 
 	function list(req, res){
 		resources.db.acquire(function(err, conn) {
@@ -32,18 +69,23 @@ module.exports = function(config, app, resources){
 				if(req.query.filter)
 					query = query.filter(req.query.filter);
 
-				query.orderBy('created').run(conn, function(err, cursor){
+				query.orderBy('created').eqJoin('cycle_id', r.table('cycles')).run(conn, function(err, cursor){
 					if(err) {
 						resources.db.release(conn);
 						return res.error(err);
 					}
 
 					// output as an array
-					cursor.toArray(function(err, projects){
+					cursor.toArray(function(err, results){
 						resources.db.release(conn);
 
 						if(err)
 							return res.error(err);
+
+						// apply locks to each project
+						var projects = results.map(function(result){
+							return applyLocks(result.left, result.right);
+						})
 
 						return res.data(projects);
 					});
@@ -70,22 +112,30 @@ module.exports = function(config, app, resources){
 	};
 
 	function show(req, res){
+		// TODO: ACL
+		// TODO: restruct to user (in params)
+		// TODO: restrict to program (in params)
+
 		resources.db.acquire(function(err, conn) {
 			if(err)
 				return res.error(err);
 
-			r.table('projects').get(req.params.project).run(conn, function(err, project){
+			r.table('projects').get(req.params.project).do(function(row){
+				return {
+					left: row,
+					right: row.not().or(r.table('cycles').get(row('cycle_id')))
+				};
+			}).run(conn, function(err, result){
 				resources.db.release(conn);
 
 				if(err)
 					return res.error(err);
 
-				// restrict to user
-				// TODO: obey cycle assignments
-				// if(!project || (req.params.user && !project.users[req.params.user]))
-				// 	return res.error(404);
+				if(!result || !result.left)
+					return res.error(404);
 
-				// TODO: restrict to project
+				// apply locks to the project
+				var project = applyLocks(result.left, result.right);
 
 				return res.data(project);
 			});
@@ -103,13 +153,24 @@ module.exports = function(config, app, resources){
 				return res.error(err);
 
 			// get projects from the DB
-			r.table('projects').insert(req.body, {returnVals: true}).run(conn, function(err, result){
+			r.table('projects').insert(req.body, {returnVals: true})('new_val').do(function(row){
+				return {
+					left: row,
+					right: row.not().or(r.table('cycles').get(row('cycle_id')))
+				};
+			}).run(conn, function(err, result){
 				resources.db.release(conn);
 
 				if(err)
 					return res.error(err);
 
-				return res.data(result.new_val);
+				if(!result || !result.left)
+					return res.error(404);
+
+				// apply locks to the project
+				var project = applyLocks(result.left, result.right);
+
+				return res.data(project);
 			});
 		});
 	}
@@ -139,15 +200,25 @@ module.exports = function(config, app, resources){
 				// TODO: restrict to project
 
 				// update the project
-				r.table('projects').get(req.params.project).update(req.body, {returnVals: true}).run(conn, function(err, result){
+				r.table('projects').get(req.params.project).update(req.body, {returnVals: true})('new_val').do(function(row){
+					return {
+						left: row,
+						right: row.not().or(r.table('cycles').get(row('cycle_id')))
+					};
+				}).run(conn, function(err, result){
 					resources.db.release(conn);
 
 					if(err)
 						return res.error(err);
 
-					return res.data(result.new_val);
-				});
+					if(!result || !result.left)
+						return res.error(404);
 
+					// apply locks to the project
+					var project = applyLocks(result.left, result.right);
+
+					return res.data(project);
+				});
 			});
 		});
 	}
@@ -169,13 +240,22 @@ module.exports = function(config, app, resources){
 				// 	return res.error(404);
 
 				// remove project from the DB
-				r.table('projects').get(req.params.project).delete({returnVals: true}).run(conn, function(err, result){
+				r.table('projects').get(req.params.project).delete({returnVals: true})('new_val').do(function(row){
+					return {
+						left: row,
+						right: row.not().or(r.table('cycles').get(row('cycle_id')))
+					};
+				}).run(conn, function(err, result){
 					resources.db.release(conn);
 
 					if(err)
 						return res.error(err);
 
-					var project = result.old_val;
+					if(!result || !result.left)
+						return res.error(404);
+
+					// apply locks to the project
+					var project = applyLocks(result.left, result.right);
 
 					return res.data(project);
 				});
