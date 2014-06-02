@@ -1,6 +1,11 @@
 angular.module('gandhi')
 
 .controller('Components.BqiSeedReview', function($scope, $state, Restangular) {
+
+	// TODO: remove!!!
+	$scope.lock = true;
+
+	
 	$scope.tab = null;
 
 	// set the priviliges & default tab

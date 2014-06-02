@@ -1,7 +1,7 @@
 <div ng-controller="Components.Submission">
 
 	<div ng-show="lock == -1">Please finish your application before submitting it.</div>
-	<div ng-show="lock == 1">Thank you for submitting your application.</div>
+	<div ng-show="lock == 1">This stage is now locked.</div>
 
 	<form role="form" ng-submit="submit()" ng-hide="lock">
 		<h1>{{title}}</h1>
