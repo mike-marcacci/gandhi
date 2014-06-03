@@ -10,7 +10,7 @@ module.exports = function(config, app, resources){
 			return tests.some(function(set){
 				return set.every(function(test){
 					// date
-					if(test.name == 'date' && (new Date(test.options.date)) >= (new Date()))
+					if(test.name == 'date' && (new Date(test.options.date).getTime() < new Date().getTime()))
 						return true;
 
 					// submission
@@ -240,7 +240,7 @@ module.exports = function(config, app, resources){
 				// 	return res.error(404);
 
 				// remove project from the DB
-				r.table('projects').get(req.params.project).delete({returnVals: true})('new_val').do(function(row){
+				r.table('projects').get(req.params.project).delete({returnVals: true})('old_val').do(function(row){
 					return {
 						left: row,
 						right: row.not().or(r.table('cycles').get(row('cycle_id')))
