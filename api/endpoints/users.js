@@ -37,6 +37,12 @@ module.exports = function(config, app, resources){
 						if(err)
 							return res.error(err);
 
+						// remove password field
+						users = users.map(function(user){
+							delete user.password;
+							return user;
+						});
+
 						return res.data(users);
 					});
 				});
