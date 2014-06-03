@@ -2,9 +2,6 @@ angular.module('gandhi')
 
 .controller('Components.BqiSeedApplication', function($scope, $state, Restangular) {
 
-	// TODO: remove!!!
-	$scope.lock = true;
-
 	$scope.disabled = ($scope.role != 'applicant');
 
 	function limit(limit){

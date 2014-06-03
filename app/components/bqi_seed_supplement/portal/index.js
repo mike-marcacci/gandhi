@@ -2,9 +2,6 @@ angular.module('gandhi')
 
 .controller('Components.BqiSeedSupplement', function($scope, $state, Restangular, $upload) {
 
-	// TODO: remove!!!
-	$scope.lock = true;
-
 	$scope.disabled = ($scope.role != 'applicant');
 
 	$scope.data = $scope.project.flow.stages[$scope.stage] && $scope.project.flow.stages[$scope.stage].data ? angular.copy($scope.project.flow.stages[$scope.stage].data) : {

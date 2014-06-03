@@ -3,9 +3,6 @@ angular.module('gandhi')
 .controller('Components.Submission', function($scope, $state, Restangular, $window) {
 	$scope.submit = function() {
 
-		// TODO: remove!!!
-		$scope.lock = true;
-
 		if(!$window.confirm('Are you sure you want to submit your project right now?'))
 			return;
 
