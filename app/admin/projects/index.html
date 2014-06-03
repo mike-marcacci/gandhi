@@ -22,6 +22,9 @@
 					<td data-title="'Department'">
 						{{project.flow.stages.application.data.pi.department}}
 					</td>
+					<td data-title="'Submitted'">
+						{{project.flow.stages.submission.status == 'submitted' ? 'Yes' : 'No'}}
+					</td>
 				</tr>
 			</table>
 		</div>
