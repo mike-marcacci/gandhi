@@ -1,5 +1,7 @@
 [
 	{
+		"default_role": "applicant",
+		"default_status": "active",
 		"description": "Seed Funds provide flexible resources to explore promising research ideas that might otherwise be too uncertain for researchers to pursue at an early stage.",
 		"flow": {
 			"default": [
@@ -16,10 +18,12 @@
 			"root": "start",
 			"stages": {
 				"administrative_review": {
+					"close": null,
 					"component": {
 						"name": "bqi_seed_review",
 						"options": {
-							"applicant": "Applications will be reviewed shortly."
+							"applicant": "Applications will be reviewed shortly.",
+							"owner": "Applications will be reviewed shortly."
 						}
 					},
 					"description": "Application is critiqued by external reviewers.",
@@ -27,11 +31,29 @@
 					"next": [
 						"internal_decision"
 					],
-					"title": "Administrative Review",
 					"open": null,
-					"close": null
+					"title": "Administrative Review"
 				},
 				"application": {
+					"close": [
+						[
+							{
+								"name": "status",
+								"options": {
+									"stage": "submission",
+									"status": "submitted"
+								}
+							}
+						],
+						[
+							{
+								"name": "date",
+								"options": {
+									"date": "Mon Jun 01 2014 23:59:59 GMT-0500 (PDT)"
+								}
+							}
+						]
+					],
 					"component": {
 						"name": "bqi_seed_application",
 						"options": {}
@@ -41,19 +63,11 @@
 					"next": [
 						"supplement"
 					],
-					"title": "Application",
 					"open": null,
-					"close": [
-						[{
-							"name": "status",
-							"options": {
-								"stage": "submission",
-								"status": "submitted"
-							}
-						}]
-					]
+					"title": "Application"
 				},
 				"award_agreement": {
+					"close": null,
 					"component": {
 						"name": "message",
 						"options": {
@@ -65,11 +79,11 @@
 					"next": [
 						"progress_report"
 					],
-					"title": "Award Agreement",
 					"open": null,
-					"close": null
+					"title": "Award Agreement"
 				},
 				"final_report": {
+					"close": null,
 					"component": {
 						"name": "message",
 						"options": {
@@ -79,11 +93,11 @@
 					"description": "The final report must be submitted.",
 					"id": "final_report",
 					"next": [],
-					"title": "Final Report",
 					"open": null,
-					"close": null
+					"title": "Final Report"
 				},
 				"internal_decision": {
+					"close": null,
 					"component": {
 						"name": "message",
 						"options": {
@@ -95,11 +109,11 @@
 					"next": [
 						"award_agreement"
 					],
-					"title": "Internal Decision",
 					"open": null,
-					"close": null
+					"title": "Internal Decision"
 				},
 				"progress_report": {
+					"close": null,
 					"component": {
 						"name": "message",
 						"options": {
@@ -111,11 +125,29 @@
 					"next": [
 						"final_report"
 					],
-					"title": "Progress Report",
 					"open": null,
-					"close": null
+					"title": "Progress Report"
 				},
 				"start": {
+					"close": [
+						[
+							{
+								"name": "status",
+								"options": {
+									"stage": "submission",
+									"status": "submitted"
+								}
+							},
+						],
+						[
+							{
+								"name": "date",
+								"options": {
+									"date": "Mon Jun 01 2014 23:59:59 GMT-0500 (PDT)"
+								}
+							}
+						]
+					],
 					"component": {
 						"name": "start",
 						"options": {}
@@ -125,41 +157,29 @@
 					"next": [
 						"application"
 					],
-					"title": "Start",
 					"open": null,
-					"close": [
-						[{
-							"name": "status",
-							"options": {
-								"stage": "submission",
-								"status": "submitted"
-							}
-						}]
-					]
-				},
-				"supplement": {
-					"component": {
-						"name": "bqi_seed_supplement",
-						"options": {}
-					},
-					"description": "Upload supplemental documents.",
-					"id": "supplement",
-					"next": [
-						"submission"
-					],
-					"title": "Supplemental Documents",
-					"open": null,
-					"close": [
-						[{
-							"name": "status",
-							"options": {
-								"stage": "submission",
-								"status": "submitted"
-							}
-						}]
-					]
+					"title": "Start"
 				},
 				"submission": {
+					"close": [
+						[
+							{
+								"name": "status",
+								"options": {
+									"stage": "submission",
+									"status": "submitted"
+								}
+							}
+						],
+						[
+							{
+								"name": "date",
+								"options": {
+									"date": "Mon Jun 01 2014 23:59:59 GMT-0500 (PDT)"
+								}
+							}
+						]
+					],
 					"component": {
 						"name": "submission",
 						"options": {}
@@ -169,7 +189,6 @@
 					"next": [
 						"administrative_review"
 					],
-					"title": "Official Submission",
 					"open": [
 						[
 							{
@@ -195,36 +214,129 @@
 							}
 						]
 					],
+					"title": "Official Submission"
+				},
+				"supplement": {
 					"close": [
-						[{
-							"name": "status",
-							"options": {
-								"stage": "submission",
-								"status": "submitted"
+						[
+							{
+								"name": "status",
+								"options": {
+									"stage": "submission",
+									"status": "submitted"
+								}
 							}
-						}]
-					]
+						],
+						[
+							{
+								"name": "date",
+								"options": {
+									"date": "Mon Jun 01 2014 23:59:59 GMT-0500 (PDT)"
+								}
+							}
+						]
+					],
+					"component": {
+						"name": "bqi_seed_supplement",
+						"options": {}
+					},
+					"description": "Upload supplemental documents.",
+					"id": "supplement",
+					"next": [
+						"submission"
+					],
+					"open": null,
+					"title": "Supplemental Documents"
 				}
 			}
 		},
 		"id": "128f2348-99d4-40a1-b5ab-91d9019f272d",
 		"roles": {
-			"advisor": {
-				"list": true
+			"advisory-council": {
+				"id": "advisory-council",
+				"title": "Advisory Council Member"
+			},
+			"advisory-reviewer": {
+				"id": "advisory-reviewer",
+				"title": "Advisory Council Reviewer"
 			},
 			"applicant": {
-				"list": true
+				"id": "applicant",
+				"name": "Applicant",
+				"title": "Application"
+			}
+		},
+		"statuses": {
+			"active": {
+				"id": "active",
+				"title": "Active"
 			},
-			"reviewer": {
-				"list": true
+			"complete": {
+				"id": "complete",
+				"title": "Complete"
+			},
+			"rejected": {
+				"id": "rejected",
+				"title": "Rejected"
 			}
 		},
 		"title": "Seed Funds: Round 1",
 		"users": {
-			"847e085b-df0e-4dc7-9cbf-d485d6e2de96": {
-				"role": "reviewer",
-				"id": "847e085b-df0e-4dc7-9cbf-d485d6e2de96"
+			"006d54fa-f19c-48f6-b3c1-748b78e01b02": {
+				"id": "006d54fa-f19c-48f6-b3c1-748b78e01b02",
+				"name": "Daniel Bennett",
+				"role": "advisory-council"
+			},
+			"0248d1f5-12c4-4ab6-87ce-3ac83534a800": {
+				"id": "0248d1f5-12c4-4ab6-87ce-3ac83534a800",
+				"name": "Daniel Casasanto",
+				"role": "advisory-council"
+			},
+			"13faa07a-6b54-4ac3-8f14-ce2e4604a7ee": {
+				"id": "13faa07a-6b54-4ac3-8f14-ce2e4604a7ee",
+				"name": "Nancy Cox",
+				"role": "advisory-council"
+			},
+			"19021d1a-99a9-4a0f-9017-0a196bf2169e": {
+				"id": "19021d1a-99a9-4a0f-9017-0a196bf2169e",
+				"name": "Don Levy",
+				"role": "advisory-council"
+			},
+			"208d390b-2d29-4b75-918d-40398dc49b96": {
+				"id": "208d390b-2d29-4b75-918d-40398dc49b96",
+				"name": "Nicholas Hatsopoulos",
+				"role": "advisory-council"
+			},
+			"261a9500-96b8-4ced-a8a7-a978bcc02931": {
+				"id": "261a9500-96b8-4ced-a8a7-a978bcc02931",
+				"name": "Ian Foster",
+				"role": "advisory-council"
+			},
+			"2c971100-27f9-4ce9-93fd-da45b31e87b3": {
+				"id": "2c971100-27f9-4ce9-93fd-da45b31e87b3",
+				"name": "Heinrich Jaeger",
+				"role": "advisory-council"
+			},
+			"384afe3c-8854-4651-92f3-e328e3c641f2": {
+				"id": "384afe3c-8854-4651-92f3-e328e3c641f2",
+				"name": "Shadi Bartsch-Zimmer",
+				"role": "advisory-council"
+			},
+			"8268f81c-5f2f-4d8f-9a0b-efbdf9ba417f": {
+				"id": "8268f81c-5f2f-4d8f-9a0b-efbdf9ba417f",
+				"name": "Jack Gilbert",
+				"role": "advisory-council"
+			},
+			"a306d2d6-58db-442a-b7f3-93c264cad717": {
+				"id": "a306d2d6-58db-442a-b7f3-93c264cad717",
+				"name": "James Evans",
+				"role": "advisory-council"
+			},
+			"bd80b15e-6b1f-44f9-83a0-05fee45e296f": {
+				"id": "bd80b15e-6b1f-44f9-83a0-05fee45e296f",
+				"name": "Heinrich Jaeger",
+				"role": "advisory-council"
 			}
-		},
+		}
 	}
 ]

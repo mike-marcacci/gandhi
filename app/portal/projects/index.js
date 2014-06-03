@@ -82,9 +82,10 @@ angular.module('gandhi')
 
 					// the lock is now set server side
 					// TODO: remove references to this in the views?
-					$scope.lock = stageProject.lock;
+					if(!$scope.currentUser.admin)
+						$scope.lock = stageProject.lock;
 
-					console.log($scope.lock)
+					console.log(stageProject);
 
 					$scope.component = 'components/'+stageCycle.component.name+'/portal/index.html';
 				}, true);
