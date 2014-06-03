@@ -5,7 +5,7 @@
 
 <div>
 	<div class="row">
-		<div class="col-sm-4 blog-main">
+		<div class="col-sm-4 col-md-5 blog-main">
 			<form role="form">
 				<select ng-change="filter()" class="form-control" ng-model="cycle" ng-options="cycle.title for cycle in cycles">
 					<option value="">All Cycles</option>
@@ -16,10 +16,16 @@
 					<td data-title="'Title'">
 						<a ui-sref="admin.projects.project.show({project: project.id})">{{project.title || '[No Title]'}}</a>
 					</td>
+					<td data-title="'PI'">
+						{{project.flow.stages.application.data.pi.name}}
+					</td>
+					<td data-title="'Department'">
+						{{project.flow.stages.application.data.pi.department}}
+					</td>
 				</tr>
 			</table>
 		</div>
-		<div class="col-sm-8">
+		<div class="col-sm-8 col-md-7">
 			<div ui-view>Choose a project from the sidebar.</div>
 		</div>
 	</div>
