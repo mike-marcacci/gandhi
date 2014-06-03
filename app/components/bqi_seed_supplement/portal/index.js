@@ -93,8 +93,8 @@ angular.module('gandhi')
 		};
 
 
-		if($scope.data.biosketches.some(missingFile) || $scope.data.team_publications.some(missingFile) || $scope.data.budget.some(missingFile) || $scope.data.budget_narrative.some(missingFile))
-			return alert('Some files are missing. Please upload each file before submitting');
+		// if($scope.data.biosketches.some(missingFile) || $scope.data.team_publications.some(missingFile) || $scope.data.budget.some(missingFile) || $scope.data.budget_narrative.some(missingFile))
+		// 	return alert('Some files are missing. Please upload each file before submitting');
 
 
 
