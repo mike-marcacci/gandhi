@@ -22,14 +22,15 @@
 					<td data-title="'Department'">
 						{{project.flow.stages.application.data.pi.department}}
 					</td>
-					<td data-title="'Submitted'">
-						{{project.flow.stages.submission.status == 'submitted' ? 'Yes' : 'No'}}
-					</td>
-					<td data-title="'Rating'">
+					<td data-title="'Avg Rating'">
 						{{project.flow.stages.administrative_review.summary.rating}}
 					</td>
-					<td data-title="'Recommendation'">
-						{{project.flow.stages.administrative_review.summary.recommendation}}
+					<td data-title="'Reviewers'">
+						<div ng-repeat="(userId, review) in project.flow.stages.administrative_review.data">{{getUser(userId).name}}</div>
+					</td>
+					<td data-title="'Recommendations'">
+						<div ng-repeat="review in project.flow.stages.administrative_review.data">{{text[review.data.recommendation]}}</div>
+
 					</td>
 				</tr>
 			</table>

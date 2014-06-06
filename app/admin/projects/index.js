@@ -10,6 +10,21 @@ angular.module('gandhi')
 				$scope.cycle = null;
 				$scope.projects = [];
 				$scope.cycles = null;
+				$scope.users = null;
+				$scope.text = [
+					'I do not think the project should be funded',
+					'The project could be funded with significant adjustments to content - Revise and Resubmit',
+					'The project could be funded in the current state with budget adjustments',
+					'I strongly support funding this project as is'
+				];
+
+				Restangular.all('users').getList().then(function(users){
+					$scope.users = users;
+				});
+
+				$scope.getUser = function(id){
+					return _.find($scope.users, {id: id});
+				}
 
 				Restangular.all('cycles').getList().then(function(cycles){
 					$scope.cycles = cycles;
@@ -34,18 +49,12 @@ angular.module('gandhi')
 
 							var ratings = _.filter(_.map(project.flow.stages.administrative_review.data, function(r){return r.data.rating;}));
 							var recommendations = _.filter(_.map(project.flow.stages.administrative_review.data, function(r){return r.data.recommendation;}), function(r){return r !== undefined && r !== null;});
-							var text = [
-								'I do not think the project should be funded',
-								'The project could be funded with significant adjustments to content - Revise and Resubmit',
-								'The project could be funded in the current state with budget adjustments',
-								'I strongly support funding this project as is'
-							];
 
 							console.log(ratings, recommendations)
 
 							project.flow.stages.administrative_review.summary = {
 								rating: ratings.length ? ratings.reduce(sum) / ratings.length : null,
-								recommendation: recommendations.length ? text[Math.round(recommendations.reduce(sum) / recommendations.length)] : null,
+								recommendation: recommendations.length ? $scope.text[Math.round(recommendations.reduce(sum) / recommendations.length)] : null,
 							};
 							return project;
 						}),function(project){
@@ -67,11 +76,6 @@ angular.module('gandhi')
 				$scope.cycle = null;
 				$scope.project = null;
 				$scope.stages = null;
-				$scope.users = null;
-
-				Restangular.all('users').getList().then(function(users){
-					$scope.users = users;
-				});
 
 				$scope.$watchCollection('projects', function(newValue, oldValue){
 					// set the project
