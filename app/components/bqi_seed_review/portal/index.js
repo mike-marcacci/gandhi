@@ -1,7 +1,28 @@
 angular.module('gandhi')
 
+.controller('Components.BqiSeedReview.Details', function($scope, $state, $location, Restangular) {
+
+	$scope.$watch('review', function(review){
+		console.log(review);
+		if(!$scope.review)
+			return;
+
+		$scope.data = review;
+	}, true);
+
+	$scope.disabled = true;
+
+	$scope.ckeditor = $scope.limit_300 = $scope.limit_200 = $scope.limit_150 = {
+		toolbar: [],
+		removePlugins: 'elementspath,wordcount',
+		readOnly: true
+	};
+
+})
+
 .controller('Components.BqiSeedReview', function($scope, $state, Restangular) {
 	$scope.tab = null;
+	$scope.review = null;
 
 	// set the priviliges & default tab
 	$scope.read = $scope.write = false;
@@ -18,6 +39,11 @@ angular.module('gandhi')
 		$scope.tab = tab;
 	}
 
+	$scope.setReview = function(userId, review){
+		console.log(review)
+		$scope.active = userId;
+		$scope.review = review;
+	}
 
 
 /// start yuck

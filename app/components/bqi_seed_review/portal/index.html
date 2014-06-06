@@ -21,15 +21,19 @@
 					<tr>
 						<th>Rating</th>
 						<th>Recommendation</th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="review in project.flow.stages[stage].data">
+					<tr ng-repeat="(userId, review) in project.flow.stages[stage].data" ng-class="{active: userId == active}">
 						<td>
 							{{review.data.rating}}
 						</td>
 						<td>
 							{{recommendations[review.data.recommendation]}}
+						</td>
+						<td>
+							<a href ng-click="setReview(userId, review)">View Details</a>
 						</td>
 					</tr>
 				</tbody>
@@ -37,9 +41,17 @@
 					<tr class="info">
 						<td><b>{{avgRating}}</b></td>
 						<td><b>{{avgRecommendation}}</b></td>
+						<td></td>
 					</tr>
 				</tfoot>
 			</table>
+
+
+			<div ng-controller="Components.BqiSeedReview.Details">
+				<div ng-show="review" class="well">
+					<ng-include src="'components/bqi_seed_review/form.html'"></ng-include>
+				</div>
+			</div>
 		</div>
 
 	</div>
