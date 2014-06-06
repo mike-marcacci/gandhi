@@ -48,7 +48,7 @@
 
 
 			<div ng-controller="Components.BqiSeedReview.Details">
-				<div ng-show="review" class="well">
+				<div ng-if="review" class="well">
 					<ng-include src="'components/bqi_seed_review/form.html'"></ng-include>
 				</div>
 			</div>
