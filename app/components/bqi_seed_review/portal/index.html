@@ -19,6 +19,7 @@
 			<table class="table table-responsive">
 				<thead>
 					<tr>
+						<th>Reviewer</th>
 						<th>Rating</th>
 						<th>Recommendation</th>
 						<th></th>
@@ -26,6 +27,9 @@
 				</thead>
 				<tbody>
 					<tr ng-repeat="(userId, review) in project.flow.stages[stage].data" ng-class="{active: userId == active}">
+						<td>
+							{{getUser(userId).name}}
+						</td>
 						<td>
 							{{review.data.rating}}
 						</td>
@@ -39,6 +43,7 @@
 				</tbody>
 				<tfoot>
 					<tr class="info">
+						<td></td>
 						<td><b>{{avgRating}}</b></td>
 						<td><b>{{avgRecommendation}}</b></td>
 						<td></td>

@@ -35,14 +35,16 @@ angular.module('gandhi')
 	}
 
 	$scope.setTab = function(tab){
-		console.log(tab)
 		$scope.tab = tab;
 	}
 
 	$scope.setReview = function(userId, review){
-		console.log(review)
 		$scope.active = userId;
 		$scope.review = review;
+	}
+
+	$scope.getUser = function(id){
+		return _.find($scope.users, {id: id});
 	}
 
 

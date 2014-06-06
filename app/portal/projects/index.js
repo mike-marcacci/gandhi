@@ -33,7 +33,12 @@ angular.module('gandhi')
 			url: '/projects/:project',
 			templateUrl: 'portal/projects/index.html',
 			abstract: true,
-			controller: function ($scope, $state, $stateParams) {
+			controller: function ($scope, $state, $stateParams, Restangular) {
+				$scope.project = null;
+				$scope.cycle = null;
+				$scope.role = null;
+				$scope.users = Restangular.one('projects', $stateParams.project).getList('users').$object;
+
 				$scope.$watchCollection('[projects, cycles]', function(newValues, oldValues) {
 					if(!newValues[0] || !newValues[1]) return;
 
