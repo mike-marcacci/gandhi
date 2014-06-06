@@ -8,6 +8,7 @@ angular.module('gandhi')
 			return;
 
 		$scope.data = review.data;
+		$scope.rating = $scope.data.rating;
 	}, true);
 
 	$scope.disabled = true;

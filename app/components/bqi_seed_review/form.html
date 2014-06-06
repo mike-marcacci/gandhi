@@ -21,7 +21,7 @@
 	<div class="input-group">
 		<span class="input-group-addon">{{data.abstract.rating}}</span>
 		<div class="form-control">
-			<input type="range" min="1" max="7" step="1" ng-model="data.abstract.rating" />
+			<input type="range" min="1" max="7" step="1" ng-model="data.abstract.rating" ng-disabled="lock || disabled" />
 		</div>
 	</div>
 	<br>
@@ -45,7 +45,7 @@
 	<div class="input-group">
 		<span class="input-group-addon">{{data.short_answer_1.rating}}</span>
 		<div class="form-control">
-			<input type="range" min="1" max="7" step="1" ng-model="data.short_answer_1.rating" />
+			<input type="range" min="1" max="7" step="1" ng-model="data.short_answer_1.rating" ng-disabled="lock || disabled" />
 		</div>
 	</div>
 	<br>
@@ -69,7 +69,7 @@
 	<div class="input-group">
 		<span class="input-group-addon">{{data.short_answer_2.rating}}</span>
 		<div class="form-control">
-			<input type="range" min="1" max="7" step="1" ng-model="data.short_answer_2.rating" />
+			<input type="range" min="1" max="7" step="1" ng-model="data.short_answer_2.rating" ng-disabled="lock || disabled" />
 		</div>
 	</div>
 	<br>
@@ -93,7 +93,7 @@
 	<div class="input-group">
 		<span class="input-group-addon">{{data.outputs_and_outcomes.rating}}</span>
 		<div class="form-control">
-			<input type="range" min="1" max="7" step="1" ng-model="data.outputs_and_outcomes.rating" />
+			<input type="range" min="1" max="7" step="1" ng-model="data.outputs_and_outcomes.rating" ng-disabled="lock || disabled" />
 		</div>
 	</div>
 	<br>
@@ -185,7 +185,7 @@
 	<div class="input-group">
 		<span class="input-group-addon">{{rating}}</span>
 		<div class="form-control">
-			<input disabled type="range" min="1" max="7" step="1" ng-model="rating" />
+			<input disabled type="range" min="1" max="7" step="1" ng-model="rating" ng-disabled="lock || disabled" />
 		</div>
 	</div>
 </fieldset>
