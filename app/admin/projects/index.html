@@ -5,13 +5,13 @@
 
 <div>
 	<div class="row">
-		<div class="col-sm-4 col-md-5 blog-main">
+		<div class="col-md-6 blog-main">
 			<form role="form">
 				<select ng-change="filter()" class="form-control" ng-model="cycle" ng-options="cycle.title for cycle in cycles">
 					<option value="">All Cycles</option>
 				</select>
 			</form>
-			<table ng-table class="table ng-table-responsive">
+			<table ng-table class="table ng-table-responsive" style="table-layout: fixed;">
 				<tr ui-sref-active="active" ng-repeat="project in projects">
 					<td data-title="'Title'">
 						<a ui-sref="admin.projects.project.show({project: project.id})">{{project.title || '[No Title]'}}</a>
@@ -38,7 +38,7 @@
 				</tr>
 			</table>
 		</div>
-		<div class="col-sm-8 col-md-7">
+		<div class="col-md-6">
 			<div ui-view>Choose a project from the sidebar.</div>
 		</div>
 	</div>
