@@ -7,7 +7,7 @@ angular.module('gandhi')
 		if(!$scope.review)
 			return;
 
-		$scope.data = review;
+		$scope.data = review.data;
 	}, true);
 
 	$scope.disabled = true;
