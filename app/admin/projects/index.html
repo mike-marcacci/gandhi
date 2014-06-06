@@ -25,6 +25,12 @@
 					<td data-title="'Submitted'">
 						{{project.flow.stages.submission.status == 'submitted' ? 'Yes' : 'No'}}
 					</td>
+					<td data-title="'Rating'">
+						{{project.flow.stages.administrative_review.summary.rating}}
+					</td>
+					<td data-title="'Recommendation'">
+						{{project.flow.stages.administrative_review.summary.recommendation}}
+					</td>
 				</tr>
 			</table>
 		</div>

@@ -8,7 +8,7 @@ angular.module('gandhi')
 			templateUrl: "admin/projects/index.html",
 			controller: function($scope, $stateParams, $state, Restangular){
 				$scope.cycle = null;
-				$scope.projects = null;
+				$scope.projects = [];
 				$scope.cycles = null;
 
 				Restangular.all('cycles').getList().then(function(cycles){
@@ -23,7 +23,35 @@ angular.module('gandhi')
 				})
 
 				$scope.$watch('cycle', function(newValue, oldValue){
-					$scope.projects = Restangular.all('projects').getList($scope.cycle ? {'filter[cycle_id]': $scope.cycle.id} : null).$object;
+					Restangular.all('projects').getList($scope.cycle ? {'filter[cycle_id]': $scope.cycle.id} : null).then(function(res){
+						$scope.projects = _.sortBy(_.map(res, function(project){
+							if(!project.flow.stages.administrative_review.data)
+								return project;
+
+							function sum(sum, num) {
+							  return sum + num;
+							}
+
+							var ratings = _.filter(_.map(project.flow.stages.administrative_review.data, function(r){return r.data.rating;}));
+							var recommendations = _.filter(_.map(project.flow.stages.administrative_review.data, function(r){return r.data.recommendation;}), function(r){return r !== undefined && r !== null;});
+							var text = [
+								'I do not think the project should be funded',
+								'The project could be funded with significant adjustments to content - Revise and Resubmit',
+								'The project could be funded in the current state with budget adjustments',
+								'I strongly support funding this project as is'
+							];
+
+							console.log(ratings, recommendations)
+
+							project.flow.stages.administrative_review.summary = {
+								rating: ratings.length ? ratings.reduce(sum) / ratings.length : null,
+								recommendation: recommendations.length ? text[Math.round(recommendations.reduce(sum) / recommendations.length)] : null,
+							};
+							return project;
+						}),function(project){
+							return project.flow.stages.administrative_review.summary ? project.flow.stages.administrative_review.summary.rating : null;
+						}).reverse();
+					});
 				})
 
 				$scope.filter = function(){
