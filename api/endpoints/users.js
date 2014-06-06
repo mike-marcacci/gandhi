@@ -324,8 +324,8 @@ module.exports = function(config, app, resources){
 		app.get('/', function(req, res){
 
 			// restrict endpoint to admin users
-			if(!req.user.admin)
-				return res.error(403);
+			// if(!req.user.admin)
+			// 	return res.error(403);
 
 			return list(req, res);
 		});
@@ -333,8 +333,8 @@ module.exports = function(config, app, resources){
 		app.get('/:user', function(req, res){
 
 			// restrict access to self for non-admin users
-			if(!req.user.admin && req.user.id != req.params.user)
-				return res.error(403);
+			// if(!req.user.admin && req.user.id != req.params.user)
+			// 	return res.error(403);
 
 			return show(req, res);
 		});
