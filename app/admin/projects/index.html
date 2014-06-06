@@ -26,11 +26,14 @@
 						{{project.flow.stages.administrative_review.summary.rating}}
 					</td>
 					<td data-title="'Reviewers'">
-						<div ng-repeat="(userId, review) in project.flow.stages.administrative_review.data">{{getUser(userId).name}}</div>
+						<ul>
+							<li ng-repeat="(userId, review) in project.flow.stages.administrative_review.data">{{getUser(userId).name}}</li>
+						</ul>
 					</td>
 					<td data-title="'Recommendations'">
-						<div ng-repeat="review in project.flow.stages.administrative_review.data">{{text[review.data.recommendation]}}</div>
-
+						<ul>
+							<li ng-repeat="review in project.flow.stages.administrative_review.data">{{text[review.data.recommendation]}}</li>
+						</ul>
 					</td>
 				</tr>
 			</table>
