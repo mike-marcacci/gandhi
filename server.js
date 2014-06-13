@@ -6,6 +6,6 @@ var app = express();
 var config = fs.existsSync('./config.json') || fs.existsSync('./config.js') ? require('./config') : require('./config.default.js');
 
 // bring in gandhi
-app.use(require('./lib/index.js')(config));
+require('./lib/index.js')(config, app)
 
 app.listen(config.port);

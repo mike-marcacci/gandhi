@@ -1,0 +1,4 @@
+<div ng-controller="Components.Admin.BqiSeedDecision.Summary">
+	Decision: {{ stage.project.data.status || '-- none --'}}<br>
+	<a ui-sref="admin.projects.project.stage({stage: stage.cycle.id})" class="btn btn-primary btn-sm">Update Decision</a>
+</div>
