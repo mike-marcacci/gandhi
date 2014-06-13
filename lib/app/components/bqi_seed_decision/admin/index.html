@@ -1,0 +1,35 @@
+<h2>{{stage.cycle.title}}</h2>
+<div ng-controller="Components.Admin.BqiSeedDecision">
+	<form ng-submit="submit()">
+
+		<fieldset>
+			<legend>Decision</legend>
+			<div class="form-group">
+				<label for="status">Application Status</label>
+				<select id="status" class="form-control" ng-model="data.status" ng-options="status.slug as status.title for status in statuses">
+					<option value="">-- none --</option>
+				</select>
+			</div>
+		</fieldset>
+
+		<fieldset ng-show="data.status == 'rejected'">
+			<legend>Rejection Reason</legend>
+			<div class="radio" ng-repeat="rejection in rejections">
+				<label>
+					<input type="radio" name="rejection" ng-model="data.rejection" value="{{rejection}}">
+					{{rejection}}
+				</label>
+			</div>
+			<div class="input-group">
+				<span class="input-group-addon">
+					<input type="radio" ng-model="data.rejection" value="{{other}}">
+				</span>
+				<input type="text" class="form-control" ng-change="setRejection(other)" ng-focus="setRejection(other)" placeholder="Other" ng-model="other">
+			</div>
+		</fieldset>
+
+		<br>
+		<button class="btn btn-primary" type="submit">Submit</button>
+
+	</form>
+</div>

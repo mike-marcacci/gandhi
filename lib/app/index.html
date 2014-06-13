@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="gandhi">
+	<head>
+
+		<link rel="shortcut icon" href="/sites/531ea09d5aea6d3cd20000ed/theme/images/favicon.ico"/>
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400italic,400,600,700' rel='stylesheet' type='text/css'>
+		<link href="/sites/531ea09d5aea6d3cd20000ed/theme/stylesheets/animate.css" media="screen, projection" rel="stylesheet" type="text/css">
+
+		<link ng-if="bqi" href="/sites/531ea09d5aea6d3cd20000ed/theme/stylesheets/styles.css" media="screen, projection" rel="stylesheet" type="text/css">
+
+		<link rel="stylesheet" href="assets/style/index.css">
+
+		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
+
+		<script type="text/javascript" src="assets/ckeditor/ckeditor.js"></script>
+		<script type="text/javascript" src="assets/bower/lodash/dist/lodash.js"></script>
+		<script type="text/javascript" src="assets/bower/angular/angular.js"></script>
+		<script type="text/javascript" src="assets/bower/angular-sanitize/angular-sanitize.js"></script>
+		<script type="text/javascript" src="assets/bower/angular-ui-router/release/angular-ui-router.js"></script>
+		<script type="text/javascript" src="assets/bower/restangular/dist/restangular.js"></script>
+		<script type="text/javascript" src="assets/bower/ng-file-upload/angular-file-upload.js"></script>
+		<script type="text/javascript" src="assets/bower/ng-ckeditor/ng-ckeditor.js"></script>
+		<script type="text/javascript" src="assets/bower/ng-table/ng-table.js"></script>
+
+		<script type="text/javascript" src="index.js"></script>
+
+		<!-- BEGIN PORTAL -->
+		<script type="text/javascript" src="portal/index.js"></script>
+		<script type="text/javascript" src="portal/user/index.js"></script>
+		<script type="text/javascript" src="portal/projects/index.js"></script>
+
+
+		<!-- TODO: load these automatically via the API -->
+		<script type="text/javascript" src="components/bqi_seed_application/portal/index.js"></script>
+		<script type="text/javascript" src="components/bqi_seed_supplement/portal/index.js"></script>
+		<script type="text/javascript" src="components/bqi_seed_review/portal/index.js"></script>
+		<script type="text/javascript" src="components/bqi_seed_decision/portal/index.js"></script>
+		<script type="text/javascript" src="components/message/portal/index.js"></script>
+		<script type="text/javascript" src="components/start/portal/index.js"></script>
+		<script type="text/javascript" src="components/submission/portal/index.js"></script>
+
+		<script type="text/javascript" src="components/bqi_seed_application/admin/index.js"></script>
+		<script type="text/javascript" src="components/bqi_seed_supplement/admin/index.js"></script>
+		<script type="text/javascript" src="components/bqi_seed_review/admin/index.js"></script>
+		<script type="text/javascript" src="components/bqi_seed_decision/admin/index.js"></script>
+		<script type="text/javascript" src="components/message/admin/index.js"></script>
+		<script type="text/javascript" src="components/start/admin/index.js"></script>
+		<script type="text/javascript" src="components/submission/admin/index.js"></script>
+
+
+		<!-- BEGIN ADMIN -->
+		<script type="text/javascript" src="admin/index.js"></script>
+		<script type="text/javascript" src="admin/users/index.js"></script>
+		<script type="text/javascript" src="admin/cycles/index.js"></script>
+		<script type="text/javascript" src="admin/projects/index.js"></script>
+		<script type="text/javascript" src="admin/reports/index.js"></script>
+
+
+		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script src="/sites/531ea09d5aea6d3cd20000ed/theme/javascripts/modernizr.custom.52856.js" type="text/javascript" ></script>
+		<script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+	</head>
+	<body class="portal">
+		<ng-include ng-if="bqi" src="'/$header'"></ng-include>
+		<div class="container" style="width: 100%;">
+			<div ng-show="currentUser" ui-view></div>
+			<div ng-hide="currentUser" class="center portal">
+
+				<div style="margin: 40px auto;max-width: 860px;">
+				<h1>THE BQI GRANTEE PORTAL</h1>
+				<p>Welcome to the BQI Grantee Portal. To manage your grant applications, please log in or sign up.</p>
+				<p>For more information, please contact us at <a href="mailto:bigquestions@uchicago.edu">bigquestions@uchicago.edu</a>.</p>
+				</div>
+
+				<div class="row">
+
+					<div class="well col-sm-5 col-md-4 col-md-offset-1">
+						<h2 style="margin-top: 0;">Log In</h2>
+						<form role="form" ng-submit="login.submit()">
+							<div class="form-group">
+								<label for="login-email">Email</label>
+								<input type="email" class="form-control" id="login-email" placeholder="email@example.com" ng-model="login.email">
+							</div>
+							<div class="form-group">
+								<label for="login-password">Password</label>
+								<input type="password" class="form-control" id="login-password" placeholder="password" ng-model="login	.password">
+							</div>
+							<button type="submit" class="btn btn-default">Submit</button>
+						</form>
+					</div>
+
+					<div class="well col-sm-5 col-md-4 col-sm-offset-2">
+						<h2 style="margin-top: 0;">Sign Up</h2>
+						<form role="form" ng-submit="signup.submit()">
+							<div class="form-group">
+								<label for="signup-name">Name</label>
+								<input type="name" class="form-control" id="signup-name" placeholder="John Doe" ng-model="signup.name">
+							</div>
+							<div class="form-group">
+								<label for="signup-email">Email</label>
+								<input type="email" class="form-control" id="signup-email" placeholder="email@example.com" ng-model="signup.email">
+							</div>
+							<div class="form-group">
+								<label for="signup-password">Password</label>
+								<input type="password" class="form-control" id="signup-password" placeholder="password" ng-model="signup.password">
+							</div>
+							<div class="form-group">
+								<label for="signup-password">Confirm Password</label>
+								<input type="password" class="form-control" id="signup-password" placeholder="password" ng-model="signup.password2">
+							</div>
+							<button type="submit" class="btn btn-default">Submit</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+		<ng-include ng-if="bqi" src="'/$footer'"></ng-include>
+	</body>
+</html>

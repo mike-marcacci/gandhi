@@ -1,0 +1,22 @@
+{
+  "name": "gandhiMessage",
+  "api": {
+    "main": "api/index.js"
+  },
+  "app": {
+    "files": [
+      "app/index.js",
+      "app/portal/index.js",
+      "app/admin/index.js",
+    ],
+    "templates": {
+      "admin": {
+        "main": "/app/admin/index.html",
+        "summary": "/app/admin/summary.html"
+      },
+      "portal": {
+        "main": "/app/portal/index.html"
+      }
+    }
+  }
+}
