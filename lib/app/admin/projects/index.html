@@ -22,6 +22,7 @@
 					<td data-title="'Department'">
 						{{project.flow.stages.application.data.pi.department}}
 					</td>
+					<!--
 					<td data-title="'Avg Rating'">
 						{{project.flow.stages.administrative_review.summary.rating}}
 					</td>
@@ -30,10 +31,14 @@
 							<li ng-repeat="(userId, review) in project.flow.stages.administrative_review.data">{{getUser(userId).name}}</li>
 						</ul>
 					</td>
+					 -->
 					<td data-title="'Recommendations'">
 						<ul>
 							<li ng-repeat="review in project.flow.stages.administrative_review.data">{{text[review.data.recommendation]}}</li>
 						</ul>
+					</td>
+					<td data-title="'Decision'">
+						{{project.flow.stages.internal_decision.data.status}}
 					</td>
 				</tr>
 			</table>
