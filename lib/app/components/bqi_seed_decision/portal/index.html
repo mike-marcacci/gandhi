@@ -1,9 +1,7 @@
 <div ng-controller="Components.BqiSeedDecision">
 
-	<div ng-hide="cycleStage.submitted">Decisions will be made shortly.</div>
-<!--
-	Reject: reason
-
-	Accept -->
+	<div ng-hide="data.status">Decisions will be made shortly.</div>
+	<div ng-show="data.status == 'accepted'">Congratulations, your proposal has been accepted.</div>
+	<div ng-hide="data.status == 'rejected'">We did not accept your proposal. Please return to the "administrative review" section for reviewer comments.</div>
 
 </div>
