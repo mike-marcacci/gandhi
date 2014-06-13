@@ -3,6 +3,9 @@
 #####################
 
 files/*
+#components/*
+config.json
+config.js
 
 
 #####################
