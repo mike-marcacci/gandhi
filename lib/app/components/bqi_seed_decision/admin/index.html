@@ -3,33 +3,126 @@
 	<form ng-submit="submit()">
 
 		<fieldset>
-			<legend>Decision</legend>
+			<legend>Proposal Data</legend>
+			<div class="form-group">
+				<label for="number">Proposal Number</label>
+				<input type="text" class="form-control" id="number" ng-model="data.number">
+			</div>
+		</fieldset>
+
+		<fieldset>
+			<legend>Funding Decision</legend>
 			<div class="form-group">
 				<label for="status">Application Status</label>
 				<select id="status" class="form-control" ng-model="data.status" ng-options="status.slug as status.title for status in statuses">
 					<option value="">-- none --</option>
 				</select>
 			</div>
+
+			<div ng-show="data.status == 'approved'">
+				<div class="form-group">
+					<label for="amount">Awarded Amount</label>
+					<input type="number" class="form-control" id="amount" ng-model="data.amount">
+				</div>
+			</div>
+
+			<div ng-show="data.status == 'rejected'">
+				<div class="radio" ng-repeat="rejection in rejections">
+					<label>
+						<input type="radio" name="rejection" ng-model="data.rejection" value="{{rejection}}">
+						{{rejection}}
+					</label>
+				</div>
+				<div class="input-group">
+					<span class="input-group-addon">
+						<input type="radio" ng-model="data.rejection" value="{{other}}">
+					</span>
+					<input type="text" class="form-control" ng-change="setRejection(other)" ng-focus="setRejection(other)" placeholder="Other" ng-model="other">
+				</div>
+			</div>
+			<br><br>
 		</fieldset>
 
+
+
+		<fieldset ng-show="data.status == 'approved'">
+			<legend>Award Letter</legend>
+			<div class="alert alert-danger">Please make sure to manually send this email!</div>
+
+			<div class="form-group">
+				<label for="email">Email</label>
+				<input type="email" value="{{project.flow.stages.application.data.pi.email}}" class="form-control" disabled>
+			</div>
+
+			<div class="form-group">
+				<label for="message">Message</label>
+				<textarea class="form-control" style="height: 150px;" disabled>
+Dear Professor {{project.flow.stages.application.data.pi.name}}:
+
+I am delighted to inform you that your proposal “{{project.title}}” has been selected for seed funding at the Big Questions Incubator. The award reflects considerable enthusiasm among members of the Faculty Advisory Council for your work, as you can see from their comments on your BQI portal. This exploratory project can generate genuinely intriguing findings within the proposed funding period.
+
+The total award amount is ${{data.amount}} in direct cost funding for a maximum of six months.
+
+We request that you present your findings in a workshop and file one report after the grant period.
+
+The Big Questions Incubator supports early-stage projects that have genuine transformative potential. Seed awards propel the exploratory phase of the project. Please consider us a strategic partner in charting greater goals in this line of research.
+
+Please follow the link to indicate if you accept the award. Once you accept it, fill out and sign the award letter with terms and conditions:
+
+http://bigquestions.uchicago.edu/portal/app/#/portal/projects/{{project.id}}/award_agreement
+
+We are looking forward to your joining the Big Questions Incubator.
+
+Sincerely,
+
+Elena Zinchenko, Ed. D.
+Director of Research Innovation
+
+				</textarea>
+			</div>
+			<br><br>
+		</fieldset>
+
+
+
 		<fieldset ng-show="data.status == 'rejected'">
-			<legend>Rejection Reason</legend>
-			<div class="radio" ng-repeat="rejection in rejections">
-				<label>
-					<input type="radio" name="rejection" ng-model="data.rejection" value="{{rejection}}">
-					{{rejection}}
-				</label>
+			<legend>Rejection Letter</legend>
+			<div class="alert alert-danger">Please make sure to manually send this email!</div>
+
+			<div class="form-group">
+				<label for="email">Email</label>
+				<input type="email" value="{{project.flow.stages.application.data.pi.email}}" class="form-control" disabled>
 			</div>
-			<div class="input-group">
-				<span class="input-group-addon">
-					<input type="radio" ng-model="data.rejection" value="{{other}}">
-				</span>
-				<input type="text" class="form-control" ng-change="setRejection(other)" ng-focus="setRejection(other)" placeholder="Other" ng-model="other">
+
+			<div class="form-group">
+				<label for="message">Message</label>
+				<textarea class="form-control" style="height: 150px;" disabled>
+Dear Professor {{project.flow.stages.application.data.pi.name}}:
+
+Thank you for submitting your proposal “{{project.title}}” for seed funding at the Big Questions Incubator. While the proposal had considerable intellectual merit, it was not selected for funding at this time. You can see more detailed comments from the Advisory Council on your BQI portal: http://bigquestions.uchicago.edu/portal
+
+The Big Questions Incubator has a particular mission to support early-stage projects with a potential to be transformative in their field. Our initial focus areas are Information, Complexity, and Cognition, and alignment with the guiding Big Questions (http://bigquestions.uchicago.edu/funding) is an important funding criterion.
+
+We are committed to supporting genuinely novel research ideas at the University of Chicago that are not yet ripe enough for external funding. Should you have a future project that aligns with the program’s goals, we hope you will consider applying for funding from the BQI.
+
+If you have any questions, please do not hesitate to contact me to discuss.
+
+Sincerely,
+
+Elena Zinchenko, Ed. D.
+Director of Research Innovation
+
+
+				</textarea>
 			</div>
+			<br><br>
 		</fieldset>
 
 		<br>
-		<button class="btn btn-primary" type="submit">Submit</button>
+		<button class="btn btn-primary" type="submit">Save (will NOT send email)</button>
 
 	</form>
 </div>
+<br>
+<br>
+<br>
