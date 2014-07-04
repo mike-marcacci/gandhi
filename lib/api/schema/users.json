@@ -1,0 +1,32 @@
+{
+  "type":"object",
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "required": [
+    "password",
+    "email"
+  ],
+  "properties":{
+    "admin": {
+      "type": "boolean",
+      "default": false
+    },
+    "email": {
+      "type": "string",
+      "format": "email"
+    },
+    "id": {
+      "type":"string"
+    },
+    "name": {
+      "type": "string",
+      "default": ""
+    },
+    "password": {
+      "type": "string"
+    },
+    "recovery": {
+      "type": ["null","string"],
+      "default": null
+    }
+  }
+}

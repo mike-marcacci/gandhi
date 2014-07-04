@@ -27,5 +27,6 @@ module.exports = {
 	files: {
 		directory: __dirname + '/files'
 	},
-	port: 3000
+	port: 3000,
+	log: false
 };
