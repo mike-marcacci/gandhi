@@ -108,7 +108,7 @@
         <attribute name="redirectauthorization" type="bool">0</attribute>
         <attribute name="method" type="string">POST</attribute>
         <attribute name="followredirects" type="bool">0</attribute>
-        <attribute name="body" type="string">["{\\n\\t\\"email\\": \\"mike.marcacci@gmail.com\\",\\n\\t\\"password\\": \\"654321\\"\\n}"]</attribute>
+        <attribute name="body" type="string">["{\\n\\t\\"email\\": \\"mike.marcacci@gmail.com\\",\\n\\t\\"password\\": \\"mike1234\\"\\n}"]</attribute>
         <attribute name="order" type="int64">0</attribute>
         <attribute name="name" type="string">Create Token</attribute>
         <relationship name="parent" type="0/1" destination="LMREQUESTTREEITEM"></relationship>
