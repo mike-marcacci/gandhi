@@ -2,16 +2,17 @@
 
 require('../../init.js');
 
+var li = require('li');
 var r = require('rethinkdb');
-var async = require('async');
 var assert = require('chai').assert;
-var request;
+var request, fixtures;
 
 var blacklist = ['password'];
 var whitelist = ['id','email','name'];
 
 before(function(){
 	request = global.setup.api;
+	fixtures = global.setup.fixtures.db.users;
 });
 
 describe('Users', function(){
@@ -26,7 +27,6 @@ describe('Users', function(){
 			})
 			.expect(201)
 			.end(function(err, res){
-				assert.isNull(err);
 				assert.isString(res.body.token);
 				adminToken = res.body.token;
 				done(err);
@@ -44,7 +44,6 @@ describe('Users', function(){
 				})
 				.expect(201)
 				.end(function(err, res){
-					assert.isNull(err);
 					assert.isString(res.body.token);
 					userToken = res.body.token;
 					done(err);
@@ -72,7 +71,6 @@ describe('Users', function(){
 				})
 				.expect(409)
 				.end(function(err, res){
-					assert.isNull(err);
 					done(err);
 				});
 		});
@@ -86,7 +84,6 @@ describe('Users', function(){
 				})
 				.expect(201)
 				.end(function(err, res){
-					assert.isNull(err);
 					assert.isString(res.body.id);
 					ids.push(res.body.id);
 					assert.equal(res.body.email, 'emily.marcacci@test.gandhi.io');
@@ -139,7 +136,6 @@ describe('Users', function(){
 				})
 				.expect(201)
 				.end(function(err, res){
-					assert.isNull(err);
 					assert.isString(res.body.id);
 					ids.push(res.body.id);
 					assert.equal(res.body.email, 'solène.clavel@test.gandhi.io');
@@ -162,25 +158,67 @@ describe('Users', function(){
 				})
 				.expect(201)
 				.end(function(err, res){
-					assert.isNull(err);
 					assert.isString(res.body.token);
 					userToken = res.body.token;
 					done(err);
 				});
 		});
 
-		describe('(list)', function(){
-			it('rejects an anonymous request', function(){});
-			it('only returns whitelisted fields to unaffiliated users', function(){});
-			it('returns all non-blacklisted fields to self', function(){});
-			it('returns all non-blacklisted fields to admin users', function(){});
+		describe('(list) /customers', function(){
+			it('rejects an anonymous request', function(done){
+				request
+					.get('/api/users')
+					.expect(401)
+					.end(function(err, res){
+						assert.isNotArray(res.body);
+						done(err);
+					});
+			});
+			it('returns list of users', function(done){
+				request
+					.get('/api/users')
+					.set('Authorization', 'Bearer ' + userToken)
+					.expect(200)
+					.end(function(err, res){
+						assert.isArray(res.body);
+						assert.lengthOf(res.body, Math.min(50, fixtures.length + ids.length));
+						done(err);
+					});
+			});
+			it('accepts per_page parameters', function(done){
+				request
+					.get('/api/users?per_page=5')
+					.set('Authorization', 'Bearer ' + userToken)
+					.expect(200)
+					.end(function(err, res){
+						assert.isArray(res.body);
+						assert.lengthOf(res.body, 5);
+						var links = li.parse(res.headers.link);
+						assert.equal(links.next, '/api/users?per_page=5&page=2');
+						assert.equal(links.last, '/api/users?per_page=5&page='+Math.ceil((fixtures.length + ids.length) / 5));
+						done(err);
+					});
+			});
+			it('accepts page parameters', function(done){
+				request
+					.get('/api/users?per_page=5&page=2')
+					.set('Authorization', 'Bearer ' + userToken)
+					.expect(200)
+					.end(function(err, res){
+						assert.isArray(res.body);
+						assert.lengthOf(res.body, 5);
+						var links = li.parse(res.headers.link);
+						assert.equal(links.first, '/api/users?per_page=5&page=1');
+						assert.equal(links.prev, '/api/users?per_page=5&page=1');
+						done(err);
+					});
+			});
+			it('only includes whitelisted fields to unaffiliated users', function(){});
+			it('includes all non-blacklisted fields to self', function(){});
+			it('includes all non-blacklisted fields to admin users', function(){});
 		});
 
-		describe('(show)', function(){
-			it('rejects an anonymous request', function(){});
-			it('only returns whitelisted fields to unaffiliated users', function(){});
-			it('returns all non-blacklisted fields to self', function(){});
-			it('returns all non-blacklisted fields to admin users', function(){});
+		describe('(show) /customers/:id', function(){
 		});
 	});
 
@@ -195,7 +233,6 @@ describe('Users', function(){
 				})
 				.expect(201)
 				.end(function(err, res){
-					assert.isNull(err);
 					assert.isString(res.body.token);
 					userToken = res.body.token;
 					done(err);
@@ -221,7 +258,6 @@ describe('Users', function(){
 				})
 				.expect(201)
 				.end(function(err, res){
-					assert.isNull(err);
 					assert.isString(res.body.token);
 					userToken = res.body.token;
 					done(err);
@@ -237,14 +273,14 @@ describe('Users', function(){
 	// remove any users we just created
 	after(function(done){
 		if(!ids.length)
-			return done(err);
+			return done();
 
 		r.connect(global.setup.config.db, function(err, conn){
 			r.table('users').getAll(ids).delete().run(conn, function(err, res){
 				conn.close();
 				done(err, res);
-			})
+			});
 		});
-	})
+	});
 
 });
