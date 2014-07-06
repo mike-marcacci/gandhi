@@ -5,10 +5,19 @@ require('../../init.js');
 var li = require('li');
 var r = require('rethinkdb');
 var assert = require('chai').assert;
+var _ = require('lodash');
 var request, fixtures;
 
-var blacklist = ['password'];
-var whitelist = ['id','email','name'];
+var blacklist = ['password', 'recovery'];
+var whitelist = ['id', 'email', 'name', 'href', 'admin', 'created','updated'];
+
+function getIdFromToken(token){
+	var output = token.split('.')[1].replace('-', '+').replace('_', '/');
+	while (output.length % 4 > 0){ output += "=" };
+	var parsed = JSON.parse(new Buffer(output, 'base64').toString('utf8'));
+	assert.property(parsed, 'sub');
+	return parsed.sub;
+}
 
 before(function(){
 	request = global.setup.api;
@@ -16,7 +25,7 @@ before(function(){
 });
 
 describe('Users', function(){
-	var adminToken, ids = [];
+	var adminToken, adminId, ids = [];
 
 	before(function(done){
 		request
@@ -29,12 +38,13 @@ describe('Users', function(){
 			.end(function(err, res){
 				assert.isString(res.body.token);
 				adminToken = res.body.token;
+				adminId = getIdFromToken(adminToken);
 				done(err);
 			});
 	});
 
 	describe('#create', function(){
-		var userToken;
+		var userToken, userId;
 		before(function(done){
 			request
 				.post('/api/tokens')
@@ -46,6 +56,7 @@ describe('Users', function(){
 				.end(function(err, res){
 					assert.isString(res.body.token);
 					userToken = res.body.token;
+					userId = getIdFromToken(userToken);
 					done(err);
 				});
 		});
@@ -148,7 +159,7 @@ describe('Users', function(){
 	});
 
 	describe('#read', function(){
-		var userToken;
+		var userToken, userId;
 		before(function(done){
 			request
 				.post('/api/tokens')
@@ -160,6 +171,7 @@ describe('Users', function(){
 				.end(function(err, res){
 					assert.isString(res.body.token);
 					userToken = res.body.token;
+					userId = getIdFromToken(userToken);
 					done(err);
 				});
 		});
@@ -213,17 +225,133 @@ describe('Users', function(){
 						done(err);
 					});
 			});
-			it('only includes whitelisted fields to unaffiliated users', function(){});
-			it('includes all non-blacklisted fields to self', function(){});
-			it('includes all non-blacklisted fields to admin users', function(){});
+			it('only includes whitelisted fields to unaffiliated users', function(done){
+				request
+					.get('/api/users')
+					.set('Authorization', 'Bearer ' + userToken)
+					.expect(200)
+					.end(function(err, res){
+						assert.isArray(res.body);
+						_.each(res.body, function(user){
+							whitelist.forEach(function(prop){
+								assert.property(user, prop);
+							}, 'missing whitelist property');
+							if(user.email != 'tim.marcacci@test.gandhi.io')
+								assert.lengthOf(Object.keys(user), whitelist.length, 'contains properties in addition to whitelist');
+						})
+						done(err);
+					});
+			});
+			it('includes all non-blacklisted fields to self', function(done){
+				request
+					.get('/api/users')
+					.set('Authorization', 'Bearer ' + userToken)
+					.expect(200)
+					.end(function(err, res){
+						assert.isArray(res.body);
+						var user = _.find(res.body, {email: 'tim.marcacci@test.gandhi.io'});
+						blacklist.forEach(function(prop){
+							assert.notProperty(user, prop);
+						}, 'contains blacklisted property');
+
+						// TODO: test for other properties
+
+						done(err);
+					});
+			});
+			it('includes all non-blacklisted fields to admin users', function(done){
+				request
+					.get('/api/users')
+					.set('Authorization', 'Bearer ' + adminToken)
+					.expect(200)
+					.end(function(err, res){
+						assert.isArray(res.body);
+						var user = _.find(res.body, {email: 'tim.marcacci@test.gandhi.io'});
+						blacklist.forEach(function(prop){
+							assert.notProperty(user, prop);
+						}, 'contains blacklisted property');
+
+						// TODO: test for other properties
+
+						done(err);
+					});
+			});
 		});
 
 		describe('(show) /customers/:id', function(){
+			it('rejects an anonymous request', function(done){
+				request
+					.get('/api/users/' + userId)
+					.expect(401)
+					.end(function(err, res){
+						assert.isNotArray(res.body);
+						done(err);
+					});
+			});
+			it('returns the correct user', function(done){
+				request
+					.get('/api/users/' + userId)
+					.set('Authorization', 'Bearer ' + userToken)
+					.expect(200)
+					.end(function(err, res){
+						assert.property(res.body, 'id');
+						assert.equal(res.body.id, userId);
+						done(err);
+					});
+			});
+			it('only includes whitelisted fields to unaffiliated users', function(done){
+				request
+					.get('/api/users/' + adminId)
+					.set('Authorization', 'Bearer ' + userToken)
+					.expect(200)
+					.end(function(err, res){
+						whitelist.forEach(function(prop){
+							assert.property(res.body, prop);
+						}, 'missing whitelist property');
+						assert.equal(res.body.id, adminId);
+						assert.lengthOf(Object.keys(res.body), whitelist.length, 'contains properties in addition to whitelist');
+						done(err);
+					});
+			});
+			it('includes all non-blacklisted fields to self', function(done){
+				request
+					.get('/api/users/' + userId)
+					.set('Authorization', 'Bearer ' + userToken)
+					.expect(200)
+					.end(function(err, res){
+						assert.property(res.body, 'id');
+						assert.equal(res.body.id, userId);
+						blacklist.forEach(function(prop){
+							assert.notProperty(res.body, prop);
+						}, 'contains blacklisted property');
+
+						// TODO: test for other properties
+
+						done(err);
+					});
+			});
+			it('includes all non-blacklisted fields to admin users', function(done){
+				request
+					.get('/api/users/' + userId)
+					.set('Authorization', 'Bearer ' + adminToken)
+					.expect(200)
+					.end(function(err, res){
+						assert.property(res.body, 'id');
+						assert.equal(res.body.id, userId);
+						blacklist.forEach(function(prop){
+							assert.notProperty(res.body, prop);
+						}, 'contains blacklisted property');
+
+						// TODO: test for other properties
+
+						done(err);
+					});
+			});
 		});
 	});
 
 	describe('#update', function(){
-		var userToken;
+		var userToken, userId;
 		before(function(done){
 			request
 				.post('/api/tokens')
@@ -235,20 +363,21 @@ describe('Users', function(){
 				.end(function(err, res){
 					assert.isString(res.body.token);
 					userToken = res.body.token;
+					userId = getIdFromToken(userToken);
 					done(err);
 				});
 		});
 
-		it('rejects an anonymous update', function(){});
-		it('rejects an update from an unaffiliated user', function(){});
-		it('processes an update from self', function(){});
-		it('processes an update from an admin user', function(){});
-		it('rejects a misformatted update', function(){});
-		it('rejects a misformatted update', function(){});
+		// it('rejects an anonymous update', function(){});
+		// it('rejects an update from an unaffiliated user', function(){});
+		// it('processes an update from self', function(){});
+		// it('processes an update from an admin user', function(){});
+		// it('rejects a misformatted update', function(){});
+		// it('rejects a misformatted update', function(){});
 	});
 
 	describe('#delete', function(){
-		var userToken;
+		var userToken, userId;
 		before(function(done){
 			request
 				.post('/api/tokens')
@@ -260,14 +389,15 @@ describe('Users', function(){
 				.end(function(err, res){
 					assert.isString(res.body.token);
 					userToken = res.body.token;
+					userId = getIdFromToken(userToken);
 					done(err);
 				});
 		});
 
-		it('rejects an anonymous update', function(){});
-		it('rejects an update from an unaffiliated user', function(){});
-		it('rejects an update from self', function(){});
-		it('processes an update from an admin user', function(){});
+		// it('rejects an anonymous update', function(){});
+		// it('rejects an update from an unaffiliated user', function(){});
+		// it('rejects an update from self', function(){});
+		// it('processes an update from an admin user', function(){});
 	});
 
 	// remove any users we just created

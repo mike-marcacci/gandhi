@@ -12,6 +12,9 @@
       "type": "boolean",
       "default": false
     },
+    "created": {
+      "type": "string"
+    },
     "email": {
       "type": "string"
     },
@@ -28,6 +31,9 @@
     "recovery": {
       "type": ["null","string"],
       "default": null
+    },
+    "updated": {
+      "type": "string"
     }
   }
 }
