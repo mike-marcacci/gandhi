@@ -4,20 +4,14 @@ require('../../init.js');
 
 var li = require('li');
 var r = require('rethinkdb');
-var assert = require('chai').assert;
 var _ = require('lodash');
+var jwt = require('jsonwebtoken');
+
+var assert = require('chai').assert;
 var request, fixtures;
 
-var blacklist = ['password', 'recovery'];
+var blacklist = ['password', 'recovery_token'];
 var whitelist = ['id', 'email', 'name', 'href', 'admin', 'created','updated'];
-
-function getIdFromToken(token){
-	var output = token.split('.')[1].replace('-', '+').replace('_', '/');
-	while (output.length % 4 > 0){ output += "=" };
-	var parsed = JSON.parse(new Buffer(output, 'base64').toString('utf8'));
-	assert.property(parsed, 'sub');
-	return parsed.sub;
-}
 
 before(function(){
 	request = global.setup.api;
@@ -38,7 +32,7 @@ describe('Users', function(){
 			.end(function(err, res){
 				assert.isString(res.body.token);
 				adminToken = res.body.token;
-				adminId = getIdFromToken(adminToken);
+				adminId = jwt.decode(adminToken).sub;
 				done(err);
 			});
 	});
@@ -56,7 +50,7 @@ describe('Users', function(){
 				.end(function(err, res){
 					assert.isString(res.body.token);
 					userToken = res.body.token;
-					userId = getIdFromToken(userToken);
+					userId = jwt.decode(userToken).sub;
 					done(err);
 				});
 		});
@@ -171,7 +165,7 @@ describe('Users', function(){
 				.end(function(err, res){
 					assert.isString(res.body.token);
 					userToken = res.body.token;
-					userId = getIdFromToken(userToken);
+					userId = jwt.decode(userToken).sub;
 					done(err);
 				});
 		});
@@ -363,7 +357,7 @@ describe('Users', function(){
 				.end(function(err, res){
 					assert.isString(res.body.token);
 					userToken = res.body.token;
-					userId = getIdFromToken(userToken);
+					userId = jwt.decode(userToken).sub;
 					done(err);
 				});
 		});
@@ -389,7 +383,7 @@ describe('Users', function(){
 				.end(function(err, res){
 					assert.isString(res.body.token);
 					userToken = res.body.token;
-					userId = getIdFromToken(userToken);
+					userId = jwt.decode(userToken).sub;
 					done(err);
 				});
 		});

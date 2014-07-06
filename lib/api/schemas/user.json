@@ -28,7 +28,7 @@
     "password": {
       "type": "string"
     },
-    "recovery": {
+    "recovery_token": {
       "type": ["null","string"],
       "default": null
     },
