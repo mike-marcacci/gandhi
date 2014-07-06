@@ -12,7 +12,11 @@ module.exports = {
 		secret: 'rubber bunny'
 	},
 	mail: {
-
+		transport: 'stub',
+		mailOptions: {},
+		messageOptions: {
+			from: 'test@test.gandhi.io'
+		}
 	},
 	components: {
 		message: {

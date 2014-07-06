@@ -12,7 +12,17 @@ module.exports = {
 		secret: 'rubber bunny'
 	},
 	mail: {
-
+		transport: 'SMTP',
+		mailOptions: {
+			service: 'Mandrill',
+			auth: {
+				user: 'mike.marcacci@gmail.com',
+				pass: '0eCce8d2FKfLrTxiFYOReg'
+			}
+		},
+		messageOptions: {
+			from: 'test@test.gandhi.io'
+		}
 	},
 	components: {
 		message: {

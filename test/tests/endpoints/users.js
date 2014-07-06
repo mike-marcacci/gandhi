@@ -367,7 +367,7 @@ describe('Users', function(){
 		// it('processes an update from self', function(){});
 		// it('processes an update from an admin user', function(){});
 		// it('rejects a misformatted update', function(){});
-		// it('rejects a misformatted update', function(){});
+		// it('rejects an update to blacklisted properties', function(){});
 	});
 
 	describe('#delete', function(){

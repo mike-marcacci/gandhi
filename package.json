@@ -27,7 +27,8 @@
     "scrypt": "^3.0.1",
     "supertest": "^0.12.1",
     "jjv": "^1.0.0",
-    "li": "^1.0.0"
+    "li": "^1.0.0",
+    "nodemailer": "^0.7.0"
   },
   "devDependencies": {
     "mocha": "~1.18.2",

@@ -10,25 +10,25 @@ before(function(){
 });
 
 describe('Tokens', function(){
-	describe('create', function(){
-		it('rejects misformatted credentials', function(done){
-			request
-				.post('/api/tokens')
-				.send({
-					cool: 'beans'
-				})
-				.expect(400)
-				.end(function(err, res){
-					assert.isUndefined(res.body.token);
-					done(err);
-				});
-		});
+	it('rejects misformatted credentials', function(done){
+		request
+			.post('/api/tokens')
+			.send({
+				cool: 'beans'
+			})
+			.expect(400)
+			.end(function(err, res){
+				assert.isUndefined(res.body.token);
+				done(err);
+			});
+	});
+	describe('password', function(){
 		it('rejects unknown email', function(done){
 			request
 				.post('/api/tokens')
 				.send({
 					email: 'null@test.gandhi.io',
-					password: 'wrong password'
+					password: '123456'
 				})
 				.expect(404)
 				.end(function(err, res){
@@ -58,8 +58,22 @@ describe('Tokens', function(){
 				})
 				.expect(201)
 				.end(function(err, res){
-					assert.isNull(err);
 					assert.isString(res.body.token);
+					done(err);
+				});
+		});
+	});
+	describe('recovery token', function(){
+		it('rejects unknown email', function(done){
+			request
+				.post('/api/tokens')
+				.send({
+					email: 'null@test.gandhi.io',
+					recovery_token: '123456'
+				})
+				.expect(404)
+				.end(function(err, res){
+					assert.isUndefined(res.body.token);
 					done(err);
 				});
 		});
@@ -111,10 +125,39 @@ describe('Tokens', function(){
 				})
 				.expect(201)
 				.end(function(err, res){
-					assert.isNull(err);
 					assert.isString(res.body.token);
 					done(err);
 				});
 		});
+		it('rejects a token that has already been used', function(done){
+			request
+				.post('/api/tokens')
+				.send({
+					email: 'tim.marcacci@test.gandhi.io',
+					recovery_token: 'eyJleHBpcmF0aW9uIjozMjUzNTEyOTYwMDAwMCwic2VjcmV0IjoiWm1mazNuYjlndEw3c2hNQ1QrbjBGOTZ3cG50cHR3d0xNWVpnWjk0emlTaDgvQ1pqQmE0c3RJVDN2M2hDMWtqZ0QzcURmeWxtd1JBd1l5MVlybTlOQUtab3dCb1VWMTA3a1NmU0QvTFlFYThaUEdJckVoV3dxS2dYckdQZFp6Y2w5TUVLVEFJS1N1VVVwTUQ0aDU4bFlzVEZMSTZMQXBzaUlIN2hSbkJBRFVmWEk5b0JhTHo2NWppeTFheWhyU2xwdlZZYTZ5TkxOaUgvMFArTGNNM0FXaDJXZFFuN1BEQ3B0S0VyN0ZVV0pmNjFXU25SbmRJV0xodEcrUkQ5UXhaTkRvS1hSam05YXBJT2dzR0pIcnJGaXlzRVlhOEFibnd2ZjNNM0I5VzU2YXRrdjcwZnlocGx3U2lrcFo3bnNTVVpFMm1UWE1jb20zeHh5ektWdlE4MVVBPT0ifQ=='
+				})
+				.expect(401)
+				.end(function(err, res){
+					assert.isUndefined(res.body.token);
+					done(err);
+				});
+		});
+	});
+	describe('email', function(){
+		it('rejects unknown email', function(done){
+			request
+				.post('/api/tokens')
+				.send({
+					email: 'null@test.gandhi.io'
+				})
+				.expect(404)
+				.end(function(err, res){
+					assert.isUndefined(res.body.token);
+					done(err);
+				});
+		});
+
+		// TODO: actually check the email and try the token
+
 	});
 });
