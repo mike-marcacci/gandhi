@@ -6,7 +6,7 @@
 
 					<p><b>{{project.flow.stages.application.data.pi.name}}</b>, {{project.flow.stages.application.data.pi.rank}}, {{project.flow.stages.application.data.pi.department}}, The University Of Chicago</p>
 
-					<p ng-repeat="ci in project.flow.stages.application.data.ci"><b>{{ci.name}}</b>, {{ci.rank}}, {{ci.department}}, {{ci.university}}</p>
+					<p ng-repeat="ci in project.flow.stages.application.data.ci" ng-show="ci.name"><b>{{ci.name}}</b>, {{ci.rank}}, {{ci.department}}, {{ci.university}}</p>
 
 					<hr>
 
@@ -45,7 +45,7 @@
 
 					<div class="form-group">
 						<label for="date">Account Number</label>
-						<input required type="text" class="form-control" id="date" ng-model="data.date" disabled>
+						<input required type="text" class="form-control" id="date" ng-model="data.date" ng-disabled="lock || disabled">
 					</div>
 
 					<button class="btn btn-primary" type="submit" ng-disabled="lock || disabled">Submit</button>

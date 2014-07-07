@@ -17,7 +17,7 @@
 
 					<p><b>{{project.flow.stages.application.data.pi.name}}</b>, {{project.flow.stages.application.data.pi.rank}}, {{project.flow.stages.application.data.pi.department}}, The University Of Chicago</p>
 
-					<p ng-repeat="ci in project.flow.stages.application.data.ci"><b>{{ci.name}}</b>, {{ci.rank}}, {{ci.department}}, {{ci.university}}</p>
+					<p ng-repeat="ci in project.flow.stages.application.data.ci" ng-show="ci.name"><b>{{ci.name}}</b>, {{ci.rank}}, {{ci.department}}, {{ci.university}}</p>
 
 					<hr>
 
