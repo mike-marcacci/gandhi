@@ -1,0 +1,13 @@
+<div class="form-group" ng-class="{'has-error': hasError(), 'has-success': hasSuccess(), 'has-feedback': form.feedback !== false}">
+  <label ng-show="showTitle()">
+    {{form.title}}
+  </label>
+  <select ng-model="$$value$$"
+          sf-changed="form"
+          class="form-control"
+          schema-validate="form.schema"
+          ng-required="form.required"
+          ng-options="val as name for (val,name) in form.titleMap">
+  </select>
+  <span class="help-block">{{ (hasError() && errorMessage(schemaError())) || form.description}} </span>
+</div>

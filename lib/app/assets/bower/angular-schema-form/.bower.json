@@ -1,0 +1,43 @@
+{
+  "name": "angular-schema-form",
+  "main": [
+    "dist/schema-form.min.js",
+    "dist/bootstrap-decorator.min.js",
+    "dist/bootstrap-datepicker.min.js"
+  ],
+  "authors": [
+    "Textalk",
+    "David Jensen <david.lgj@gmail.com>"
+  ],
+  "moduleType": [
+    "globals"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "coverage"
+  ],
+  "dependencies": {
+    "angular": "~1.2.18",
+    "tv4": "~1.0.15",
+    "pickadate": "~3.5.2",
+    "angular-sanitize": "~1.2.18"
+  },
+  "devDependencies": {
+    "angular-ui-ace": "bower"
+  },
+  "homepage": "https://github.com/Textalk/angular-schema-form",
+  "_release": "76d9033c39",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "76d9033c39c0ca73bcd1badb234fb6d2dfe55162"
+  },
+  "_source": "git://github.com/Textalk/angular-schema-form.git",
+  "_target": "*",
+  "_originalSource": "angular-schema-form",
+  "_direct": true
+}

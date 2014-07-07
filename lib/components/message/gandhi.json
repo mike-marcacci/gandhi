@@ -1,0 +1,19 @@
+{
+  "name": "message",
+  "api": {
+    "main": "api/index.js"
+  },
+  "app": {
+    "files": [
+      "app/portal/index.js",
+      "app/admin/cycle/index.js",
+      "app/admin/project/index.js"
+    ],
+    "templates": {
+      "admin.projects.main": "app/admin/project/index.html",
+      "admin.projects.summary": "app/admin/project/summary.html",
+      "admin.cycle.main": "app/admin/cycle/summary.html",
+      "portal.main": "app/portal/index.html"
+    }
+  }
+}

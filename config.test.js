@@ -20,12 +20,8 @@ module.exports = {
 	},
 	components: {
 		message: {
-			directory: __dirname + '/components/message',
-			config: {}
-		},
-		form: {
-			directory: __dirname + '/components/form',
-			config: {}
+			directory: __dirname + '/lib/components/message',
+			options: {}
 		}
 	},
 	files: {
