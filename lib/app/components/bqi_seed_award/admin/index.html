@@ -1,0 +1,57 @@
+<div ng-controller="Components.Admin.BqiSeedAward">
+	<div>
+		<form ng-submit="submit()">
+					<h3 style="text-align: center;">BQI SEED AWARD TERMS AND CONDITIONS</h3>
+					<br>
+
+					<p><b>{{project.flow.stages.application.data.pi.name}}</b>, {{project.flow.stages.application.data.pi.rank}}, {{project.flow.stages.application.data.pi.department}}, The University Of Chicago</p>
+
+					<p ng-repeat="ci in project.flow.stages.application.data.ci"><b>{{ci.name}}</b>, {{ci.rank}}, {{ci.department}}, {{ci.university}}</p>
+
+					<hr>
+
+					<p>Proposal #<b>{{decision.number}}</b>: {{project.title}}</p>
+
+					<p>Award amount: ${{decision.amount | number}}</p>
+
+					<p>The funding start date is June 16, 2014, for a period of 6 months.</p>
+
+					<p>Acceptance of this award means that you agree to submit a report within 30 days of completion of grant activities. The report could be filed prior to the expiration of the 6 months grant period.</p>
+
+					<p>In addition to the report, you will be asked to submit copies of preprints, papers and other products of your activities related to the project. All publications and presentations resulting from the work supported by this award should carry the acknowledgment, “Supported by the University of Chicago’s Big Questions Incubator”.</p>
+
+					<p>To arrange for a fund transfer, please fill out an account number here:</p>
+					<div class="form-group">
+						<label for="account">Account Number</label>
+						<input type="text" class="form-control" id="account" ng-model="data.account" ng-disabled="lock || disabled">
+					</div>
+
+					<p>If you have any financial questions, please email Calvin Golden <a href="mailto:cmogolden@uchicago.edu">cmogolden@uchicago.edu</a> in The Office of the Vice President for Research and National Laboratories.</p>
+
+					<p>Any other questions should be sent to Elena Zinchenko, <a href="mailto:elenaz@uchicago.edu">elenaz@uchicago.edu</a>, 773-702-7158.</p>
+
+					<hr>
+
+					<div class="checkbox">
+						<label>
+							<input required type="checkbox" ng-model="data.accept" ng-disabled="lock || disabled">
+							I accept this award and its terms.
+						</label>
+						</div>
+					<div class="form-group">
+						<label for="name">Print your name</label>
+						<input required type="text" class="form-control" id="name" ng-model="data.name" ng-disabled="lock || disabled">
+					</div>
+
+					<div class="form-group">
+						<label for="date">Account Number</label>
+						<input required type="text" class="form-control" id="date" ng-model="data.date" disabled>
+					</div>
+
+					<button class="btn btn-primary" type="submit" ng-disabled="lock || disabled">Submit</button>
+		</form>
+	</div>
+
+	<br><br>
+
+</div>

@@ -21,7 +21,7 @@ module.exports = {
 			}
 		},
 		messageOptions: {
-			from: 'test@test.gandhi.io'
+			from: 'BQI <bigquestions@uchicago.edu>'
 		}
 	},
 	components: {
