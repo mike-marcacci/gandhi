@@ -1,5 +1,6 @@
 {
   "name": "message",
+  "title": "Message",
   "api": {
     "main": "api/index.js"
   },

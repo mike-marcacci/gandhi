@@ -1,26 +1,66 @@
 [
   {
-    "user_id": "a5901ab6-bf17-49cd-981d-c25875aec8e9",
+    "id": "587416ec-0626-43fc-ab99-4141bde069ae",
+    "title": "The Gandhi Grant Management System",
+    "cycle_id": "128f2348-99d4-40a1-b5ab-91d9019f272d",
+    "status": "active",
+    "events": {
+      "open": [
+        {
+          "value": true,
+          "time": {"$reql_type$":"TIME","epoch_time":1405203171.364,"timezone":"+00:00"}
+        }
+      ],
+      "close": [
+        {
+          "value": true,
+          "time": {"$reql_type$":"TIME","epoch_time":1406203171.364,"timezone":"+00:00"}
+        }
+      ],
+      "warning": [
+        {
+          "value": true,
+          "time": {"$reql_type$":"TIME","epoch_time":1405803171.364,"timezone":"+00:00"}
+        }
+      ],
+      "complete": [
+        {
+          "value": true,
+          "time": {"$reql_type$":"TIME","epoch_time":1405903171.364,"timezone":"+00:00"}
+        },
+        {
+          "value": false,
+          "time": {"$reql_type$":"TIME","epoch_time":1405803171.364,"timezone":"+00:00"}
+        },
+        {
+          "value": true,
+          "time": {"$reql_type$":"TIME","epoch_time":1405203171.364,"timezone":"+00:00"}
+        }
+      ],
+      "submit": [],
+      "archive": [],
+      "accept": [],
+      "reject": []
+
+    },
+    "flow": {
+      "start": {
+        "id": "start",
+        "data": {
+          "user_id": "a5901ab6-bf17-49cd-981d-c25875aec8e9"
+        },
+        "status": "open"
+      }
+    },
     "users": {
       "a5901ab6-bf17-49cd-981d-c25875aec8e9": {
-        "role": "applicant",
-        "id": "a5901ab6-bf17-49cd-981d-c25875aec8e9"
+        "id": "a5901ab6-bf17-49cd-981d-c25875aec8e9",
+        "role": "applicant"
       },
       "847e085b-df0e-4dc7-9cbf-d485d6e2de96": {
-        "role": "reviewer",
-        "id": "847e085b-df0e-4dc7-9cbf-d485d6e2de96"
+        "id": "847e085b-df0e-4dc7-9cbf-d485d6e2de96",
+        "role": "reviewer"
       }
-    },
-    "title": "The Gandhi Grant Management System",
-    "flow": {
-      "active": "2e360108d95f3cda2e7467d3",
-      "stages": {
-        "2e360108d95f3cda2e7467d3": {},
-        "9dcd650c0544dd3dc82fd87a": {},
-        "e882df32df91f89f9a8324dc": {}
-      }
-    },
-    "cycle_id": "128f2348-99d4-40a1-b5ab-91d9019f272d",
-    "id": "587416ec-0626-43fc-ab99-4141bde069ae"
+    }
   }
 ]

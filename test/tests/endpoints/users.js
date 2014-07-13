@@ -366,6 +366,7 @@ describe('Users', function(){
 		// it('rejects an update from an unaffiliated user', function(){});
 		// it('processes an update from self', function(){});
 		// it('processes an update from an admin user', function(){});
+		// it('rejects promition of a user to admin by a non-admin user', function(){});
 		// it('rejects a misformatted update', function(){});
 		// it('rejects an update to blacklisted properties', function(){});
 	});

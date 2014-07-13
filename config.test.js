@@ -18,11 +18,10 @@ module.exports = {
 			from: 'test@test.gandhi.io'
 		}
 	},
-	components: {
-		message: {
-			directory: __dirname + '/lib/components/message',
-			options: {}
-		}
+	extensions: {
+		message: [
+			__dirname + '/lib/components/message'
+		]
 	},
 	files: {
 		directory: __dirname + '/files'

@@ -1,0 +1,76 @@
+{
+  "id": "project",
+  "type":"object",
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "required": [
+    "title",
+    "cycle_id",
+    "status"
+  ],
+  "additionalProperties": false,
+  "properties":{
+    "id": {
+      "type":"string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "events": {
+      "type": "object",
+      "default": {},
+      "additionalProperties": {
+        "type": "array",
+        "default": [],
+        "items": {
+          "type": "object",
+          "required": [
+            "value",
+            "time"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "value": {
+              "type": "boolean"
+            },
+            "time": {
+            }
+          }
+        }
+      }
+    },
+    "flow": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "constant": {"$data": "0#"}
+          },
+          "data": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "status": {
+            "type": [
+              null,
+              "string"
+            ],
+            "default": null,
+            "enum": [
+              "draft",
+              "completed"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
