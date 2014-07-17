@@ -25,9 +25,11 @@ module.exports = {
 		}
 	},
 	extensions: {
-		message: [
-			__dirname + '/lib/components/message'
-		]
+		message: {
+			name: 'message',
+			directory: __dirname + '/lib/components/message/',
+			config: {}
+		}
 	},
 	files: {
 		directory: __dirname + '/files'

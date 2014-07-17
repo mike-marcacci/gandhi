@@ -1,15 +1,11 @@
 {
-  "name": "message",
   "title": "Message",
-  "api": {
-    "main": "api/index.js"
-  },
-  "app": {
-    "files": [
-      "app/portal/index.js",
-      "app/admin/cycle/index.js",
-      "app/admin/project/index.js"
-    ],
+  "main": "api/index.js",
+  "files": [
+    "app/index.js"
+  ],
+  "component": {
+    "name": "message",
     "templates": {
       "admin.projects.main": "app/admin/project/index.html",
       "admin.projects.summary": "app/admin/project/summary.html",
