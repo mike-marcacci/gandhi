@@ -8,5 +8,5 @@
   "dependencies": {},
   "scripts": {
     "postinstall": "bower install"
-  },
+  }
 }

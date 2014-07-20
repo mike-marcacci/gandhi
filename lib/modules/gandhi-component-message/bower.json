@@ -4,6 +4,6 @@
   "version": "0.0.1",
   "license": "MIT",
   "private": true,
-  "main": "app/index.js",
+  "main": "./app/index.js",
   "dependencies": {}
 }
