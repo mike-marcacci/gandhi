@@ -24,13 +24,6 @@ module.exports = {
 			from: 'test@test.gandhi.io'
 		}
 	},
-	extensions: {
-		message: {
-			name: 'message',
-			directory: __dirname + '/lib/components/message/',
-			config: {}
-		}
-	},
 	files: {
 		directory: __dirname + '/files'
 	},

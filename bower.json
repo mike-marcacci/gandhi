@@ -6,6 +6,12 @@
   "repository": "",
   "license": "MIT",
   "private": true,
+  "main": [
+    "index.js",
+    "portal/index.js",
+    "portal/projects/index.js",
+    "portal/user/index.js"
+  ],
   "dependencies": {
     "angular": "1.2.x",
     "angular-sanitize": "1.2.x",
@@ -13,7 +19,12 @@
     "restangular": "~1.4.0",
     "lodash": "~2.4.1",
     "ng-ckeditor": "~0.2.1",
-    "angular-schema-form": "*",
-    "gandhi-component-message": "./lib/components/message/"
-  }
+    "angular-schema-form": "*"
+  },
+  "modules": [
+    "ui.router",
+    "restangular",
+    "ngSanitize",
+    "ngCkeditor"
+  ]
 }

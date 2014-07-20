@@ -5,7 +5,5 @@
   "license": "MIT",
   "private": true,
   "main": "app/index.js",
-  "dependencies": {
-
-  }
+  "dependencies": {}
 }
