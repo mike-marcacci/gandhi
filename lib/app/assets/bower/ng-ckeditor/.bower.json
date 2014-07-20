@@ -19,6 +19,5 @@
   },
   "_source": "git://github.com/esvit/ng-ckeditor.git",
   "_target": "~0.2.1",
-  "_originalSource": "ng-ckeditor",
-  "_direct": true
+  "_originalSource": "ng-ckeditor"
 }

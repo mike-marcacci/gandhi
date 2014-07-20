@@ -1,0 +1,12 @@
+{
+  "name": "gandhi-component-message",
+  "description": "Gandhi Component: Message",
+  "version": "0.0.1",
+  "license": "MIT",
+  "private": true,
+  "main": "app/index.js",
+  "dependencies": {},
+  "_source": "/Users/michaelmarcacci/Documents/Projects/Gandhi/gandhi/lib/components/message",
+  "_target": "*",
+  "_originalSource": "./lib/components/message/"
+}

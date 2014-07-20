@@ -1,6 +1,10 @@
 Angular Schema Form
 ===================
 
+[![Build Status](https://travis-ci.org/Textalk/angular-schema-form.svg?branch=master)](https://travis-ci.org/Textalk/angular-schema-form)
+[![Coverage Status](https://coveralls.io/repos/Textalk/angular-schema-form/badge.png?branch=master)](https://coveralls.io/r/Textalk/angular-schema-form?branch=development)
+[![Bower version](https://badge.fury.io/bo/angular-schema-form.svg)](http://badge.fury.io/bo/angular-schema-form)
+
 Generate forms from a JSON schema, with AngularJS!
 
 ### [Try out the example page](http://textalk.github.io/angular-schema-form/examples/bootstrap-example.html)
@@ -10,7 +14,7 @@ Generate forms from a JSON schema, with AngularJS!
 What is it?
 ----------
 
-Schema Form is a set of AngularJS directives (and a service..) that can create a form directly from a json schema
+Schema Form is a set of AngularJS directives (and a couple of services..) that can create a form directly from a json schema
 definition and also validate against that schema. The defaults may be fine for a lot cases, but you can also
 customize it, changing order and type of fields.
 
@@ -71,13 +75,26 @@ bower install angular-schema-form
 (or just download the contents of the ```dist/``` folder and add dependencies
 manually)
 
-It depends on AngularJS (duh!), [tv4](https://github.com/geraintluff/tv4), and
+It depends on [AngularJS](https://angularjs.org/) (duh!),
+[angular-sanitize](https://docs.angularjs.org/api/ngSanitize),
+[bootstrap 3](http://getbootstrap.com/),
+[tv4](https://github.com/geraintluff/tv4), and
 if you like to use the date picker you also need jQuery and
 [pickadate.js](http://amsul.ca/pickadate.js/). Also if you use the ```help```
 type to inject HTML you'll want to use ngSanitize as well.
 
-The minified files also includes all templates so they are all you need.
+If you like to have drag and drop reordering of arrays you also need
+[ui-sortable](https://github.com/angular-ui/ui-sortable) and its dependencies
+[jQueryUI](http://jqueryui.com/), see *ui-sortable* documentation for details of
+what parts of jQueryUI that is needed. You can safely ignore these if you don't
+need the reordering.
 
+Tabbed arrays, form type ```tabarray```, defaults to tabs on the left side. For
+these to work you also need to include the css from
+[bootstrap-vertical-tabs](https://github.com/dbtek/bootstrap-vertical-tabs).
+It is not needed for tabs on top, the  ```tabType: "top"``` option.
+
+The minified files also includes all templates so they are all you need.
 
 Addons
 ------
