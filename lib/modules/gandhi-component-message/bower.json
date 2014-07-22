@@ -8,5 +8,6 @@
   "dependencies": {
     "angular": "*",
     "gandhi-component": "*"
-  }
+  },
+  "module": "gandhi-component-message"
 }

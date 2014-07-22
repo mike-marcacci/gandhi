@@ -2,10 +2,10 @@
 # Gandhi Stuff
 #####################
 
-files/*
-components/*
 config.json
 config.js
+files/*
+lib/app/assets/bower/*
 
 
 #####################

@@ -25,6 +25,7 @@ module.exports = {
 		}
 	},
 	modules: [
+		__dirname + '/lib/modules/gandhi-component',
 		__dirname + '/lib/modules/gandhi-component-message'
 	],
 	files: {
