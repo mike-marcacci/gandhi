@@ -1,0 +1,750 @@
+[
+  {
+    "id": "128f2348-99d4-40a1-b5ab-91d9019f272d",
+    "title": "Sample Application Cycle",
+    "description": "This application cycle is just a sample.",
+    "events": {
+      "open": {
+        "id": "open",
+        "title": "Application Window Opened",
+        "messages": [
+          "Applications are not yet being accepted.",
+          "Applications are being accepted."
+        ],
+        "conditions": [
+          [
+            {
+              "name": "date",
+              "options": {
+                "mode": "after",
+                "date": {
+                  "$reql_type$": "TIME",
+                  "epoch_time": 1405203171.364,
+                  "timezone": "+00:00"
+                }
+              }
+            }
+          ]
+        ],
+        "listeners": []
+      },
+      "warning": {
+        "id": "warning",
+        "title": "Application Window Closing Soon",
+        "messages": [
+          "This project is not in jeopardy of missing the application window.",
+          "This project is in jeopardy of missing the application window."
+        ],
+        "conditions": [
+          [
+            {
+              "name": "date",
+              "options": {
+                "mode": "after",
+                "date": {
+                  "$reql_type$": "TIME",
+                  "epoch_time": 1405803171.364,
+                  "timezone": "+00:00"
+                }
+              }
+            },
+            {
+              "name": "regex",
+              "options": {
+                "regex": "^complete$",
+                "invert": true,
+                "pointer": "/flow/stages/submission/status"
+              }
+            }
+          ]
+        ],
+        "listeners": [
+          {
+            "name": "email",
+            "options": {
+              "value": true,
+              "roles": [
+                "applicant",
+                "advisor"
+              ],
+              "template": "Don't get left behind!"
+            }
+          }
+        ]
+      },
+      "close": {
+        "id": "close",
+        "title": "Application Window Closed",
+        "messages": [
+          "Applications are still open.",
+          "Applications are no longer being accepted."
+        ],
+        "conditions": [
+          [
+            {
+              "name": "date",
+              "options": {
+                "mode": "after",
+                "date": {
+                  "$reql_type$": "TIME",
+                  "epoch_time": 1406203171.364,
+                  "timezone": "+00:00"
+                }
+              }
+            }
+          ]
+        ],
+        "listeners": []
+      },
+      "complete": {
+        "id": "complete",
+        "title": "Application Complete",
+        "messages": [
+          "The application is not yet complete.",
+          "The application is complete."
+        ],
+        "conditions": [
+          [
+            {
+              "name": "regex",
+              "options": {
+                "regex": "^complete$",
+                "pointer": "/flow/stages/start/status"
+              }
+            },
+            {
+              "name": "regex",
+              "options": {
+                "regex": "^complete$",
+                "pointer": "/flow/stages/team/status"
+              }
+            },
+            {
+              "name": "regex",
+              "options": {
+                "regex": "^complete$",
+                "pointer": "/flow/stages/application/status"
+              }
+            }
+          ]
+        ],
+        "listeners": []
+      },
+      "submit": {
+        "id": "submit",
+        "title": "Officially Submitted",
+        "messages": [
+          "This project has not yet been submitted.",
+          "This project has been submitted."
+        ],
+        "conditions": [
+          [
+            {
+              "name": "regex",
+              "options": {
+                "regex": "^complete$",
+                "pointer": "/flow/stages/submission/status"
+              }
+            }
+          ]
+        ],
+        "listeners": []
+      },
+      "report": {
+        "id": "report",
+        "title": "Report Submitted",
+        "messages": [
+          "This project's report has not yet been submitted.",
+          "This project's report has been submitted."
+        ],
+        "conditions": [
+          [
+            {
+              "name": "regex",
+              "options": {
+                "regex": "^complete$",
+                "pointer": "/flow/stages/report/status"
+              }
+            }
+          ]
+        ],
+        "listeners": []
+      },
+      "archive": {
+        "id": "archive",
+        "title": "Archived",
+        "messages": [
+          "This project is not archived.",
+          "This project has been archived."
+        ],
+        "conditions": [
+          [
+            {
+              "name": "regex",
+              "options": {
+                "regex": "^archived$",
+                "pointer": "/status"
+              }
+            }
+          ]
+        ],
+        "listeners": []
+      },
+      "accept": {
+        "id": "accept",
+        "title": "Accepted",
+        "messages": [
+          "This project has not yet been accepted.",
+          "This project has been accepted."
+        ],
+        "conditions": [
+          [
+            {
+              "name": "regex",
+              "options": {
+                "regex": "^accepted$",
+                "pointer": "/status"
+              }
+            }
+          ]
+        ],
+        "listeners": []
+      },
+      "reject": {
+        "id": "reject",
+        "title": "Rejected",
+        "messages": [
+          "This project is not rejected.",
+          "This project has been rejected."
+        ],
+        "conditions": [
+          [
+            {
+              "name": "regex",
+              "options": {
+                "regex": "^rejected$",
+                "pointer": "/status"
+              }
+            }
+          ]
+        ],
+        "listeners": []
+      }
+    },
+    "root": "start",
+    "flow": {
+      "start": {
+        "id": "start",
+        "title": "Start",
+        "description": "Start your application!",
+        "visible": [
+          "staff",
+          "applicant",
+          "advisor",
+          "reviewer"
+        ],
+        "lock": {
+          "open": [
+            "open"
+          ],
+          "close": [
+            "submit",
+            "archive",
+            "close"
+          ]
+        },
+        "component": {
+          "name": "start",
+          "status": "active",
+          "options": {
+            "next": "team",
+            "role": "applicant",
+            "permissions": {
+              "write": [
+                "staff",
+                "applicant"
+              ]
+            }
+          }
+        },
+        "next": [
+          "team"
+        ]
+      },
+      "team": {
+        "id": "team",
+        "title": "Team",
+        "description": "Build your team by adding collaborators to your application.",
+        "visible": [
+          "staff",
+          "applicant",
+          "advisor",
+          "reviewer"
+        ],
+        "lock": {
+          "open": [
+            "open"
+          ],
+          "close": [
+            "submit",
+            "archive",
+            "close"
+          ]
+        },
+        "component": {
+          "name": "users",
+          "options": {
+            "next": "application",
+            "roles": [
+              "applicant",
+              "advisor"
+            ],
+            "permissions": {
+              "assign": [
+                "staff",
+                "applicant"
+              ],
+              "remove": [
+                "staff",
+                "applicant"
+              ]
+            }
+          }
+        },
+        "next": [
+          "supplement"
+        ]
+      },
+      "application": {
+        "id": "application",
+        "title": "Application Form",
+        "description": "Fill out our online application form.",
+        "visible": [
+          "staff",
+          "applicant",
+          "advisor",
+          "reviewer"
+        ],
+        "lock": {
+          "open": [
+            "open"
+          ],
+          "close": [
+            "submit",
+            "archive",
+            "close"
+          ]
+        },
+        "component": {
+          "name": "form",
+          "options": {
+            "next": "assignment",
+            "permissions": {
+              "read": [
+                "staff",
+                "applicant",
+                "advisor",
+                "reviewer"
+              ],
+              "write": [
+                "staff",
+                "applicant"
+              ]
+            }
+          }
+        },
+        "next": [
+          "submission"
+        ]
+      },
+      "submission": {
+        "id": "submission",
+        "title": "Official Submission",
+        "description": "Officially submit your application. Once submitted, your application can no longer be edited.",
+        "visible": [
+          "staff",
+          "applicant",
+          "advisor",
+          "reviewer"
+        ],
+        "lock": {
+          "open": [
+            "open",
+            "complete"
+          ],
+          "close": [
+            "submit",
+            "archive",
+            "close"
+          ]
+        },
+        "component": {
+          "name": "form",
+          "options": {
+            "next": "acknowledgment",
+            "permissions": {
+              "read": [
+                "staff",
+                "applicant",
+                "advisor",
+                "reviewer"
+              ],
+              "write": [
+                "staff",
+                "applicant"
+              ]
+            }
+          }
+        },
+        "next": [
+          "acknowledgment"
+        ]
+      },
+      "acknowledgment": {
+        "id": "acknowledgment",
+        "title": "Submission Acknowledgment",
+        "description": "This page acknowledges that the application was received.",
+        "visible": [
+          "applicant",
+          "advisor"
+        ],
+        "lock": {
+          "open": [
+            "submit"
+          ],
+          "close": [
+            "accept",
+            "reject"
+          ]
+        },
+        "component": {
+          "name": "message",
+          "options": {
+            "default": {
+              "default": "You have not yet submitted your application.",
+              "roles": {}
+            },
+            "open": {
+              "default": "Thank you for submitting your application! It will be reviewed shortly.",
+              "roles": {}
+            },
+            "close": {
+              "default": "Thank you for submitting your application! A funding decision has been made.",
+              "roles": {}
+            },
+            "permissions": {
+              "write": [
+                "staff"
+              ]
+            }
+          }
+        },
+        "next": [
+          "assignment"
+        ]
+      },
+      "assignment": {
+        "id": "assignment",
+        "title": "Reviewer Assignment",
+        "description": "Assign reviewers to the project.",
+        "visible": [
+          "staff"
+        ],
+        "lock": {
+          "open": [
+            "submit"
+          ],
+          "close": [
+            "archive",
+            "reject"
+          ]
+        },
+        "component": {
+          "name": "users",
+          "options": {
+            "roles": [
+              "reviewer"
+            ],
+            "permissions": {
+              "assign": [
+                "staff"
+              ],
+              "remove": [
+                "staff"
+              ]
+            }
+          }
+        },
+        "next": [
+          "review"
+        ]
+      },
+      "review": {
+        "id": "review",
+        "title": "Review",
+        "description": "The project will be reviewed by assigned reviewers.",
+        "visible": [
+          "staff",
+          "applicant",
+          "advisor",
+          "reviewer"
+        ],
+        "lock": {
+          "open": [
+            "submit"
+          ],
+          "close": [
+            "archive",
+            "accept",
+            "reject"
+          ]
+        },
+        "component": {
+          "name": "review",
+          "options": {
+            "permissions": {
+              "write": [
+                "reviewer"
+              ],
+              "read.public": [
+                "staff",
+                "applicant",
+                "advisor",
+                "reviewer"
+              ],
+              "read.private": [
+                "staff",
+                "reviewer"
+              ],
+              "read.users": [
+                "staff"
+              ]
+            }
+          }
+        },
+        "next": [
+          "decision"
+        ]
+      },
+      "decision": {
+        "id": "decision",
+        "title": "Funding Decision",
+        "description": "Decide to fund the project or not.",
+        "visible": [
+          "staff"
+        ],
+        "lock": {
+          "open": [
+            "submit"
+          ],
+          "close": [
+            "archive"
+          ]
+        },
+        "component": {
+          "name": "status",
+          "options": {
+            "statuses": [
+              "accepted",
+              "rejected"
+            ],
+            "permissions": {
+              "read": [
+                "staff"
+              ],
+              "write": [
+                "staff"
+              ]
+            }
+          }
+        },
+        "next": [
+          "rejection",
+          "acceptance"
+        ]
+      },
+      "acceptance": {
+        "id": "acceptance",
+        "title": "Acceptance",
+        "description": "This project has been accepted.",
+        "visible": [
+          "staff",
+          "applicant",
+          "advisor"
+        ],
+        "lock": {
+          "open": [
+            "accept"
+          ],
+          "close": [
+            "reject"
+          ]
+        },
+        "component": {
+          "name": "message",
+          "options": {
+            "default": {
+              "default": "No decision has been made about your application.",
+              "roles": {}
+            },
+            "open": {
+              "default": "Congratulations! Your application has been accepted.",
+              "roles": {}
+            },
+            "close": {
+              "default": "We're sorry, but your application was not accepted.",
+              "roles": {}
+            },
+            "permissions": {
+              "write": [
+                "staff"
+              ]
+            }
+          }
+        },
+        "next": [
+          "report"
+        ]
+      },
+      "rejection": {
+        "id": "rejection",
+        "title": "Rejection",
+        "description": "This project has been rejected.",
+        "visible": [
+          "staff",
+          "applicant",
+          "advisor"
+        ],
+        "lock": {
+          "open": [
+            "reject"
+          ],
+          "close": [
+            "accept"
+          ]
+        },
+        "component": {
+          "name": "message",
+          "options": {
+            "default": {
+              "default": "No decision has been made about your application.",
+              "roles": {}
+            },
+            "open": {
+              "default": "We're sorry, but your application was not accepted.",
+              "roles": {}
+            },
+            "close": {
+              "default": "Congratulations! Your application has been accepted.",
+              "roles": {}
+            },
+            "permissions": {
+              "write": [
+                "staff"
+              ]
+            }
+          }
+        },
+        "next": []
+      },
+      "report": {
+        "id": "report",
+        "title": "Report",
+        "description": "The project's final report.",
+        "visible": [
+          "staff",
+          "applicant",
+          "advisor"
+        ],
+        "lock": {
+          "open": [
+            "accept"
+          ],
+          "close": [
+            "report"
+          ]
+        },
+        "component": {
+          "name": "form",
+          "options": {
+            "next": null,
+            "permissions": {
+              "read": [
+                "staff",
+                "applicant",
+                "advisor"
+              ],
+              "write": [
+                "staff",
+                "applicant"
+              ]
+            }
+          }
+        },
+        "next": []
+      }
+    },
+    "roles": {
+      "staff": {
+        "id": "staff",
+        "title": "Administrator",
+        "visible": [
+          "staff"
+        ]
+      },
+      "applicant": {
+        "id": "applicant",
+        "title": "Applicant",
+        "visible": [
+          "staff",
+          "applicant",
+          "advisor",
+          "reviewer"
+        ]
+      },
+      "advisor": {
+        "id": "advisor",
+        "title": "Advisor",
+        "visible": [
+          "staff",
+          "applicant",
+          "advisor",
+          "reviewer"
+        ]
+      },
+      "reviewer": {
+        "id": "reviewer",
+        "title": "Reviewer",
+        "visible": [
+          "staff",
+          "reviewer"
+        ]
+      }
+    },
+    "status": "active",
+    "statuses": {
+      "active": {
+        "id": "active",
+        "title": "Active"
+      },
+      "accepted": {
+        "id": "accepted",
+        "title": "Accepted"
+      },
+      "rejected": {
+        "id": "rejected",
+        "title": "Rejected"
+      },
+      "archived": {
+        "id": "archived",
+        "title": "Archived"
+      }
+    },
+    "users": {
+      "006d54fa-f19c-48f6-b3c1-748b78e01b02": {
+        "id": "006d54fa-f19c-48f6-b3c1-748b78e01b02",
+        "role": "staff"
+      }
+    }
+  }
+]

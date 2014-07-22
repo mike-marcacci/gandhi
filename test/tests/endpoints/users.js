@@ -170,7 +170,7 @@ describe('Users', function(){
 				});
 		});
 
-		describe('(list) /customers', function(){
+		describe('(list) /users', function(){
 			it('rejects an anonymous request', function(done){
 				request
 					.get('/api/users')
@@ -272,7 +272,7 @@ describe('Users', function(){
 			});
 		});
 
-		describe('(show) /customers/:id', function(){
+		describe('(show) /users/:id', function(){
 			it('rejects an anonymous request', function(done){
 				request
 					.get('/api/users/' + userId)
@@ -362,13 +362,13 @@ describe('Users', function(){
 				});
 		});
 
-		// it('rejects an anonymous update', function(){});
-		// it('rejects an update from an unaffiliated user', function(){});
-		// it('processes an update from self', function(){});
-		// it('processes an update from an admin user', function(){});
-		// it('rejects promition of a user to admin by a non-admin user', function(){});
-		// it('rejects a misformatted update', function(){});
-		// it('rejects an update to blacklisted properties', function(){});
+		it.skip('rejects an anonymous update', function(){});
+		it.skip('rejects an update from an unaffiliated user', function(){});
+		it.skip('processes an update from self', function(){});
+		it.skip('processes an update from an admin user', function(){});
+		it.skip('rejects promition of a user to admin by a non-admin user', function(){});
+		it.skip('rejects a misformatted update', function(){});
+		it.skip('rejects an update to blacklisted properties', function(){});
 	});
 
 	describe('#delete', function(){
@@ -389,10 +389,10 @@ describe('Users', function(){
 				});
 		});
 
-		// it('rejects an anonymous update', function(){});
-		// it('rejects an update from an unaffiliated user', function(){});
-		// it('rejects an update from self', function(){});
-		// it('processes an update from an admin user', function(){});
+		it.skip('rejects an anonymous delete', function(){});
+		it.skip('rejects a delete from an unaffiliated user', function(){});
+		it.skip('rejects a delete from self', function(){});
+		it.skip('processes a delete from an admin user', function(){});
 	});
 
 	// remove any users we just created
