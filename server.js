@@ -1,8 +1,7 @@
 'use strict';
 
 var fs = require('fs');
-var express = require('express');
-var app = express();
+var app = require('express')();
 var config = fs.existsSync('./config.json') || fs.existsSync('./config.js') || fs.existsSync('./config/index.js') ? require('./config') : require('./config.default.js');
 
 // setup the environment
