@@ -4,8 +4,9 @@
 
 config.json
 config.js
-files/*
-lib/app/assets/bower/*
+files
+lib/app/assets/bower
+rethinkdb_data
 
 
 #####################
