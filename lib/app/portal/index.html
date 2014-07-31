@@ -1,47 +1,24 @@
-<div class="row" style="margin-top: 20px;">
-	<aside class="col-sm-4 col-md-3">
-		<div class="panel panel-default" ng-show="currentUser.admin">
-			<div class="panel-heading">
-				<h3 class="panel-title">Admin</h3>
-			</div>
-			<div class="panel-body">
-				<ul class="nav nav-pills nav-stacked">
-					<li><a ui-sref="admin.users">Users</a></li>
-					<li><a ui-sref="admin.cycles">Cycles</a></li>
-					<li><a ui-sref="admin.projects">Projects</a></li>
+<div id="sidebar">
+	<nav>
+		<ul>
+			<li><a ui-sref-active="active" ui-sref="portal.dashboard"><i class="glyphicon glyphicon-dashboard"></i>Dashboard</a></li>
+			<li><a ui-sref-active="active" ui-sref="portal.user.show"><i class="glyphicon glyphicon-user"></i>Account</a></li>
+			<li ng-show="currentUser.admin"><a href><i class="glyphicon glyphicon-chevron-down"></i><i class="glyphicon glyphicon-cog"></i>Admin</a>
+				<ul>
+					<li><a ui-sref-active="active" ui-sref="portal.admin.users.list">Users</a></li>
+					<li><a ui-sref-active="active" ui-sref="portal.admin.cycles.list">Cycles</a></li>
+					<li><a ui-sref-active="active" ui-sref="portal.admin.projects.list">Projects</a></li>
+					<!-- <li><a href><span class="label label-primary pull-right">NewVector Maps</a></li> -->
 				</ul>
-			</div>
-		</div>
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title">Portal</h3>
-			</div>
-			<div class="panel-body">
-				<ul class="nav nav-pills nav-stacked">
-						<li ui-sref-active="active"><a ui-sref="portal.dashboard">Dashboard</a></li>
-						<li ui-sref-active="active"><a ui-sref="portal.user.show">My Account</a></li>
-						<li ui-sref-active="active"><a href ng-click="logout()">Log Out</a></li>
+			</li>
+			<li><a ui-sref-active="active" ui-sref="portal.user.projects.list">Projects</a>
+				<ul>
+					<li><a ui-sref-active="active" href>Induction of pluripotent stem cells from mouse embryonic...</a></li>
+					<li><a ui-sref-active="active" href>On the Origin of Species</a></li>
 				</ul>
-			</div>
-		</div>
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<div ui-sref="portal.start" class="btn btn-success btn-xs pull-right" ng-show="navByRole.applicant">New Project</div>
-				<h3 class="panel-title">Your Projects</h3>
-			</div>
-			<div class="panel-body">
-				<div ui-sref="portal.start" class="btn btn-success btn-block" ng-hide="navByRole.applicant">New Project</div>
-				<ul class="nav nav-pills nav-stacked">
-					<li ui-sref-active="active" ng-repeat="cycle in navByRole.applicant">
-						<!-- <a ui-sref="cycles({ cycle: cycle.id })">{{ cycle.title }}</a> -->
-						<h4>{{ cycle.title }}</h4>
-						<ul class="nav nav-pills nav-stacked">
-							<li ui-sref-active="active" ng-repeat="project in cycle.projects"><a ui-sref="portal.projects.stage({ project: project.id, stage: project.flow.active })">{{ project.title || project.id }}</a></li>
-						</ul>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</aside>
-	<section ui-view class="col-sm-8 col-md-9"></section>
+			</li>
+		</ul>
+		<a href><i class="glyphicon glyphicon-off"></i>Log Out</a>
+	</nav>
 </div>
+<div id="body" ui-view></div>

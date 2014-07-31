@@ -1,0 +1,96 @@
+<h1>Dashboard</h1>
+<div class="row">
+	<div class="col-sm-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Your Projects</h3>
+			</div>
+			<div class="panel-body">
+				<div ng-hide="navByRole.applicant">No Projects</div>
+				<ul class="nav nav-pills nav-stacked">
+					<li ui-sref-active="active" ng-repeat="cycle in navByRole.applicant">
+						<!-- <a ui-sref="cycles({ cycle: cycle.id })">{{ cycle.title }}</a> -->
+						<h4>{{ cycle.title }}</h4>
+						<table class="table">
+							<tr><th>Title</th><th>Submitted</th></tr>
+							<tr ng-repeat="project in cycle.projects" class="{{ project.flow.stages.submission.status == 'submitted' ? 'success' : ''}}">
+								<td>
+									<a ui-sref="portal.projects.stage({ project: project.id, stage: project.flow.active })">
+										{{ project.title || project.id }}
+									</a>
+								</td>
+								<td>
+									{{ project.flow.stages.submission.status == 'submitted' ? 'Yes' : 'No'}}
+								</td>
+							</tr>
+						</table>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-sm-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Assigned to Review</h3>
+			</div>
+			<div class="panel-body">
+				<div ng-hide="navByRole.applicant">No Projects</div>
+				<ul class="nav nav-pills nav-stacked">
+					<li ui-sref-active="active" ng-repeat="cycle in navByRole['advisory-reviewer']">
+						<!-- <a ui-sref="cycles({ cycle: cycle.id })">{{ cycle.title }}</a> -->
+						<h4>{{ cycle.title }}</h4>
+						<table class="table">
+							<tr><th>Title</th><th>Reviewed</th></tr>
+							<tr ng-repeat="project in cycle.projects">
+								<td>
+									<a ui-sref="portal.projects.stage({ project: project.id, stage: project.flow.active })">
+										{{ project.title || project.id }}
+									</a>
+								</td>
+								<td>
+									{{ project.flow.stages.administrative_review.data[currentUser.id] ? 'Yes' : 'No'}}
+								</td>
+							</tr>
+						</table>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">All Projects</h3>
+			</div>
+			<div class="panel-body">
+				<ul class="nav nav-pills nav-stacked">
+					<li ui-sref-active="active" ng-repeat="cycle in nav" ng-show="cycle.projects">
+						<!-- <a ui-sref="cycles({ cycle: cycle.id })">{{ cycle.title }}</a> -->
+						<h4>{{ cycle.title }}</h4>
+						<table class="table">
+							<tr><th>Title</th><th>PI Name</th><th>PI Department</th></tr>
+							<tr ng-repeat="project in cycle.projects">
+								<td>
+									<a ui-sref="portal.projects.stage({ project: project.id, stage: project.flow.active })">
+										{{ project.title || project.id }}
+									</a>
+								</td>
+								<td>
+									{{ project.flow.stages.application.data.pi.name}}
+								</td>
+								<td>
+									{{ project.flow.stages.application.data.pi.department}}
+								</td>
+							</tr>
+						</table>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
