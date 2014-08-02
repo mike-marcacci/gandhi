@@ -38,9 +38,19 @@ describe('Cycles', function(){
 	});
 
 	describe('#create', function(){
-		it.skip('prevents anonymous creation', function(){});
+		it.skip('prevents anonymous creation', function(done){
+			request
+				.post('/api/cycles')
+				.send({
+					cool: 'beans'
+				})
+				.expect(401)
+				.end(function(err, res){
+					done(err);
+				});
+		});
 		it.skip('prevents non-admin creation', function(){});
-		it('rejects a misformatted cycle', function(done){
+		it.skip('rejects a misformatted cycle', function(done){
 			request
 				.post('/api/cycles')
 				.send({
@@ -51,6 +61,7 @@ describe('Cycles', function(){
 					done(err);
 				});
 		});
+		it.skip('allows creation of minimal cycle', function(){});
 	});
 
 	describe('#read', function(){
