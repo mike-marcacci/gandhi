@@ -105,10 +105,6 @@ describe('Cycles', function(){
 						done(err);
 					});
 			});
-			it.skip('shows all assigned users to admin', function(){});
-			it.skip('shows no users to an urelated user', function(){});
-			it.skip('only shows users of allowed roles to a user assigned directly to the cycle', function(){});
-			it.skip('only shows users of allowed roles to a user assigned to a project of the cycle', function(){});
 		});
 
 		describe('(show) /cycles/:id', function(){
@@ -121,10 +117,9 @@ describe('Cycles', function(){
 						done(err);
 					});
 			});
-			it.skip('shows all assigned users to admin', function(){});
-			it.skip('shows no users to an urelated user', function(){});
-			it.skip('only shows users of allowed roles to a user assigned directly to the cycle', function(){});
-			it.skip('only shows users of allowed roles to a user assigned to a project of the cycle', function(){});
+			it.skip('shows all cycles to an admin user', function(){});
+			it.skip('shows non-draft cycles to a non-admin user', function(){});
+			it.skip('hides draft cycles from a non-admin user', function(){});
 		});
 	});
 
