@@ -8,7 +8,6 @@
 					<li><a ui-sref-active="active" ui-sref="portal.admin.users.list">Users</a></li>
 					<li><a ui-sref-active="active" ui-sref="portal.admin.cycles.list">Cycles</a></li>
 					<li><a ui-sref-active="active" ui-sref="portal.admin.projects.list">Projects</a></li>
-					<!-- <li><a href><span class="label label-primary pull-right">NewVector Maps</a></li> -->
 				</ul>
 			</li>
 			<li><a ui-sref-active="active" ui-sref="portal.user.projects.list">Projects</a>
@@ -18,7 +17,7 @@
 				</ul>
 			</li>
 		</ul>
-		<a href><i class="glyphicon glyphicon-off"></i>Log Out</a>
+		<a href ng-click="logout()"><i class="glyphicon glyphicon-off"></i>Log Out</a>
 	</nav>
 </div>
 <div id="body" ui-view></div>

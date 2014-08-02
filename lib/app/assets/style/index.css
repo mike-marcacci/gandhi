@@ -5,6 +5,27 @@ html {
 body {
   background-color: transparent !important;
   margin: 0; }
+  body .panel {
+    -webkit-box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.1); }
+  body .nav-tabs {
+    border-bottom: 1px solid transparent; }
+  body .nav-tabs > li.active > a,
+  body .nav-tabs > li.active > a:hover,
+  body .nav-tabs > li.active > a:focus {
+    border-style: solid;
+    border-width: 2px 0 0 0;
+    border-color: #428bca; }
+  body .nav-tabs > li > a {
+    border-radius: 0;
+    border-width: 2px 0 0 0;
+    border-color: transparent; }
+  body .nav-tabs > li > a:hover {
+    background-color: transparent;
+    border-color: transparent; }
+  body .nav-tabs + .panel {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0; }
 
 #main {
   padding: 0 1em; }
@@ -16,7 +37,7 @@ body {
   top: 0;
   bottom: 0;
   width: 210px;
-  border-right: 2px solid #f5f5f5; }
+  box-shadow: 2px 0px 1px rgba(0, 0, 0, 0.1); }
   #sidebar nav {
     line-height: 1.4em; }
     #sidebar nav a {

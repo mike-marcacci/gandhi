@@ -1,12 +1,51 @@
 html {
 	min-height: 100%;
 	background-color: rgb(253, 253, 253);
+	// background-color: rgb(248, 248, 248);
 }
 
 body {
 	background-color: transparent !important;
 	margin: 0;
+
+	// bootstrap styles
+
+	.panel {
+		-webkit-box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.1);
+		box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.1);
+	}
+
+	.nav-tabs {
+		border-bottom: 1px solid transparent;
+	}
+
+	.nav-tabs > li.active > a,
+	.nav-tabs > li.active > a:hover,
+	.nav-tabs > li.active > a:focus {
+		border-style: solid;
+		border-width: 2px 0 0 0;
+		border-color: #428bca;
+	}
+
+	.nav-tabs > li > a {
+		border-radius: 0;
+		border-width: 2px 0 0 0;
+		border-color: transparent;
+	}
+
+	.nav-tabs > li > a:hover {
+		background-color: transparent;
+		border-color: transparent;
+	}
+
+	.nav-tabs + .panel {
+		border-top-left-radius: 0;
+		border-top-right-radius: 0;
+	}
+
 }
+
+// structure
 
 #main {
 	padding: 0 1em;
@@ -19,7 +58,8 @@ body {
 	top: 0;
 	bottom: 0;
 	width: 210px;
-	border-right: 2px solid #f5f5f5;
+	// border-right: 2px solid #f5f5f5;
+	box-shadow: 2px 0px 1px rgba(0, 0, 0, 0.1);
 
 	nav {
 		line-height: 1.4em;
