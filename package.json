@@ -32,12 +32,12 @@
     "wiredep": "^1.8.2"
   },
   "devDependencies": {
-    "mocha": "~1.18.2",
-    "supertest": "^0.12.1",
-    "chai": "~1.9.1",
-    "nodemon": "^1.0.17",
+    "blanket": "^1.1.6",
     "bower": "^1.3.3",
-    "blanket": "^1.1.6"
+    "chai": "~1.9.1",
+    "mocha": "~1.18.2",
+    "nodemon": "^1.0.17",
+    "supertest": "^0.13.0"
   },
   "config": {
     "blanket": {

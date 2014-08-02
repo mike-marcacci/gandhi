@@ -4,7 +4,7 @@
     "admin": true,
     "password": "c2NyeXB0AA8AAAAIAAAAAXvB6YzTjq3K7/XyWAcp/cWB2u9nLyOPiD3R+emAi96U4dZt9EZ0eVYaLPpf3l+oLtGCUxdjMX0GNytUPY2Tjsdo7g0ip8xbvlIFkMJkduW+",
     "recovery_token": null,
-    "email": "admin@gandhi.io",
+    "email": "admin@demo.gandhi.io",
     "name": "Admin User",
     "created": "Sat Jul 05 2014 21:35:40 GMT-0700 (PDT)",
     "updated": "Sat Jul 05 2014 21:35:40 GMT-0700 (PDT)"

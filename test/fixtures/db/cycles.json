@@ -741,9 +741,13 @@
       }
     },
     "users": {
-      "006d54fa-f19c-48f6-b3c1-748b78e01b02": {
-        "id": "006d54fa-f19c-48f6-b3c1-748b78e01b02",
+      "a5901ab6-bf17-49cd-981d-c25875aec8e9": {
+        "id": "a5901ab6-bf17-49cd-981d-c25875aec8e9",
         "role": "staff"
+      },
+      "84fbaa78-54b0-42fc-9754-c9ea7dc24538": {
+        "id": "84fbaa78-54b0-42fc-9754-c9ea7dc24538",
+        "role": "advisor"
       }
     }
   }

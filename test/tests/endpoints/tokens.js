@@ -22,7 +22,7 @@ describe('Tokens', function(){
 				done(err);
 			});
 	});
-	describe('password', function(){
+	describe('#password', function(){
 		it('rejects unknown email', function(done){
 			request
 				.post('/api/tokens')
@@ -63,7 +63,7 @@ describe('Tokens', function(){
 				});
 		});
 	});
-	describe('recovery token', function(){
+	describe('#recovery_token', function(){
 		it('rejects unknown email', function(done){
 			request
 				.post('/api/tokens')
@@ -143,7 +143,7 @@ describe('Tokens', function(){
 				});
 		});
 	});
-	describe('email', function(){
+	describe('#email', function(){
 		it('rejects unknown email', function(done){
 			request
 				.post('/api/tokens')
@@ -159,5 +159,88 @@ describe('Tokens', function(){
 
 		// TODO: actually check the email and try the token
 
+	});
+	describe('#token', function(){
+		var tim, mike;
+		before(function(done){
+			request
+				.post('/api/tokens')
+				.send({
+					email: 'mike.marcacci@test.gandhi.io',
+					password: 'mike1234'
+				})
+				.expect(201)
+				.end(function(err, res){
+					assert.isString(res.body.token);
+					mike = res.body.token;
+					done(err);
+				});
+		});
+		before(function(done){
+			request
+				.post('/api/tokens')
+				.send({
+					email: 'tim.marcacci@test.gandhi.io',
+					password: 'tim1234'
+				})
+				.expect(201)
+				.end(function(err, res){
+					assert.isString(res.body.token);
+					tim = res.body.token;
+					done(err);
+				});
+		});
+		it('rejects an invalid token', function(done){
+			request
+				.post('/api/tokens')
+				.send({
+					email: 'tim.marcacci@test.gandhi.io',
+					token: 'asdf'
+				})
+				.expect(401)
+				.end(function(err, res){
+					assert.isUndefined(res.body.token);
+					done(err);
+				});
+		});
+		it('rejects token from a different, non-admin user', function(done){
+			request
+				.post('/api/tokens')
+				.send({
+					email: 'mike.marcacci@test.gandhi.io',
+					token: tim
+				})
+				.expect(403)
+				.end(function(err, res){
+					assert.isUndefined(res.body.token);
+					done(err);
+				});
+		});
+		it('returns a token from the same non-admin user', function(done){
+			request
+				.post('/api/tokens')
+				.send({
+					email: 'tim.marcacci@test.gandhi.io',
+					token: tim
+				})
+				.expect(201)
+				.end(function(err, res){
+					assert.isString(res.body.token);
+					done(err);
+				});
+		});
+		it('returns a token from a different admin user', function(done){
+			request
+				.post('/api/tokens')
+				.send({
+					email: 'tim.marcacci@test.gandhi.io',
+					token: mike
+				})
+				.expect(201)
+				.end(function(err, res){
+					assert.isString(res.body.token);
+					done(err);
+				});
+		});
 	});
 });

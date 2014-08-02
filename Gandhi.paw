@@ -10,7 +10,7 @@
             <plist version="1.0">
                 <dict>
                     <key>NSPersistenceFrameworkVersion</key>
-                    <integer>481</integer>
+                    <integer>513</integer>
                     <key>NSStoreModelVersionHashes</key>
                     <dict>
                         <key>LMEnvironment</key>
@@ -108,7 +108,7 @@
         <attribute name="redirectauthorization" type="bool">0</attribute>
         <attribute name="method" type="string">POST</attribute>
         <attribute name="followredirects" type="bool">0</attribute>
-        <attribute name="body" type="string">["{\\n\\t\\"email\\": \\"mike.marcacci@test.gandhi.io\\",\\n\\t\\"password\\": \\"mike1234\\"\\n}"]</attribute>
+        <attribute name="body" type="string">["{\\n\\t\\"email\\": \\"admin@demo.gandhi.io\\",\\n\\t\\"password\\": \\"password\\"\\n}"]</attribute>
         <attribute name="order" type="int64">0</attribute>
         <attribute name="name" type="string">Create Token</attribute>
         <relationship name="parent" type="0/1" destination="LMREQUESTTREEITEM"></relationship>
@@ -368,7 +368,7 @@
         <attribute name="redirectauthorization" type="bool">0</attribute>
         <attribute name="method" type="string">PATCH</attribute>
         <attribute name="followredirects" type="bool">0</attribute>
-        <attribute name="body" type="string">["{\\n\\t\\"title\\": \\"Seed Funds: Round 1\\",\\n\\t\\"roles\\": [\\"applicant\\",\\"advisory-council\\",\\"advisory-reviewer\\"],\\n\\t\\"users\\": {\\n\\t\\t\\"cc00aa26-7f25-48cf-aa65-94f211630b23\\": null\\n\\t}\\n}"]</attribute>
+        <attribute name="body" type="string">["{\\n\\t\\"description\\": \\"This is a sample grant cycle.\\"\\n}"]</attribute>
         <attribute name="order" type="int64">2</attribute>
         <attribute name="name" type="string">Update Cycles</attribute>
         <relationship name="parent" type="0/1" destination="LMREQUESTTREEITEM" idrefs="z120"></relationship>
