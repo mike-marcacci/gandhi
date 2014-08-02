@@ -18,7 +18,9 @@
 				<h3 class="panel-title">Open Cycles</h3>
 			</div>
 			<div class="panel-body">
-				There are no open cycles.
+				<ul>
+					<li ng-repeat="cycle in cycles">{{cycle.title}}</li>
+				</ul>
 			</div>
 		</div>
 	</div>

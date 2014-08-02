@@ -27,9 +27,6 @@ body {
     border-top-left-radius: 0;
     border-top-right-radius: 0; }
 
-#main {
-  padding: 0 1em; }
-
 #sidebar {
   background: #FFFFFF;
   position: fixed;
@@ -101,4 +98,6 @@ body {
             background-color: #e8f1f8; }
 
 #body {
-  margin-left: 210px; }
+  margin-left: 210px;
+  margin-right: 1px;
+  padding: 1em; }
