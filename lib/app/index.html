@@ -23,18 +23,18 @@
 
 			<div class="panel panel-gandhi">
 				<div class="panel-body">
-					<form ng-show="tab.login">
+					<form ng-show="tab.login" ng-submit="login.submit()">
 						<div class="form-group">
 							<input name="email" ng-model="login.email" type="email" class="form-control" placeholder="Email">
 						</div>
 						<div class="form-group">
 							<input name="password" ng-model="login.password" type="password" class="form-control" placeholder="Password">
 						</div>
-						<button type="submit" ng-click="login.submit()" class="btn btn-primary">Submit</button>
+						<button type="submit" class="btn btn-primary">Submit</button>
 						<button type="submit" class="btn btn-default">Recover</button>
 					</form>
 
-					<form ng-show="tab.signup">
+					<form ng-show="tab.signup" ng-submit="signup.submit()">
 						<div class="form-group">
 							<input name="name" ng-model="signup.name" type="text" class="form-control" placeholder="Name">
 						</div>
@@ -47,7 +47,7 @@
 						<div class="form-group">
 							<input type="password" ng-model="signup.password2" class="form-control" placeholder="Confirm Password">
 						</div>
-						<button type="submit" ng-click="signup.submit()" class="btn btn-primary">Submit</button>
+						<button type="submit" class="btn btn-primary">Submit</button>
 					</form>
 				</div>
 			</div>
