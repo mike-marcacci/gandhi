@@ -13,6 +13,14 @@
     "title": {
       "type": "string"
     },
+    "open": {
+      "type": ["null", "boolean", "string"],
+      "default": null
+    },
+    "close": {
+      "type": ["null", "boolean", "string"],
+      "default": null
+    },
     "description": {
       "type": "string",
       "default": ""
@@ -30,15 +38,8 @@
           "conditions": [
             [
               {
-                "name": "date",
-                "options": {
-                  "mode": "after",
-                  "date": {
-                    "$reql_type$": "TIME",
-                    "epoch_time": 1405203171.364,
-                    "timezone": "+00:00"
-                  }
-                }
+                "name": "open",
+                "options": {}
               }
             ]
           ],
@@ -54,15 +55,8 @@
           "conditions": [
             [
               {
-                "name": "date",
-                "options": {
-                  "mode": "after",
-                  "date": {
-                    "$reql_type$": "TIME",
-                    "epoch_time": 1406203171.364,
-                    "timezone": "+00:00"
-                  }
-                }
+                "name": "close",
+                "options": {}
               }
             ]
           ],
