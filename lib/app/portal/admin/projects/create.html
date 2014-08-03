@@ -1,15 +1,15 @@
 <ol class="breadcrumb">
 	<li><a href>Admin</a></li>
-	<li><a ui-sref="portal.admin.cycles.list">Cycles</a></li>
-	<li class="active">Create Cycle</li>
+	<li><a ui-sref="portal.admin.projects.list">Projects</a></li>
+	<li class="active">Create Project</li>
 </ol>
 <div class="row">
 	<div class="col-md-3 hidden-xs hidden-sm">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				Cycles
+				Projects
 				<div class="pull-right">
-					<button class="btn btn-xs btn-default" ui-sref="portal.admin.cycles.create"><i class="glyphicon glyphicon-plus"></i></button>
+					<button class="btn btn-xs btn-default" ui-sref="portal.admin.projects.create"><i class="glyphicon glyphicon-plus"></i></button>
 				</div>
 			</div>
 			<table class="table table-hover">
@@ -19,8 +19,8 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ui-sref-active="active" ng-repeat="cycle in cycles" ui-sref="portal.admin.cycles.show({cycle: cycle.id})" style="cursor: pointer;">
-						<td>{{cycle.title}}</td>
+					<tr ui-sref-active="active" ng-repeat="project in projects" ui-sref="portal.admin.projects.show({project: project.id})" style="cursor: pointer;">
+						<td>{{project.title}}</td>
 					</tr>
 				</tbody>
 			</table>
@@ -33,9 +33,9 @@
 				Create User
 			</div>
 			<form class="form-horizontal" role="form" ng-submit="create()">
-				<div ui-ace="{mode: 'json'}" style="height: 600px;" ng-model="cycleSource"></div>
+				<div ui-ace="{mode: 'json'}" style="height: 600px;" ng-model="projectCreate"></div>
 				<div class="panel-body">
-					<a ui-sref="portal.admin.cycles.list" class="btn btn-sm btn-default">Cancel</a>
+					<a ui-sref="portal.admin.projects.list" class="btn btn-sm btn-default">Cancel</a>
 					<input type="submit" class="btn btn-sm btn-primary" value="Create">
 				</div>
 			</form>

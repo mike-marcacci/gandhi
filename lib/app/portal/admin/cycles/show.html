@@ -33,15 +33,44 @@
 			<div class="panel-heading">
 				{{cycle.title}}
 				<div class="pull-right">
-					<button class="btn btn-xs" ng-show="update" ng-class="{'btn-default': !edit}" ng-click="toggleEdit()"><i class="glyphicon glyphicon-edit"></i></button>
+					<button class="btn btn-xs" ng-show="replace" ng-class="{'btn-default': !source}" ng-click="toggleSource()"><i class="glyphicon glyphicon-edit"></i></button>
 					<button class="btn btn-xs btn-default" ng-show="destroy" ng-click="destroy()"><i class="glyphicon glyphicon-trash"></i></button>
 				</div>
 			</div>
-			<pre ng-show="!edit" style="height: 600px; overflow: auto;" class="panel-body">{{cycleEdit}}</pre>
-			<form ng-show="edit" class="form-horizontal" role="form" ng-submit="update()">
-				<div ui-ace="{mode: 'json'}" style="height: 600px;" ng-model="cycleEdit"></div>
+			<div ng-show="!source" class="panel-body">
+
+				<div class="form-horizontal">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Title</label>
+						<div class="col-sm-10">
+							<p class="form-control-static">{{cycle.title}}</p>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Status</label>
+						<div class="col-sm-10">
+							<p class="form-control-static">{{cycle.status}}</p>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Created</label>
+						<div class="col-sm-10">
+							<p class="form-control-static">{{cycle.created}}</p>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Updated</label>
+						<div class="col-sm-10">
+							<p class="form-control-static">{{cycle.updated}}</p>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<form ng-show="source" class="form-horizontal" role="form" ng-submit="replace()">
+				<div ui-ace="{mode: 'json'}" style="height: 600px;" ng-model="cycleSource"></div>
 				<div class="panel-body">
-					<a class="btn btn-sm btn-default" ng-click="edit=false">Cancel</a>
+					<a class="btn btn-sm btn-default" ng-click="source=false">Cancel</a>
 					<input type="submit" class="btn btn-sm btn-primary" value="Update">
 				</div>
 			</form>

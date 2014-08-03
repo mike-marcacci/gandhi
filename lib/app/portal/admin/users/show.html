@@ -31,7 +31,27 @@
 	</div>
 
 	<div class="col-md-9">
-		<ng-include src="'portal/user/show.html'"></ng-include>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				{{user.name}}
+				<div class="pull-right">
+					<button class="btn btn-xs" ng-show="update" ng-class="{'btn-default': !edit}" ng-click="toggleEdit()"><i class="glyphicon glyphicon-cog"></i></button>
+					<button class="btn btn-xs" ng-show="replace" ng-class="{'btn-default': !source}" ng-click="toggleSource()"><i class="glyphicon glyphicon-edit"></i></button>
+					<button class="btn btn-xs btn-default" ng-show="destroy" ng-click="destroy()"><i class="glyphicon glyphicon-trash"></i></button>
+				</div>
+			</div>
+			<form ng-show="source" class="form-horizontal" role="form" ng-submit="replace()">
+				<div ui-ace="{mode: 'json'}" style="height: 600px;" ng-model="userSource"></div>
+				<div class="panel-body">
+					<a class="btn btn-sm btn-default" ng-click="source=false">Cancel</a>
+					<input type="submit" class="btn btn-sm btn-primary" value="Update">
+				</div>
+			</form>
+			<div ng-show="!source" class="panel-body">
+				<ng-include src="'portal/user/form.html'"></ng-include>
+			</div>
+		</div>
+
 
 		<div class="panel panel-default">
 			<div class="panel-heading">

@@ -2,63 +2,12 @@
 	<div class="panel-heading">
 		{{user.name}}
 		<div class="pull-right">
-			<button class="btn btn-xs" ng-show="update" ng-class="{'btn-default': !edit}" ng-click="toggleEdit()"><i class="glyphicon glyphicon-edit"></i></button>
+			<button class="btn btn-xs" ng-show="update" ng-class="{'btn-default': !edit}" ng-click="toggleEdit()"><i class="glyphicon glyphicon-cog"></i></button>
+			<button class="btn btn-xs" ng-show="replace" ng-class="{'btn-default': !source}" ng-click="toggleSource()"><i class="glyphicon glyphicon-edit"></i></button>
 			<button class="btn btn-xs btn-default" ng-show="destroy" ng-click="destroy()"><i class="glyphicon glyphicon-trash"></i></button>
 		</div>
 	</div>
 	<div class="panel-body">
-		<form class="form-horizontal" role="form" ng-submit="update()">
-			<div class="form-group">
-				<label class="col-sm-2 control-label">ID</label>
-				<div class="col-sm-10">
-					<p class="form-control-static">{{user.id}}</p>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">Name</label>
-				<div class="col-sm-10">
-					<p ng-show="!edit" class="form-control-static">{{user.name}}</p>
-					<input ng-show="edit" type="text" class="form-control" id="user-name" placeholder="John Doe" ng-model="userEdit.name">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">Email</label>
-				<div class="col-sm-10">
-					<p ng-show="!edit" class="form-control-static"><a href="mailto: {{user.email}}">{{user.email}}</a></p>
-					<input ng-show="edit" type="email" class="form-control" id="user-email" placeholder="email@example.com" ng-model="userEdit.email">
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="inputPassword" class="col-sm-2 control-label">Password</label>
-				<div class="col-sm-10">
-					<p ng-show="!edit" class="form-control-static">******</p>
-					<input ng-show="edit" type="password" class="form-control" id="user-password" placeholder="password" ng-model="userEdit.password">
-				</div>
-			</div>
-			<div class="form-group" ng-show="currentUser.admin">
-				<label for="inputPassword" class="col-sm-2 control-label">Admin</label>
-				<div class="col-sm-10">
-					<p ng-show="!edit" class="form-control-static">{{!!user.admin}}</p>
-					<input ng-show="edit" type="checkbox" if="user-admin" ng-model="userEdit.admin">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">Created</label>
-				<div class="col-sm-10">
-					<p class="form-control-static">{{user.created}}</p>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">Updated</label>
-				<div class="col-sm-10">
-					<p class="form-control-static">{{user.updated}}</p>
-				</div>
-			</div>
-			<div class="form-group">
-				<div class="col-sm-10 col-sm-offset-2">
-					<input type="submit" class="btn btn-sm btn-primary" ng-show="edit" value="Update">
-				</div>
-			</div>
-		</form>
+		<ng-include src="'portal/user/form.html'"></ng-include>
 	</div>
 </div>
