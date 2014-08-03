@@ -11,8 +11,15 @@ body {
 	// bootstrap styles
 
 	.panel {
+		border-width: 0;
 		-webkit-box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.1);
 		box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.1);
+	}
+
+	.panel-default > .panel-heading {
+		background-color: #fafafa;
+		border-bottom: 2px solid #f5f5f5;
+		font-weight: 300;
 	}
 
 	.nav-tabs {

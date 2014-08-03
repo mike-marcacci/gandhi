@@ -9,6 +9,10 @@
   "main": [
     "index.js",
     "portal/index.js",
+    "portal/admin/index.js",
+    "portal/admin/users/index.js",
+    "portal/admin/cycles/index.js",
+    "portal/admin/projects/index.js",
     "portal/projects/index.js",
     "portal/user/index.js"
   ],

@@ -1,0 +1,51 @@
+<ol class="breadcrumb">
+	<li><a href>Admin</a></li>
+	<li class="active">Users</li>
+</ol>
+
+<!-- <div class="panel panel-default">
+	<div class="panel-body">
+		Query settings go here
+		- filter
+		- search
+	</div>
+</div> -->
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		Users
+		<div class="pull-right">
+			<button class="btn btn-xs btn-default" ui-sref="portal.admin.users.create"><i class="glyphicon glyphicon-plus"></i></button>
+		</div>
+	</div>
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th></td>
+				<th>Name</td>
+				<th>Email</td>
+				<th>Created</td>
+				<th>Updated</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ui-sref-active="active" ng-repeat="user in users" ui-sref="portal.admin.users.show({user: user.id})" style="cursor: pointer;">
+				<td><span class="glyphicon glyphicon-star" ng-show="user.admin"></span></td>
+				<td>{{user.name}}</td>
+				<td>{{user.email}}</td>
+				<td>{{user.created}}</td>
+				<td>{{user.updated}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<!-- <ul class="pagination pagination-sm">
+  <li class="disabled"><a href>&laquo;</a></li>
+  <li class="active"><a href>1 <span class="sr-only">(current)</span></a></li>
+  <li><a href>2</a></li>
+
+  <li><a href>&raquo;</a></li>
+</ul>
+
+ -->
