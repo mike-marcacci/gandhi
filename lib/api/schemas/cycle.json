@@ -14,12 +14,12 @@
       "type": "string"
     },
     "open": {
-      "type": ["null", "boolean", "string"],
-      "default": null
+      "type": ["boolean", "string"],
+      "default": true
     },
     "close": {
-      "type": ["null", "boolean", "string"],
-      "default": null
+      "type": ["boolean", "string"],
+      "default": false
     },
     "description": {
       "type": "string",

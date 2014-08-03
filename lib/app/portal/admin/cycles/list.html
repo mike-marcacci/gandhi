@@ -23,12 +23,16 @@
 			<tr>
 				<th>Title</td>
 				<th>Status</td>
+				<th>Created</td>
+				<th>Updated</td>
 			</tr>
 		</thead>
 		<tbody>
 			<tr ui-sref-active="active" ng-repeat="cycle in cycles" ui-sref="portal.admin.cycles.show({cycle: cycle.id})" style="cursor: pointer;">
 				<td>{{cycle.title}}</td>
 				<td>{{cycle.status}}</td>
+				<td>{{cycle.created}}</td>
+				<td>{{cycle.updated}}</td>
 			</tr>
 		</tbody>
 	</table>
