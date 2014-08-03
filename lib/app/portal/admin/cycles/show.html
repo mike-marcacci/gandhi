@@ -1,23 +1,50 @@
 <ol class="breadcrumb">
 	<li><a href>Admin</a></li>
 	<li><a ui-sref="portal.admin.cycles.list">Cycles</a></li>
-	<li class="active">{{cycle.name}}</li>
+	<li class="active">{{cycle.title}}</li>
 </ol>
 
-<div class="panel panel-default">
-	<div class="panel-heading">
-		{{cycle.title}}
-		<div class="pull-right">
-			<button class="btn btn-xs" ng-show="update" ng-class="{'btn-default': !edit}" ng-click="toggleEdit()"><i class="glyphicon glyphicon-edit"></i></button>
-			<button class="btn btn-xs btn-default" ng-show="destroy" ng-click="destroy()"><i class="glyphicon glyphicon-trash"></i></button>
+<div class="row">
+	<div class="col-md-3 hidden-xs hidden-sm">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				Cycles
+				<div class="pull-right">
+					<button class="btn btn-xs btn-default" ui-sref="portal.admin.cycles.create"><i class="glyphicon glyphicon-plus"></i></button>
+				</div>
+			</div>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Title</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ui-sref-active="active" ng-repeat="cycle in cycles" ui-sref="portal.admin.cycles.show({cycle: cycle.id})" style="cursor: pointer;">
+						<td>{{cycle.title}}</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
-	<pre ng-show="!edit" style="height: 600px; overflow: auto;" class="panel-body">{{cycleEdit}}</pre>
-	<form ng-show="edit" class="form-horizontal" role="form" ng-submit="update()">
-		<div ui-ace="{mode: 'json'}" style="height: 600px;" ng-model="cycleEdit"></div>
-		<div class="panel-body">
-			<a class="btn btn-sm btn-default" ng-click="edit=false">Cancel</a>
-			<input type="submit" class="btn btn-sm btn-primary" value="Update">
+
+	<div class="col-md-9">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				{{cycle.title}}
+				<div class="pull-right">
+					<button class="btn btn-xs" ng-show="update" ng-class="{'btn-default': !edit}" ng-click="toggleEdit()"><i class="glyphicon glyphicon-edit"></i></button>
+					<button class="btn btn-xs btn-default" ng-show="destroy" ng-click="destroy()"><i class="glyphicon glyphicon-trash"></i></button>
+				</div>
+			</div>
+			<pre ng-show="!edit" style="height: 600px; overflow: auto;" class="panel-body">{{cycleEdit}}</pre>
+			<form ng-show="edit" class="form-horizontal" role="form" ng-submit="update()">
+				<div ui-ace="{mode: 'json'}" style="height: 600px;" ng-model="cycleEdit"></div>
+				<div class="panel-body">
+					<a class="btn btn-sm btn-default" ng-click="edit=false">Cancel</a>
+					<input type="submit" class="btn btn-sm btn-primary" value="Update">
+				</div>
+			</form>
 		</div>
-	</form>
+	</div>
 </div>

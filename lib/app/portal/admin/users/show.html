@@ -4,17 +4,45 @@
 	<li class="active">{{user.name}}</li>
 </ol>
 
-<ng-include src="'portal/user/show.html'"></ng-include>
-
-
-<div class="panel panel-default">
-	<div class="panel-heading">
-		Projects
+<div class="row">
+	<div class="col-md-3 hidden-xs hidden-sm">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				Users
+				<div class="pull-right">
+					<button class="btn btn-xs btn-default" ui-sref="portal.admin.users.create"><i class="glyphicon glyphicon-plus"></i></button>
+				</div>
+			</div>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th></th>
+						<th>Name</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ui-sref-active="active" ng-repeat="user in users" ui-sref="portal.admin.users.show({user: user.id})" style="cursor: pointer;">
+						<td><span class="glyphicon glyphicon-star" ng-show="user.admin"></span></td>
+						<td>{{user.name}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
-	<div class="panel-body">
-		<div ng-hide="projects.length">This user has no projects.</div>
-		<div style="margin-top: 20px;" ng-repeat="project in projects">
-			<h4><a ui-sref="portal.admin.projects.project.show({project: project.id})">{{project.title}}</a></h4>
+
+	<div class="col-md-9">
+		<ng-include src="'portal/user/show.html'"></ng-include>
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				Projects
+			</div>
+			<div class="panel-body">
+				<div ng-hide="projects.length">This user has no projects.</div>
+				<div style="margin-top: 20px;" ng-repeat="project in projects">
+					<h4><a ui-sref="portal.admin.projects.project.show({project: project.id})">{{project.title}}</a></h4>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
