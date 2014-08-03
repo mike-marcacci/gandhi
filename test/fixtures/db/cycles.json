@@ -541,6 +541,7 @@
           ]
         },
         "component": {
+          "name": "status",
           "options": {
             "statuses": [
               "accepted",

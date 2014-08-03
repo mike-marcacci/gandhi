@@ -348,6 +348,12 @@
           }
         }
       }
+    },
+    "updated": {
+      "type": "string"
+    },
+    "created": {
+      "type": "string"
     }
   }
 }
