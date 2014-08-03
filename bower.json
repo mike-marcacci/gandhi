@@ -23,10 +23,17 @@
     "restangular": "~1.4.0",
     "lodash": "~2.4.1",
     "ng-ckeditor": "~0.2.1",
-    "angular-schema-form": "git@github.com:mike-marcacci/angular-schema-form.git#bracket_notation"
+    "angular-schema-form": "git@github.com:mike-marcacci/angular-schema-form.git#bracket_notation",
+    "angular-ui-ace": "~0.1.1"
+  },
+  "overrides": {
+    "ace-builds": {
+      "main": "src-min-noconflict/ace.js"
+    }
   },
   "modules": [
     "ui.router",
+    "ui.ace",
     "restangular",
     "ngSanitize",
     "ngCkeditor"

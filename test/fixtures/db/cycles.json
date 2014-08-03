@@ -255,7 +255,6 @@
         },
         "component": {
           "name": "start",
-          "status": "active",
           "options": {
             "next": "team",
             "role": "applicant",
@@ -542,7 +541,6 @@
           ]
         },
         "component": {
-          "name": "status",
           "options": {
             "statuses": [
               "accepted",

@@ -1,0 +1,45 @@
+<ol class="breadcrumb">
+	<li><a href>Admin</a></li>
+	<li class="active">Cycles</li>
+</ol>
+
+<!-- <div class="panel panel-default">
+	<div class="panel-body">
+		Query settings go here
+		- filter
+		- search
+	</div>
+</div> -->
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		Cycles
+		<div class="pull-right">
+			<button class="btn btn-xs btn-default" ui-sref="portal.admin.cycles.create"><i class="glyphicon glyphicon-plus"></i></button>
+		</div>
+	</div>
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>Title</td>
+				<th>Status</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ui-sref-active="active" ng-repeat="cycle in cycles" ui-sref="portal.admin.cycles.show({cycle: cycle.id})" style="cursor: pointer;">
+				<td>{{cycle.title}}</td>
+				<td>{{cycle.status}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<!-- <ul class="pagination pagination-sm">
+  <li class="disabled"><a href>&laquo;</a></li>
+  <li class="active"><a href>1 <span class="sr-only">(current)</span></a></li>
+  <li><a href>2</a></li>
+
+  <li><a href>&raquo;</a></li>
+</ul>
+
+ -->

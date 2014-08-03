@@ -1,0 +1,18 @@
+<ol class="breadcrumb">
+	<li><a href>Admin</a></li>
+	<li><a ui-sref="portal.admin.cycles.list">Users</a></li>
+	<li class="active">Create User</li>
+</ol>
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		Create User
+	</div>
+	<form class="form-horizontal" role="form" ng-submit="create()">
+		<div ui-ace="{mode: 'json'}" style="height: 600px;" ng-model="cycleCreate"></div>
+		<div class="panel-body">
+			<a ui-sref="portal.admin.cycles.list" class="btn btn-sm btn-default">Cancel</a>
+			<input type="submit" class="btn btn-sm btn-primary" value="Create">
+		</div>
+	</form>
+</div>

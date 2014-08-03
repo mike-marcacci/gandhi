@@ -14,10 +14,61 @@
       "type": "string"
     },
     "description": {
-      "type": "string"
+      "type": "string",
+      "default": ""
     },
     "events": {
       "type": "object",
+      "default": {
+        "open": {
+          "id": "open",
+          "title": "Application Window Opened",
+          "messages": [
+            "Applications are not yet being accepted.",
+            "Applications are being accepted."
+          ],
+          "conditions": [
+            [
+              {
+                "name": "date",
+                "options": {
+                  "mode": "after",
+                  "date": {
+                    "$reql_type$": "TIME",
+                    "epoch_time": 1405203171.364,
+                    "timezone": "+00:00"
+                  }
+                }
+              }
+            ]
+          ],
+          "listeners": []
+        },
+        "close": {
+          "id": "close",
+          "title": "Application Window Closed",
+          "messages": [
+            "Applications are still open.",
+            "Applications are no longer being accepted."
+          ],
+          "conditions": [
+            [
+              {
+                "name": "date",
+                "options": {
+                  "mode": "after",
+                  "date": {
+                    "$reql_type$": "TIME",
+                    "epoch_time": 1406203171.364,
+                    "timezone": "+00:00"
+                  }
+                }
+              }
+            ]
+          ],
+          "listeners": []
+        }
+      },
       "additionalProperties": {
         "type": "object",
         "required": [
@@ -91,11 +142,44 @@
       }
     },
     "root": {
-      "type": "string"
+      "type": "string",
+      "default": "start"
     },
     "flow": {
       "type": "object",
-      "default": {},
+      "default": {
+        "start": {
+          "id": "start",
+          "title": "Start",
+          "description": "Start your application!",
+          "visible": [
+            "applicant"
+          ],
+          "lock": {
+            "open": [
+              "open"
+            ],
+            "close": [
+              "submit",
+              "archive",
+              "close"
+            ]
+          },
+          "component": {
+            "name": "start",
+            "options": {
+              "next": null,
+              "role": "applicant",
+              "permissions": {
+                "write": [
+                  "applicant"
+                ]
+              }
+            }
+          },
+          "next": []
+        }
+      },
       "additionalProperties": {
         "type": "object",
         "required": ["id", "title", "component"],
@@ -107,6 +191,17 @@
           },
           "title": {
             "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "default": ""
+          },
+          "visible": {
+            "type": "array",
+            "default": [],
+            "items": {
+              "type": "string"
+            }
           },
           "lock": {
             "type": "object",
