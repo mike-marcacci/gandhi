@@ -6,8 +6,8 @@
     "recovery_token": null,
     "email": "michael.douglas@test.gandhi.io",
     "name": "Michael Douglas",
-    "created": "Sat Jul 05 2014 21:35:40 GMT-0700 (PDT)",
-    "updated": "Sat Jul 05 2014 21:35:40 GMT-0700 (PDT)"
+    "created": { "$reql_type$": "TIME", "epoch_time": 1407029321882, "timezone": "+00:00"},
+    "updated": { "$reql_type$": "TIME", "epoch_time": 1407029321882, "timezone": "+00:00"}
   },
   {
     "id": "f6826282-1ffb-453d-8804-6b2921e6807f",
@@ -16,8 +16,8 @@
     "recovery_token": null,
     "email": "matt.shafer@test.gandhi.io",
     "name": "Matt Shafer",
-    "created": "Sat Jul 05 2014 21:35:40 GMT-0700 (PDT)",
-    "updated": "Sat Jul 05 2014 21:35:40 GMT-0700 (PDT)"
+    "created": { "$reql_type$": "TIME", "epoch_time": 1407029321882, "timezone": "+00:00"},
+    "updated": { "$reql_type$": "TIME", "epoch_time": 1407029321882, "timezone": "+00:00"}
   },
   {
     "id": "3cd2dc98-e280-4e72-a437-9a916d98b636",
@@ -26,8 +26,8 @@
     "recovery_token": null,
     "email": "eric.jensen@test.gandhi.io",
     "name": "Eric Jensen",
-    "created": "Sat Jul 05 2014 21:35:40 GMT-0700 (PDT)",
-    "updated": "Sat Jul 05 2014 21:35:40 GMT-0700 (PDT)"
+    "created": { "$reql_type$": "TIME", "epoch_time": 1407029321882, "timezone": "+00:00"},
+    "updated": { "$reql_type$": "TIME", "epoch_time": 1407029321882, "timezone": "+00:00"}
   },
   {
     "id": "5a3cf444-9d87-4125-8026-2d5ffb834676",
@@ -36,8 +36,8 @@
     "recovery_token": null,
     "email": "jon.ramos@test.gandhi.io",
     "name": "Jon Ramos",
-    "created": "Sat Jul 05 2014 21:35:40 GMT-0700 (PDT)",
-    "updated": "Sat Jul 05 2014 21:35:40 GMT-0700 (PDT)"
+    "created": { "$reql_type$": "TIME", "epoch_time": 1407029321882, "timezone": "+00:00"},
+    "updated": { "$reql_type$": "TIME", "epoch_time": 1407029321882, "timezone": "+00:00"}
   },
   {
     "id": "82b08fd0-b93d-4169-a0bf-b25823077adb",
@@ -46,8 +46,8 @@
     "recovery_token": null,
     "email": "mark.boerneke@test.gandhi.io",
     "name": "Mark Boerneke",
-    "created": "Sat Jul 05 2014 21:35:40 GMT-0700 (PDT)",
-    "updated": "Sat Jul 05 2014 21:35:40 GMT-0700 (PDT)"
+    "created": { "$reql_type$": "TIME", "epoch_time": 1407029321882, "timezone": "+00:00"},
+    "updated": { "$reql_type$": "TIME", "epoch_time": 1407029321882, "timezone": "+00:00"}
   },
   {
     "id": "847e085b-df0e-4dc7-9cbf-d485d6e2de96",
@@ -56,8 +56,8 @@
     "recovery_token": "eyJleHBpcmF0aW9uIjo5NDY2ODQ4MDAwMDAsInNlY3JldCI6Ik1weFlwMUpvd3RLN0tVaDIzZXcwK0NSSE1MdVpWSnZmMHQ1dG84UEtGNGVoYlNPTWZxbHNtLzJVWjBSc1ErR3BVK2ZaVHl1RklJRWo2czUvUTVWeEthZ1NhMG50VEVieE85M2FEUTdDQmZNUkwxUjhGRSsySFNwdTU3K2w1ajZmbnV2MDNvbkxDY2ltTUZ1UjZ6WFZvNVI0UnBvdDNMTTJjNlFRM1p0SzdRUFAwa2IvdDlXeVVocWZiMlhnVkh6K0srSUxTaXd5Z2dBU2ZpeHBYYlNGNXB0bTlIb3dtWlZYbUYwQnRmWnF6c09sNElyM1U3UVJaalFzdnVmUFJjMGQxV2tIVWNvcENLSnJma2JmMTFjanFRSGEydmFNSnJyQXVYZUZaeG9ZaEhtYWdFVXM1Q3NrMjAvR3ZUaXJmRXFPbHA4K0hiamRMWC83alZDR3JVQysxQT09In0=",
     "email": "dustin.towery@test.gandhi.io",
     "name": "Dustin Towery",
-    "created": "Sat Jul 05 2014 21:35:40 GMT-0700 (PDT)",
-    "updated": "Sat Jul 05 2014 21:35:40 GMT-0700 (PDT)"
+    "created": { "$reql_type$": "TIME", "epoch_time": 1407029321882, "timezone": "+00:00"},
+    "updated": { "$reql_type$": "TIME", "epoch_time": 1407029321882, "timezone": "+00:00"}
   },
   {
     "id": "84fbaa78-54b0-42fc-9754-c9ea7dc24538",
@@ -66,8 +66,8 @@
     "recovery_token": "eyJleHBpcmF0aW9uIjozMjUzNTEyOTYwMDAwMCwic2VjcmV0IjoiWm1mazNuYjlndEw3c2hNQ1QrbjBGOTZ3cG50cHR3d0xNWVpnWjk0emlTaDgvQ1pqQmE0c3RJVDN2M2hDMWtqZ0QzcURmeWxtd1JBd1l5MVlybTlOQUtab3dCb1VWMTA3a1NmU0QvTFlFYThaUEdJckVoV3dxS2dYckdQZFp6Y2w5TUVLVEFJS1N1VVVwTUQ0aDU4bFlzVEZMSTZMQXBzaUlIN2hSbkJBRFVmWEk5b0JhTHo2NWppeTFheWhyU2xwdlZZYTZ5TkxOaUgvMFArTGNNM0FXaDJXZFFuN1BEQ3B0S0VyN0ZVV0pmNjFXU25SbmRJV0xodEcrUkQ5UXhaTkRvS1hSam05YXBJT2dzR0pIcnJGaXlzRVlhOEFibnd2ZjNNM0I5VzU2YXRrdjcwZnlocGx3U2lrcFo3bnNTVVpFMm1UWE1jb20zeHh5ektWdlE4MVVBPT0ifQ==",
     "email": "tim.marcacci@test.gandhi.io",
     "name": "Tim Marcacci",
-    "created": "Sat Jul 05 2014 21:35:40 GMT-0700 (PDT)",
-    "updated": "Sat Jul 05 2014 21:35:40 GMT-0700 (PDT)"
+    "created": { "$reql_type$": "TIME", "epoch_time": 1407029321882, "timezone": "+00:00"},
+    "updated": { "$reql_type$": "TIME", "epoch_time": 1407029321882, "timezone": "+00:00"}
   },
   {
     "id": "a5901ab6-bf17-49cd-981d-c25875aec8e9",
@@ -76,7 +76,7 @@
     "recovery_token": null,
     "email": "mike.marcacci@test.gandhi.io",
     "name": "Mike Marcacci",
-    "created": "Sat Jul 05 2014 21:35:40 GMT-0700 (PDT)",
-    "updated": "Sat Jul 05 2014 21:35:40 GMT-0700 (PDT)"
+    "created": { "$reql_type$": "TIME", "epoch_time": 1407029321882, "timezone": "+00:00"},
+    "updated": { "$reql_type$": "TIME", "epoch_time": 1407029321882, "timezone": "+00:00"}
   }
 ]

@@ -6,7 +6,7 @@
     "recovery_token": null,
     "email": "admin@demo.gandhi.io",
     "name": "Admin User",
-    "created": "Sat Jul 05 2014 21:35:40 GMT-0700 (PDT)",
-    "updated": "Sat Jul 05 2014 21:35:40 GMT-0700 (PDT)"
+    "created": { "$reql_type$": "TIME", "epoch_time": 1407029321882, "timezone": "+00:00"},
+    "updated": { "$reql_type$": "TIME", "epoch_time": 1407029321882, "timezone": "+00:00"}
   }
 ]
