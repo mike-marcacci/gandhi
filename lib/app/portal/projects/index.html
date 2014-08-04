@@ -1,6 +1,0 @@
-<h1>{{project.title}}</h1>
-<ul class="nav nav-tabs x-scroll">
-	<li ng-repeat="id in cycle.flow.default" ui-sref-active="active"><a ui-sref=".stage({stage: id})"><span>{{cycle.flow.stages[id].title}}</span></a></li>
-</ul>
-
-<div class="stage" ui-view></div>

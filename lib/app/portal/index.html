@@ -10,10 +10,9 @@
 					<li><a ui-sref-active="active" ui-sref="portal.admin.projects.list">Projects</a></li>
 				</ul>
 			</li>
-			<li><a ui-sref-active="active" ui-sref="portal.user.projects.list">Projects</a>
-				<ul>
-					<li><a ui-sref-active="active" href>Induction of pluripotent stem cells from mouse embryonic...</a></li>
-					<li><a ui-sref-active="active" href>On the Origin of Species</a></li>
+			<li><a ui-sref-active="active" ui-sref="portal.projects.list">Projects</a>
+				<ul ng-show="projects.length">
+					<li ng-repeat="project in projects"><a ui-sref-active="active" ui-sref="portal.projects.show({project: project.it})">{{project.title}}</a></li>
 				</ul>
 			</li>
 		</ul>

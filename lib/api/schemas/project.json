@@ -12,6 +12,9 @@
     "id": {
       "type":"string"
     },
+    "cycle_id": {
+      "type":"string"
+    },
     "title": {
       "type": "string"
     },
@@ -66,11 +69,35 @@
             "default": null,
             "enum": [
               "draft",
-              "completed"
+              "complete"
             ]
           }
         }
       }
+    },
+    "users": {
+      "type": "object",
+      "default": {},
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "id": {
+            "type": "string",
+            "constant": {"$data": "0#"}
+          },
+          "role": {
+            "type": "string",
+            "default": {"$data": "2#defaults/role"}
+          }
+        }
+      }
+    },
+    "updated": {
+      "type": "string"
+    },
+    "created": {
+      "type": "string"
     }
   }
 }

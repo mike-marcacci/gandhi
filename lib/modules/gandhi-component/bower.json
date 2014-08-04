@@ -6,6 +6,8 @@
   "private": true,
   "main": "./index.js",
   "dependencies": {
-    "angular": "*"
-  }
+    "angular": "*",
+    "angular-sanitize": "*"
+  },
+  "module": "gandhi-component"
 }

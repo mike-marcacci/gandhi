@@ -1,0 +1,18 @@
+<ol class="breadcrumb">
+	<li><a ui-sref="portal.projects.list">Projects</a></li>
+	<li><a ui-sref="portal.projects.new">Create</a></li>
+	<li class="active">{{cycle.title}}</li>
+</ol>
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<span class="panel-title">{{cycle.title}}</span>
+	</div>
+	<div class="panel-body">
+		<div class="waterfall-wrapper"><div class="waterfall-scroller">
+			<div waterfall="waterfallOptions" ng-model="cycle.flow"></div>
+		</div></div>
+	</div>
+</div>
+
+<div gandhi-component="{cycle: cycle, project: null, stage: cycle.root, role: null}"></div>
