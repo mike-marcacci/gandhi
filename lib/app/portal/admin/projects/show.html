@@ -8,7 +8,7 @@
 	<div class="col-md-3 hidden-xs hidden-sm">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				Projects
+				<span class="panel-title">Projects</span>
 				<div class="pull-right">
 					<button class="btn btn-xs btn-default" ui-sref="portal.admin.projects.create"><i class="glyphicon glyphicon-plus"></i></button>
 				</div>
@@ -31,7 +31,7 @@
 	<div class="col-md-9">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				{{project.title}}
+				<span class="panel-title">{{project.title}}</span>
 				<div class="pull-right">
 					<button class="btn btn-xs" ng-show="update" ng-class="{'btn-default': !edit}" ng-click="toggleEdit()"><i class="glyphicon glyphicon-edit"></i></button>
 					<button class="btn btn-xs btn-default" ng-show="destroy" ng-click="destroy()"><i class="glyphicon glyphicon-trash"></i></button>

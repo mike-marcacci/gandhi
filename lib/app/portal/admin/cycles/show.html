@@ -8,7 +8,7 @@
 	<div class="col-md-3 hidden-xs hidden-sm">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				Cycles
+				<span class="panel-title">Cycles</span>
 				<div class="pull-right">
 					<button class="btn btn-xs btn-default" ui-sref="portal.admin.cycles.create"><i class="glyphicon glyphicon-plus"></i></button>
 				</div>
@@ -31,7 +31,7 @@
 	<div class="col-md-9">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				{{cycle.title}}
+				<span class="panel-title">{{cycle.title}}</span>
 				<div class="pull-right">
 					<button class="btn btn-xs" ng-show="replace" ng-class="{'btn-default': !source}" ng-click="toggleSource()"><i class="glyphicon glyphicon-edit"></i></button>
 					<button class="btn btn-xs btn-default" ng-show="destroy" ng-click="destroy()"><i class="glyphicon glyphicon-trash"></i></button>
@@ -62,6 +62,15 @@
 					<input type="submit" class="btn btn-sm btn-primary" value="Update">
 				</div>
 			</form>
+		</div>
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<span class="panel-title">Assigned Users</span>
+			</div>
+			<div class="panel-body">
+				{{users}}
+			</div>
 		</div>
 	</div>
 </div>
