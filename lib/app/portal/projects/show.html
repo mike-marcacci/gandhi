@@ -1,34 +1,19 @@
 <ol class="breadcrumb">
 	<li><a ui-sref="portal.projects.list">Projects</a></li>
-	<li class="active">Projects</li>
+	<li class="active">{{project.title}}</li>
 </ol>
-
-<!-- <div class="panel panel-default">
-	<div class="panel-body">
-		Query settings go here
-		- filter
-		- search
-	</div>
-</div> -->
 
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<span class="panel-title">{{project.title}}</span>
-		<div class="pull-right">
-			<button class="btn btn-xs btn-default" ui-sref="portal.projects.new"><i class="glyphicon glyphicon-plus"></i></button>
-		</div>
 	</div>
 	<div class="panel-body">
-		{{project}}
+		<div class="waterfall-wrapper"><div class="waterfall-scroller">
+			<div waterfall="waterfallOptions" ng-model="index"></div>
+		</div></div>
 	</div>
 </div>
 
-<!-- <ul class="pagination pagination-sm">
-  <li class="disabled"><a href>&laquo;</a></li>
-  <li class="active"><a href>1 <span class="sr-only">(current)</span></a></li>
-  <li><a href>2</a></li>
+<div gandhi-component="{cycle: cycle, project: null, stage: cycle.root, role: null}"></div>
 
-  <li><a href>&raquo;</a></li>
-</ul>
-
- -->
+<style>svg.waterfall div { cursor: pointer; }</style>
