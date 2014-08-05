@@ -1,0 +1,13 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<span class="panel-title">{{stage.title}}</span>
+	</div>
+	<div class="panel-body">
+		<div class="alert alert-warning" role="alert" ng-show="!permissions.read" sf-decorator-name="'bootstrap-decorator'">Sorry, but you don't have permission to read this stage.</div>
+
+		<div class="table">
+			<form ng-submit="submit()" sf-model="data" sf-form="options.form" sf-schema="options.schema"></form>
+		</div>
+
+	</div>
+</div>

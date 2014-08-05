@@ -43,22 +43,22 @@ body {
     font-weight: 300; }
   body .panel-title {
     font-size: 14px; }
-  body .nav-tabs {
+  body .new .nav-tabs {
     border-bottom: 1px solid transparent; }
-  body .nav-tabs > li.active > a,
-  body .nav-tabs > li.active > a:hover,
-  body .nav-tabs > li.active > a:focus {
+  body .new .nav-tabs > li.active > a,
+  body .new .nav-tabs > li.active > a:hover,
+  body .new .nav-tabs > li.active > a:focus {
     border-style: solid;
     border-width: 2px 0 0 0;
     border-color: #428bca; }
-  body .nav-tabs > li > a {
+  body .new .nav-tabs > li > a {
     border-radius: 0;
     border-width: 2px 0 0 0;
     border-color: transparent; }
-  body .nav-tabs > li > a:hover {
+  body .new .nav-tabs > li > a:hover {
     background-color: transparent;
     border-color: transparent; }
-  body .nav-tabs + .panel {
+  body .new .nav-tabs + .panel {
     border-top-left-radius: 0;
     border-top-right-radius: 0; }
 

@@ -62,32 +62,36 @@ body {
 		font-size: 14px;
 	}
 
-	.nav-tabs {
-		border-bottom: 1px solid transparent;
-	}
+	// TODO: apply these tabs to all directions!
+	.new {
 
-	.nav-tabs > li.active > a,
-	.nav-tabs > li.active > a:hover,
-	.nav-tabs > li.active > a:focus {
-		border-style: solid;
-		border-width: 2px 0 0 0;
-		border-color: #428bca;
-	}
+		.nav-tabs {
+			border-bottom: 1px solid transparent;
+		}
 
-	.nav-tabs > li > a {
-		border-radius: 0;
-		border-width: 2px 0 0 0;
-		border-color: transparent;
-	}
+		.nav-tabs > li.active > a,
+		.nav-tabs > li.active > a:hover,
+		.nav-tabs > li.active > a:focus {
+			border-style: solid;
+			border-width: 2px 0 0 0;
+			border-color: #428bca;
+		}
 
-	.nav-tabs > li > a:hover {
-		background-color: transparent;
-		border-color: transparent;
-	}
+		.nav-tabs > li > a {
+			border-radius: 0;
+			border-width: 2px 0 0 0;
+			border-color: transparent;
+		}
 
-	.nav-tabs + .panel {
-		border-top-left-radius: 0;
-		border-top-right-radius: 0;
+		.nav-tabs > li > a:hover {
+			background-color: transparent;
+			border-color: transparent;
+		}
+
+		.nav-tabs + .panel {
+			border-top-left-radius: 0;
+			border-top-right-radius: 0;
+		}
 	}
 
 }
