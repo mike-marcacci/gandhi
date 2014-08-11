@@ -1,16 +1,16 @@
 <div id="sidebar">
 	<nav>
 		<ul>
-			<li><a ui-sref-active="active" ui-sref="portal.dashboard"><i class="glyphicon glyphicon-dashboard"></i>Dashboard</a></li>
-			<li><a ui-sref-active="active" ui-sref="portal.user.show"><i class="glyphicon glyphicon-user"></i>Account</a></li>
-			<li ng-show="currentUser.admin"><a ui-sref-active="active" ui-sref="portal.admin.dashboard"><i class="glyphicon glyphicon-chevron-down"></i><i class="glyphicon glyphicon-cog"></i>Admin</a>
+			<li><a ng-class="{active: $state.includes('portal.dashboard')}" ui-sref="portal.dashboard"><i class="glyphicon glyphicon-dashboard"></i>Dashboard</a></li>
+			<li><a ng-class="{active: $state.includes('portal.user')}" ui-sref="portal.user.show"><i class="glyphicon glyphicon-user"></i>Account</a></li>
+			<li ng-show="currentUser.admin"><a ng-class="{active: $state.includes('portal.admin')}" ui-sref="portal.admin.dashboard"><i class="glyphicon glyphicon-chevron-down"></i><i class="glyphicon glyphicon-cog"></i>Admin</a>
 				<ul>
-					<li><a ui-sref-active="active" ui-sref="portal.admin.users.list">Users</a></li>
-					<li><a ui-sref-active="active" ui-sref="portal.admin.cycles.list">Cycles</a></li>
-					<li><a ui-sref-active="active" ui-sref="portal.admin.projects.list">Projects</a></li>
+					<li><a ng-class="{active: $state.includes('portal.admin.users')}" ui-sref="portal.admin.users.list">Users</a></li>
+					<li><a ng-class="{active: $state.includes('portal.admin.cycles')}" ui-sref="portal.admin.cycles.list">Cycles</a></li>
+					<li><a ng-class="{active: $state.includes('portal.admin.projects')}" ui-sref="portal.admin.projects.list">Projects</a></li>
 				</ul>
 			</li>
-			<li><a ui-sref-active="active" ui-sref="portal.projects.list">Projects</a>
+			<li><a ng-class="{active: $state.includes('portal.projects')}" ui-sref="portal.projects.list">Projects</a>
 				<ul ng-show="projects.length">
 					<li ng-repeat="project in projects"><a ui-sref-active="active" ui-sref="portal.projects.show({project: project.id})">{{project.title}}</a></li>
 				</ul>

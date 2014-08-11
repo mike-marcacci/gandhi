@@ -22,7 +22,7 @@
 	<div class="form-group">
 		<label for="inputPassword" class="col-sm-2 control-label">Password</label>
 		<div class="col-sm-10">
-			<p ng-show="!edit" class="form-control-static">******</p>
+			<p ng-show="!edit" class="form-control-static" style="opacity: .5;">(not shown)</p>
 			<input ng-show="edit" type="password" class="form-control" id="user-password" placeholder="password" ng-model="userEdit.password">
 		</div>
 	</div>
