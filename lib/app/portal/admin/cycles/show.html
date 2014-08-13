@@ -69,7 +69,9 @@
 				<span class="panel-title">Assigned Users</span>
 			</div>
 			<div class="panel-body">
-				{{users}}
+				<ul>
+					<li ng-repeat="user in users"><a ui-sref="portal.admin.users.show({user: user.id})">{{user.name}}</a></li>
+				</ul>
 			</div>
 		</div>
 	</div>
