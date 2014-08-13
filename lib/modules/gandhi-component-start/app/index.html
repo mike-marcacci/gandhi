@@ -3,6 +3,7 @@
 		<span class="panel-title">{{data.title || 'Start'}}</span>
 	</div>
 	<div class="panel-body">
+		<div ng-show="description" ng-bind-html="description"></div>
 		<div class="alert alert-warning" role="alert" ng-show="!permissions.read">Sorry, but you don't have permission to read this stage.</div>
 		<form role="form" ng-submit="submit()" ng-show="permissions.read">
 			<div class="form-group">
