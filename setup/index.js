@@ -24,7 +24,8 @@ module.exports = function(config) {
 				var fixtures = [
 					{info: requireJSON(__dirname + '/db/cycles.info'), data: require('./db/cycles.json')},
 					{info: requireJSON(__dirname + '/db/projects.info'), data: require('./db/projects.json')},
-					{info: requireJSON(__dirname + '/db/users.info'), data: require('./db/users.json')}
+					{info: requireJSON(__dirname + '/db/users.info'), data: require('./db/users.json')},
+					{info: requireJSON(__dirname + '/db/files.info'), data: require('./db/files.json')}
 				];
 
 				async.each(fixtures, function(fixture, loop){

@@ -1,21 +1,14 @@
 {
-  "id": "user",
+  "id": "file",
   "type":"object",
   "$schema": "http://json-schema.org/draft-04/schema",
-  "required": [
-    "password",
-    "email"
-  ],
+  "required": [],
   "additionalProperties": false,
   "properties":{
-    "admin": {
-      "type": "boolean",
-      "default": false
-    },
     "created": {
       "type": "string"
     },
-    "email": {
+    "user_id": {
       "type": "string"
     },
     "id": {
@@ -25,13 +18,25 @@
       "type": "string",
       "default": ""
     },
-    "password": {
+    "mimetype": {
       "type": "string",
-      "minLength": 4
+      "default": ""
     },
-    "recovery_token": {
-      "type": ["null","string"],
-      "default": null
+    "encoding": {
+      "type": "string",
+      "default": ""
+    },
+    "path": {
+      "type": "string",
+      "default": ""
+    },
+    "extension": {
+      "type": "string",
+      "default": ""
+    },
+    "size": {
+      "type": "string",
+      "default": ""
     },
     "updated": {
       "type": "string"
