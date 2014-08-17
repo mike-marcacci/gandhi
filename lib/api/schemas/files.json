@@ -1,0 +1,49 @@
+{
+  "id": "file",
+  "type":"object",
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "required": [],
+  "additionalProperties": false,
+  "properties":{
+    "created": {
+      "type": "string"
+    },
+    "user_id": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string",
+      "default": ""
+    },
+    "mimetype": {
+      "type": "string",
+      "default": ""
+    },
+    "encoding": {
+      "type": "string",
+      "default": ""
+    },
+    "path": {
+      "type": "string",
+      "default": ""
+    },
+    "extension": {
+      "type": "string",
+      "default": ""
+    },
+    "size": {
+      "type": "string",
+      "default": ""
+    },
+    "updated": {
+      "type": "string"
+    },
+    "lock": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

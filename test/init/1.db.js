@@ -33,7 +33,8 @@ module.exports = {
 					var fixtures = [
 						{info: requireJSON(__dirname + '/../fixtures/db/cycles.info'), data: require('../fixtures/db/cycles.json')},
 						{info: requireJSON(__dirname + '/../fixtures/db/projects.info'), data: require('../fixtures/db/projects.json')},
-						{info: requireJSON(__dirname + '/../fixtures/db/users.info'), data: require('../fixtures/db/users.json')}
+						{info: requireJSON(__dirname + '/../fixtures/db/users.info'), data: require('../fixtures/db/users.json')},
+						{info: requireJSON(__dirname + '/../fixtures/db/files.info'), data: require('../fixtures/db/files.json')}
 					];
 
 					async.each(fixtures, function(fixture, loop){

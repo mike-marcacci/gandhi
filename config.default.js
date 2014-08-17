@@ -31,7 +31,7 @@ module.exports = {
 		__dirname + '/lib/modules/gandhi-component-message'
 	],
 	files: {
-		directory: __dirname + '/files'
+		directory: __dirname + '/uploads'
 	},
 	port: 3000,
 	log: true

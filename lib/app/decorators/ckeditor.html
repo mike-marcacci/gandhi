@@ -1,0 +1,16 @@
+<div class="form-group has-feedback" ng-class="{'has-error': hasError(), 'has-success': hasSuccess()}">
+  <label ng-show="showTitle()">{{form.title}}</label>
+  <span class="help-block">{{form.description}}</span>
+  <span ng-if="hasError()" class="help-block">{{errorMessage(schemaError())}}</span>
+  <textarea class="form-control"
+            ckeditor
+            sf-changed="form"
+            ng-model="$$value$$"
+            ng-model-options="form.ngModelOptions"
+            schema-validate="form"></textarea>
+  <!-- disabled until we unbreak the css
+    <span ng-if="form.feedback !== false"
+        class="form-control-feedback"
+        ng-class="evalInScope(form.feedback) || { 'glyphicon': true, 'glyphicon-ok': hasSuccess(), 'glyphicon-remove': hasError() }"></span>
+  -->
+</div>

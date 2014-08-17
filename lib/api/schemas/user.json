@@ -19,7 +19,7 @@
       "type": "string"
     },
     "id": {
-      "type":"string"
+      "type": "string"
     },
     "name": {
       "type": "string",
