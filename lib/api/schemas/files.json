@@ -40,6 +40,10 @@
     },
     "updated": {
       "type": "string"
+    },
+    "lock": {
+      "type": "boolean",
+      "default": false
     }
   }
 }
