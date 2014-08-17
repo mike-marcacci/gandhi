@@ -6,7 +6,7 @@
 		<div class="alert alert-warning" role="alert" ng-show="!permissions.read" sf-decorator-name="'bootstrap-decorator'">Sorry, but you don't have permission to read this stage.</div>
 
 		<div class="table">
-			<form ng-submit="submit()">
+			<form name="gandhiFormComponent" ng-submit="submit(gandhiFormComponent, data)">
 				<div sf-model="data" sf-form="options.form" sf-schema="options.schema"></div>
 				<div ng-click="save()" class="btn btn-default">Save Draft</div>
 				<button class="btn btn-primary">Submit</button>

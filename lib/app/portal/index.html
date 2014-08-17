@@ -12,7 +12,7 @@
 			</li>
 			<li><a ng-class="{active: $state.includes('portal.projects')}" ui-sref="portal.projects.list">Projects</a>
 				<ul ng-show="projects.length">
-					<li ng-repeat="project in projects"><a ui-sref-active="active" ui-sref="portal.projects.show({project: project.id})">{{project.title}}</a></li>
+					<li ng-repeat="project in projects"><a ng-class="{active: $state.includes('portal.projects.show') && $state.params.project == project.id}" ui-sref="portal.projects.show({project: project.id})">{{project.title}}</a></li>
 				</ul>
 			</li>
 		</ul>
