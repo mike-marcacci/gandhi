@@ -13,7 +13,7 @@
   "additionalProperties": false,
   "properties":{
     "created": {
-      "type": "string"
+      "type": "date"
     },
     "user_id": {
       "type": "string"
@@ -45,7 +45,7 @@
       "type": "number"
     },
     "updated": {
-      "type": "string"
+      "type": "date"
     },
     "lock": {
       "type": "boolean",

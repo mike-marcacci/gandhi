@@ -13,7 +13,7 @@
       "default": false
     },
     "created": {
-      "type": "string"
+      "type": "date"
     },
     "email": {
       "type": "string"
@@ -34,7 +34,7 @@
       "default": null
     },
     "updated": {
-      "type": "string"
+      "type": "date"
     }
   }
 }
