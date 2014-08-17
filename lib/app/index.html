@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-
 		<link rel="stylesheet" href="assets/style/index.css">
-
-		<script type="text/javascript" src="assets/ckeditor/ckeditor.js"></script>
-		<script type="text/javascript" src="main.js"></script>
-
+		<link rel="stylesheet" href="main.css">
 	</head>
 	<body ng-app="gandhi">
+		<!-- loader -->
+		<div ng-hide="true" class="loader"></div>
 
-		<div id="main" ng-if="currentUser" ui-view></div>
+		<!-- the portal lives here -->
+		<div ng-cloak id="main" ng-if="currentUser" ui-view></div>
 
-		<div id="login" ng-if="!currentUser" ng-controller="loginController" class="new col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+		<!-- login form shown instead of portal if not logged in -->
+		<div ng-cloak id="login" ng-if="!currentUser" ng-controller="loginController" class="new col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 
 			<h1 style="text-align: center;">Welcome.</h1>
 
@@ -53,5 +53,8 @@
 			</div>
 		</div>
 
+		<!-- load all the javascript and dependentcies -->
+		<script type="text/javascript" src="assets/ckeditor/ckeditor.js"></script>
+		<script type="text/javascript" src="main.js"></script>
 	</body>
 </html>
