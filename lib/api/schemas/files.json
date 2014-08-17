@@ -2,7 +2,14 @@
   "id": "file",
   "type":"object",
   "$schema": "http://json-schema.org/draft-04/schema",
-  "required": [],
+  "required": [
+    "name",
+    "mimetype",
+    "encoding",
+    "path",
+    "extension",
+    "size"
+  ],
   "additionalProperties": false,
   "properties":{
     "created": {
@@ -35,8 +42,7 @@
       "default": ""
     },
     "size": {
-      "type": "string",
-      "default": ""
+      "type": "number"
     },
     "updated": {
       "type": "string"
