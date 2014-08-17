@@ -2,12 +2,12 @@
 # Gandhi Stuff
 #####################
 
-config.json
-config.js
-files
-lib/app/assets/bower
-rethinkdb_data
-uploads
+/config.json
+/config.js
+/lib/app/assets/bower
+/rethinkdb_data
+/uploads
+/files
 
 
 #####################
