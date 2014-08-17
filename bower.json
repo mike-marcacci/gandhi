@@ -13,6 +13,7 @@
     "portal/admin/users/index.js",
     "portal/admin/cycles/index.js",
     "portal/admin/projects/index.js",
+    "portal/admin/files/index.js",
     "portal/projects/index.js",
     "portal/user/index.js"
   ],

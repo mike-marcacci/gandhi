@@ -344,10 +344,10 @@
       }
     },
     "updated": {
-      "type": "string"
+      "type": "date"
     },
     "created": {
-      "type": "string"
+      "type": "date"
     }
   }
 }
