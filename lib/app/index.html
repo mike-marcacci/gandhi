@@ -1,8 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<!-- load all the styles -->
 		<link rel="stylesheet" href="assets/style/index.css">
-		<link rel="stylesheet" href="main.css">
+		<script type="text/javascript" src="styles.js"></script>
+		<style type="text/css">
+			@-webkit-keyframes pulsate {
+				0% {
+					-webkit-transform:scale(.1);
+					opacity: 0.0;
+				}
+				50% {
+					opacity:1;
+				}
+				100% {
+					-webkit-transform:scale(1.2);
+					opacity:0;
+				}
+			}
+
+			@keyframes pulsate {
+				0% {
+					transform:scale(.1);
+					opacity: 0.0;
+				}
+				50% {
+					opacity:1;
+				}
+				100% {
+					transform:scale(1.2);
+					opacity:0;
+				}
+			}
+
+			[ng-cloak] {
+				display: none;
+			}
+
+			.loader {
+				border:3px solid #428CD6;
+				border-radius:30px;
+				height:30px;
+				left:50%;
+				margin:-15px 0 0 -15px;
+				opacity:0;
+				position:absolute;
+				top:50%;
+				width:30px;
+			
+				-webkit-animation: pulsate 1s infinite ease-out;
+				animation: pulsate 1s infinite ease-out;
+			}
+		</style>
+
+		<!-- load all the javascript and dependentcies -->
+		<script type="text/javascript" async src="assets/ckeditor/ckeditor.js"></script>
+		<script type="text/javascript" async src="main.js"></script>
 	</head>
 	<body ng-app="gandhi">
 		<!-- loader -->
@@ -77,9 +130,5 @@
 				</div>
 			</div>
 		</div>
-
-		<!-- load all the javascript and dependentcies -->
-		<script type="text/javascript" src="assets/ckeditor/ckeditor.js"></script>
-		<script type="text/javascript" src="main.js"></script>
 	</body>
 </html>
