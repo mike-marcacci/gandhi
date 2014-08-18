@@ -15,6 +15,7 @@
     "express": "^4.4.3",
     "generic-pool": "~2.0.4",
     "jjv": "^1.0.0",
+    "json-pointer": "^0.2.1",
     "jsonwebtoken": "^0.4.0",
     "li": "^1.0.0",
     "lodash": "^2.4.1",
@@ -27,7 +28,7 @@
     "passport-http-bearer": "^1.0.1",
     "passport-local": "^1.0.0",
     "res-error": "^0.3.1",
-    "rethinkdb": "^1.13.0-2",
+    "rethinkdb": "^1.13.0-3",
     "scrypt": "^3.0.1",
     "supertest": "^0.12.1",
     "wiredep": "^1.8.2"
