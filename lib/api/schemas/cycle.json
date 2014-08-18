@@ -14,11 +14,11 @@
       "type": "string"
     },
     "open": {
-      "type": ["boolean", "string"],
+      "type": ["boolean", "date"],
       "default": true
     },
     "close": {
-      "type": ["boolean", "string"],
+      "type": ["boolean", "date"],
       "default": false
     },
     "description": {

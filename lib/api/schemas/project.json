@@ -31,14 +31,14 @@
           "type": "object",
           "required": [
             "value",
-            "time"
+            "date"
           ],
           "additionalProperties": false,
           "properties": {
             "value": {
               "type": "boolean"
             },
-            "time": {
+            "date": {
             }
           }
         }
@@ -62,12 +62,10 @@
             "additionalProperties": true
           },
           "status": {
-            "type": [
-              null,
-              "string"
-            ],
-            "default": null,
+            "type": "string",
+            "default": "none",
             "enum": [
+              "none",
               "draft",
               "complete"
             ]

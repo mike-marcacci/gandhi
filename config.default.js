@@ -28,7 +28,9 @@ module.exports = {
 		__dirname + '/lib/modules/gandhi-component',
 		__dirname + '/lib/modules/gandhi-component-start',
 		__dirname + '/lib/modules/gandhi-component-form',
-		__dirname + '/lib/modules/gandhi-component-message'
+		__dirname + '/lib/modules/gandhi-component-message',
+		__dirname + '/lib/modules/gandhi-tester-date',
+		__dirname + '/lib/modules/gandhi-tester-regex'
 	],
 	files: {
 		directory: __dirname + '/uploads'
