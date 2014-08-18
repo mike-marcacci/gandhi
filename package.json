@@ -26,7 +26,7 @@
     "passport": "^0.2.0",
     "passport-http-bearer": "^1.0.1",
     "passport-local": "^1.0.0",
-    "res-error": "^0.1.0",
+    "res-error": "^0.3.1",
     "rethinkdb": "^1.13.0-2",
     "scrypt": "^3.0.1",
     "supertest": "^0.12.1",

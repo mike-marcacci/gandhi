@@ -2,6 +2,8 @@
 <html lang="en">
 	<head>
 		<!-- load all the styles -->
+		<meta name="viewport" content="width=device-width, maximum-scale=1">
+		<meta name="apple-mobile-web-app-capable" content="yes">
 		<link rel="stylesheet" href="assets/style/index.css">
 		<script type="text/javascript" src="styles.js"></script>
 		<style type="text/css">
@@ -52,10 +54,6 @@
 				animation: pulsate 1s infinite ease-out;
 			}
 		</style>
-
-		<!-- load all the javascript and dependentcies -->
-		<script type="text/javascript" async src="assets/ckeditor/ckeditor.js"></script>
-		<script type="text/javascript" async src="main.js"></script>
 	</head>
 	<body ng-app="gandhi">
 		<!-- loader -->
@@ -130,5 +128,9 @@
 				</div>
 			</div>
 		</div>
+
+		<!-- load all the javascript and dependentcies -->
+		<script type="text/javascript" src="assets/ckeditor/ckeditor.js"></script>
+		<script type="text/javascript" src="main.js"></script>
 	</body>
 </html>
