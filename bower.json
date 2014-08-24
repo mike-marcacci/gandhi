@@ -29,7 +29,8 @@
     "angular-ui-ace": "~0.1.1",
     "angular-waterfall": "~0.0.2",
     "ng-file-upload": "~1.6.5",
-    "bootstrap-vertical-tabs": "~1.1.0"
+    "bootstrap-vertical-tabs": "~1.1.0",
+    "angular-ui-select": "~0.6.0"
   },
   "overrides": {
     "ace-builds": {
@@ -44,7 +45,8 @@
     "ngCkeditor",
     "waterfall",
     "schemaForm",
-    "angularFileUpload"
+    "angularFileUpload",
+    "ui.select"
   ],
   "resolutions": {
     "bootstrap": "3.2.x",
