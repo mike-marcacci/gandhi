@@ -3,13 +3,13 @@
 	<li class="active">Users</li>
 </ol>
 
-<!-- <div class="panel panel-default">
+<div class="panel panel-default">
 	<div class="panel-body">
 		Query settings go here
-		- filter
-		- search
+		Sort: <input ng-model="query.sort"><br />
+		Direction: <input ng-model="query.direction"><br />
 	</div>
-</div> -->
+</div>
 
 <div class="panel panel-default">
 	<div class="panel-heading">
@@ -40,12 +40,13 @@
 	</table>
 </div>
 
-<!-- <ul class="pagination pagination-sm">
-  <li class="disabled"><a href>&laquo;</a></li>
+<ul class="pagination pagination-sm">
+  <li ng-class="{disabled: query.page == 1}"><a href>&laquo;</a></li>
+<!--
   <li class="active"><a href>1 <span class="sr-only">(current)</span></a></li>
   <li><a href>2</a></li>
-
+-->
   <li><a href>&raquo;</a></li>
 </ul>
 
- -->
+
