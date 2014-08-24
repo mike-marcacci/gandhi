@@ -69,8 +69,25 @@
 				<span class="panel-title">Assigned Users</span>
 			</div>
 			<div class="panel-body">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Title</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-show="cycleUsersEdit[assignment.id] !== null" ui-sref-active="active" ng-repeat="assignment in cycle.users">
+							<td>{{users[assignment.id].name || assignment.id}}</td>
+						</tr>
+					</tbody>
+				</table>
+
+
 				<ul>
-					<li ng-repeat="user in users"><a ui-sref="portal.admin.users.show({user: user.id})">{{user.name}}</a></li>
+					<li ng-repeat="user in users">
+						<a ui-sref="portal.admin.users.show({user: user.id})">{{user.name}}</a>
+						{{cycle.roles[cycle.users[user.id].role].title}}
+					</li>
 				</ul>
 			</div>
 		</div>
