@@ -1,5 +1,6 @@
 'use strict';
 
+var fs = require('fs');
 var crypto = require('crypto');
 
 module.exports = {
@@ -12,26 +13,20 @@ module.exports = {
 		secret: 'rubber bunny'
 	},
 	mail: {
-		transport: 'SMTP',
-		mailOptions: {
+		transport: {
 			service: 'Mandrill',
 			auth: {
 				user: 'mike.marcacci@gmail.com',
 				pass: '0eCce8d2FKfLrTxiFYOReg'
 			}
 		},
-		messageOptions: {
+		defaults: {
 			from: 'test@test.gandhi.io'
 		}
 	},
-	modules: [
-		__dirname + '/lib/modules/gandhi-component',
-		__dirname + '/lib/modules/gandhi-component-start',
-		__dirname + '/lib/modules/gandhi-component-form',
-		__dirname + '/lib/modules/gandhi-component-message',
-		__dirname + '/lib/modules/gandhi-tester-date',
-		__dirname + '/lib/modules/gandhi-tester-regex'
-	],
+	modules: fs.readdirSync(__dirname + '/lib/modules').map(function(dir){
+		return __dirname + '/lib/modules/' + dir;
+	}),
 	files: {
 		directory: __dirname + '/uploads'
 	},

@@ -89,44 +89,7 @@
 		</div>
 
 		<div ng-cloak id="login" ng-if="!currentUser" ng-controller="loginController" class="new col-lg-4 col-lg-offset-1 col-md-6 col-sm-8 col-sm-offset-2">
-
-			<h1 style="text-align: center;">Welcome.</h1>
-
-			<ul class="nav nav-tabs" role="tablist">
-				<li ng-class="{active: tab.login}"><a href ng-click="selectTab('login')">Log In</a></li>
-				<li ng-class="{active: tab.signup}"><a href ng-click="selectTab('signup')">Sign Up</a></li>
-			</ul>
-
-			<div class="panel panel-default">
-				<div class="panel-body">
-					<form ng-show="tab.login" ng-submit="login.submit()">
-						<div class="form-group">
-							<input name="email" ng-model="login.email" type="email" class="form-control" placeholder="Email">
-						</div>
-						<div class="form-group">
-							<input name="password" ng-model="login.password" type="password" class="form-control" placeholder="Password">
-						</div>
-						<button type="submit" class="btn btn-primary">Submit</button>
-						<!-- <button type="submit" class="btn btn-default">Recover</button> -->
-					</form>
-
-					<form ng-show="tab.signup" ng-submit="signup.submit()">
-						<div class="form-group">
-							<input name="name" ng-model="signup.name" type="text" class="form-control" placeholder="Name">
-						</div>
-						<div class="form-group">
-							<input name="email" ng-model="signup.email" type="email" class="form-control" placeholder="Email">
-						</div>
-						<div class="form-group">
-							<input name="password" ng-model="signup.password" type="password" class="form-control" placeholder="Password">
-						</div>
-						<div class="form-group">
-							<input type="password" ng-model="signup.password2" class="form-control" placeholder="Confirm Password">
-						</div>
-						<button type="submit" class="btn btn-primary">Submit</button>
-					</form>
-				</div>
-			</div>
+			<div ng-if="!currentUser" ng-include="'auth.html'"></div>
 		</div>
 
 		<!-- load all the javascript and dependentcies -->
