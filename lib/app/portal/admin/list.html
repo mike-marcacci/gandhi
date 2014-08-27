@@ -11,9 +11,11 @@
 			<button class="btn btn-xs btn-default" ui-sref="{{link('create')}}"><i class="glyphicon glyphicon-plus"></i></button>
 		</div>
 	</div>
-	<table class="table table-hover" gandhi-admin-table="table">
-		<tr gandhi-admin-table-row ui-sref-active="active" ui-sref="{{link('show', row.id)}}" style="cursor: pointer"></tr>
-	</table>
+	<div style="overflow-x: auto;">
+		<table class="table table-hover" gandhi-admin-table="table">
+			<tr gandhi-admin-table-row ui-sref-active="active" ui-sref="{{link('show', row.id)}}" style="cursor: pointer"></tr>
+		</table>
+	</div>
 </div>
 
 <ul class="pagination pagination-sm" ng-show="table.pages.first != table.pages.last">
