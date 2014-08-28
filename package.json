@@ -2,6 +2,7 @@
   "name": "gandhi",
   "version": "0.0.1",
   "main": "lib/index.js",
+  "description": "The open source, online grant management system.",
   "scripts": {
     "postinstall": "bower install",
     "start": "node server.js",
