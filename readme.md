@@ -1,7 +1,7 @@
 Gandhi
 ======
 
-Gandhi is a web-based open source grant management system. It is built with [node](http://nodejs.org/) and uses the impeccable [rethinkdb](http://rethinkdb.com/docs/install/). While it's still alpha software, it is already being used with great success by a few groups.
+Gandhi is an open source, online grant management system. It is built with [node](http://nodejs.org/) and uses the impeccable [rethinkdb](http://rethinkdb.com/). While it's still alpha software, it is already being used with great success by a few groups.
 
 Installation
 ------------
@@ -47,4 +47,10 @@ app.listen(3000);
 Configuration
 -------------
 
+Coming Soon!
+
+Demo
+----
+
+Coming Soon!
 

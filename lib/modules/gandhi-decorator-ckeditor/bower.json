@@ -1,0 +1,16 @@
+{
+  "name": "gandhi-decorator-ckeditor",
+  "description": "Gandhi Decorator: CKEditor",
+  "version": "0.0.1",
+  "license": "MIT",
+  "private": true,
+  "main": [
+    "index.js",
+    "index.html"
+  ],
+  "dependencies": {
+    "angular": "*",
+    "angular-schema-form": "*"
+  },
+  "module": "gandhi-decorator-ckeditor"
+}

@@ -1,0 +1,17 @@
+{
+  "name": "gandhi-decorator-upload",
+  "description": "Gandhi Decorator: Upload",
+  "version": "0.0.1",
+  "license": "MIT",
+  "private": true,
+  "main": [
+    "index.js",
+    "index.html"
+  ],
+  "dependencies": {
+    "angular": "*",
+    "angular-schema-form": "*",
+    "angular-ui-select": "*"
+  },
+  "module": "gandhi-decorator-upload"
+}

@@ -1,0 +1,7 @@
+<ui-select ng-disabled="disabled" ng-model="model" theme="bootstrap">
+	<ui-select-match placeholder="Choose a user...">{{$select.selected.name}}</ui-select-match>
+	<ui-select-choices refresh="search($select.search)" refresh-delay="200" repeat="item in users | filter: $select.search">
+		<div ng-bind-html="item.name | highlight: $select.search"></div>
+		<small ng-bind-html="item.email | highlight: $select.search"></small>
+	</ui-select-choices>
+</ui-select>

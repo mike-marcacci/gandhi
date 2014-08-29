@@ -1,7 +1,7 @@
 <div class="form-group" ng-class="{'has-error': hasError(), 'has-success': hasSuccess(), 'has-feedback': form.feedback !== false }">
   <label class="control-label" ng-show="showTitle()">{{form.title}}</label>
 
-  <div sf-upload ng-model="$$value$$"></div>
+  <div gandhi-decorator-upload ng-model="$$value$$"></div>
   <input ng-show="form.key"
          type="hidden"
          sf-changed="form"
@@ -14,6 +14,6 @@
         class="form-control-feedback"
         ng-class="evalInScope(form.feedback) || {'glyphicon': true, 'glyphicon-ok': hasSuccess(), 'glyphicon-remove': hasError() }"></span>
   <div class="help-block"
-       ng-show="(hasError() && errorMessage(schemaError())) || form.description"
-       ng-bind-html="(hasError() && errorMessage(schemaError())) || form.description"></div>
+       ng-show="(hasError() &amp;&amp; errorMessage(schemaError())) || form.description"
+       ng-bind-html="(hasError() &amp;&amp; errorMessage(schemaError())) || form.description"></div>
 </div>

@@ -73,7 +73,7 @@
         "properties": {
           "id": {
             "type": "string",
-            "constant": {"$data": "0#"}
+            "constant": {"$data": "0"}
           },
           "title": {
             "type": "string"
@@ -181,7 +181,7 @@
         "properties": {
           "id": {
             "type": "string",
-            "constant": {"$data": "0#"}
+            "constant": {"$data": "0"}
           },
           "title": {
             "type": "string"
@@ -267,7 +267,7 @@
         "properties": {
           "id": {
             "type": "string",
-            "constant": {"$data": "0#"}
+            "constant": {"$data": "0"}
           },
           "title": {
             "type": "string"
@@ -317,7 +317,7 @@
         "properties": {
           "id": {
             "type": "string",
-            "constant": {"$data": "0#"}
+            "constant": {"$data": "0"}
           },
           "title": {
             "type": "string"
@@ -331,14 +331,17 @@
       "additionalProperties": {
         "type": "object",
         "additionalProperties": true,
+        "required": [
+          "id",
+          "role"
+        ],
         "properties": {
           "id": {
             "type": "string",
-            "constant": {"$data": "0#"}
+            "constant": {"$data": "0"}
           },
           "role": {
-            "type": "string",
-            "default": {"$data": "2#defaults/role"}
+            "type": "string"
           }
         }
       }

@@ -55,7 +55,7 @@
         "properties": {
           "id": {
             "type": "string",
-            "constant": {"$data": "0#"}
+            "constant": {"$data": "0"}
           },
           "data": {
             "type": "object",
@@ -78,15 +78,39 @@
       "default": {},
       "additionalProperties": {
         "type": "object",
-        "additionalProperties": true,
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "role"
+        ],
         "properties": {
           "id": {
             "type": "string",
-            "constant": {"$data": "0#"}
+            "constant": {"$data": "0"}
           },
           "role": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "invitations": {
+      "type": "object",
+      "default": {},
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "role"
+        ],
+        "properties": {
+          "id": {
             "type": "string",
-            "default": {"$data": "2#defaults/role"}
+            "constant": {"$data": "0"}
+          },
+          "role": {
+            "type": "string"
           }
         }
       }
