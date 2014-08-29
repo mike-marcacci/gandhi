@@ -18,7 +18,7 @@
 					<button class="btn btn-xs btn-default" ng-show="destroy" ng-click="destroy()"><i class="glyphicon glyphicon-trash"></i></button>
 				</div>
 			</div>
-			<pre ng-show="!source" style="height: 600px; overflow: auto;" class="panel-body">{{projectSource}}</pre>
+			<pre ng-show="!source" style="height: 300px; overflow: auto;" class="panel-body">{{projectSource}}</pre>
 			<form ng-show="source" class="form-horizontal" role="form" ng-submit="replace()">
 				<div ui-ace="{mode: 'json'}" style="height: 600px;" ng-model="projectSource"></div>
 				<div class="panel-body">
@@ -26,6 +26,75 @@
 					<input type="submit" class="btn btn-sm btn-primary" value="Update">
 				</div>
 			</form>
+		</div>
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<span class="panel-title">Project Users</span>
+			</div>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th style="width: 50%">User</th>
+						<th style="width: 30%">Role</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="active">
+						<td>
+							<ui-select ng-disabled="disabled" ng-model="newUser.user" theme="bootstrap">
+								<ui-select-match placeholder="Choose a user...">{{$select.selected.name}}</ui-select-match>
+								<ui-select-choices refresh="newUser.search($newUser.search)" refresh-delay="200" repeat="item in newUser.users | filter: $select.search | filter: newUser.filter ">
+									<div ng-bind-html="item.name | highlight: $select.search"></div>
+									<small ng-bind-html="item.email | highlight: $select.search"></small>
+								</ui-select-choices>
+							</ui-select>
+						</td>
+						<td>
+							<ui-select ng-disabled="disabled" ng-model="newUser.role" theme="bootstrap">
+								<ui-select-match placeholder="Choose a role...">{{$select.selected.title}}</ui-select-match>
+								<ui-select-choices repeat="item in newUser.roles | filter: $select.search">
+									<div ng-bind-html="item.title | highlight: $select.search"></div>
+								</ui-select-choices>
+							</ui-select>
+						</td>
+						<td align="right">
+							<button ng-click="newUser.submit()" class="btn btn-primary">Assign</button>
+						</td>
+					</tr>
+					<tr ng-repeat="assignment in project.users">
+						<td><a ui-sref="portal.admin.users.show({user: assignment.id})">{{users[assignment.id].name || assignment.id}}</a></td>
+						<td>{{cycle.roles[assignment.role].title}}</td>
+						<td align="right"><button ng-click="removeUser(assignment.id)" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i></button></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<span class="panel-title">Cycle Users</span>
+			</div>
+			<div class="panel-body">
+				<p class="help-block">These users are assigned to this project's cycle. If a user is assigned to both a cycle and a project, her <strong>project</strong> role takes precedence.</p>
+			</div>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th style="width: 50%">User</th>
+						<th style="width: 30%">Role</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="assignment in cycle.users">
+						<td><a ui-sref="portal.admin.users.show({user: assignment.id})">{{users[assignment.id].name || assignment.id}}</a></td>
+						<td>{{cycle.roles[assignment.role].title}}</td>
+						<td align="right"></td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
 </div>

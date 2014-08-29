@@ -39,7 +39,7 @@
 			<div class="panel-body">
 				<div ng-hide="projects.length">This user has no projects.</div>
 				<div style="margin-top: 20px;" ng-repeat="project in projects">
-					<h4><a ui-sref="portal.admin.projects.project.show({project: project.id})">{{project.title}}</a></h4>
+					<h4><a ui-sref="portal.admin.projects.show({project: project.id})">{{project.title}}</a></h4>
 				</div>
 			</div>
 		</div>
