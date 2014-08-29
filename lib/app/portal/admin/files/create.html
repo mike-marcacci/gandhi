@@ -12,13 +12,18 @@
 	<div class="col-md-9">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<span class="panel-title">Create User</span>
+				<span class="panel-title">Upload File</span>
 			</div>
 			<form class="form-horizontal" role="form" ng-submit="create()">
-				<div ui-ace="{mode: 'json'}" style="height: 600px;" ng-model="fileSource"></div>
 				<div class="panel-body">
+					<div class="form-control">
+						<input ng-hide="inProgress > 0" type="file" ng-file-select="upload($files)">
+						<div ng-show="inProgress" class="progress">
+						  <div class="progress-bar progress-bar-striped active" role="progressbar" style="width: 100%"></div>
+						</div>
+					</div>
+					<br />
 					<a ui-sref="portal.admin.files.list" class="btn btn-sm btn-default">Cancel</a>
-					<input type="submit" class="btn btn-sm btn-primary" value="Create">
 				</div>
 			</form>
 		</div>

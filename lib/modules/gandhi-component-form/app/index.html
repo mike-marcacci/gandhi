@@ -7,7 +7,7 @@
 
 		<div class="table">
 			<form name="gandhiFormComponent" ng-submit="submit(gandhiFormComponent, data)">
-				<div sf-model="data" sf-form="options.form" sf-schema="options.schema"></div>
+				<div sf-model="data" sf-form="options.form" sf-schema="options.schema" sf-options="config"></div>
 				<div ng-disabled="lock" ng-show="options.draft !== false" ng-click="lock ? null : save()" class="btn btn-default">Save Draft</div>
 				<button ng-disabled="lock" class="btn btn-primary">Submit</button>
 			</form>

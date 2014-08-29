@@ -25,7 +25,7 @@
     "restangular": "~1.4.0",
     "lodash": "~2.4.1",
     "ng-ckeditor": "~0.2.1",
-    "angular-schema-form": "~0.7.0",
+    "angular-schema-form": "~0.7.2",
     "angular-ui-ace": "~0.1.1",
     "angular-waterfall": "~0.0.2",
     "ng-file-upload": "~1.6.5",
