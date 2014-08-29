@@ -18,7 +18,9 @@
 					<button class="btn btn-xs btn-default" ng-show="destroy" ng-click="destroy()"><i class="glyphicon glyphicon-trash"></i></button>
 				</div>
 			</div>
-			<pre ng-show="!source" style="height: 300px; overflow: auto;" class="panel-body">{{projectSource}}</pre>
+			<div ng-show="!source" class="panel-body">
+				<button class="btn btn-primary" ui-sref="portal.projects.show({project: project.id})">View Project Flow</button>
+			</div>
 			<form ng-show="source" class="form-horizontal" role="form" ng-submit="replace()">
 				<div ui-ace="{mode: 'json'}" style="height: 600px;" ng-model="projectSource"></div>
 				<div class="panel-body">

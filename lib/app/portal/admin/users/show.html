@@ -43,5 +43,18 @@
 				</div>
 			</div>
 		</div>
+
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<span class="panel-title">Files</span>
+			</div>
+			<div class="panel-body">
+				<div ng-hide="files.length">This user has no files.</div>
+				<div style="margin-top: 20px;" ng-repeat="file in files">
+					<h4><a ui-sref="portal.admin.files.show({file: file.id})">{{file.name}}</a></h4>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>

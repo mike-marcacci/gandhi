@@ -253,6 +253,9 @@
           "title": "Applicant",
           "visible": [
             "applicant"
+          ],
+          "assignable": [
+            "applicant"
           ]
         }
       },
@@ -261,7 +264,8 @@
         "required": [
           "id",
           "title",
-          "visible"
+          "visible",
+          "assignable"
         ],
         "additionalProperties": false,
         "properties": {
@@ -273,6 +277,12 @@
             "type": "string"
           },
           "visible": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "assignable": {
             "type": "array",
             "items": {
               "type": "string"

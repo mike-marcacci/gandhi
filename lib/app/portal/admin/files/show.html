@@ -12,13 +12,16 @@
 	<div class="col-md-9">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<span class="panel-title">{{file.title}}</span>
+				<span class="panel-title">{{file.name}}</span>
 				<div class="pull-right">
 					<button class="btn btn-xs" ng-show="replace" ng-class="{'btn-default': !source}" ng-click="toggleSource()"><i class="glyphicon glyphicon-edit"></i></button>
 					<button class="btn btn-xs btn-default" ng-show="destroy" ng-click="destroy()"><i class="glyphicon glyphicon-trash"></i></button>
 				</div>
 			</div>
-			<pre ng-show="!source" style="height: 600px; overflow: auto;" class="panel-body">{{fileSource}}</pre>
+			<div ng-show="!source" class="panel-body">
+				<p>Uploaded By: <a ng-bind="user.name" ui-sref="portal.admin.users.show({user: user.id})"></a></p>
+				<button class="btn btn-default" ng-click="download()"><i class="glyphicon glyphicon-download-alt"></i> Download</button>
+			</div>
 			<form ng-show="source" class="form-horizontal" role="form" ng-submit="replace()">
 				<div ui-ace="{mode: 'json'}" style="height: 600px;" ng-model="fileSource"></div>
 				<div class="panel-body">
