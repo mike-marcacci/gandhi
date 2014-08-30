@@ -1,6 +1,6 @@
 <div class="form-group has-feedback" ng-class="{'has-error': hasError(), 'has-success': hasSuccess()}">
   <label ng-show="showTitle()">{{form.title}}</label>
-  <span class="help-block">{{form.description}}</span>
+  <span class="help-block" ng-bind-html="form.description"></span>
   <span ng-if="hasError()" class="help-block">{{errorMessage(schemaError())}}</span>
   <textarea class="form-control"
             ckeditor
