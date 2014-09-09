@@ -368,7 +368,7 @@
         <attribute name="redirectauthorization" type="bool">0</attribute>
         <attribute name="method" type="string">PATCH</attribute>
         <attribute name="followredirects" type="bool">0</attribute>
-        <attribute name="body" type="string">["{\\n\\t\\"title\\": \\"Vision (Fall 2014) (ed)\\",\\n  \\"users\\": {\\n    \\"16b6d45f-2704-47db-bf50-7cec5f4d5e4e\\": null\\n}\\n}"]</attribute>
+        <attribute name="body" type="string">["{\\n\\t\\"description\\": \\"This is a sample grant cycle.\\"\\n}"]</attribute>
         <attribute name="order" type="int64">3</attribute>
         <attribute name="name" type="string">Update Cycles</attribute>
         <relationship name="parent" type="0/1" destination="LMREQUESTTREEITEM" idrefs="z120"></relationship>
