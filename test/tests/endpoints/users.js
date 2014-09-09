@@ -371,6 +371,33 @@ describe('Users', function(){
 		it.skip('rejects an update to blacklisted properties', function(){});
 	});
 
+	describe('#replace', function(){
+		var userToken, userId;
+		before(function(done){
+			request
+				.post('/api/tokens')
+				.send({
+					email: 'solène.clavel@test.gandhi.io',
+					password: 'solène1234'
+				})
+				.expect(201)
+				.end(function(err, res){
+					assert.isString(res.body.token);
+					userToken = res.body.token;
+					userId = jwt.decode(userToken).sub;
+					done(err);
+				});
+		});
+
+		it.skip('rejects an anonymous replace', function(){});
+		it.skip('rejects a replace from an unaffiliated user', function(){});
+		it.skip('processes a replace from self', function(){});
+		it.skip('processes a replace from an admin user', function(){});
+		it.skip('rejects promition of a user to admin by a non-admin user', function(){});
+		it.skip('rejects a misformatted replace', function(){});
+		it.skip('rejects a replace to blacklisted properties', function(){});
+	});
+
 	describe('#delete', function(){
 		var userToken, userId;
 		before(function(done){

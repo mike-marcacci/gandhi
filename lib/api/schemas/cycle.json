@@ -64,7 +64,7 @@
         }
       },
       "additionalProperties": {
-        "oneOf": [
+        "anyOf": [
           {
             "type": "null"
           },
@@ -182,7 +182,7 @@
         }
       },
       "additionalProperties": {
-        "oneOf": [
+        "anyOf": [
           {
             "type": "null"
           },
@@ -274,7 +274,7 @@
         }
       },
       "additionalProperties": {
-        "oneOf": [
+        "anyOf": [
           {
             "type": "null"
           },
@@ -342,7 +342,7 @@
         }
       },
       "additionalProperties": {
-        "oneOf": [
+        "anyOf": [
           {
             "type": "null"
           },
@@ -367,7 +367,7 @@
       "type": "object",
       "default": {},
       "additionalProperties": {
-        "oneOf": [
+        "anyOf": [
           {
             "type": "null"
           },

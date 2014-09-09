@@ -77,7 +77,7 @@
       "type": "object",
       "default": {},
       "additionalProperties": {
-        "oneOf": [
+        "anyOf": [
           {
             "type": "null"
           },
@@ -105,21 +105,31 @@
       "type": "object",
       "default": {},
       "additionalProperties": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "id",
-          "role"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "constant": {"$data": "0"}
+        "anyOf": [
+          {
+            "type": "null"
           },
-          "role": {
-            "type": "string"
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "role"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "constant": {"$data": "0"}
+              },
+              "role": {
+                "type": "string"
+              },
+              "secret": {
+                "type": "string"
+              }
+            }
           }
-        }
+        ]
       }
     },
     "updated": {

@@ -61,6 +61,13 @@
         "id": "847e085b-df0e-4dc7-9cbf-d485d6e2de96",
         "role": "reviewer"
       }
+    },
+    "invitations": {
+      "tim.marcacci@test.gandhi.io": {
+        "id": "tim.marcacci@test.gandhi.io",
+        "role": "applicant",
+        "secret": "ociuzxvhxcoiausydfagkbadkjhclizuhaefhbdskja"
+      }
     }
   }
 ]
