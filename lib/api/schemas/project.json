@@ -77,21 +77,28 @@
       "type": "object",
       "default": {},
       "additionalProperties": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "id",
-          "role"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "constant": {"$data": "0"}
+        "oneOf": [
+          {
+            "type": "null"
           },
-          "role": {
-            "type": "string"
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "role"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "constant": {"$data": "0"}
+              },
+              "role": {
+                "type": "string"
+              }
+            }
           }
-        }
+        ]
       }
     },
     "invitations": {
