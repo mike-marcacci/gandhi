@@ -21,12 +21,13 @@
 			<div ng-show="!source" class="panel-body">
 
 				<div class="waterfall-wrapper"><div class="waterfall-scroller">
-					<div waterfall="waterfallOptions" ng-model="cycle.flow"></div>
+					<div waterfall="waterfallOptions" ng-model="flow"></div>
 				</div></div>
 
 				<style type="text/css">
 					svg.waterfall div {
 						line-height: 26px;
+						cursor: pointer;
 					}
 				</style>
 			</div>
@@ -37,6 +38,10 @@
 					<input type="submit" class="btn btn-sm btn-primary" value="Update">
 				</div>
 			</form>
+		</div>
+
+		<div ui-view>
+			<!-- <div gandhi-component="{cycle: cycle, project: project, stage: cycle.defaults.flow, role: role, mode: 'admin'}"></div> -->
 		</div>
 
 		<div class="panel panel-default">
