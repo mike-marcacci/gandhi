@@ -1,0 +1,18 @@
+<div ng-show="!source" class="panel panel-default">
+	<div class="panel-body">
+		<div class="waterfall-wrapper"><div class="waterfall-scroller">
+			<div waterfall="waterfallOptions" ng-model="flow"></div>
+		</div></div>
+
+		<style type="text/css">
+			svg.waterfall div {
+				line-height: 26px;
+				cursor: pointer;
+			}
+		</style>
+	</div>
+</div>
+
+<div ui-view>
+	<div gandhi-component="{cycle: cycle, project: project, stage: stage || cycle.defaults.flow, role: role, mode: 'admin'}"></div>
+</div>

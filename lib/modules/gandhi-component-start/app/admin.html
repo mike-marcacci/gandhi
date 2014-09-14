@@ -1,22 +1,20 @@
-<div class="alert alert-warning" role="alert" ng-show="!permissions.read">Sorry, but you don't have permission to read this stage.</div>
+<div class="row">
 
-<div class="row" ng-show="permissions.read">
-
-	<div class="col-md-6" ng-show="description">
-		<div class="panel panel-default" ng-show="description">
+	<div class="col-sm-7">
+		<div class="panel panel-default">
 			<div class="panel-heading">
-				<span class="panel-title">{{cycle.title}}</span>
+				<span class="panel-title">{{cycle.flow[stage].title}}</span>
 			</div>
 			<div class="panel-body">
-				<div ng-bind-html="description"></div>
+				{{cycle}}
 			</div>
 		</div>
 	</div>
 
-	<div ng-class="{'col-md-6': description, 'col-md-12': !description}">
+	<div class="col-sm-5">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<span class="panel-title">{{data.title || 'Start'}}</span>
+				<span class="panel-title">Permissions</span>
 			</div>
 			<div class="panel-body">
 				<form role="form" ng-submit="submit()">

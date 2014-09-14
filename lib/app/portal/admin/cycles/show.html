@@ -18,18 +18,14 @@
 					<button class="btn btn-xs btn-default" ng-show="destroy" ng-click="destroy()"><i class="glyphicon glyphicon-trash"></i></button>
 				</div>
 			</div>
-			<div ng-show="!source" class="panel-body">
-
-				<div class="waterfall-wrapper"><div class="waterfall-scroller">
-					<div waterfall="waterfallOptions" ng-model="flow"></div>
-				</div></div>
-
-				<style type="text/css">
-					svg.waterfall div {
-						line-height: 26px;
-						cursor: pointer;
-					}
-				</style>
+			<div ng-hide="source" class="panel-body">
+				<ul class="nav nav-pills">
+					<li ui-sref-active="active"><a ui-sref="portal.admin.cycles.show">General</a></li>
+					<li ng-class="{active: $state.includes('portal.admin.cycles.show.flow')}"><a ui-sref="portal.admin.cycles.show.flow">Flow</a></li>
+					<!-- <li ng-class="{active: $state.includes('portal.admin.cycles.show.roles')}"><a ui-sref="portal.admin.cycles.show.roles">Roles</a></li> -->
+					<li ng-class="{active: $state.includes('portal.admin.cycles.show.users')}"><a ui-sref="portal.admin.cycles.show.users">Users</a></li>
+					<!-- <li ng-class="{active: $state.includes('portal.admin.cycles.show.statuses')}"><a ui-sref="portal.admin.cycles.show.statuses">Statuses</a></li> -->
+				</ul>
 			</div>
 			<form ng-show="source" class="form-horizontal" role="form" ng-submit="replace()">
 				<div ui-ace="{mode: 'json'}" style="height: 600px;" ng-model="cycleSource"></div>
@@ -40,53 +36,30 @@
 			</form>
 		</div>
 
-		<div ui-view>
-			<!-- <div gandhi-component="{cycle: cycle, project: project, stage: cycle.defaults.flow, role: role, mode: 'admin'}"></div> -->
+
+		<div ng-hide="source" ui-view>
+			
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<span class="panel-title">General Settings</span>
+				</div>
+				<div class="panel-body">
+					<form role="form" ng-submit="update()">
+						<div class="form-group">
+							<label for="general-title">Title</label>
+							<input id="general-title" ng-model="cycleEdit.title" type="text" class="form-control">
+						</div>
+						<div class="form-group">
+							<label for="general-status">Status</label>
+							<select class="form-control" ng-model="cycleEdit.status" ng-options="status for status in ['active','archived']" required></select>
+						</div>
+						<input type="submit" class="btn btn-sm btn-primary" value="Submit">
+					</form>
+				</div>
+			</div>
+
 		</div>
 
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<span class="panel-title">Cycle Users</span>
-			</div>
-			<table class="table table-hover">
-				<thead>
-					<tr>
-						<th style="width: 50%">User</th>
-						<th style="width: 30%">Role</th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr class="active">
-						<td>
-							<ui-select ng-disabled="disabled" ng-model="newUser.user" theme="bootstrap">
-								<ui-select-match placeholder="Choose a user...">{{$select.selected.name}}</ui-select-match>
-								<ui-select-choices refresh="newUser.search($select.search)" refresh-delay="200" repeat="item in newUser.users | filter: $select.search | filter: newUser.filter ">
-									<div ng-bind-html="item.name | highlight: $select.search"></div>
-									<small ng-bind-html="item.email | highlight: $select.search"></small>
-								</ui-select-choices>
-							</ui-select>
-						</td>
-						<td>
-							<ui-select ng-disabled="disabled" ng-model="newUser.role" theme="bootstrap">
-								<ui-select-match placeholder="Choose a role...">{{$select.selected.title}}</ui-select-match>
-								<ui-select-choices repeat="item in newUser.roles | filter: $select.search">
-									<div ng-bind-html="item.title | highlight: $select.search"></div>
-								</ui-select-choices>
-							</ui-select>
-						</td>
-						<td align="right">
-							<button ng-click="newUser.submit()" class="btn btn-primary">Assign</button>
-						</td>
-					</tr>
-					<tr ng-repeat="assignment in cycle.users">
-						<td><a ui-sref="portal.admin.users.show({user: assignment.id})">{{users[assignment.id].name || assignment.id}}</a></td>
-						<td>{{cycle.roles[assignment.role].title}}</td>
-						<td align="right"><button ng-click="removeUser(assignment.id)" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i></button></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
 	</div>
 </div>
 <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
