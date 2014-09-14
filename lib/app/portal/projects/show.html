@@ -15,7 +15,7 @@
 </div>
 
 <div ui-view>
-	<div gandhi-component="{cycle: cycle, project: project, stage: cycle.root, role: role}"></div>
+	<div gandhi-component="{cycle: cycle, project: project, stage: cycle.defaults.flow, role: role, mode: 'default'}"></div>
 </div>
 
 <style>svg.waterfall div { cursor: pointer; }</style>
