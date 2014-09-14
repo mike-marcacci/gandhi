@@ -231,7 +231,11 @@
         "listeners": []
       }
     },
-    "root": "start",
+    "defaults": {
+      "flow": "start",
+      "role": "applicant",
+      "status": "active"
+    },
     "flow": {
       "start": {
         "id": "start",

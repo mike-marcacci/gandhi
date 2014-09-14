@@ -4,8 +4,7 @@
   "$schema": "http://json-schema.org/draft-04/schema",
   "required": [
     "title",
-    "cycle_id",
-    "status"
+    "cycle_id"
   ],
   "additionalProperties": false,
   "properties":{

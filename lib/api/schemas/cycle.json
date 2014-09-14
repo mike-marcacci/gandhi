@@ -13,6 +13,10 @@
     "title": {
       "type": "string"
     },
+    "description": {
+      "type": "string",
+      "default": ""
+    },
     "open": {
       "type": ["boolean", "date"],
       "default": true
@@ -20,10 +24,6 @@
     "close": {
       "type": ["boolean", "date"],
       "default": false
-    },
-    "description": {
-      "type": "string",
-      "default": ""
     },
     "events": {
       "type": "object",
@@ -142,9 +142,27 @@
         ]
       }
     },
-    "root": {
-      "type": "string",
-      "default": "start"
+    "defaults": {
+      "type": "object",
+      "default": {
+        "flow": "start",
+        "role": "applicant",
+        "status": "active"
+      },
+      "properties": {
+        "flow": {
+          "type": "string",
+          "default": "start"
+        },
+        "role": {
+          "type": "string",
+          "default": "applicant"
+        },
+        "status": {
+          "type": "string",
+          "default": "active"
+        }
+      }
     },
     "flow": {
       "type": "object",

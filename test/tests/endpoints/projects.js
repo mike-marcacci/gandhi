@@ -15,10 +15,10 @@ var whitelist = ['id', 'email', 'name', 'href', 'admin', 'created','updated'];
 
 before(function(){
 	request = global.setup.api;
-	fixtures = global.setup.fixtures.db.cycles;
+	fixtures = global.setup.fixtures.db.projects;
 });
 
-describe('Cycles', function(){
+describe('Projects', function(){
 	var adminToken, adminId, userToken, userId, ids = [];
 
 	before(function(done){
@@ -50,7 +50,7 @@ describe('Cycles', function(){
 				assert.isNull(err);
 				assert.isString(res.body.token);
 				userToken = res.body.token;
-				userId = jwt.decode(adminToken).sub;
+				userId = jwt.decode(userToken).sub;
 				done();
 			});
 	});
@@ -58,59 +58,40 @@ describe('Cycles', function(){
 	describe('#create', function(){
 		it('prevents anonymous creation', function(done){
 			request
-				.post('/api/cycles')
+				.post('/api/projects')
 				.send({
 					title: 'Woops!'
 				})
 				.expect(401)
 				.end(done);
 		});
-		it('prevents non-admin creation', function(done){
+		it('applies defaults to a new project for non-admin users', function(done){
 			request
-				.post('/api/cycles')
+				.post('/api/projects')
 				.set('Authorization', 'Bearer ' + userToken)
 				.send({
-					title: 'Woops!'
-				})
-				.expect(403)
-				.end(done);
-		});
-		it('rejects a misformatted cycle', function(done){
-			request
-				.post('/api/cycles')
-				.set('Authorization', 'Bearer ' + adminToken)
-				.send({
-					cool: 'beans'
-				})
-				.expect(400)
-				.end(function(err, res){
-					assert.isNull(err);
-					done();
-				});
-		});
-		it('allows creation of minimal cycle', function(done){
-			request
-				.post('/api/cycles')
-				.set('Authorization', 'Bearer ' + adminToken)
-				.send({
-					title: 'Awesome Possum'
+					title: 'CREATE - Minimal Project',
+					cycle_id: '128f2348-99d4-40a1-b5ab-91d9019f272d'
 				})
 				.expect(201)
 				.end(function(err, res){
 					assert.isNull(err);
-					assert.isString(res.body.id);
+					assert.equal(res.body.title, 'CREATE - Minimal Project')
+					assert.equal(res.body.cycle_id, '128f2348-99d4-40a1-b5ab-91d9019f272d')
+					assert.property(res.body.users, userId);
+					assert.equal(res.body.users[userId].role, 'applicant');
+					assert.equal(res.body.status, 'active');
 					ids.push(res.body.id);
-					assert.equal(res.body.title, 'Awesome Possum');
 					done();
-				});
-		});
+				})
+		})
 	});
 
 	describe('#read', function(){
-		describe('(list) /cycles', function(){
+		describe('(list) /projects', function(){
 			it('rejects an anonymous request', function(done){
 				request
-					.get('/api/cycles')
+					.get('/api/projects')
 					.expect(401)
 					.end(function(err, res){
 						assert.isNull(err);
@@ -118,23 +99,20 @@ describe('Cycles', function(){
 						done();
 					});
 			});
-			it('shows all cycles to an admin user', function(done){
+			it('returns an array at least', function(done){
 				request
-					.get('/api/cycles')
-					.set('Authorization', 'Bearer ' + adminToken)
+					.get('/api/files')
+					.set('Authorization', 'Bearer ' + userToken)
 					.expect(200)
 					.end(function(err, res){
 						assert.isNull(err);
-						
 						assert.isArray(res.body);
-						// assert.lengthOf(res.body, fixtures.cycles.length);
 						done();
 					});
 			});
-			it.skip('hides draft cycles from a non-admin user', function(done){});
 			it.skip('accepts per_page parameters', function(done){
 				request
-					.get('/api/cycles?per_page=5')
+					.get('/api/projects?per_page=5')
 					.set('Authorization', 'Bearer ' + userToken)
 					.expect(200)
 					.end(function(err, res){
@@ -142,14 +120,14 @@ describe('Cycles', function(){
 						assert.isArray(res.body);
 						assert.lengthOf(res.body, 5);
 						var links = li.parse(res.headers.link);
-						assert.equal(links.next, '/api/cycles?per_page=5&page=2');
-						assert.equal(links.last, '/api/cycles?per_page=5&page='+Math.ceil((fixtures.length + ids.length) / 5));
+						assert.equal(links.next, '/api/projects?per_page=5&page=2');
+						assert.equal(links.last, '/api/projects?per_page=5&page='+Math.ceil((fixtures.length + ids.length) / 5));
 						done();
 					});
 			});
 			it.skip('accepts page parameters', function(done){
 				request
-					.get('/api/cycles?per_page=5&page=2')
+					.get('/api/projects?per_page=5&page=2')
 					.set('Authorization', 'Bearer ' + userToken)
 					.expect(200)
 					.end(function(err, res){
@@ -157,56 +135,45 @@ describe('Cycles', function(){
 						assert.isArray(res.body);
 						assert.lengthOf(res.body, 5);
 						var links = li.parse(res.headers.link);
-						assert.equal(links.first, '/api/cycles?per_page=5&page=1');
-						assert.equal(links.prev, '/api/cycles?per_page=5&page=1');
+						assert.equal(links.first, '/api/projects?per_page=5&page=1');
+						assert.equal(links.prev, '/api/projects?per_page=5&page=1');
 						done();
 					});
 			});
 		});
 
-		describe('(show) /cycles/:id', function(){
+		describe('(show) /projects/:id', function(){
 			it('rejects an anonymous request', function(done){
 				request
-					.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d')
+					.get('/api/projects/587416ec-0626-43fc-ab99-4141bde069ae')
 					.expect(401)
 					.end(done);
 			});
-			it('shows a non-draft cycle to an admin user', function(done){
+			it('shows a project to an unaffiliated admin user', function(done){
 				request
-					.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d')
+					.get('/api/projects/587416ec-0626-43fc-ab99-4141bde069ae')
 					.set('Authorization', 'Bearer ' + adminToken)
 					.expect(200)
 					.end(function(err, res){
 						assert.isNull(err);
-						assert.equal(res.body.id, '128f2348-99d4-40a1-b5ab-91d9019f272d');
+						assert.equal(res.body.id, '587416ec-0626-43fc-ab99-4141bde069ae');
 						done();
 					});
 			});
-			it.skip('shows a draft cycle to an admin user', function(done){});
-			it.skip('shows a non-draft cycle to a non-admin user', function(done){});
-			it.skip('hides a draft cycle from a non-admin user', function(done){});
 		});
 	});
 
 	describe('#update', function(){
 		it('rejects an anonymous update', function(done){
 			request
-				.patch('/api/cycles/' + ids[0])
+				.patch('/api/projects/' + ids[0])
 				.send({title: 'Woops!'})
 				.expect(401)
 				.end(done);
 		});
-		it('rejects an update by a non-admin user', function(done){
+		it('accepts an update by an unaffiliated admin user', function(done){
 			request
-				.patch('/api/cycles/' + ids[0])
-				.set('Authorization', 'Bearer ' + userToken)
-				.send({title: 'Woops!'})
-				.expect(403)
-				.end(done);
-		});
-		it('allows an updates by an admin user', function(done){
-			request
-				.patch('/api/cycles/' + ids[0])
+				.patch('/api/projects/' + ids[0])
 				.set('Authorization', 'Bearer ' + adminToken)
 				.send({
 					title: 'UPDATED'
@@ -221,29 +188,43 @@ describe('Cycles', function(){
 	});
 
 	describe('#replace', function(){
+		var project;
+		before(function(done){
+			request
+				.get('/api/projects/' + ids[0])
+				.set('Authorization', 'Bearer ' + adminToken)
+				.expect(200)
+				.end(function(err, res){
+					assert.isNull(err);
+					project = res.body;
+					done();
+				});
+		});
+
 		it('rejects an anonymous replace', function(done){
 			request
-				.put('/api/cycles/' + ids[0])
+				.put('/api/projects/' + ids[0])
 				.send({title: 'Woops!'})
 				.expect(401)
 				.end(done);
 		});
 		it('rejects a replace by a non-admin user', function(done){
 			request
-				.put('/api/cycles/' + ids[0])
+				.put('/api/projects/' + ids[0])
 				.set('Authorization', 'Bearer ' + userToken)
-				.send({title: 'Woops!'})
+				.send(_.extend({}, project, {
+					title: 'UPDATED'
+				}))
 				.expect(403)
 				.end(done);
 		});
-		it('allows a replace by an admin user', function(done){
+		it('accepts a replace by an unaffiliated admin user', function(done){
 			request
-				.put('/api/cycles/' + ids[0])
+				.put('/api/projects/' + ids[0])
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({
-					title: 'REPLACED',
-					id: ids[0]
-				})
+				.send(_.extend({}, project, {
+					title: 'UPDATED'
+				}))
 				.expect(200)
 				.end(function(err, res){
 					assert.isNull(err);
@@ -256,40 +237,33 @@ describe('Cycles', function(){
 	describe('#delete', function(){
 		it('rejects an anonymous delete', function(done){
 			request
-				.delete('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d')
+				.delete('/api/projects/' + ids[0])
 				.expect(401)
 				.end(done);
 		});
 		it('rejects a delete by a non-admin user', function(done){
 			request
-				.delete('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d')
+				.delete('/api/projects/' + ids[0])
 				.set('Authorization', 'Bearer ' + userToken)
 				.expect(403)
 				.end(done);
 		});
-		it('refuses to delete a cycle that has projects', function(done){
+		it('deletes a project for an admin user', function(done){
 			request
-				.delete('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d')
-				.set('Authorization', 'Bearer ' + adminToken)
-				.expect(400)
-				.end(done);
-		});
-		it('deletes a cycle without projects', function(done){
-			request
-				.delete('/api/cycles/' + ids[0])
+				.delete('/api/projects/' + ids[0])
 				.set('Authorization', 'Bearer ' + adminToken)
 				.expect(200)
 				.end(done);
 		});
 	});
 
-	// remove any cycles we just created
+	// remove any projects we just created
 	after(function(done){
 		if(!ids.length)
 			return done();
 
 		r.connect(global.setup.config.db, function(err, conn){
-			r.table('cycles').getAll(ids).delete().run(conn, function(err, res){
+			r.table('projects').getAll(ids).delete().run(conn, function(err, res){
 				conn.close();
 				done(err, res);
 			});
