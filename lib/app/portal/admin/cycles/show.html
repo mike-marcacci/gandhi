@@ -21,7 +21,7 @@
 			<div ng-hide="source" class="panel-body">
 				<ul class="nav nav-pills">
 					<li ui-sref-active="active"><a ui-sref="portal.admin.cycles.show">General</a></li>
-					<li ng-class="{active: $state.includes('portal.admin.cycles.show.flow')}"><a ui-sref="portal.admin.cycles.show.flow">Flow</a></li>
+					<li ng-class="{active: $state.includes('portal.admin.cycles.show.flow')}"><a ui-sref="portal.admin.cycles.show.flow.stage({stage: cycle.defaults.flow})">Flow</a></li>
 					<!-- <li ng-class="{active: $state.includes('portal.admin.cycles.show.roles')}"><a ui-sref="portal.admin.cycles.show.roles">Roles</a></li> -->
 					<li ng-class="{active: $state.includes('portal.admin.cycles.show.users')}"><a ui-sref="portal.admin.cycles.show.users">Users</a></li>
 					<!-- <li ng-class="{active: $state.includes('portal.admin.cycles.show.statuses')}"><a ui-sref="portal.admin.cycles.show.statuses">Statuses</a></li> -->
