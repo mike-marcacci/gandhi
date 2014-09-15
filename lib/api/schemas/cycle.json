@@ -202,9 +202,6 @@
       "additionalProperties": {
         "anyOf": [
           {
-            "type": "null"
-          },
-          {
             "type": "object",
             "required": ["id", "title", "component"],
             "additionalProperties": false,
@@ -273,6 +270,9 @@
                 }
               }
             }
+          },
+          {
+            "type": "null"
           }
         ]
       }
