@@ -7,7 +7,7 @@
 		<span class="panel-title">{{user.name}}</span>
 		<div class="pull-right">
 			<button class="btn btn-xs" ng-show="update" ng-class="{'btn-default': !edit}" ng-click="toggleEdit()"><i class="glyphicon glyphicon-cog"></i></button>
-			<button class="btn btn-xs" ng-show="replace" ng-class="{'btn-default': !source}" ng-click="toggleSource()"><i class="glyphicon glyphicon-edit"></i></button>
+			<button class="btn btn-xs" ng-show="replace" ng-class="{'btn-default': true, 'active': source}" ng-click="toggleSource()"><i class="glyphicon glyphicon-edit"></i></button>
 			<button class="btn btn-xs btn-default" ng-show="destroy" ng-click="destroy()"><i class="glyphicon glyphicon-trash"></i></button>
 		</div>
 	</div>
