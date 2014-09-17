@@ -8,9 +8,12 @@
 		<span class="panel-title">{{project.title}} <span style="opacity: .5;" class="pull-right">{{cycle.title}}</span></span>
 	</div>
 	<div class="panel-body">
-		<div class="waterfall-wrapper"><div class="waterfall-scroller">
+		<div ng-if="cycle.config.layout === 'waterfall'" class="waterfall-wrapper"><div class="waterfall-scroller">
 			<div waterfall="waterfallOptions" ng-model="index"></div>
 		</div></div>
+		<ul ng-if="cycle.config.layout === 'pill'" class="nav nav-pills">
+			<li ui-sref-active="active" ng-repeat="node in ordered" ng-show="node.visible"><a ui-sref="portal.projects.show.flow({stage: node.id})" ng-bind-html="node.html"></a></li>
+		</ul>
 	</div>
 </div>
 

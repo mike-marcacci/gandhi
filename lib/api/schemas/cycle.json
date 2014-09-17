@@ -409,6 +409,11 @@
         ]
       }
     },
+    "config": {
+      "type": "object",
+      "additionalProperties": true,
+      "default": {}
+    },
     "updated": {
       "type": "date"
     },

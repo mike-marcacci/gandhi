@@ -53,6 +53,10 @@
 							<label for="general-status">Status</label>
 							<select id="general-status" class="form-control" ng-model="cycleEdit.status" ng-options="status for status in ['active','archived']" required></select>
 						</div>
+						<div class="form-group">
+							<label for="general-config-layout">Layout</label>
+							<select id="general-config-layout" class="form-control" ng-model="cycleEdit.config.layout" ng-options="status.value as status.title for status in [{title: 'Pill', value: 'pill'},{title: 'Waterfall', value: 'waterfall'}]" required></select>
+						</div>
 						<input type="submit" class="btn btn-sm btn-primary" value="Submit">
 					</form>
 				</div>

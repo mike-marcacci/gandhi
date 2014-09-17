@@ -26,7 +26,7 @@
     "lodash": "~2.4.1",
     "angular-schema-form": "~0.7.3",
     "angular-ui-ace": "~0.1.1",
-    "angular-waterfall": "~0.0.2",
+    "angular-waterfall": "~0.1.0",
     "ng-file-upload": "~1.6.5",
     "bootstrap-vertical-tabs": "~1.1.0",
     "angular-ui-select": "~0.6.0",

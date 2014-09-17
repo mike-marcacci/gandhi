@@ -139,7 +139,7 @@ describe('Files', function(){
 		});
 
 		describe('(show) /files/:id', function(){
-			it('rejects an anonymous request', function(done){
+			it.skip('rejects an anonymous request', function(done){
 				request
 					.get('/api/files/' + ids[0])
 					.expect(401)
