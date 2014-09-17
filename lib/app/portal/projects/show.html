@@ -12,7 +12,7 @@
 			<div waterfall="waterfallOptions" ng-model="index"></div>
 		</div></div>
 		<ul ng-if="cycle.config.layout === 'pill'" class="nav nav-pills">
-			<li ui-sref-active="active" ng-repeat="node in ordered" ng-show="node.visible"><a ui-sref="portal.projects.show.flow({stage: node.id})" ng-bind-html="node.html"></a></li>
+			<li ng-class="{active: stage === node.id}" ng-repeat="node in ordered" ng-show="node.visible"><a ui-sref="portal.projects.show.flow({stage: node.id})" ng-bind-html="node.html"></a></li>
 		</ul>
 	</div>
 </div>
