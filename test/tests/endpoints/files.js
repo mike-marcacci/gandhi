@@ -189,7 +189,7 @@ describe('Files', function(){
 		var file;
 		before(function(done){
 			request
-				.get('/api/files/?filter[id]=' + ids[0])
+				.get('/api/files/?filter[id][eq]=' + ids[0])
 				.set('Authorization', 'Bearer ' + adminToken)
 				.expect(200)
 				.end(function(err, res){
