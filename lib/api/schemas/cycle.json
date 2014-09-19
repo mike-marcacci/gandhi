@@ -171,9 +171,9 @@
           "id": "start",
           "title": "Start",
           "description": "Start your application!",
-          "visible": [
-            "applicant"
-          ],
+          "visible": {
+            "applicant": true
+          },
           "lock": {
             "open": [
               "open"
@@ -218,35 +218,7 @@
                 "default": ""
               },
               "visible": {
-                "type": "array",
-                "default": [],
-                "items": {
-                  "type": "string"
-                }
-              },
-              "lock": {
-                "type": "object",
-                "additionalProperties": false,
-                "default": {
-                  "open": [],
-                  "close": []
-                },
-                "properties": {
-                  "open": {
-                    "type": "array",
-                    "default": [],
-                    "items": {
-                      "type": "string"
-                    }
-                  },
-                  "close": {
-                    "type": "array",
-                    "default": [],
-                    "items": {
-                      "type": "string"
-                    }
-                  }
-                }
+                "$ref": "#/definitions/permission"
               },
               "component": {
                 "type": "object",
@@ -283,12 +255,12 @@
         "applicant": {
           "id": "applicant",
           "title": "Applicant",
-          "visible": [
-            "applicant"
-          ],
-          "assignable": [
-            "applicant"
-          ]
+          "visible": {
+            "applicant": true
+          },
+          "assignable": {
+            "applicant": true
+          }
         }
       },
       "additionalProperties": {
@@ -314,16 +286,10 @@
                 "type": "string"
               },
               "visible": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
+                "$ref": "#/definitions/permission"
               },
               "assignable": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
+                "$ref": "#/definitions/permission"
               }
             }
           }
@@ -419,6 +385,50 @@
     },
     "created": {
       "type": "date"
+    }
+  },
+  "definitions": {
+    "permission": {
+      "type": "object",
+      "default": {},
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "boolean"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "default": {
+              "open": [],
+              "close": []
+            },
+            "properties": {
+              "open": {
+                "default": true,
+                "anyOf": [
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "type": "boolean"
+                  }
+                ]
+              },
+              "close": {
+                "type": "array",
+                "default": [],
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ]
+      }
     }
   }
 }

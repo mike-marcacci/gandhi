@@ -237,21 +237,11 @@
         "id": "start",
         "title": "Start",
         "description": "Start your application!",
-        "visible": [
-          "staff",
-          "applicant",
-          "advisor",
-          "reviewer"
-        ],
-        "lock": {
-          "open": [
-            "open"
-          ],
-          "close": [
-            "submit",
-            "archive",
-            "close"
-          ]
+        "visible": {
+          "staff": true,
+          "applicant": true,
+          "advisor": true,
+          "reviewer": true
         },
         "component": {
           "name": "start",
@@ -275,21 +265,11 @@
         "id": "team",
         "title": "Team",
         "description": "Build your team by adding collaborators to your application.",
-        "visible": [
-          "staff",
-          "applicant",
-          "advisor",
-          "reviewer"
-        ],
-        "lock": {
-          "open": [
-            "open"
-          ],
-          "close": [
-            "submit",
-            "archive",
-            "close"
-          ]
+        "visible": {
+          "staff": true,
+          "applicant": true,
+          "advisor": true,
+          "reviewer": true
         },
         "component": {
           "name": "users",
@@ -319,21 +299,11 @@
         "id": "application",
         "title": "Application Form",
         "description": "Fill out our online application form.",
-        "visible": [
-          "staff",
-          "applicant",
-          "advisor",
-          "reviewer"
-        ],
-        "lock": {
-          "open": [
-            "open"
-          ],
-          "close": [
-            "submit",
-            "archive",
-            "close"
-          ]
+        "visible": {
+          "staff": true,
+          "applicant": true,
+          "advisor": true,
+          "reviewer": true
         },
         "component": {
           "name": "form",
@@ -361,22 +331,11 @@
         "id": "submission",
         "title": "Official Submission",
         "description": "Officially submit your application. Once submitted, your application can no longer be edited.",
-        "visible": [
-          "staff",
-          "applicant",
-          "advisor",
-          "reviewer"
-        ],
-        "lock": {
-          "open": [
-            "open",
-            "complete"
-          ],
-          "close": [
-            "submit",
-            "archive",
-            "close"
-          ]
+        "visible": {
+          "staff": true,
+          "applicant": true,
+          "advisor": true,
+          "reviewer": true
         },
         "component": {
           "name": "form",
@@ -404,18 +363,9 @@
         "id": "acknowledgment",
         "title": "Submission Acknowledgment",
         "description": "This page acknowledges that the application was received.",
-        "visible": [
-          "applicant",
-          "advisor"
-        ],
-        "lock": {
-          "open": [
-            "submit"
-          ],
-          "close": [
-            "accept",
-            "reject"
-          ]
+        "visible": {
+          "applicant": true,
+          "advisor": true
         },
         "component": {
           "name": "message",
@@ -447,17 +397,8 @@
         "id": "assignment",
         "title": "Reviewer Assignment",
         "description": "Assign reviewers to the project.",
-        "visible": [
-          "staff"
-        ],
-        "lock": {
-          "open": [
-            "submit"
-          ],
-          "close": [
-            "archive",
-            "reject"
-          ]
+        "visible": {
+          "staff": true
         },
         "component": {
           "name": "users",
@@ -483,21 +424,11 @@
         "id": "review",
         "title": "Review",
         "description": "The project will be reviewed by assigned reviewers.",
-        "visible": [
-          "staff",
-          "applicant",
-          "advisor",
-          "reviewer"
-        ],
-        "lock": {
-          "open": [
-            "submit"
-          ],
-          "close": [
-            "archive",
-            "accept",
-            "reject"
-          ]
+        "visible": {
+          "staff": true,
+          "applicant": true,
+          "advisor": true,
+          "reviewer": true
         },
         "component": {
           "name": "review",
@@ -530,16 +461,8 @@
         "id": "decision",
         "title": "Funding Decision",
         "description": "Decide to fund the project or not.",
-        "visible": [
-          "staff"
-        ],
-        "lock": {
-          "open": [
-            "submit"
-          ],
-          "close": [
-            "archive"
-          ]
+        "visible": {
+          "staff": true
         },
         "component": {
           "name": "status",
@@ -567,18 +490,10 @@
         "id": "acceptance",
         "title": "Acceptance",
         "description": "This project has been accepted.",
-        "visible": [
-          "staff",
-          "applicant",
-          "advisor"
-        ],
-        "lock": {
-          "open": [
-            "accept"
-          ],
-          "close": [
-            "reject"
-          ]
+        "visible": {
+          "staff": true,
+          "applicant": true,
+          "advisor": true
         },
         "component": {
           "name": "message",
@@ -610,18 +525,10 @@
         "id": "rejection",
         "title": "Rejection",
         "description": "This project has been rejected.",
-        "visible": [
-          "staff",
-          "applicant",
-          "advisor"
-        ],
-        "lock": {
-          "open": [
-            "reject"
-          ],
-          "close": [
-            "accept"
-          ]
+        "visible": {
+          "staff": true,
+          "applicant": true,
+          "advisor": true
         },
         "component": {
           "name": "message",
@@ -651,18 +558,10 @@
         "id": "report",
         "title": "Report",
         "description": "The project's final report.",
-        "visible": [
-          "staff",
-          "applicant",
-          "advisor"
-        ],
-        "lock": {
-          "open": [
-            "accept"
-          ],
-          "close": [
-            "report"
-          ]
+        "visible": {
+          "staff": true,
+          "applicant": true,
+          "advisor": true
         },
         "component": {
           "name": "form",
@@ -688,37 +587,41 @@
       "staff": {
         "id": "staff",
         "title": "Administrator",
-        "visible": [
-          "staff"
-        ]
+        "visible": {
+          "staff": true
+        },
+        "assignable": {}
       },
       "applicant": {
         "id": "applicant",
         "title": "Applicant",
-        "visible": [
-          "staff",
-          "applicant",
-          "advisor",
-          "reviewer"
-        ]
+        "visible": {
+          "staff": true,
+          "applicant": true,
+          "advisor": true,
+          "reviewer": true
+        },
+        "assignable": {}
       },
       "advisor": {
         "id": "advisor",
         "title": "Advisor",
-        "visible": [
-          "staff",
-          "applicant",
-          "advisor",
-          "reviewer"
-        ]
+        "visible": {
+          "staff": true,
+          "applicant": true,
+          "advisor": true,
+          "reviewer": true
+        },
+        "assignable": {}
       },
       "reviewer": {
         "id": "reviewer",
         "title": "Reviewer",
-        "visible": [
-          "staff",
-          "reviewer"
-        ]
+        "visible": {
+          "staff": true,
+          "reviewer": true
+        },
+        "assignable": {}
       }
     },
     "status": "active",
