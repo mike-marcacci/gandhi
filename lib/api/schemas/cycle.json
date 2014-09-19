@@ -394,15 +394,16 @@
       "additionalProperties": {
         "anyOf": [
           {
-            "type": "boolean"
-          },
-          {
             "type": "object",
             "additionalProperties": false,
             "default": {
               "open": [],
               "close": []
             },
+            "required": [
+              "open",
+              "close"
+            ],
             "properties": {
               "open": {
                 "default": true,
@@ -419,13 +420,23 @@
                 ]
               },
               "close": {
-                "type": "array",
-                "default": [],
-                "items": {
-                  "type": "string"
-                }
+                "default": false,
+                "anyOf": [
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "type": "boolean"
+                  }
+                ]
               }
             }
+          },
+          {
+            "type": "boolean"
           }
         ]
       }
