@@ -3,7 +3,7 @@
   <span class="help-block" ng-bind-html="form.description"></span>
   <span ng-if="hasError()" class="help-block">{{errorMessage(schemaError())}}</span>
   <textarea class="form-control"
-            ckeditor
+            ckeditor="{readOnly: true, toolbar: []}"
             sf-changed="form"
             ng-model="$$value$$"
             ng-model-options="form.ngModelOptions"
