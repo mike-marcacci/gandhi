@@ -6,6 +6,7 @@
     "name",
     "mimetype",
     "encoding",
+    "path",
     "extension",
     "size"
   ],
@@ -29,6 +30,10 @@
       "default": ""
     },
     "encoding": {
+      "type": "string",
+      "default": ""
+    },
+    "path": {
       "type": "string",
       "default": ""
     },
