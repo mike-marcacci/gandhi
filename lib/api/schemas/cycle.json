@@ -174,25 +174,25 @@
           "visible": {
             "applicant": true
           },
-          "lock": {
-            "open": [
-              "open"
-            ],
-            "close": [
-              "submit",
-              "archive",
-              "close"
-            ]
+          "visible": {
+            "applicant": {
+              "open": [
+                "open"
+              ],
+              "close": [
+                "close"
+              ]
+            }
           },
           "component": {
             "name": "start",
             "options": {
               "next": null,
-              "role": "applicant",
-              "permissions": {
-                "write": [
-                  "applicant"
-                ]
+              "role": "applicant"
+            },
+            "permissions": {
+              "write": {
+                "applicant": true
               }
             }
           },
@@ -231,6 +231,13 @@
                   "options": {
                     "type": "object",
                     "additionalProperties": true
+                  },
+                  "permissions": {
+                    "type": "object",
+                    "default": {},
+                    "additionalProperties": {
+                      "$ref": "#/definitions/permission"
+                    }
                   }
                 }
               },
