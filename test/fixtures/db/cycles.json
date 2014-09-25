@@ -7,11 +7,11 @@
       "open": {
         "id": "open",
         "title": "Application Window Opened",
-        "messages":[
+        "messages": [
           "Applications are not yet being accepted.",
           "Applications are being accepted."
         ],
-        "conditions":[
+        "conditions": [
           [
             {
               "name": "date",
@@ -19,24 +19,23 @@
                 "mode": "after",
                 "date": {
                   "$reql_type$": "TIME",
-                  "epoch_time":1405203171.364,
+                  "epoch_time": 1405203171.364,
                   "timezone": "+00:00"
                 }
               }
             }
           ]
         ],
-        "listeners":[
-        ]
+        "listeners": []
       },
       "warning": {
         "id": "warning",
         "title": "Application Window Closing Soon",
-        "messages":[
+        "messages": [
           "This project is not in jeopardy of missing the application window.",
           "This project is in jeopardy of missing the application window."
         ],
-        "conditions":[
+        "conditions": [
           [
             {
               "name": "date",
@@ -44,7 +43,7 @@
                 "mode": "after",
                 "date": {
                   "$reql_type$": "TIME",
-                  "epoch_time":1405803171.364,
+                  "epoch_time": 1405803171.364,
                   "timezone": "+00:00"
                 }
               }
@@ -53,18 +52,18 @@
               "name": "regex",
               "options": {
                 "regex": "^complete$",
-                "invert":true,
+                "invert": true,
                 "pointer": "/flow/stages/submission/status"
               }
             }
           ]
         ],
-        "listeners":[
+        "listeners": [
           {
             "name": "email",
             "options": {
-              "value":true,
-              "roles":[
+              "value": true,
+              "roles": [
                 "applicant",
                 "advisor"
               ],
@@ -76,11 +75,11 @@
       "close": {
         "id": "close",
         "title": "Application Window Closed",
-        "messages":[
+        "messages": [
           "Applications are still open.",
           "Applications are no longer being accepted."
         ],
-        "conditions":[
+        "conditions": [
           [
             {
               "name": "date",
@@ -88,24 +87,23 @@
                 "mode": "after",
                 "date": {
                   "$reql_type$": "TIME",
-                  "epoch_time":1406203171.364,
+                  "epoch_time": 1406203171.364,
                   "timezone": "+00:00"
                 }
               }
             }
           ]
         ],
-        "listeners":[
-        ]
+        "listeners": []
       },
       "complete": {
         "id": "complete",
         "title": "Application Complete",
-        "messages":[
+        "messages": [
           "The application is not yet complete.",
           "The application is complete."
         ],
-        "conditions":[
+        "conditions": [
           [
             {
               "name": "regex",
@@ -130,17 +128,16 @@
             }
           ]
         ],
-        "listeners":[
-        ]
+        "listeners": []
       },
       "submit": {
         "id": "submit",
         "title": "Officially Submitted",
-        "messages":[
+        "messages": [
           "This project has not yet been submitted.",
           "This project has been submitted."
         ],
-        "conditions":[
+        "conditions": [
           [
             {
               "name": "regex",
@@ -151,17 +148,16 @@
             }
           ]
         ],
-        "listeners":[
-        ]
+        "listeners": []
       },
       "report": {
         "id": "report",
         "title": "Report Submitted",
-        "messages":[
+        "messages": [
           "This project's report has not yet been submitted.",
           "This project's report has been submitted."
         ],
-        "conditions":[
+        "conditions": [
           [
             {
               "name": "regex",
@@ -172,17 +168,16 @@
             }
           ]
         ],
-        "listeners":[
-        ]
+        "listeners": []
       },
       "archive": {
         "id": "archive",
         "title": "Archived",
-        "messages":[
+        "messages": [
           "This project is not archived.",
           "This project has been archived."
         ],
-        "conditions":[
+        "conditions": [
           [
             {
               "name": "regex",
@@ -193,17 +188,16 @@
             }
           ]
         ],
-        "listeners":[
-        ]
+        "listeners": []
       },
       "accept": {
         "id": "accept",
         "title": "Accepted",
-        "messages":[
+        "messages": [
           "This project has not yet been accepted.",
           "This project has been accepted."
         ],
-        "conditions":[
+        "conditions": [
           [
             {
               "name": "regex",
@@ -214,17 +208,16 @@
             }
           ]
         ],
-        "listeners":[
-        ]
+        "listeners": []
       },
       "reject": {
         "id": "reject",
         "title": "Rejected",
-        "messages":[
+        "messages": [
           "This project is not rejected.",
           "This project has been rejected."
         ],
-        "conditions":[
+        "conditions": [
           [
             {
               "name": "regex",
@@ -235,8 +228,7 @@
             }
           ]
         ],
-        "listeners":[
-        ]
+        "listeners": []
       }
     },
     "defaults": {
@@ -250,25 +242,25 @@
         "title": "Start",
         "description": "Start your application!",
         "visible": {
-          "staff":true,
-          "applicant":true,
-          "advisor":true,
-          "reviewer":true
+          "staff": true,
+          "applicant": true,
+          "advisor": true,
+          "reviewer": true
         },
         "component": {
           "name": "start",
           "options": {
             "next": "team",
-            "role": "applicant",
-            "permissions": {
-              "write":[
-                "staff",
-                "applicant"
-              ]
+            "role": "applicant"
+          },
+          "permissions": {
+            "write": {
+              "staff": true,
+              "applicant": true
             }
           }
         },
-        "next":[
+        "next": [
           "team"
         ]
       },
@@ -277,32 +269,32 @@
         "title": "Team",
         "description": "Build your team by adding collaborators to your application.",
         "visible": {
-          "staff":true,
-          "applicant":true,
-          "advisor":true,
-          "reviewer":true
+          "staff": true,
+          "applicant": true,
+          "advisor": true,
+          "reviewer": true
         },
         "component": {
           "name": "users",
           "options": {
             "next": "application",
-            "roles":[
+            "roles": [
               "applicant",
               "advisor"
-            ],
-            "permissions": {
-              "assign":[
-                "staff",
-                "applicant"
-              ],
-              "remove":[
-                "staff",
-                "applicant"
-              ]
+            ]
+          },
+          "permissions": {
+            "assign": {
+              "staff": true,
+              "applicant": true
+            },
+            "remove": {
+              "staff": true,
+              "applicant": true
             }
           }
         },
-        "next":[
+        "next": [
           "application"
         ]
       },
@@ -311,30 +303,30 @@
         "title": "Application Form",
         "description": "Fill out our online application form.",
         "visible": {
-          "staff":true,
-          "applicant":true,
-          "advisor":true,
-          "reviewer":true
+          "staff": true,
+          "applicant": true,
+          "advisor": true,
+          "reviewer": true
         },
         "component": {
           "name": "form",
           "options": {
-            "next": "assignment",
-            "permissions": {
-              "read":[
-                "staff",
-                "applicant",
-                "advisor",
-                "reviewer"
-              ],
-              "write":[
-                "staff",
-                "applicant"
-              ]
+            "next": "assignment"
+          },
+          "permissions": {
+            "read": {
+              "staff": true,
+              "applicant": true,
+              "advisor": true,
+              "reviewer": true
+            },
+            "write": {
+              "staff": true,
+              "applicant": true
             }
           }
         },
-        "next":[
+        "next": [
           "submission"
         ]
       },
@@ -343,30 +335,30 @@
         "title": "Official Submission",
         "description": "Officially submit your application. Once submitted, your application can no longer be edited.",
         "visible": {
-          "staff":true,
-          "applicant":true,
-          "advisor":true,
-          "reviewer":true
+          "staff": true,
+          "applicant": true,
+          "advisor": true,
+          "reviewer": true
         },
         "component": {
           "name": "form",
           "options": {
-            "next": "acknowledgment",
-            "permissions": {
-              "read":[
-                "staff",
-                "applicant",
-                "advisor",
-                "reviewer"
-              ],
-              "write":[
-                "staff",
-                "applicant"
-              ]
+            "next": "acknowledgment"
+          },
+          "permissions": {
+            "read": {
+              "staff": true,
+              "applicant": true,
+              "advisor": true,
+              "reviewer": true
+            },
+            "write": {
+              "staff": true,
+              "applicant": true
             }
           }
         },
-        "next":[
+        "next": [
           "acknowledgment"
         ]
       },
@@ -375,35 +367,32 @@
         "title": "Submission Acknowledgment",
         "description": "This page acknowledges that the application was received.",
         "visible": {
-          "applicant":true,
-          "advisor":true
+          "applicant": true,
+          "advisor": true
         },
         "component": {
           "name": "message",
           "options": {
             "default": {
               "default": "You have not yet submitted your application.",
-              "roles": {
-              }
+              "roles": {}
             },
             "open": {
               "default": "Thank you for submitting your application! It will be reviewed shortly.",
-              "roles": {
-              }
+              "roles": {}
             },
             "close": {
               "default": "Thank you for submitting your application! A funding decision has been made.",
-              "roles": {
-              }
-            },
-            "permissions": {
-              "write":[
-                "staff"
-              ]
+              "roles": {}
+            }
+          },
+          "permissions": {
+            "write": {
+              "staff": true
             }
           }
         },
-        "next":[
+        "next": [
           "assignment"
         ]
       },
@@ -412,25 +401,25 @@
         "title": "Reviewer Assignment",
         "description": "Assign reviewers to the project.",
         "visible": {
-          "staff":true
+          "staff": true
         },
         "component": {
           "name": "users",
           "options": {
-            "roles":[
+            "roles": [
               "reviewer"
-            ],
-            "permissions": {
-              "assign":[
-                "staff"
-              ],
-              "remove":[
-                "staff"
-              ]
+            ]
+          },
+          "permissions": {
+            "assign": {
+              "staff": true
+            },
+            "remove": {
+              "staff": true
             }
           }
         },
-        "next":[
+        "next": [
           "review"
         ]
       },
@@ -439,35 +428,34 @@
         "title": "Review",
         "description": "The project will be reviewed by assigned reviewers.",
         "visible": {
-          "staff":true,
-          "applicant":true,
-          "advisor":true,
-          "reviewer":true
+          "staff": true,
+          "applicant": true,
+          "advisor": true,
+          "reviewer": true
         },
         "component": {
           "name": "review",
-          "options": {
-            "permissions": {
-              "write":[
-                "reviewer"
-              ],
-              "read.public":[
-                "staff",
-                "applicant",
-                "advisor",
-                "reviewer"
-              ],
-              "read.private":[
-                "staff",
-                "reviewer"
-              ],
-              "read.users":[
-                "staff"
-              ]
+          "options": {},
+          "permissions": {
+            "write": {
+              "reviewer": true
+            },
+            "read.public": {
+              "staff": true,
+              "applicant": true,
+              "advisor": true,
+              "reviewer": true
+            },
+            "read.private": {
+              "staff": true,
+              "reviewer": true
+            },
+            "read.users": {
+              "staff": true
             }
           }
         },
-        "next":[
+        "next": [
           "decision"
         ]
       },
@@ -476,26 +464,26 @@
         "title": "Funding Decision",
         "description": "Decide to fund the project or not.",
         "visible": {
-          "staff":true
+          "staff": true
         },
         "component": {
           "name": "status",
           "options": {
-            "statuses":[
+            "statuses": [
               "accepted",
               "rejected"
-            ],
-            "permissions": {
-              "read":[
-                "staff"
-              ],
-              "write":[
-                "staff"
-              ]
+            ]
+          },
+          "permissions": {
+            "read": {
+              "staff": true
+            },
+            "write": {
+              "staff": true
             }
           }
         },
-        "next":[
+        "next": [
           "rejection",
           "acceptance"
         ]
@@ -505,36 +493,33 @@
         "title": "Acceptance",
         "description": "This project has been accepted.",
         "visible": {
-          "staff":true,
-          "applicant":true,
-          "advisor":true
+          "staff": true,
+          "applicant": true,
+          "advisor": true
         },
         "component": {
           "name": "message",
           "options": {
             "default": {
               "default": "No decision has been made about your application.",
-              "roles": {
-              }
+              "roles": {}
             },
             "open": {
               "default": "Congratulations! Your application has been accepted.",
-              "roles": {
-              }
+              "roles": {}
             },
             "close": {
               "default": "We're sorry, but your application was not accepted.",
-              "roles": {
-              }
-            },
-            "permissions": {
-              "write":[
-                "staff"
-              ]
+              "roles": {}
+            }
+          },
+          "permissions": {
+            "write": {
+              "staff": true
             }
           }
         },
-        "next":[
+        "next": [
           "report"
         ]
       },
@@ -543,66 +528,61 @@
         "title": "Rejection",
         "description": "This project has been rejected.",
         "visible": {
-          "staff":true,
-          "applicant":true,
-          "advisor":true
+          "staff": true,
+          "applicant": true,
+          "advisor": true
         },
         "component": {
           "name": "message",
           "options": {
             "default": {
               "default": "No decision has been made about your application.",
-              "roles": {
-              }
+              "roles": {}
             },
             "open": {
               "default": "We're sorry, but your application was not accepted.",
-              "roles": {
-              }
+              "roles": {}
             },
             "close": {
               "default": "Congratulations! Your application has been accepted.",
-              "roles": {
-              }
-            },
-            "permissions": {
-              "write":[
-                "staff"
-              ]
+              "roles": {}
+            }
+          },
+          "permissions": {
+            "write": {
+              "staff": true
             }
           }
         },
-        "next":[
-        ]
+        "next": []
       },
       "report": {
         "id": "report",
         "title": "Report",
         "description": "The project's final report.",
         "visible": {
-          "staff":true,
-          "applicant":true,
-          "advisor":true
+          "staff": true,
+          "applicant": true,
+          "advisor": true
         },
         "component": {
           "name": "form",
           "options": {
-            "next":null,
-            "permissions": {
-              "read":[
-                "staff",
-                "applicant",
-                "advisor"
-              ],
-              "write":[
-                "staff",
-                "applicant"
-              ]
+            "next": null
+          },
+          "permissions": {
+            "read": {
+              "staff": true,
+              "applicant": true,
+              "advisor": true
+            },
+            "write": {
+              "staff": true,
+              "applicant": true
             }
           }
         },
-        "next":[
-        ]
+        "next": []
       }
     },
     "roles": {
@@ -610,44 +590,40 @@
         "id": "staff",
         "title": "Administrator",
         "visible": {
-          "staff":true
+          "staff": true
         },
-        "assignable": {
-        }
+        "assignable": {}
       },
       "applicant": {
         "id": "applicant",
         "title": "Applicant",
         "visible": {
-          "staff":true,
-          "applicant":true,
-          "advisor":true,
-          "reviewer":true
+          "staff": true,
+          "applicant": true,
+          "advisor": true,
+          "reviewer": true
         },
-        "assignable": {
-        }
+        "assignable": {}
       },
       "advisor": {
         "id": "advisor",
         "title": "Advisor",
         "visible": {
-          "staff":true,
-          "applicant":true,
-          "advisor":true,
-          "reviewer":true
+          "staff": true,
+          "applicant": true,
+          "advisor": true,
+          "reviewer": true
         },
-        "assignable": {
-        }
+        "assignable": {}
       },
       "reviewer": {
         "id": "reviewer",
         "title": "Reviewer",
         "visible": {
-          "staff":true,
-          "reviewer":true
+          "staff": true,
+          "reviewer": true
         },
-        "assignable": {
-        }
+        "assignable": {}
       }
     },
     "status": "active",
