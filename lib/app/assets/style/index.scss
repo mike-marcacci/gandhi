@@ -203,6 +203,12 @@ body {
 	padding: 1em;
 }
 
+table[gandhi-admin-table] {
+	th, td {
+		max-width: 200px;
+	}
+}
+
 @media (max-width: 768px) {
 	#sidebar {
 		position: relative;
