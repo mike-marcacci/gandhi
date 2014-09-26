@@ -28,6 +28,17 @@ module.exports = function(){
     });
   });
 
+  // migrate permissions
+  _.each(cycle.flow, function(flow){
+    var p = flow.component.options.permissions; if(!p) return;
+      delete flow.component.options.permissions;
+      flow.component.permissions = {};
+    _.each(p, function(arr, name){
+      var o = {}; _.each(arr, function(n){o[n] = true;});
+      flow.component.permissions[name] = o;
+    })
+  });
+
 // TODO: update the cycles
 
 }

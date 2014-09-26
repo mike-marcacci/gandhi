@@ -32,7 +32,7 @@
     "passport-local": "^1.0.0",
     "qs": "^1.2.2",
     "res-error": "^0.3.1",
-    "rethinkdb": "^1.14.0-0",
+    "rethinkdb": "^1.15.0-0",
     "scrypt": "^3.0.1",
     "supertest": "^0.12.1",
     "wiredep": "^1.8.2"
