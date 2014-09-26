@@ -19,10 +19,12 @@
 				</div>
 			</div>
 			<div ng-show="!source" class="panel-body">
-				<div class="alert alert-info">
-					<b>Coming Back Soon!</b> Admin summary views will return shortly – until then, you can continue to look at the project details.
+				<div ng-repeat="stage in cycle.flow">
+					<h3>{{stage.title}}</h3>
+					<p class="help-block">
+						Details here...
+					</p>
 				</div>
-				<button class="btn btn-primary" ui-sref="portal.projects.show({project: project.id})">View Project Details</button>
 			</div>
 			<form ng-show="source" class="form-horizontal" role="form" ng-submit="replace()">
 				<div ui-ace="{mode: 'json'}" style="height: 600px;" ng-model="projectSource"></div>
