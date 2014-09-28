@@ -36,7 +36,8 @@
       "type": "date"
     },
     "preferences": {
-      "type": "object"
+      "type": "object",
+      "default": {}
     }
   }
 }

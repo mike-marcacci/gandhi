@@ -14,14 +14,14 @@
 			<div class="panel-heading">
 				<span class="panel-title">{{cycle.title}}</span>
 				<div class="pull-right">
-					<button class="btn btn-xs" ng-show="replace" ng-class="{'btn-default': true, 'active': source}" ng-click="toggleSource()"><i class="glyphicon glyphicon-edit"></i></button>
+					<button ng-show="currentUser.preferences.admin.technical" class="btn btn-xs" ng-show="replace" ng-class="{'btn-default': true, 'active': source}" ng-click="toggleSource()"><i class="glyphicon glyphicon-edit"></i></button>
 					<button class="btn btn-xs btn-default" ng-show="destroy" ng-click="destroy()"><i class="glyphicon glyphicon-trash"></i></button>
 				</div>
 			</div>
 			<div ng-hide="source" class="panel-body">
 				<ul class="nav nav-pills">
 					<li ng-class="{active: $state.is('portal.admin.cycles.show')}"><a ui-sref="portal.admin.cycles.show">General</a></li>
-					<li ng-class="{active: $state.includes('portal.admin.cycles.show.flow')}"><a ui-sref="portal.admin.cycles.show.flow.stage({stage: cycle.defaults.flow})">Flow</a></li>
+					<li ng-show="currentUser.preferences.admin.technical" ng-class="{active: $state.includes('portal.admin.cycles.show.flow')}"><a ui-sref="portal.admin.cycles.show.flow.stage({stage: cycle.defaults.flow})">Flow</a></li>
 					<!-- <li ng-class="{active: $state.includes('portal.admin.cycles.show.roles')}"><a ui-sref="portal.admin.cycles.show.roles">Roles</a></li> -->
 					<li ng-class="{active: $state.includes('portal.admin.cycles.show.users')}"><a ui-sref="portal.admin.cycles.show.users">Users</a></li>
 					<!-- <li ng-class="{active: $state.includes('portal.admin.cycles.show.statuses')}"><a ui-sref="portal.admin.cycles.show.statuses">Statuses</a></li> -->
