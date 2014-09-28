@@ -78,14 +78,10 @@
       "additionalProperties": {
         "anyOf": [
           {
-            "type": "null"
-          },
-          {
             "type": "object",
             "additionalProperties": false,
             "required": [
-              "id",
-              "role"
+              "id"
             ],
             "properties": {
               "id": {
@@ -94,8 +90,15 @@
               },
               "role": {
                 "type": "string"
+              },
+              "invitation_id": {
+                "type": ["string", "null"],
+                "default": null
               }
             }
+          },
+          {
+            "type": "null"
           }
         ]
       }
@@ -106,9 +109,6 @@
       "additionalProperties": {
         "anyOf": [
           {
-            "type": "null"
-          },
-          {
             "type": "object",
             "additionalProperties": false,
             "required": [
@@ -123,10 +123,25 @@
               "role": {
                 "type": "string"
               },
-              "secret": {
-                "type": "string"
+              "name": {
+                "type": "string",
+                "default": ""
+              },
+              "email": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null
               }
             }
+          },
+          {
+            "type": "null"
           }
         ]
       }

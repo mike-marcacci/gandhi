@@ -19,7 +19,10 @@ before(function(){
 });
 
 describe('Projects', function(){
-	var adminToken, adminId, userToken, userId, ids = [];
+	var adminToken, adminId,
+	    userToken, userId,
+	    unaffiliatedToken, unaffiliatedId,
+	    ids = [];
 
 	before(function(done){
 		request
@@ -51,6 +54,23 @@ describe('Projects', function(){
 				assert.isString(res.body.token);
 				userToken = res.body.token;
 				userId = jwt.decode(userToken).sub;
+				done();
+			});
+	});
+
+	before(function(done){
+		request
+			.post('/api/tokens')
+			.send({
+				email: 'mark.boerneke@test.gandhi.io',
+				password: 'mark1234'
+			})
+			.expect(201)
+			.end(function(err, res){
+				assert.isNull(err);
+				assert.isString(res.body.token);
+				unaffiliatedToken = res.body.token;
+				unaffiliatedId = jwt.decode(unaffiliatedToken).sub;
 				done();
 			});
 	});
@@ -171,17 +191,71 @@ describe('Projects', function(){
 				.expect(401)
 				.end(done);
 		});
+		it('rejects an update by an unaffiliated non-admin user', function(done){
+			request
+				.patch('/api/projects/' + ids[0])
+				.set('Authorization', 'Bearer ' + unaffiliatedToken)
+				.send({title: 'Woops!'})
+				.expect(403)
+				.end(done);
+		});
 		it('accepts an update by an unaffiliated admin user', function(done){
 			request
 				.patch('/api/projects/' + ids[0])
 				.set('Authorization', 'Bearer ' + adminToken)
 				.send({
-					title: 'UPDATED'
+					title: 'UPDATED (By Admin)',
+					invitations: {
+						'72d8153e-dc53-4fcc-98c8-febfc4f171ed': {
+						  id: '72d8153e-dc53-4fcc-98c8-febfc4f171ed',
+						  role: 'applicant',
+						  name: 'Mark Boerneke',
+						  email: 'mark.boerneke@test.gandhi.io'
+						}
+					}
 				})
 				.expect(200)
 				.end(function(err, res){
 					assert.isNull(err);
 					assert.equal(res.body.id, ids[0]);
+					done();
+				});
+		});
+		it('rejects an update with an invalid invitation', function(done){
+			request
+				.patch('/api/projects/' + ids[0])
+				.set('Authorization', 'Bearer ' + unaffiliatedToken)
+				.send({
+					title: 'Woops!',
+					users: {
+						'82b08fd0-b93d-4169-a0bf-b25823077adb': {
+							id: '82b08fd0-b93d-4169-a0bf-b25823077adb',
+							invitation_id: '0853609d-5c15-4843-ae91-c60b3c7cb0c8'
+						}
+					}
+				})
+				.expect(400)
+				.end(done);
+		});
+		it('accepts an update by an invited non-admin user', function(done){
+			request
+				.patch('/api/projects/' + ids[0])
+				.set('Authorization', 'Bearer ' + unaffiliatedToken)
+				.send({
+					title: 'UPDATED (By Invited User)',
+					users: {
+						'82b08fd0-b93d-4169-a0bf-b25823077adb': {
+							id: '82b08fd0-b93d-4169-a0bf-b25823077adb',
+							invitation_id: '72d8153e-dc53-4fcc-98c8-febfc4f171ed'
+						}
+					}
+				})
+				.expect(200)
+				.end(function(err, res){
+					assert.isNull(err);
+					assert.equal(res.body.id, ids[0]);
+					assert.property(res.body.users, unaffiliatedId);
+					assert.equal(res.body.users[unaffiliatedId].role, 'applicant');
 					done();
 				});
 		});

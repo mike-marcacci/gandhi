@@ -63,10 +63,11 @@
       }
     },
     "invitations": {
-      "tim.marcacci@test.gandhi.io": {
-        "id": "tim.marcacci@test.gandhi.io",
+      "3ec75913-91e1-4c5f-8567-a032f19fe395": {
+        "id": "3ec75913-91e1-4c5f-8567-a032f19fe395",
         "role": "applicant",
-        "secret": "ociuzxvhxcoiausydfagkbadkjhclizuhaefhbdskja"
+        "name": "Mark Boerneke",
+        "email": "mark.boerneke@test.gandhi.io"
       }
     }
   }
