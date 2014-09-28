@@ -37,6 +37,46 @@
 
 		<div class="panel panel-default">
 			<div class="panel-heading">
+				<span class="panel-title">Invitations</span>
+			</div>
+			<div class="panel-body">
+				<p class="help-block">Use invitations to assign a role to someone who does not yet have an account. Once the invited creates an account, she can use the invitation link to join the project.</p>
+			</div>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th style="width: 30%">Name</th>
+						<th style="width: 30%">Role</th>
+						<th style="width: 30%">Link</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="active">
+						<td><input type="text" class="form-control" placeholder="Name..." ng-model="newInvitation.name"></td>
+						<td>
+							<ui-select ng-disabled="disabled" ng-model="newInvitation.role" theme="bootstrap">
+								<ui-select-match placeholder="Choose a role...">{{$select.selected.title}}</ui-select-match>
+								<ui-select-choices repeat="item in newInvitation.roles | filter: $select.search">
+									<div ng-bind-html="item.title | highlight: $select.search"></div>
+								</ui-select-choices>
+							</ui-select>
+						</td>
+						<td><input class="form-control" disabled placeholder="(Auto-Generated)"></td>
+						<td align="right"><button ng-click="newInvitation.submit()" class="btn btn-primary">Assign</button></td>
+					</tr>
+					<tr ng-repeat="invitation in project.invitations">
+						<td>{{invitation.name}}</td>
+						<td>{{cycle.roles[invitation.role].title || '[INVALID ROLE]'}}</td>
+						<td><input class="form-control" ng-model="invitation.id"></td>
+						<td align="right"><button ng-click="removeInvitation(invitation.id)" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i></button></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
 				<span class="panel-title">Project Users</span>
 			</div>
 			<table class="table table-hover">
@@ -72,7 +112,7 @@
 					</tr>
 					<tr ng-repeat="assignment in project.users">
 						<td><a ui-sref="portal.admin.users.show({user: assignment.id})">{{users[assignment.id].name || assignment.id}}</a></td>
-						<td>{{cycle.roles[assignment.role].title}}</td>
+						<td>{{cycle.roles[assignment.role].title || '[INVALID ROLE]'}}</td>
 						<td align="right"><button ng-click="removeUser(assignment.id)" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i></button></td>
 					</tr>
 				</tbody>
@@ -97,7 +137,7 @@
 				<tbody>
 					<tr ng-repeat="assignment in cycle.users">
 						<td><a ui-sref="portal.admin.users.show({user: assignment.id})">{{users[assignment.id].name || assignment.id}}</a></td>
-						<td>{{cycle.roles[assignment.role].title}}</td>
+						<td>{{cycle.roles[assignment.role].title || '[INVALID ROLE]'}}</td>
 						<td align="right"></td>
 					</tr>
 				</tbody>
