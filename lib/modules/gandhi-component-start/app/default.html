@@ -1,6 +1,16 @@
-<div class="alert alert-warning" role="alert" ng-show="!permissions.read">Sorry, but you don't have permission to read this stage.</div>
+<div class="alert alert-info" role="alert" ng-show="status == 'draft'" sf-decorator-name="'bootstrap-decorator'">
+	This stage is saved as a draft.
+</div>
 
-<div class="row" ng-show="permissions.read">
+<div class="alert alert-info" role="alert" ng-show="status == 'complete'" sf-decorator-name="'bootstrap-decorator'">
+	This stage has been submitted.
+</div>
+
+<div class="alert alert-warning" role="alert" ng-show="!permissions.read" sf-decorator-name="'bootstrap-decorator'">
+	Sorry, but you don't have permission to read this stage.
+</div>
+
+<div ng-show="permissions.read" class="row" ng-show="permissions.read">
 
 	<div class="col-md-6" ng-show="options.info">
 		<div class="panel panel-default" ng-show="options.info">
@@ -22,10 +32,10 @@
 				<form role="form" ng-submit="submit()">
 					<div class="form-group">
 						<label for="title">Title</label>
-						<input type="text" class="form-control" id="title" placeholder="Your Project's Title Goes Here" ng-model="data.title" ng-disabled="lock || !permissions.write">
+						<input type="text" class="form-control" id="title" placeholder="Your Project's Title Goes Here" ng-model="data.title" ng-disabled="!permissions.write">
 					</div>
 
-					<input type="submit" class="btn btn-sm btn-primary" value="Submit" ng-disabled="!data.title || lock || !permissions.write">
+					<input ng-show="permissions.write" type="submit" class="btn btn-sm btn-primary" value="Submit" ng-disabled="!data.title">
 				</form>
 
 			</div>
