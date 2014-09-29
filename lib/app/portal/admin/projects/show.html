@@ -45,15 +45,17 @@
 			<table class="table table-hover">
 				<thead>
 					<tr>
-						<th style="width: 30%">Name</th>
-						<th style="width: 30%">Role</th>
-						<th style="width: 30%">Link</th>
+						<th style="width: 22%;">Name</th>
+						<th style="width: 22%;">Email</th>
+						<th style="width: 22%;">Role</th>
+						<th style="width: 22%;">Invitation Code</th>
 						<th></th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr class="active">
 						<td><input type="text" class="form-control" placeholder="Name..." ng-model="newInvitation.name"></td>
+						<td><input type="text" class="form-control" placeholder="Email..." ng-model="newInvitation.email"></td>
 						<td>
 							<ui-select ng-disabled="disabled" ng-model="newInvitation.role" theme="bootstrap">
 								<ui-select-match placeholder="Choose a role...">{{$select.selected.title}}</ui-select-match>
@@ -66,10 +68,18 @@
 						<td align="right"><button ng-click="newInvitation.submit()" class="btn btn-primary">Assign</button></td>
 					</tr>
 					<tr ng-repeat="invitation in project.invitations">
-						<td>{{invitation.name}}</td>
-						<td>{{cycle.roles[invitation.role].title || '[INVALID ROLE]'}}</td>
-						<td><input class="form-control" ng-model="invitation.id"></td>
-						<td align="right"><button ng-click="removeInvitation(invitation.id)" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i></button></td>
+						<td><div style="padding: 5px;" ng-bind="invitation.name"></div></td>
+						<td><div style="padding: 5px;" ng-bind="invitation.email"></div></td>
+						<td><div style="padding: 5px;" ng-bind="cycle.roles[invitation.role].title || '[INVALID ROLE]'"></div></td>
+						<td>
+							<div class="input-group">
+								<input type="text" class="form-control input-sm" value="{{project.id + ':' + invitation.id}}" select-on-click>
+								<span class="input-group-btn">
+									<a class="btn btn-default btn-sm" type="button" href="{{mailInvitation(invitation)}}"><i class="glyphicon glyphicon-envelope"></i></a>
+								</span>
+							</div>
+						</td>
+						<td align="right"><div style="padding: 5px;"><button ng-click="removeInvitation(invitation.id)" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i></button></div></td>
 					</tr>
 				</tbody>
 			</table>
