@@ -3,22 +3,8 @@
 		<span class="panel-title">{{stage.title}}</span>
 	</div>
 	<div class="panel-body">
-
-		<div class="alert alert-info" role="alert" ng-show="status == 'draft'" sf-decorator-name="'bootstrap-decorator'">
-			This stage is saved as a draft.
-		</div>
-
-		<div class="alert alert-info" role="alert" ng-show="status == 'complete'" sf-decorator-name="'bootstrap-decorator'">
-			This stage has been submitted.
-		</div>
-
-		<div class="alert alert-warning" role="alert" ng-show="!permissions.read" sf-decorator-name="'bootstrap-decorator'">
-			Sorry, but you don't have permission to read this stage.
-		</div>
-
-		<div ng-show="permissions.read">
 			<div>
-				<form name="gandhiFormComponent" ng-submit="submit(gandhiFormComponent, data)">
+				<form name="gandhiFormComponent">
 					<div sf-model="data" sf-form="form" sf-schema="options.schema" sf-options="config"></div>
 
 
@@ -45,6 +31,5 @@
 					<button ng-show="saveable && permissions.write" class="btn btn-primary" ng-bind="options.submitButtonText || 'Submit'"></button>
 				</form>
 			</div>
-		</div>
 	</div>
 </div>
