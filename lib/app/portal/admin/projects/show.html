@@ -6,6 +6,26 @@
 
 <div class="row">
 	<div class="col-md-3 hidden-xs hidden-sm">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<div class="input-group">
+					<ui-select ng-disabled="disabled" ng-model="constraints.cycle" theme="bootstrap">
+						<ui-select-match placeholder="Choose a cycle...">{{$select.selected.title}}</ui-select-match>
+						<ui-select-choices refresh="constraints.search($select.search)" refresh-delay="200" repeat="item in constraints.cycles | filter: $select.search">
+							<div ng-bind-html="item.title | highlight: $select.search"></div>
+						</ui-select-choices>
+					</ui-select>
+					<span class="input-group-btn">
+					  <button class="btn btn-default" ng-disabled="!constraints.cycle" ng-click="constraints.cycle = null" type="button"><i class="glyphicon glyphicon-remove-circle"></i></button>
+					</span>
+				</div>
+
+				<div ng-show="constraints.cycle">
+					<!-- <div ng-repeat="stage in constraints.cycle.flow">{{stage.title}}</div> -->
+					<!-- <div ng-repeat="status in constraints.cycle.statuses">{{status.title}}</div> -->
+				</div>
+			</div>
+		</div>
 		<div gandhi-admin-list="table" base="'portal.admin.projects'" model="'project'" limit="true"></div>
 	</div>
 
@@ -19,10 +39,10 @@
 				</div>
 			</div>
 			<div ng-show="!source" class="panel-body">
-				<div ng-repeat="stage in cycle.flow">
+				<div ng-repeat="stage in cycle.flow" ng-if="stage.summary">
 					<h3>{{stage.title}}</h3>
 					<p class="help-block">
-						Details here...
+						<div gandhi-component="{cycle: cycle, project: project, stage: stage.id, role: role, mode: 'summary'}"></div>
 					</p>
 				</div>
 			</div>

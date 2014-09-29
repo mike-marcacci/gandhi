@@ -230,6 +230,7 @@
                   },
                   "options": {
                     "type": "object",
+                    "default": {},
                     "additionalProperties": true
                   },
                   "permissions": {
@@ -247,6 +248,10 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "summary": {
+                "type": "boolean",
+                "default": false
               }
             }
           },
