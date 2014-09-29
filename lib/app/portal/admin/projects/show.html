@@ -68,18 +68,18 @@
 						<td align="right"><button ng-click="newInvitation.submit()" class="btn btn-primary">Assign</button></td>
 					</tr>
 					<tr ng-repeat="invitation in project.invitations">
-						<td><div style="padding: 5px;" ng-bind="invitation.name"></div></td>
-						<td><div style="padding: 5px;" ng-bind="invitation.email"></div></td>
-						<td><div style="padding: 5px;" ng-bind="cycle.roles[invitation.role].title || '[INVALID ROLE]'"></div></td>
+						<td><div style="padding-top: 6px;" ng-bind="invitation.name"></div></td>
+						<td><div style="padding-top: 6px;" ng-bind="invitation.email"></div></td>
+						<td><div style="padding-top: 6px;" ng-bind="cycle.roles[invitation.role].title || '[INVALID ROLE]'"></div></td>
 						<td>
-							<div class="input-group">
-								<input type="text" class="form-control input-sm" value="{{project.id + ':' + invitation.id}}" select-on-click>
+							<div class="input-group input-group-sm">
+								<input type="text" class="form-control" value="{{project.id + ':' + invitation.id}}" select-on-click>
 								<span class="input-group-btn">
-									<a class="btn btn-default btn-sm" type="button" href="{{mailInvitation(invitation)}}"><i class="glyphicon glyphicon-envelope"></i></a>
+									<a class="btn btn-default" type="button" href="{{mailInvitation(invitation)}}"><i class="glyphicon glyphicon-envelope"></i></a>
 								</span>
 							</div>
 						</td>
-						<td align="right"><div style="padding: 5px;"><button ng-click="removeInvitation(invitation.id)" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i></button></div></td>
+						<td align="right"><div style="padding-top: 4px;"><button ng-click="removeInvitation(invitation.id)" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i></button></div></td>
 					</tr>
 				</tbody>
 			</table>
