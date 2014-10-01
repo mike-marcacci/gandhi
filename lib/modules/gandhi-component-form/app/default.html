@@ -9,15 +9,15 @@
 		</div>
 
 		<div class="alert alert-info" role="alert" ng-show="status == 'complete'" sf-decorator-name="'bootstrap-decorator'">
-			This stage has been submitted.
+			This stage is complete.
 		</div>
 
 		<div class="alert alert-warning" role="alert" ng-show="!permissions.read" sf-decorator-name="'bootstrap-decorator'">
-			Sorry, but you don't have permission to read this stage.
+			You are not allowed to see the contents of this stage.
 		</div>
 
 		<div class="alert alert-warning" role="alert" ng-show="!permissions.write && permissions.read" sf-decorator-name="'bootstrap-decorator'">
-			Please note, you don't have permission to save changes to this stage.
+			Please note, you are not allwed to make changes to this stage.
 		</div>
 
 		<div ng-show="permissions.read">

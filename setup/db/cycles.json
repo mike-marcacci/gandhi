@@ -1,653 +1,380 @@
 [
-  {
-    "id": "128f2348-99d4-40a1-b5ab-91d9019f272d",
-    "title": "Sample Application Cycle",
-    "description": "This application cycle is just a sample.",
-    "events": {
-      "open": {
-        "id": "open",
-        "title": "Application Window Opened",
-        "messages": [
-          "Applications are not yet being accepted.",
-          "Applications are being accepted."
-        ],
-        "conditions": [
-          [
-            {
-              "name": "date",
-              "options": {
-                "mode": "after",
-                "date": {
-                  "$reql_type$": "TIME",
-                  "epoch_time": 1405203171.364,
-                  "timezone": "+00:00"
-                }
-              }
-            }
-          ]
-        ],
-        "listeners": []
-      },
-      "warning": {
-        "id": "warning",
-        "title": "Application Window Closing Soon",
-        "messages": [
-          "This project is not in jeopardy of missing the application window.",
-          "This project is in jeopardy of missing the application window."
-        ],
-        "conditions": [
-          [
-            {
-              "name": "date",
-              "options": {
-                "mode": "after",
-                "date": {
-                  "$reql_type$": "TIME",
-                  "epoch_time": 1405803171.364,
-                  "timezone": "+00:00"
-                }
-              }
-            },
-            {
-              "name": "regex",
-              "options": {
-                "regex": "^complete$",
-                "invert": true,
-                "pointer": "/flow/stages/submission/status"
-              }
-            }
-          ]
-        ],
-        "listeners": [
-          {
-            "name": "email",
-            "options": {
-              "value": true,
-              "roles": [
-                "applicant",
-                "advisor"
-              ],
-              "template": "Don't get left behind!"
-            }
-          }
-        ]
-      },
-      "close": {
-        "id": "close",
-        "title": "Application Window Closed",
-        "messages": [
-          "Applications are still open.",
-          "Applications are no longer being accepted."
-        ],
-        "conditions": [
-          [
-            {
-              "name": "date",
-              "options": {
-                "mode": "after",
-                "date": {
-                  "$reql_type$": "TIME",
-                  "epoch_time": 1406203171.364,
-                  "timezone": "+00:00"
-                }
-              }
-            }
-          ]
-        ],
-        "listeners": []
-      },
-      "complete": {
-        "id": "complete",
-        "title": "Application Complete",
-        "messages": [
-          "The application is not yet complete.",
-          "The application is complete."
-        ],
-        "conditions": [
-          [
-            {
-              "name": "regex",
-              "options": {
-                "regex": "^complete$",
-                "pointer": "/flow/stages/start/status"
-              }
-            },
-            {
-              "name": "regex",
-              "options": {
-                "regex": "^complete$",
-                "pointer": "/flow/stages/team/status"
-              }
-            },
-            {
-              "name": "regex",
-              "options": {
-                "regex": "^complete$",
-                "pointer": "/flow/stages/application/status"
-              }
-            }
-          ]
-        ],
-        "listeners": []
-      },
-      "submit": {
-        "id": "submit",
-        "title": "Officially Submitted",
-        "messages": [
-          "This project has not yet been submitted.",
-          "This project has been submitted."
-        ],
-        "conditions": [
-          [
-            {
-              "name": "regex",
-              "options": {
-                "regex": "^complete$",
-                "pointer": "/flow/stages/submission/status"
-              }
-            }
-          ]
-        ],
-        "listeners": []
-      },
-      "report": {
-        "id": "report",
-        "title": "Report Submitted",
-        "messages": [
-          "This project's report has not yet been submitted.",
-          "This project's report has been submitted."
-        ],
-        "conditions": [
-          [
-            {
-              "name": "regex",
-              "options": {
-                "regex": "^complete$",
-                "pointer": "/flow/stages/report/status"
-              }
-            }
-          ]
-        ],
-        "listeners": []
-      },
-      "archive": {
-        "id": "archive",
-        "title": "Archived",
-        "messages": [
-          "This project is not archived.",
-          "This project has been archived."
-        ],
-        "conditions": [
-          [
-            {
-              "name": "regex",
-              "options": {
-                "regex": "^archived$",
-                "pointer": "/status"
-              }
-            }
-          ]
-        ],
-        "listeners": []
-      },
-      "accept": {
-        "id": "accept",
-        "title": "Accepted",
-        "messages": [
-          "This project has not yet been accepted.",
-          "This project has been accepted."
-        ],
-        "conditions": [
-          [
-            {
-              "name": "regex",
-              "options": {
-                "regex": "^accepted$",
-                "pointer": "/status"
-              }
-            }
-          ]
-        ],
-        "listeners": []
-      },
-      "reject": {
-        "id": "reject",
-        "title": "Rejected",
-        "messages": [
-          "This project is not rejected.",
-          "This project has been rejected."
-        ],
-        "conditions": [
-          [
-            {
-              "name": "regex",
-              "options": {
-                "regex": "^rejected$",
-                "pointer": "/status"
-              }
-            }
-          ]
-        ],
-        "listeners": []
-      }
-    },
-    "root": "start",
-    "flow": {
-      "start": {
-        "id": "start",
-        "title": "Start",
-        "description": "Start your application!",
-        "visible": {
-          "staff": true,
-          "applicant": true,
-          "advisor": true,
-          "reviewer": true
-        },
-        "component": {
-          "name": "start",
-          "status": "active",
-          "options": {
-            "next": "team",
-            "role": "applicant",
-            "permissions": {
-              "write": [
-                "staff",
-                "applicant"
-              ]
-            }
-          }
-        },
-        "next": [
-          "team"
-        ]
-      },
-      "team": {
-        "id": "team",
-        "title": "Team",
-        "description": "Build your team by adding collaborators to your application.",
-        "visible": {
-          "staff": true,
-          "applicant": true,
-          "advisor": true,
-          "reviewer": true
-        },
-        "component": {
-          "name": "users",
-          "options": {
-            "next": "application",
-            "roles": [
-              "applicant",
-              "advisor"
-            ],
-            "permissions": {
-              "assign": [
-                "staff",
-                "applicant"
-              ],
-              "remove": [
-                "staff",
-                "applicant"
-              ]
-            }
-          }
-        },
-        "next": [
-          "supplement"
-        ]
-      },
-      "application": {
-        "id": "application",
-        "title": "Application Form",
-        "description": "Fill out our online application form.",
-        "visible": {
-          "staff": true,
-          "applicant": true,
-          "advisor": true,
-          "reviewer": true
-        },
-        "component": {
-          "name": "form",
-          "options": {
-            "next": "assignment",
-            "permissions": {
-              "read": [
-                "staff",
-                "applicant",
-                "advisor",
-                "reviewer"
-              ],
-              "write": [
-                "staff",
-                "applicant"
-              ]
-            }
-          }
-        },
-        "next": [
-          "submission"
-        ]
-      },
-      "submission": {
-        "id": "submission",
-        "title": "Official Submission",
-        "description": "Officially submit your application. Once submitted, your application can no longer be edited.",
-        "visible": {
-          "staff": true,
-          "applicant": true,
-          "advisor": true,
-          "reviewer": true
-        },
-        "component": {
-          "name": "form",
-          "options": {
-            "next": "acknowledgment",
-            "permissions": {
-              "read": [
-                "staff",
-                "applicant",
-                "advisor",
-                "reviewer"
-              ],
-              "write": [
-                "staff",
-                "applicant"
-              ]
-            }
-          }
-        },
-        "next": [
-          "acknowledgment"
-        ]
-      },
-      "acknowledgment": {
-        "id": "acknowledgment",
-        "title": "Submission Acknowledgment",
-        "description": "This page acknowledges that the application was received.",
-        "visible": {
-          "applicant": true,
-          "advisor": true
-        },
-        "component": {
-          "name": "message",
-          "options": {
-            "default": {
-              "default": "You have not yet submitted your application.",
-              "roles": {}
-            },
-            "open": {
-              "default": "Thank you for submitting your application! It will be reviewed shortly.",
-              "roles": {}
-            },
-            "close": {
-              "default": "Thank you for submitting your application! A funding decision has been made.",
-              "roles": {}
-            },
-            "permissions": {
-              "write": [
-                "staff"
-              ]
-            }
-          }
-        },
-        "next": [
-          "assignment"
-        ]
-      },
-      "assignment": {
-        "id": "assignment",
-        "title": "Reviewer Assignment",
-        "description": "Assign reviewers to the project.",
-        "visible": {
-          "staff": true
-        },
-        "component": {
-          "name": "users",
-          "options": {
-            "roles": [
-              "reviewer"
-            ],
-            "permissions": {
-              "assign": [
-                "staff"
-              ],
-              "remove": [
-                "staff"
-              ]
-            }
-          }
-        },
-        "next": [
-          "review"
-        ]
-      },
-      "review": {
-        "id": "review",
-        "title": "Review",
-        "description": "The project will be reviewed by assigned reviewers.",
-        "visible": {
-          "staff": true,
-          "applicant": true,
-          "advisor": true,
-          "reviewer": true
-        },
-        "component": {
-          "name": "review",
-          "options": {
-            "permissions": {
-              "write": [
-                "reviewer"
-              ],
-              "read.public": [
-                "staff",
-                "applicant",
-                "advisor",
-                "reviewer"
-              ],
-              "read.private": [
-                "staff",
-                "reviewer"
-              ],
-              "read.users": [
-                "staff"
-              ]
-            }
-          }
-        },
-        "next": [
-          "decision"
-        ]
-      },
-      "decision": {
-        "id": "decision",
-        "title": "Funding Decision",
-        "description": "Decide to fund the project or not.",
-        "visible": {
-          "staff": true
-        },
-        "component": {
-          "name": "status",
-          "options": {
-            "statuses": [
-              "accepted",
-              "rejected"
-            ],
-            "permissions": {
-              "read": [
-                "staff"
-              ],
-              "write": [
-                "staff"
-              ]
-            }
-          }
-        },
-        "next": [
-          "rejection",
-          "acceptance"
-        ]
-      },
-      "acceptance": {
-        "id": "acceptance",
-        "title": "Acceptance",
-        "description": "This project has been accepted.",
-        "visible": {
-          "staff": true,
-          "applicant": true,
-          "advisor": true
-        },
-        "component": {
-          "name": "message",
-          "options": {
-            "default": {
-              "default": "No decision has been made about your application.",
-              "roles": {}
-            },
-            "open": {
-              "default": "Congratulations! Your application has been accepted.",
-              "roles": {}
-            },
-            "close": {
-              "default": "We're sorry, but your application was not accepted.",
-              "roles": {}
-            },
-            "permissions": {
-              "write": [
-                "staff"
-              ]
-            }
-          }
-        },
-        "next": [
-          "report"
-        ]
-      },
-      "rejection": {
-        "id": "rejection",
-        "title": "Rejection",
-        "description": "This project has been rejected.",
-        "visible": {
-          "staff": true,
-          "applicant": true,
-          "advisor": true
-        },
-        "component": {
-          "name": "message",
-          "options": {
-            "default": {
-              "default": "No decision has been made about your application.",
-              "roles": {}
-            },
-            "open": {
-              "default": "We're sorry, but your application was not accepted.",
-              "roles": {}
-            },
-            "close": {
-              "default": "Congratulations! Your application has been accepted.",
-              "roles": {}
-            },
-            "permissions": {
-              "write": [
-                "staff"
-              ]
-            }
-          }
-        },
-        "next": []
-      },
-      "report": {
-        "id": "report",
-        "title": "Report",
-        "description": "The project's final report.",
-        "visible": {
-          "staff": true,
-          "applicant": true,
-          "advisor": true
-        },
-        "component": {
-          "name": "form",
-          "options": {
-            "next": null,
-            "permissions": {
-              "read": [
-                "staff",
-                "applicant",
-                "advisor"
-              ],
-              "write": [
-                "staff",
-                "applicant"
-              ]
-            }
-          }
-        },
-        "next": []
-      }
-    },
-    "roles": {
-      "staff": {
-        "id": "staff",
-        "title": "Administrator",
-        "visible": {
-          "staff": true
-        },
-        "assignable": {}
-      },
-      "applicant": {
-        "id": "applicant",
-        "title": "Applicant",
-        "visible": {
-          "staff": true,
-          "applicant": true,
-          "advisor": true,
-          "reviewer": true
-        },
-        "assignable": {}
-      },
-      "advisor": {
-        "id": "advisor",
-        "title": "Advisor",
-        "visible": {
-          "staff": true,
-          "applicant": true,
-          "advisor": true,
-          "reviewer": true
-        },
-        "assignable": {}
-      },
-      "reviewer": {
-        "id": "reviewer",
-        "title": "Reviewer",
-        "visible": {
-          "staff": true,
-          "reviewer": true
-        },
-        "assignable": {}
-      }
-    },
-    "status": "active",
-    "statuses": {
-      "active": {
-        "id": "active",
-        "title": "Active"
-      },
-      "accepted": {
-        "id": "accepted",
-        "title": "Accepted"
-      },
-      "rejected": {
-        "id": "rejected",
-        "title": "Rejected"
-      },
-      "archived": {
-        "id": "archived",
-        "title": "Archived"
-      }
-    },
-    "users": {
-      "006d54fa-f19c-48f6-b3c1-748b78e01b02": {
-        "id": "006d54fa-f19c-48f6-b3c1-748b78e01b02",
-        "role": "staff"
-      }
-    }
-  }
+
+{
+	"close": false,
+	"config": {
+		"layout": "pill"
+	},
+	"created": "2014-10-01T07:02:33.431Z",
+	"defaults": {
+		"flow": "start",
+		"role": "applicant",
+		"status": "active"
+	},
+	"description": "This application cycle is just a sample.",
+	"events": {
+		"close": {
+			"conditions": [
+				[
+					{
+						"name": "date",
+						"options": {
+							"date": "2014-07-24T11:59:31.364Z",
+							"mode": "after"
+						}
+					}
+				]
+			],
+			"id": "close",
+			"listeners": [],
+			"messages": [
+				"Applications are still open.",
+				"Applications are no longer being accepted."
+			],
+			"title": "Application Window Closed"
+		},
+		"open": {
+			"conditions": [
+				[
+					{
+						"name": "date",
+						"options": {
+							"date": "2014-07-12T22:12:51.364Z",
+							"mode": "after"
+						}
+					}
+				]
+			],
+			"id": "open",
+			"listeners": [],
+			"messages": [
+				"Applications are not yet being accepted.",
+				"Applications are being accepted."
+			],
+			"title": "Application Window Opened"
+		},
+		"submit": {
+			"conditions": [
+				[
+					{
+						"name": "regex",
+						"options": {
+							"pointer": "/flow/application/status",
+							"regex": "^complete$"
+						}
+					}
+				]
+			],
+			"id": "submit",
+			"listeners": [],
+			"messages": [
+				"This project has not yet been submitted.",
+				"This project has been submitted."
+			],
+			"title": "Officially Submitted"
+		}
+	},
+	"flow": {
+		"application": {
+			"component": {
+				"name": "form",
+				"options": {
+					"form": [
+						{
+							"key": "type",
+							"type": "checkboxes"
+						},
+						{
+							"key": "duration"
+						},
+						{
+							"helpvalue": "<label>Investigators",
+							"type": "help"
+						},
+						{
+							"items": [
+								"['investigators'][]['name']",
+								"['investigators'][]['email']",
+								{
+									"key": "['investigators'][]['cv']",
+									"type": "upload"
+								}
+							],
+							"key": "investigators",
+							"title": "value.name || 'Investigator #'+($index+1)",
+							"type": "tabarray"
+						},
+						{
+							"key": "abstract",
+							"type": "ckeditor"
+						},
+						{
+							"key": "narrative",
+							"type": "upload"
+						},
+						{
+							"key": "budget",
+							"type": "upload"
+						}
+					],
+					"schema": {
+						"properties": {
+							"abstract": {
+								"description": "Please enter (or paste) a 200-250 word project abstract.",
+								"title": "Abstract",
+								"type": "string"
+							},
+							"budget": {
+								"description": "Please attach a project budget. Acceptable file types include Adobe PDF (.pdf), Microsoft Excel (.xls or .xlsx) or Microsoft Word (.doc or .docx). Note: Budget Guidelines are available linked from the CFP page.",
+								"title": "Project Budget",
+								"type": "string"
+							},
+							"duration": {
+								"enum": [
+									"1-Year",
+									"2-Year",
+									"3-Year"
+								],
+								"title": "Project Duration",
+								"type": "string"
+							},
+							"investigators": {
+								"items": {
+									"properties": {
+										"cv": {
+											"description": "Acceptable file formats include Adobe PDF (.pdf) or Microsoft Word (.doc or .docx).",
+											"title": "CV",
+											"type": "string"
+										},
+										"email": {
+											"pattern": "^\\S+@\\S+$",
+											"title": "Email",
+											"type": "string"
+										},
+										"name": {
+											"title": "Name",
+											"type": "string"
+										}
+									},
+									"required": [
+										"name",
+										"email",
+										"cv"
+									],
+									"type": "object"
+								},
+								"type": "array"
+							},
+							"narrative": {
+								"description": "Please attach a project narrative of no more than 10 pages single spaced. Acceptable file formats include Adobe PDF (.pdf) or Microsoft Word (.doc or .docx).",
+								"title": "Project Narrative",
+								"type": "string"
+							},
+							"type": {
+								"description": "Check all that apply.",
+								"enum": [
+									"Large-Scale Collaborative Project",
+									"Seed Project",
+									"Visiting Fellows"
+								],
+								"items": {
+									"enum": [
+										"Large-Scale Collaborative Project",
+										"Seed Project",
+										"Visiting Fellows"
+									],
+									"type": "string"
+								},
+								"title": "Project Type",
+								"type": "array"
+							}
+						},
+						"required": [
+							"duration",
+							"investigators",
+							"narrative",
+							"budget"
+						],
+						"title": "Application",
+						"type": "object"
+					}
+				},
+				"permissions": {
+					"read": {
+						"applicant": true,
+						"reviewer": true
+					},
+					"write": {
+						"applicant": {
+							"open": true,
+							"close": ["submit", "close"]
+						},
+						"reviewer": false
+					}
+				}
+			},
+			"description": "Fill out our online application form.",
+			"id": "application",
+			"next": [
+				"review"
+			],
+			"summary": false,
+			"title": "Application",
+			"visible": {
+				"applicant": true,
+				"reviewer": true
+			}
+		},
+		"decision": {
+			"component": {
+				"name": "status",
+				"options": {
+					"permissions": {
+						"read": {
+							"applicant": true,
+							"reviewer": false
+						},
+						"write": {
+							"applicant": false,
+							"reviewer": false
+						}
+					},
+					"statuses": [
+						"accepted",
+						"rejected"
+					]
+				},
+				"permissions": {}
+			},
+			"description": "Decide to fund the project or not.",
+			"id": "decision",
+			"next": [],
+			"summary": false,
+			"title": "Funding Decision",
+			"visible": {
+				"applicant": {
+					"close": false,
+					"open": [
+						"submit"
+					]
+				},
+				"reviewer": false
+			}
+		},
+		"review": {
+			"component": {
+				"name": "review",
+				"options": {},
+				"permissions": {
+					"read.private": {
+						"applicant": false,
+						"reviewer": true
+					},
+					"read.public": {
+						"applicant": true,
+						"reviewer": true
+					},
+					"write": {
+						"applicant": false,
+						"reviewer": true
+					}
+				}
+			},
+			"description": "The project will be reviewed by assigned reviewers.",
+			"id": "review",
+			"next": [
+				"decision"
+			],
+			"summary": false,
+			"title": "Review",
+			"visible": {
+				"applicant": {
+					"close": false,
+					"open": [
+						"submit"
+					]
+				},
+				"reviewer": true
+			}
+		},
+		"start": {
+			"component": {
+				"name": "start",
+				"options": {
+					"info": "<p><strong>Program Description</strong></p>\n\n<p>The Neubauer Collegium provides financial and administrative support for collaborative research projects that enable University of Chicago faculty to pursue complex questions that require collaboration. Project activities may involve any combination of working group meetings, conferences, performances, short-term or long-term faculty Visiting Fellows (from one month to one academic year), course instruction, research assistance, or any other relevant form of collaborative inquiry. Project activities should be designed in whatever form the applicants think best fits the nature of the questions they are asking. One of the goals of the Neubauer Collegium is to encourage experimentation in the conceptualization of collaborative work &ndash; as such, we welcome proposals that lead outside the boundaries of particular disciplines, or even challenge the nature of those boundaries themselves.&nbsp;</p>\n\n<p><strong>Eligibility</strong></p>\n\n<p>Proposals may originate from teams of collaborators in any discipline, art, science, or administrative unit of the University of Chicago, provided humanistic knowledge and modes of inquiry are central to the pursuit, and provided University of Chicago faculty are engaged in the principal research activities. Current members of the Neubauer Collegium Faculty Advisory Board are ineligible to apply.</p>\n\n<p><strong>Award Information</strong></p>\n\n<p>Neubauer Collegium proposals are solicited for the following programs:</p>\n\n<ol>\n\t<li>\n\t<p>Large-Scale Collaborative Projects: The Neubauer Collegium supports a limited number of large-scale collaborative projects each year. These can be multi-year projects (1-3 years), and may include whatever type of collaborative activities the proposing faculty deem most appropriate to the questions they are pursuing. Requests for support may range from $25,000/year-$100,000/year over the duration of the project (up to $300,000 total for a three-year project).</p>\n\t</li>\n\t<li>\n\t<p>Seed Projects: The Neubauer Collegium supports seed projects for faculty teams wishing to explore collaborative topics at a stage not sufficiently developed for a large-scale award. Seed Projects may be multi-year (1-3 years), and may include whatever type of collaborative activities the proposing faculty deem most appropriate to the questions they are pursuing. Requests for support are accepted for up to $25,000/year over the duration of the project (up to $75,000 total for a three-year project).</p>\n\t</li>\n\t<li>\n\t<p>Visiting Fellows: The Neubauer Collegium can host Visiting Fellows who are not otherwise affiliated with a large-scale or seed project. Nominations for such visitors may be put forward by any individual or group of faculty, and should describe how the Visiting Fellow will catalyze or strengthen collaborative research communities on campus. Although Visiting Fellows may be asked to offer a course, their campus residency is intended to stimulate collaborative research, not to provide curricular coverage. We welcome proposals that include a sabbatical top-off for the visitor while on leave from her/his home institution.</p>\n\t</li>\n</ol>\n\n<p><em>Prospective applicants should download the Neubauer Collegium&nbsp;<a href=\"http://neubauercollegium.uchicago.edu/cfp/guidelines/\" target=\"_blank\">Application Guidelines</a>&nbsp;and are invited to consult with staff at the Neubauer Collegium (<a href=\"mailto:collegium@uchicago.edu\">collegium@uchicago.edu</a>).</em></p>\n",
+					"next": "application"
+				},
+				"permissions": {
+					"read": {
+						"applicant": true,
+						"reviewer": true
+					},
+					"write": {
+						"applicant": {
+							"open": true,
+							"close": ["submit", "close"]
+						},
+						"reviewer": false
+					}
+				}
+			},
+			"description": "Start your application!",
+			"id": "start",
+			"next": [
+				"application"
+			],
+			"summary": false,
+			"title": "Start",
+			"visible": {
+				"applicant": true,
+				"reviewer": true
+			}
+		}
+	},
+	"id": "128f2348-99d4-40a1-b5ab-91d9019f272d",
+	"open": true,
+	"roles": {
+		"applicant": {
+			"assignable": {},
+			"id": "applicant",
+			"title": "Applicant",
+			"visible": {
+				"advisor": true,
+				"applicant": true,
+				"reviewer": true
+			}
+		},
+		"reviewer": {
+			"assignable": {},
+			"id": "reviewer",
+			"title": "Reviewer",
+			"visible": {
+				"reviewer": true
+			}
+		}
+	},
+	"status": "active",
+	"statuses": {
+		"accepted": {
+			"id": "accepted",
+			"title": "Accepted"
+		},
+		"active": {
+			"id": "active",
+			"title": "Active"
+		},
+		"archived": {
+			"id": "archived",
+			"title": "Archived"
+		},
+		"rejected": {
+			"id": "rejected",
+			"title": "Rejected"
+		}
+	},
+	"title": "Sample Application Cycle",
+	"updated": "2014-10-01T08:02:32.965Z",
+	"users": {}
+}
+
 ]

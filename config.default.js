@@ -4,7 +4,7 @@ var fs = require('fs');
 var crypto = require('crypto');
 
 module.exports = {
-	root: '/portal',
+	root: '',
 	db: {
 		host: '127.0.0.1',
 		db: 'gandhi'
