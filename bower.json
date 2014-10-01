@@ -24,7 +24,7 @@
     "bootstrap": "3.2.x",
     "restangular": "~1.4.0",
     "lodash": "~2.4.1",
-    "angular-schema-form": "~0.7.3",
+    "angular-schema-form": "https://github.com/mike-marcacci/angular-schema-form.git#gandhi",
     "angular-ui-ace": "~0.1.1",
     "angular-waterfall": "~0.1.0",
     "ng-file-upload": "~1.6.5",
@@ -53,6 +53,7 @@
   "resolutions": {
     "bootstrap": "3.2.x",
     "angular": "1.3.x",
-    "angular-sanitize": "1.3.x"
+    "angular-sanitize": "1.3.x",
+    "angular-schema-form": "gandhi"
   }
 }
