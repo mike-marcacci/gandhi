@@ -16,7 +16,7 @@
 						</ui-select-choices>
 					</ui-select>
 					<span class="input-group-btn">
-					  <button class="btn btn-default" ng-disabled="!constraints.cycle" ng-click="constraints.cycle = null" type="button"><i class="glyphicon glyphicon-remove-circle"></i></button>
+						<button class="btn btn-default" ng-disabled="!constraints.cycle" ng-click="constraints.cycle = null" type="button"><i class="glyphicon glyphicon-remove-circle"></i></button>
 					</span>
 				</div>
 
@@ -39,6 +39,18 @@
 				</div>
 			</div>
 			<div ng-show="!source" class="panel-body">
+
+
+				<form ng-submit="update()" class="form-inline" role="form">
+					<div class="form-group">
+						<label>Status</label>
+						<select class="form-control" ng-model="projectEdit.status" ng-options="key as value.title for (key, value) in cycle.statuses"></select>
+					</div>
+					<button class="btn btn-primary">Save</button>
+				</form>
+				<hr>
+
+
 				<div ng-repeat="stage in cycle.flow" ng-if="stage.summary">
 					<h3>{{stage.title}}</h3>
 					<p class="help-block">
