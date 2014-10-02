@@ -7,7 +7,6 @@
 				<form name="gandhiFormComponent">
 					<div sf-model="data" sf-form="form" sf-schema="options.schema" sf-options="config"></div>
 
-
 					<!-- <label>Schedule a Time: ({{timezone}})</label> -->
 					<label>Schedule a Time:</label>
 					<div class="help-block" ng-bind-html="description" ng-bind="options.description"></div>
@@ -26,9 +25,6 @@
 							</tr>
 						</table>
 					</div>
-
-					<div ng-show="saveable && permissions.write && options.draft !== false" ng-click="save()" class="btn btn-default" ng-bind="options.draftButtonText || 'Save Draft'"></div>
-					<button ng-show="saveable && permissions.write" class="btn btn-primary" ng-bind="options.submitButtonText || 'Submit'"></button>
 				</form>
 			</div>
 	</div>

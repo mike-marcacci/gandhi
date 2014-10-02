@@ -1,0 +1,1050 @@
+{
+	"close": false,
+	"config": {
+		"layout": "pill"
+	},
+	"created": "2014-08-18T09:49:52.270Z",
+	"defaults": {
+		"flow": "start",
+		"role": "applicant",
+		"status": "preliminary"
+	},
+	"description": "Vision Funds are designed to encourage faculty to explore new uncertain directions for their research rather than support the existing research agendas. Vision grants should be used to systematically test the theoretic assumptions underlying a research project and its potential to grow into a large research initiative.",
+	"events": {
+		"accept": {
+			"conditions": [
+				[
+					{
+						"name": "regex",
+						"options": {
+							"pointer": "/status",
+							"regex": "^accepted$"
+						}
+					}
+				]
+			],
+			"id": "accept",
+			"listeners": [],
+			"messages": [
+				"This project has not yet been accepted.",
+				"This project has been accepted."
+			],
+			"title": "Accepted"
+		},
+		"archive": {
+			"conditions": [
+				[
+					{
+						"name": "regex",
+						"options": {
+							"pointer": "/status",
+							"regex": "^archived$"
+						}
+					}
+				]
+			],
+			"id": "archive",
+			"listeners": [],
+			"messages": [
+				"This project is not archived.",
+				"This project has been archived."
+			],
+			"title": "Archived"
+		},
+		"close": {
+			"conditions": [
+				[
+					{
+						"name": "date",
+						"options": {
+							"date": "2014-09-31T11:59:59.999Z",
+							"mode": "after"
+						}
+					}
+				]
+			],
+			"id": "close",
+			"listeners": [],
+			"messages": [
+				"Applications are still open.",
+				"Applications are no longer being accepted."
+			],
+			"title": "Application Window Closed"
+		},
+		"pre_proposal_submit": {
+			"conditions": [
+				[
+					{
+						"name": "regex",
+						"options": {
+							"pointer": "/flow/pre_proposal/status",
+							"regex": "^complete$"
+						}
+					}
+				]
+			],
+			"id": "pre_proposal_submit",
+			"listeners": [],
+			"messages": [
+				"The pre-proposal has not yet been submitted.",
+				"The pre-proposal has been submitted."
+			],
+			"title": "Application Complete"
+		},
+		"full_proposal_submit": {
+			"conditions": [
+				[
+					{
+						"name": "regex",
+						"options": {
+							"pointer": "/flow/full_proposal/status",
+							"regex": "^complete$"
+						}
+					}
+				]
+			],
+			"id": "pre_proposal_submit",
+			"listeners": [],
+			"messages": [
+				"The full-proposal has not yet been submitted.",
+				"The full-proposal has been submitted."
+			],
+			"title": "Application Complete"
+		},
+		"open": {
+			"conditions": [
+				[
+					{
+						"name": "date",
+						"options": {
+							"date": "2014-07-12T22:12:51.364Z",
+							"mode": "after"
+						}
+					}
+				]
+			],
+			"id": "open",
+			"listeners": [],
+			"messages": [
+				"Applications are not yet being accepted.",
+				"Applications are being accepted."
+			],
+			"title": "Application Window Opened"
+		},
+		"pass": {
+			"conditions": [
+				[
+					{
+						"name": "regex",
+						"options": {
+							"pointer": "/status",
+							"regex": "^passed$"
+						}
+					}
+				]
+			],
+			"id": "pass",
+			"listeners": [],
+			"messages": [
+				"This project has not yet passed administative review.",
+				"This project has passed administative review."
+			],
+			"title": "Passed"
+		},
+		"reject": {
+			"conditions": [
+				[
+					{
+						"name": "regex",
+						"options": {
+							"pointer": "/status",
+							"regex": "^rejected$"
+						}
+					}
+				]
+			],
+			"id": "reject",
+			"listeners": [],
+			"messages": [
+				"This project is not rejected.",
+				"This project has been rejected."
+			],
+			"title": "Rejected"
+		},
+		"report": {
+			"conditions": [
+				[
+					{
+						"name": "regex",
+						"options": {
+							"pointer": "/flow/report/status",
+							"regex": "^complete$"
+						}
+					}
+				]
+			],
+			"id": "report",
+			"listeners": [],
+			"messages": [
+				"This project's report has not yet been submitted.",
+				"This project's report has been submitted."
+			],
+			"title": "Report Submitted"
+		},
+		"warning": {
+			"conditions": [
+				[
+					{
+						"name": "date",
+						"options": {
+							"date": "2014-07-19T20:52:51.364Z",
+							"mode": "after"
+						}
+					},
+					{
+						"name": "regex",
+						"options": {
+							"invert": true,
+							"pointer": "/flow/submission/status",
+							"regex": "^complete$"
+						}
+					}
+				]
+			],
+			"id": "warning",
+			"listeners": [
+				{
+					"name": "email",
+					"options": {
+						"roles": [
+							"applicant",
+							"council"
+						],
+						"template": "Don't get left behind!",
+						"value": true
+					}
+				}
+			],
+			"messages": [
+				"This project is not in jeopardy of missing the application window.",
+				"This project is in jeopardy of missing the application window."
+			],
+			"title": "Application Window Closing Soon"
+		}
+	},
+	"flow": {
+		"start": {
+			"component": {
+				"name": "start",
+				"options": {
+					"info": "<h1>Vision Grants</h1>\n\n<p>Vision Funds are designed to encourage faculty to explore new uncertain directions for their research rather than support the existing research agendas. Vision grants should be used to systematically test the theoretic assumptions underlying a research project and its potential to grow into a large research initiative. In addition, they serve to support preliminary work for a large research proposal to support a substantial research agenda with external funding. Vision projects can originate either as Seed projects or outside of the Big Questions Incubator. Vision grants are peer-reviewed and are focused on supporting data-generating activities, such as</p>\n\n<ul>\n\t<li>Conducting experiments</li>\n\t<li>Sharing a post-doctoral fellow between departments</li>\n\t<li>Developing new techniques, or</li>\n\t<li>Other relevant activities</li>\n</ul>\n\n<p>Vision awards will range from $50,000 - $100,000 for a maximum of 12 months of research work. The proposals should present a plan on how the grant will be crucial in allowing the research team to secure substantial external funding at later stages. These projects may receive customized support from the BQI <a href=\"http://bigquestions.uchicago.edu/about/team\">team</a> and <a href=\"http://arete.uchicago.edu/\">Arete</a>, a strategic research development unit at the Vice President for Research office. Support may involve developing a long-term operational plan and assistance in seeking additional external support in subsequent stages of the project.</p>\n",
+					"next": "pre_proposal",
+					"permissions": {
+						"read": [
+							"staff",
+							"applicant",
+							"council",
+							"reviewer"
+						],
+						"write": [
+							"staff",
+							"applicant"
+						]
+					},
+					"role": "applicant",
+					"status": "active"
+				}
+			},
+			"description": "Begin the application process!",
+			"id": "start",
+			"next": [
+				"pre_proposal"
+			],
+			"title": "Start",
+			"visible": {
+				"applicant": true,
+				"peer": true,
+				"council": true,
+				"reviewer": true,
+				"staff": true
+			}
+		},
+		"pre_proposal": {
+			"component": {
+				"name": "schedule",
+				"options": {
+					"assignments": {
+						"FWpQzfcxdC": "asldfkjsda",
+						"dOruBpCd8T": "asldfkjsda",
+						"j7FvqwBVRk": "asldfkjsda",
+						"kqoE38UEVY": "asldfkjsda"
+					},
+					"description": "Please schedule a time to meet in person with the staff.",
+					"form": [
+						{
+							"key": "pre_proposal",
+							"type": "upload"
+						},
+						{
+							"helpvalue": "<label>Recommended Reviewers</label><span class=\"help-block\">Please identify at least two (2), and up to five (5) peer reviewers who may be able to provide an expert perspective on your Vision proposal. Your suggested reviewers must be qualified to review your research proposal, must not be a collaborator on your project, and must not possess any other conflict of interest in reviewing and scoring your proposal. Please be sure to include each suggested reviewer’s full name, title, affiliation, email address, mailing address, phone number, and website address (if available). As part of the proposal evaluation process, the BQI team may contact these candidates for peer review. There is no guarantee that the reviewers you have listed here will review your proposal. The Selection Committee will ultimately determine the reviewers.</span>",
+							"type": "help"
+						},
+						{
+							"items": [
+								"reviewers[].name",
+								"reviewers[].title",
+								"reviewers[].affiliation",
+								"reviewers[].email",
+								"reviewers[].phone",
+								"reviewers[].address",
+								"reviewers[].website"
+							],
+							"key": "reviewers",
+							"title": "value.name || 'Reviewer #'+$index",
+							"type": "tabarray"
+						}
+					],
+					"next": "pre_proposal",
+					"permissions": {
+						"read": [
+							"staff",
+							"applicant",
+							"council",
+							"reviewer"
+						],
+						"write": [
+							"staff",
+							"applicant"
+						]
+					},
+					"schema": {
+						"required": [
+							"pre_proposal",
+							"reviewers"
+						],
+						"properties": {
+							"pre_proposal": {
+								"description": "Please submit a 1 page document (excluding references) using single space and standard font answering the questions below.",
+								"title": "Pre-Proposal",
+								"type": "string",
+								"minLength": 1
+							},
+							"reviewers": {
+								"items": {
+									"properties": {
+										"address": {
+											"title": "Address",
+											"type": "string"
+										},
+										"affiliation": {
+											"title": "Affiliation",
+											"type": "string"
+										},
+										"email": {
+											"format": "email",
+											"title": "Email",
+											"type": "string"
+										},
+										"name": {
+											"title": "Name",
+											"type": "string"
+										},
+										"phone": {
+											"format": "tel",
+											"title": "Phone",
+											"type": "string"
+										},
+										"title": {
+											"title": "Title",
+											"type": "string"
+										},
+										"website": {
+											"title": "Website",
+											"type": "string"
+										}
+									},
+									"required": [
+										"name",
+										"title",
+										"email",
+										"affiliation",
+										"phone"
+									],
+									"type": "object"
+								},
+								"maxItems": 5,
+								"minItems": 2,
+								"title": "Recomended Reviewers",
+								"type": "array"
+							}
+						},
+						"type": "object"
+					},
+					"slots": {
+						"1I9MujIkwW": {
+							"begin": "2014-10-10T12:00:00.000-06:00",
+							"end": "2014-10-10T12:25:00.000-06:00"
+						},
+						"2bNorpKEin": {
+							"begin": "2014-10-06T12:00:00.000-06:00",
+							"end": "2014-10-06T12:25:00.000-06:00"
+						},
+						"6UefebvUUi": {
+							"begin": "2014-10-07T13:00:00.000-06:00",
+							"end": "2014-10-07T13:25:00.000-06:00"
+						},
+						"789lgL986B": {
+							"begin": "2014-10-06T12:30:00.000-06:00",
+							"end": "2014-10-06T12:55:00.000-06:00"
+						},
+						"7pOJzaVW40": {
+							"begin": "2014-10-09T11:00:00.000-06:00",
+							"end": "2014-10-09T11:25:00.000-06:00"
+						},
+						"DA5lAhllkW": {
+							"begin": "2014-10-07T11:00:00.000-06:00",
+							"end": "2014-10-07T11:25:00.000-06:00"
+						},
+						"EFzlrNpUQ6": {
+							"begin": "2014-10-07T12:00:00.000-06:00",
+							"end": "2014-10-07T12:25:00.000-06:00"
+						},
+						"FWpQzfcxdC": {
+							"begin": "2014-10-07T11:30:00.000-06:00",
+							"end": "2014-10-07T11:55:00.000-06:00"
+						},
+						"IPCUHhSACh": {
+							"begin": "2014-10-09T12:30:00.000-06:00",
+							"end": "2014-10-09T12:55:00.000-06:00"
+						},
+						"Jwq0lMO4Cr": {
+							"begin": "2014-10-08T11:30:00.000-06:00",
+							"end": "2014-10-08T11:55:00.000-06:00"
+						},
+						"KoLcpSQ2oY": {
+							"begin": "2014-10-10T12:30:00.000-06:00",
+							"end": "2014-10-10T12:55:00.000-06:00"
+						},
+						"O5ZcWFhG9W": {
+							"begin": "2014-10-06T13:00:00.000-06:00",
+							"end": "2014-10-06T13:25:00.000-06:00"
+						},
+						"WJ7QyXamQ7": {
+							"begin": "2014-10-06T11:30:00.000-06:00",
+							"end": "2014-10-06T11:55:00.000-06:00"
+						},
+						"YKWtLcXDSB": {
+							"begin": "2014-10-08T11:00:00.000-06:00",
+							"end": "2014-10-08T11:25:00.000-06:00"
+						},
+						"Yfd4PFHm1F": {
+							"begin": "2014-10-09T11:30:00.000-06:00",
+							"end": "2014-10-09T11:55:00.000-06:00"
+						},
+						"ZJ3niUl1sS": {
+							"begin": "2014-10-07T12:30:00.000-06:00",
+							"end": "2014-10-07T12:55:00.000-06:00"
+						},
+						"ZfmbbqDmC0": {
+							"begin": "2014-10-10T13:00:00.000-06:00",
+							"end": "2014-10-10T13:25:00.000-06:00"
+						},
+						"dOruBpCd8T": {
+							"begin": "2014-10-08T12:30:00.000-06:00",
+							"end": "2014-10-08T12:55:00.000-06:00"
+						},
+						"j7FvqwBVRk": {
+							"begin": "2014-10-10T11:30:00.000-06:00",
+							"end": "2014-10-10T11:55:00.000-06:00"
+						},
+						"kEe0q7TJ7U": {
+							"begin": "2014-10-09T13:00:00.000-06:00",
+							"end": "2014-10-09T13:25:00.000-06:00"
+						},
+						"kqoE38UEVY": {
+							"begin": "2014-10-10T11:00:00.000-06:00",
+							"end": "2014-10-10T11:25:00.000-06:00"
+						},
+						"lQxzCV6ssF": {
+							"begin": "2014-10-06T11:00:00.000-06:00",
+							"end": "2014-10-06T11:25:00.000-06:00"
+						},
+						"oVZwHznAH1": {
+							"begin": "2014-10-09T12:00:00.000-06:00",
+							"end": "2014-10-09T12:25:00.000-06:00"
+						},
+						"uzAN84hbo5": {
+							"begin": "2014-10-08T12:00:00.000-06:00",
+							"end": "2014-10-08T12:25:00.000-06:00"
+						}
+					},
+					"timezone": "-06:00"
+				}
+			},
+			"description": "Submit Pre-Proposal and schedule an in-person review.",
+			"id": "pre_proposal",
+			"next": [
+				"admin_review"
+			],
+			"title": "Pre-Proposal",
+			"visible": {
+				"applicant": true,
+				"council": true,
+				"reviewer": true,
+				"staff": true
+			}
+		},
+		"admin_review": {
+			"component": {
+				"name": "start",
+				"options": {
+					"close": {
+						"default": "Thank you for submitting your application! A funding decision has been made.",
+						"roles": {}
+					},
+					"default": {
+						"default": "You have not yet submitted your application.",
+						"roles": {}
+					},
+					"open": {
+						"default": "Thank you for submitting your application! It will be reviewed shortly.",
+						"roles": {}
+					},
+					"permissions": {
+						"write": [
+							"staff"
+						]
+					}
+				}
+			},
+			"description": "Begin the application process!",
+			"id": "admin_review",
+			"next": [
+				"full_proposal"
+			],
+			"title": "Admin Review",
+			"visible": {
+				"applicant": {
+					"open": ["pass","reject"],
+					"close": false
+				},
+				"council": false,
+				"reviewer": false,
+				"staff": true
+			}
+		},
+		"full_proposal": {
+			"component": {
+				"name": "form",
+				"options": {
+					"form": [
+						{
+							"items": [
+								"pi.name",
+								"pi.email",
+								"pi.rank",
+								"pi.department",
+								{
+									"key": "pi.biosketch",
+									"type": "upload"
+								}
+							],
+							"key": "pi"
+						},
+						{
+							"items": [
+								"ci[].name",
+								"ci[].email",
+								"ci[].rank",
+								"ci[].department",
+								"ci[].university",
+								{
+									"key": "ci[]biosketch",
+									"type": "upload"
+								}
+							],
+							"key": "ci"
+						},
+						{
+							"items": [
+								"collaboration.new",
+								{
+									"condition": "model.collaboration.new",
+									"items": [
+										"collaboration.activities",
+										"collaboration.other"
+									],
+									"type": "conditional"
+								}
+							],
+							"key": "collaboration"
+						},
+						{
+							"title": "Your BIG Idea",
+							"type": "fieldset",
+							"items": [
+								{
+									"key": "proposal",
+									"type": "upload"
+								},
+								{
+									"helpvalue": "<div class=\"well\"><h4>How will it change the way we think?</h4><p>State your big idea and how it relates to one of the guiding questions (<a href=\"http://bigquestions.uchicago.edu/funding/focus-areas/cognition\" target=\"_blank\">cognition</a>, <a href=\"http://bigquestions.uchicago.edu/funding/focus-areas/complexity\" target=\"_blank\">complexity</a>, and <a href=\"http://bigquestions.uchicago.edu/funding/focus-areas/information\" target=\"_blank\">information</a>). &nbsp;Explain what is truly bold about your approach and the long-term impact on the field.</p><p>&nbsp;</p><h4>What will you do?</h4><p>Detail the major activities of the project over the grant period (e.g. methods, plans for analyses, etc.)</p><p>&nbsp;</p><h4>How will this grant help you do what you want in the future?</h4><p>Explain how receiving this grant will be crucial for securing external funding in the future.&nbsp;</p><p>&nbsp;</p><h4>What will you produce?</h4><p>State concrete short-term research outputs for this project (e.g. datasets, tools, publications, etc.)&nbsp;</p></div>",
+									"type": "help"
+								}
+							]
+						},
+						{
+							"key": "abstract",
+							"type": "ckeditor"
+						},
+						{
+							"key": "budget",
+							"type": "upload"
+						},
+						{
+							"key": "budget_narrative",
+							"type": "upload"
+						}
+					],
+					"next": null,
+					"permissions": {
+						"read": [
+							"staff",
+							"applicant",
+							"council",
+							"reviewer"
+						],
+						"write": [
+							"staff",
+							"applicant"
+						]
+					},
+					"schema": {
+						"properties": {
+							"abstract": {
+								"description": "State your hypothesis and how it relates to one of the guiding Big Questions. Explain what is truly bold about your approach – i. e., how it may transform the scholarship on the subject and lead to a substantial research agenda.",
+								"title": "Abstract (300 words max)",
+								"type": "string"
+							},
+							"amount": {
+								"min": 1,
+								"title": "Requested Amount",
+								"type": "number"
+							},
+							"budget": {
+								"description": "Please attach a Budget Summary based on the <a href=\"http://bigquestions.uchicago.edu/sites/531ea09d5aea6d3cd20000ed/assets/536208b05aea6d5873015feb/Template_Budget_Seed.xlsx\">Budget Summary Sheet template</a>. The duration of the project should not exceed 12 months.",
+								"title": "Detailed Budget",
+								"type": "string"
+							},
+							"budget_narrative": {
+								"description": "Please provide a brief justification for each line item in the proposed Budget. Note that while each investigator must include effort in the budget for his or her proposal, that effort can be completely cost-shared (i.e., the effort can be included in the budget at a cost of $0).",
+								"title": "Budget Justification Narrative",
+								"type": "string"
+							},
+							"proposal": {
+								"title": "Full Proposal",
+								"description": "Please submit a 5 page document (excluding references and figures) using single space and standard font answering the questions below.",
+								"type": "string"
+							},
+							"ci": {
+								"items": {
+									"properties": {
+										"biosketch": {
+											"description": "A biosketch should be one page long and provide the investigator’s expertise and the history of funding relevant for this line of research.",
+											"title": "Biosketch",
+											"type": "string"
+										},
+										"department": {
+											"title": "Department",
+											"type": "string"
+										},
+										"email": {
+											"pattern": "^\\S+@\\S+$",
+											"title": "Email",
+											"type": "string"
+										},
+										"name": {
+											"title": "Name",
+											"type": "string"
+										},
+										"rank": {
+											"title": "Rank",
+											"type": "string"
+										},
+										"university": {
+											"enum": [
+												"University of Chicago",
+												"Other"
+											],
+											"title": "University",
+											"type": "string"
+										}
+									},
+									"required": [
+										"department",
+										"email",
+										"name",
+										"rank",
+										"university"
+									],
+									"type": "object"
+								},
+								"title": "Co-Investigators",
+								"type": "array"
+							},
+							"collaboration": {
+								"properties": {
+									"activities": {
+										"items": {
+											"enum": [
+												"Chalk Talk",
+												"Monthly Reception",
+												"Big Questions Dinner"
+											],
+											"type": "string"
+										},
+										"title": "Activities:",
+										"type": "array"
+									},
+									"new": {
+										"title": "Yes, this is a new collaboration?",
+										"type": "boolean"
+									},
+									"other": {
+										"title": "Other",
+										"type": "string"
+									}
+								},
+								"title": "Is this a new collaboration?",
+								"type": "object"
+							},
+							"financial_contact": {
+								"properties": {
+									"email": {
+										"pattern": "^\\S+@\\S+$",
+										"title": "Email",
+										"type": "string"
+									},
+									"name": {
+										"title": "Name",
+										"type": "string"
+									},
+									"phone": {
+										"title": "Phone",
+										"type": "string"
+									}
+								},
+								"required": [
+									"email",
+									"name",
+									"phone"
+								],
+								"title": "Financial Contact",
+								"type": "object"
+							},
+							"pi": {
+								"properties": {
+									"biosketch": {
+										"description": "A biosketch should be one page long and provide the investigator’s expertise and the history of funding relevant for this line of research.",
+										"title": "Biosketch",
+										"type": "string"
+									},
+									"department": {
+										"title": "Department",
+										"type": "string"
+									},
+									"email": {
+										"pattern": "^\\S+@\\S+$",
+										"title": "Email",
+										"type": "string"
+									},
+									"name": {
+										"title": "Name",
+										"type": "string"
+									},
+									"rank": {
+										"title": "Rank",
+										"type": "string"
+									}
+								},
+								"required": [
+									"department",
+									"email",
+									"name",
+									"rank"
+								],
+								"title": "Primary Investigator",
+								"type": "object"
+							}
+						},
+						"required": [
+							"abstract",
+							"amount",
+							"budget",
+							"budget_narrative",
+							"ci",
+							"collaboration",
+							"financial_contact",
+							"pi"
+						],
+						"type": "object"
+					}
+				}
+			},
+			"description": "Fill out our online application form.",
+			"id": "full_proposal",
+			"next": [
+				"peer_review"
+			],
+			"title": "Full Proposal",
+			"visible": {
+				"applicant": {
+					"open": ["pass"],
+					"close": false
+				},
+				"peer": true,
+				"council": true,
+				"reviewer": true,
+				"staff": true
+			}
+		},
+		"peer_review": {
+			"component": {
+				"name": "peer_review",
+				"options": {
+					"permissions": {
+						"read.private": [
+							"staff",
+							"reviewer"
+						],
+						"read.public": [
+							"staff",
+							"applicant",
+							"council",
+							"reviewer"
+						],
+						"read.users": [
+							"staff"
+						],
+						"write": [
+							"reviewer"
+						]
+					}
+				}
+			},
+			"description": "The project will be reviewed by assigned reviewers.",
+			"id": "peer_review",
+			"next": [
+				"advisor_review"
+			],
+			"title": "Peer Review",
+			"visible": {
+				"applicant": false,
+				"peer": true,
+				"council": true,
+				"reviewer": true,
+				"staff": true
+			}
+		},
+		"advisor_review": {
+			"component": {
+				"name": "review",
+				"options": {
+					"permissions": {
+						"read.private": [
+							"staff",
+							"reviewer"
+						],
+						"read.public": [
+							"staff",
+							"applicant",
+							"council",
+							"reviewer"
+						],
+						"read.users": [
+							"staff"
+						],
+						"write": [
+							"reviewer"
+						]
+					}
+				}
+			},
+			"description": "The project will be reviewed by assigned advisory council members.",
+			"id": "advisor_review",
+			"next": [
+				"decision"
+			],
+			"title": "Advisor Review",
+			"visible": {
+				"applicant": false,
+				"peer": false,
+				"council": true,
+				"reviewer": true,
+				"staff": true
+			}
+		},
+		"decision": {
+			"component": {
+				"name": "form",
+				"options": {
+					"next": null,
+					"permissions": {
+						"read": [
+							"staff"
+						],
+						"write": [
+							"staff"
+						]
+					}
+				}
+			},
+			"description": "Distribution of funds to receiving parties.",
+			"id": "decision",
+			"next": [
+				"report"
+			],
+			"title": "Decision",
+			"visible": {
+				"applicant": {
+					"open": ["pass"],
+					"close": false
+				},
+				"staff": true
+			}
+		},
+		"report": {
+			"component": {
+				"name": "form",
+				"options": {
+					"next": null,
+					"permissions": {
+						"read": [
+							"staff",
+							"applicant",
+							"council"
+						],
+						"write": [
+							"staff",
+							"applicant"
+						]
+					}
+				}
+			},
+			"description": "The project's final report.",
+			"id": "report",
+			"next": [],
+			"title": "Report",
+			"visible": {
+				"applicant": {
+					"open": ["accept"],
+					"close": false
+				},
+				"staff": true
+			}
+		}
+	},
+	"id": "4cb6484a-5cf6-4bbc-a00a-12d4f642e491",
+	"open": true,
+	"roles": {
+		"applicant": {
+			"assignable": {
+				"applicant": true,
+				"staff": true
+			},
+			"id": "applicant",
+			"title": "Applicant",
+			"visible": {
+				"applicant": true,
+				"council": true,
+				"reviewer": true,
+				"staff": true
+			}
+		},
+		"peer": {
+			"assignable": {
+				"staff": true
+			},
+			"id": "peer",
+			"title": "Peer Reviewer",
+			"visible": {
+				"council": true,
+				"reviewer": true,
+				"staff": true
+			}
+		},
+		"council": {
+			"assignable": {
+				"staff": true
+			},
+			"id": "council",
+			"title": "Council Member",
+			"visible": {
+				"council": true,
+				"reviewer": true,
+				"staff": true
+			}
+		},
+		"reviewer": {
+			"assignable": {
+				"staff": true
+			},
+			"id": "reviewer",
+			"title": "Reviewer",
+			"visible": {
+				"council": true,
+				"reviewer": true,
+				"staff": true
+			}
+		},
+		"staff": {
+			"assignable": {
+				"staff": true
+			},
+			"id": "staff",
+			"title": "Administrator",
+			"visible": {
+				"staff": true
+			}
+		}
+	},
+	"status": "active",
+	"statuses": {
+		"accepted": {
+			"id": "accepted",
+			"title": "Accepted"
+		},
+		"passed": {
+			"id": "passed",
+			"title": "Active"
+		},
+		"archived": {
+			"id": "archived",
+			"title": "Archived"
+		},
+		"preliminary": {
+			"id": "preliminary",
+			"title": "Preliminary"
+		},
+		"rejected": {
+			"id": "rejected",
+			"title": "Rejected"
+		}
+	},
+	"title": "Vision (Fall 2014)",
+	"updated": "2014-09-19T07:23:50.747Z",
+	"users": {
+		"16b6d45f-2704-47db-bf50-7cec5f4d5e4e": {
+			"id": "16b6d45f-2704-47db-bf50-7cec5f4d5e4e",
+			"role": "staff"
+		},
+		"72e7f9a1-614d-423e-8273-1194932f8718": {
+			"id": "72e7f9a1-614d-423e-8273-1194932f8718",
+			"role": "staff"
+		},
+		"9312e42c-9afd-44c0-b9f7-3a03dbeeb266": {
+			"id": "9312e42c-9afd-44c0-b9f7-3a03dbeeb266",
+			"role": "staff"
+		}
+	}
+}
