@@ -66,9 +66,6 @@
       "additionalProperties": {
         "anyOf": [
           {
-            "type": "null"
-          },
-          {
             "type": "object",
             "required": [
               "id",
@@ -138,6 +135,9 @@
                 }
               }
             }
+          },
+          {
+            "type": "null"
           }
         ]
       }
@@ -278,9 +278,6 @@
       "additionalProperties": {
         "anyOf": [
           {
-            "type": "null"
-          },
-          {
             "type": "object",
             "required": [
               "id",
@@ -304,6 +301,9 @@
                 "$ref": "#/definitions/permission"
               }
             }
+          },
+          {
+            "type": "null"
           }
         ]
       }
@@ -340,9 +340,6 @@
       "additionalProperties": {
         "anyOf": [
           {
-            "type": "null"
-          },
-          {
             "type": "object",
             "required": ["id", "title"],
             "additionalProperties": true,
@@ -355,6 +352,9 @@
                 "type": "string"
               }
             }
+          },
+          {
+            "type": "null"
           }
         ]
       }
@@ -364,9 +364,6 @@
       "default": {},
       "additionalProperties": {
         "anyOf": [
-          {
-            "type": "null"
-          },
           {
             "type": "object",
             "additionalProperties": true,
@@ -383,6 +380,9 @@
                 "type": "string"
               }
             }
+          },
+          {
+            "type": "null"
           }
         ]
       }
