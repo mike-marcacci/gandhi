@@ -51,12 +51,7 @@
 				<hr>
 
 
-				<div ng-repeat="stage in cycle.flow" ng-if="stage.summary">
-					<h3>{{stage.title}}</h3>
-					<p class="help-block">
-						<div gandhi-component="{cycle: cycle, project: project, stage: stage.id, role: role, mode: 'summary'}"></div>
-					</p>
-				</div>
+				<div ng-repeat="stage in cycle.flow" ng-if="stage.summary" gandhi-component="{cycle: cycle, project: project, stage: stage.id, role: role, mode: 'summary'}"></div>
 			</div>
 			<form ng-show="source" class="form-horizontal" role="form" ng-submit="replace()">
 				<div ui-ace="{mode: 'json'}" style="height: 600px;" ng-model="projectSource"></div>
