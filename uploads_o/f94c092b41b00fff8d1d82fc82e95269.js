@@ -15,7 +15,7 @@ module.exports = function(config, app){
 
 	// add resources
 	var resources = {
-		db: require('./api/utils/db.js')(config.db),
+		db: require('./api/utils/db.js')(config.db, 1000),
 		mail: function(data, callback) {
 			_.defaults(data, config.mail.defaults);
 			return transporter.sendMail(data, callback);
