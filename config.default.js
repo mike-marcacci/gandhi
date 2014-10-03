@@ -9,6 +9,11 @@ module.exports = {
 		host: '127.0.0.1',
 		db: 'gandhi'
 	},
+	pool: {
+		max: 1,
+		min: 1,
+		timeout: 30000
+	},
 	auth: {
 		secret: 'rubber bunny'
 	},
