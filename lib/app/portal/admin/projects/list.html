@@ -6,16 +6,34 @@
 
 <div class="panel panel-default">
 	<div class="panel-body">
-		<div class="input-group">
-			<ui-select ng-disabled="disabled" ng-model="constraints.cycle" theme="bootstrap">
-				<ui-select-match placeholder="Choose a cycle...">{{$select.selected.title}}</ui-select-match>
-				<ui-select-choices refresh="constraints.search($select.search)" refresh-delay="200" repeat="item in constraints.cycles | filter: $select.search">
-					<div ng-bind-html="item.title | highlight: $select.search"></div>
-				</ui-select-choices>
-			</ui-select>
-			<span class="input-group-btn">
-			  <button class="btn btn-default" ng-disabled="!constraints.cycle" ng-click="constraints.cycle = null" type="button"><i class="glyphicon glyphicon-remove-circle"></i></button>
-			</span>
+		<div class="row">
+			<div class="col-xs-6">
+				<div class="input-group">
+					<ui-select ng-disabled="disabled" ng-model="constraints.cycle" theme="bootstrap">
+						<ui-select-match placeholder="Choose a cycle...">{{$select.selected.title}}</ui-select-match>
+						<ui-select-choices refresh="constraints.searchCycles($select.search)" refresh-delay="200" repeat="item in constraints.cycles | filter: $select.search">
+							<div ng-bind-html="item.title | highlight: $select.search"></div>
+						</ui-select-choices>
+					</ui-select>
+					<span class="input-group-btn">
+					  <button class="btn btn-default" ng-disabled="!constraints.cycle" ng-click="constraints.cycle = null" type="button"><i class="glyphicon glyphicon-remove-circle"></i></button>
+					</span>
+				</div>
+			</div>
+			<div class="col-xs-6">
+				<div class="input-group">
+					<ui-select ng-disabled="disabled" ng-model="constraints.user" theme="bootstrap">
+						<ui-select-match placeholder="Choose a user...">{{$select.selected.name}}</ui-select-match>
+						<ui-select-choices refresh="constraints.searchUsers($select.search)" refresh-delay="200" repeat="item in constraints.users | filter: $select.search">
+							<div ng-bind-html="item.name | highlight: $select.search"></div>
+							<small ng-bind-html="item.email | highlight: $select.search"></small>
+						</ui-select-choices>
+					</ui-select>
+					<span class="input-group-btn">
+					  <button class="btn btn-default" ng-disabled="!constraints.user" ng-click="constraints.user = null" type="button"><i class="glyphicon glyphicon-remove-circle"></i></button>
+					</span>
+				</div>
+			</div>
 		</div>
 
 		<div ng-show="constraints.cycle">

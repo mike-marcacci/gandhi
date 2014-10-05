@@ -1,3 +1,10 @@
+-
+-
+**We are actively looking for contributors, and are willing to pay for quality pull requests! If you are at all interested, please [send Mike an email](mailto:mike.marcacci@gmail.com)!**
+
+-
+-
+
 Gandhi
 ======
 
