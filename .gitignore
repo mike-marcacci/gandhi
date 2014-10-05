@@ -8,6 +8,7 @@
 /rethinkdb_data
 /uploads
 /files
+/secret.txt
 
 
 #####################
