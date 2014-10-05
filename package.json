@@ -3,6 +3,14 @@
   "version": "0.0.1",
   "main": "lib/index.js",
   "description": "The open source, online grant management system.",
+  "homepage": "http://gandhi.io",
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/mike-marcacci/gandhi.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mike-marcacci/gandhi/issues"
+  },
   "scripts": {
     "postinstall": "bower install",
     "start": "node server.js",
@@ -11,6 +19,7 @@
   },
   "dependencies": {
     "async": "^0.9.0",
+    "bedroll": "^0.0.1",
     "body-parser": "^1.3.1",
     "bower": "^1.3.5",
     "express": "^4.4.3",
