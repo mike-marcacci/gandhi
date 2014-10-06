@@ -172,16 +172,11 @@
           "title": "Start",
           "description": "Start your application!",
           "visible": {
-            "applicant": true
-          },
-          "visible": {
             "applicant": {
               "open": [
                 "open"
               ],
-              "close": [
-                "close"
-              ]
+              "close": false
             }
           },
           "component": {
@@ -409,8 +404,8 @@
             "type": "object",
             "additionalProperties": false,
             "default": {
-              "open": [],
-              "close": []
+              "open": true,
+              "close": false
             },
             "required": [
               "open",
