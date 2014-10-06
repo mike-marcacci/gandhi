@@ -1,17 +1,23 @@
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<span class="panel-title">{{stage.title}} ({{status}})</span>
+		<span class="panel-title">{{stage.title}} ({{status || 'none'}})</span>
 		<div class="btn-group btn-group-xs pull-right">
-		  <button type="button" class="btn btn-default" ng-click="show = true" ng-class="{active: show}">Show</button>
-		  <button type="button" class="btn btn-default" ng-click="show = false" ng-class="{active: !show}">Hide</button>
+			<button type="button" class="btn btn-default" ng-click="show = true" ng-class="{active: show}">Show</button>
+			<button type="button" class="btn btn-default" ng-click="show = false" ng-class="{active: !show}">Hide</button>
 		</div>
 	</div>
-	<div ng-show="show" class="panel-body">
-		<div>
-			<form name="gandhiFormComponent" ng-submit="submit(gandhiFormComponent, data)">
-				<div sf-model="data" sf-form="form" sf-schema="options.schema" sf-options="config"></div>
-			</form>
+	<div class="panel-body" ng-show="show">
+		<div class="row">
+			<div class="col-sm-3">
+				<ul class="nav nav-pills nav-stacked">
+					<li ng-class="{active: read.group.key == group.key}" ng-repeat="group in read.groups"><a href ng-bind="group.title" ng-click="read.group = group"></a></li>
+				</ul>
+			</div>
+			<div class="col-sm-9" ng-if="read.group">
+				<div ng-repeat="review in read.group.data">
+					<form sf-model="review.data" sf-form="read.group.form" sf-schema="options.schema" sf-options="read.config"></form>
+				</div>
+			</div>
 		</div>
-
 	</div>
 </div>
