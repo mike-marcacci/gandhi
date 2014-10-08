@@ -130,7 +130,10 @@
 					<tr ng-repeat="assignment in project.users">
 						<td><a ui-sref="portal.admin.users.show({user: assignment.id})">{{users[assignment.id].name || assignment.id}}</a></td>
 						<td>{{cycle.roles[assignment.role].title || '[INVALID ROLE]'}}</td>
-						<td align="right"><button ng-click="removeUser(assignment.id)" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i></button></td>
+						<td align="right">
+							<button ng-click="mailAssignment(assignment)" class="btn btn-xs btn-default"><i class="glyphicon glyphicon-envelope"></i></button>
+							<button ng-click="removeUser(assignment.id)" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
+						</td>
 					</tr>
 				</tbody>
 			</table>
