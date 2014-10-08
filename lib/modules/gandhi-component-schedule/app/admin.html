@@ -1,34 +1,43 @@
-<div class="panel panel-default">
-	<div class="panel-heading">
-		<span class="panel-title">{{stage.title}}</span>
-	</div>
-	<div class="panel-body">
-		<div ng-click="save()" class="btn btn-sm btn-primary">Save Changes</div>
-	</div>
-</div>
-
 <div class="row">
-
-	<div class="col-sm-6">
+	<div class="col-sm-8">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<span class="panel-title">Schema</span>
+				<span class="panel-title">{{stage.title}}</span>
 			</div>
 			<div class="panel-body">
-				<div ui-ace="{mode: 'json'}" style="height: 400px;" ng-model="schema" ng-model-options="{debounce: 500}"></div>
+				<span class="help-block">Please that these dates are displayed in your browser's local timezone.</span>
+				<div style="overflow-x: auto;">
+					<table class="table table-bordered">
+						<tr>
+							<th ng-repeat="group in schedule">{{group[0].begin | date:'EEEE, MMMM d'}}</th>
+						</tr>
+						<tr>
+							<td ng-repeat="group in schedule">
+								<ul class="nav nav-pills nav-stacked">
+									<li ng-repeat="slot in group" ng-class="{disabled: slot.available, active: slot.id == selected.id}"><a href ng-click="select(slot)">{{slot.begin | date:'h:mm a':timezone}} - {{slot.end | date:'h:mm a':timezone}}</a></li>
+								</ul>
+							</td>
+						</tr>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>
-
-	<div class="col-sm-6">
+	<div class="col-sm-4">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<span class="panel-title">Form</span>
+				<span class="panel-title" ng-bind="project.title || 'Select a Time Slot'"></span>
 			</div>
 			<div class="panel-body">
-				<div ui-ace="{mode: 'json'}" style="height: 400px;" ng-model="form" ng-model-options="{debounce: 500}"></div>
+				<div class="alert alert-info" ng-hide="selected">Please select a time slot from the calendar to the left.</div>
+				<div ng-show="selected">
+					<div>Begins: {{selected.begin | date:'h:mm a':timezone}}</div>
+					<div>Ends: {{selected.end | date:'h:mm a':timezone}}</div>
+					<hr>
+					<div>Project: <a ui-sref="portal.admin.projects.show({project: project.id})" ng-bind="project.title"></a></div>
+
+				</div>
 			</div>
 		</div>
 	</div>
-
 </div>
