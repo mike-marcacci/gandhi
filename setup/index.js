@@ -6,6 +6,10 @@ var fs = require('fs');
 var async = require('async');
 
 module.exports = function(config) {
+
+	// set up and populate uploads
+
+	// set up and populate the database
 	r.connect(config.db, function(err, conn){
 		r.dbList().run(conn, function(err, dbs){
 			if(_.indexOf(dbs, config.db.db) !== -1)
@@ -22,10 +26,10 @@ module.exports = function(config) {
 				}
 
 				var fixtures = [
-					{info: requireJSON(__dirname + '/db/cycles.info'), data: require('./db/cycles.json')},
-					{info: requireJSON(__dirname + '/db/projects.info'), data: require('./db/projects.json')},
-					{info: requireJSON(__dirname + '/db/users.info'), data: require('./db/users.json')},
-					{info: requireJSON(__dirname + '/db/files.info'), data: require('./db/files.json')}
+					{info: requireJSON(__dirname + '/../test/fixtures/db/cycles.info'), data: require('../test/fixtures/db/cycles.json')},
+					{info: requireJSON(__dirname + '/../test/fixtures/db/projects.info'), data: require('../test/fixtures/db/projects.json')},
+					{info: requireJSON(__dirname + '/../test/fixtures/db/users.info'), data: require('../test/fixtures/db/users.json')},
+					{info: requireJSON(__dirname + '/../test/fixtures/db/files.info'), data: require('../test/fixtures/db/files.json')}
 				];
 
 				async.each(fixtures, function(fixture, loop){
