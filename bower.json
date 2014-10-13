@@ -31,7 +31,8 @@
     "bootstrap-vertical-tabs": "~1.1.0",
     "angular-ui-select": "~0.6.0",
     "objectpath": "~1.0.5",
-    "angular-ckeditor": "~0.2.0"
+    "angular-ckeditor": "~0.2.0",
+    "angular-ui-sortable": "~0.12.11"
   },
   "overrides": {
     "ace-builds": {
@@ -48,6 +49,7 @@
     "schemaForm",
     "angularFileUpload",
     "ui.select",
+    "ui.sortable",
     "ObjectPath"
   ],
   "resolutions": {
