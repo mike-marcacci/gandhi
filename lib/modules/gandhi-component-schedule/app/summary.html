@@ -2,32 +2,41 @@
 	<div class="panel-heading">
 		<span class="panel-title">{{stage.title}} ({{status}})</span>
 		<div class="btn-group btn-group-xs pull-right">
-			<button type="button" class="btn btn-default" ng-click="show = true" ng-class="{active: show}">Show</button>
-			<button type="button" class="btn btn-default" ng-click="show = false" ng-class="{active: !show}">Hide</button>
+			<button type="button" class="btn btn-default" ng-click="show = true" ng-class="{active: show}">Expanded</button>
+			<button type="button" class="btn btn-default" ng-click="show = false" ng-class="{active: !show}">Collapsed</button>
 		</div>
 	</div>
-	<div ng-show="show" class="panel-body">
-		<form name="gandhiFormComponent">
-			<div sf-model="data" sf-form="form" sf-schema="options.schema" sf-options="config"></div>
+	<div ng-if="show" class="panel-body">
+		<div>
+			<form name="gandhiFormComponent" ng-submit="submit(gandhiFormComponent, data)">
+				<div sf-model="data" sf-form="options.form" sf-schema="options.schema" sf-options="config"></div>
 
-			<!-- <label>Schedule a Time: ({{timezone}})</label> -->
-			<label>Schedule a Time:</label>
-			<div class="help-block" ng-bind-html="description" ng-bind="options.description"></div>
+				<!-- <label>Schedule a Time: ({{timezone}})</label> -->
+				<label>Schedule a Time:</label>
+				<div class="help-block" ng-bind-html="description" ng-bind="options.description"></div>
 
-			<div style="overflow-x: auto;">
-				<table class="table table-bordered">
-					<tr>
-						<th ng-repeat="group in schedule">{{group[0].begin | date:'EEEE, MMMM d'}}</th>
-					</tr>
-					<tr>
-						<td ng-repeat="group in schedule">
-							<ul class="nav nav-pills nav-stacked">
-								<li ng-repeat="slot in group" ng-class="{disabled: !slot.available, active: slot.id == data.reservation}"><a href ng-click="reserve(slot)">{{slot.begin | date:'h:mm a':timezone}} - {{slot.end | date:'h:mm a':timezone}}</a></li>
-							</ul>
-						</td>
-					</tr>
-				</table>
-			</div>
-		</form>
+				<div style="overflow-x: auto;">
+					<table class="table table-bordered">
+						<tr>
+							<th ng-repeat="group in schedule">{{group[0].begin | date:'EEEE, MMMM d'}}</th>
+						</tr>
+						<tr>
+							<td ng-repeat="group in schedule">
+								<ul class="nav nav-pills nav-stacked">
+									<li ng-repeat="slot in group" ng-class="{disabled: !slot.available, active: slot.id == data.reservation}"><a href ng-click="reserve(slot)">{{slot.begin | date:'h:mm a':timezone}} - {{slot.end | date:'h:mm a':timezone}}</a></li>
+								</ul>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div ng-if="options.summary && !show" class="panel-body">
+		<div>
+			<form name="gandhiFormComponent" ng-submit="submit(gandhiFormComponent, data)">
+				<div sf-model="data" sf-form="options.summary" sf-schema="options.schema" sf-options="config"></div>
+			</form>
+		</div>
 	</div>
 </div>

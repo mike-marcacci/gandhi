@@ -56,7 +56,7 @@
 		<div ng-hide="source" ui-view>
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<span class="panel-title">Summary</span>
+					<span class="panel-title">Project Contents</span>
 				</div>
 				<div ng-show="!source" class="panel-body">
 					<div ng-repeat="stage in cycle.flow" ng-if="stage.summary" gandhi-component="{cycle: cycle, project: project, stage: stage.id, role: role, mode: 'summary'}"></div>
