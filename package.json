@@ -1,12 +1,12 @@
 {
   "name": "gandhi",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "lib/index.js",
   "description": "The open source, online grant management system.",
   "homepage": "http://gandhi.io",
-  "repository" : {
-    "type" : "git",
-    "url" : "https://github.com/mike-marcacci/gandhi.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mike-marcacci/gandhi.git"
   },
   "bugs": {
     "url": "https://github.com/mike-marcacci/gandhi/issues"
