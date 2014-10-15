@@ -8,6 +8,8 @@
 Gandhi
 ======
 
+[![Build Status](https://travis-ci.org/mike-marcacci/gandhi.svg?branch=master)](https://travis-ci.org/mike-marcacci/gandhi)
+
 Gandhi is an open source, online grant management system. It is built with [node](http://nodejs.org/) and uses the impeccable [rethinkdb](http://rethinkdb.com/). While it's still alpha software, it is already being used with great success by a few groups.
 
 Installation
