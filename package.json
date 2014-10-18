@@ -4,7 +4,9 @@
   "main": "lib/index.js",
   "description": "The open source, online grant management system.",
   "homepage": "http://gandhi.io",
-  "engines" : { "node" : "^0.10.3" },
+  "engines": {
+    "node": "^0.10.3"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/mike-marcacci/gandhi.git"
@@ -40,6 +42,7 @@
     "passport": "^0.2.0",
     "passport-http-bearer": "^1.0.1",
     "passport-local": "^1.0.0",
+    "q": "^1.0.1",
     "qs": "^1.2.2",
     "res-error": "^0.3.1",
     "rethinkdb": "^1.15.0-0",

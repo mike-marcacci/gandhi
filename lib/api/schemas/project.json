@@ -1,5 +1,5 @@
 {
-  "id": "project",
+  "id": "http://www.gandhi.io/schema/project",
   "type":"object",
   "$schema": "http://json-schema.org/draft-04/schema",
   "required": [
@@ -43,7 +43,7 @@
         }
       }
     },
-    "flow": {
+    "contents": {
       "type": "object",
       "additionalProperties": {
         "type": "object",
@@ -72,78 +72,64 @@
         }
       }
     },
-    "users": {
+    "assignments": {
       "type": "object",
       "default": {},
       "additionalProperties": {
-        "anyOf": [
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string",
-                "constant": {"$data": "0"}
-              },
-              "role": {
-                "type": "string"
-              },
-              "invitation_id": {
-                "type": ["string", "null"],
-                "default": null
-              }
-            }
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "constant": {"$data": "0"}
           },
-          {
-            "type": "null"
+          "role": {
+            "type": "string"
+          },
+          "invitation_id": {
+            "type": ["string", "null"],
+            "default": null
           }
-        ]
+        }
       }
     },
     "invitations": {
       "type": "object",
       "default": {},
       "additionalProperties": {
-        "anyOf": [
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "required": [
-              "id",
-              "role"
-            ],
-            "properties": {
-              "id": {
-                "type": "string",
-                "constant": {"$data": "0"}
-              },
-              "role": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "role"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "constant": {"$data": "0"}
+          },
+          "role": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "default": ""
+          },
+          "email": {
+            "anyOf": [
+              {
                 "type": "string"
               },
-              "name": {
-                "type": "string",
-                "default": ""
-              },
-              "email": {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
-                "default": null
+              {
+                "type": "null"
               }
-            }
-          },
-          {
-            "type": "null"
+            ],
+            "default": null
           }
-        ]
+        }
       }
     },
     "updated": {

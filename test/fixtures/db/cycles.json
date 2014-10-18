@@ -1,659 +1,1417 @@
 [
-  {
-    "id": "128f2348-99d4-40a1-b5ab-91d9019f272d",
-    "title": "Sample Application Cycle",
-    "description": "This application cycle is just a sample.",
-    "events": {
-      "open": {
-        "id": "open",
-        "title": "Application Window Opened",
-        "messages": [
-          "Applications are not yet being accepted.",
-          "Applications are being accepted."
-        ],
-        "conditions": [
-          [
-            {
-              "name": "date",
-              "options": {
-                "mode": "after",
-                "date": {
-                  "$reql_type$": "TIME",
-                  "epoch_time": 1405203171.364,
-                  "timezone": "+00:00"
-                }
-              }
-            }
-          ]
-        ],
-        "listeners": []
+   {
+      "assignments":{
+         "72e7f9a1-614d-423e-8273-1194932f8718":{
+            "id":"72e7f9a1-614d-423e-8273-1194932f8718",
+            "role":"staff"
+         }
       },
-      "warning": {
-        "id": "warning",
-        "title": "Application Window Closing Soon",
-        "messages": [
-          "This project is not in jeopardy of missing the application window.",
-          "This project is in jeopardy of missing the application window."
-        ],
-        "conditions": [
-          [
-            {
-              "name": "date",
-              "options": {
-                "mode": "after",
-                "date": {
-                  "$reql_type$": "TIME",
-                  "epoch_time": 1405803171.364,
-                  "timezone": "+00:00"
-                }
-              }
+      "close":[
+         "close"
+      ],
+      "config":{
+         "layout":"pill"
+      },
+      "created":{
+         "$reql_type$":"TIME",
+         "epoch_time":1413166638.466,
+         "timezone":"+00:00"
+      },
+      "defaults":{
+         "flow":"start",
+         "role":"applicant",
+         "status":"active"
+      },
+      "description":"Submit your essay for a chance to win a $2000 scholarship!",
+      "events":{
+         "accept":{
+            "conditions":[
+               [
+                  {
+                     "name":"regex",
+                     "options":{
+                        "pointer":"/status",
+                        "regex":"^accepted$"
+                     }
+                  }
+               ]
+            ],
+            "id":"accept",
+            "listeners":[
+
+            ],
+            "title":"Accepted"
+         },
+         "close":{
+            "conditions":[
+               [
+                  {
+                     "name":"date",
+                     "options":{
+                        "date":"2014-09-31T11:59:59.999Z",
+                        "mode":"after"
+                     }
+                  }
+               ]
+            ],
+            "id":"close",
+            "listeners":[
+
+            ],
+            "title":"Application Window Closed"
+         },
+         "open":{
+            "conditions":[
+               [
+                  {
+                     "name":"date",
+                     "options":{
+                        "date":"2014-07-12T22:12:51.364Z",
+                        "mode":"after"
+                     }
+                  }
+               ]
+            ],
+            "id":"open",
+            "listeners":[
+
+            ],
+            "title":"Application Window Opened"
+         },
+         "reject":{
+            "conditions":[
+               [
+                  {
+                     "name":"regex",
+                     "options":{
+                        "pointer":"/status",
+                        "regex":"^rejected$"
+                     }
+                  }
+               ]
+            ],
+            "id":"reject",
+            "listeners":[
+
+            ],
+            "title":"Rejected"
+         },
+         "submit":{
+            "conditions":[
+               [
+                  {
+                     "name":"regex",
+                     "options":{
+                        "pointer":"/flow/application/status",
+                        "regex":"^complete$"
+                     }
+                  }
+               ]
+            ],
+            "id":"submit",
+            "listeners":[
+
+            ],
+            "title":"Officially Submitted"
+         }
+      },
+      "id":"e5f58a2c-2894-40e6-91a9-a110d190e85f",
+      "open":[
+         "open"
+      ],
+      "roles":{
+         "applicant":{
+            "assignable":{
+               "applicant":true,
+               "staff":true
             },
-            {
-              "name": "regex",
-              "options": {
-                "regex": "^complete$",
-                "invert": true,
-                "pointer": "/flow/stages/submission/status"
-              }
+            "id":"applicant",
+            "title":"Applicant",
+            "visible":{
+               "applicant":true,
+               "reviewer":true,
+               "staff":true
             }
-          ]
-        ],
-        "listeners": [
-          {
-            "name": "email",
-            "options": {
-              "value": true,
-              "roles": [
-                "applicant",
-                "advisor"
-              ],
-              "template": "Don't get left behind!"
-            }
-          }
-        ]
-      },
-      "close": {
-        "id": "close",
-        "title": "Application Window Closed",
-        "messages": [
-          "Applications are still open.",
-          "Applications are no longer being accepted."
-        ],
-        "conditions": [
-          [
-            {
-              "name": "date",
-              "options": {
-                "mode": "after",
-                "date": {
-                  "$reql_type$": "TIME",
-                  "epoch_time": 1406203171.364,
-                  "timezone": "+00:00"
-                }
-              }
-            }
-          ]
-        ],
-        "listeners": []
-      },
-      "complete": {
-        "id": "complete",
-        "title": "Application Complete",
-        "messages": [
-          "The application is not yet complete.",
-          "The application is complete."
-        ],
-        "conditions": [
-          [
-            {
-              "name": "regex",
-              "options": {
-                "regex": "^complete$",
-                "pointer": "/flow/stages/start/status"
-              }
+         },
+         "reviewer":{
+            "assignable":{
+               "staff":true
             },
-            {
-              "name": "regex",
-              "options": {
-                "regex": "^complete$",
-                "pointer": "/flow/stages/team/status"
-              }
+            "id":"reviewer",
+            "title":"Reviewer",
+            "visible":{
+               "reviewer":true,
+               "staff":true
+            }
+         },
+         "staff":{
+            "assignable":{
+               "staff":true
             },
-            {
-              "name": "regex",
-              "options": {
-                "regex": "^complete$",
-                "pointer": "/flow/stages/application/status"
-              }
+            "id":"staff",
+            "title":"Administrator",
+            "visible":{
+               "staff":true
             }
-          ]
-        ],
-        "listeners": []
+         }
       },
-      "submit": {
-        "id": "submit",
-        "title": "Officially Submitted",
-        "messages": [
-          "This project has not yet been submitted.",
-          "This project has been submitted."
-        ],
-        "conditions": [
-          [
-            {
-              "name": "regex",
-              "options": {
-                "regex": "^complete$",
-                "pointer": "/flow/stages/submission/status"
-              }
+      "stages":{
+         "application":{
+            "component":{
+               "name":"form",
+               "options":{
+                  "confirm":"You will no longer be able to edit your proposal once it is submitted. Are you sure you want to submit it right now?",
+                  "draftButtonText":"Save Draft",
+                  "form":[
+                     {
+                        "key":"essay",
+                        "type":"ckeditor"
+                     }
+                  ],
+                  "next":null,
+                  "schema":{
+                     "properties":{
+                        "essay":{
+                           "description":"<p>Think carefully about the issue presented in the following excerpt and the assignment below.</p><blockquote><p>What determines success in life is not intelligence or talent, but character: those qualities gained both from living in an honorable and straightforward manner and from learning to deal with disappointment and hardship. Without character, an individual has no hope of true success. Even when competing against opponents of considerable intelligence or strength, those individuals who possess strong character will ultimately win.</p></blockquote><p>Does a person&rsquo;s character determine that person&rsquo;s success in life? Plan and write an essay in which you develop your point of view on this issue. Support your position with reasoning and examples taken from your reading, studies, experience, or observations.</p>",
+                           "title":"Abstract",
+                           "type":"string"
+                        }
+                     },
+                     "required":[
+                        "essay"
+                     ],
+                     "type":"object"
+                  },
+                  "submitButtonText":"Submit Essay"
+               },
+               "permissions":{
+                  "read":{
+                     "applicant":{
+                        "close":[
+                           "submit"
+                        ],
+                        "open":true
+                     },
+                     "reviewer":true,
+                     "staff":true
+                  },
+                  "write":{
+                     "applicant":true,
+                     "staff":true
+                  }
+               }
+            },
+            "description":"Submit your essay right here.",
+            "id":"application",
+            "next":[
+               "review"
+            ],
+            "summary":true,
+            "title":"Essay Submission",
+            "visible":{
+               "applicant":true,
+               "reviewer":true,
+               "staff":true
             }
-          ]
-        ],
-        "listeners": []
+         },
+         "decision":{
+            "component":{
+               "name":"status",
+               "options":{
+                  "statuses":[
+                     "accepted",
+                     "rejected"
+                  ]
+               },
+               "permissions":{
+                  "read":{
+                     "staff":true
+                  },
+                  "write":{
+                     "staff":true
+                  }
+               }
+            },
+            "description":"Decide to fund the project or not.",
+            "id":"decision",
+            "next":[
+
+            ],
+            "summary":false,
+            "title":"Funding Decision",
+            "visible":{
+               "staff":true
+            }
+         },
+         "review":{
+            "component":{
+               "name":"review",
+               "options":{
+                  "form":[
+                     {
+                        "items":[
+                           {
+                              "key":"rating.comment",
+                              "type":"range"
+                           },
+                           "decision.public"
+                        ],
+                        "key":"decision"
+                     },
+                     {
+                        "items":[
+                           {
+                              "key":"justification.comment",
+                              "type":"ckeditor"
+                           },
+                           "justification.public"
+                        ],
+                        "key":"justification"
+                     },
+                     {
+                        "items":[
+                           {
+                              "key":"feedback.comment",
+                              "type":"ckeditor"
+                           },
+                           "feedback.public"
+                        ],
+                        "key":"feedback"
+                     }
+                  ],
+                  "preview":[
+                     "full_proposal"
+                  ],
+                  "ranking":true,
+                  "schema":{
+                     "properties":{
+                        "feedback":{
+                           "properties":{
+                              "comment":{
+                                 "description":"Applicants place great value on independent evaluations, and your observations may improve their study design or direct them to relevant literature. As you prepare your comments, please be sure that the statements are balanced, informative & concise.",
+                                 "title":"Feedback",
+                                 "type":"string"
+                              },
+                              "public":{
+                                 "default":true,
+                                 "readOnly":true,
+                                 "title":"Make this public?",
+                                 "type":"boolean"
+                              }
+                           },
+                           "title":"Feedback to the Author",
+                           "type":"object"
+                        },
+                        "justification":{
+                           "properties":{
+                              "comment":{
+                                 "description":"Only mention points that justify your decision. Please do not summarize the project. Since these comments will not be shared with the author of the proposal, you may choose be more candid.",
+                                 "title":"Justification",
+                                 "type":"string"
+                              },
+                              "public":{
+                                 "default":false,
+                                 "readOnly":true,
+                                 "title":"Make this public?",
+                                 "type":"boolean"
+                              }
+                           },
+                           "title":"Justification Narrative",
+                           "type":"object"
+                        },
+                        "rating":{
+                           "properties":{
+                              "comment":{
+                                 "description":"Rate the essay on a scale of 1 (worst) through 7 (best).",
+                                 "max":7,
+                                 "min":1,
+                                 "title":"Justification",
+                                 "type":"number"
+                              },
+                              "public":{
+                                 "default":false,
+                                 "readOnly":true,
+                                 "title":"Make this public?",
+                                 "type":"boolean"
+                              }
+                           },
+                           "title":"Overall Rating",
+                           "type":"object"
+                        }
+                     },
+                     "required":[
+
+                     ],
+                     "title":"Review",
+                     "type":"object"
+                  }
+               },
+               "permissions":{
+                  "read.private":{
+                     "reviewer":true,
+                     "staff":true
+                  },
+                  "read.public":{
+                     "applicant":true,
+                     "reviewer":true,
+                     "staff":true
+                  },
+                  "read.users":{
+                     "staff":true
+                  },
+                  "write":{
+                     "reviewer":true
+                  }
+               }
+            },
+            "description":"The project will be reviewed by assigned reviewers.",
+            "id":"review",
+            "next":[
+               "decision"
+            ],
+            "summary":false,
+            "title":"Review",
+            "visible":{
+               "reviewer":true,
+               "staff":true
+            }
+         },
+         "start":{
+            "component":{
+               "name":"start",
+               "options":{
+                  "info":"<h1>Essay Contest</h1>\n\n<p>Submit an essay on character for a chance to win a $2000 scholarship.</p>\n",
+                  "next":"application",
+                  "role":"applicant",
+                  "status":"active"
+               },
+               "permissions":{
+                  "read":{
+                     "applicant":true,
+                     "reviewer":true,
+                     "staff":true
+                  },
+                  "write":{
+                     "applicant":{
+                        "close":[
+                           "submit"
+                        ],
+                        "open":true
+                     },
+                     "staff":true
+                  }
+               }
+            },
+            "description":"Begin the application process.",
+            "id":"start",
+            "next":[
+               "application"
+            ],
+            "summary":false,
+            "title":"Start",
+            "visible":{
+               "applicant":true,
+               "reviewer":true,
+               "staff":true
+            }
+         }
       },
-      "report": {
-        "id": "report",
-        "title": "Report Submitted",
-        "messages": [
-          "This project's report has not yet been submitted.",
-          "This project's report has been submitted."
-        ],
-        "conditions": [
-          [
-            {
-              "name": "regex",
-              "options": {
-                "regex": "^complete$",
-                "pointer": "/flow/stages/report/status"
-              }
-            }
-          ]
-        ],
-        "listeners": []
+      "status":"draft",
+      "statuses":{
+         "accepted":{
+            "id":"accepted",
+            "title":"Accepted"
+         },
+         "active":{
+            "id":"active",
+            "title":"Active"
+         },
+         "archived":{
+            "id":"archived",
+            "title":"Archived"
+         },
+         "rejected":{
+            "id":"rejected",
+            "title":"Rejected"
+         }
       },
-      "archive": {
-        "id": "archive",
-        "title": "Archived",
-        "messages": [
-          "This project is not archived.",
-          "This project has been archived."
-        ],
-        "conditions": [
-          [
-            {
-              "name": "regex",
-              "options": {
-                "regex": "^archived$",
-                "pointer": "/status"
-              }
-            }
-          ]
-        ],
-        "listeners": []
-      },
-      "accept": {
-        "id": "accept",
-        "title": "Accepted",
-        "messages": [
-          "This project has not yet been accepted.",
-          "This project has been accepted."
-        ],
-        "conditions": [
-          [
-            {
-              "name": "regex",
-              "options": {
-                "regex": "^accepted$",
-                "pointer": "/status"
-              }
-            }
-          ]
-        ],
-        "listeners": []
-      },
-      "reject": {
-        "id": "reject",
-        "title": "Rejected",
-        "messages": [
-          "This project is not rejected.",
-          "This project has been rejected."
-        ],
-        "conditions": [
-          [
-            {
-              "name": "regex",
-              "options": {
-                "regex": "^rejected$",
-                "pointer": "/status"
-              }
-            }
-          ]
-        ],
-        "listeners": []
+      "title":"Essay Contest",
+      "updated":{
+         "$reql_type$":"TIME",
+         "epoch_time":1413187849.212,
+         "timezone":"+00:00"
       }
-    },
-    "defaults": {
-      "flow": "start",
-      "role": "applicant",
-      "status": "active"
-    },
-    "flow": {
-      "start": {
-        "id": "start",
-        "title": "Start",
-        "description": "Start your application!",
-        "visible": {
-          "staff": true,
-          "applicant": true,
-          "advisor": true,
-          "reviewer": true
-        },
-        "component": {
-          "name": "start",
-          "options": {
-            "next": "team",
-            "role": "applicant"
-          },
-          "permissions": {
-            "write": {
-              "staff": true,
-              "applicant": true
-            }
-          }
-        },
-        "next": [
-          "team"
-        ]
+   },
+   {
+      "assignments":{
+         "5a3cf444-9d87-4125-8026-2d5ffb834676":{
+            "id":"5a3cf444-9d87-4125-8026-2d5ffb834676",
+            "role":"advisor"
+         },
+         "f6826282-1ffb-453d-8804-6b2921e6807f":{
+            "id":"f6826282-1ffb-453d-8804-6b2921e6807f",
+            "role":"advisor"
+         }
       },
-      "team": {
-        "id": "team",
-        "title": "Team",
-        "description": "Build your team by adding collaborators to your application.",
-        "visible": {
-          "staff": true,
-          "applicant": true,
-          "advisor": true,
-          "reviewer": true
-        },
-        "component": {
-          "name": "users",
-          "options": {
-            "next": "application",
-            "roles": [
-              "applicant",
-              "advisor"
-            ]
-          },
-          "permissions": {
-            "assign": {
-              "staff": true,
-              "applicant": true
-            },
-            "remove": {
-              "staff": true,
-              "applicant": true
-            }
-          }
-        },
-        "next": [
-          "application"
-        ]
+      "close":[
+         "close"
+      ],
+      "config":{
+         "layout":"pill"
       },
-      "application": {
-        "id": "application",
-        "title": "Application Form",
-        "description": "Fill out our online application form.",
-        "visible": {
-          "staff": true,
-          "applicant": true,
-          "advisor": true,
-          "reviewer": true
-        },
-        "component": {
-          "name": "form",
-          "options": {
-            "next": "assignment"
-          },
-          "permissions": {
-            "read": {
-              "staff": true,
-              "applicant": true,
-              "advisor": true,
-              "reviewer": true
-            },
-            "write": {
-              "staff": true,
-              "applicant": true
-            }
-          }
-        },
-        "next": [
-          "submission"
-        ]
+      "created":{
+         "$reql_type$":"TIME",
+         "epoch_time":1413164112.703,
+         "timezone":"+00:00"
       },
-      "submission": {
-        "id": "submission",
-        "title": "Official Submission",
-        "description": "Officially submit your application. Once submitted, your application can no longer be edited.",
-        "visible": {
-          "staff": true,
-          "applicant": true,
-          "advisor": true,
-          "reviewer": true
-        },
-        "component": {
-          "name": "form",
-          "options": {
-            "next": "acknowledgment"
-          },
-          "permissions": {
-            "read": {
-              "staff": true,
-              "applicant": true,
-              "advisor": true,
-              "reviewer": true
-            },
-            "write": {
-              "staff": true,
-              "applicant": true
-            }
-          }
-        },
-        "next": [
-          "acknowledgment"
-        ]
+      "defaults":{
+         "flow":"start",
+         "role":"applicant",
+         "stages":"start",
+         "status":"active"
       },
-      "acknowledgment": {
-        "id": "acknowledgment",
-        "title": "Submission Acknowledgment",
-        "description": "This page acknowledges that the application was received.",
-        "visible": {
-          "applicant": true,
-          "advisor": true
-        },
-        "component": {
-          "name": "message",
-          "options": {
-            "default": {
-              "default": "You have not yet submitted your application.",
-              "roles": {}
-            },
-            "open": {
-              "default": "Thank you for submitting your application! It will be reviewed shortly.",
-              "roles": {}
-            },
-            "close": {
-              "default": "Thank you for submitting your application! A funding decision has been made.",
-              "roles": {}
-            }
-          },
-          "permissions": {
-            "write": {
-              "staff": true
-            }
-          }
-        },
-        "next": [
-          "assignment"
-        ]
+      "description":"Seed Funds provide flexible resources to explore bold research ideas that might otherwise be too uncertain for researchers to pursue at an early stage. Seed Awards range from $10,000 - $15,000 for a maximum of a six-month period. Seed Awards could lead to Vision proposals but it is not necessary.",
+      "events":{
+         "accept":{
+            "conditions":[
+               [
+                  {
+                     "name":"regex",
+                     "options":{
+                        "pointer":"/status",
+                        "regex":"^accepted$"
+                     }
+                  }
+               ]
+            ],
+            "id":"accept",
+            "listeners":[
+
+            ],
+            "title":"Accepted"
+         },
+         "archive":{
+            "conditions":[
+               [
+                  {
+                     "name":"regex",
+                     "options":{
+                        "pointer":"/status",
+                        "regex":"^archived$"
+                     }
+                  }
+               ]
+            ],
+            "id":"archive",
+            "listeners":[
+
+            ],
+            "title":"Archived"
+         },
+         "close":{
+            "conditions":[
+               [
+                  {
+                     "name":"date",
+                     "options":{
+                        "date":"2014-09-31T11:59:59.999Z",
+                        "mode":"after"
+                     }
+                  }
+               ]
+            ],
+            "id":"close",
+            "listeners":[
+
+            ],
+            "title":"Application Window Closed"
+         },
+         "open":{
+            "conditions":[
+               [
+                  {
+                     "name":"date",
+                     "options":{
+                        "date":"2014-07-12T22:12:51.364Z",
+                        "mode":"after"
+                     }
+                  }
+               ]
+            ],
+            "id":"open",
+            "listeners":[
+
+            ],
+            "title":"Application Window Opened"
+         },
+         "reject":{
+            "conditions":[
+               [
+                  {
+                     "name":"regex",
+                     "options":{
+                        "pointer":"/status",
+                        "regex":"^rejected$"
+                     }
+                  }
+               ]
+            ],
+            "id":"reject",
+            "listeners":[
+
+            ],
+            "title":"Rejected"
+         },
+         "report":{
+            "conditions":[
+               [
+                  {
+                     "name":"regex",
+                     "options":{
+                        "pointer":"/flow/report/status",
+                        "regex":"^complete$"
+                     }
+                  }
+               ]
+            ],
+            "id":"report",
+            "listeners":[
+
+            ],
+            "title":"Report Submitted"
+         },
+         "submit":{
+            "conditions":[
+               [
+                  {
+                     "name":"regex",
+                     "options":{
+                        "pointer":"/flow/application/status",
+                        "regex":"^complete$"
+                     }
+                  }
+               ]
+            ],
+            "id":"submit",
+            "listeners":[
+
+            ],
+            "title":"Officially Submitted"
+         },
+         "warning":{
+            "conditions":[
+               [
+                  {
+                     "name":"date",
+                     "options":{
+                        "date":"2014-07-19T20:52:51.364Z",
+                        "mode":"after"
+                     }
+                  },
+                  {
+                     "name":"regex",
+                     "options":{
+                        "invert":true,
+                        "pointer":"/flow/submission/status",
+                        "regex":"^complete$"
+                     }
+                  }
+               ]
+            ],
+            "id":"warning",
+            "listeners":[
+               {
+                  "name":"email",
+                  "options":{
+                     "roles":[
+                        "applicant",
+                        "advisor"
+                     ],
+                     "template":"Don't get left behind!",
+                     "value":true
+                  }
+               }
+            ],
+            "title":"Application Window Closing Soon"
+         }
       },
-      "assignment": {
-        "id": "assignment",
-        "title": "Reviewer Assignment",
-        "description": "Assign reviewers to the project.",
-        "visible": {
-          "staff": true
-        },
-        "component": {
-          "name": "users",
-          "options": {
-            "roles": [
-              "reviewer"
-            ]
-          },
-          "permissions": {
-            "assign": {
-              "staff": true
-            },
-            "remove": {
-              "staff": true
-            }
-          }
-        },
-        "next": [
-          "review"
-        ]
+      "id":"128f2348-99d4-40a1-b5ab-91d9019f272d",
+      "invitations":{
+
       },
-      "review": {
-        "id": "review",
-        "title": "Review",
-        "description": "The project will be reviewed by assigned reviewers.",
-        "visible": {
-          "staff": true,
-          "applicant": true,
-          "advisor": true,
-          "reviewer": true
-        },
-        "component": {
-          "name": "review",
-          "options": {},
-          "permissions": {
-            "write": {
-              "reviewer": true
+      "open":[
+         "open"
+      ],
+      "roles":{
+         "advisor":{
+            "assignable":{
+               "staff":true
             },
-            "read.public": {
-              "staff": true,
-              "applicant": true,
-              "advisor": true,
-              "reviewer": true
-            },
-            "read.private": {
-              "staff": true,
-              "reviewer": true
-            },
-            "read.users": {
-              "staff": true
+            "id":"advisor",
+            "title":"Advisor",
+            "visible":{
+               "advisor":true,
+               "reviewer":true,
+               "staff":true
             }
-          }
-        },
-        "next": [
-          "decision"
-        ]
+         },
+         "applicant":{
+            "assignable":{
+               "applicant":true,
+               "staff":true
+            },
+            "id":"applicant",
+            "title":"Applicant",
+            "visible":{
+               "advisor":true,
+               "applicant":true,
+               "reviewer":true,
+               "staff":true
+            }
+         },
+         "reviewer":{
+            "assignable":{
+               "staff":true
+            },
+            "id":"reviewer",
+            "title":"Reviewer",
+            "visible":{
+               "advisor":true,
+               "reviewer":true,
+               "staff":true
+            }
+         },
+         "staff":{
+            "assignable":{
+               "staff":true
+            },
+            "id":"staff",
+            "title":"Administrator",
+            "visible":{
+               "staff":true
+            }
+         }
       },
-      "decision": {
-        "id": "decision",
-        "title": "Funding Decision",
-        "description": "Decide to fund the project or not.",
-        "visible": {
-          "staff": true
-        },
-        "component": {
-          "name": "status",
-          "options": {
-            "statuses": [
-              "accepted",
-              "rejected"
-            ]
-          },
-          "permissions": {
-            "read": {
-              "staff": true
+      "stages":{
+         "acceptance":{
+            "component":{
+               "name":"message",
+               "options":{
+                  "close":{
+                     "default":"We're sorry, but your application was not accepted.",
+                     "roles":{
+
+                     }
+                  },
+                  "default":{
+                     "default":"No decision has been made about your application.",
+                     "roles":{
+
+                     }
+                  },
+                  "open":{
+                     "default":"Congratulations! Your application has been accepted.",
+                     "roles":{
+
+                     }
+                  }
+               },
+               "permissions":{
+                  "write":{
+                     "staff":true
+                  }
+               }
             },
-            "write": {
-              "staff": true
+            "description":"This project has been accepted.",
+            "id":"acceptance",
+            "next":[
+               "report"
+            ],
+            "summary":false,
+            "title":"Acceptance",
+            "visible":{
+               "staff":true
             }
-          }
-        },
-        "next": [
-          "rejection",
-          "acceptance"
-        ]
+         },
+         "administrative_review":{
+            "component":{
+               "name":"message",
+               "options":{
+                  "close":{
+                     "default":"Thank you for submitting your application! A funding decision has been made.",
+                     "roles":{
+
+                     }
+                  },
+                  "default":{
+                     "default":"You have not yet submitted your application.",
+                     "roles":{
+
+                     }
+                  },
+                  "open":{
+                     "default":"Thank you for submitting your application! It will be reviewed shortly.",
+                     "roles":{
+
+                     }
+                  }
+               },
+               "permissions":{
+                  "write":{
+                     "staff":true
+                  }
+               }
+            },
+            "description":"This page acknowledges that the application was received.",
+            "id":"administrative_review",
+            "next":[
+               "review"
+            ],
+            "summary":false,
+            "title":"Administrative Review",
+            "visible":{
+
+            }
+         },
+         "application":{
+            "component":{
+               "name":"form",
+               "options":{
+                  "confirm":"You will no longer be able to edit your proposal once it is submitted. Are you sure you want to submit it right now?",
+                  "draftButtonText":"Save Draft",
+                  "form":[
+                     {
+                        "items":[
+                           {
+                              "add":"Add Investigator",
+                              "items":[
+                                 "investigators[].name",
+                                 "investigators[].email",
+                                 "investigators[].rank",
+                                 "investigators[].department",
+                                 "investigators[].university",
+                                 {
+                                    "key":"investigators[]biosketch",
+                                    "type":"upload"
+                                 }
+                              ],
+                              "key":"investigators",
+                              "remove":"Remove Investigator",
+                              "style":{
+                                 "remove":"btn-danger"
+                              },
+                              "title":"value.name || 'Investigator #'+($index+1)",
+                              "type":"tabarray"
+                           }
+                        ],
+                        "title":"Investigators",
+                        "type":"fieldset"
+                     },
+                     {
+                        "items":[
+                           "collaboration.new",
+                           {
+                              "condition":"model.collaboration.new",
+                              "items":[
+                                 "collaboration.activities",
+                                 "collaboration.other"
+                              ],
+                              "type":"conditional"
+                           }
+                        ],
+                        "key":"collaboration"
+                     },
+                     {
+                        "helpvalue":"<br /><br />",
+                        "type":"help"
+                     },
+                     {
+                        "items":[
+                           {
+                              "key":"proposal",
+                              "type":"upload"
+                           },
+                           {
+                              "helpvalue":"<div class=\"well\"><h2>Your Big Idea</h2><h4>How will it change the way we think?</h4><p>State your big idea and how it relates to one of the guiding questions (<a href=\"http://bigquestions.uchicago.edu/funding/focus-areas/cognition\" target=\"_blank\">cognition</a>, <a href=\"http://bigquestions.uchicago.edu/funding/focus-areas/complexity\" target=\"_blank\">complexity</a>, and <a href=\"http://bigquestions.uchicago.edu/funding/focus-areas/information\" target=\"_blank\">information</a>). &nbsp;Explain what is truly bold about your approach and the long-term impact on the field.</p><p>&nbsp;</p><h4>What will you do?</h4><p>Detail the major activities of the project over the grant period (e.g. methods, plans for analyses, etc.)</p><p>&nbsp;</p><h4>How will this grant help you do what you want in the future?</h4><p>Explain how receiving this grant will be crucial for securing external funding in the future. Please let us know if you have other sources of funding that will help you leverage this grant.&nbsp;</p><p>&nbsp;</p><h4>What will you produce?</h4><p>State concrete short-term research outputs for this project (e.g. datasets, tools, publications, etc.)&nbsp;</p></div>",
+                              "type":"help"
+                           },
+                           {
+                              "key":"abstract",
+                              "type":"ckeditor"
+                           }
+                        ],
+                        "title":"Proposal",
+                        "type":"fieldset"
+                     },
+                     {
+                        "items":[
+                           {
+                              "key":"budget",
+                              "type":"upload"
+                           },
+                           {
+                              "key":"budget_narrative",
+                              "type":"ckeditor"
+                           }
+                        ],
+                        "title":"Budget",
+                        "type":"fieldset"
+                     }
+                  ],
+                  "next":null,
+                  "schema":{
+                     "properties":{
+                        "abstract":{
+                           "description":"Please copy and paste your answer to the first question above from your full proposal: <div class=\"well\"><h4>How will it change the way we think?</h4><p>State your big idea and how it relates to one of the guiding questions (<a href=\"http://bigquestions.uchicago.edu/funding/focus-areas/cognition\" target=\"_blank\">cognition</a>, <a href=\"http://bigquestions.uchicago.edu/funding/focus-areas/complexity\" target=\"_blank\">complexity</a>, and <a href=\"http://bigquestions.uchicago.edu/funding/focus-areas/information\" target=\"_blank\">information</a>). &nbsp;Explain what is truly bold about your approach and the long-term impact on the field.</p></div>",
+                           "title":"Abstract",
+                           "type":"string"
+                        },
+                        "amount":{
+                           "min":1,
+                           "title":"Requested Amount",
+                           "type":"number"
+                        },
+                        "budget":{
+                           "description":"Please attach a Budget Summary based on the <a href=\"http://arete.uchicago.edu/uploads/Template-Budget-Seed.xlsx\">Budget Summary Sheet template</a>. The duration of the project should not exceed 12 months.",
+                           "title":"Detailed Budget",
+                           "type":"string"
+                        },
+                        "budget_narrative":{
+                           "description":"Please provide a brief justification for each line item in the proposed Budget. Use our <a href=\"http://arete.uchicago.edu/uploads/Budget-Guidelines.docx\">Budget Guidelines</a> when creating the budget and budget justification. Note that while each investigator must include effort in the budget for his or her proposal, that effort can be completely cost-shared (i.e., the effort can be included in the budget at a cost of $0).",
+                           "title":"Budget Justification Narrative",
+                           "type":"string"
+                        },
+                        "collaboration":{
+                           "properties":{
+                              "activities":{
+                                 "items":{
+                                    "enum":[
+                                       "Chalk Talk",
+                                       "Kick-Off Events",
+                                       "Email"
+                                    ],
+                                    "type":"string"
+                                 },
+                                 "title":"How did you hear about us:",
+                                 "type":"array"
+                              },
+                              "new":{
+                                 "title":"Yes, this is a new collaboration.",
+                                 "type":"boolean"
+                              },
+                              "other":{
+                                 "title":"Other",
+                                 "type":"string"
+                              }
+                           },
+                           "title":"Is this a new collaboration?",
+                           "type":"object"
+                        },
+                        "financial_contact":{
+                           "properties":{
+                              "email":{
+                                 "pattern":"^\\S+@\\S+$",
+                                 "title":"Email",
+                                 "type":"string"
+                              },
+                              "name":{
+                                 "title":"Name",
+                                 "type":"string"
+                              },
+                              "phone":{
+                                 "title":"Phone",
+                                 "type":"string"
+                              }
+                           },
+                           "required":[
+                              "email",
+                              "name",
+                              "phone"
+                           ],
+                           "title":"Financial Contact",
+                           "type":"object"
+                        },
+                        "investigators":{
+                           "items":{
+                              "properties":{
+                                 "biosketch":{
+                                    "description":"A biosketch should be one page long and provide the investigator’s expertise and the history of funding relevant for this line of research.",
+                                    "title":"Biosketch",
+                                    "type":"string"
+                                 },
+                                 "department":{
+                                    "title":"Department",
+                                    "type":"string"
+                                 },
+                                 "email":{
+                                    "pattern":"^\\S+@\\S+$",
+                                    "title":"Email",
+                                    "type":"string"
+                                 },
+                                 "name":{
+                                    "title":"Name",
+                                    "type":"string"
+                                 },
+                                 "rank":{
+                                    "title":"Rank",
+                                    "type":"string"
+                                 },
+                                 "university":{
+                                    "enum":[
+                                       "University of Chicago",
+                                       "Other"
+                                    ],
+                                    "title":"University",
+                                    "type":"string"
+                                 }
+                              },
+                              "required":[
+                                 "department",
+                                 "email",
+                                 "name",
+                                 "rank",
+                                 "university",
+                                 "biosketch"
+                              ],
+                              "type":"object"
+                           },
+                           "minItems":1,
+                           "title":"Co-Investigators",
+                           "type":"array"
+                        },
+                        "proposal":{
+                           "description":"Please submit a 1 page document (excluding images and figures). Please use single space and a standard font.",
+                           "title":"Proposal",
+                           "type":"string"
+                        }
+                     },
+                     "required":[
+                        "abstract",
+                        "amount",
+                        "budget",
+                        "budget_narrative",
+                        "investigators",
+                        "collaboration",
+                        "financial_contact",
+                        "proposal"
+                     ],
+                     "type":"object"
+                  },
+                  "submitButtonText":"Submit Application",
+                  "summary":[
+                     {
+                        "key":"proposal",
+                        "type":"upload"
+                     }
+                  ]
+               },
+               "permissions":{
+                  "read":{
+                     "advisor":true,
+                     "applicant":{
+                        "close":false,
+                        "open":true
+                     },
+                     "reviewer":true,
+                     "staff":true
+                  },
+                  "write":{
+                     "applicant":{
+                        "close":[
+                           "submit"
+                        ],
+                        "open":true
+                     },
+                     "staff":true
+                  }
+               }
+            },
+            "description":"Fill out our online application form.",
+            "id":"application",
+            "next":[
+               "administrative_review"
+            ],
+            "summary":true,
+            "title":"Application",
+            "visible":{
+               "advisor":true,
+               "applicant":true,
+               "reviewer":true,
+               "staff":true
+            }
+         },
+         "decision":{
+            "component":{
+               "name":"status",
+               "options":{
+                  "statuses":[
+                     "accepted",
+                     "rejected"
+                  ]
+               },
+               "permissions":{
+                  "read":{
+                     "staff":true
+                  },
+                  "write":{
+                     "staff":true
+                  }
+               }
+            },
+            "description":"Decide to fund the project or not.",
+            "id":"decision",
+            "next":[
+               "acceptance"
+            ],
+            "summary":false,
+            "title":"Funding Decision",
+            "visible":{
+               "staff":true
+            }
+         },
+         "report":{
+            "component":{
+               "name":"form",
+               "options":{
+                  "next":null
+               },
+               "permissions":{
+                  "read":{
+                     "advisor":true,
+                     "applicant":true,
+                     "staff":true
+                  },
+                  "write":{
+                     "applicant":true,
+                     "staff":true
+                  }
+               }
+            },
+            "description":"The project's final report.",
+            "id":"report",
+            "next":[
+
+            ],
+            "summary":false,
+            "title":"Report",
+            "visible":{
+               "advisor":true,
+               "staff":true
+            }
+         },
+         "review":{
+            "component":{
+               "name":"review",
+               "options":{
+                  "form":[
+                     {
+                        "items":[
+                           {
+                              "key":"question1.comment",
+                              "type":"ckeditor"
+                           },
+                           "question1.public"
+                        ],
+                        "key":"question1"
+                     },
+                     {
+                        "items":[
+                           {
+                              "key":"question2.comment",
+                              "type":"ckeditor"
+                           },
+                           "question2.public"
+                        ],
+                        "key":"question2"
+                     },
+                     {
+                        "items":[
+                           {
+                              "key":"outputs.comment",
+                              "type":"ckeditor"
+                           },
+                           "outputs.public"
+                        ],
+                        "key":"outputs"
+                     },
+                     {
+                        "items":[
+                           {
+                              "key":"budget.comment",
+                              "type":"ckeditor"
+                           },
+                           "budget.public"
+                        ],
+                        "key":"budget"
+                     },
+                     {
+                        "items":[
+                           {
+                              "key":"decision.comment"
+                           },
+                           "decision.public"
+                        ],
+                        "key":"decision"
+                     },
+                     {
+                        "items":[
+                           {
+                              "key":"justification.comment",
+                              "type":"ckeditor"
+                           },
+                           "justification.public"
+                        ],
+                        "key":"justification"
+                     },
+                     {
+                        "items":[
+                           {
+                              "key":"feedback.comment",
+                              "type":"ckeditor"
+                           },
+                           "feedback.public"
+                        ],
+                        "key":"feedback"
+                     }
+                  ],
+                  "preview":[
+                     "application"
+                  ],
+                  "ranking":true,
+                  "schema":{
+                     "properties":{
+                        "budget":{
+                           "properties":{
+                              "comment":{
+                                 "title":"Do you think the budget is justified?",
+                                 "type":"string"
+                              },
+                              "public":{
+                                 "title":"Make this public?",
+                                 "type":"boolean"
+                              }
+                           },
+                           "title":"Budget and Budget Justification",
+                           "type":"object"
+                        },
+                        "decision":{
+                           "properties":{
+                              "comment":{
+                                 "enum":[
+                                    "I do not think the project should be funded",
+                                    "The project could be funded with significant adjustments to content - Revise and Resubmit",
+                                    "The project could be funded in the current state with budget adjustments",
+                                    "I strongly support funding this project as is"
+                                 ],
+                                 "title":"Do you think the project should be funded?",
+                                 "type":"string"
+                              },
+                              "public":{
+                                 "default":false,
+                                 "readOnly":true,
+                                 "title":"Make this public?",
+                                 "type":"boolean"
+                              }
+                           },
+                           "title":"Decision",
+                           "type":"object"
+                        },
+                        "feedback":{
+                           "properties":{
+                              "comment":{
+                                 "description":"Applicants place great value on independent evaluations, and your observations may improve their study design or direct them to relevant literature. As you prepare your comments, please be sure that the statements are balanced, informative & concise.",
+                                 "title":"Feedback",
+                                 "type":"string"
+                              },
+                              "public":{
+                                 "default":true,
+                                 "readOnly":true,
+                                 "title":"Make this public?",
+                                 "type":"boolean"
+                              }
+                           },
+                           "title":"Feedback to the Author",
+                           "type":"object"
+                        },
+                        "justification":{
+                           "properties":{
+                              "comment":{
+                                 "description":"Only mention points that justify your decision. Please do not summarize the project. Since these comments will not be shared with the author of the proposal, you may choose be more candid.",
+                                 "title":"Justification",
+                                 "type":"string"
+                              },
+                              "public":{
+                                 "default":false,
+                                 "readOnly":true,
+                                 "title":"Make this public?",
+                                 "type":"boolean"
+                              }
+                           },
+                           "title":"Justification Narrative",
+                           "type":"object"
+                        },
+                        "outputs":{
+                           "properties":{
+                              "comment":{
+                                 "title":"Do you think this research program can have important implications and external funding in the future?",
+                                 "type":"string"
+                              },
+                              "public":{
+                                 "title":"Make this public?",
+                                 "type":"boolean"
+                              }
+                           },
+                           "title":"Project Outputs and Outcomes",
+                           "type":"object"
+                        },
+                        "question1":{
+                           "properties":{
+                              "comment":{
+                                 "title":"Is the hypothesis intellectually sound and novel?",
+                                 "type":"string"
+                              },
+                              "public":{
+                                 "title":"Make this public?",
+                                 "type":"boolean"
+                              }
+                           },
+                           "title":"Question 1",
+                           "type":"object"
+                        },
+                        "question2":{
+                           "properties":{
+                              "comment":{
+                                 "title":"Do you think a seed grant will be leveraged effectively by the research team?",
+                                 "type":"string"
+                              },
+                              "public":{
+                                 "title":"Make this public?",
+                                 "type":"boolean"
+                              }
+                           },
+                           "title":"Question 2",
+                           "type":"object"
+                        },
+                        "ranking":{
+                           "properties":{
+                              "comment":{
+                                 "title":"Ranking",
+                                 "type":"string"
+                              },
+                              "public":{
+                                 "title":"Make this public?",
+                                 "type":"boolean"
+                              }
+                           },
+                           "title":"Ranking",
+                           "type":"object"
+                        }
+                     },
+                     "required":[
+
+                     ],
+                     "title":"Review",
+                     "type":"object"
+                  }
+               },
+               "permissions":{
+                  "read:private":{
+                     "reviewer":true,
+                     "staff":true
+                  },
+                  "read:public":{
+                     "advisor":true,
+                     "applicant":true,
+                     "reviewer":true,
+                     "staff":true
+                  },
+                  "read:users":{
+                     "staff":true
+                  },
+                  "write":{
+                     "reviewer":true
+                  }
+               }
+            },
+            "description":"The project will be reviewed by assigned reviewers.",
+            "id":"review",
+            "next":[
+               "decision"
+            ],
+            "summary":false,
+            "title":"Review",
+            "visible":{
+               "advisor":true,
+               "reviewer":true,
+               "staff":true
+            }
+         },
+         "start":{
+            "component":{
+               "name":"start",
+               "options":{
+                  "info":"<h1>Seed Grants</h1>\n\n<p>Seed Funds provide flexible resources to explore bold research ideas that might otherwise be too uncertain for researchers to pursue at an early stage. Seed grants are quite open in format to support a focused initial exploration and&nbsp;can potentially be used to</p>\n\n<ul>\n\t<li>Convene a working group with peers</li>\n\t<li>Generate preliminary data</li>\n\t<li>Fund part of a graduate student&rsquo;s time to do preliminary work</li>\n\t<li>Other exploratory activities</li>\n</ul>\n\n<p>Seed Awards range from $10,000 - $15,000 for a maximum of a six-month period. Seed Awards could lead to full-scale&nbsp;proposals but it is not necessary.</p>\n",
+                  "next":"application",
+                  "role":"applicant",
+                  "status":"active"
+               },
+               "permissions":{
+                  "read":{
+                     "advisor":true,
+                     "applicant":true,
+                     "reviewer":true,
+                     "staff":true
+                  },
+                  "write":{
+                     "applicant":{
+                        "close":[
+                           "submit"
+                        ],
+                        "open":true
+                     },
+                     "staff":true
+                  }
+               }
+            },
+            "description":"Begin the application process.",
+            "id":"start",
+            "next":[
+               "application"
+            ],
+            "summary":false,
+            "title":"Start",
+            "visible":{
+               "advisor":true,
+               "applicant":true,
+               "reviewer":true,
+               "staff":true
+            }
+         }
       },
-      "acceptance": {
-        "id": "acceptance",
-        "title": "Acceptance",
-        "description": "This project has been accepted.",
-        "visible": {
-          "staff": true,
-          "applicant": true,
-          "advisor": true
-        },
-        "component": {
-          "name": "message",
-          "options": {
-            "default": {
-              "default": "No decision has been made about your application.",
-              "roles": {}
-            },
-            "open": {
-              "default": "Congratulations! Your application has been accepted.",
-              "roles": {}
-            },
-            "close": {
-              "default": "We're sorry, but your application was not accepted.",
-              "roles": {}
-            }
-          },
-          "permissions": {
-            "write": {
-              "staff": true
-            }
-          }
-        },
-        "next": [
-          "report"
-        ]
+      "status":"active",
+      "statuses":{
+         "accepted":{
+            "id":"accepted",
+            "title":"Accepted"
+         },
+         "active":{
+            "id":"active",
+            "title":"Active"
+         },
+         "archived":{
+            "id":"archived",
+            "title":"Archived"
+         },
+         "rejected":{
+            "id":"rejected",
+            "title":"Rejected"
+         }
       },
-      "rejection": {
-        "id": "rejection",
-        "title": "Rejection",
-        "description": "This project has been rejected.",
-        "visible": {
-          "staff": true,
-          "applicant": true,
-          "advisor": true
-        },
-        "component": {
-          "name": "message",
-          "options": {
-            "default": {
-              "default": "No decision has been made about your application.",
-              "roles": {}
-            },
-            "open": {
-              "default": "We're sorry, but your application was not accepted.",
-              "roles": {}
-            },
-            "close": {
-              "default": "Congratulations! Your application has been accepted.",
-              "roles": {}
-            }
-          },
-          "permissions": {
-            "write": {
-              "staff": true
-            }
-          }
-        },
-        "next": []
-      },
-      "report": {
-        "id": "report",
-        "title": "Report",
-        "description": "The project's final report.",
-        "visible": {
-          "staff": true,
-          "applicant": true,
-          "advisor": true
-        },
-        "component": {
-          "name": "form",
-          "options": {
-            "next": null
-          },
-          "permissions": {
-            "read": {
-              "staff": true,
-              "applicant": true,
-              "advisor": true
-            },
-            "write": {
-              "staff": true,
-              "applicant": true
-            }
-          }
-        },
-        "next": []
+      "title":"Seed Grants",
+      "updated":{
+         "$reql_type$":"TIME",
+         "epoch_time":1413619824.704,
+         "timezone":"+00:00"
       }
-    },
-    "roles": {
-      "staff": {
-        "id": "staff",
-        "title": "Administrator",
-        "visible": {
-          "staff": true
-        },
-        "assignable": {}
-      },
-      "applicant": {
-        "id": "applicant",
-        "title": "Applicant",
-        "visible": {
-          "staff": true,
-          "applicant": true,
-          "advisor": true,
-          "reviewer": true
-        },
-        "assignable": {}
-      },
-      "advisor": {
-        "id": "advisor",
-        "title": "Advisor",
-        "visible": {
-          "staff": true,
-          "applicant": true,
-          "advisor": true,
-          "reviewer": true
-        },
-        "assignable": {}
-      },
-      "reviewer": {
-        "id": "reviewer",
-        "title": "Reviewer",
-        "visible": {
-          "staff": true,
-          "reviewer": true
-        },
-        "assignable": {}
-      }
-    },
-    "status": "active",
-    "statuses": {
-      "active": {
-        "id": "active",
-        "title": "Active"
-      },
-      "accepted": {
-        "id": "accepted",
-        "title": "Accepted"
-      },
-      "rejected": {
-        "id": "rejected",
-        "title": "Rejected"
-      },
-      "archived": {
-        "id": "archived",
-        "title": "Archived"
-      }
-    },
-    "users": {
-      "a5901ab6-bf17-49cd-981d-c25875aec8e9": {
-        "id": "a5901ab6-bf17-49cd-981d-c25875aec8e9",
-        "role": "staff"
-      },
-      "84fbaa78-54b0-42fc-9754-c9ea7dc24538": {
-        "id": "84fbaa78-54b0-42fc-9754-c9ea7dc24538",
-        "role": "advisor"
-      }
-    }
-  }
+   }
 ]

@@ -1,5 +1,5 @@
 {
-  "id": "file",
+  "id": "http://www.gandhi.io/schema/file",
   "type":"object",
   "$schema": "http://json-schema.org/draft-04/schema",
   "required": [
