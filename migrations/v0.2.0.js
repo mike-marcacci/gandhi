@@ -29,6 +29,7 @@ r.connect({host: host, db: db}).then(function(conn){
     return cycle.merge({
       assignments: cycle('users').default(cycle('assignments')),
       stages: cycle('flow').default(cycle('stages')),
+      triggers: cycle('events').default(cycle('triggers')),
       exports: cycle('exports').default({}),
       open: ['open'],
       close: ['close'],
@@ -37,7 +38,8 @@ r.connect({host: host, db: db}).then(function(conn){
       }).coerceTo('object'))
     }).without({
       users: true,
-      flow: true
+      flow: true,
+      events: true
     })
   }).run(conn));
 

@@ -25,7 +25,7 @@
       "type": "array",
       "default": ["close"]
     },
-    "events": {
+    "triggers": {
       "type": "object",
       "default": {
         "open": {
@@ -64,7 +64,7 @@
         }
       },
       "additionalProperties": {
-        "$ref": "#/definitions/event"
+        "$ref": "#/definitions/trigger"
       }
     },
     "defaults": {
@@ -225,7 +225,7 @@
         }
       }
     },
-    "event": {
+    "trigger": {
       "type": "object",
       "required": [
         "id",
