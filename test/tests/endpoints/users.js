@@ -79,15 +79,15 @@ describe('Users', function(){
 			request
 				.post('/api/users')
 				.send({
-					email: 'emily.marcacci@test.gandhi.io',
-					password: 'emily1234'
+					email: 'heather.harbottle@test.gandhi.io',
+					password: 'heather1234'
 				})
 				.expect(201)
 				.end(function(err, res){
 					assert.isNull(err);
 					assert.isString(res.body.id);
 					ids.push(res.body.id);
-					assert.equal(res.body.email, 'emily.marcacci@test.gandhi.io');
+					assert.equal(res.body.email, 'heather.harbottle@test.gandhi.io');
 					blacklist.forEach(function(prop){
 						assert.notProperty(res.body, prop);
 					});
@@ -359,8 +359,8 @@ describe('Users', function(){
 			request
 				.post('/api/tokens')
 				.send({
-					email: 'emily.marcacci@test.gandhi.io',
-					password: 'emily1234'
+					email: 'heather.harbottle@test.gandhi.io',
+					password: 'heather1234'
 				})
 				.expect(201)
 				.end(function(err, res){
@@ -453,8 +453,8 @@ describe('Users', function(){
 			request
 				.post('/api/tokens')
 				.send({
-					email: 'emily.marcacci@test.gandhi.io',
-					password: 'emily1234'
+					email: 'heather.harbottle@test.gandhi.io',
+					password: 'heather1234'
 				})
 				.expect(201)
 				.end(function(err, res){
@@ -529,8 +529,8 @@ describe('Users', function(){
 			request
 				.post('/api/tokens')
 				.send({
-					email: 'emily.marcacci@test.gandhi.io',
-					password: 'emily1234'
+					email: 'heather.harbottle@test.gandhi.io',
+					password: 'heather1234'
 				})
 				.expect(201)
 				.end(function(err, res){

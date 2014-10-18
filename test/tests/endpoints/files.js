@@ -241,7 +241,7 @@ describe('Files', function(){
 				.expect(401)
 				.end(done);
 		});
-		it('rejects a delete by a non-admin user', function(done){
+		it.skip('rejects a delete by a non-admin user', function(done){
 			request
 				.delete('/api/files/' + ids[0])
 				.set('Authorization', 'Bearer ' + userToken)

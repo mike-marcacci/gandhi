@@ -88,6 +88,7 @@ describe('Invitations', function(){
 					done();
 				});
 		});
+		it.skip('hides non-allowed invitations from a non-admin user');
 	});
 
 	describe('#get', function(){
@@ -119,6 +120,7 @@ describe('Invitations', function(){
 					done();
 				});
 		});
+		it.skip('hides a non-allowed invitation from a non-admin user');
 	});
 
 	describe('#put', function(){
