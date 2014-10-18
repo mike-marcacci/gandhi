@@ -188,6 +188,13 @@
         "$ref": "#/definitions/invitation"
       }
     },
+    "exports": {
+      "type": "object",
+      "default": {},
+      "additionalProperties": {
+        "$ref": "#/definitions/export"
+      }
+    },
     "config": {
       "type": "object",
       "additionalProperties": true,
@@ -203,7 +210,7 @@
   "definitions": {
     "assignment": {
       "type": "object",
-      "additionalProperties": true,
+      "additionalProperties": false,
       "required": [
         "id",
         "role"
@@ -444,7 +451,7 @@
     "status": {
       "type": "object",
       "required": ["id", "title"],
-      "additionalProperties": true,
+      "additionalProperties": false,
       "properties": {
         "id": {
           "type": "string",
@@ -452,6 +459,27 @@
         },
         "title": {
           "type": "string"
+        }
+      }
+    },
+    "export": {
+      "type": "object",
+      "required": ["id", "title", "pointer"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "constant": {"$data": "0"}
+        },
+        "title": {
+          "type": "string"
+        },
+        "pointer": {
+          "type": "string"
+        },
+        "template": {
+          "type": ["string", "null"],
+          "default": null
         }
       }
     }

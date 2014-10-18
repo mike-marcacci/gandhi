@@ -637,7 +637,12 @@
       },
       "id":"128f2348-99d4-40a1-b5ab-91d9019f272d",
       "invitations":{
-
+         "3350caac-84b9-4827-a5e4-c7a413760a0a": {
+            "id": "3350caac-84b9-4827-a5e4-c7a413760a0a",
+            "name": "Sarah Powell",
+            "email": "sarah.powell@test.gandhi.io",
+            "role": "advisor"
+         }
       },
       "open":[
          "open"
@@ -1386,6 +1391,14 @@
                "reviewer":true,
                "staff":true
             }
+         }
+      },
+      "exports": {
+         "proposal": {
+            "id": "proposal",
+            "title": "Proposal",
+            "pointer": "/contents/application/data/proposal",
+            "template": "<a ng-show=\"value\" href=\"{{value}}\" target=\"_blank\">Download</a>"
          }
       },
       "status":"active",

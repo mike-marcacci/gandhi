@@ -55,7 +55,7 @@ describe('Cycles', function(){
 			});
 	});
 
-	describe('#create', function(){
+	describe('#post', function(){
 		it('prevents anonymous creation', function(done){
 			request
 				.post('/api/cycles')
@@ -106,89 +106,87 @@ describe('Cycles', function(){
 		});
 	});
 
-	describe('#read', function(){
-		describe('(list) /cycles', function(){
-			it('rejects an anonymous request', function(done){
-				request
-					.get('/api/cycles')
-					.expect(401)
-					.end(function(err, res){
-						assert.isNull(err);
-						assert.isNotArray(res.body);
-						done();
-					});
-			});
-			it('shows all cycles to an admin user', function(done){
-				request
-					.get('/api/cycles')
-					.set('Authorization', 'Bearer ' + adminToken)
-					.expect(200)
-					.end(function(err, res){
-						assert.isNull(err);
-						
-						assert.isArray(res.body);
-						// assert.lengthOf(res.body, fixtures.cycles.length);
-						done();
-					});
-			});
-			it.skip('hides draft cycles from a non-admin user', function(done){});
-			it.skip('accepts per_page parameters', function(done){
-				request
-					.get('/api/cycles?per_page=5')
-					.set('Authorization', 'Bearer ' + userToken)
-					.expect(200)
-					.end(function(err, res){
-						assert.isNull(err);
-						assert.isArray(res.body);
-						assert.lengthOf(res.body, 5);
-						var links = li.parse(res.headers.link);
-						assert.equal(links.next, '/api/cycles?per_page=5&page=2');
-						assert.equal(links.last, '/api/cycles?per_page=5&page='+Math.ceil((fixtures.length + ids.length) / 5));
-						done();
-					});
-			});
-			it.skip('accepts page parameters', function(done){
-				request
-					.get('/api/cycles?per_page=5&page=2')
-					.set('Authorization', 'Bearer ' + userToken)
-					.expect(200)
-					.end(function(err, res){
-						assert.isNull(err);
-						assert.isArray(res.body);
-						assert.lengthOf(res.body, 5);
-						var links = li.parse(res.headers.link);
-						assert.equal(links.first, '/api/cycles?per_page=5&page=1');
-						assert.equal(links.prev, '/api/cycles?per_page=5&page=1');
-						done();
-					});
-			});
+	describe('#list', function(){
+		it('rejects an anonymous request', function(done){
+			request
+				.get('/api/cycles')
+				.expect(401)
+				.end(function(err, res){
+					assert.isNull(err);
+					assert.isNotArray(res.body);
+					done();
+				});
 		});
-
-		describe('(show) /cycles/:id', function(){
-			it('rejects an anonymous request', function(done){
-				request
-					.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d')
-					.expect(401)
-					.end(done);
-			});
-			it('shows a non-draft cycle to an admin user', function(done){
-				request
-					.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d')
-					.set('Authorization', 'Bearer ' + adminToken)
-					.expect(200)
-					.end(function(err, res){
-						assert.isNull(err);
-						assert.equal(res.body.id, '128f2348-99d4-40a1-b5ab-91d9019f272d');
-						done();
-					});
-			});
-			it.skip('shows a draft cycle to an admin user', function(done){});
-			it.skip('shows a non-draft cycle to a non-admin user', function(done){});
-			it.skip('hides a draft cycle from a non-admin user', function(done){});
+		it('shows all cycles to an admin user', function(done){
+			request
+				.get('/api/cycles')
+				.set('Authorization', 'Bearer ' + adminToken)
+				.expect(200)
+				.end(function(err, res){
+					assert.isNull(err);
+					
+					assert.isArray(res.body);
+					// assert.lengthOf(res.body, fixtures.cycles.length);
+					done();
+				});
+		});
+		it.skip('hides draft cycles from a non-admin user', function(done){});
+		it.skip('accepts per_page parameters', function(done){
+			request
+				.get('/api/cycles?per_page=5')
+				.set('Authorization', 'Bearer ' + userToken)
+				.expect(200)
+				.end(function(err, res){
+					assert.isNull(err);
+					assert.isArray(res.body);
+					assert.lengthOf(res.body, 5);
+					var links = li.parse(res.headers.link);
+					assert.equal(links.next, '/api/cycles?per_page=5&page=2');
+					assert.equal(links.last, '/api/cycles?per_page=5&page='+Math.ceil((fixtures.length + ids.length) / 5));
+					done();
+				});
+		});
+		it.skip('accepts page parameters', function(done){
+			request
+				.get('/api/cycles?per_page=5&page=2')
+				.set('Authorization', 'Bearer ' + userToken)
+				.expect(200)
+				.end(function(err, res){
+					assert.isNull(err);
+					assert.isArray(res.body);
+					assert.lengthOf(res.body, 5);
+					var links = li.parse(res.headers.link);
+					assert.equal(links.first, '/api/cycles?per_page=5&page=1');
+					assert.equal(links.prev, '/api/cycles?per_page=5&page=1');
+					done();
+				});
 		});
 	});
 
-	describe('#update', function(){
+	describe('#get', function(){
+		it('rejects an anonymous request', function(done){
+			request
+				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d')
+				.expect(401)
+				.end(done);
+		});
+		it('shows a non-draft cycle to an admin user', function(done){
+			request
+				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d')
+				.set('Authorization', 'Bearer ' + adminToken)
+				.expect(200)
+				.end(function(err, res){
+					assert.isNull(err);
+					assert.equal(res.body.id, '128f2348-99d4-40a1-b5ab-91d9019f272d');
+					done();
+				});
+		});
+		it.skip('shows a draft cycle to an admin user', function(done){});
+		it.skip('shows a non-draft cycle to a non-admin user', function(done){});
+		it.skip('hides a draft cycle from a non-admin user', function(done){});
+	});
+
+	describe('#patch', function(){
 		it('rejects an anonymous update', function(done){
 			request
 				.patch('/api/cycles/' + ids[0])
@@ -220,7 +218,7 @@ describe('Cycles', function(){
 		});
 	});
 
-	describe('#replace', function(){
+	describe('#put', function(){
 		it('rejects an anonymous replace', function(done){
 			request
 				.put('/api/cycles/' + ids[0])
@@ -281,6 +279,11 @@ describe('Cycles', function(){
 				.expect(200)
 				.end(done);
 		});
+	});
+
+	// test embedded collections
+	['statuses','roles','assignments','invitations','events','stages','exports'].forEach(function(c){
+		require('./cycles/' + c);
 	});
 
 	// remove any cycles we just created

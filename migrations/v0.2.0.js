@@ -29,6 +29,7 @@ r.connect({host: host, db: db}).then(function(conn){
     return cycle.merge({
       assignments: cycle('users').default(cycle('assignments')),
       stages: cycle('flow').default(cycle('stages')),
+      exports: cycle('exports').default({}),
       open: ['open'],
       close: ['close'],
       events: r.literal(cycle('events').coerceTo('array').map(function(eventKV){
@@ -40,17 +41,9 @@ r.connect({host: host, db: db}).then(function(conn){
     })
   }).run(conn));
 
-  // tasks.push(r.table('cycles').map(function(cycle){
-  //   return cycle('events').coerceTo('array').map(function(eventKV){
-  //       return [eventKV.nth(0), eventKV.nth(1).without('messages')];
-  //     }).coerceTo('object')
-  // }).coerceTo('array').run(conn));
-
   // run all the tasks
   q.all(tasks).then(function(res){
-
     console.log('success:', JSON.stringify(res, null, 2));
-
     conn.close();
   }, function(err){
     console.error(err)

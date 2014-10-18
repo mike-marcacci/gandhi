@@ -18,7 +18,7 @@ before(function(){
 	fixtures = global.setup.fixtures.db.cycles;
 });
 
-describe('Assignments', function(){
+describe('Stages', function(){
 	var adminToken, adminId, userToken, userId;
 
 	before(function(done){
@@ -58,7 +58,7 @@ describe('Assignments', function(){
 	describe('#list', function(){
 		it('rejects an anonymous request', function(done){
 			request
-				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/assignments')
+				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/stages')
 				.expect(401)
 				.end(function(err, res){
 					assert.isNull(err);
@@ -66,82 +66,80 @@ describe('Assignments', function(){
 					done();
 				});
 		});
-		it('shows all assignments to an admin user', function(done){
+		it('shows all stages to an admin user', function(done){
 			request
-				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/assignments')
+				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/stages')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.expect(200)
 				.end(function(err, res){
 					assert.isNull(err);
-					assert.lengthOf(Object.keys(res.body), 2);
+					assert.lengthOf(Object.keys(res.body), 7);
 					done();
 				});
 		});
-		it('shows all assignments to a non-admin user', function(done){
+		it('shows all stages to a non-admin user', function(done){
 			request
-				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/assignments')
+				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/stages')
 				.set('Authorization', 'Bearer ' + userToken)
 				.expect(200)
 				.end(function(err, res){
 					assert.isNull(err);
-					assert.lengthOf(Object.keys(res.body), 2);
+					assert.lengthOf(Object.keys(res.body), 7);
 					done();
 				});
 		});
-		it.skip('hides non-allowed assignments from a non-admin user');
 	});
 
 	describe('#get', function(){
 		it('rejects an anonymous request', function(done){
 			request
-				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/assignments/5a3cf444-9d87-4125-8026-2d5ffb834676')
+				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/stages/application')
 				.expect(401)
 				.end(done);
 		});
-		it('shows an assignment to an admin user', function(done){
+		it('shows a stage to an admin user', function(done){
 			request
-				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/assignments/5a3cf444-9d87-4125-8026-2d5ffb834676')
+				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/stages/application')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.expect(200)
 				.end(function(err, res){
 					assert.isNull(err);
-					assert.equal(res.body.id, '5a3cf444-9d87-4125-8026-2d5ffb834676');
+					assert.equal(res.body.id, 'application');
 					done();
 				});
 		});
-		it('shows an assignment to a non-admin user', function(done){
+		it('shows a stage to a non-admin user', function(done){
 			request
-				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/assignments/5a3cf444-9d87-4125-8026-2d5ffb834676')
+				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/stages/application')
 				.set('Authorization', 'Bearer ' + userToken)
 				.expect(200)
 				.end(function(err, res){
 					assert.isNull(err);
-					assert.equal(res.body.id, '5a3cf444-9d87-4125-8026-2d5ffb834676');
+					assert.equal(res.body.id, 'application');
 					done();
 				});
 		});
-		it.skip('hides a non-allowed assignment from a non-admin user');
 	});
 
 	describe('#put', function(){
 		it('rejects an anonymous put', function(done){
 			request
-				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
-				.send({id:'3cd2dc98-e280-4e72-a437-9a916d98b636',role:'advisor'})
+				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/stages/test')
+				.send({id:'test',title:'Test',component:{name:'form'}})
 				.expect(401)
 				.end(done);
 		});
 		it('rejects a put by a non-admin user', function(done){
 			request
-				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
+				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/stages/test')
 				.set('Authorization', 'Bearer ' + userToken)
-				.send({id:'3cd2dc98-e280-4e72-a437-9a916d98b636',role:'advisor'})
+				.send({id:'test',title:'Test',component:{name:'form'}})
 				.expect(403)
 				.end(done);
 		});
 		it('rejects an invalid put', function(done){
 			request
-				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
+				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/stages/test')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.send({foo:'bar'})
 				.expect(400)
@@ -149,26 +147,26 @@ describe('Assignments', function(){
 		});
 		it('allows a new put by an admin user', function(done){
 			request
-				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
+				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/stages/test')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({id:'3cd2dc98-e280-4e72-a437-9a916d98b636',role:'advisor'})
+				.send({id:'test',title:'Test',component:{name:'form'}})
 				.expect(200)
 				.end(function(err, res){
 					assert.isNull(err);
-					assert.equal(res.body.id, '3cd2dc98-e280-4e72-a437-9a916d98b636');
+					assert.equal(res.body.id, 'test');
 					done();
 				});
 		});
 		it('allows an existing put by an admin user', function(done){
 			request
-				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
+				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/stages/test')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({id:'3cd2dc98-e280-4e72-a437-9a916d98b636',role:'applicant'})
+				.send({id:'test',title:'Test PUT',component:{name:'form'}})
 				.expect(200)
 				.end(function(err, res){
 					assert.isNull(err);
-					assert.equal(res.body.id, '3cd2dc98-e280-4e72-a437-9a916d98b636');
-					assert.equal(res.body.role, 'applicant');
+					assert.equal(res.body.id, 'test');
+					assert.equal(res.body.title, 'Test PUT');
 					done();
 				});
 		});
@@ -177,22 +175,22 @@ describe('Assignments', function(){
 	describe('#patch', function(){
 		it('rejects an anonymous put', function(done){
 			request
-				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
-				.send({role:'applicant'})
+				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/stages/test')
+				.send({title:'Oops'})
 				.expect(401)
 				.end(done);
 		});
 		it('rejects a patch by a non-admin user', function(done){
 			request
-				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
+				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/stages/test')
 				.set('Authorization', 'Bearer ' + userToken)
-				.send({role:'applicant'})
+				.send({title:'Oops'})
 				.expect(403)
 				.end(done);
 		});
 		it('rejects an invalid patch', function(done){
 			request
-				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
+				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/stages/test')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.send({foo:'bar'})
 				.expect(400)
@@ -200,9 +198,9 @@ describe('Assignments', function(){
 		});
 		it('rejects a new patch by an admin user', function(done){
 			request
-				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/assignments/foo')
+				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/stages/foo')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({role:'applicant'})
+				.send({title:'Oops'})
 				.expect(404)
 				.end(function(err, res){
 					assert.isNull(err);
@@ -211,13 +209,13 @@ describe('Assignments', function(){
 		});
 		it('allows an existing patch by an admin user', function(done){
 			request
-				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
+				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/stages/test')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({role:'applicant'})
+				.send({title:'Patched'})
 				.expect(200)
 				.end(function(err, res){
 					assert.isNull(err);
-					assert.equal(res.body.role, 'applicant');
+					assert.equal(res.body.title, 'Patched');
 					done();
 				});
 		});
@@ -226,25 +224,25 @@ describe('Assignments', function(){
 	describe('#delete', function(){
 		it('rejects an anonymous delete', function(done){
 			request
-				.delete('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
+				.delete('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/stages/test')
 				.expect(401)
 				.end(done);
 		});
 		it('rejects a delete by a non-admin user', function(done){
 			request
-				.delete('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
+				.delete('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/stages/test')
 				.set('Authorization', 'Bearer ' + userToken)
 				.expect(403)
 				.end(done);
 		});
-		it('deletes an assignment for an admin user', function(done){
+		it('deletes a stage for an admin user', function(done){
 			request
-				.delete('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
+				.delete('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/stages/test')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.expect(200)
 				.end(function(err, res){
 					assert.isNull(err);
-					assert.equal(res.body.id, '3cd2dc98-e280-4e72-a437-9a916d98b636');
+					assert.equal(res.body.id, 'test');
 					done();
 				});
 		});
