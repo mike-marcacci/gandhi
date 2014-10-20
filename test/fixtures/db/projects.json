@@ -153,7 +153,14 @@
 		"$reql_type$": "TIME",
 		"epoch_time": 1413262289.045
 	},
-	"invitations": {},
+	"invitations": {
+		"514d3645-a768-4749-b6da-8b1b4d08cf1c": {
+			"id": "514d3645-a768-4749-b6da-8b1b4d08cf1c",
+			"name": "Sarah Powell",
+			"email": "sarah.powell@test.gandhi.io",
+			"role": "reviewer"
+		}
+	},
 	"id": "b37e83a5-d613-4d64-8873-fdcc8df0a009",
 	"events": {
 		"submit": [{
