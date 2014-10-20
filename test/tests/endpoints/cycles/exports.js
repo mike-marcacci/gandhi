@@ -66,6 +66,13 @@ describe('Exports', function(){
 					done();
 				});
 		});
+		it('returns 404 for nonexistant cycle', function(done){
+			request
+				.get('/api/cycles/foo/exports')
+				.set('Authorization', 'Bearer ' + adminToken)
+				.expect(404)
+				.end(done);
+		});
 		it('shows all exports to an admin user', function(done){
 			request
 				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/exports')
@@ -95,6 +102,13 @@ describe('Exports', function(){
 			request
 				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/exports/proposal')
 				.expect(401)
+				.end(done);
+		});
+		it('returns 404 for nonexistant cycle', function(done){
+			request
+				.get('/api/cycles/foo/exports/proposal')
+				.set('Authorization', 'Bearer ' + adminToken)
+				.expect(404)
 				.end(done);
 		});
 		it('shows a export to an admin user', function(done){
@@ -143,6 +157,14 @@ describe('Exports', function(){
 				.set('Authorization', 'Bearer ' + adminToken)
 				.send({foo:'bar'})
 				.expect(400)
+				.end(done);
+		});
+		it('returns 404 for nonexistant cycle', function(done){
+			request
+				.put('/api/cycles/foo/exports/proposal')
+				.set('Authorization', 'Bearer ' + adminToken)
+				.send({id:'test',title:'Test',pointer:'/contents/start/status',template:null})
+				.expect(404)
 				.end(done);
 		});
 		it('allows a new put by an admin user', function(done){
@@ -207,6 +229,14 @@ describe('Exports', function(){
 					done();
 				});
 		});
+		it('returns 404 for nonexistant cycle', function(done){
+			request
+				.patch('/api/cycles/foo/exports/proposal')
+				.set('Authorization', 'Bearer ' + adminToken)
+				.send({title:'Oops'})
+				.expect(404)
+				.end(done);
+		});
 		it('allows an existing patch by an admin user', function(done){
 			request
 				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/exports/test')
@@ -233,6 +263,13 @@ describe('Exports', function(){
 				.delete('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/exports/test')
 				.set('Authorization', 'Bearer ' + userToken)
 				.expect(403)
+				.end(done);
+		});
+		it('returns 404 for nonexistant cycle', function(done){
+			request
+				.delete('/api/cycles/foo/exports/proposal')
+				.set('Authorization', 'Bearer ' + adminToken)
+				.expect(404)
 				.end(done);
 		});
 		it('deletes a export for an admin user', function(done){

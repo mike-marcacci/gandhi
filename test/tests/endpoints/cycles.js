@@ -170,6 +170,13 @@ describe('Cycles', function(){
 				.expect(401)
 				.end(done);
 		});
+		it('returns 404 for nonexistant cycle', function(done){
+			request
+				.get('/api/cycles/foo')
+				.set('Authorization', 'Bearer ' + adminToken)
+				.expect(404)
+				.end(done);
+		});
 		it('shows a non-draft cycle to an admin user', function(done){
 			request
 				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d')
@@ -202,13 +209,19 @@ describe('Cycles', function(){
 				.expect(403)
 				.end(done);
 		});
+		it('returns 404 for nonexistant cycle', function(done){
+			request
+				.patch('/api/cycles/foo')
+				.set('Authorization', 'Bearer ' + adminToken)
+				.send({title: 'UPDATED'})
+				.expect(404)
+				.end(done);
+		});
 		it('allows an updates by an admin user', function(done){
 			request
 				.patch('/api/cycles/' + ids[0])
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({
-					title: 'UPDATED'
-				})
+				.send({title: 'UPDATED'})
 				.expect(200)
 				.end(function(err, res){
 					assert.isNull(err);
@@ -238,10 +251,7 @@ describe('Cycles', function(){
 			request
 				.put('/api/cycles/' + ids[0])
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({
-					title: 'REPLACED',
-					id: ids[0]
-				})
+				.send({title: 'REPLACED',id: ids[0]})
 				.expect(200)
 				.end(function(err, res){
 					assert.isNull(err);
@@ -270,6 +280,13 @@ describe('Cycles', function(){
 				.delete('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.expect(400)
+				.end(done);
+		});
+		it('returns 404 for nonexistant cycle', function(done){
+			request
+				.delete('/api/cycles/foo')
+				.set('Authorization', 'Bearer ' + adminToken)
+				.expect(404)
 				.end(done);
 		});
 		it('deletes a cycle without projects', function(done){

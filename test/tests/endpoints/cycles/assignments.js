@@ -66,6 +66,13 @@ describe('Assignments', function(){
 					done();
 				});
 		});
+		it('returns 404 for nonexistant cycle', function(done){
+			request
+				.get('/api/cycles/foo/assignments')
+				.set('Authorization', 'Bearer ' + adminToken)
+				.expect(404)
+				.end(done);
+		});
 		it('shows all assignments to an admin user', function(done){
 			request
 				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/assignments')
@@ -96,6 +103,20 @@ describe('Assignments', function(){
 			request
 				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/assignments/5a3cf444-9d87-4125-8026-2d5ffb834676')
 				.expect(401)
+				.end(done);
+		});
+		it('returns 404 for nonexistant cycle', function(done){
+			request
+				.get('/api/cycles/foo/assignments/5a3cf444-9d87-4125-8026-2d5ffb834676')
+				.set('Authorization', 'Bearer ' + adminToken)
+				.expect(404)
+				.end(done);
+		});
+		it('returns 404 for nonexistant cycle assignment', function(done){
+			request
+				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/assignments/foo')
+				.set('Authorization', 'Bearer ' + adminToken)
+				.expect(404)
 				.end(done);
 		});
 		it('shows an assignment to an admin user', function(done){
@@ -131,6 +152,7 @@ describe('Assignments', function(){
 				.expect(401)
 				.end(done);
 		});
+
 		it('rejects a put by a non-admin user', function(done){
 			request
 				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
@@ -145,6 +167,14 @@ describe('Assignments', function(){
 				.set('Authorization', 'Bearer ' + adminToken)
 				.send({foo:'bar'})
 				.expect(400)
+				.end(done);
+		});
+		it('returns 404 for nonexistant cycle', function(done){
+			request
+				.put('/api/cycles/foo/assignments/5a3cf444-9d87-4125-8026-2d5ffb834676')
+				.set('Authorization', 'Bearer ' + adminToken)
+				.send({id:'3cd2dc98-e280-4e72-a437-9a916d98b636',role:'advisor'})
+				.expect(404)
 				.end(done);
 		});
 		it('allows a new put by an admin user', function(done){
@@ -209,6 +239,14 @@ describe('Assignments', function(){
 					done();
 				});
 		});
+		it('returns 404 for nonexistant cycle', function(done){
+			request
+				.patch('/api/cycles/foo/assignments/5a3cf444-9d87-4125-8026-2d5ffb834676')
+				.set('Authorization', 'Bearer ' + adminToken)
+				.send({id:'3cd2dc98-e280-4e72-a437-9a916d98b636',role:'advisor'})
+				.expect(404)
+				.end(done);
+		});
 		it('allows an existing patch by an admin user', function(done){
 			request
 				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
@@ -235,6 +273,20 @@ describe('Assignments', function(){
 				.delete('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
 				.set('Authorization', 'Bearer ' + userToken)
 				.expect(403)
+				.end(done);
+		});
+		it('returns 404 for nonexistant cycle', function(done){
+			request
+				.delete('/api/cycles/foo/assignments/5a3cf444-9d87-4125-8026-2d5ffb834676')
+				.set('Authorization', 'Bearer ' + adminToken)
+				.expect(404)
+				.end(done);
+		});
+		it('returns 404 for nonexistant cycle assignment', function(done){
+			request
+				.delete('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/assignments/foo')
+				.set('Authorization', 'Bearer ' + adminToken)
+				.expect(404)
 				.end(done);
 		});
 		it('deletes an assignment for an admin user', function(done){

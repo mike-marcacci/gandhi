@@ -24,7 +24,6 @@ r.connect({host: host, db: db}).then(function(conn){
 
   // Cycles
   // ------
-
   tasks.push(r.table('cycles').replace(function(cycle){
     return cycle.merge({
       assignments: cycle('users').default(cycle('assignments')),
@@ -35,11 +34,26 @@ r.connect({host: host, db: db}).then(function(conn){
       close: ['close'],
       events: r.literal(cycle('events').coerceTo('array').map(function(eventKV){
         return [eventKV.nth(0), eventKV.nth(1).without('messages')];
+      }).coerceTo('object')),
+      visible: r.literal(cycle('roles').coerceTo('array').map(function(roleKV){
+        return [roleKV.nth(0), true];
       }).coerceTo('object'))
     }).without({
       users: true,
       flow: true,
       events: true
+    })
+  }).run(conn));
+
+  // Projects
+  // --------
+  tasks.push(r.table('projects').replace(function(project){
+    return project.merge({
+      assignments: project('users').default(project('assignments')),
+      contents: project('flow').default(project('contents'))
+    }).without({
+      users: true,
+      flow: true
     })
   }).run(conn));
 

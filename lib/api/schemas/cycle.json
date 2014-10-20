@@ -200,6 +200,9 @@
       "additionalProperties": true,
       "default": {}
     },
+    "visible": {
+      "$ref": "#/definitions/permission"
+    },
     "updated": {
       "type": "date"
     },

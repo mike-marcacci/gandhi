@@ -15,10 +15,10 @@ var whitelist = ['id', 'email', 'name', 'href', 'admin', 'created','updated'];
 
 before(function(){
 	request = global.setup.api;
-	fixtures = global.setup.fixtures.db.cycles;
+	fixtures = global.setup.fixtures.db.projects;
 });
 
-describe('Invitations', function(){
+describe('Assignments', function(){
 	var adminToken, adminId, userToken, userId;
 
 	before(function(done){
@@ -58,7 +58,7 @@ describe('Invitations', function(){
 	describe('#list', function(){
 		it('rejects an anonymous request', function(done){
 			request
-				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations')
+				.get('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments')
 				.expect(401)
 				.end(function(err, res){
 					assert.isNull(err);
@@ -66,138 +66,139 @@ describe('Invitations', function(){
 					done();
 				});
 		});
-		it('returns 404 for nonexistant cycle', function(done){
+		it('returns 404 for nonexistant project', function(done){
 			request
-				.get('/api/cycles/foo/invitations')
+				.get('/api/projects/foo/assignments')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.expect(404)
 				.end(done);
 		});
-		it('shows all invitations to an admin user', function(done){
+		it('shows all assignments to an admin user', function(done){
 			request
-				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations')
+				.get('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.expect(200)
 				.end(function(err, res){
 					assert.isNull(err);
-					assert.lengthOf(Object.keys(res.body), 1);
+					assert.lengthOf(Object.keys(res.body), 3);
 					done();
 				});
 		});
-		it('shows all invitations to a non-admin user', function(done){
+		it('shows all assignments to a non-admin user', function(done){
 			request
-				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations')
+				.get('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments')
 				.set('Authorization', 'Bearer ' + userToken)
 				.expect(200)
 				.end(function(err, res){
 					assert.isNull(err);
-					assert.lengthOf(Object.keys(res.body), 1);
+					assert.lengthOf(Object.keys(res.body), 3);
 					done();
 				});
 		});
-		it.skip('hides non-allowed invitations from a non-admin user');
+		it.skip('hides non-allowed assignments from a non-admin user');
 	});
 
 	describe('#get', function(){
 		it('rejects an anonymous request', function(done){
 			request
-				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations/3350caac-84b9-4827-a5e4-c7a413760a0a')
+				.get('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/5a3cf444-9d87-4125-8026-2d5ffb834676')
 				.expect(401)
 				.end(done);
 		});
-		it('returns 404 for nonexistant cycle', function(done){
+		it('returns 404 for nonexistant project', function(done){
 			request
-				.get('/api/cycles/foo/invitations/3350caac-84b9-4827-a5e4-c7a413760a0a')
+				.get('/api/projects/foo/assignments/5a3cf444-9d87-4125-8026-2d5ffb834676')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.expect(404)
 				.end(done);
 		});
-		it('returns 404 for nonexistant cycle invitation', function(done){
+		it('returns 404 for nonexistant project assignment', function(done){
 			request
-				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations/foo')
+				.get('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/foo')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.expect(404)
 				.end(done);
 		});
-		it('shows an invitation to an admin user', function(done){
+		it('shows an assignment to an admin user', function(done){
 			request
-				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations/3350caac-84b9-4827-a5e4-c7a413760a0a')
+				.get('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/5a3cf444-9d87-4125-8026-2d5ffb834676')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.expect(200)
 				.end(function(err, res){
 					assert.isNull(err);
-					assert.equal(res.body.id, '3350caac-84b9-4827-a5e4-c7a413760a0a');
+					assert.equal(res.body.id, '5a3cf444-9d87-4125-8026-2d5ffb834676');
 					done();
 				});
 		});
-		it('shows an invitation to a non-admin user', function(done){
+		it('shows an assignment to a non-admin user', function(done){
 			request
-				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations/3350caac-84b9-4827-a5e4-c7a413760a0a')
+				.get('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/5a3cf444-9d87-4125-8026-2d5ffb834676')
 				.set('Authorization', 'Bearer ' + userToken)
 				.expect(200)
 				.end(function(err, res){
 					assert.isNull(err);
-					assert.equal(res.body.id, '3350caac-84b9-4827-a5e4-c7a413760a0a');
+					assert.equal(res.body.id, '5a3cf444-9d87-4125-8026-2d5ffb834676');
 					done();
 				});
 		});
-		it.skip('hides a non-allowed invitation from a non-admin user');
+		it.skip('hides a non-allowed assignment from a non-admin user');
 	});
 
 	describe('#put', function(){
 		it('rejects an anonymous put', function(done){
 			request
-				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
-				.send({id:'c7efa7cf-bab2-44a6-862f-7ca5e154b1ae',role:'applicant',name:'Test',email:'test@email.com'})
+				.put('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
+				.send({id:'3cd2dc98-e280-4e72-a437-9a916d98b636',role:'advisor'})
 				.expect(401)
 				.end(done);
 		});
+
 		it('rejects a put by a non-admin user', function(done){
 			request
-				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
+				.put('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
 				.set('Authorization', 'Bearer ' + userToken)
-				.send({id:'c7efa7cf-bab2-44a6-862f-7ca5e154b1ae',role:'applicant',name:'Test',email:'test@email.com'})
+				.send({id:'3cd2dc98-e280-4e72-a437-9a916d98b636',role:'advisor'})
 				.expect(403)
 				.end(done);
 		});
 		it('rejects an invalid put', function(done){
 			request
-				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
+				.put('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.send({foo:'bar'})
 				.expect(400)
 				.end(done);
 		});
-		it('returns 404 for nonexistant cycle', function(done){
+		it('returns 404 for nonexistant project', function(done){
 			request
-				.put('/api/cycles/foo/invitations/3350caac-84b9-4827-a5e4-c7a413760a0a')
+				.put('/api/projects/foo/assignments/5a3cf444-9d87-4125-8026-2d5ffb834676')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({id:'c7efa7cf-bab2-44a6-862f-7ca5e154b1ae',role:'applicant',name:'Test',email:'test@email.com'})
+				.send({id:'3cd2dc98-e280-4e72-a437-9a916d98b636',role:'advisor'})
 				.expect(404)
 				.end(done);
 		});
 		it('allows a new put by an admin user', function(done){
 			request
-				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
+				.put('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({id:'c7efa7cf-bab2-44a6-862f-7ca5e154b1ae',role:'applicant',name:'Test',email:'test@email.com'})
+				.send({id:'3cd2dc98-e280-4e72-a437-9a916d98b636',role:'advisor'})
 				.expect(200)
 				.end(function(err, res){
 					assert.isNull(err);
-					assert.equal(res.body.id, 'c7efa7cf-bab2-44a6-862f-7ca5e154b1ae');
+					assert.equal(res.body.id, '3cd2dc98-e280-4e72-a437-9a916d98b636');
 					done();
 				});
 		});
 		it('allows an existing put by an admin user', function(done){
 			request
-				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
+				.put('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({id:'c7efa7cf-bab2-44a6-862f-7ca5e154b1ae',role:'applicant',name:'Test PUT',email:'test@email.com'})
+				.send({id:'3cd2dc98-e280-4e72-a437-9a916d98b636',role:'applicant'})
 				.expect(200)
 				.end(function(err, res){
 					assert.isNull(err);
-					assert.equal(res.body.id, 'c7efa7cf-bab2-44a6-862f-7ca5e154b1ae');
-					assert.equal(res.body.name, 'Test PUT');
+					assert.equal(res.body.id, '3cd2dc98-e280-4e72-a437-9a916d98b636');
+					assert.equal(res.body.role, 'applicant');
 					done();
 				});
 		});
@@ -206,22 +207,22 @@ describe('Invitations', function(){
 	describe('#patch', function(){
 		it('rejects an anonymous put', function(done){
 			request
-				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
-				.send({name:'Oops'})
+				.patch('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
+				.send({role:'applicant'})
 				.expect(401)
 				.end(done);
 		});
 		it('rejects a patch by a non-admin user', function(done){
 			request
-				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
+				.patch('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
 				.set('Authorization', 'Bearer ' + userToken)
-				.send({name:'Oops'})
+				.send({role:'applicant'})
 				.expect(403)
 				.end(done);
 		});
 		it('rejects an invalid patch', function(done){
 			request
-				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
+				.patch('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.send({foo:'bar'})
 				.expect(400)
@@ -229,32 +230,32 @@ describe('Invitations', function(){
 		});
 		it('rejects a new patch by an admin user', function(done){
 			request
-				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations/foo')
+				.patch('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/foo')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({name:'Oops'})
+				.send({role:'applicant'})
 				.expect(404)
 				.end(function(err, res){
 					assert.isNull(err);
 					done();
 				});
 		});
-		it('returns 404 for nonexistant cycle', function(done){
+		it('returns 404 for nonexistant project', function(done){
 			request
-				.patch('/api/cycles/foo/invitations/3350caac-84b9-4827-a5e4-c7a413760a0a')
+				.patch('/api/projects/foo/assignments/5a3cf444-9d87-4125-8026-2d5ffb834676')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({name:'Oops'})
+				.send({id:'3cd2dc98-e280-4e72-a437-9a916d98b636',role:'advisor'})
 				.expect(404)
 				.end(done);
 		});
 		it('allows an existing patch by an admin user', function(done){
 			request
-				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
+				.patch('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({name:'Patched'})
+				.send({role:'applicant'})
 				.expect(200)
 				.end(function(err, res){
 					assert.isNull(err);
-					assert.equal(res.body.name, 'Patched');
+					assert.equal(res.body.role, 'applicant');
 					done();
 				});
 		});
@@ -263,39 +264,33 @@ describe('Invitations', function(){
 	describe('#delete', function(){
 		it('rejects an anonymous delete', function(done){
 			request
-				.delete('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
+				.delete('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
 				.expect(401)
 				.end(done);
 		});
 		it('rejects a delete by a non-admin user', function(done){
 			request
-				.delete('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
+				.delete('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
 				.set('Authorization', 'Bearer ' + userToken)
 				.expect(403)
 				.end(done);
 		});
-		it('returns 404 for nonexistant cycle', function(done){
+		it('returns 404 for nonexistant project', function(done){
 			request
-				.delete('/api/cycles/foo/invitations/3350caac-84b9-4827-a5e4-c7a413760a0a')
+				.delete('/api/projects/foo/assignments/5a3cf444-9d87-4125-8026-2d5ffb834676')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.send({id:'3cd2dc98-e280-4e72-a437-9a916d98b636',role:'advisor'})
 				.expect(404)
 				.end(done);
 		});
-		it('returns 404 for nonexistant cycle invitation', function(done){
+		it('deletes an assignment for an admin user', function(done){
 			request
-				.delete('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations/foo')
-				.set('Authorization', 'Bearer ' + adminToken)
-				.expect(404)
-				.end(done);
-		});
-		it('deletes an invitation for an admin user', function(done){
-			request
-				.delete('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
+				.delete('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.expect(200)
 				.end(function(err, res){
 					assert.isNull(err);
-					assert.equal(res.body.id, 'c7efa7cf-bab2-44a6-862f-7ca5e154b1ae');
+					assert.equal(res.body.id, '3cd2dc98-e280-4e72-a437-9a916d98b636');
 					done();
 				});
 		});

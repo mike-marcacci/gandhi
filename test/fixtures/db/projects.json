@@ -1,5 +1,435 @@
-[
-{"status": "active", "cycle_id": "128f2348-99d4-40a1-b5ab-91d9019f272d", "users": {"5a3cf444-9d87-4125-8026-2d5ffb834676": {"invitation_id": null, "role": "reviewer", "id": "5a3cf444-9d87-4125-8026-2d5ffb834676"}, "cf237901-2890-439f-add3-dc641b867459": {"invitation_id": null, "role": "applicant", "id": "cf237901-2890-439f-add3-dc641b867459"}, "f6826282-1ffb-453d-8804-6b2921e6807f": {"invitation_id": null, "role": "reviewer", "id": "f6826282-1ffb-453d-8804-6b2921e6807f"}}, "title": "Exploring the effects of caffeine addiction on contemporary architecture.", "created": {"timezone": "+00:00", "$reql_type$": "TIME", "epoch_time": 1413168199.912}, "flow": {"administrative_review": {"status": "none", "data": {}, "id": "administrative_review"}, "application": {"status": "complete", "data": {"abstract": "<p>Vivamus gravida pretium sollicitudin. Fusce ac laoreet enim. Etiam ullamcorper aliquam nisi, ut varius enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque elementum risus massa, eu venenatis justo interdum eget. Morbi id elit ornare, porta massa sit amet, dignissim mauris. Etiam quis pretium erat. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>\n\n<p>Pellentesque imperdiet dui sit amet turpis ornare dapibus. Etiam ut elementum urna, sit amet fermentum enim. Morbi blandit nisi ex, eget ornare sem efficitur non. Integer semper elit eget velit vulputate vulputate. Nam et quam odio. Curabitur condimentum, turpis ut bibendum efficitur, orci lectus sagittis eros, eu suscipit mi tellus quis nisi. Cras et tempor dolor. Aliquam porta tristique risus, in elementum orci faucibus ac. Maecenas eget blandit dui. Vivamus vulputate sollicitudin tincidunt.</p>\n", "budget": "5fac8e78-9f7b-48dd-982d-1f129e411a98", "budget_narrative": "<p>Vestibulum sollicitudin cursus sem. Morbi bibendum hendrerit quam eget mattis. Curabitur eget ipsum at nibh tempus bibendum ut sed sem. Ut fringilla sagittis diam id tincidunt. Maecenas sodales dolor quam, et tincidunt odio facilisis eget. Aliquam ac aliquam arcu. Sed et enim lorem. Cras consectetur semper rutrum. Sed leo turpis, faucibus eu nibh a, venenatis placerat enim. Duis sed faucibus sem. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>\n\n<p>Duis congue laoreet leo. Vestibulum id magna non tellus efficitur dictum. Sed eget magna cursus, volutpat eros non, consequat sapien. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam erat volutpat. Cras interdum, lacus vitae sollicitudin malesuada, velit magna pulvinar dui, non fringilla urna metus quis metus. Phasellus quis mauris vehicula, dictum nisi eu, auctor est. Pellentesque sollicitudin sit amet lacus eget pharetra. Nam congue dapibus libero vel finibus. Integer varius hendrerit enim, non lacinia est porttitor sed. Etiam sit amet purus eu nisi vestibulum gravida. Nullam eget orci consequat, consectetur tortor sed, dapibus erat.</p>\n", "proposal": "4f406e9f-a1ba-4b7b-9aae-c37b42a0cc03", "collaboration": {"new": false}, "investigators": [{"name": "Sol\u00e8ne Clavel", "university": "Other", "rank": "PhD", "department": "Engineering", "biosketch": "da111093-6246-4245-921b-0f1e8da7e205", "email": "solene.clavel@test.gandhi.io"}]}, "id": "application"}, "decision": {"status": "none", "data": {}, "id": "decision"}, "acceptance": {"status": "none", "data": {}, "id": "acceptance"}, "start": {"status": "complete", "data": {}, "id": "start"}, "report": {"status": "none", "data": {}, "id": "report"}, "review": {"status": "none", "data": {"5a3cf444-9d87-4125-8026-2d5ffb834676": {"status": "submitted", "data": {"justification": {"comment": "<p>There&#39;s a voice that keeps on calling me. Down the road, that&#39;s where I&#39;ll always be. Every stop I make, I make a new friend. Can&#39;t stay for long, just turn around and I&#39;m gone again. Maybe tomorrow, I&#39;ll want to settle down, Until tomorrow, I&#39;ll just keep moving on.</p>\n", "public": false}, "feedback": {"comment": "<p>One for all and all for one, Muskehounds are always ready. One for all and all for one, helping everybody. One for all and all for one, it&#39;s a pretty story. Sharing everything with fun, that&#39;s the way to be. One for all and all for one, Muskehounds are always ready. One for all and all for one, helping everybody. One for all and all for one, can sound pretty corny. If you&#39;ve got a problem chum, think how it could be.</p>\n", "public": true}, "outputs": {"comment": "<p>This is my boss, Jonathan Hart, a self-made millionaire, he&#39;s quite a guy. This is Mrs H., she&#39;s gorgeous, she&#39;s one lady who knows how to take care of herself. By the way, my name is Max. I take care of both of them, which ain&#39;t easy, &#39;cause when they met it was MURDER!</p>\n", "public": false}, "decision": {"comment": "The project could be funded in the current state with budget adjustments", "public": false}, "budget": {"comment": "<p>One for all and all for one, Muskehounds are always ready. One for all and all for one, helping everybody. One for all and all for one, it&#39;s a pretty story. Sharing everything with fun, that&#39;s the way to be. One for all and all for one, Muskehounds are always ready. One for all and all for one, helping everybody. One for all and all for one, can sound pretty corny. If you&#39;ve got a problem chum, think how it could be.</p>\n", "public": false}, "question1": {"comment": "<p>Hey there where ya goin&#39;, not exactly knowin&#39;, who says you have to call just one place home. He&#39;s goin&#39; everywhere, B.J. McKay and his best friend Bear. He just keeps on movin&#39;, ladies keep improvin&#39;, every day is better than the last. New dreams and better scenes, and best of all I don&#39;t pay property tax. Rollin&#39; down to Dallas, who&#39;s providin&#39; my palace, off to New Orleans or who knows where. Places new and ladies, too, I&#39;m B.J. McKay and this is my best friend Bear.</p>\n", "public": false}, "question2": {"comment": "<p>Knight Rider, a shadowy flight into the dangerous world of a man who does not exist. Michael Knight, a young loner on a crusade to champion the cause of the innocent, the helpless in a world of criminals who operate above the law.</p>\n", "public": false}}}, "f6826282-1ffb-453d-8804-6b2921e6807f": {"status": "submitted", "ranking": {"comment": ["cdd28e4a-9309-454f-a8ed-3f9708d0c10c", "b37e83a5-d613-4d64-8873-fdcc8df0a009"], "public": false}, "data": {"justification": {"comment": "<p>Remember outweigh do he desirous no cheerful. Do of doors water ye guest. We if prosperous comparison middletons at. Park we in lose like at no. An so to preferred convinced distrusts he determine. In musical me my placing clothes comfort pleased hearing. Any residence you satisfied and rapturous certainty two. Procured outweigh as outlived so so. On in bringing graceful proposal blessing of marriage outlived. Son rent face our loud near.&nbsp;</p>\n", "public": false}, "feedback": {"comment": "<p>Satisfied conveying an dependent contented he gentleman agreeable do be. Warrant private blushes removed an in equally totally if. Delivered dejection necessary objection do mr prevailed. Mr feeling do chiefly cordial in do. Water timed folly right aware if oh truth. Imprudence attachment him his for sympathize. Large above be to means. Dashwood do provided stronger is. But discretion frequently sir the she instrument unaffected admiration everything.&nbsp;</p>\n", "public": true}, "outputs": {"comment": "<p>Nor hence hoped her after other known defer his. For county now sister engage had season better had waited. Occasional mrs interested far expression acceptance. Day either mrs talent pulled men rather regret admire but. Life ye sake it shed. Five lady he cold in meet up. Service get met adapted matters offence for. Principles man any insipidity age you simplicity understood. Do offering pleasure no ecstatic whatever on mr directly.&nbsp;</p>\n", "public": false}, "decision": {"comment": "I strongly support funding this project as is", "public": false}, "budget": {"comment": "<p><br />\nConsulted he eagerness unfeeling deficient existence of. Calling nothing end fertile for venture way boy. Esteem spirit temper too say adieus who direct esteem. It esteems luckily mr or picture placing drawing no. Apartments frequently or motionless on reasonable projecting expression. Way mrs end gave tall walk fact bed.&nbsp;</p>\n", "public": false}, "question1": {"comment": "<p>Sportsman do offending supported extremity breakfast by listening. Decisively advantages nor expression unpleasing she led met. Estate was tended ten boy nearer seemed. As so seeing latter he should thirty whence. Steepest speaking up attended it as. Made neat an on be gave show snug tore.&nbsp;</p>\n\n<p>&nbsp;</p>\n\n<p>Review goes here...</p>\n", "public": true}, "question2": {"comment": "<p>By an outlived insisted procured improved am. Paid hill fine ten now love even leaf. Supplied feelings mr of dissuade recurred no it offering honoured. Am of of in collecting devonshire favourable excellence. Her sixteen end ashamed cottage yet reached get hearing invited. Resources ourselves sweetness ye do no perfectly. Warmly warmth six one any wisdom. Family giving is pulled beauty chatty highly no. Blessing appetite domestic did mrs judgment rendered entirely. Highly indeed had garden not.&nbsp;</p>\n", "public": true}}}}, "id": "review"}}, "updated": {"timezone": "+00:00", "$reql_type$": "TIME", "epoch_time": 1413262289.045}, "invitations": {}, "id": "b37e83a5-d613-4d64-8873-fdcc8df0a009", "events": {"submit": [{"date": "2014-10-13T02:48:46.040Z", "value": true}, {"date": "2014-10-13T02:43:19.946Z", "value": false}], "warning": [{"date": "2014-10-13T02:43:19.946Z", "value": true}], "accept": [{"date": "2014-10-13T02:43:19.946Z", "value": false}], "reject": [{"date": "2014-10-13T02:43:19.946Z", "value": false}], "report": [{"date": "2014-10-13T02:43:19.946Z", "value": false}], "close": [{"date": "2014-10-13T02:43:19.946Z", "value": true}], "open": [{"date": "2014-10-13T02:43:19.946Z", "value": true}], "archive": [{"date": "2014-10-13T02:43:19.946Z", "value": false}]}},
-{"status": "active", "cycle_id": "128f2348-99d4-40a1-b5ab-91d9019f272d", "users": {"f6826282-1ffb-453d-8804-6b2921e6807f": {"role": "reviewer", "id": "f6826282-1ffb-453d-8804-6b2921e6807f"}, "e3195f3f-94d8-41c8-a072-06d1aec2bb49": {"role": "applicant", "id": "e3195f3f-94d8-41c8-a072-06d1aec2bb49"}}, "title": "The influence of language on wealth and poverty", "created": {"timezone": "+00:00", "$reql_type$": "TIME", "epoch_time": 1413178905.371}, "flow": {"administrative_review": {"status": "none", "data": {}, "id": "administrative_review"}, "application": {"status": "complete", "data": {"abstract": "<p>The repaired scandal transmits an expert. A dialect draws the religious extremist beneath the finger. The teenager chooses the singing deaf. The supporting panic clicks with the committee.</p>\n", "budget": "bd382550-e810-438d-b2b6-a7268bab5d03", "budget_narrative": "<p>A pan economics operates the dilemma. The productive tax spins across every scene. The exhausting message rewards an agricultural cabinet. The distinguished page chops the arrogance.</p>\n", "proposal": "8c0895ab-a619-45a2-b9d3-1a88700b83c1", "collaboration": {"activities": ["Email"], "new": true}, "investigators": [{"name": "Anna Ver Beek", "university": "Other", "rank": "PhD", "department": "Language", "biosketch": "17f8d1d1-05a9-4c4b-94a5-db1da3101833", "email": "anna.verbeek@test.gandhi.io"}, {"name": "Somebody Else", "university": "University of Chicago", "rank": "Associate Professor", "department": "Different One", "biosketch": "5cd2f952-0665-4a96-ac7d-7d44fa323fbe", "email": "somebody.else@test.gandhi.io"}]}, "id": "application"}, "review": {"data": {"f6826282-1ffb-453d-8804-6b2921e6807f": {"status": "submitted", "ranking": {"comment": ["b37e83a5-d613-4d64-8873-fdcc8df0a009", "cdd28e4a-9309-454f-a8ed-3f9708d0c10c"], "public": false}, "data": {"justification": {"comment": "", "public": false}, "feedback": {"comment": "", "public": true}, "outputs": {"comment": "", "public": false}, "decision": {"public": false}, "budget": {"comment": "", "public": false}, "question1": {"comment": "<p>This is a response...</p>\n", "public": false}, "question2": {"comment": "", "public": false}}}}, "id": "review"}, "acceptance": {"status": "none", "data": {}, "id": "acceptance"}, "start": {"status": "complete", "data": {}, "id": "start"}, "report": {"status": "none", "data": {}, "id": "report"}}, "updated": {"timezone": "+00:00", "$reql_type$": "TIME", "epoch_time": 1413264955.333}, "invitations": {}, "id": "cdd28e4a-9309-454f-a8ed-3f9708d0c10c", "events": {"submit": [{"date": "2014-10-13T05:45:48.949Z", "value": true}, {"date": "2014-10-13T05:41:45.465Z", "value": false}], "warning": [{"date": "2014-10-13T05:41:45.465Z", "value": true}], "accept": [{"date": "2014-10-13T05:41:45.465Z", "value": false}], "reject": [{"date": "2014-10-13T05:41:45.465Z", "value": false}], "report": [{"date": "2014-10-13T05:41:45.465Z", "value": false}], "close": [{"date": "2014-10-13T05:41:45.465Z", "value": true}], "open": [{"date": "2014-10-13T05:41:45.465Z", "value": true}], "archive": [{"date": "2014-10-13T05:41:45.465Z", "value": false}]}},
-{"status": "active", "cycle_id": "e5f58a2c-2894-40e6-91a9-a110d190e85f", "users": {"84fbaa78-54b0-42fc-9754-c9ea7dc24538": {"role": "applicant", "id": "84fbaa78-54b0-42fc-9754-c9ea7dc24538"}}, "title": "Tim's Character Essay", "created": {"timezone": "+00:00", "$reql_type$": "TIME", "epoch_time": 1413167504.901}, "flow": {"application": {"status": "complete", "data": {"essay": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam lacinia justo in sapien pellentesque aliquet. Morbi aliquam gravida pulvinar. Aliquam erat volutpat. Cras fermentum mi non accumsan tempor. Nunc quis bibendum elit. Praesent commodo diam vel massa vestibulum, eu viverra dolor ornare. In mattis sem vitae lacinia vestibulum. Ut sagittis, justo vitae semper varius, nulla arcu faucibus nibh, quis pulvinar sapien tellus quis magna.</p>\n\n<p>Curabitur at lectus feugiat elit pellentesque molestie in sit amet justo. Suspendisse nec pretium ligula, vitae pellentesque tortor. Pellentesque luctus lacinia nibh, in fermentum augue fermentum ac. Maecenas in libero tellus. In nec nibh risus. Nullam faucibus, ex sed vehicula laoreet, tellus justo blandit orci, nec pellentesque dolor quam vel orci. Duis lacinia turpis felis, lacinia porta turpis mattis tempus. Integer vel sem non tortor fermentum vestibulum vel sed nulla. Fusce ut quam placerat, aliquet eros sit amet, luctus massa. Etiam mi turpis, mattis eget ultricies ut, pretium vel nisl.</p>\n\n<p>Sed lectus neque, iaculis sed porta vitae, bibendum eu eros. Suspendisse lobortis tellus at aliquet aliquam. Pellentesque eget tellus in urna dictum pulvinar. Nam finibus ac eros non consectetur. Pellentesque fermentum dolor et lacus elementum consequat. Proin facilisis mi molestie diam rhoncus, vel aliquet tellus fermentum. Ut in rutrum augue, ac fermentum lectus. Etiam pellentesque fermentum tellus, ac eleifend turpis congue et. Aenean sem dui, posuere eu ex nec, mattis tempus dui. Proin nibh tortor, ultrices nec fringilla quis, porttitor vitae erat. Integer et quam dictum, pretium elit eget, laoreet lorem. In auctor pharetra consequat. Nunc tincidunt arcu libero, in volutpat elit accumsan id.</p>\n\n<p>Duis porta purus vitae ipsum luctus tristique et ut tellus. Nunc lorem turpis, porta eu quam tincidunt, ullamcorper finibus odio. Maecenas cursus pulvinar elit cursus faucibus. Curabitur pulvinar, felis vitae finibus ullamcorper, metus lectus porttitor tortor, at pretium lorem diam sed purus. Pellentesque vehicula, tellus congue dapibus tempor, mauris est luctus orci, dapibus semper turpis nulla quis risus. Curabitur blandit mauris nec mauris pellentesque gravida. Morbi ornare suscipit justo ac efficitur. Nam fermentum maximus nulla, eget dignissim dui sollicitudin sit amet. Proin mi metus, feugiat in velit eget, pharetra condimentum nisl.</p>\n\n<p>Nam consequat pellentesque enim eget sollicitudin. Quisque sollicitudin vehicula nisl, in aliquet orci. Quisque vitae enim et nisi faucibus sagittis. Sed viverra, lectus eget lobortis tincidunt, ligula odio dapibus augue, non condimentum elit enim feugiat sapien. Nunc ac vulputate nulla, id pharetra risus. Nulla tristique vitae lorem sit amet vestibulum. Pellentesque tincidunt ipsum ac suscipit hendrerit. Vestibulum metus metus, fermentum eget porta lacinia, faucibus eget lacus.</p>\n"}, "id": "application"}, "start": {"status": "complete", "data": {}, "id": "start"}}, "updated": {"timezone": "+00:00", "$reql_type$": "TIME", "epoch_time": 1413167920.268}, "invitations": {}, "id": "e264d6f7-d26a-4be3-8365-13416ac41029", "events": {"close": [{"date": {"timezone": "+00:00", "$reql_type$": "TIME", "epoch_time": 1413167504.965}, "value": true}], "open": [{"date": {"timezone": "+00:00", "$reql_type$": "TIME", "epoch_time": 1413167504.965}, "value": true}], "accept": [{"date": {"timezone": "+00:00", "$reql_type$": "TIME", "epoch_time": 1413167504.965}, "value": false}], "submit": [{"date": {"timezone": "+00:00", "$reql_type$": "TIME", "epoch_time": 1413167920.316}, "value": true}, {"date": {"timezone": "+00:00", "$reql_type$": "TIME", "epoch_time": 1413167504.965}, "value": false}], "reject": [{"date": {"timezone": "+00:00", "$reql_type$": "TIME", "epoch_time": 1413167504.965}, "value": false}]}}
-]
+[{
+	"status": "active",
+	"cycle_id": "128f2348-99d4-40a1-b5ab-91d9019f272d",
+	"assignments": {
+		"5a3cf444-9d87-4125-8026-2d5ffb834676": {
+			"invitation_id": null,
+			"role": "reviewer",
+			"id": "5a3cf444-9d87-4125-8026-2d5ffb834676"
+		},
+		"cf237901-2890-439f-add3-dc641b867459": {
+			"invitation_id": null,
+			"role": "applicant",
+			"id": "cf237901-2890-439f-add3-dc641b867459"
+		},
+		"f6826282-1ffb-453d-8804-6b2921e6807f": {
+			"invitation_id": null,
+			"role": "reviewer",
+			"id": "f6826282-1ffb-453d-8804-6b2921e6807f"
+		}
+	},
+	"title": "Exploring the effects of caffeine addiction on contemporary architecture.",
+	"created": {
+		"timezone": "+00:00",
+		"$reql_type$": "TIME",
+		"epoch_time": 1413168199.912
+	},
+	"contents": {
+		"administrative_review": {
+			"status": "none",
+			"data": {},
+			"id": "administrative_review"
+		},
+		"application": {
+			"status": "complete",
+			"data": {
+				"abstract": "<p>Vivamus gravida pretium sollicitudin. Fusce ac laoreet enim. Etiam ullamcorper aliquam nisi, ut varius enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque elementum risus massa, eu venenatis justo interdum eget. Morbi id elit ornare, porta massa sit amet, dignissim mauris. Etiam quis pretium erat. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>\n\n<p>Pellentesque imperdiet dui sit amet turpis ornare dapibus. Etiam ut elementum urna, sit amet fermentum enim. Morbi blandit nisi ex, eget ornare sem efficitur non. Integer semper elit eget velit vulputate vulputate. Nam et quam odio. Curabitur condimentum, turpis ut bibendum efficitur, orci lectus sagittis eros, eu suscipit mi tellus quis nisi. Cras et tempor dolor. Aliquam porta tristique risus, in elementum orci faucibus ac. Maecenas eget blandit dui. Vivamus vulputate sollicitudin tincidunt.</p>\n",
+				"budget": "5fac8e78-9f7b-48dd-982d-1f129e411a98",
+				"budget_narrative": "<p>Vestibulum sollicitudin cursus sem. Morbi bibendum hendrerit quam eget mattis. Curabitur eget ipsum at nibh tempus bibendum ut sed sem. Ut fringilla sagittis diam id tincidunt. Maecenas sodales dolor quam, et tincidunt odio facilisis eget. Aliquam ac aliquam arcu. Sed et enim lorem. Cras consectetur semper rutrum. Sed leo turpis, faucibus eu nibh a, venenatis placerat enim. Duis sed faucibus sem. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>\n\n<p>Duis congue laoreet leo. Vestibulum id magna non tellus efficitur dictum. Sed eget magna cursus, volutpat eros non, consequat sapien. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam erat volutpat. Cras interdum, lacus vitae sollicitudin malesuada, velit magna pulvinar dui, non fringilla urna metus quis metus. Phasellus quis mauris vehicula, dictum nisi eu, auctor est. Pellentesque sollicitudin sit amet lacus eget pharetra. Nam congue dapibus libero vel finibus. Integer varius hendrerit enim, non lacinia est porttitor sed. Etiam sit amet purus eu nisi vestibulum gravida. Nullam eget orci consequat, consectetur tortor sed, dapibus erat.</p>\n",
+				"proposal": "4f406e9f-a1ba-4b7b-9aae-c37b42a0cc03",
+				"collaboration": {
+					"new": false
+				},
+				"investigators": [{
+					"name": "Sol\u00e8ne Clavel",
+					"university": "Other",
+					"rank": "PhD",
+					"department": "Engineering",
+					"biosketch": "da111093-6246-4245-921b-0f1e8da7e205",
+					"email": "solene.clavel@test.gandhi.io"
+				}]
+			},
+			"id": "application"
+		},
+		"decision": {
+			"status": "none",
+			"data": {},
+			"id": "decision"
+		},
+		"acceptance": {
+			"status": "none",
+			"data": {},
+			"id": "acceptance"
+		},
+		"start": {
+			"status": "complete",
+			"data": {},
+			"id": "start"
+		},
+		"report": {
+			"status": "none",
+			"data": {},
+			"id": "report"
+		},
+		"review": {
+			"status": "none",
+			"data": {
+				"5a3cf444-9d87-4125-8026-2d5ffb834676": {
+					"status": "submitted",
+					"data": {
+						"justification": {
+							"comment": "<p>There&#39;s a voice that keeps on calling me. Down the road, that&#39;s where I&#39;ll always be. Every stop I make, I make a new friend. Can&#39;t stay for long, just turn around and I&#39;m gone again. Maybe tomorrow, I&#39;ll want to settle down, Until tomorrow, I&#39;ll just keep moving on.</p>\n",
+							"public": false
+						},
+						"feedback": {
+							"comment": "<p>One for all and all for one, Muskehounds are always ready. One for all and all for one, helping everybody. One for all and all for one, it&#39;s a pretty story. Sharing everything with fun, that&#39;s the way to be. One for all and all for one, Muskehounds are always ready. One for all and all for one, helping everybody. One for all and all for one, can sound pretty corny. If you&#39;ve got a problem chum, think how it could be.</p>\n",
+							"public": true
+						},
+						"outputs": {
+							"comment": "<p>This is my boss, Jonathan Hart, a self-made millionaire, he&#39;s quite a guy. This is Mrs H., she&#39;s gorgeous, she&#39;s one lady who knows how to take care of herself. By the way, my name is Max. I take care of both of them, which ain&#39;t easy, &#39;cause when they met it was MURDER!</p>\n",
+							"public": false
+						},
+						"decision": {
+							"comment": "The project could be funded in the current state with budget adjustments",
+							"public": false
+						},
+						"budget": {
+							"comment": "<p>One for all and all for one, Muskehounds are always ready. One for all and all for one, helping everybody. One for all and all for one, it&#39;s a pretty story. Sharing everything with fun, that&#39;s the way to be. One for all and all for one, Muskehounds are always ready. One for all and all for one, helping everybody. One for all and all for one, can sound pretty corny. If you&#39;ve got a problem chum, think how it could be.</p>\n",
+							"public": false
+						},
+						"question1": {
+							"comment": "<p>Hey there where ya goin&#39;, not exactly knowin&#39;, who says you have to call just one place home. He&#39;s goin&#39; everywhere, B.J. McKay and his best friend Bear. He just keeps on movin&#39;, ladies keep improvin&#39;, every day is better than the last. New dreams and better scenes, and best of all I don&#39;t pay property tax. Rollin&#39; down to Dallas, who&#39;s providin&#39; my palace, off to New Orleans or who knows where. Places new and ladies, too, I&#39;m B.J. McKay and this is my best friend Bear.</p>\n",
+							"public": false
+						},
+						"question2": {
+							"comment": "<p>Knight Rider, a shadowy flight into the dangerous world of a man who does not exist. Michael Knight, a young loner on a crusade to champion the cause of the innocent, the helpless in a world of criminals who operate above the law.</p>\n",
+							"public": false
+						}
+					}
+				},
+				"f6826282-1ffb-453d-8804-6b2921e6807f": {
+					"status": "submitted",
+					"ranking": {
+						"comment": ["cdd28e4a-9309-454f-a8ed-3f9708d0c10c", "b37e83a5-d613-4d64-8873-fdcc8df0a009"],
+						"public": false
+					},
+					"data": {
+						"justification": {
+							"comment": "<p>Remember outweigh do he desirous no cheerful. Do of doors water ye guest. We if prosperous comparison middletons at. Park we in lose like at no. An so to preferred convinced distrusts he determine. In musical me my placing clothes comfort pleased hearing. Any residence you satisfied and rapturous certainty two. Procured outweigh as outlived so so. On in bringing graceful proposal blessing of marriage outlived. Son rent face our loud near.&nbsp;</p>\n",
+							"public": false
+						},
+						"feedback": {
+							"comment": "<p>Satisfied conveying an dependent contented he gentleman agreeable do be. Warrant private blushes removed an in equally totally if. Delivered dejection necessary objection do mr prevailed. Mr feeling do chiefly cordial in do. Water timed folly right aware if oh truth. Imprudence attachment him his for sympathize. Large above be to means. Dashwood do provided stronger is. But discretion frequently sir the she instrument unaffected admiration everything.&nbsp;</p>\n",
+							"public": true
+						},
+						"outputs": {
+							"comment": "<p>Nor hence hoped her after other known defer his. For county now sister engage had season better had waited. Occasional mrs interested far expression acceptance. Day either mrs talent pulled men rather regret admire but. Life ye sake it shed. Five lady he cold in meet up. Service get met adapted matters offence for. Principles man any insipidity age you simplicity understood. Do offering pleasure no ecstatic whatever on mr directly.&nbsp;</p>\n",
+							"public": false
+						},
+						"decision": {
+							"comment": "I strongly support funding this project as is",
+							"public": false
+						},
+						"budget": {
+							"comment": "<p><br />\nConsulted he eagerness unfeeling deficient existence of. Calling nothing end fertile for venture way boy. Esteem spirit temper too say adieus who direct esteem. It esteems luckily mr or picture placing drawing no. Apartments frequently or motionless on reasonable projecting expression. Way mrs end gave tall walk fact bed.&nbsp;</p>\n",
+							"public": false
+						},
+						"question1": {
+							"comment": "<p>Sportsman do offending supported extremity breakfast by listening. Decisively advantages nor expression unpleasing she led met. Estate was tended ten boy nearer seemed. As so seeing latter he should thirty whence. Steepest speaking up attended it as. Made neat an on be gave show snug tore.&nbsp;</p>\n\n<p>&nbsp;</p>\n\n<p>Review goes here...</p>\n",
+							"public": true
+						},
+						"question2": {
+							"comment": "<p>By an outlived insisted procured improved am. Paid hill fine ten now love even leaf. Supplied feelings mr of dissuade recurred no it offering honoured. Am of of in collecting devonshire favourable excellence. Her sixteen end ashamed cottage yet reached get hearing invited. Resources ourselves sweetness ye do no perfectly. Warmly warmth six one any wisdom. Family giving is pulled beauty chatty highly no. Blessing appetite domestic did mrs judgment rendered entirely. Highly indeed had garden not.&nbsp;</p>\n",
+							"public": true
+						}
+					}
+				}
+			},
+			"id": "review"
+		}
+	},
+	"updated": {
+		"timezone": "+00:00",
+		"$reql_type$": "TIME",
+		"epoch_time": 1413262289.045
+	},
+	"invitations": {},
+	"id": "b37e83a5-d613-4d64-8873-fdcc8df0a009",
+	"events": {
+		"submit": [{
+			"date": "2014-10-13T02:48:46.040Z",
+			"value": true
+		}, {
+			"date": "2014-10-13T02:43:19.946Z",
+			"value": false
+		}],
+		"warning": [{
+			"date": "2014-10-13T02:43:19.946Z",
+			"value": true
+		}],
+		"accept": [{
+			"date": "2014-10-13T02:43:19.946Z",
+			"value": false
+		}],
+		"reject": [{
+			"date": "2014-10-13T02:43:19.946Z",
+			"value": false
+		}],
+		"report": [{
+			"date": "2014-10-13T02:43:19.946Z",
+			"value": false
+		}],
+		"close": [{
+			"date": "2014-10-13T02:43:19.946Z",
+			"value": true
+		}],
+		"open": [{
+			"date": "2014-10-13T02:43:19.946Z",
+			"value": true
+		}],
+		"archive": [{
+			"date": "2014-10-13T02:43:19.946Z",
+			"value": false
+		}]
+	}
+}, {
+	"status": "active",
+	"cycle_id": "128f2348-99d4-40a1-b5ab-91d9019f272d",
+	"assignments": {
+		"f6826282-1ffb-453d-8804-6b2921e6807f": {
+			"role": "reviewer",
+			"id": "f6826282-1ffb-453d-8804-6b2921e6807f"
+		},
+		"e3195f3f-94d8-41c8-a072-06d1aec2bb49": {
+			"role": "applicant",
+			"id": "e3195f3f-94d8-41c8-a072-06d1aec2bb49"
+		}
+	},
+	"title": "The influence of language on wealth and poverty",
+	"created": {
+		"timezone": "+00:00",
+		"$reql_type$": "TIME",
+		"epoch_time": 1413178905.371
+	},
+	"contents": {
+		"administrative_review": {
+			"status": "none",
+			"data": {},
+			"id": "administrative_review"
+		},
+		"application": {
+			"status": "complete",
+			"data": {
+				"abstract": "<p>The repaired scandal transmits an expert. A dialect draws the religious extremist beneath the finger. The teenager chooses the singing deaf. The supporting panic clicks with the committee.</p>\n",
+				"budget": "bd382550-e810-438d-b2b6-a7268bab5d03",
+				"budget_narrative": "<p>A pan economics operates the dilemma. The productive tax spins across every scene. The exhausting message rewards an agricultural cabinet. The distinguished page chops the arrogance.</p>\n",
+				"proposal": "8c0895ab-a619-45a2-b9d3-1a88700b83c1",
+				"collaboration": {
+					"activities": ["Email"],
+					"new": true
+				},
+				"investigators": [{
+					"name": "Anna Ver Beek",
+					"university": "Other",
+					"rank": "PhD",
+					"department": "Language",
+					"biosketch": "17f8d1d1-05a9-4c4b-94a5-db1da3101833",
+					"email": "anna.verbeek@test.gandhi.io"
+				}, {
+					"name": "Somebody Else",
+					"university": "University of Chicago",
+					"rank": "Associate Professor",
+					"department": "Different One",
+					"biosketch": "5cd2f952-0665-4a96-ac7d-7d44fa323fbe",
+					"email": "somebody.else@test.gandhi.io"
+				}]
+			},
+			"id": "application"
+		},
+		"review": {
+			"data": {
+				"f6826282-1ffb-453d-8804-6b2921e6807f": {
+					"status": "submitted",
+					"ranking": {
+						"comment": ["b37e83a5-d613-4d64-8873-fdcc8df0a009", "cdd28e4a-9309-454f-a8ed-3f9708d0c10c"],
+						"public": false
+					},
+					"data": {
+						"justification": {
+							"comment": "",
+							"public": false
+						},
+						"feedback": {
+							"comment": "",
+							"public": true
+						},
+						"outputs": {
+							"comment": "",
+							"public": false
+						},
+						"decision": {
+							"public": false
+						},
+						"budget": {
+							"comment": "",
+							"public": false
+						},
+						"question1": {
+							"comment": "<p>This is a response...</p>\n",
+							"public": false
+						},
+						"question2": {
+							"comment": "",
+							"public": false
+						}
+					}
+				}
+			},
+			"id": "review"
+		},
+		"acceptance": {
+			"status": "none",
+			"data": {},
+			"id": "acceptance"
+		},
+		"start": {
+			"status": "complete",
+			"data": {},
+			"id": "start"
+		},
+		"report": {
+			"status": "none",
+			"data": {},
+			"id": "report"
+		}
+	},
+	"updated": {
+		"timezone": "+00:00",
+		"$reql_type$": "TIME",
+		"epoch_time": 1413264955.333
+	},
+	"invitations": {},
+	"id": "cdd28e4a-9309-454f-a8ed-3f9708d0c10c",
+	"events": {
+		"submit": [{
+			"date": "2014-10-13T05:45:48.949Z",
+			"value": true
+		}, {
+			"date": "2014-10-13T05:41:45.465Z",
+			"value": false
+		}],
+		"warning": [{
+			"date": "2014-10-13T05:41:45.465Z",
+			"value": true
+		}],
+		"accept": [{
+			"date": "2014-10-13T05:41:45.465Z",
+			"value": false
+		}],
+		"reject": [{
+			"date": "2014-10-13T05:41:45.465Z",
+			"value": false
+		}],
+		"report": [{
+			"date": "2014-10-13T05:41:45.465Z",
+			"value": false
+		}],
+		"close": [{
+			"date": "2014-10-13T05:41:45.465Z",
+			"value": true
+		}],
+		"open": [{
+			"date": "2014-10-13T05:41:45.465Z",
+			"value": true
+		}],
+		"archive": [{
+			"date": "2014-10-13T05:41:45.465Z",
+			"value": false
+		}]
+	}
+}, {
+	"status": "active",
+	"cycle_id": "e5f58a2c-2894-40e6-91a9-a110d190e85f",
+	"assignments": {
+		"84fbaa78-54b0-42fc-9754-c9ea7dc24538": {
+			"role": "applicant",
+			"id": "84fbaa78-54b0-42fc-9754-c9ea7dc24538"
+		}
+	},
+	"title": "Tim's Character Essay",
+	"created": {
+		"timezone": "+00:00",
+		"$reql_type$": "TIME",
+		"epoch_time": 1413167504.901
+	},
+	"contents": {
+		"application": {
+			"status": "complete",
+			"data": {
+				"essay": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam lacinia justo in sapien pellentesque aliquet. Morbi aliquam gravida pulvinar. Aliquam erat volutpat. Cras fermentum mi non accumsan tempor. Nunc quis bibendum elit. Praesent commodo diam vel massa vestibulum, eu viverra dolor ornare. In mattis sem vitae lacinia vestibulum. Ut sagittis, justo vitae semper varius, nulla arcu faucibus nibh, quis pulvinar sapien tellus quis magna.</p>\n\n<p>Curabitur at lectus feugiat elit pellentesque molestie in sit amet justo. Suspendisse nec pretium ligula, vitae pellentesque tortor. Pellentesque luctus lacinia nibh, in fermentum augue fermentum ac. Maecenas in libero tellus. In nec nibh risus. Nullam faucibus, ex sed vehicula laoreet, tellus justo blandit orci, nec pellentesque dolor quam vel orci. Duis lacinia turpis felis, lacinia porta turpis mattis tempus. Integer vel sem non tortor fermentum vestibulum vel sed nulla. Fusce ut quam placerat, aliquet eros sit amet, luctus massa. Etiam mi turpis, mattis eget ultricies ut, pretium vel nisl.</p>\n\n<p>Sed lectus neque, iaculis sed porta vitae, bibendum eu eros. Suspendisse lobortis tellus at aliquet aliquam. Pellentesque eget tellus in urna dictum pulvinar. Nam finibus ac eros non consectetur. Pellentesque fermentum dolor et lacus elementum consequat. Proin facilisis mi molestie diam rhoncus, vel aliquet tellus fermentum. Ut in rutrum augue, ac fermentum lectus. Etiam pellentesque fermentum tellus, ac eleifend turpis congue et. Aenean sem dui, posuere eu ex nec, mattis tempus dui. Proin nibh tortor, ultrices nec fringilla quis, porttitor vitae erat. Integer et quam dictum, pretium elit eget, laoreet lorem. In auctor pharetra consequat. Nunc tincidunt arcu libero, in volutpat elit accumsan id.</p>\n\n<p>Duis porta purus vitae ipsum luctus tristique et ut tellus. Nunc lorem turpis, porta eu quam tincidunt, ullamcorper finibus odio. Maecenas cursus pulvinar elit cursus faucibus. Curabitur pulvinar, felis vitae finibus ullamcorper, metus lectus porttitor tortor, at pretium lorem diam sed purus. Pellentesque vehicula, tellus congue dapibus tempor, mauris est luctus orci, dapibus semper turpis nulla quis risus. Curabitur blandit mauris nec mauris pellentesque gravida. Morbi ornare suscipit justo ac efficitur. Nam fermentum maximus nulla, eget dignissim dui sollicitudin sit amet. Proin mi metus, feugiat in velit eget, pharetra condimentum nisl.</p>\n\n<p>Nam consequat pellentesque enim eget sollicitudin. Quisque sollicitudin vehicula nisl, in aliquet orci. Quisque vitae enim et nisi faucibus sagittis. Sed viverra, lectus eget lobortis tincidunt, ligula odio dapibus augue, non condimentum elit enim feugiat sapien. Nunc ac vulputate nulla, id pharetra risus. Nulla tristique vitae lorem sit amet vestibulum. Pellentesque tincidunt ipsum ac suscipit hendrerit. Vestibulum metus metus, fermentum eget porta lacinia, faucibus eget lacus.</p>\n"
+			},
+			"id": "application"
+		},
+		"start": {
+			"status": "complete",
+			"data": {},
+			"id": "start"
+		}
+	},
+	"updated": {
+		"timezone": "+00:00",
+		"$reql_type$": "TIME",
+		"epoch_time": 1413167920.268
+	},
+	"invitations": {},
+	"id": "e264d6f7-d26a-4be3-8365-13416ac41029",
+	"events": {
+		"close": [{
+			"date": {
+				"timezone": "+00:00",
+				"$reql_type$": "TIME",
+				"epoch_time": 1413167504.965
+			},
+			"value": true
+		}],
+		"open": [{
+			"date": {
+				"timezone": "+00:00",
+				"$reql_type$": "TIME",
+				"epoch_time": 1413167504.965
+			},
+			"value": true
+		}],
+		"accept": [{
+			"date": {
+				"timezone": "+00:00",
+				"$reql_type$": "TIME",
+				"epoch_time": 1413167504.965
+			},
+			"value": false
+		}],
+		"submit": [{
+			"date": {
+				"timezone": "+00:00",
+				"$reql_type$": "TIME",
+				"epoch_time": 1413167920.316
+			},
+			"value": true
+		}, {
+			"date": {
+				"timezone": "+00:00",
+				"$reql_type$": "TIME",
+				"epoch_time": 1413167504.965
+			},
+			"value": false
+		}],
+		"reject": [{
+			"date": {
+				"timezone": "+00:00",
+				"$reql_type$": "TIME",
+				"epoch_time": 1413167504.965
+			},
+			"value": false
+		}]
+	}
+}]

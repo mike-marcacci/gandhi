@@ -24,112 +24,27 @@
       "type": "object",
       "default": {},
       "additionalProperties": {
-        "type": "array",
-        "default": [],
-        "items": {
-          "type": "object",
-          "required": [
-            "value",
-            "date"
-          ],
-          "additionalProperties": false,
-          "properties": {
-            "value": {
-              "type": "boolean"
-            },
-            "date": {
-            }
-          }
-        }
+        "$ref": "#/definitions/event"
       }
     },
     "contents": {
       "type": "object",
       "additionalProperties": {
-        "type": "object",
-        "required": [
-          "id"
-        ],
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "string",
-            "constant": {"$data": "0"}
-          },
-          "data": {
-            "type": "object",
-            "additionalProperties": true
-          },
-          "status": {
-            "type": "string",
-            "default": "none",
-            "enum": [
-              "none",
-              "draft",
-              "complete"
-            ]
-          }
-        }
+        "$ref": "#/definitions/content"
       }
     },
     "assignments": {
       "type": "object",
       "default": {},
       "additionalProperties": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "id"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "constant": {"$data": "0"}
-          },
-          "role": {
-            "type": "string"
-          },
-          "invitation_id": {
-            "type": ["string", "null"],
-            "default": null
-          }
-        }
+        "$ref": "#/definitions/assignment"
       }
     },
     "invitations": {
       "type": "object",
       "default": {},
       "additionalProperties": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "id",
-          "role"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "constant": {"$data": "0"}
-          },
-          "role": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string",
-            "default": ""
-          },
-          "email": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "default": null
-          }
-        }
+        "$ref": "#/definitions/invitation"
       }
     },
     "updated": {
@@ -137,6 +52,105 @@
     },
     "created": {
       "type": "date"
+    }
+  },
+  "definitions": {
+    "assignment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "constant": {"$data": "0"}
+        },
+        "role": {
+          "type": "string"
+        },
+        "invitation_id": {
+          "type": ["string", "null"],
+          "default": null
+        }
+      }
+    },
+    "content": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "constant": {"$data": "0"}
+        },
+        "data": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "status": {
+          "type": "string",
+          "default": "none",
+          "enum": [
+            "none",
+            "draft",
+            "complete"
+          ]
+        }
+      }
+    },
+    "event": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "object",
+        "required": [
+          "value",
+          "date"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "value": {
+            "type": "boolean"
+          },
+          "date": {
+          }
+        }
+      }
+    },
+    "invitation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "role"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "constant": {"$data": "0"}
+        },
+        "role": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string",
+          "default": ""
+        },
+        "email": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      }
     }
   }
 }
