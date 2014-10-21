@@ -7,7 +7,9 @@
 				<span class="panel-title">Notifications</span>
 			</div>
 			<div class="panel-body">
-				You have no new notifications.
+				<div ng-show="projects.length" class="list-group">
+					<a ng-repeat="project in projects" class="list-group-item" ng-class="{active: $state.includes('portal.projects.show') && $state.params.project == project.id}" ui-sref="portal.projects.show({project: project.id})">{{project.title}} <span class="badge">{{project.users[currentUser.id].role}}</span></a>
+				</div>
 			</div>
 		</div>
 
