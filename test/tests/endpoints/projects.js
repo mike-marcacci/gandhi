@@ -186,6 +186,8 @@ describe('Projects', function(){
 					done();
 				});
 		});
+		it.skip('rejects a request from an unaffiliated non-admin user');
+		it.skip('rejects a request from an affiliated non-admin user with permission');
 	});
 
 	describe('#patch', function(){

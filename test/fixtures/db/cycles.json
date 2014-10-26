@@ -120,6 +120,11 @@
 		"open":[
 			"open"
 		],
+		"visible": {
+			"applicant": true,
+			"reviewer": true,
+			"staff": true
+		},
 		"roles":{
 			"applicant":{
 				"assignable":{
@@ -648,6 +653,12 @@
 		"open":[
 			"open"
 		],
+		"visible": {
+			"applicant": true,
+			"advisor": true,
+			"reviewer": true,
+			"staff": true
+		},
 		"roles":{
 			"advisor":{
 				"assignable":{
