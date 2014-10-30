@@ -1,0 +1,9 @@
+{
+  "name": "gandhi-component-decision",
+  "description": "Gandhi Component: Decision",
+  "version": "0.0.1",
+  "license": "MIT",
+  "private": true,
+  "main": "api/index.js",
+  "dependencies": {}
+}

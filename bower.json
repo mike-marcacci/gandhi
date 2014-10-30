@@ -18,8 +18,8 @@
     "portal/user/index.js"
   ],
   "dependencies": {
-    "angular": "1.3.x",
-    "angular-sanitize": "1.3.x",
+    "angular": "~1.3.0",
+    "angular-sanitize": "~1.3.0",
     "angular-ui-router": "0.2.x",
     "bootstrap": "3.2.x",
     "restangular": "~1.4.0",
@@ -54,7 +54,7 @@
   ],
   "resolutions": {
     "bootstrap": "3.2.x",
-    "angular": "1.3.x",
+    "angular": "~1.3.0",
     "angular-sanitize": "1.3.x",
     "angular-schema-form": "gandhi"
   }
