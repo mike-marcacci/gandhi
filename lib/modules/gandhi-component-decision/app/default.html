@@ -1,0 +1,47 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<span class="panel-title">{{stage.title}}</span>
+	</div>
+	<div class="panel-body">
+
+		<div class="alert alert-info" role="alert" ng-show="status == 'draft'" sf-decorator-name="'bootstrap-decorator'">
+			This stage is saved as a draft.
+		</div>
+
+		<div class="alert alert-info" role="alert" ng-show="status == 'complete'" sf-decorator-name="'bootstrap-decorator'">
+			This stage is complete.
+		</div>
+
+		<div class="alert alert-warning" role="alert" ng-show="!permissions['read:message']" sf-decorator-name="'bootstrap-decorator'">
+			You are not allowed to see the contents of this stage.
+		</div>
+
+		<div class="alert alert-warning" role="alert" ng-show="!data.resolution" sf-decorator-name="'bootstrap-decorator'">
+			No decision has been made for this project.
+		</div>
+
+		<div class="alert alert-warning" role="alert" ng-show="!permissions.write && permissions['read:form']" sf-decorator-name="'bootstrap-decorator'">
+			Please note, you are not allowed to make changes to this stage.
+		</div>
+
+		<div ng-show="permissions['read:form']">
+			<form name="gandhiFormComponent" ng-submit="submit(gandhiFormComponent, data)">
+				<div sf-model="data" sf-form="form" sf-schema="options.schema" sf-options="config"></div>
+				<button ng-show="permissions.write" class="btn btn-primary" ng-bind="options.submitButtonText || 'Submit'"></button>
+			</form>
+		</div>
+
+		<div ng-show="permissions['read:message'] && data.resolution">
+			<hr>
+
+			<div ng-show="context.mode == 'summary'">
+				<a class="btn btn-sm btn-default" href="mailto:{{emailsByResolution[data.resolution].join(',')}}?subject={{stage.title}}"><span class="glyphicon glyphicon-envelope"></span> <span>Send Message</span></a>
+				<hr>
+				<div class="well" contenteditable compile="options.resolutions[data.resolution].template"></div>
+			</div>
+
+			<div ng-hide="context.mode == 'summary'" compile="options.resolutions[data.resolution].template"></div>
+		</div>
+
+	</div>
+</div>
