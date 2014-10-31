@@ -1409,7 +1409,7 @@
 			"proposal": {
 				"id": "proposal",
 				"title": "Proposal",
-				"pointer": "/contents/application/data/proposal",
+				"pointer": ["contents","application","data","proposal"],
 				"template": "<a ng-show=\"value\" href=\"{{value}}\" target=\"_blank\">Download</a>"
 			}
 		},
