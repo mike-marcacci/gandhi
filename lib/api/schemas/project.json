@@ -29,6 +29,7 @@
     },
     "contents": {
       "type": "object",
+      "default": {},
       "additionalProperties": {
         "$ref": "#/definitions/content"
       }

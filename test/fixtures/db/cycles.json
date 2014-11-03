@@ -29,9 +29,8 @@
 				"conditions":[
 					[
 						{
-							"name":"regex",
+							"name":"status",
 							"options":{
-								"pointer":"/status",
 								"regex":"^accepted$"
 							}
 						}
@@ -83,9 +82,8 @@
 				"conditions":[
 					[
 						{
-							"name":"regex",
+							"name":"status",
 							"options":{
-								"pointer":"/status",
 								"regex":"^rejected$"
 							}
 						}
@@ -101,9 +99,9 @@
 				"conditions":[
 					[
 						{
-							"name":"regex",
+							"name":"content_status",
 							"options":{
-								"pointer":"/flow/application/status",
+								"id":"application",
 								"regex":"^complete$"
 							}
 						}
@@ -120,10 +118,23 @@
 		"open":[
 			"open"
 		],
-		"visible": {
-			"applicant": true,
-			"reviewer": true,
-			"staff": true
+		"permissions": {
+			"create": {
+				"applicant": true,
+				"staff": true
+			},
+			"read": {
+				"applicant": true,
+				"reviewer": true,
+				"staff": true
+			},
+			"update": {
+				"applicant": true,
+				"staff": true
+			},
+			"destroy": {
+				"staff": true
+			}
 		},
 		"roles":{
 			"applicant":{
@@ -192,17 +203,17 @@
 					},
 					"permissions":{
 						"read":{
+							"applicant":true,
+							"reviewer":true,
+							"staff":true
+						},
+						"write":{
 							"applicant":{
 								"close":[
 									"submit"
 								],
 								"open":true
 							},
-							"reviewer":true,
-							"staff":true
-						},
-						"write":{
-							"applicant":true,
 							"staff":true
 						}
 					}
@@ -482,9 +493,8 @@
 				"conditions":[
 					[
 						{
-							"name":"regex",
+							"name":"status",
 							"options":{
-								"pointer":"/status",
 								"regex":"^accepted$"
 							}
 						}
@@ -500,9 +510,8 @@
 				"conditions":[
 					[
 						{
-							"name":"regex",
+							"name":"status",
 							"options":{
-								"pointer":"/status",
 								"regex":"^archived$"
 							}
 						}
@@ -554,9 +563,8 @@
 				"conditions":[
 					[
 						{
-							"name":"regex",
+							"name":"status",
 							"options":{
-								"pointer":"/status",
 								"regex":"^rejected$"
 							}
 						}
@@ -572,9 +580,9 @@
 				"conditions":[
 					[
 						{
-							"name":"regex",
+							"name":"content_status",
 							"options":{
-								"pointer":"/flow/report/status",
+								"id":"report",
 								"regex":"^complete$"
 							}
 						}
@@ -590,9 +598,9 @@
 				"conditions":[
 					[
 						{
-							"name":"regex",
+							"name":"content_status",
 							"options":{
-								"pointer":"/flow/application/status",
+								"id":"application",
 								"regex":"^complete$"
 							}
 						}
@@ -615,10 +623,10 @@
 							}
 						},
 						{
-							"name":"regex",
+							"name":"content_status",
 							"options":{
 								"invert":true,
-								"pointer":"/flow/submission/status",
+								"id":"submission",
 								"regex":"^complete$"
 							}
 						}
@@ -653,11 +661,24 @@
 		"open":[
 			"open"
 		],
-		"visible": {
-			"applicant": true,
-			"advisor": true,
-			"reviewer": true,
-			"staff": true
+		"permissions": {
+			"create": {
+				"applicant": true,
+				"staff": true
+			},
+			"read": {
+				"applicant": true,
+				"advisor": true,
+				"reviewer": true,
+				"staff": true
+			},
+			"update": {
+				"applicant": true,
+				"staff": true
+			},
+			"destroy": {
+				"staff": true
+			}
 		},
 		"roles":{
 			"advisor":{

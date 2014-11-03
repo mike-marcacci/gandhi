@@ -25,19 +25,25 @@ r.connect({host: host, db: db}).then(function(conn){
   // Cycles
   // ------
   tasks.push(r.table('cycles').replace(function(cycle){
+    var allPermissions =  r.literal(cycle('roles').coerceTo('array').map(function(roleKV){
+      return [roleKV.nth(0), true];
+    }).coerceTo('object'))
+
     return cycle.merge({
       assignments: cycle('users').default(cycle('assignments')),
       stages: cycle('flow').default(cycle('stages')),
-      triggers: cycle('events').default(cycle('triggers')),
       exports: cycle('exports').default({}),
       open: ['open'],
       close: ['close'],
-      events: r.literal(cycle('events').coerceTo('array').map(function(eventKV){
+      triggers: r.literal(cycle('events').coerceTo('array').map(function(eventKV){
         return [eventKV.nth(0), eventKV.nth(1).without('messages')];
-      }).coerceTo('object')),
-      visible: r.literal(cycle('roles').coerceTo('array').map(function(roleKV){
-        return [roleKV.nth(0), true];
-      }).coerceTo('object'))
+      }).coerceTo('object').default(cycle('triggers'))),
+      permissions: {
+        create: allPermissions,
+        read: allPermissions,
+        update: allPermissions,
+        destroy: {}
+      }
     }).without({
       users: true,
       flow: true,

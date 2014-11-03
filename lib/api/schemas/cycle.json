@@ -354,8 +354,22 @@
           "type": "string",
           "default": ""
         },
-        "visible": {
-          "$ref": "#/definitions/permission"
+        "permissions": {
+          "type": "object",
+          "properties": {
+            "create": {
+              "$ref": "#/definitions/permission"
+            },
+            "read": {
+              "$ref": "#/definitions/permission"
+            },
+            "update": {
+              "$ref": "#/definitions/permission"
+            },
+            "destroy": {
+              "$ref": "#/definitions/permission"
+            }
+          }
         },
         "component": {
           "type": "object",
