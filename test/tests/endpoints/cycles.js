@@ -30,7 +30,7 @@ describe('Cycles', function(){
 			})
 			.expect(201)
 			.end(function(err, res){
-				assert.isNull(err);
+				if(err) return done(err);
 				assert.isString(res.body.token);
 				adminToken = res.body.token;
 				adminId = jwt.decode(adminToken).sub;
@@ -47,7 +47,7 @@ describe('Cycles', function(){
 			})
 			.expect(201)
 			.end(function(err, res){
-				assert.isNull(err);
+				if(err) return done(err);
 				assert.isString(res.body.token);
 				userToken = res.body.token;
 				userId = jwt.decode(adminToken).sub;
@@ -84,7 +84,7 @@ describe('Cycles', function(){
 				})
 				.expect(400)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					done();
 				});
 		});
@@ -97,7 +97,7 @@ describe('Cycles', function(){
 				})
 				.expect(201)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.isString(res.body.id);
 					ids.push(res.body.id);
 					assert.equal(res.body.title, 'Awesome Possum');
@@ -112,7 +112,7 @@ describe('Cycles', function(){
 				.get('/api/cycles')
 				.expect(401)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.isNotArray(res.body);
 					done();
 				});
@@ -123,7 +123,7 @@ describe('Cycles', function(){
 				.set('Authorization', 'Bearer ' + adminToken)
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					
 					assert.isArray(res.body);
 					// assert.lengthOf(res.body, fixtures.cycles.length);
@@ -137,7 +137,7 @@ describe('Cycles', function(){
 				.set('Authorization', 'Bearer ' + userToken)
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.isArray(res.body);
 					assert.lengthOf(res.body, 5);
 					var links = li.parse(res.headers.link);
@@ -152,7 +152,7 @@ describe('Cycles', function(){
 				.set('Authorization', 'Bearer ' + userToken)
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.isArray(res.body);
 					assert.lengthOf(res.body, 5);
 					var links = li.parse(res.headers.link);
@@ -183,7 +183,7 @@ describe('Cycles', function(){
 				.set('Authorization', 'Bearer ' + adminToken)
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.equal(res.body.id, '128f2348-99d4-40a1-b5ab-91d9019f272d');
 					done();
 				});
@@ -224,7 +224,7 @@ describe('Cycles', function(){
 				.send({title: 'UPDATED'})
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.equal(res.body.id, ids[0]);
 					done();
 				});
@@ -254,7 +254,7 @@ describe('Cycles', function(){
 				.send({title: 'REPLACED',id: ids[0]})
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.equal(res.body.id, ids[0]);
 					done();
 				});

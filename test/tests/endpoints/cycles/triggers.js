@@ -30,7 +30,7 @@ describe('Triggers', function(){
 			})
 			.expect(201)
 			.end(function(err, res){
-				assert.isNull(err);
+				if(err) return done(err);
 				assert.isString(res.body.token);
 				adminToken = res.body.token;
 				adminId = jwt.decode(adminToken).sub;
@@ -47,7 +47,7 @@ describe('Triggers', function(){
 			})
 			.expect(201)
 			.end(function(err, res){
-				assert.isNull(err);
+				if(err) return done(err);
 				assert.isString(res.body.token);
 				userToken = res.body.token;
 				userId = jwt.decode(adminToken).sub;
@@ -61,7 +61,7 @@ describe('Triggers', function(){
 				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers')
 				.expect(401)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.isNotArray(res.body);
 					done();
 				});
@@ -72,7 +72,7 @@ describe('Triggers', function(){
 				.set('Authorization', 'Bearer ' + adminToken)
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.lengthOf(Object.keys(res.body), 8);
 					done();
 				});
@@ -83,7 +83,7 @@ describe('Triggers', function(){
 				.set('Authorization', 'Bearer ' + userToken)
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.lengthOf(Object.keys(res.body), 8);
 					done();
 				});
@@ -103,7 +103,7 @@ describe('Triggers', function(){
 				.set('Authorization', 'Bearer ' + adminToken)
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.equal(res.body.id, 'accept');
 					done();
 				});
@@ -114,7 +114,7 @@ describe('Triggers', function(){
 				.set('Authorization', 'Bearer ' + userToken)
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.equal(res.body.id, 'accept');
 					done();
 				});
@@ -152,7 +152,7 @@ describe('Triggers', function(){
 				.send({conditions:[[{name:'date',options:{date:'2014-09-31T11:59:59.999Z',mode:'after'}}]],id:'test',listeners:[],title:'Test Trigger'})
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.equal(res.body.id, 'test');
 					done();
 				});
@@ -164,7 +164,7 @@ describe('Triggers', function(){
 				.send({conditions:[[{name:'date',options:{date:'2014-09-31T11:59:59.999Z',mode:'after'}}]],id:'test',listeners:[],title:'Test Trigger PUT'})
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.equal(res.body.id, 'test');
 					assert.equal(res.body.title, 'Test Trigger PUT');
 					done();
@@ -203,7 +203,7 @@ describe('Triggers', function(){
 				.send({title:'Oops'})
 				.expect(404)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					done();
 				});
 		});
@@ -214,7 +214,7 @@ describe('Triggers', function(){
 				.send({title:'Patched'})
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.equal(res.body.title, 'Patched');
 					done();
 				});
@@ -241,7 +241,7 @@ describe('Triggers', function(){
 				.set('Authorization', 'Bearer ' + adminToken)
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.equal(res.body.id, 'test');
 					done();
 				});

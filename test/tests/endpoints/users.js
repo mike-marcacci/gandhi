@@ -30,7 +30,7 @@ describe('Users', function(){
 			})
 			.expect(201)
 			.end(function(err, res){
-				assert.isNull(err);
+				if(err) return done(err);
 				assert.isString(res.body.token);
 				adminToken = res.body.token;
 				adminId = jwt.decode(adminToken).sub;
@@ -49,7 +49,7 @@ describe('Users', function(){
 				})
 				.expect(201)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.isString(res.body.token);
 					userToken = res.body.token;
 					userId = jwt.decode(userToken).sub;
@@ -84,7 +84,7 @@ describe('Users', function(){
 				})
 				.expect(201)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.isString(res.body.id);
 					ids.push(res.body.id);
 					assert.equal(res.body.email, 'heather.harbottle@test.gandhi.io');
@@ -104,7 +104,7 @@ describe('Users', function(){
 				})
 				.expect(403)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.isUndefined(res.body.id);
 					done();
 				});
@@ -120,7 +120,7 @@ describe('Users', function(){
 				})
 				.expect(403)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.isUndefined(res.body.id);
 					done();
 				});
@@ -136,7 +136,7 @@ describe('Users', function(){
 				})
 				.expect(201)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.isString(res.body.id);
 					ids.push(res.body.id);
 					assert.equal(res.body.email, 'solène.clavel@test.gandhi.io');
@@ -159,7 +159,7 @@ describe('Users', function(){
 				})
 				.expect(201)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.isString(res.body.token);
 					userToken = res.body.token;
 					userId = jwt.decode(userToken).sub;
@@ -173,7 +173,7 @@ describe('Users', function(){
 					.get('/api/users')
 					.expect(401)
 					.end(function(err, res){
-						assert.isNull(err);
+						if(err) return done(err);
 						assert.isNotArray(res.body);
 						done();
 					});
@@ -184,7 +184,7 @@ describe('Users', function(){
 					.set('Authorization', 'Bearer ' + userToken)
 					.expect(200)
 					.end(function(err, res){
-						assert.isNull(err);
+						if(err) return done(err);
 						assert.isArray(res.body);
 						assert.lengthOf(res.body, Math.min(50, fixtures.length + ids.length));
 						done();
@@ -196,7 +196,7 @@ describe('Users', function(){
 					.set('Authorization', 'Bearer ' + userToken)
 					.expect(200)
 					.end(function(err, res){
-						assert.isNull(err);
+						if(err) return done(err);
 						assert.isArray(res.body);
 						assert.lengthOf(res.body, 5);
 						var links = li.parse(res.headers.link);
@@ -211,7 +211,7 @@ describe('Users', function(){
 					.set('Authorization', 'Bearer ' + userToken)
 					.expect(200)
 					.end(function(err, res){
-						assert.isNull(err);
+						if(err) return done(err);
 						assert.isArray(res.body);
 						assert.lengthOf(res.body, 5);
 						var links = li.parse(res.headers.link);
@@ -226,7 +226,7 @@ describe('Users', function(){
 					.set('Authorization', 'Bearer ' + userToken)
 					.expect(200)
 					.end(function(err, res){
-						assert.isNull(err);
+						if(err) return done(err);
 						assert.isArray(res.body);
 						_.each(res.body, function(user){
 							whitelist.forEach(function(prop){
@@ -244,7 +244,7 @@ describe('Users', function(){
 					.set('Authorization', 'Bearer ' + userToken)
 					.expect(200)
 					.end(function(err, res){
-						assert.isNull(err);
+						if(err) return done(err);
 						assert.isArray(res.body);
 						var user = _.find(res.body, {email: 'tim.marcacci@test.gandhi.io'});
 						blacklist.forEach(function(prop){
@@ -262,7 +262,7 @@ describe('Users', function(){
 					.set('Authorization', 'Bearer ' + adminToken)
 					.expect(200)
 					.end(function(err, res){
-						assert.isNull(err);
+						if(err) return done(err);
 						assert.isArray(res.body);
 						var user = _.find(res.body, {email: 'tim.marcacci@test.gandhi.io'});
 						blacklist.forEach(function(prop){
@@ -282,7 +282,7 @@ describe('Users', function(){
 					.get('/api/users/' + userId)
 					.expect(401)
 					.end(function(err, res){
-						assert.isNull(err);
+						if(err) return done(err);
 						assert.isNotArray(res.body);
 						done();
 					});
@@ -293,7 +293,7 @@ describe('Users', function(){
 					.set('Authorization', 'Bearer ' + userToken)
 					.expect(200)
 					.end(function(err, res){
-						assert.isNull(err);
+						if(err) return done(err);
 						assert.property(res.body, 'id');
 						assert.equal(res.body.id, userId);
 						done();
@@ -305,7 +305,7 @@ describe('Users', function(){
 					.set('Authorization', 'Bearer ' + userToken)
 					.expect(200)
 					.end(function(err, res){
-						assert.isNull(err);
+						if(err) return done(err);
 						whitelist.forEach(function(prop){
 							assert.property(res.body, prop);
 						}, 'missing whitelist property');
@@ -320,7 +320,7 @@ describe('Users', function(){
 					.set('Authorization', 'Bearer ' + userToken)
 					.expect(200)
 					.end(function(err, res){
-						assert.isNull(err);
+						if(err) return done(err);
 						assert.property(res.body, 'id');
 						assert.equal(res.body.id, userId);
 						blacklist.forEach(function(prop){
@@ -338,7 +338,7 @@ describe('Users', function(){
 					.set('Authorization', 'Bearer ' + adminToken)
 					.expect(200)
 					.end(function(err, res){
-						assert.isNull(err);
+						if(err) return done(err);
 						assert.property(res.body, 'id');
 						assert.equal(res.body.id, userId);
 						blacklist.forEach(function(prop){
@@ -364,7 +364,7 @@ describe('Users', function(){
 				})
 				.expect(201)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.isString(res.body.token);
 					userToken = res.body.token;
 					userId = jwt.decode(userToken).sub;
@@ -380,7 +380,7 @@ describe('Users', function(){
 				})
 				.expect(401)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					done();
 				});
 		});
@@ -403,7 +403,7 @@ describe('Users', function(){
 				})
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.equal(res.body.id, userId);
 					assert.equal(res.body.name, 'Emily Shafer Marcacci');
 					done();
@@ -418,7 +418,7 @@ describe('Users', function(){
 				})
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.equal(res.body.id, userId);
 					assert.equal(res.body.name, 'Emily S. Marcacci');
 					done();
@@ -458,7 +458,7 @@ describe('Users', function(){
 				})
 				.expect(201)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.isString(res.body.token);
 					userToken = res.body.token;
 					userId = jwt.decode(userToken).sub;
@@ -470,7 +470,7 @@ describe('Users', function(){
 				.get('/api/users/' + userId)
 				.set('Authorization', 'Bearer ' + userToken)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					user = res.body;
 					return done();
 				});
@@ -504,7 +504,7 @@ describe('Users', function(){
 				}))
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.equal(res.body.id, userId);
 					assert.equal(res.body.name, 'Emily Martha Shafer Marcacci');
 					done();
@@ -534,7 +534,7 @@ describe('Users', function(){
 				})
 				.expect(201)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.isString(res.body.token);
 					userToken = res.body.token;
 					userId = jwt.decode(userToken).sub;
@@ -568,7 +568,7 @@ describe('Users', function(){
 				.set('Authorization', 'Bearer ' + adminToken)
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.equal(res.body.id, userId);
 					done();
 				});

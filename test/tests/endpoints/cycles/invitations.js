@@ -30,7 +30,7 @@ describe('Invitations', function(){
 			})
 			.expect(201)
 			.end(function(err, res){
-				assert.isNull(err);
+				if(err) return done(err);
 				assert.isString(res.body.token);
 				adminToken = res.body.token;
 				adminId = jwt.decode(adminToken).sub;
@@ -47,7 +47,7 @@ describe('Invitations', function(){
 			})
 			.expect(201)
 			.end(function(err, res){
-				assert.isNull(err);
+				if(err) return done(err);
 				assert.isString(res.body.token);
 				userToken = res.body.token;
 				userId = jwt.decode(adminToken).sub;
@@ -61,7 +61,7 @@ describe('Invitations', function(){
 				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations')
 				.expect(401)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.isNotArray(res.body);
 					done();
 				});
@@ -79,7 +79,7 @@ describe('Invitations', function(){
 				.set('Authorization', 'Bearer ' + adminToken)
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.lengthOf(Object.keys(res.body), 1);
 					done();
 				});
@@ -90,7 +90,7 @@ describe('Invitations', function(){
 				.set('Authorization', 'Bearer ' + userToken)
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.lengthOf(Object.keys(res.body), 1);
 					done();
 				});
@@ -125,7 +125,7 @@ describe('Invitations', function(){
 				.set('Authorization', 'Bearer ' + adminToken)
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.equal(res.body.id, '3350caac-84b9-4827-a5e4-c7a413760a0a');
 					done();
 				});
@@ -136,7 +136,7 @@ describe('Invitations', function(){
 				.set('Authorization', 'Bearer ' + userToken)
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.equal(res.body.id, '3350caac-84b9-4827-a5e4-c7a413760a0a');
 					done();
 				});
@@ -183,7 +183,7 @@ describe('Invitations', function(){
 				.send({id:'c7efa7cf-bab2-44a6-862f-7ca5e154b1ae',role:'applicant',name:'Test',email:'test@email.com'})
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.equal(res.body.id, 'c7efa7cf-bab2-44a6-862f-7ca5e154b1ae');
 					done();
 				});
@@ -195,7 +195,7 @@ describe('Invitations', function(){
 				.send({id:'c7efa7cf-bab2-44a6-862f-7ca5e154b1ae',role:'applicant',name:'Test PUT',email:'test@email.com'})
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.equal(res.body.id, 'c7efa7cf-bab2-44a6-862f-7ca5e154b1ae');
 					assert.equal(res.body.name, 'Test PUT');
 					done();
@@ -234,7 +234,7 @@ describe('Invitations', function(){
 				.send({name:'Oops'})
 				.expect(404)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					done();
 				});
 		});
@@ -253,7 +253,7 @@ describe('Invitations', function(){
 				.send({name:'Patched'})
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.equal(res.body.name, 'Patched');
 					done();
 				});
@@ -294,7 +294,7 @@ describe('Invitations', function(){
 				.set('Authorization', 'Bearer ' + adminToken)
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.equal(res.body.id, 'c7efa7cf-bab2-44a6-862f-7ca5e154b1ae');
 					done();
 				});

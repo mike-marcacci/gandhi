@@ -33,7 +33,7 @@ describe('Projects', function(){
 			})
 			.expect(201)
 			.end(function(err, res){
-				assert.isNull(err);
+				if(err) return done(err);
 				assert.isString(res.body.token);
 				adminToken = res.body.token;
 				adminId = jwt.decode(adminToken).sub;
@@ -50,7 +50,7 @@ describe('Projects', function(){
 			})
 			.expect(201)
 			.end(function(err, res){
-				assert.isNull(err);
+				if(err) return done(err);
 				assert.isString(res.body.token);
 				userToken = res.body.token;
 				userId = jwt.decode(userToken).sub;
@@ -67,7 +67,7 @@ describe('Projects', function(){
 			})
 			.expect(201)
 			.end(function(err, res){
-				assert.isNull(err);
+				if(err) return done(err);
 				assert.isString(res.body.token);
 				unaffiliatedToken = res.body.token;
 				unaffiliatedId = jwt.decode(unaffiliatedToken).sub;
@@ -95,7 +95,7 @@ describe('Projects', function(){
 				})
 				.expect(201)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.equal(res.body.title, 'CREATE - Minimal Project')
 					assert.equal(res.body.cycle_id, '128f2348-99d4-40a1-b5ab-91d9019f272d')
 					// assert.property(res.body.users, userId);
@@ -113,7 +113,7 @@ describe('Projects', function(){
 				.get('/api/projects')
 				.expect(401)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.isNotArray(res.body);
 					done();
 				});
@@ -124,7 +124,7 @@ describe('Projects', function(){
 				.set('Authorization', 'Bearer ' + userToken)
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.isArray(res.body);
 					done();
 				});
@@ -135,7 +135,7 @@ describe('Projects', function(){
 				.set('Authorization', 'Bearer ' + userToken)
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.isArray(res.body);
 					assert.lengthOf(res.body, 5);
 					var links = li.parse(res.headers.link);
@@ -150,7 +150,7 @@ describe('Projects', function(){
 				.set('Authorization', 'Bearer ' + userToken)
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.isArray(res.body);
 					assert.lengthOf(res.body, 5);
 					var links = li.parse(res.headers.link);
@@ -181,7 +181,7 @@ describe('Projects', function(){
 				.set('Authorization', 'Bearer ' + adminToken)
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.equal(res.body.id, 'b37e83a5-d613-4d64-8873-fdcc8df0a009');
 					done();
 				});
@@ -232,7 +232,7 @@ describe('Projects', function(){
 				})
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.equal(res.body.id, ids[0]);
 					done();
 				});
@@ -268,7 +268,7 @@ describe('Projects', function(){
 		// 		})
 		// 		.expect(200)
 		// 		.end(function(err, res){
-		// 			assert.isNull(err);
+		// 			if(err) return done(err);
 		// 			assert.equal(res.body.id, ids[0]);
 		// 			assert.property(res.body.users, unaffiliatedId);
 		// 			assert.equal(res.body.users[unaffiliatedId].role, 'applicant');
@@ -285,7 +285,7 @@ describe('Projects', function(){
 	// 			.set('Authorization', 'Bearer ' + adminToken)
 	// 			.expect(200)
 	// 			.end(function(err, res){
-	// 				assert.isNull(err);
+	// 				if(err) return done(err);
 	// 				project = res.body;
 	// 				done();
 	// 			});
@@ -317,7 +317,7 @@ describe('Projects', function(){
 	// 			}))
 	// 			.expect(200)
 	// 			.end(function(err, res){
-	// 				assert.isNull(err);
+	// 				if(err) return done(err);
 	// 				assert.equal(res.body.id, ids[0]);
 	// 				done();
 	// 			});

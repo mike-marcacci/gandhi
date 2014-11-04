@@ -30,7 +30,7 @@ describe('Exports', function(){
 			})
 			.expect(201)
 			.end(function(err, res){
-				assert.isNull(err);
+				if(err) return done(err);
 				assert.isString(res.body.token);
 				adminToken = res.body.token;
 				adminId = jwt.decode(adminToken).sub;
@@ -47,7 +47,7 @@ describe('Exports', function(){
 			})
 			.expect(201)
 			.end(function(err, res){
-				assert.isNull(err);
+				if(err) return done(err);
 				assert.isString(res.body.token);
 				userToken = res.body.token;
 				userId = jwt.decode(adminToken).sub;
@@ -61,7 +61,7 @@ describe('Exports', function(){
 				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/exports')
 				.expect(401)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.isNotArray(res.body);
 					done();
 				});
@@ -79,7 +79,7 @@ describe('Exports', function(){
 				.set('Authorization', 'Bearer ' + adminToken)
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.lengthOf(Object.keys(res.body), 1);
 					done();
 				});
@@ -90,7 +90,7 @@ describe('Exports', function(){
 				.set('Authorization', 'Bearer ' + userToken)
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.lengthOf(Object.keys(res.body), 1);
 					done();
 				});
@@ -117,7 +117,7 @@ describe('Exports', function(){
 				.set('Authorization', 'Bearer ' + adminToken)
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.equal(res.body.id, 'proposal');
 					done();
 				});
@@ -128,7 +128,7 @@ describe('Exports', function(){
 				.set('Authorization', 'Bearer ' + userToken)
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.equal(res.body.id, 'proposal');
 					done();
 				});
@@ -139,7 +139,7 @@ describe('Exports', function(){
 		it('rejects an anonymous put', function(done){
 			request
 				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/exports/test')
-				.send({id:'test',title:'Test',pointer:'/contents/start/status',template:null})
+				.send({id:'test',title:'Test',pointer:['contents','start','status'],template:null})
 				.expect(401)
 				.end(done);
 		});
@@ -147,7 +147,7 @@ describe('Exports', function(){
 			request
 				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/exports/test')
 				.set('Authorization', 'Bearer ' + userToken)
-				.send({id:'test',title:'Test',pointer:'/contents/start/status',template:null})
+				.send({id:'test',title:'Test',pointer:['contents','start','status'],template:null})
 				.expect(403)
 				.end(done);
 		});
@@ -163,7 +163,7 @@ describe('Exports', function(){
 			request
 				.put('/api/cycles/foo/exports/proposal')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({id:'test',title:'Test',pointer:'/contents/start/status',template:null})
+				.send({id:'test',title:'Test',pointer:['contents','start','status'],template:null})
 				.expect(404)
 				.end(done);
 		});
@@ -171,10 +171,10 @@ describe('Exports', function(){
 			request
 				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/exports/test')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({id:'test',title:'Test',pointer:'/contents/start/status',template:null})
+				.send({id:'test',title:'Test',pointer:['contents','start','status'],template:null})
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.equal(res.body.id, 'test');
 					done();
 				});
@@ -183,10 +183,10 @@ describe('Exports', function(){
 			request
 				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/exports/test')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({id:'test',title:'Test PUT',pointer:'/contents/start/status',template:null})
+				.send({id:'test',title:'Test PUT',pointer:['contents','start','status'],template:null})
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.equal(res.body.id, 'test');
 					assert.equal(res.body.title, 'Test PUT');
 					done();
@@ -225,7 +225,7 @@ describe('Exports', function(){
 				.send({title:'Oops'})
 				.expect(404)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					done();
 				});
 		});
@@ -244,7 +244,7 @@ describe('Exports', function(){
 				.send({title:'Patched'})
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.equal(res.body.title, 'Patched');
 					done();
 				});
@@ -278,7 +278,7 @@ describe('Exports', function(){
 				.set('Authorization', 'Bearer ' + adminToken)
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.equal(res.body.id, 'test');
 					done();
 				});

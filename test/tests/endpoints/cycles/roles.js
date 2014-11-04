@@ -30,7 +30,7 @@ describe('Roles', function(){
 			})
 			.expect(201)
 			.end(function(err, res){
-				assert.isNull(err);
+				if(err) return done(err);
 				assert.isString(res.body.token);
 				adminToken = res.body.token;
 				adminId = jwt.decode(adminToken).sub;
@@ -47,7 +47,7 @@ describe('Roles', function(){
 			})
 			.expect(201)
 			.end(function(err, res){
-				assert.isNull(err);
+				if(err) return done(err);
 				assert.isString(res.body.token);
 				userToken = res.body.token;
 				userId = jwt.decode(adminToken).sub;
@@ -61,7 +61,7 @@ describe('Roles', function(){
 				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/roles')
 				.expect(401)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.isNotArray(res.body);
 					done();
 				});
@@ -72,7 +72,7 @@ describe('Roles', function(){
 				.set('Authorization', 'Bearer ' + adminToken)
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.lengthOf(Object.keys(res.body), 4);
 					done();
 				});
@@ -83,7 +83,7 @@ describe('Roles', function(){
 				.set('Authorization', 'Bearer ' + userToken)
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.lengthOf(Object.keys(res.body), 4);
 					done();
 				});
@@ -103,7 +103,7 @@ describe('Roles', function(){
 				.set('Authorization', 'Bearer ' + adminToken)
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.equal(res.body.id, 'advisor');
 					done();
 				});
@@ -114,7 +114,7 @@ describe('Roles', function(){
 				.set('Authorization', 'Bearer ' + userToken)
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.equal(res.body.id, 'advisor');
 					done();
 				});
@@ -152,7 +152,7 @@ describe('Roles', function(){
 				.send({assignable:{staff:true},id:'test',title:'Test',visible:{advisor:true,reviewer:true,staff:true,test:true}})
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.equal(res.body.id, 'test');
 					done();
 				});
@@ -164,7 +164,7 @@ describe('Roles', function(){
 				.send({assignable:{staff:true},id:'test',title:'Test',visible:{advisor:true,reviewer:true,staff:true,test:false}})
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.equal(res.body.id, 'test');
 					assert.equal(res.body.visible.test, false);
 					done();
@@ -203,7 +203,7 @@ describe('Roles', function(){
 				.send({title:'Oops'})
 				.expect(404)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					done();
 				});
 		});
@@ -214,7 +214,7 @@ describe('Roles', function(){
 				.send({title:'Patched'})
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.equal(res.body.title, 'Patched');
 					done();
 				});
@@ -241,7 +241,7 @@ describe('Roles', function(){
 				.set('Authorization', 'Bearer ' + adminToken)
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.equal(res.body.id, 'test');
 					done();
 				});

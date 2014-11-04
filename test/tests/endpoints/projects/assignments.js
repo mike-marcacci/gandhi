@@ -30,7 +30,7 @@ describe('Assignments', function(){
 			})
 			.expect(201)
 			.end(function(err, res){
-				assert.isNull(err);
+				if(err) return done(err);
 				assert.isString(res.body.token);
 				adminToken = res.body.token;
 				adminId = jwt.decode(adminToken).sub;
@@ -47,7 +47,7 @@ describe('Assignments', function(){
 			})
 			.expect(201)
 			.end(function(err, res){
-				assert.isNull(err);
+				if(err) return done(err);
 				assert.isString(res.body.token);
 				userToken = res.body.token;
 				userId = jwt.decode(adminToken).sub;
@@ -61,7 +61,7 @@ describe('Assignments', function(){
 				.get('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments')
 				.expect(401)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.isNotArray(res.body);
 					done();
 				});
@@ -79,7 +79,7 @@ describe('Assignments', function(){
 				.set('Authorization', 'Bearer ' + adminToken)
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.lengthOf(Object.keys(res.body), 3);
 					done();
 				});
@@ -90,7 +90,7 @@ describe('Assignments', function(){
 				.set('Authorization', 'Bearer ' + userToken)
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.lengthOf(Object.keys(res.body), 3);
 					done();
 				});
@@ -132,7 +132,7 @@ describe('Assignments', function(){
 				.set('Authorization', 'Bearer ' + adminToken)
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.equal(res.body.id, '5a3cf444-9d87-4125-8026-2d5ffb834676');
 					done();
 				});
@@ -143,7 +143,7 @@ describe('Assignments', function(){
 				.set('Authorization', 'Bearer ' + userToken)
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.equal(res.body.id, '5a3cf444-9d87-4125-8026-2d5ffb834676');
 					done();
 				});
@@ -191,7 +191,7 @@ describe('Assignments', function(){
 				.send({id:'3cd2dc98-e280-4e72-a437-9a916d98b636',role:'advisor'})
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.equal(res.body.id, '3cd2dc98-e280-4e72-a437-9a916d98b636');
 					done();
 				});
@@ -203,7 +203,7 @@ describe('Assignments', function(){
 				.send({id:'3cd2dc98-e280-4e72-a437-9a916d98b636',role:'applicant'})
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.equal(res.body.id, '3cd2dc98-e280-4e72-a437-9a916d98b636');
 					assert.equal(res.body.role, 'applicant');
 					done();
@@ -242,7 +242,7 @@ describe('Assignments', function(){
 				.send({role:'applicant'})
 				.expect(404)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					done();
 				});
 		});
@@ -261,7 +261,7 @@ describe('Assignments', function(){
 				.send({role:'applicant'})
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.equal(res.body.role, 'applicant');
 					done();
 				});
@@ -303,7 +303,7 @@ describe('Assignments', function(){
 				.set('Authorization', 'Bearer ' + adminToken)
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.equal(res.body.id, '3cd2dc98-e280-4e72-a437-9a916d98b636');
 					done();
 				});

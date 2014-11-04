@@ -32,7 +32,7 @@ describe('Files', function(){
 			})
 			.expect(201)
 			.end(function(err, res){
-				assert.isNull(err);
+				if(err) return done(err);
 				assert.isString(res.body.token);
 				adminToken = res.body.token;
 				adminId = jwt.decode(adminToken).sub;
@@ -49,7 +49,7 @@ describe('Files', function(){
 			})
 			.expect(201)
 			.end(function(err, res){
-				assert.isNull(err);
+				if(err) return done(err);
 				assert.isString(res.body.token);
 				userToken = res.body.token;
 				userId = jwt.decode(userToken).sub;
@@ -74,7 +74,7 @@ describe('Files', function(){
 				.attach('logo', __dirname + '/../../fixtures/logo.png')
 				.expect(201)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.equal(res.body[0].name, 'logo.png')
 					assert.equal(res.body[0].user_id, userId)
 					ids.push(res.body[0].id);
@@ -90,7 +90,7 @@ describe('Files', function(){
 					.get('/api/files')
 					.expect(401)
 					.end(function(err, res){
-						assert.isNull(err);
+						if(err) return done(err);
 						assert.isNotArray(res.body);
 						done();
 					});
@@ -101,7 +101,7 @@ describe('Files', function(){
 					.set('Authorization', 'Bearer ' + userToken)
 					.expect(200)
 					.end(function(err, res){
-						assert.isNull(err);
+						if(err) return done(err);
 						assert.isArray(res.body);
 						done();
 					});
@@ -112,7 +112,7 @@ describe('Files', function(){
 					.set('Authorization', 'Bearer ' + userToken)
 					.expect(200)
 					.end(function(err, res){
-						assert.isNull(err);
+						if(err) return done(err);
 						assert.isArray(res.body);
 						assert.lengthOf(res.body, 5);
 						var links = li.parse(res.headers.link);
@@ -127,7 +127,7 @@ describe('Files', function(){
 					.set('Authorization', 'Bearer ' + userToken)
 					.expect(200)
 					.end(function(err, res){
-						assert.isNull(err);
+						if(err) return done(err);
 						assert.isArray(res.body);
 						assert.lengthOf(res.body, 5);
 						var links = li.parse(res.headers.link);
@@ -151,7 +151,7 @@ describe('Files', function(){
 					.set('Authorization', 'Bearer ' + adminToken)
 					.expect(200)
 					.end(function(err, res){
-						assert.isNull(err);
+						if(err) return done(err);
 						assert.equal(res.headers['content-type'], 'image/png');
 						assert.equal(res.headers['content-length'], '21592');
 						assert.equal(res.headers['content-disposition'], 'attachment; filename="logo.png"');
@@ -178,7 +178,7 @@ describe('Files', function(){
 				})
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.equal(res.body.name, 'UPDATED.png');
 					done();
 				});
@@ -193,7 +193,7 @@ describe('Files', function(){
 				.set('Authorization', 'Bearer ' + adminToken)
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					file = res.body[0];
 					done();
 				});
@@ -227,7 +227,7 @@ describe('Files', function(){
 				}))
 				.expect(200)
 				.end(function(err, res){
-					assert.isNull(err);
+					if(err) return done(err);
 					assert.equal(res.body.name, 'REPLACED.png');
 					done();
 				});
