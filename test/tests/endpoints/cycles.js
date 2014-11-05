@@ -50,7 +50,7 @@ describe('Cycles', function(){
 				if(err) return done(err);
 				assert.isString(res.body.token);
 				userToken = res.body.token;
-				userId = jwt.decode(adminToken).sub;
+				userId = jwt.decode(userToken).sub;
 				done();
 			});
 	});
@@ -124,7 +124,7 @@ describe('Cycles', function(){
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
-					
+
 					assert.isArray(res.body);
 					// assert.lengthOf(res.body, fixtures.cycles.length);
 					done();

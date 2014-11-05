@@ -355,7 +355,7 @@ describe('Projects', function(){
 	});
 
 	// test embedded collections
-	['assignments', 'invitations'].forEach(function(c){
+	['assignments', 'invitations', 'contents'].forEach(function(c){
 		require('./projects/' + c);
 	});
 

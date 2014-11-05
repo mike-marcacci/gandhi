@@ -50,7 +50,7 @@ describe('Exports', function(){
 				if(err) return done(err);
 				assert.isString(res.body.token);
 				userToken = res.body.token;
-				userId = jwt.decode(adminToken).sub;
+				userId = jwt.decode(userToken).sub;
 				done();
 			});
 	});

@@ -11,5 +11,5 @@ insert_final_newline = true
 tab_width = 2
 trim_trailing_whitespace = true
 
-[**.json]
+[**.yml,**.yaml]
 indent_style = space
