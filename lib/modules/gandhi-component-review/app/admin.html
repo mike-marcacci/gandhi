@@ -1,1 +1,31 @@
-<div class="alert alert-info" role="alert">There is no summary data for form components.</div>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<span class="panel-title">{{context.cycle.flow[context.stage].title}}</span>
+	</div>
+	<div class="panel-body" style="overflow-x: auto;">
+		<table class="table table-bordered table-hover" style="margin-bottom: 0; max-width: auto; width: auto; min-width: 100%;">
+			<thead>
+				<tr>
+					<th>Project</th>
+					<th>Ranking</th>
+					<th style="min-width: 200px;" ng-repeat="(key, question) in context.cycle.flow[context.stage].component.options.schema.properties">
+						{{question.description || key}}...
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat-start="project in projects">
+					<th rowspan="{{keylength(project.flow[context.stage].data) + 1}}">
+						<a ui-sref="portal.admin.projects.show({project: project.id})">{{project.title}}</a>
+					</th>
+				</tr>
+				<tr ng-repeat-end ng-repeat="(key, review) in project.flow[context.stage].data">
+					<td>{{getRank(project.id, review.ranking.comment)}}</td>
+					<td ng-repeat="(key, question) in context.cycle.flow[context.stage].component.options.schema.properties">
+						<div style="min-width: 300px; width: auto; max-height: 300px; overflow-y: auto;">{{review.data[key].comment}}</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
