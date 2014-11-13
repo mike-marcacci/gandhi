@@ -437,7 +437,7 @@
         <attribute name="name" type="string">List Projects</attribute>
         <relationship name="parent" type="0/1" destination="LMREQUESTTREEITEM" idrefs="z145"></relationship>
         <relationship name="children" type="0/0" destination="LMREQUESTTREEITEM"></relationship>
-        <relationship name="headers" type="0/0" destination="LMKEYVALUE" idrefs="z143 z140 z138"></relationship>
+        <relationship name="headers" type="0/0" destination="LMKEYVALUE" idrefs="z140 z138 z143"></relationship>
     </object>
     <object type="LMREQUESTGROUP" id="z142">
         <attribute name="order" type="int64">6</attribute>
@@ -1632,12 +1632,12 @@
         <attribute name="redirectauthorization" type="bool">0</attribute>
         <attribute name="method" type="string">POST</attribute>
         <attribute name="followredirects" type="bool">0</attribute>
-        <attribute name="body" type="string">["{\\n\\t\\"email\\": \\"mike.marcacci@test.gandhi.io\\",\\n\\t\\"password\\": \\"mike1234\\"\\n}\\n"]</attribute>
+        <attribute name="body" type="string">["{\\n\\t\\"email\\": \\"solene.clavel@test.gandhi.io\\",\\n\\t\\"password\\": \\"solene1234\\"\\n}\\n"]</attribute>
         <attribute name="order" type="int64">0</attribute>
         <attribute name="name" type="string">By Password</attribute>
         <relationship name="parent" type="0/1" destination="LMREQUESTTREEITEM" idrefs="z200"></relationship>
         <relationship name="children" type="0/0" destination="LMREQUESTTREEITEM"></relationship>
-        <relationship name="headers" type="0/0" destination="LMKEYVALUE" idrefs="z119 z109"></relationship>
+        <relationship name="headers" type="0/0" destination="LMKEYVALUE" idrefs="z109 z119"></relationship>
     </object>
     <object type="LMKEYVALUE" id="z270">
         <attribute name="value" type="string"></attribute>

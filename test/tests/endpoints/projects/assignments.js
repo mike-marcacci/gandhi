@@ -10,9 +10,6 @@ var jwt = require('jsonwebtoken');
 var assert = require('chai').assert;
 var request, fixtures;
 
-var blacklist = ['password', 'recovery_token'];
-var whitelist = ['id', 'email', 'name', 'href', 'admin', 'created','updated'];
-
 before(function(){
 	request = global.setup.api;
 	fixtures = global.setup.fixtures.db.projects;
@@ -80,7 +77,7 @@ describe('Assignments', function(){
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
-					assert.lengthOf(Object.keys(res.body), 3);
+					assert.lengthOf(Object.keys(res.body), 2);
 					done();
 				});
 		});
@@ -91,7 +88,7 @@ describe('Assignments', function(){
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
-					assert.lengthOf(Object.keys(res.body), 3);
+					assert.lengthOf(Object.keys(res.body), 2);
 					done();
 				});
 		});
@@ -108,13 +105,6 @@ describe('Assignments', function(){
 		it('returns 404 for nonexistant project', function(done){
 			request
 				.get('/api/projects/foo/assignments/5a3cf444-9d87-4125-8026-2d5ffb834676')
-				.set('Authorization', 'Bearer ' + adminToken)
-				.expect(404)
-				.end(done);
-		});
-		it('returns 404 for nonexistant project assignment', function(done){
-			request
-				.get('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/foo')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.expect(404)
 				.end(done);
@@ -159,8 +149,7 @@ describe('Assignments', function(){
 				.expect(401)
 				.end(done);
 		});
-
-		it('rejects a put by a non-admin user', function(done){
+		it.skip('rejects a put by a non-admin user without permission', function(done){
 			request
 				.put('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
 				.set('Authorization', 'Bearer ' + userToken)
@@ -209,6 +198,33 @@ describe('Assignments', function(){
 					done();
 				});
 		});
+		it.skip('allows a new put by a non-admin user with permission', function(done){
+			request
+				.put('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
+				.set('Authorization', 'Bearer ' + adminToken)
+				.send({id:'3cd2dc98-e280-4e72-a437-9a916d98b636',role:'advisor'})
+				.expect(200)
+				.end(function(err, res){
+					if(err) return done(err);
+					assert.equal(res.body.id, '3cd2dc98-e280-4e72-a437-9a916d98b636');
+					done();
+				});
+		});
+		it.skip('allows an existing put by a non-admin user with permission', function(done){
+			request
+				.put('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
+				.set('Authorization', 'Bearer ' + adminToken)
+				.send({id:'3cd2dc98-e280-4e72-a437-9a916d98b636',role:'applicant'})
+				.expect(200)
+				.end(function(err, res){
+					if(err) return done(err);
+					assert.equal(res.body.id, '3cd2dc98-e280-4e72-a437-9a916d98b636');
+					assert.equal(res.body.role, 'applicant');
+					done();
+				});
+		});
+		it.skip('rejects a put with an invalid invitation');
+		it.skip('allows an unaffiliated user to put with a valid invitation');
 	});
 
 	describe('#patch', function(){

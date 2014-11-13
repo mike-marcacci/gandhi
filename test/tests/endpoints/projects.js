@@ -10,8 +10,7 @@ var jwt = require('jsonwebtoken');
 var assert = require('chai').assert;
 var request, fixtures;
 
-var blacklist = ['password', 'recovery_token'];
-var whitelist = ['id', 'email', 'name', 'href', 'admin', 'created','updated'];
+var collections = ['assignments', 'contents', 'invitations'];
 
 before(function(){
 	request = global.setup.api;
@@ -20,8 +19,8 @@ before(function(){
 
 describe('Projects', function(){
 	var adminToken, adminId,
-	    userToken, userId,
-	    unaffiliatedToken, unaffiliatedId,
+	    soleneToken, soleneId,
+	    mattToken, markId,
 	    ids = [];
 
 	before(function(done){
@@ -45,15 +44,15 @@ describe('Projects', function(){
 		request
 			.post('/api/tokens')
 			.send({
-				email: 'tim.marcacci@test.gandhi.io',
-				password: 'tim1234'
+				email: 'solene.clavel@test.gandhi.io',
+				password: 'solene1234'
 			})
 			.expect(201)
 			.end(function(err, res){
 				if(err) return done(err);
 				assert.isString(res.body.token);
-				userToken = res.body.token;
-				userId = jwt.decode(userToken).sub;
+				soleneToken = res.body.token;
+				soleneId = jwt.decode(soleneToken).sub;
 				done();
 			});
 	});
@@ -62,49 +61,17 @@ describe('Projects', function(){
 		request
 			.post('/api/tokens')
 			.send({
-				email: 'mark.boerneke@test.gandhi.io',
-				password: 'mark1234'
+				email: 'matt.shafer@test.gandhi.io',
+				password: 'matt1234'
 			})
 			.expect(201)
 			.end(function(err, res){
 				if(err) return done(err);
 				assert.isString(res.body.token);
-				unaffiliatedToken = res.body.token;
-				unaffiliatedId = jwt.decode(unaffiliatedToken).sub;
+				mattToken = res.body.token;
+				markId = jwt.decode(mattToken).sub;
 				done();
 			});
-	});
-
-	describe('#create', function(){
-		it('prevents anonymous creation', function(done){
-			request
-				.post('/api/projects')
-				.send({
-					title: 'Woops!'
-				})
-				.expect(401)
-				.end(done);
-		});
-		it('applies defaults to a new project for non-admin users', function(done){
-			request
-				.post('/api/projects')
-				.set('Authorization', 'Bearer ' + userToken)
-				.send({
-					title: 'CREATE - Minimal Project',
-					cycle_id: '128f2348-99d4-40a1-b5ab-91d9019f272d'
-				})
-				.expect(201)
-				.end(function(err, res){
-					if(err) return done(err);
-					assert.equal(res.body.title, 'CREATE - Minimal Project')
-					assert.equal(res.body.cycle_id, '128f2348-99d4-40a1-b5ab-91d9019f272d')
-					// assert.property(res.body.users, userId);
-					// assert.equal(res.body.users[userId].role, 'applicant');
-					assert.equal(res.body.status, 'active');
-					ids.push(res.body.id);
-					done();
-				})
-		})
 	});
 
 	describe('#list', function(){
@@ -118,47 +85,205 @@ describe('Projects', function(){
 					done();
 				});
 		});
-		it('returns an array at least', function(done){
+		it('shows all projects to an admin user', function(done){
 			request
-				.get('/api/files')
-				.set('Authorization', 'Bearer ' + userToken)
+				.get('/api/projects')
+				.set('Authorization', 'Bearer ' + adminToken)
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
 					assert.isArray(res.body);
+					assert.lengthOf(res.body, 3);
 					done();
 				});
 		});
-		it.skip('accepts per_page parameters', function(done){
+		it('shows all project-assigned projects to a non-admin user', function(done){
 			request
-				.get('/api/projects?per_page=5')
-				.set('Authorization', 'Bearer ' + userToken)
+				.get('/api/projects')
+				.set('Authorization', 'Bearer ' + soleneToken)
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
 					assert.isArray(res.body);
-					assert.lengthOf(res.body, 5);
+					assert.lengthOf(res.body, 1);
+					done();
+				});
+		});
+		it('shows all cycle-assigned projects to a non-admin user', function(done){
+			request
+				.get('/api/projects')
+				.set('Authorization', 'Bearer ' + mattToken)
+				.expect(200)
+				.end(function(err, res){
+					if(err) return done(err);
+					assert.isArray(res.body);
+					assert.lengthOf(res.body, 2);
+					done();
+				});
+		});
+		it('shows correct role for each project', function(done){
+			request
+				.get('/api/projects')
+				.set('Authorization', 'Bearer ' + soleneToken)
+				.expect(200)
+				.end(function(err, res){
+					if(err) return done(err);
+					assert.isArray(res.body);
+					assert.equal(res.body[0].role.id, 'applicant');
+					done();
+				});
+		});
+		it('shows correct permissions for each project', function(done){
+			request
+				.get('/api/projects')
+				.set('Authorization', 'Bearer ' + soleneToken)
+				.expect(200)
+				.end(function(err, res){
+					if(err) return done(err);
+					assert.isArray(res.body);
+					assert.isTrue(res.body[0].permissions.create);
+					assert.isTrue(res.body[0].permissions.read);
+					assert.isTrue(res.body[0].permissions.update);
+					assert.isFalse(res.body[0].permissions.destroy);
+					done();
+				});
+		});
+		it('shows exported values for each project to an admin user', function(done){
+			request
+				.get('/api/projects')
+				.set('Authorization', 'Bearer ' + adminToken)
+				.expect(200)
+				.end(function(err, res){
+					if(err) return done(err);
+					assert.isArray(res.body);
+					assert.equal(_.find(res.body, {id: 'b37e83a5-d613-4d64-8873-fdcc8df0a009'}).values.proposal, '4f406e9f-a1ba-4b7b-9aae-c37b42a0cc03');
+					done();
+				});
+		});
+		it.skip('hides exported values for each project from a non-admin user');
+		it('shows correct events for each trigger', function(done){
+			request
+				.get('/api/projects')
+				.set('Authorization', 'Bearer ' + adminToken)
+				.expect(200)
+				.end(function(err, res){
+					if(err) return done(err);
+					assert.isArray(res.body);
+					var project = _.find(res.body, {id: 'b37e83a5-d613-4d64-8873-fdcc8df0a009'});
+					assert.lengthOf(Object.keys(project.events), 8);
+					_.each(project.events, function(group){
+						assert.isArray(group);
+						_.each(group, function(event){
+							assert.isBoolean(event.value);
+						});
+					});
+					done();
+				});
+		});
+		it('hides all embedded collections', function(done){
+			request
+				.get('/api/projects')
+				.set('Authorization', 'Bearer ' + adminToken)
+				.expect(200)
+				.end(function(err, res){
+					if(err) return done(err);
+					assert.isArray(res.body);
+					res.body.forEach(function(project){
+						collections.forEach(function(collection){
+							assert.notProperty(project, collection);
+						});
+					});
+					done();
+				});
+		});
+		it('accepts filter parameters', function(done){
+			request
+				.get('/api/projects')
+				.query({filter: '{"id": {"eq": "e264d6f7-d26a-4be3-8365-13416ac41029"}}'})
+				.set('Authorization', 'Bearer ' + adminToken)
+				.expect(200)
+				.end(function(err, res){
+					if(err) return done(err);
+					assert.isArray(res.body);
+					assert.lengthOf(res.body, 1);
+					done();
+				});
+		});
+		it('accepts search parameters', function(done){
+			request
+				.get('/api/projects')
+				.query({search: 'Tim\'s Character '})
+				.set('Authorization', 'Bearer ' + adminToken)
+				.expect(200)
+				.end(function(err, res){
+					if(err) return done(err);
+					assert.isArray(res.body);
+					assert.lengthOf(res.body, 1);
+					done();
+				});
+		});
+		it('accepts per_page parameters', function(done){
+			request
+				.get('/api/projects?per_page=2')
+				.set('Authorization', 'Bearer ' + adminToken)
+				.expect(200)
+				.end(function(err, res){
+					if(err) return done(err);
+					assert.isArray(res.body);
+					assert.lengthOf(res.body, 2);
 					var links = li.parse(res.headers.link);
-					assert.equal(links.next, '/api/projects?per_page=5&page=2');
-					assert.equal(links.last, '/api/projects?per_page=5&page='+Math.ceil((fixtures.length + ids.length) / 5));
+					assert.equal(links.next, '/api/projects?per_page=2&page=2');
+					assert.equal(links.last, '/api/projects?per_page=2&page='+Math.ceil((fixtures.length + ids.length) / 2));
 					done();
 				});
 		});
-		it.skip('accepts page parameters', function(done){
+		it('accepts page parameters', function(done){
 			request
-				.get('/api/projects?per_page=5&page=2')
-				.set('Authorization', 'Bearer ' + userToken)
+				.get('/api/projects?per_page=2&page=2')
+				.set('Authorization', 'Bearer ' + adminToken)
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
 					assert.isArray(res.body);
-					assert.lengthOf(res.body, 5);
+					assert.lengthOf(res.body, 1);
 					var links = li.parse(res.headers.link);
-					assert.equal(links.first, '/api/projects?per_page=5&page=1');
-					assert.equal(links.prev, '/api/projects?per_page=5&page=1');
+					assert.equal(links.first, '/api/projects?per_page=2&page=1');
+					assert.equal(links.prev, '/api/projects?per_page=2&page=1');
 					done();
 				});
 		});
+	});
+
+	describe('#post', function(){
+		it('prevents anonymous creation', function(done){
+			request
+				.post('/api/projects')
+				.send({
+					title: 'Woops!'
+				})
+				.expect(401)
+				.end(done);
+		});
+		it('applies defaults to a new project for non-admin users', function(done){
+			request
+				.post('/api/projects')
+				.set('Authorization', 'Bearer ' + soleneToken)
+				.send({
+					title: 'CREATE - Minimal Project',
+					cycle_id: '128f2348-99d4-40a1-b5ab-91d9019f272d'
+				})
+				.expect(201)
+				.end(function(err, res){
+					if(err) return done(err);
+					assert.equal(res.body.title, 'CREATE - Minimal Project')
+					assert.equal(res.body.cycle_id, '128f2348-99d4-40a1-b5ab-91d9019f272d')
+					// assert.property(res.body.users, soleneId);
+					// assert.equal(res.body.users[soleneId].role, 'applicant');
+					assert.equal(res.body.status, 'active');
+					ids.push(res.body.id);
+					done();
+				})
+		})
 	});
 
 	describe('#get', function(){
@@ -186,6 +311,73 @@ describe('Projects', function(){
 					done();
 				});
 		});
+		it('shows correct role for the project', function(done){
+			request
+				.get('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009')
+				.set('Authorization', 'Bearer ' + soleneToken)
+				.expect(200)
+				.end(function(err, res){
+					if(err) return done(err);
+					assert.equal(res.body.role.id, 'applicant');
+					done();
+				});
+		});
+		it('shows correct permissions for the project', function(done){
+			request
+				.get('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009')
+				.set('Authorization', 'Bearer ' + soleneToken)
+				.expect(200)
+				.end(function(err, res){
+					if(err) return done(err);
+					assert.isTrue(res.body.permissions.create);
+					assert.isTrue(res.body.permissions.read);
+					assert.isTrue(res.body.permissions.update);
+					assert.isFalse(res.body.permissions.destroy);
+					done();
+				});
+		});
+		it('shows exported values for the project to an admin user', function(done){
+			request
+				.get('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009')
+				.set('Authorization', 'Bearer ' + adminToken)
+				.expect(200)
+				.end(function(err, res){
+					if(err) return done(err);
+					assert.equal(res.body.values.proposal, '4f406e9f-a1ba-4b7b-9aae-c37b42a0cc03');
+					done();
+				});
+		});
+		it.skip('hides exported values for each project from a non-admin user');
+		it('shows correct events for each trigger', function(done){
+			request
+				.get('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009')
+				.set('Authorization', 'Bearer ' + adminToken)
+				.expect(200)
+				.end(function(err, res){
+					if(err) return done(err);
+					assert.lengthOf(Object.keys(res.body.events), 8);
+					_.forEach(res.body.events, function(group){
+						assert.isArray(group);
+						_.forEach(group, function(event){
+							assert.isBoolean(event.value);
+						});
+					});
+					done();
+				});
+		});
+		it('hides all embedded collections', function(done){
+			request
+				.get('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009')
+				.set('Authorization', 'Bearer ' + adminToken)
+				.expect(200)
+				.end(function(err, res){
+					if(err) return done(err);
+					collections.forEach(function(collection){
+						assert.notProperty(res.body, collection);
+					});
+					done();
+				});
+		});
 		it.skip('rejects a request from an unaffiliated non-admin user');
 		it.skip('rejects a request from an affiliated non-admin user without permission');
 		it('shows a project to an affiliated non-admin user with permission');
@@ -202,7 +394,7 @@ describe('Projects', function(){
 		it('rejects an update by an unaffiliated non-admin user', function(done){
 			request
 				.patch('/api/projects/' + ids[0])
-				.set('Authorization', 'Bearer ' + unaffiliatedToken)
+				.set('Authorization', 'Bearer ' + mattToken)
 				.send({title: 'Woops!'})
 				.expect(403)
 				.end(done);
@@ -237,44 +429,6 @@ describe('Projects', function(){
 					done();
 				});
 		});
-		// it('rejects an update with an invalid invitation', function(done){
-		// 	request
-		// 		.patch('/api/projects/' + ids[0])
-		// 		.set('Authorization', 'Bearer ' + unaffiliatedToken)
-		// 		.send({
-		// 			title: 'Woops!',
-		// 			users: {
-		// 				'82b08fd0-b93d-4169-a0bf-b25823077adb': {
-		// 					id: '82b08fd0-b93d-4169-a0bf-b25823077adb',
-		// 					invitation_id: '0853609d-5c15-4843-ae91-c60b3c7cb0c8'
-		// 				}
-		// 			}
-		// 		})
-		// 		.expect(400)
-		// 		.end(done);
-		// });
-		// it('accepts an update by an invited non-admin user', function(done){
-		// 	request
-		// 		.patch('/api/projects/' + ids[0])
-		// 		.set('Authorization', 'Bearer ' + unaffiliatedToken)
-		// 		.send({
-		// 			title: 'UPDATED (By Invited User)',
-		// 			users: {
-		// 				'82b08fd0-b93d-4169-a0bf-b25823077adb': {
-		// 					id: '82b08fd0-b93d-4169-a0bf-b25823077adb',
-		// 					invitation_id: '72d8153e-dc53-4fcc-98c8-febfc4f171ed'
-		// 				}
-		// 			}
-		// 		})
-		// 		.expect(200)
-		// 		.end(function(err, res){
-		// 			if(err) return done(err);
-		// 			assert.equal(res.body.id, ids[0]);
-		// 			assert.property(res.body.users, unaffiliatedId);
-		// 			assert.equal(res.body.users[unaffiliatedId].role, 'applicant');
-		// 			done();
-		// 		});
-		// });
 	});
 
 	// describe('#replace', function(){
@@ -301,7 +455,7 @@ describe('Projects', function(){
 	// 	it('rejects a replace by a non-admin user', function(done){
 	// 		request
 	// 			.put('/api/projects/' + ids[0])
-	// 			.set('Authorization', 'Bearer ' + userToken)
+	// 			.set('Authorization', 'Bearer ' + soleneToken)
 	// 			.send(_.extend({}, project, {
 	// 				title: 'UPDATED'
 	// 			}))
@@ -334,7 +488,7 @@ describe('Projects', function(){
 		it('rejects a delete by a non-admin user', function(done){
 			request
 				.delete('/api/projects/' + ids[0])
-				.set('Authorization', 'Bearer ' + userToken)
+				.set('Authorization', 'Bearer ' + soleneToken)
 				.expect(403)
 				.end(done);
 		});
