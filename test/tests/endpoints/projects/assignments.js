@@ -70,6 +70,13 @@ describe('Assignments', function(){
 				.expect(404)
 				.end(done);
 		});
+		it('returns 403 for unaffiliated project', function(done){
+			request
+				.get('/api/projects/cdd28e4a-9309-454f-a8ed-3f9708d0c10c/assignments')
+				.set('Authorization', 'Bearer ' + soleneToken)
+				.expect(403)
+				.end(done);
+		});
 		it('shows all assignments to an admin user', function(done){
 			request
 				.get('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments')
@@ -78,7 +85,7 @@ describe('Assignments', function(){
 				.end(function(err, res){
 					if(err) return done(err);
 					assert.isArray(res.body);
-					assert.lengthOf(res.body, 3);
+					assert.lengthOf(res.body, 2);
 					done();
 				});
 		});
@@ -93,7 +100,6 @@ describe('Assignments', function(){
 					done();
 				});
 		});
-		it.skip('shows assignments from both project and cycle with preference to project');
 	});
 
 	describe('#get', function(){
@@ -117,7 +123,7 @@ describe('Assignments', function(){
 				.expect(404)
 				.end(done);
 		});
-		it.skip('shows a project assignment to an admin user', function(done){
+		it('shows an assignment to an admin user', function(done){
 			request
 				.get('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/5a3cf444-9d87-4125-8026-2d5ffb834676')
 				.set('Authorization', 'Bearer ' + adminToken)
@@ -128,40 +134,24 @@ describe('Assignments', function(){
 					done();
 				});
 		});
-		it.skip('shows a cycle assignment to an admin user', function(done){
+		it('shows an allowed assignment to a non-admin user', function(done){
 			request
-				.get('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/5a3cf444-9d87-4125-8026-2d5ffb834676')
-				.set('Authorization', 'Bearer ' + adminToken)
-				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
-					assert.equal(res.body.id, '5a3cf444-9d87-4125-8026-2d5ffb834676');
-					done();
-				});
-		});
-		it.skip('shows a project assignment to a non-admin user', function(done){
-			request
-				.get('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/5a3cf444-9d87-4125-8026-2d5ffb834676')
+				.get('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/cf237901-2890-439f-add3-dc641b867459')
 				.set('Authorization', 'Bearer ' + soleneToken)
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
-					assert.equal(res.body.id, '5a3cf444-9d87-4125-8026-2d5ffb834676');
+					assert.equal(res.body.id, 'cf237901-2890-439f-add3-dc641b867459');
 					done();
 				});
 		});
-		it.skip('shows a project assignment to a non-admin user', function(done){
+		it('hides a non-allowed assignment to a non-admin user', function(done){
 			request
 				.get('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/5a3cf444-9d87-4125-8026-2d5ffb834676')
 				.set('Authorization', 'Bearer ' + soleneToken)
-				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
-					assert.equal(res.body.id, '5a3cf444-9d87-4125-8026-2d5ffb834676');
-					done();
-				});
+				.expect(404)
+				.end(done);
 		});
-		it.skip('hides a non-allowed assignment from a non-admin user');
 	});
 
 	describe('#put', function(){
@@ -246,6 +236,7 @@ describe('Assignments', function(){
 					done();
 				});
 		});
+		it.skip('rejects a put from a non-admin user without permission');
 		it.skip('rejects a put with an invalid invitation');
 		it.skip('allows an unaffiliated user to put with a valid invitation');
 	});
