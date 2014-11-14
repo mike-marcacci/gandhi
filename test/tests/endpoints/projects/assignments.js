@@ -16,7 +16,7 @@ before(function(){
 });
 
 describe('Assignments', function(){
-	var adminToken, adminId, userToken, userId;
+	var adminToken, adminId, soleneToken, soleneId;
 
 	before(function(done){
 		request
@@ -39,15 +39,15 @@ describe('Assignments', function(){
 		request
 			.post('/api/tokens')
 			.send({
-				email: 'tim.marcacci@test.gandhi.io',
-				password: 'tim1234'
+				email: 'solene.clavel@test.gandhi.io',
+				password: 'solene1234'
 			})
 			.expect(201)
 			.end(function(err, res){
 				if(err) return done(err);
 				assert.isString(res.body.token);
-				userToken = res.body.token;
-				userId = jwt.decode(userToken).sub;
+				soleneToken = res.body.token;
+				soleneId = jwt.decode(soleneToken).sub;
 				done();
 			});
 	});
@@ -77,22 +77,23 @@ describe('Assignments', function(){
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
-					assert.lengthOf(Object.keys(res.body), 2);
+					assert.isArray(res.body);
+					assert.lengthOf(res.body, 3);
 					done();
 				});
 		});
-		it('shows all assignments to a non-admin user', function(done){
+		it('shows visible assignments to a non-admin user', function(done){
 			request
 				.get('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments')
-				.set('Authorization', 'Bearer ' + userToken)
+				.set('Authorization', 'Bearer ' + soleneToken)
 				.expect(200)
 				.end(function(err, res){
-					if(err) return done(err);
-					assert.lengthOf(Object.keys(res.body), 2);
+					assert.isArray(res.body);
+					assert.lengthOf(res.body, 1);
 					done();
 				});
 		});
-		it.skip('hides non-allowed assignments from a non-admin user');
+		it.skip('shows assignments from both project and cycle with preference to project');
 	});
 
 	describe('#get', function(){
@@ -116,7 +117,7 @@ describe('Assignments', function(){
 				.expect(404)
 				.end(done);
 		});
-		it('shows an assignment to an admin user', function(done){
+		it.skip('shows a project assignment to an admin user', function(done){
 			request
 				.get('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/5a3cf444-9d87-4125-8026-2d5ffb834676')
 				.set('Authorization', 'Bearer ' + adminToken)
@@ -127,10 +128,32 @@ describe('Assignments', function(){
 					done();
 				});
 		});
-		it('shows an assignment to a non-admin user', function(done){
+		it.skip('shows a cycle assignment to an admin user', function(done){
 			request
 				.get('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/5a3cf444-9d87-4125-8026-2d5ffb834676')
-				.set('Authorization', 'Bearer ' + userToken)
+				.set('Authorization', 'Bearer ' + adminToken)
+				.expect(200)
+				.end(function(err, res){
+					if(err) return done(err);
+					assert.equal(res.body.id, '5a3cf444-9d87-4125-8026-2d5ffb834676');
+					done();
+				});
+		});
+		it.skip('shows a project assignment to a non-admin user', function(done){
+			request
+				.get('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/5a3cf444-9d87-4125-8026-2d5ffb834676')
+				.set('Authorization', 'Bearer ' + soleneToken)
+				.expect(200)
+				.end(function(err, res){
+					if(err) return done(err);
+					assert.equal(res.body.id, '5a3cf444-9d87-4125-8026-2d5ffb834676');
+					done();
+				});
+		});
+		it.skip('shows a project assignment to a non-admin user', function(done){
+			request
+				.get('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/5a3cf444-9d87-4125-8026-2d5ffb834676')
+				.set('Authorization', 'Bearer ' + soleneToken)
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
@@ -152,7 +175,7 @@ describe('Assignments', function(){
 		it.skip('rejects a put by a non-admin user without permission', function(done){
 			request
 				.put('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
-				.set('Authorization', 'Bearer ' + userToken)
+				.set('Authorization', 'Bearer ' + soleneToken)
 				.send({id:'3cd2dc98-e280-4e72-a437-9a916d98b636',role:'advisor'})
 				.expect(403)
 				.end(done);
@@ -238,7 +261,7 @@ describe('Assignments', function(){
 		it('rejects a patch by a non-admin user', function(done){
 			request
 				.patch('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
-				.set('Authorization', 'Bearer ' + userToken)
+				.set('Authorization', 'Bearer ' + soleneToken)
 				.send({role:'applicant'})
 				.expect(403)
 				.end(done);
@@ -294,7 +317,7 @@ describe('Assignments', function(){
 		it('rejects a delete by a non-admin user', function(done){
 			request
 				.delete('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
-				.set('Authorization', 'Bearer ' + userToken)
+				.set('Authorization', 'Bearer ' + soleneToken)
 				.expect(403)
 				.end(done);
 		});

@@ -208,6 +208,23 @@
     },
     "created": {
       "type": "date"
+    },
+    "permissions": {
+      "type": "object",
+      "properties": {
+        "create": {
+          "$ref": "#/definitions/permission"
+        },
+        "read": {
+          "$ref": "#/definitions/permission"
+        },
+        "update": {
+          "$ref": "#/definitions/permission"
+        },
+        "destroy": {
+          "$ref": "#/definitions/permission"
+        }
+      }
     }
   },
   "definitions": {
@@ -225,6 +242,10 @@
         },
         "role": {
           "type": "string"
+        },
+        "invitation_id": {
+          "type": ["string", "null"],
+          "default": null
         }
       }
     },
@@ -354,22 +375,8 @@
           "type": "string",
           "default": ""
         },
-        "permissions": {
-          "type": "object",
-          "properties": {
-            "create": {
-              "$ref": "#/definitions/permission"
-            },
-            "read": {
-              "$ref": "#/definitions/permission"
-            },
-            "update": {
-              "$ref": "#/definitions/permission"
-            },
-            "destroy": {
-              "$ref": "#/definitions/permission"
-            }
-          }
+        "visible": {
+          "$ref": "#/definitions/permission"
         },
         "component": {
           "type": "object",

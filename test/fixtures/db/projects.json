@@ -200,10 +200,12 @@
 	"assignments": {
 		"f6826282-1ffb-453d-8804-6b2921e6807f": {
 			"role": "reviewer",
+			"invitation_id": null,
 			"id": "f6826282-1ffb-453d-8804-6b2921e6807f"
 		},
 		"e3195f3f-94d8-41c8-a072-06d1aec2bb49": {
 			"role": "applicant",
+			"invitation_id": null,
 			"id": "e3195f3f-94d8-41c8-a072-06d1aec2bb49"
 		}
 	},

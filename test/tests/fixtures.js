@@ -26,8 +26,15 @@ fs.readdirSync(__dirname + '/../../lib/api/schemas/').forEach(function(file){
 describe('Fixtures', function(){
 
 	it('should have valid cycles', function(){
-		require('../fixtures/db/cycles.json').map(function(cycle){
+		require('../fixtures/db/cycles.json').forEach(function(cycle){
 			var err = validator.validate('http://www.gandhi.io/schema/cycle', cycle);
+			if(err) throw new Error(JSON.stringify(_.extend(err, {id: cycle.id})));
+		})
+	});
+
+	it('should have valid projects', function(){
+		require('../fixtures/db/projects.json').forEach(function(cycle){
+			var err = validator.validate('http://www.gandhi.io/schema/project', cycle);
 			if(err) throw new Error(JSON.stringify(_.extend(err, {id: cycle.id})));
 		})
 	});

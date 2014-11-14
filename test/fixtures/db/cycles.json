@@ -4,6 +4,7 @@
 		"assignments":{
 			"72e7f9a1-614d-423e-8273-1194932f8718":{
 				"id":"72e7f9a1-614d-423e-8273-1194932f8718",
+				"invitation_id": null,
 				"role":"staff"
 			}
 		},
@@ -463,10 +464,12 @@
 		"assignments":{
 			"5a3cf444-9d87-4125-8026-2d5ffb834676":{
 				"id":"5a3cf444-9d87-4125-8026-2d5ffb834676",
+				"invitation_id": null,
 				"role":"advisor"
 			},
 			"f6826282-1ffb-453d-8804-6b2921e6807f":{
 				"id":"f6826282-1ffb-453d-8804-6b2921e6807f",
+				"invitation_id": null,
 				"role":"advisor"
 			}
 		},
