@@ -74,32 +74,7 @@
 		<div ng-cloak id="main" ng-if="currentUser" ui-view></div>
 
 		<!-- login form shown instead of portal if not logged in -->
-		<div ng-cloak ng-if="!currentUser" class="col-lg-5 col-lg-offset-1 well" style="margin-top: 20px;">
-
-			<h3 style="margin-top: 0;">Exploratory Research Funds</h3><p>We are pleased to announce grants in support of collaborative research among UChicago and MBL faculty (both visiting and year round) at the MBL. We seek to support and seed novel research that enhances the affiliation among the institutions and can serve as the substrate for future grant proposals. &nbsp; These are intended to be exploratory funds: budgets are at a maximum of $25,000, proposals are short, target dates are quarterly, and review and funding will be rapid.</p>
-
-			<h4>The Program</h4>
-
-			<p>The intent is to provide the basis for exploratory collaborative research between UChicago faculty and visiting and/or year round faculty of the MBL. &nbsp; &nbsp;</p>
-
-			<h4>Criteria for Selection of Proposals</h4>
-
-			<p>Criteria for selection include importance of the work to be accomplished and potential to initiate novel collaboration between individuals and institutions.&nbsp; High risk, novel collaborations are welcome. &nbsp;</p>
-
-			<p>While all collaborative applications are welcome, priority will be given to proposals that use onsite resources of the MBL, particularly in the off season (October through May).&nbsp;</p>
-
-			<h4>Guidelines and Evaluation&nbsp;</h4>
-
-			<p>Only UChicago faculty are eligible to apply.</p>
-
-			<p>Applications are due on, October 1, 2014.&nbsp; Proposal guidelines and applications can be found at: <a href="https://mbl.gandhi.io/">https://mbl.gandhi.io/</a>.<br>
-			<br>
-			Proposals should be completed and submitted utilizing the online form and should include an MBL component (MBL visiting or year round faculty and/or MBL onsite resources). Please note, you will be asked to sign-up for an account before submitting an application to this site.</p>
-
-			<p>Appropriate budget items include: reagents, supplies, sequencing and core facility costs, computational expenses, travel, MBL rental and lodging expenses, travel and other items in direct support of exploratory research.&nbsp; Student stipends, faculty salaries, publication costs and registrations expenses for scientific meetings are excluded.</p>
-		</div>
-
-		<div ng-cloak id="login" ng-if="!currentUser" ng-controller="loginController" class="new col-lg-6">
+		<div ng-cloak id="login" ng-if="!currentUser" ng-controller="loginController" class="new">
 			<div ng-if="!currentUser" ng-include="'auth.html'"></div>
 		</div>
 
