@@ -159,9 +159,17 @@ describe('Exports', function(){
 				.expect(400)
 				.end(done);
 		});
+		it('rejects a mismatched id', function(done){
+			request
+				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/exports/test')
+				.set('Authorization', 'Bearer ' + adminToken)
+				.send({id:'wrong',title:'Oops'})
+				.expect(400)
+				.end(done);
+		});
 		it('returns 404 for nonexistant cycle', function(done){
 			request
-				.put('/api/cycles/foo/exports/proposal')
+				.put('/api/cycles/foo/exports/test')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.send({id:'test',title:'Test',pointer:['contents','start','status'],template:null})
 				.expect(404)
@@ -215,6 +223,14 @@ describe('Exports', function(){
 				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/exports/test')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.send({foo:'bar'})
+				.expect(400)
+				.end(done);
+		});
+		it('rejects a mismatched id', function(done){
+			request
+				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/exports/test')
+				.set('Authorization', 'Bearer ' + adminToken)
+				.send({id:'wrong',title:'Oops'})
 				.expect(400)
 				.end(done);
 		});

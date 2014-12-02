@@ -189,6 +189,14 @@ describe('Contents', function(){
 				.expect(400)
 				.end(done);
 		});
+		it('rejects mismatched ids', function(done){
+			request
+				.put('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/contents/application')
+				.set('Authorization', 'Bearer ' + adminToken)
+				.send({id:'foo',status:'draft',data:{foo:'bar'}})
+				.expect(400)
+				.end(done);
+		});
 		it('returns 404 for nonexistant project', function(done){
 			request
 				.put('/api/projects/foo/contents/application')
@@ -295,6 +303,14 @@ describe('Contents', function(){
 				.patch('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/contents/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.send({foo:'bar'})
+				.expect(400)
+				.end(done);
+		});
+		it('rejects mismatched ids', function(done){
+			request
+				.patch('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/contents/application')
+				.set('Authorization', 'Bearer ' + adminToken)
+				.send({id:'foo',status:'draft',data:{foo:'bar'}})
 				.expect(400)
 				.end(done);
 		});

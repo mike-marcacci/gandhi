@@ -95,7 +95,6 @@ describe('Assignments', function(){
 					done();
 				});
 		});
-		it.skip('hides non-allowed assignments from a non-admin user');
 	});
 
 	describe('#get', function(){
@@ -141,7 +140,6 @@ describe('Assignments', function(){
 					done();
 				});
 		});
-		it.skip('hides a non-allowed assignment from a non-admin user');
 	});
 
 	describe('#put', function(){
@@ -169,11 +167,19 @@ describe('Assignments', function(){
 				.expect(400)
 				.end(done);
 		});
+		it('rejects a mismatched id', function(done){
+			request
+				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
+				.set('Authorization', 'Bearer ' + adminToken)
+				.send({id:'5cd2dc98-e280-4e72-a437-9a916d98b639',role:'advisor'})
+				.expect(400)
+				.end(done);
+		});
 		it('returns 404 for nonexistant cycle', function(done){
 			request
 				.put('/api/cycles/foo/assignments/5a3cf444-9d87-4125-8026-2d5ffb834676')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({id:'3cd2dc98-e280-4e72-a437-9a916d98b636',role:'advisor'})
+				.send({id:'5a3cf444-9d87-4125-8026-2d5ffb834676',role:'advisor'})
 				.expect(404)
 				.end(done);
 		});
@@ -239,9 +245,17 @@ describe('Assignments', function(){
 					done();
 				});
 		});
+		it('rejects a mismatched id', function(done){
+			request
+				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
+				.set('Authorization', 'Bearer ' + adminToken)
+				.send({id:'5cd2dc98-e280-4e72-a437-9a916d98b639',role:'advisor'})
+				.expect(400)
+				.end(done);
+		});
 		it('returns 404 for nonexistant cycle', function(done){
 			request
-				.patch('/api/cycles/foo/assignments/5a3cf444-9d87-4125-8026-2d5ffb834676')
+				.patch('/api/cycles/foo/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.send({id:'3cd2dc98-e280-4e72-a437-9a916d98b636',role:'advisor'})
 				.expect(404)

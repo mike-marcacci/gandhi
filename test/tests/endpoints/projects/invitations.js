@@ -164,13 +164,21 @@ describe('Invitations', function(){
 			request
 				.put('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/invitations/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.send({id:'57efa7cf-bab2-44a6-862f-7ca5e154b1a9',role:'applicant',name:'Test',email:'test@email.com'})
+				.expect(400)
+				.end(done);
+		});
+		it('rejects mismatched ids', function(done){
+			request
+				.put('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/invitations/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
+				.set('Authorization', 'Bearer ' + adminToken)
 				.send({foo:'bar'})
 				.expect(400)
 				.end(done);
 		});
 		it('returns 404 for nonexistant project', function(done){
 			request
-				.put('/api/projects/foo/invitations/514d3645-a768-4749-b6da-8b1b4d08cf1c')
+				.put('/api/projects/foo/invitations/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.send({id:'c7efa7cf-bab2-44a6-862f-7ca5e154b1ae',role:'applicant',name:'Test',email:'test@email.com'})
 				.expect(404)
@@ -224,6 +232,14 @@ describe('Invitations', function(){
 				.patch('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/invitations/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.send({foo:'bar'})
+				.expect(400)
+				.end(done);
+		});
+		it('rejects an invalid put', function(done){
+			request
+				.patch('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/invitations/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
+				.set('Authorization', 'Bearer ' + adminToken)
+				.send({id:'57efa7cf-bab2-44a6-862f-7ca5e154b1a9',role:'applicant',name:'Test',email:'test@email.com'})
 				.expect(400)
 				.end(done);
 		});

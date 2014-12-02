@@ -145,6 +145,14 @@ describe('Statuses', function(){
 				.expect(400)
 				.end(done);
 		});
+		it('rejects mismatched ids', function(done){
+			request
+				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/statuses/test')
+				.set('Authorization', 'Bearer ' + adminToken)
+				.send({id:'foo',title:'Test'})
+				.expect(400)
+				.end(done);
+		});
 		it('allows a new put by an admin user', function(done){
 			request
 				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/statuses/test')
@@ -193,6 +201,14 @@ describe('Statuses', function(){
 				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/statuses/test')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.send({foo:'bar'})
+				.expect(400)
+				.end(done);
+		});
+		it('rejects mismatched ids', function(done){
+			request
+				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/statuses/test')
+				.set('Authorization', 'Bearer ' + adminToken)
+				.send({id:'foo',title:'Test'})
 				.expect(400)
 				.end(done);
 		});

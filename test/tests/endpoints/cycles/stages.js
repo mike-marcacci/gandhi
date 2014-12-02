@@ -145,6 +145,14 @@ describe('Stages', function(){
 				.expect(400)
 				.end(done);
 		});
+		it('rejects an invalid put', function(done){
+			request
+				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/stages/test')
+				.set('Authorization', 'Bearer ' + adminToken)
+				.send({id:'foo',title:'Test',component:{name:'form'}})
+				.expect(400)
+				.end(done);
+		});
 		it('allows a new put by an admin user', function(done){
 			request
 				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/stages/test')
@@ -193,6 +201,14 @@ describe('Stages', function(){
 				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/stages/test')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.send({foo:'bar'})
+				.expect(400)
+				.end(done);
+		});
+		it('rejects an invalid patch', function(done){
+			request
+				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/stages/test')
+				.set('Authorization', 'Bearer ' + adminToken)
+				.send({id:'foo',title:'Test',component:{name:'form'}})
 				.expect(400)
 				.end(done);
 		});
