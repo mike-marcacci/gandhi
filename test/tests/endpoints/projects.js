@@ -18,6 +18,11 @@ before(function(){
 });
 
 describe('Projects', function(){
+
+	// RethinkDB on Wercker is crazy slow... and I'm kind of abusing the db here. We
+	// will probably need to come up with a better solution eventually
+	this.timeout(5000);
+
 	var adminToken, adminId,
 	    soleneToken, soleneId,
 	    mattToken, markId,
