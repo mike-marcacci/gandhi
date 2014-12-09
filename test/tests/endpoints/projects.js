@@ -85,7 +85,7 @@ describe('Projects', function(){
 					done();
 				});
 		});
-		it.skip('shows all projects to an admin user', function(done){
+		it('shows all projects to an admin user', function(done){
 			request
 				.get('/api/projects')
 				.set('Authorization', 'Bearer ' + adminToken)
