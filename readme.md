@@ -41,7 +41,7 @@ Add Gandhi as a dependency to your app:
 npm install --save gandhi
 ```
 
-Import gandhi and add it as a middleware to your app:
+Import gandhi and add it to your app:
 
 ```js
 var app = require('express')();
