@@ -22,7 +22,7 @@ Installation
 
 ###Simple
 
-Gandhi can be run as a stand-alone app. Simply clone and start it:
+Gandhi can be run as a stand-alone app. Make sure RethinkDB is running on your machine. Simply clone Gandhi and start it:
 
 ```bash
 git clone https://github.com/mike-marcacci/gandhi.git
@@ -41,14 +41,15 @@ Add Gandhi as a dependency to your app:
 npm install --save gandhi
 ```
 
-In your app, apply the package to your express app:
+Import gandhi and add it as a middleware to your app:
+
 ```js
 var app = require('express')();
 var config = {
 	// configure here
 };
 
-require('gandhi')(config, app);
+app.use(require('gandhi')(config));
 
 app.listen(3000);
 ```
@@ -57,6 +58,7 @@ Configuration
 -------------
 
 Coming Soon!
+
 
 Demo
 ----

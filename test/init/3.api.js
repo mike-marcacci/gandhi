@@ -6,7 +6,7 @@ var express = require('express');
 module.exports = {
 	setup: function(done){
 		var app = express();
-		require("../../lib/index.js")(global.setup.config, app)
+		app.use(require("../../lib/index.js")(global.setup.config));
 		global.setup.api = require("supertest")(app);
 		done();
 	},

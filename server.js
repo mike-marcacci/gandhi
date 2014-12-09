@@ -8,6 +8,6 @@ var config = fs.existsSync('./config.json') || fs.existsSync('./config.js') || f
 require('./setup/index.js')(config);
 
 // bring in gandhi
-require('./lib/index.js')(config, app);
+app.use(require('./lib/index.js')(config));
 
 app.listen(config.port);

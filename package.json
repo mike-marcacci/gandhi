@@ -53,7 +53,7 @@
     "chai": "~1.9.1",
     "mocha": "~1.18.2",
     "nodemon": "^1.0.17",
-    "supertest": "^0.13.0"
+    "supertest": "^0.15.0"
   },
   "config": {
     "blanket": {
