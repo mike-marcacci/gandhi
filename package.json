@@ -23,7 +23,7 @@
   "dependencies": {
     "async": "^0.9.0",
     "bedroll": "0.0.2",
-    "body-parser": "^1.3.1",
+    "body-parser": "^1.10.0",
     "bower": "^1.3.5",
     "express": "^4.4.3",
     "generic-pool": "^2.0.4",
@@ -34,10 +34,8 @@
     "li": "^1.0.0",
     "lodash": "^2.4.1",
     "method-override": "^2.0.2",
-    "mocha": "^1.18.2",
     "multer": "^0.1.4",
     "nodemailer": "1.x",
-    "nodemon": "^1.2.0",
     "objectpath": "^1.0.5",
     "passport": "^0.2.0",
     "passport-http-bearer": "^1.0.1",
@@ -47,7 +45,6 @@
     "res-error": "^0.3.1",
     "rethinkdb": "^1.15.0-0",
     "scrypt": "^3.0.1",
-    "supertest": "^0.12.1",
     "wiredep": "^1.8.6"
   },
   "devDependencies": {
