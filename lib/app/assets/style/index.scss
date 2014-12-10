@@ -1,6 +1,6 @@
 $icon-font-path: "../bower/bootstrap-sass-official/assets/fonts/bootstrap/";
-$brand-primary: #428bca;
-// $brand-primary: #993636;
+// $brand-primary: #428bca;
+$brand-primary: #993636;
 @import "../bower/bootstrap-sass-official/assets/stylesheets/bootstrap";
 
 .btn {
@@ -28,6 +28,7 @@ html {
 	min-height: 100%;
 	background-color: rgb(253, 253, 253);
 	// background-color: rgb(248, 248, 248);
+	border-top: 4px solid maroon;
 }
 
 body {
