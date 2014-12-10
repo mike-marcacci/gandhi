@@ -74,7 +74,9 @@
 		<div ng-cloak id="main" ng-if="currentUser" ui-view></div>
 
 		<!-- login form shown instead of portal if not logged in -->
-		<div ng-if="!currentUser" ng-include="'auth.html'"></div>
+		<div ng-cloak id="login" ng-if="!currentUser" ng-controller="loginController" class="new">
+			<div ng-if="!currentUser" ng-include="'auth.html'"></div>
+		</div>
 
 		<!-- load all the javascript and dependentcies -->
 		<script type="text/javascript" src="assets/ckeditor/ckeditor.js"></script>
