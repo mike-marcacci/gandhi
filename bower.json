@@ -59,7 +59,6 @@
     "angular-schema-form": "gandhi"
   },
   "exclude": [
-    "bootstrap",
-    "bootstrap-sass-official"
+    "bower/bootstrap/"
   ]
 }
