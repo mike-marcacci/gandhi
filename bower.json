@@ -21,7 +21,6 @@
     "angular": "~1.3.0",
     "angular-sanitize": "~1.3.0",
     "angular-ui-router": "0.2.x",
-    "bootstrap": "3.2.x",
     "restangular": "~1.4.0",
     "lodash": "~2.4.1",
     "angular-schema-form": "https://github.com/mike-marcacci/angular-schema-form.git#gandhi",
@@ -32,7 +31,8 @@
     "angular-ui-select": "~0.6.0",
     "objectpath": "~1.0.5",
     "angular-ckeditor": "~0.2.0",
-    "angular-ui-sortable": "~0.12.11"
+    "angular-ui-sortable": "~0.12.11",
+    "bootstrap-sass-official": "~3.3.1"
   },
   "overrides": {
     "ace-builds": {
@@ -57,5 +57,9 @@
     "angular": "~1.3.0",
     "angular-sanitize": "1.3.x",
     "angular-schema-form": "gandhi"
-  }
+  },
+  "exclude": [
+    "bootstrap",
+    "bootstrap-sass-official"
+  ]
 }
