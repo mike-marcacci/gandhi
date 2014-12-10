@@ -5372,6 +5372,20 @@ button.close {
 .btn {
   line-height: 1.42857143 !important; }
 
+.table > thead > tr > td.active,
+.table > thead > tr > th.active,
+.table > thead > tr.active > td,
+.table > thead > tr.active > th,
+.table > tbody > tr > td.active,
+.table > tbody > tr > th.active,
+.table > tbody > tr.active > td,
+.table > tbody > tr.active > th,
+.table > tfoot > tr > td.active,
+.table > tfoot > tr > th.active,
+.table > tfoot > tr.active > td,
+.table > tfoot > tr.active > th {
+  background-color: #e3eef7; }
+
 html {
   min-height: 100%;
   background-color: #fdfdfd; }
@@ -5572,7 +5586,7 @@ body {
           padding: 0.4em 0.8em 0.4em 2em;
           line-height: 1.3em; }
           #sidebar nav > ul > li > ul a.active {
-            background-color: #e8f1f8; }
+            background-color: #eaedf0; }
 
 #body {
   margin-left: 210px;
