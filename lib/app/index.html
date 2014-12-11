@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="gandhi">
 	<head>
-		<!-- load all the styles -->
 		<meta name="viewport" content="width=device-width, maximum-scale=1">
 		<meta name="apple-mobile-web-app-capable" content="yes">
+
+		<!-- load all the styles -->
 		<link rel="stylesheet" href="assets/style/index.css">
 		<script type="text/javascript" src="styles.js"></script>
+
+		<!-- the "loading" animation -->
 		<style type="text/css">
 			@-webkit-keyframes pulsate {
 				0% {
@@ -54,8 +57,10 @@
 				animation: pulsate 1s infinite ease-out;
 			}
 		</style>
+
+		<title>Gandhi</title>
 	</head>
-	<body ng-app="gandhi">
+	<body>
 		<script>
 		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -80,7 +85,7 @@
 		<script type="text/javascript" src="assets/ckeditor/ckeditor.js"></script>
 		<script type="text/javascript" src="main.js"></script>
 
-		<!-- invisible frame for downloads -->
+		<!-- invisible frame for file downloads in older browsers -->
 		<iframe style="visibility: hidden;" width="0" height="0" id="downloads" src=""></iframe>
 	</body>
 </html>
