@@ -1,4 +1,12 @@
 <div id="sidebar">
+	<div class="navbar-default visible-xs">
+		<button class="navbar-toggle" ng-click="toggleNavigation()">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</button>
+	</div>
 	<nav>
 		<ul>
 			<li><a ng-class="{active: $state.includes('portal.dashboard')}" ui-sref="portal.dashboard"><i class="glyphicon glyphicon-dashboard"></i>Dashboard</a></li>
@@ -19,7 +27,7 @@
 		</ul>
 		<a href ng-click="logout()"><i class="glyphicon glyphicon-off"></i>Log Out</a>
 	</nav>
-	<span ng-hide="hideSidebar" class="control" ng-click="toggleSidebar()">&#xe079;</span>
-	<span ng-hide="!hideSidebar" class="control" ng-click="toggleSidebar()">&#xe080;</span>
+	<span ng-hide="collapseSidebar" class="control" ng-click="toggleSidebar()">&#xe079;</span>
+	<span ng-hide="!collapseSidebar" class="control" ng-click="toggleSidebar()">&#xe080;</span>
 </div>
 <div id="body" ui-view></div>

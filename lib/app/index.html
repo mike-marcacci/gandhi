@@ -1,8 +1,21 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="gandhi">
+<html lang="en" ng-app="gandhi" ng-class="{'collapse-sidebar': collapseSidebar, 'show-navigation': showNavigation}">
 	<head>
-		<meta name="viewport" content="width=device-width, maximum-scale=1">
+
+		<!-- mobile settings -->
 		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="viewport" content="width=device-width, maximum-scale=1">
+
+		<!-- app icon -->
+		<link rel="apple-touch-icon" href="assets/icons/appicon-60.png" sizes="60x60" />
+		<link rel="apple-touch-icon" href="assets/icons/appicon-60@2x.png" sizes="120x120" />
+		<link rel="apple-touch-icon" href="assets/icons/appicon-60@3x.png" sizes="180x180" />
+		<link rel="apple-touch-icon" href="assets/icons/appicon-72.png" sizes="72x72" />
+		<link rel="apple-touch-icon" href="assets/icons/appicon-72@2x.png" sizes="144x144" />
+		<link rel="apple-touch-icon" href="assets/icons/appicon-76.png" sizes="76x76" />
+		<link rel="apple-touch-icon" href="assets/icons/appicon-76@2x.png" sizes="152x152" />
+
 
 		<!-- load all the styles -->
 		<link rel="stylesheet" href="assets/style/index.css">
@@ -60,7 +73,7 @@
 
 		<title>Gandhi</title>
 	</head>
-	<body ng-class="{'collapse-sidebar': collapseSidebar}">
+	<body>
 		<script>
 		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
