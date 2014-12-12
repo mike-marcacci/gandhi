@@ -19,5 +19,7 @@
 		</ul>
 		<a href ng-click="logout()"><i class="glyphicon glyphicon-off"></i>Log Out</a>
 	</nav>
+	<span ng-hide="hideSidebar" class="control" ng-click="toggleSidebar()">&#xe079;</span>
+	<span ng-hide="!hideSidebar" class="control" ng-click="toggleSidebar()">&#xe080;</span>
 </div>
 <div id="body" ui-view></div>

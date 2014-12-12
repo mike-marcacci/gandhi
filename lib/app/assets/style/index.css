@@ -5518,14 +5518,18 @@ body {
     transform: rotate(-90deg); }
 
 #sidebar {
+  position: relative;
+  bottom: auto;
+  width: 100%;
+  box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.1);
   background: #FFFFFF;
-  position: fixed;
   left: 0;
   top: 0;
-  bottom: 0;
-  width: 210px;
-  box-shadow: 2px 0px 1px rgba(0, 0, 0, 0.1);
-  z-index: 10; }
+  z-index: 10;
+  -webkit-transition: left .5s;
+  transition: left .5s; }
+  #sidebar > .control {
+    display: none; }
   #sidebar nav {
     line-height: 1.4em; }
     #sidebar nav a {
@@ -5541,7 +5545,7 @@ body {
       bottom: 0;
       padding: 0.8em 1.8em 0.8em 1em;
       left: 0;
-      position: absolute;
+      position: relative;
       right: 0; }
     #sidebar nav > a, #sidebar nav > ul > li > a {
       background-color: #fff;
@@ -5562,13 +5566,13 @@ body {
           right: auto;
           top: 2.5em; }
     #sidebar nav > ul {
+      position: relative;
+      bottom: auto;
       border-bottom: 1px solid #f5f5f5;
       border-top: 2px solid #f5f5f5;
       margin: 0;
       padding: 0;
-      bottom: 3em;
       left: 0;
-      position: absolute;
       right: 0;
       top: 0;
       overflow-x: hidden;
@@ -5589,25 +5593,57 @@ body {
             background-color: #eaedf0; }
 
 #body {
-  margin-left: 210px;
+  margin-left: 0;
   margin-right: 1px;
-  padding: 1em; }
+  padding: 1em;
+  -webkit-transition: margin-left .5s;
+  transition: margin-left .5s; }
 
 table[gandhi-admin-table] th, table[gandhi-admin-table] td {
   max-width: 200px; }
 
-@media (max-width: 768px) {
+@media (min-width: 768px) {
   #sidebar {
-    position: relative;
-    bottom: auto;
-    width: 100%;
-    border-right: none 0;
-    box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.1); }
+    position: fixed;
+    bottom: 0;
+    width: 210px;
+    box-shadow: 2px 0px 1px rgba(0, 0, 0, 0.1); }
+    #sidebar > .control {
+      background: #dbdbdb;
+      border-radius: 3px 0 0 3px;
+      color: #7e7e7e;
+      cursor: pointer;
+      display: block;
+      font-family: Glyphicons Halflings;
+      font-size: 8px;
+      line-height: 40px;
+      margin-top: -20px;
+      opacity: .5;
+      padding-left: 1px;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      vertical-align: middle;
+      -webkit-transition: opacity .2s;
+      transition: opacity .2s; }
+      #sidebar > .control:hover {
+        opacity: 1; }
     #sidebar nav > a:last-child {
-      position: relative; }
+      position: absolute; }
     #sidebar nav > ul {
-      position: relative;
-      bottom: auto; }
+      bottom: 3em;
+      position: absolute; }
 
   #body {
-    margin-left: 0; } }
+    margin-left: 210px; }
+
+  .collapse-sidebar #sidebar {
+    left: -180px; }
+    .collapse-sidebar #sidebar > .control {
+      opacity: 0; }
+    .collapse-sidebar #sidebar:hover {
+      left: 0px; }
+      .collapse-sidebar #sidebar:hover > .control {
+        opacity: 1; }
+  .collapse-sidebar #body {
+    margin-left: 30px; } }

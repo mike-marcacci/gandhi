@@ -214,16 +214,26 @@ body {
 
 }
 
+
+
+
 #sidebar {
+	position: relative;
+	bottom: auto;
+	width: 100%;
+	box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.1);
+
 	background: #FFFFFF;
-	position: fixed;
 	left: 0;
 	top: 0;
-	bottom: 0;
-	width: 210px;
-	// border-right: 2px solid #f5f5f5;
-	box-shadow: 2px 0px 1px rgba(0, 0, 0, 0.1);
 	z-index: 10;
+
+	-webkit-transition: left .5s;
+	transition: left .5s;
+
+	> .control {
+		display: none;
+	}
 
 	nav {
 		line-height: 1.4em;
@@ -245,7 +255,8 @@ body {
 			bottom: 0;
 			padding: 0.8em 1.8em 0.8em 1em;
 			left: 0;
-			position: absolute;
+			
+			position: relative;
 			right: 0;
 		}
 
@@ -274,13 +285,13 @@ body {
 		}
 
 		> ul {
+			position: relative;
+			bottom: auto;
 			border-bottom: 1px solid #f5f5f5;
 			border-top: 2px solid #f5f5f5;
 			margin: 0;
 			padding: 0;
-			bottom: 3em;
 			left: 0;
-			position: absolute;
 			right: 0;
 			top: 0;
 			overflow-x: hidden;
@@ -310,9 +321,12 @@ body {
 }
 
 #body {
-	margin-left: 210px;
+	margin-left: 0;
 	margin-right: 1px;
 	padding: 1em;
+
+	-webkit-transition: margin-left .5s;
+	transition: margin-left .5s;
 }
 
 table[gandhi-admin-table] {
@@ -321,28 +335,76 @@ table[gandhi-admin-table] {
 	}
 }
 
-@media (max-width: 768px) {
+
+@media (min-width: 768px) {
+
 	#sidebar {
-		position: relative;
-		bottom: auto;
-		width: 100%;
-		border-right: none 0;
-		box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.1);
+		position: fixed;
+		bottom: 0;
+		width: 210px;
+		box-shadow: 2px 0px 1px rgba(0, 0, 0, 0.1);
+
+		> .control {
+			background: rgb(219, 219, 219);
+			border-radius: 3px 0 0 3px;
+			color: rgb(126, 126, 126);
+			cursor: pointer;
+			display: block;
+			font-family: Glyphicons Halflings;
+			font-size: 8px;
+			line-height: 40px;
+			margin-top: -20px;
+			opacity: .5;
+			padding-left: 1px;
+			position: absolute;
+			right: 0;
+			top: 50%;
+			vertical-align: middle;
+
+			-webkit-transition: opacity .2s;
+			transition: opacity .2s;
+
+			&:hover {
+				opacity: 1;
+			}
+		}
 
 		nav {
 			> a:last-child {
-				position: relative;
+				position: absolute;
 			}
 
 			> ul {
-				position: relative;
-				bottom: auto;
+				bottom: 3em;
+				position: absolute;
 			}
 		}
 	}
 
 	#body {
-		margin-left: 0;
+		margin-left: 210px;
 	}
 
+	.collapse-sidebar {
+
+		#sidebar {
+			left: -180px;
+
+			> .control {
+				opacity: 0;
+			}
+
+			&:hover {
+				left: 0px;
+
+				> .control {
+					opacity: 1;
+				}
+			}
+		}
+
+		#body {
+			margin-left: 30px;
+		}
+	}
 }
