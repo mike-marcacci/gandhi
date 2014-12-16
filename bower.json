@@ -59,6 +59,11 @@
     "angular-schema-form": "gandhi"
   },
   "exclude": [
+<<<<<<< HEAD
     "bower/bootstrap/"
+=======
+    "bootstrap",
+    "bootstrap-sass-official"
+>>>>>>> master
   ]
 }
