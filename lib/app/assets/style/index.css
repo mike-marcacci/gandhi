@@ -5388,8 +5388,7 @@ button.close {
 
 html {
   min-height: 100%;
-  background-color: #fdfdfd;
-  border-top: 4px solid maroon; }
+  background-color: #efefef; }
 
 body {
   background-color: transparent !important;
