@@ -62,7 +62,10 @@
 				</div>
 				<div class="col-sm-9" ng-if="read.group">
 					<div ng-repeat="review in read.group.data">
-						<form sf-model="review.data" sf-form="read.group.form" sf-schema="options.schema" sf-options="read.config"></form>
+						<fieldset>
+							<legend ng-if="permissions['read:users']">{{read.users[review.id].name}}</legend>
+							<form sf-model="review.data" sf-form="read.group.form" sf-schema="options.schema" sf-options="read.config"></form>
+						</fieldset>
 					</div>
 				</div>
 			</div>
