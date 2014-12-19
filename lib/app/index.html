@@ -89,7 +89,7 @@
 		<div ng-hide="true" class="loader"></div>
 
 		<!-- the portal lives here -->
-		<div ng-cloak id="main" ng-if="currentUser" ui-view></div>
+		<div id="main" ng-if="currentUser" ng-cloak ui-view></div>
 
 		<!-- login form shown instead of portal if not logged in -->
 		<div ng-if="!currentUser" ng-include="'auth.html'"></div>
