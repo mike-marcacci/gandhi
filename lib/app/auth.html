@@ -11,7 +11,7 @@
 	<div class="panel panel-default">
 		<div class="panel-body">
 			<div ng-show="tab == 'login' || tab == null">
-				<form ng-controller="loginController" ng-submit="submit()">
+				<form ng-controller="LoginController" ng-submit="submit()">
 					<div class="form-group">
 						<input name="email" ng-model="email" type="email" class="form-control" placeholder="Email">
 					</div>
@@ -24,7 +24,7 @@
 			</div>
 
 			<div ng-show="tab == 'signup'">
-				<form ng-controller="signupController" ng-submit="submit()">
+				<form ng-controller="SignupController" ng-submit="submit()">
 					<div class="form-group">
 						<input name="name" ng-model="name" type="text" class="form-control" placeholder="Name">
 					</div>
