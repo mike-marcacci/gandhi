@@ -204,9 +204,7 @@
 			},
 			"description": "Submit your essay right here.",
 			"id": "application",
-			"next": [
-				"review"
-			],
+			"order": 1,
 			"summary": true,
 			"title": "Essay Submission",
 			"visible": {
@@ -235,9 +233,7 @@
 			},
 			"description": "Decide to fund the project or not.",
 			"id": "decision",
-			"next": [
-
-			],
+			"order": 3,
 			"summary": false,
 			"title": "Funding Decision",
 			"visible": {
@@ -360,9 +356,7 @@
 			},
 			"description": "The project will be reviewed by assigned reviewers.",
 			"id": "review",
-			"next": [
-				"decision"
-			],
+			"order": 2,
 			"summary": false,
 			"title": "Review",
 			"visible": {
@@ -398,9 +392,7 @@
 			},
 			"description": "Begin the application process.",
 			"id": "start",
-			"next": [
-				"application"
-			],
+			"order": 0,
 			"summary": false,
 			"title": "Start",
 			"visible": {
@@ -712,9 +704,7 @@
 			},
 			"description": "This project has been accepted.",
 			"id": "acceptance",
-			"next": [
-				"report"
-			],
+			"order": 5,
 			"summary": false,
 			"title": "Acceptance",
 			"visible": {
@@ -752,9 +742,7 @@
 			},
 			"description": "This page acknowledges that the application was received.",
 			"id": "administrative_review",
-			"next": [
-				"review"
-			],
+			"order": 2,
 			"summary": false,
 			"title": "Administrative Review",
 			"visible": {
@@ -997,9 +985,7 @@
 			},
 			"description": "Fill out our online application form.",
 			"id": "application",
-			"next": [
-				"administrative_review"
-			],
+			"order": 1,
 			"summary": true,
 			"title": "Application",
 			"visible": {
@@ -1029,9 +1015,7 @@
 			},
 			"description": "Decide to fund the project or not.",
 			"id": "decision",
-			"next": [
-				"acceptance"
-			],
+			"order": 4,
 			"summary": false,
 			"title": "Funding Decision",
 			"visible": {
@@ -1058,9 +1042,7 @@
 			},
 			"description": "The project's final report.",
 			"id": "report",
-			"next": [
-
-			],
+			"order": 6,
 			"summary": false,
 			"title": "Report",
 			"visible": {
@@ -1289,9 +1271,7 @@
 			},
 			"description": "The project will be reviewed by assigned reviewers.",
 			"id": "review",
-			"next": [
-				"decision"
-			],
+			"order": 3,
 			"summary": false,
 			"title": "Review",
 			"visible": {
@@ -1329,9 +1309,7 @@
 			},
 			"description": "Begin the application process.",
 			"id": "start",
-			"next": [
-				"application"
-			],
+			"order": 1,
 			"summary": false,
 			"title": "Start",
 			"visible": {

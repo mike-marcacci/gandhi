@@ -19,20 +19,20 @@
   ],
   "dependencies": {
     "angular": "1.3.x",
-    "angular-sanitize": "1.3.x",
-    "angular-resource": "1.3.x",
-    "angular-ui-router": "0.2.x",
-    "angular-ui-sortable": "~0.12.11",
-    "angular-ui-select": "~0.6.0",
-    "angular-ui-ace": "~0.1.1",
-    "restangular": "~1.4.0",
-    "lodash": "~2.4.1",
-    "angular-schema-form": "*",
-    "ng-file-upload": "~1.6.5",
-    "bootstrap-vertical-tabs": "~1.1.0",
-    "objectpath": "~1.0.5",
     "angular-ckeditor": "~0.2.0",
-    "bootstrap-sass-official": "~3.3.1"
+    "angular-resource": "1.3.x",
+    "angular-sanitize": "1.3.x",
+    "angular-schema-form": "*",
+    "angular-ui-ace": "~0.1.1",
+    "angular-ui-router": "0.2.x",
+    "angular-ui-select": "~0.6.0",
+    "angular-ui-sortable": "~0.12.11",
+    "bootstrap-sass-official": "~3.3.1",
+    "bootstrap-vertical-tabs": "~1.1.0",
+    "lodash": "~2.4.1",
+    "ng-file-upload": "~1.6.5",
+    "objectpath": "~1.0.5",
+    "restangular": "~1.4.0"
   },
   "overrides": {
     "ace-builds": {
@@ -40,17 +40,17 @@
     }
   },
   "modules": [
-    "ui.router",
-    "ui.ace",
-    "restangular",
-    "ngSanitize",
-    "ngResource",
-    "ckeditor",
-    "schemaForm",
     "angularFileUpload",
+    "ckeditor",
+    "ngResource",
+    "ngSanitize",
+    "ObjectPath",
+    "restangular",
+    "schemaForm",
+    "ui.ace",
+    "ui.router",
     "ui.select",
-    "ui.sortable",
-    "ObjectPath"
+    "ui.sortable"
   ],
   "resolutions": {
     "angular": "1.3.x"

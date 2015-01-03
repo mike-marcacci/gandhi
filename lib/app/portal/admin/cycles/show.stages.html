@@ -1,0 +1,62 @@
+<div class="panel panel-default" ng-show="stageCreate">
+	<div class="panel-heading">
+		<span class="panel-title">Create Stage</span>
+	</div>
+	<div class="panel-body">
+		<form class="form-horizontal" role="form" ng-submit="create()">
+			<div class="form-group">
+				<label for="cycle-id" class="col-sm-2 control-label">ID</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="cycle-id" ng-model="stageCreate.id">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="cycle-title" class="col-sm-2 control-label">Title</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="cycle-title" ng-model="stageCreate.title">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-10 col-sm-offset-2">
+					<input type="submit" class="btn btn-sm btn-primary" value="Create">
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<span class="panel-title">Stages</span>
+		<div class="pull-right">
+			<button class="btn btn-xs btn-default" ng-class="{active: stageCreate}" ng-click="toggleCreate()"><i class="glyphicon glyphicon-plus"></i></button>
+		</div>
+	</div>
+	<div class="table-responsive">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Title</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody ui-sortable>
+				<tr ng-repeat="stage in stages" ng-class="{active: backup[stage.id]}">
+					<td>
+						<p class="form-control-static"><strong>{{stage.id}}</strong></p>
+					</td>
+					<td>
+						<p ng-hide="backup[stage.id]" class="form-control-static">{{stage.title}}</p>
+						<input ng-show="backup[stage.id]" class="form-control" type="text" ng-model="stage.title">
+					</td>
+					<td align="right">
+						<button ng-click="toggleEdit(stage)" class="btn btn-block btn-xs btn-default" ng-class="{active: backup[stage.id]}"><i class="glyphicon glyphicon-cog"></i></button>
+						<button ng-click="save(stage)" class="btn btn-block btn-xs btn-primary" ng-show="backup[stage.id]">Save</button>
+						<button ng-click="delete(stage)" class="btn btn-block btn-xs btn-danger" ng-hide="backup[stage.id]"><i class="glyphicon glyphicon-trash"></i></button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

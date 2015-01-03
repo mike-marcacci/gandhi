@@ -268,7 +268,7 @@ describe('Cycles', function(){
 		});
 	});
 
-	describe('#put', function(){
+	describe.skip('#put', function(){
 		it('rejects an anonymous replace', function(done){
 			request
 				.put('/api/cycles/' + ids[0])
@@ -288,7 +288,7 @@ describe('Cycles', function(){
 			request
 				.put('/api/cycles/' + ids[0])
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({title: 'REPLACED',id: ids[0]})
+				.send({title: 'REPLACED', id: ids[0]})
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);

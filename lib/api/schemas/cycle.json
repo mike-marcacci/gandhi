@@ -116,7 +116,7 @@
               }
             }
           },
-          "next": []
+          "order": 0
         }
       },
       "additionalProperties": {
@@ -400,12 +400,8 @@
             }
           }
         },
-        "next": {
-          "type": "array",
-          "default": [],
-          "items": {
-            "type": "string"
-          }
+        "order": {
+          "type": "number"
         },
         "summary": {
           "type": "boolean",

@@ -431,52 +431,52 @@ describe('Projects', function(){
 		});
 	});
 
-	// describe('#replace', function(){
-	// 	var project;
-	// 	before(function(done){
-	// 		request
-	// 			.get('/api/projects/' + ids[0])
-	// 			.set('Authorization', 'Bearer ' + adminToken)
-	// 			.expect(200)
-	// 			.end(function(err, res){
-	// 				if(err) return done(err);
-	// 				project = res.body;
-	// 				done();
-	// 			});
-	// 	});
+	describe.skip('#put', function(){
+		var project;
+		before(function(done){
+			request
+				.get('/api/projects/' + ids[0])
+				.set('Authorization', 'Bearer ' + adminToken)
+				.expect(200)
+				.end(function(err, res){
+					if(err) return done(err);
+					project = res.body;
+					done();
+				});
+		});
 
-	// 	it('rejects an anonymous replace', function(done){
-	// 		request
-	// 			.put('/api/projects/' + ids[0])
-	// 			.send({title: 'Woops!'})
-	// 			.expect(401)
-	// 			.end(done);
-	// 	});
-	// 	it('rejects a replace by a non-admin user', function(done){
-	// 		request
-	// 			.put('/api/projects/' + ids[0])
-	// 			.set('Authorization', 'Bearer ' + soleneToken)
-	// 			.send(_.extend({}, project, {
-	// 				title: 'UPDATED'
-	// 			}))
-	// 			.expect(403)
-	// 			.end(done);
-	// 	});
-	// 	it('accepts a replace by an unaffiliated admin user', function(done){
-	// 		request
-	// 			.put('/api/projects/' + ids[0])
-	// 			.set('Authorization', 'Bearer ' + adminToken)
-	// 			.send(_.extend({}, project, {
-	// 				title: 'UPDATED'
-	// 			}))
-	// 			.expect(200)
-	// 			.end(function(err, res){
-	// 				if(err) return done(err);
-	// 				assert.equal(res.body.id, ids[0]);
-	// 				done();
-	// 			});
-	// 	});
-	// });
+		it('rejects an anonymous replace', function(done){
+			request
+				.put('/api/projects/' + ids[0])
+				.send({title: 'Woops!'})
+				.expect(401)
+				.end(done);
+		});
+		it('rejects a replace by a non-admin user', function(done){
+			request
+				.put('/api/projects/' + ids[0])
+				.set('Authorization', 'Bearer ' + soleneToken)
+				.send(_.extend({}, project, {
+					title: 'UPDATED'
+				}))
+				.expect(403)
+				.end(done);
+		});
+		it('accepts a replace by an unaffiliated admin user', function(done){
+			request
+				.put('/api/projects/' + ids[0])
+				.set('Authorization', 'Bearer ' + adminToken)
+				.send(_.extend({}, project, {
+					title: 'UPDATED'
+				}))
+				.expect(200)
+				.end(function(err, res){
+					if(err) return done(err);
+					assert.equal(res.body.id, ids[0]);
+					done();
+				});
+		});
+	});
 
 	describe('#delete', function(){
 		it('rejects an anonymous delete', function(done){
