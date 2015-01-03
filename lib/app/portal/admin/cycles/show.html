@@ -14,6 +14,7 @@
 			<div class="panel-heading">
 				<span class="panel-title">{{cycle.title}}</span>
 				<div class="pull-right">
+					<button class="btn btn-xs" ng-show="update" ng-class="{'btn-default': true, 'active': edit}" ng-click="toggleEdit()"><i class="glyphicon glyphicon-cog"></i></button>
 					<button ng-show="currentUser.preferences.admin.technical" class="btn btn-xs" ng-show="replace" ng-class="{'btn-default': true, 'active': source}" ng-click="toggleSource()"><i class="glyphicon glyphicon-edit"></i></button>
 					<button class="btn btn-xs btn-default" ng-show="destroy" ng-click="destroy()"><i class="glyphicon glyphicon-trash"></i></button>
 				</div>
@@ -21,16 +22,16 @@
 			<div ng-hide="source" class="panel-body">
 				<ul class="nav nav-pills">
 					<li ng-class="{active: $state.is('portal.admin.cycles.show')}"><a ui-sref="portal.admin.cycles.show">General</a></li>
+					<li ng-class="{active: $state.includes('portal.admin.cycles.show.roles')}"><a ui-sref="portal.admin.cycles.show.roles">Roles</a></li>
+					<li ng-class="{active: $state.includes('portal.admin.cycles.show.statuses')}"><a ui-sref="portal.admin.cycles.show.statuses">Statuses</a></li>
+					<li ng-class="{active: $state.includes('portal.admin.cycles.show.assignments')}"><a ui-sref="portal.admin.cycles.show.users">Assignments</a></li>
 					<li ng-class="{active: $state.includes('portal.admin.cycles.show.flow')}"><a ui-sref="portal.admin.cycles.show.flow.stage({stage: cycle.defaults.flow})">Stages</a></li>
-					<!-- <li ng-class="{active: $state.includes('portal.admin.cycles.show.roles')}"><a ui-sref="portal.admin.cycles.show.roles">Roles</a></li> -->
-					<li ng-class="{active: $state.includes('portal.admin.cycles.show.users')}"><a ui-sref="portal.admin.cycles.show.users">Users</a></li>
-					<!-- <li ng-class="{active: $state.includes('portal.admin.cycles.show.statuses')}"><a ui-sref="portal.admin.cycles.show.statuses">Statuses</a></li> -->
 				</ul>
 			</div>
-			<form ng-show="source" class="form-horizontal" role="form" ng-submit="replace()">
+			<form ng-if="source" class="form-horizontal" role="form" ng-submit="replace()">
 				<div ui-ace="{mode: 'json'}" style="height: 600px;" ng-model="cycleSource"></div>
 				<div class="panel-body">
-					<a class="btn btn-sm btn-default" ng-click="source=false">Cancel</a>
+					<a class="btn btn-sm btn-default" ng-click="toggleSource()">Cancel</a>
 					<input type="submit" class="btn btn-sm btn-primary" value="Update">
 				</div>
 			</form>
@@ -44,21 +45,55 @@
 					<span class="panel-title">General Settings</span>
 				</div>
 				<div class="panel-body">
-					<form role="form" ng-submit="update()">
+					<form class="form-horizontal" role="form" ng-submit="update()">
 						<div class="form-group">
-							<label for="general-title">Title</label>
-							<input id="general-title" ng-model="cycleEdit.title" type="text" class="form-control">
+							<label class="col-sm-2 control-label">ID</label>
+							<div class="col-sm-10">
+								<p class="form-control-static">{{cycle.id}}</p>
+							</div>
 						</div>
 						<div class="form-group">
-							<label for="general-status">Status</label>
-							<select id="general-status" class="form-control" ng-model="cycleEdit.status" ng-options="status for status in ['draft','active','archived']" required></select>
+							<label for="cycle-title" class="col-sm-2 control-label">Title</label>
+							<div class="col-sm-10">
+								<p ng-show="!edit" class="form-control-static">{{cycle.title}}</p>
+								<input ng-show="edit" type="text" class="form-control" id="cycle-title" ng-model="cycleEdit.title">
+							</div>
 						</div>
 						<div class="form-group">
-							<label for="general-config-layout">Layout</label>
-							<select id="general-config-layout" class="form-control" ng-model="cycleEdit.config.layout" ng-options="status.value as status.title for status in [{title: 'Pill', value: 'pill'},{title: 'Waterfall', value: 'waterfall'}]" required></select>
+							<label for="cycle-description" class="col-sm-2 control-label">Description</label>
+							<div class="col-sm-10">
+								<p ng-show="!edit" class="form-control-static">{{cycle.description}}</p>
+								<textarea ng-show="edit" class="form-control" id="cycle-description" ng-model="cycleEdit.description"></textarea>
+							</div>
 						</div>
-						<input type="submit" class="btn btn-sm btn-primary" value="Submit">
+						<div class="form-group">
+							<label for="cycle-status" class="col-sm-2 control-label">Status</label>
+							<div class="col-sm-10">
+								<p ng-show="!edit" class="form-control-static">{{cycleEdit.status}}</p>
+								<select ng-show="edit" class="form-control" id="cycle-status" ng-model="cycleEdit.status" ng-options="status for status in ['draft','active','archived']" required></select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">Created</label>
+							<div class="col-sm-10">
+								<p class="form-control-static">{{cycle.created | date:"yyyy.MM.dd - hh:mm a"}}</p>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">Updated</label>
+							<div class="col-sm-10">
+								<p class="form-control-static">{{cycle.updated | date:"yyyy.MM.dd - hh:mm a"}}</p>
+							</div>
+						</div>
+						<div class="form-group" ng-show="edit">
+							<div class="col-sm-10 col-sm-offset-2">
+								<input type="submit" class="btn btn-sm btn-primary" ng-show="edit" value="Update">
+							</div>
+						</div>
 					</form>
+
+
+
 				</div>
 			</div>
 

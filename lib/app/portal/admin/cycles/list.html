@@ -3,4 +3,10 @@
 	<li class="active">Cycles</li>
 </ol>
 
+<div class="panel panel-default">
+	<div class="panel-body">
+		<input type="text" class="form-control" ng-model="table.query.search" ng-model-options="{debounce: 100}" placeholder="Search">
+	</div>
+</div>
+
 <div gandhi-admin-list="table" base="'portal.admin.cycles'" model="'cycle'" limit="false"></div>
