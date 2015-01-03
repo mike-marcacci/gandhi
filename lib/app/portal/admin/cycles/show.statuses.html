@@ -1,0 +1,62 @@
+<div class="panel panel-default" ng-show="statusCreate">
+	<div class="panel-heading">
+		<span class="panel-title">Create Status</span>
+	</div>
+	<div class="panel-body">
+		<form class="form-horizontal" role="form" ng-submit="create()">
+			<div class="form-group">
+				<label for="cycle-id" class="col-sm-2 control-label">ID</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="cycle-id" ng-model="statusCreate.id">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="cycle-title" class="col-sm-2 control-label">Title</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="cycle-title" ng-model="statusCreate.title">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-10 col-sm-offset-2">
+					<input type="submit" class="btn btn-sm btn-primary" value="Create">
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<span class="panel-title">Cycle Statuses</span>
+		<div class="pull-right">
+			<button class="btn btn-xs btn-default" ng-class="{active: statusCreate}" ng-click="toggleCreate()"><i class="glyphicon glyphicon-plus"></i></button>
+		</div>
+	</div>
+	<div class="table-responsive">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Title</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="status in statuses" ng-class="{active: backup[status.id]}">
+					<td>
+						<p class="form-control-static"><strong>{{status.id}}</strong></p>
+					</td>
+					<td>
+						<p ng-hide="backup[status.id]" class="form-control-static">{{status.title}}</p>
+						<input ng-show="backup[status.id]" class="form-control" type="text" ng-model="status.title">
+					</td>
+					<td align="right">
+						<button ng-click="toggleEdit(status)" class="btn btn-block btn-xs btn-default" ng-class="{active: backup[status.id]}"><i class="glyphicon glyphicon-cog"></i></button>
+						<button ng-click="save(status)" class="btn btn-block btn-xs btn-primary" ng-show="backup[status.id]">Save</button>
+						<button ng-click="delete(status)" class="btn btn-block btn-xs btn-danger" ng-hide="backup[status.id]"><i class="glyphicon glyphicon-trash"></i></button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

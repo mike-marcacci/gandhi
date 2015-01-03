@@ -14,8 +14,6 @@
 			<div class="panel-heading">
 				<span class="panel-title">{{cycle.title}}</span>
 				<div class="pull-right">
-					<button class="btn btn-xs" ng-show="update" ng-class="{'btn-default': true, 'active': edit}" ng-click="toggleEdit()"><i class="glyphicon glyphicon-cog"></i></button>
-					<button ng-show="currentUser.preferences.admin.technical" class="btn btn-xs" ng-show="replace" ng-class="{'btn-default': true, 'active': source}" ng-click="toggleSource()"><i class="glyphicon glyphicon-edit"></i></button>
 					<button class="btn btn-xs btn-default" ng-show="destroy" ng-click="destroy()"><i class="glyphicon glyphicon-trash"></i></button>
 				</div>
 			</div>
@@ -24,9 +22,9 @@
 					<li ng-class="{active: $state.is('portal.admin.cycles.show')}"><a ui-sref="portal.admin.cycles.show">General</a></li>
 					<li ng-class="{active: $state.includes('portal.admin.cycles.show.roles')}"><a ui-sref="portal.admin.cycles.show.roles">Roles</a></li>
 					<li ng-class="{active: $state.includes('portal.admin.cycles.show.statuses')}"><a ui-sref="portal.admin.cycles.show.statuses">Statuses</a></li>
-					<li ng-class="{active: $state.includes('portal.admin.cycles.show.exports')}"><a ui-sref="portal.admin.cycles.show.exports">Exports</a></li>
-					<li ng-class="{active: $state.includes('portal.admin.cycles.show.exports')}"><a ui-sref="portal.admin.cycles.show.exports">Triggers</a></li>
 					<li ng-class="{active: $state.includes('portal.admin.cycles.show.stages')}"><a ui-sref="portal.admin.cycles.show.flow.stage({stage: cycle.defaults.stage})">Stages</a></li>
+					<li ng-class="{active: $state.includes('portal.admin.cycles.show.exports')}"><a ui-sref="portal.admin.cycles.show.exports">Exports</a></li>
+					<li ng-class="{active: $state.includes('portal.admin.cycles.show.triggers')}"><a ui-sref="portal.admin.cycles.show.exports">Triggers</a></li>
 					<li ng-class="{active: $state.includes('portal.admin.cycles.show.assignments')}"><a ui-sref="portal.admin.cycles.show.users">Assignments</a></li>
 					<li ng-class="{active: $state.includes('portal.admin.cycles.show.invitations')}"><a ui-sref="portal.admin.cycles.show.invitations">Invitations</a></li>
 				</ul>
@@ -46,6 +44,10 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<span class="panel-title">General Settings</span>
+					<div class="pull-right">
+						<button class="btn btn-xs" ng-show="update" ng-class="{'btn-default': true, 'active': edit}" ng-click="toggleEdit()"><i class="glyphicon glyphicon-cog"></i></button>
+						<button ng-show="currentUser.preferences.admin.technical" class="btn btn-xs" ng-show="replace" ng-class="{'btn-default': true, 'active': source}" ng-click="toggleSource()"><i class="glyphicon glyphicon-edit"></i></button>
+					</div>
 				</div>
 				<div class="panel-body">
 					<form class="form-horizontal" role="form" ng-submit="update()">
@@ -77,10 +79,17 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="cycle-status" class="col-sm-2 control-label">Default Role</label>
+							<label for="cycle-default-role" class="col-sm-2 control-label">Default Role</label>
 							<div class="col-sm-10">
 								<p ng-show="!edit" class="form-control-static">{{rolesById[cycleEdit.defaults.role].title}}</p>
-								<select ng-show="edit" class="form-control" id="cycle-status" ng-model="cycleEdit.defaults.role" ng-options="role.id as role.title for role in roles" required></select>
+								<select ng-show="edit" class="form-control" id="cycle-default-role" ng-model="cycleEdit.defaults.role" ng-options="role.id as role.title for role in roles" required></select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="cycle-default-status" class="col-sm-2 control-label">Default Status</label>
+							<div class="col-sm-10">
+								<p ng-show="!edit" class="form-control-static">{{statusesById[cycleEdit.defaults.status].title}}</p>
+								<select ng-show="edit" class="form-control" id="cycle-default-status" ng-model="cycleEdit.defaults.status" ng-options="status.id as status.title for status in statuses" required></select>
 							</div>
 						</div>
 						<div class="form-group">
