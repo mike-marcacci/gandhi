@@ -11,9 +11,6 @@
       "type": "boolean",
       "default": false
     },
-    "created": {
-      "type": "date"
-    },
     "email": {
       "type": "string"
     },
@@ -32,8 +29,11 @@
       "type": ["null","string"],
       "default": null
     },
+    "created": {
+      "type": "number"
+    },
     "updated": {
-      "type": "date"
+      "type": "number"
     },
     "preferences": {
       "type": "object",

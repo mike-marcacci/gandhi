@@ -14,11 +14,7 @@
 		}
 	},
 	"title": "Exploring the effects of caffeine addiction on contemporary architecture.",
-	"created": {
-		"timezone": "+00:00",
-		"$reql_type$": "TIME",
-		"epoch_time": 1413168199.912
-	},
+	"created": 1413168199.912,
 	"contents": {
 		"administrative_review": {
 			"status": "none",
@@ -143,11 +139,7 @@
 			"id": "review"
 		}
 	},
-	"updated": {
-		"timezone": "+00:00",
-		"$reql_type$": "TIME",
-		"epoch_time": 1413262289.045
-	},
+	"updated": 1413262289.045,
 	"invitations": {
 		"514d3645-a768-4749-b6da-8b1b4d08cf1c": {
 			"id": "514d3645-a768-4749-b6da-8b1b4d08cf1c",
@@ -210,11 +202,7 @@
 		}
 	},
 	"title": "The influence of language on wealth and poverty",
-	"created": {
-		"timezone": "+00:00",
-		"$reql_type$": "TIME",
-		"epoch_time": 1413178905.371
-	},
+	"created": 1413178905.371,
 	"contents": {
 		"administrative_review": {
 			"status": "none",
@@ -307,11 +295,7 @@
 			"id": "report"
 		}
 	},
-	"updated": {
-		"timezone": "+00:00",
-		"$reql_type$": "TIME",
-		"epoch_time": 1413264955.333
-	},
+	"updated": 1413264955.333,
 	"invitations": {},
 	"id": "cdd28e4a-9309-454f-a8ed-3f9708d0c10c",
 	"events": {
@@ -361,11 +345,7 @@
 		}
 	},
 	"title": "Tim's Character Essay",
-	"created": {
-		"timezone": "+00:00",
-		"$reql_type$": "TIME",
-		"epoch_time": 1413167504.901
-	},
+	"created": 1413167504.901,
 	"contents": {
 		"application": {
 			"status": "complete",
@@ -380,11 +360,7 @@
 			"id": "start"
 		}
 	},
-	"updated": {
-		"timezone": "+00:00",
-		"$reql_type$": "TIME",
-		"epoch_time": 1413167920.268
-	},
+	"updated": 1413167920.268,
 	"invitations": {},
 	"id": "e264d6f7-d26a-4be3-8365-13416ac41029",
 	"events": {

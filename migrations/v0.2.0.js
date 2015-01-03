@@ -15,19 +15,20 @@ for (var i = 2; i < process.argv.length; i++) {
   else if(process.argv[i] === '--db'){
     i++; db = process.argv[i];
   }
-};
+}
 
 
 r.connect({host: host, db: db}).then(function(conn){
 
   var tasks = [];
 
+
   // Cycles
   // ------
   tasks.push(r.table('cycles').replace(function(cycle){
-    var allPermissions =  r.literal(cycle('roles').coerceTo('array').map(function(roleKV){
+    var allPermissions = r.literal(cycle('roles').coerceTo('array').map(function(roleKV){
       return [roleKV.nth(0), true];
-    }).coerceTo('object'))
+    }).coerceTo('object'));
 
     return cycle.merge({
       assignments: cycle('users').default(cycle('assignments')),
@@ -43,24 +44,49 @@ r.connect({host: host, db: db}).then(function(conn){
         read: allPermissions,
         update: allPermissions,
         destroy: {}
-      }
+      },
+      created: cycle('created').toEpochTime(),
+      updated: cycle('updated').toEpochTime()
     }).without({
       users: true,
       flow: true,
       events: true
-    })
+    });
   }).run(conn));
+
 
   // Projects
   // --------
   tasks.push(r.table('projects').replace(function(project){
     return project.merge({
       assignments: project('users').default(project('assignments')),
-      contents: project('flow').default(project('contents'))
+      contents: project('flow').default(project('contents')),
+      created: project('created').toEpochTime(),
+      updated: project('updated').toEpochTime()
     }).without({
       users: true,
       flow: true
-    })
+    });
+  }).run(conn));
+
+
+  // Users
+  // -----
+  tasks.push(r.table('users').replace(function(user){
+    return user.merge({
+      created: user('created').toEpochTime(),
+      updated: user('updated').toEpochTime()
+    });
+  }).run(conn));
+
+
+  // Files
+  // -----
+  tasks.push(r.table('files').replace(function(file){
+    return file.merge({
+      created: file('created').toEpochTime(),
+      updated: file('updated').toEpochTime()
+    });
   }).run(conn));
 
   // run all the tasks
@@ -68,7 +94,7 @@ r.connect({host: host, db: db}).then(function(conn){
     console.log('success:', JSON.stringify(res, null, 2));
     conn.close();
   }, function(err){
-    console.error(err)
+    console.error(err);
     conn.close();
   });
 });

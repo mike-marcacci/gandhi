@@ -204,10 +204,10 @@
       "$ref": "#/definitions/permission"
     },
     "updated": {
-      "type": "date"
+      "type": "number"
     },
     "created": {
-      "type": "date"
+      "type": "number"
     },
     "permissions": {
       "type": "object",

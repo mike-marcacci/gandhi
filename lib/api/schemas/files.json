@@ -12,9 +12,6 @@
   ],
   "additionalProperties": false,
   "properties":{
-    "created": {
-      "type": "date"
-    },
     "user_id": {
       "type": "string"
     },
@@ -44,8 +41,11 @@
     "size": {
       "type": "number"
     },
+    "created": {
+      "type": "number"
+    },
     "updated": {
-      "type": "date"
+      "type": "number"
     },
     "lock": {
       "type": "boolean",

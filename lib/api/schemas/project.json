@@ -49,10 +49,10 @@
       }
     },
     "updated": {
-      "type": "date"
+      "type": "number"
     },
     "created": {
-      "type": "date"
+      "type": "number"
     }
   },
   "definitions": {
