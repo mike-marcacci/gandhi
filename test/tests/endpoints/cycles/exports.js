@@ -139,7 +139,7 @@ describe('Exports', function(){
 		it('rejects an anonymous put', function(done){
 			request
 				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/exports/test')
-				.send({id:'test',title:'Test',pointer:['contents','start','status'],template:null})
+				.send({id:'test',title:'Test',path:['contents','start','status'],template:null})
 				.expect(401)
 				.end(done);
 		});
@@ -147,7 +147,7 @@ describe('Exports', function(){
 			request
 				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/exports/test')
 				.set('Authorization', 'Bearer ' + userToken)
-				.send({id:'test',title:'Test',pointer:['contents','start','status'],template:null})
+				.send({id:'test',title:'Test',path:['contents','start','status'],template:null})
 				.expect(403)
 				.end(done);
 		});
@@ -171,7 +171,7 @@ describe('Exports', function(){
 			request
 				.put('/api/cycles/foo/exports/test')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({id:'test',title:'Test',pointer:['contents','start','status'],template:null})
+				.send({id:'test',title:'Test',path:['contents','start','status'],template:null})
 				.expect(404)
 				.end(done);
 		});
@@ -179,7 +179,7 @@ describe('Exports', function(){
 			request
 				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/exports/test')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({id:'test',title:'Test',pointer:['contents','start','status'],template:null})
+				.send({id:'test',title:'Test',path:['contents','start','status'],template:null})
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
@@ -191,7 +191,7 @@ describe('Exports', function(){
 			request
 				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/exports/test')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({id:'test',title:'Test PUT',pointer:['contents','start','status'],template:null})
+				.send({id:'test',title:'Test PUT',path:['contents','start','status'],template:null})
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);

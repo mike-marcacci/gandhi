@@ -24,8 +24,11 @@
 					<li ng-class="{active: $state.is('portal.admin.cycles.show')}"><a ui-sref="portal.admin.cycles.show">General</a></li>
 					<li ng-class="{active: $state.includes('portal.admin.cycles.show.roles')}"><a ui-sref="portal.admin.cycles.show.roles">Roles</a></li>
 					<li ng-class="{active: $state.includes('portal.admin.cycles.show.statuses')}"><a ui-sref="portal.admin.cycles.show.statuses">Statuses</a></li>
+					<li ng-class="{active: $state.includes('portal.admin.cycles.show.exports')}"><a ui-sref="portal.admin.cycles.show.exports">Exports</a></li>
+					<li ng-class="{active: $state.includes('portal.admin.cycles.show.exports')}"><a ui-sref="portal.admin.cycles.show.exports">Triggers</a></li>
+					<li ng-class="{active: $state.includes('portal.admin.cycles.show.stages')}"><a ui-sref="portal.admin.cycles.show.flow.stage({stage: cycle.defaults.stage})">Stages</a></li>
 					<li ng-class="{active: $state.includes('portal.admin.cycles.show.assignments')}"><a ui-sref="portal.admin.cycles.show.users">Assignments</a></li>
-					<li ng-class="{active: $state.includes('portal.admin.cycles.show.flow')}"><a ui-sref="portal.admin.cycles.show.flow.stage({stage: cycle.defaults.flow})">Stages</a></li>
+					<li ng-class="{active: $state.includes('portal.admin.cycles.show.invitations')}"><a ui-sref="portal.admin.cycles.show.invitations">Invitations</a></li>
 				</ul>
 			</div>
 			<form ng-if="source" class="form-horizontal" role="form" ng-submit="replace()">

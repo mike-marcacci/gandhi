@@ -488,7 +488,7 @@
     },
     "export": {
       "type": "object",
-      "required": ["id", "title", "pointer"],
+      "required": ["id", "title", "path"],
       "additionalProperties": false,
       "properties": {
         "id": {
@@ -498,7 +498,7 @@
         "title": {
           "type": "string"
         },
-        "pointer": {
+        "path": {
           "type": "array",
           "items": {
             "type": "string"

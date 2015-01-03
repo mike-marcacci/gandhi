@@ -1,0 +1,57 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<span class="panel-title">Cycle Roles</span>
+	</div>
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Title</th>
+				<th>Visibility</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="active">
+				<td>
+					
+				</td>
+				<td>
+					
+				</td>
+				<td></td>
+				<td align="right">
+					<button ng-click="newUser.submit()" class="btn btn-primary">Assign</button>
+				</td>
+			</tr>
+			<tr ng-repeat="role in roles" ng-class="{active: edit}">
+				<td>
+					<p class="form-control-static"><strong>{{role.id}}</strong></p>
+				</td>
+				<td width="200">
+					<p ng-hide="edit" class="form-control-static">{{role.title}}</p>
+					<input ng-show="edit" class="form-control" type="text" ng-model="role.title">
+				</td>
+				<td>
+					<table class="table table-condensed small" style="margin-bottom: 0;">
+						<thead><tr><th ng-repeat="r in roles">{{r.title}}</th></tr></thead>
+						<tbody>
+							<tr><td ng-repeat="r in roles">
+								<label>
+									<input ng-show="edit" type="checkbox" ng-model="role.visible[r.id]">
+									<span class="text-success" ng-show="role.visible[r.id]">Show</span>
+									<span class="text-danger" ng-hide="role.visible[r.id]">Hide</span>
+								</label>
+							</td></tr>
+						</tbody>
+					</table>
+				</td>
+				<td align="right">
+					<button ng-click="edit = !edit" class="btn btn-xs btn-default" ng-class="{active: edit}"><i class="glyphicon glyphicon-cog"></i></button>
+					<button ng-show="edit" ng-click="" class="btn btn-xs btn-primary">Save</button>
+					<button ng-hide="edit" ng-click="" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
