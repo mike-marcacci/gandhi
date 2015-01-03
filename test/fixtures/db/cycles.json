@@ -15,7 +15,7 @@
 	},
 	"created": 1413166638.466,
 	"defaults": {
-		"flow": "start",
+		"stage": "start",
 		"role": "applicant",
 		"status": "active"
 	},
@@ -452,9 +452,8 @@
 	},
 	"created": 1413164112.703,
 	"defaults": {
-		"flow": "start",
+		"stage": "start",
 		"role": "applicant",
-		"stages": "start",
 		"status": "active"
 	},
 	"description": "Seed Funds provide flexible resources to explore bold research ideas that might otherwise be too uncertain for researchers to pursue at an early stage. Seed Awards range from $10,000 - $15,000 for a maximum of a six-month period. Seed Awards could lead to Vision proposals but it is not necessary.",

@@ -1,57 +1,92 @@
 <div class="panel panel-default">
 	<div class="panel-heading">
+		<span class="panel-title">Create Role</span>
+	</div>
+	<div class="panel-body">
+		<form class="form-horizontal" role="form" ng-submit="create()">
+			<div class="form-group">
+				<label for="cycle-id" class="col-sm-2 control-label">ID</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="cycle-id" ng-model="roleCreate.id">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="cycle-title" class="col-sm-2 control-label">Title</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="cycle-title" ng-model="roleCreate.title">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-10 col-sm-offset-2">
+					<input type="submit" class="btn btn-sm btn-primary" value="Create">
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+
+
+
+<div class="panel panel-default">
+	<div class="panel-heading">
 		<span class="panel-title">Cycle Roles</span>
 	</div>
-	<table class="table table-hover">
-		<thead>
-			<tr>
-				<th>ID</th>
-				<th>Title</th>
-				<th>Visibility</th>
-				<th></th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr class="active">
-				<td>
-					
-				</td>
-				<td>
-					
-				</td>
-				<td></td>
-				<td align="right">
-					<button ng-click="newUser.submit()" class="btn btn-primary">Assign</button>
-				</td>
-			</tr>
-			<tr ng-repeat="role in roles" ng-class="{active: edit}">
-				<td>
-					<p class="form-control-static"><strong>{{role.id}}</strong></p>
-				</td>
-				<td width="200">
-					<p ng-hide="edit" class="form-control-static">{{role.title}}</p>
-					<input ng-show="edit" class="form-control" type="text" ng-model="role.title">
-				</td>
-				<td>
-					<table class="table table-condensed small" style="margin-bottom: 0;">
-						<thead><tr><th ng-repeat="r in roles">{{r.title}}</th></tr></thead>
-						<tbody>
-							<tr><td ng-repeat="r in roles">
-								<label>
-									<input ng-show="edit" type="checkbox" ng-model="role.visible[r.id]">
-									<span class="text-success" ng-show="role.visible[r.id]">Show</span>
-									<span class="text-danger" ng-hide="role.visible[r.id]">Hide</span>
-								</label>
-							</td></tr>
-						</tbody>
-					</table>
-				</td>
-				<td align="right">
-					<button ng-click="edit = !edit" class="btn btn-xs btn-default" ng-class="{active: edit}"><i class="glyphicon glyphicon-cog"></i></button>
-					<button ng-show="edit" ng-click="" class="btn btn-xs btn-primary">Save</button>
-					<button ng-hide="edit" ng-click="" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
-				</td>
-			</tr>
-		</tbody>
-	</table>
+	<div class="table-responsive">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Title</th>
+					<th>Visible To:</th>
+					<th>Assignable By:</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="role in roles" ng-class="{active: backup[role.id]}">
+					<td>
+						<p class="form-control-static"><strong>{{role.id}}</strong></p>
+					</td>
+					<td>
+						<p ng-hide="backup[role.id]" class="form-control-static">{{role.title}}</p>
+						<input ng-show="backup[role.id]" class="form-control" type="text" ng-model="role.title">
+					</td>
+					<td>
+						<table class="table table-condensed small" style="margin-bottom: 0;">
+							<thead><tr><th ng-repeat="r in roles">{{r.title}}</th></tr></thead>
+							<tbody>
+								<tr><td ng-repeat="r in roles">
+									<label>
+										<input ng-show="backup[role.id]" ng-disabled="!backup[role.id]" type="checkbox" ng-model="role.visible[r.id]">
+										<span class="text-success" ng-show="role.visible[r.id]">Show</span>
+										<span class="text-danger" ng-hide="role.visible[r.id]">Hide</span>
+									</label>
+								</td></tr>
+							</tbody>
+						</table>
+					</td>
+					<td>
+						<table class="table table-condensed small" style="margin-bottom: 0;">
+							<thead><tr><th ng-repeat="r in roles">{{r.title}}</th></tr></thead>
+							<tbody>
+								<tr><td ng-repeat="r in roles">
+									<label>
+										<input ng-show="backup[role.id]" ng-disabled="!backup[role.id]" type="checkbox" ng-model="role.assignable[r.id]">
+										<span class="text-success" ng-show="role.assignable[r.id]">Show</span>
+										<span class="text-danger" ng-hide="role.assignable[r.id]">Hide</span>
+									</label>
+								</td></tr>
+							</tbody>
+						</table>
+					</td>
+					<td align="right">
+						<button ng-click="toggleEdit(role)" class="btn btn-block btn-xs btn-default" ng-class="{active: backup[role.id]}"><i class="glyphicon glyphicon-cog"></i></button>
+						<button ng-click="save(role)" class="btn btn-block btn-xs btn-primary" ng-show="backup[role.id]">Save</button>
+						<button ng-click="delete(role)" class="btn btn-block btn-xs btn-danger" ng-hide="backup[role.id]"><i class="glyphicon glyphicon-trash"></i></button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 </div>

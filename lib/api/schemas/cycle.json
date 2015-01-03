@@ -70,12 +70,12 @@
     "defaults": {
       "type": "object",
       "default": {
-        "stages": "start",
+        "stage": "start",
         "role": "applicant",
         "status": "active"
       },
       "properties": {
-        "stages": {
+        "stage": {
           "type": "string",
           "default": "start"
         },
