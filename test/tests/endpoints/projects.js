@@ -199,7 +199,7 @@ describe('Projects', function(){
 		it('accepts filter parameters', function(done){
 			request
 				.get('/api/projects')
-				.query({filter: '{"id": {"eq": "e264d6f7-d26a-4be3-8365-13416ac41029"}}'})
+				.query({filter: '[{"path":"/id","op":"eq","value":"e264d6f7-d26a-4be3-8365-13416ac41029"}]'})
 				.set('Authorization', 'Bearer ' + adminToken)
 				.expect(200)
 				.end(function(err, res){
