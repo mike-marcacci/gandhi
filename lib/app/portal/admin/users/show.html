@@ -19,7 +19,7 @@
 					<button class="btn btn-xs btn-default" ng-show="destroy" ng-click="destroy()"><i class="glyphicon glyphicon-trash"></i></button>
 				</div>
 			</div>
-			<form ng-show="source" class="form-horizontal" role="form" ng-submit="replace()">
+			<form ng-if="source" class="form-horizontal" role="form" ng-submit="replace()">
 				<div ui-ace="{mode: 'json'}" style="height: 600px;" ng-model="userSource"></div>
 				<div class="panel-body">
 					<a class="btn btn-sm btn-default" ng-click="source=false">Cancel</a>
@@ -44,7 +44,8 @@
 			</div>
 		</div>
 
-
+		<!-- TODO: add files panel back
+		
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<span class="panel-title">Files</span>
@@ -56,5 +57,6 @@
 				</div>
 			</div>
 		</div>
+		-->
 	</div>
 </div>
