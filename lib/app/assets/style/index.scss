@@ -34,42 +34,6 @@ body {
 	background-color: transparent !important;
 	margin: 0;
 
-	.waterfall-wrapper {
-		position: relative;
-	}
-
-	.waterfall-wrapper::before {
-		background: linear-gradient(to right, rgba(255,255,255,1) 10%,rgba(255,255,255,0) 100%);
-		bottom: 0;
-		content: " ";
-		display: block;
-		left: 0;
-		position: absolute;
-		top: 0;
-		width: 20px;
-		z-index: 1;
-	}
-
-	.waterfall-wrapper::after {
-		background: linear-gradient(to left, rgba(255,255,255,1) 10%,rgba(255,255,255,0) 100%);
-		bottom: 0;
-		content: " ";
-		display: block;
-		right: 0;
-		position: absolute;
-		top: 0;
-		width: 20px;
-		z-index: 1;
-	}
-
-	.waterfall-scroller {
-		height: auto;
-		max-width: 100%;
-		overflow-x: auto;
-		padding: 20px 0 40px;
-		position: relative;
-	}
-
 	// bootstrap styles
 
 	.panel {
@@ -203,6 +167,34 @@ body {
 			-ms-transform: rotate(-90deg);
 			-o-transform: rotate(-90deg);
 			transform: rotate(-90deg);
+		}
+	}
+
+	td.handle {
+		cursor: move;
+		position: relative;
+		background: rgba(89, 89, 89, 0.07);
+		width: 20px;
+
+		&::after {
+			content: "";
+			position: absolute;
+			top: 50%;
+			left: 4px;
+			right: 4px;
+			height: 6px;
+			display: block;
+			border: solid rgba(115, 115, 115, 0.3);
+			border-width: 2px 0;
+			margin-top: -4px;
+		}
+	}
+
+	tr.ui-sortable-helper {
+		display: table;
+		opacity: .5;
+		td {
+
 		}
 	}
 

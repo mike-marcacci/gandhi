@@ -12,6 +12,9 @@
 	<div class="col-md-9">
 		<div class="panel panel-default">
 			<div class="panel-heading">
+				<div class="pull-left" style="margin-right: 10px;">
+					<button class="btn btn-xs btn-default" ng-show="destroy" ng-click="refresh()"><i class="glyphicon glyphicon-refresh"></i></button>
+				</div>
 				<span class="panel-title">{{cycle.title}}</span>
 				<div class="pull-right">
 					<button class="btn btn-xs btn-default" ng-show="destroy" ng-click="destroy()"><i class="glyphicon glyphicon-trash"></i></button>

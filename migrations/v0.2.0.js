@@ -32,7 +32,11 @@ r.connect({host: host, db: db}).then(function(conn){
 
     return cycle.merge({
       assignments: cycle('users').default(cycle('assignments')),
-      stages: cycle('flow').default(cycle('stages')),
+      stages: cycle('flow').default(cycle('stages')).without({
+        next: true
+      }).merge({
+        order: 0
+      }),
       exports: cycle('exports').default({}),
       open: ['open'],
       close: ['close'],

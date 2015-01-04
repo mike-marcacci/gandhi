@@ -1309,7 +1309,7 @@
 			},
 			"description": "Begin the application process.",
 			"id": "start",
-			"order": 1,
+			"order": 0,
 			"summary": false,
 			"title": "Start",
 			"visible": {
