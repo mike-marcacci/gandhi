@@ -47,6 +47,8 @@
 				<tr>
 					<th>ID</th>
 					<th>Title</th>
+					<th>Conditions</th>
+					<th>Listeners</th>
 					<th></th>
 				</tr>
 			</thead>
@@ -58,6 +60,18 @@
 					<td>
 						<p ng-hide="backup[trigger.id]" class="form-control-static">{{trigger.title}}</p>
 						<input ng-show="backup[trigger.id]" class="form-control" type="text" ng-model="trigger.title">
+					</td>
+					<td>
+						<p ng-hide="backup[trigger.id]" class="form-control-static">{{trigger.conditions}}</p>
+						<div ng-if="backup[trigger.id]">
+							<textarea ng-if="backup[trigger.id]" class="form-control" ng-model="trigger.conditions" json ui-ace="{mode: 'json'}"></textarea>
+						</div>
+					</td>
+					<td>
+						<p ng-hide="backup[trigger.id]" class="form-control-static">{{trigger.listeners}}</p>
+						<div ng-if="backup[trigger.id]">
+							<textarea class="form-control" ng-model="trigger.listeners" json ui-ace="{mode: 'json'}"></textarea>
+						</div>
 					</td>
 					<td align="right" width="80">
 						<button ng-click="toggleEdit(trigger)" class="btn btn-block btn-xs btn-default" ng-class="{active: backup[trigger.id]}"><i class="glyphicon glyphicon-cog"></i></button>

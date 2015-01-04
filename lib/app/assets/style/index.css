@@ -5393,6 +5393,10 @@ html {
 body {
   background-color: transparent !important;
   margin: 0; }
+  body .ace_editor {
+    height: 200px; }
+  body td .ace_editor {
+    height: 80px; }
   body .panel {
     border-width: 0;
     -webkit-box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.1);
