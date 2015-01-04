@@ -1,0 +1,62 @@
+<div class="panel panel-default" ng-show="assignmentCreate">
+	<div class="panel-heading">
+		<span class="panel-title">Create Assignment</span>
+	</div>
+	<div class="panel-body">
+		<form class="form-horizontal" role="form" ng-submit="create()">
+			<div class="form-group">
+				<label for="cycle-id" class="col-sm-2 control-label">ID</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="cycle-id" ng-model="assignmentCreate.id">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="cycle-title" class="col-sm-2 control-label">Title</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="cycle-title" ng-model="assignmentCreate.title">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-10 col-sm-offset-2">
+					<input type="submit" class="btn btn-sm btn-primary" value="Create">
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<span class="panel-title">Assignments</span>
+		<div class="pull-right">
+			<button class="btn btn-xs btn-default" ng-class="{active: assignmentCreate}" ng-click="toggleCreate()"><i class="glyphicon glyphicon-plus"></i></button>
+		</div>
+	</div>
+	<div class="table-responsive">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Title</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="assignment in assignments" ng-class="{active: backup[assignment.id]}">
+					<td>
+						<p class="form-control-static"><strong>{{assignment.id}}</strong></p>
+					</td>
+					<td>
+						<p ng-hide="backup[assignment.id]" class="form-control-static">{{assignment.title}}</p>
+						<input ng-show="backup[assignment.id]" class="form-control" type="text" ng-model="assignment.title">
+					</td>
+					<td align="right">
+						<button ng-click="toggleEdit(assignment)" class="btn btn-block btn-xs btn-default" ng-class="{active: backup[assignment.id]}"><i class="glyphicon glyphicon-cog"></i></button>
+						<button ng-click="save(assignment)" class="btn btn-block btn-xs btn-primary" ng-show="backup[assignment.id]">Save</button>
+						<button ng-click="delete(assignment)" class="btn btn-block btn-xs btn-danger" ng-hide="backup[assignment.id]"><i class="glyphicon glyphicon-trash"></i></button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
