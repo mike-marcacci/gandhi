@@ -1,0 +1,80 @@
+
+<!-- <div gandhi-component="{mode: mode, cycle: cycle, stage: stage, project: null, content: null}"></div> -->
+
+<div class="row">
+
+	<div class="col-sm-7">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<span class="panel-title">{{component.title}}</span>
+			</div>
+			<div class="panel-body">
+
+			</div>
+		</div>
+	</div>
+
+	<div class="col-sm-5">
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<span class="panel-title">Visibility</span>
+			</div>
+			<div class="panel-body">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Role</th>
+							<th>Visible</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="role in roles">
+							<th>{{role.title}}</th>
+							<td>
+								{{stage.visible[role.id]}}
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<span class="panel-title">Permissions</span>
+			</div>
+			<div class="panel-body">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Role</th>
+							<th ng-repeat="permission in component.permissions">{{permission.title}}</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="role in roles">
+							<th>{{role.title}}</th>
+							<td ng-repeat="permission in component.permissions">
+								<div ng-show="stage.component.permissions[permission.id][role.id] === true || !stage.component.permissions[permission.id][role.id]">
+									<span class="text-success" ng-show="stage.component.permissions[permission.id][role.id]">Yes</span>
+									<span class="text-danger" ng-hide="stage.component.permissions[permission.id][role.id]">No</span>
+								</div>
+								<div ng-show="stage.component.permissions[permission.id][role.id] &amp;&amp; stage.component.permissions[permission.id][role.id] !== true">
+
+									<table class="table table-condensed small">
+										<tbody>
+											<tr><th>Open</th><td>{{ stage.component.permissions[permission.id][role.id].open }}</td></tr>
+											<tr><th>Close</th><td>{{ stage.component.permissions[permission.id][role.id].close }}</td></tr>
+										</tbody>
+									</table>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+</div>
