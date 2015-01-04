@@ -48,6 +48,7 @@
 				</div>
 				<div class="form-group">
 					<div class="col-sm-10 col-sm-offset-2">
+						<div class="btn btn-sm btn-default" ng-click="toggleCreate()">Cancel</div>
 						<input type="submit" class="btn btn-sm btn-primary" value="Create">
 					</div>
 				</div>
@@ -62,7 +63,12 @@
 				<button class="btn btn-xs btn-default" ng-class="{active: stageCreate}" ng-click="toggleCreate()"><i class="glyphicon glyphicon-plus"></i></button>
 			</div>
 		</div>
-		<div class="table-responsive">
+
+		<div class="panel-body" ng-hide="stages.length">
+			No stages. <a href ng-click="toggleCreate()">Create one.</a>
+		</div>
+
+		<div class="table-responsive" ng-show="stages.length">
 			<table class="table table-hover">
 				<thead>
 					<tr>
@@ -87,7 +93,7 @@
 							<p ng-hide="backup[stage.id]" class="form-control-static">{{stage.description}}</p>
 							<textarea ng-show="backup[stage.id]" class="form-control" ng-model="stage.description"></textarea>
 						</td>
-						<td align="right">
+						<td align="right" width="80">
 							<button ng-click="toggleEdit(stage)" class="btn btn-block btn-xs btn-default" ng-class="{active: backup[stage.id]}"><i class="glyphicon glyphicon-cog"></i></button>
 							<button ng-click="save(stage)" class="btn btn-block btn-xs btn-primary" ng-show="backup[stage.id]">Save</button>
 							<button ng-click="delete(stage)" class="btn btn-block btn-xs btn-danger" ng-hide="backup[stage.id]"><i class="glyphicon glyphicon-trash"></i></button>

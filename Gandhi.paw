@@ -758,10 +758,10 @@
         <attribute name="method" type="string">GET</attribute>
         <attribute name="followredirects" type="bool">0</attribute>
         <attribute name="order" type="int64">0</attribute>
-        <attribute name="name" type="string">List Stages</attribute>
+        <attribute name="name" type="string">List Triggers</attribute>
         <relationship name="parent" type="0/1" destination="LMREQUESTTREEITEM" idrefs="z345"></relationship>
         <relationship name="children" type="0/0" destination="LMREQUESTTREEITEM"></relationship>
-        <relationship name="headers" type="0/0" destination="LMKEYVALUE" idrefs="z330 z209 z166"></relationship>
+        <relationship name="headers" type="0/0" destination="LMKEYVALUE" idrefs="z209 z330 z166"></relationship>
     </object>
     <object type="LMREQUEST" id="z145">
         <attribute name="uuid" type="string">E3AB0078-B236-4986-8CA6-9870762251B1</attribute>
@@ -954,10 +954,10 @@
         <attribute name="method" type="string">GET</attribute>
         <attribute name="followredirects" type="bool">0</attribute>
         <attribute name="order" type="int64">1</attribute>
-        <attribute name="name" type="string">Get Stage</attribute>
+        <attribute name="name" type="string">Get Trigger</attribute>
         <relationship name="parent" type="0/1" destination="LMREQUESTTREEITEM" idrefs="z345"></relationship>
         <relationship name="children" type="0/0" destination="LMREQUESTTREEITEM"></relationship>
-        <relationship name="headers" type="0/0" destination="LMKEYVALUE" idrefs="z194 z188 z211"></relationship>
+        <relationship name="headers" type="0/0" destination="LMKEYVALUE" idrefs="z211 z194 z188"></relationship>
     </object>
     <object type="LMREQUEST" id="z157">
         <attribute name="uuid" type="string">32BA6907-1F70-4CD2-A2BA-790806EBF4EC</attribute>
