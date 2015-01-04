@@ -31,10 +31,6 @@
         "open": {
           "id": "open",
           "title": "Application Window Opened",
-          "messages": [
-            "Applications are not yet being accepted.",
-            "Applications are being accepted."
-          ],
           "conditions": [
             [
               {
@@ -48,10 +44,6 @@
         "close": {
           "id": "close",
           "title": "Application Window Closed",
-          "messages": [
-            "Applications are still open.",
-            "Applications are no longer being accepted."
-          ],
           "conditions": [
             [
               {

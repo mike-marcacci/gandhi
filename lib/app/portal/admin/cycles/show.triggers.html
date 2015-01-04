@@ -1,0 +1,71 @@
+<div class="panel panel-default" ng-show="triggerCreate">
+	<div class="panel-heading">
+		<span class="panel-title">Create Trigger</span>
+		<div class="pull-right">
+			<button class="btn btn-xs btn-default" ng-class="{active: triggerCreate}" ng-click="toggleCreate()"><i class="glyphicon glyphicon-plus"></i></button>
+		</div>
+	</div>
+	<div class="panel-body">
+		<form class="form-horizontal" role="form" ng-submit="create()">
+			<div class="form-group">
+				<label for="trigger-id" class="col-sm-2 control-label">ID</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="trigger-id" ng-model="triggerCreate.id">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="trigger-title" class="col-sm-2 control-label">Title</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="trigger-title" ng-model="triggerCreate.title">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-10 col-sm-offset-2">
+					<div class="btn btn-sm btn-default" ng-click="toggleCreate()">Cancel</div>
+					<input type="submit" class="btn btn-sm btn-primary" value="Create">
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<div class="panel panel-default" ng-hide="triggerCreate">
+	<div class="panel-heading">
+		<span class="panel-title">Triggers</span>
+		<div class="pull-right">
+			<button class="btn btn-xs btn-default" ng-class="{active: triggerCreate}" ng-click="toggleCreate()"><i class="glyphicon glyphicon-plus"></i></button>
+		</div>
+	</div>
+
+	<div class="panel-body" ng-hide="triggers.length">
+		No triggers. <a href ng-click="toggleCreate()">Create one.</a>
+	</div>
+
+	<div class="table-responsive" ng-show="triggers.length">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Title</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="trigger in triggers" ng-class="{active: backup[trigger.id]}">
+					<td>
+						<p class="form-control-static"><strong>{{trigger.id}}</strong></p>
+					</td>
+					<td>
+						<p ng-hide="backup[trigger.id]" class="form-control-static">{{trigger.title}}</p>
+						<input ng-show="backup[trigger.id]" class="form-control" type="text" ng-model="trigger.title">
+					</td>
+					<td align="right" width="80">
+						<button ng-click="toggleEdit(trigger)" class="btn btn-block btn-xs btn-default" ng-class="{active: backup[trigger.id]}"><i class="glyphicon glyphicon-cog"></i></button>
+						<button ng-click="save(trigger)" class="btn btn-block btn-xs btn-primary" ng-show="backup[trigger.id]">Save</button>
+						<button ng-click="delete(trigger)" class="btn btn-block btn-xs btn-danger" ng-hide="backup[trigger.id]"><i class="glyphicon glyphicon-trash"></i></button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
