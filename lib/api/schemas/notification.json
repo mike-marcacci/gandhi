@@ -1,0 +1,40 @@
+{
+  "id": "http://www.gandhi.io/schema/notification",
+  "type":"object",
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "required": [
+    "user_id",
+    "subject",
+    "content"
+  ],
+  "additionalProperties": false,
+  "properties":{
+    "id": {
+      "type": "string"
+    },
+    "user_id": {
+      "type": "string"
+    },
+    "subject": {
+      "type": "string"
+    },
+    "content": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "unread",
+        "read",
+        "archived"
+      ],
+      "default": "unread"
+    },
+    "created": {
+      "type": "number"
+    },
+    "updated": {
+      "type": "number"
+    }
+  }
+}

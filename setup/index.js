@@ -29,6 +29,7 @@ module.exports = function(config) {
 					{info: requireJSON(__dirname + '/../test/fixtures/db/cycles.info'), data: require('../test/fixtures/db/cycles.json')},
 					{info: requireJSON(__dirname + '/../test/fixtures/db/projects.info'), data: require('../test/fixtures/db/projects.json')},
 					{info: requireJSON(__dirname + '/../test/fixtures/db/users.info'), data: require('../test/fixtures/db/users.json')},
+					{info: requireJSON(__dirname + '/../test/fixtures/db/notifications.info'), data: require('../test/fixtures/db/notifications.json')},
 					{info: requireJSON(__dirname + '/../test/fixtures/db/files.info'), data: require('../test/fixtures/db/files.json')}
 				];
 

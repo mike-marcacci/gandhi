@@ -578,13 +578,14 @@
 			],
 			"id": "warning",
 			"listeners": [{
-				"name": "email",
+				"name": "notify",
 				"options": {
 					"roles": [
 						"applicant",
 						"advisor"
 					],
-					"template": "Don't get left behind!",
+					"subject": "Don't get left behind!",
+					"content": "You're about to miss the submission deadline.",
 					"value": true
 				}
 			}],
