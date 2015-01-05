@@ -50,6 +50,23 @@
 			</div>
 		</div>
 
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<span class="panel-title">Active Projects</span>
+				<div class="pull-right">
+					<a ui-href="portal.projects" class="btn btn-default btn-xs">All Projects</a>
+				</div>
+			</div>
+			<div class="panel-body">
+				<div ng-if="!(projects | filter : {authorizations:{create:true}}).length">You have no active projects.</div>
+				<div ng-if="(projects | filter : {authorizations:{create:true}}).length" class="list-group">
+					<div ng-repeat="project in projects | filter : {authorizations:{create:true}}" class="list-group-item">
+						<h4 class="list-group-item-heading">{{project.title}}</h4>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<!-- TODO: implement invitations
 		<div class="panel panel-default">
 			<div class="panel-heading">
@@ -77,8 +94,9 @@
 				<span class="panel-title">Open Cycles</span>
 			</div>
 			<div class="panel-body">
-				<div class="list-group">
-					<div ng-repeat="cycle in cycles" class="list-group-item">
+				<div ng-if="!(cycles | filter : {authorizations:{create:true}}).length">There are currently no open cycles.</div>
+				<div ng-if="(cycles | filter : {authorizations:{create:true}}).length" class="list-group">
+					<div ng-repeat="cycle in cycles | filter : {authorizations:{create:true}}" class="list-group-item">
 						<h4 class="list-group-item-heading">{{cycle.title}}</h4>
 						<div class="list-group-item-text" ng-bind-html="cycle.description"></div>
 						<div style="padding: 1em 0 .5em;">
