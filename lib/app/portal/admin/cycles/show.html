@@ -20,7 +20,7 @@
 					<button class="btn btn-xs btn-default" ng-show="destroy" ng-click="destroy()"><i class="glyphicon glyphicon-trash"></i></button>
 				</div>
 			</div>
-			<div ng-hide="source" class="panel-body">
+			<div class="panel-body">
 				<ul class="nav nav-pills">
 					<li ng-class="{active: $state.is('portal.admin.cycles.show')}"><a ui-sref="portal.admin.cycles.show">General</a></li>
 					<li ng-class="{active: $state.includes('portal.admin.cycles.show.roles')}"><a ui-sref="portal.admin.cycles.show.roles">Roles</a></li>
@@ -29,30 +29,32 @@
 					<li ng-class="{active: $state.includes('portal.admin.cycles.show.exports')}"><a ui-sref="portal.admin.cycles.show.exports">Exports</a></li>
 					<li ng-class="{active: $state.includes('portal.admin.cycles.show.triggers')}"><a ui-sref="portal.admin.cycles.show.triggers">Triggers</a></li>
 					<li ng-class="{active: $state.includes('portal.admin.cycles.show.assignments')}"><a ui-sref="portal.admin.cycles.show.assignments">Assignments</a></li>
-					<li ng-class="{active: $state.includes('portal.admin.cycles.show.invitations')}"><a ui-sref="portal.admin.cycles.show.invitations">Invitations</a></li>
+					<!-- <li ng-class="{active: $state.includes('portal.admin.cycles.show.invitations')}"><a ui-sref="portal.admin.cycles.show.invitations">Invitations</a></li> -->
 				</ul>
 			</div>
-			<form ng-if="source" class="form-horizontal" role="form" ng-submit="replace()">
-				<div ui-ace="{mode: 'json'}" style="height: 600px;" ng-model="cycleSource"></div>
-				<div class="panel-body">
-					<a class="btn btn-sm btn-default" ng-click="toggleSource()">Cancel</a>
-					<input type="submit" class="btn btn-sm btn-primary" value="Update">
-				</div>
-			</form>
 		</div>
 
 
-		<div ng-hide="source" ui-view>
+		<div ui-view>
 			
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<span class="panel-title">General Settings</span>
 					<div class="pull-right">
-						<button class="btn btn-xs" ng-show="update" ng-class="{'btn-default': true, 'active': edit}" ng-click="toggleEdit()"><i class="glyphicon glyphicon-cog"></i></button>
-						<button ng-show="currentUser.preferences.admin.technical" class="btn btn-xs" ng-show="replace" ng-class="{'btn-default': true, 'active': source}" ng-click="toggleSource()"><i class="glyphicon glyphicon-edit"></i></button>
+						<button class="btn btn-xs" ng-show="update" ng-class="{'btn-default': true, 'active': cycleEdit}" ng-click="toggleEdit()"><i class="glyphicon glyphicon-cog"></i></button>
+						<button ng-show="currentUser.preferences.admin.technical" class="btn btn-xs" ng-class="{'btn-default': true, 'active': source.cycle}" ng-click="toggleSource()"><i class="glyphicon glyphicon-edit"></i></button>
 					</div>
 				</div>
-				<div class="panel-body">
+				<div class="body-panel" ng-if="source.cycle">
+					<form class="form-horizontal" role="form" ng-submit="updateSource()">
+						<div style="height: 400px;" ng-model="source.cycle" json ui-ace="{mode: 'json'}"></div>
+						<div class="panel-body">
+							<a class="btn btn-sm btn-default" ng-click="toggleSource()">Hide</a>
+							<input class="btn btn-sm btn-primary" type="submit" value="Update">
+						</div>
+					</form>
+				</div>
+				<div class="panel-body" ng-if="!source.cycle">
 					<form class="form-horizontal" role="form" ng-submit="update()">
 						<div class="form-group">
 							<label class="col-sm-2 control-label">ID</label>
@@ -63,36 +65,36 @@
 						<div class="form-group">
 							<label for="cycle-title" class="col-sm-2 control-label">Title</label>
 							<div class="col-sm-10">
-								<p ng-show="!edit" class="form-control-static">{{cycle.title}}</p>
-								<input ng-show="edit" type="text" class="form-control" id="cycle-title" ng-model="cycleEdit.title">
+								<p ng-show="!cycleEdit" class="form-control-static">{{cycle.title}}</p>
+								<input ng-show="cycleEdit" type="text" class="form-control" id="cycle-title" ng-model="cycleEdit.title">
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="cycle-description" class="col-sm-2 control-label">Description</label>
 							<div class="col-sm-10">
-								<p ng-show="!edit" class="form-control-static">{{cycle.description}}</p>
-								<textarea ng-show="edit" class="form-control" id="cycle-description" ng-model="cycleEdit.description"></textarea>
+								<p ng-show="!cycleEdit" class="form-control-static">{{cycle.description}}</p>
+								<textarea ng-show="cycleEdit" class="form-control" id="cycle-description" ng-model="cycleEdit.description"></textarea>
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="cycle-status" class="col-sm-2 control-label">Status</label>
 							<div class="col-sm-10">
-								<p ng-show="!edit" class="form-control-static">{{cycleEdit.status}}</p>
-								<select ng-show="edit" class="form-control" id="cycle-status" ng-model="cycleEdit.status" ng-options="status for status in ['draft','active','archived']" required></select>
+								<p ng-show="!cycleEdit" class="form-control-static">{{cycle.status}}</p>
+								<select ng-show="cycleEdit" class="form-control" id="cycle-status" ng-model="cycleEdit.status" ng-options="status for status in ['draft','active','archived']" required></select>
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="cycle-default-role" class="col-sm-2 control-label">Default Role</label>
 							<div class="col-sm-10">
-								<p ng-show="!edit" class="form-control-static">{{rolesById[cycleEdit.defaults.role].title}}</p>
-								<select ng-show="edit" class="form-control" id="cycle-default-role" ng-model="cycleEdit.defaults.role" ng-options="role.id as role.title for role in roles" required></select>
+								<p ng-show="!cycleEdit" class="form-control-static">{{rolesById[cycle.defaults.role].title}}</p>
+								<select ng-show="cycleEdit" class="form-control" id="cycle-default-role" ng-model="cycleEdit.defaults.role" ng-options="role.id as role.title for role in roles" required></select>
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="cycle-default-status" class="col-sm-2 control-label">Default Status</label>
 							<div class="col-sm-10">
-								<p ng-show="!edit" class="form-control-static">{{statusesById[cycleEdit.defaults.status].title}}</p>
-								<select ng-show="edit" class="form-control" id="cycle-default-status" ng-model="cycleEdit.defaults.status" ng-options="status.id as status.title for status in statuses" required></select>
+								<p ng-show="!cycleEdit" class="form-control-static">{{statusesById[cycle.defaults.status].title}}</p>
+								<select ng-show="cycleEdit" class="form-control" id="cycle-default-status" ng-model="cycleEdit.defaults.status" ng-options="status.id as status.title for status in statuses" required></select>
 							</div>
 						</div>
 						<div class="form-group">
@@ -107,15 +109,52 @@
 								<p class="form-control-static">{{cycle.updated * 1000 | date:"yyyy.MM.dd - hh:mm a"}}</p>
 							</div>
 						</div>
-						<div class="form-group" ng-show="edit">
+						<div class="form-group" ng-show="cycleEdit">
 							<div class="col-sm-10 col-sm-offset-2">
-								<input type="submit" class="btn btn-sm btn-primary" ng-show="edit" value="Update">
+								<input type="submit" class="btn btn-sm btn-primary" ng-show="cycleEdit" value="Update">
 							</div>
 						</div>
 					</form>
 
 
 
+				</div>
+			</div>
+
+
+			<div class="panel panel-default" ng-hide="roleCreate">
+				<div class="panel-heading">
+					<span class="panel-title">Permissions</span>
+				</div>
+				<div class="table-responsive" ng-show="roles.length">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Role</th>
+								<th style="text-transform: capitalize;" ng-repeat="(k, v) in cycle.permissions">{{k}}</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="role in roles">
+								<th>{{role.title}}</th>
+								<td ng-repeat="permission in cycle.permissions">
+									<div ng-show="permission[role.id] === true || !permission[role.id]">
+										<span class="text-success" ng-show="permission[role.id]">Yes</span>
+										<span class="text-danger" ng-hide="permission[role.id]">No</span>
+									</div>
+									<div ng-show="permission[role.id] &amp;&amp; permission[role.id] !== true">
+
+										<table class="table table-condensed small">
+											<tbody>
+												<tr><th>Open</th><td>{{ permission[role.id].open }}</td></tr>
+												<tr><th>Close</th><td>{{ permission[role.id].close }}</td></tr>
+											</tbody>
+										</table>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 			</div>
 
