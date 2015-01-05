@@ -17,14 +17,6 @@
       "type": "string",
       "default": ""
     },
-    "open": {
-      "type": "array",
-      "default": ["open"]
-    },
-    "close": {
-      "type": "array",
-      "default": ["close"]
-    },
     "triggers": {
       "type": "object",
       "default": {
@@ -203,6 +195,12 @@
     },
     "permissions": {
       "type": "object",
+      "required": [
+        "create",
+        "read",
+        "update",
+        "destroy"
+      ],
       "properties": {
         "create": {
           "$ref": "#/definitions/permission"
@@ -215,6 +213,20 @@
         },
         "destroy": {
           "$ref": "#/definitions/permission"
+        }
+      },
+      "default": {
+        "create": {
+          "applicant": true
+        },
+        "read": {
+          "applicant": true
+        },
+        "update": {
+          "applicant": true
+        },
+        "destroy": {
+          "applicant": false
         }
       }
     }

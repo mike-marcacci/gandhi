@@ -7,9 +7,6 @@
 			"role": "staff"
 		}
 	},
-	"close": [
-		"close"
-	],
 	"config": {
 		"layout": "pill"
 	},
@@ -41,7 +38,7 @@
 				[{
 					"name": "date",
 					"options": {
-						"timestamp": 1412164799.999,
+						"timestamp": 4094539199.000,
 						"mode": "after"
 					}
 				}]
@@ -101,12 +98,12 @@
 		}
 	},
 	"id": "e5f58a2c-2894-40e6-91a9-a110d190e85f",
-	"open": [
-		"open"
-	],
 	"permissions": {
 		"create": {
-			"applicant": true,
+			"applicant": {
+				"open": ["open"],
+				"close": ["close"]
+			},
 			"staff": true
 		},
 		"read": {
@@ -436,9 +433,6 @@
 			"role": "advisor"
 		}
 	},
-	"close": [
-		"close"
-	],
 	"config": {
 		"layout": "pill"
 	},
@@ -601,9 +595,6 @@
 			"role": "advisor"
 		}
 	},
-	"open": [
-		"open"
-	],
 	"permissions": {
 		"create": {
 			"applicant": true,
