@@ -94,9 +94,9 @@
 				<span class="panel-title">Open Cycles</span>
 			</div>
 			<div class="panel-body">
-				<div ng-if="!(cycles | filter : {authorizations:{create:true}}).length">There are currently no open cycles.</div>
-				<div ng-if="(cycles | filter : {authorizations:{create:true}}).length" class="list-group">
-					<div ng-repeat="cycle in cycles | filter : {authorizations:{create:true}}" class="list-group-item">
+				<div ng-if="!(cycles | filter : {open: true}).length">There are currently no open cycles.</div>
+				<div ng-if="(cycles | filter : {open: true}).length" class="list-group">
+					<div ng-repeat="cycle in cycles | filter : {open: true}" class="list-group-item">
 						<h4 class="list-group-item-heading">{{cycle.title}}</h4>
 						<div class="list-group-item-text" ng-bind-html="cycle.description"></div>
 						<div style="padding: 1em 0 .5em;">
