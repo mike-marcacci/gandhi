@@ -1,0 +1,9 @@
+{
+  "name": "gandhi-action-notify",
+  "description": "Gandhi Action: Notify",
+  "version": "0.0.1",
+  "license": "MIT",
+  "private": false,
+  "main": "index.js",
+  "dependencies": {}
+}

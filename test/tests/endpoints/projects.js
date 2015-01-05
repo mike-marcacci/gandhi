@@ -133,7 +133,7 @@ describe('Projects', function(){
 					done();
 				});
 		});
-		it('shows correct permissions for each project', function(done){
+		it('shows correct authorizations for each project', function(done){
 			request
 				.get('/api/projects')
 				.set('Authorization', 'Bearer ' + soleneToken)
@@ -141,10 +141,10 @@ describe('Projects', function(){
 				.end(function(err, res){
 					if(err) return done(err);
 					assert.isArray(res.body);
-					assert.isTrue(res.body[0].permissions.create);
-					assert.isTrue(res.body[0].permissions.read);
-					assert.isTrue(res.body[0].permissions.update);
-					assert.isFalse(res.body[0].permissions.destroy);
+					assert.isTrue(res.body[0].authorizations.create);
+					assert.isTrue(res.body[0].authorizations.read);
+					assert.isTrue(res.body[0].authorizations.update);
+					assert.isFalse(res.body[0].authorizations.destroy);
 					done();
 				});
 		});
@@ -322,17 +322,17 @@ describe('Projects', function(){
 					done();
 				});
 		});
-		it('shows correct permissions for the project', function(done){
+		it('shows correct authorizations for the project', function(done){
 			request
 				.get('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009')
 				.set('Authorization', 'Bearer ' + soleneToken)
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
-					assert.isTrue(res.body.permissions.create);
-					assert.isTrue(res.body.permissions.read);
-					assert.isTrue(res.body.permissions.update);
-					assert.isFalse(res.body.permissions.destroy);
+					assert.isTrue(res.body.authorizations.create);
+					assert.isTrue(res.body.authorizations.read);
+					assert.isTrue(res.body.authorizations.update);
+					assert.isFalse(res.body.authorizations.destroy);
 					done();
 				});
 		});
@@ -379,8 +379,8 @@ describe('Projects', function(){
 				});
 		});
 		it.skip('rejects a request from an unaffiliated non-admin user');
-		it.skip('rejects a request from an affiliated non-admin user without permission');
-		it('shows a project to an affiliated non-admin user with permission');
+		it.skip('rejects a request from an affiliated non-admin user without authorization');
+		it('shows a project to an affiliated non-admin user with authorization');
 	});
 
 	describe('#patch', function(){
