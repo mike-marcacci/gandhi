@@ -41,7 +41,12 @@ r.connect({host: host, db: db}).then(function(conn){
       open: ['open'],
       close: ['close'],
       triggers: r.literal(cycle('events').coerceTo('array').map(function(eventKV){
-        return [eventKV.nth(0), eventKV.nth(1).without('messages')];
+        return [eventKV.nth(0), eventKV.nth(1).merge({
+          timestamp: eventKV.nth(1)('date')
+        }).without({
+          date: true,
+          messages: true
+        })];
       }).coerceTo('object').default(cycle('triggers'))),
       permissions: {
         create: allPermissions,
@@ -65,6 +70,13 @@ r.connect({host: host, db: db}).then(function(conn){
     return project.merge({
       assignments: project('users').default(project('assignments')),
       contents: project('flow').default(project('contents')),
+      events: r.literal(project('events').coerceTo('array').map(function(eventKV){
+        return [eventKV.nth(0), eventKV.nth(1).merge({
+          timestamp: eventKV.nth(1)('date')
+        }).without({
+          date: true
+        })];
+      }).coerceTo('object'),
       created: project('created').toEpochTime(),
       updated: project('updated').toEpochTime()
     }).without({

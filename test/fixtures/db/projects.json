@@ -151,38 +151,38 @@
 	"id": "b37e83a5-d613-4d64-8873-fdcc8df0a009",
 	"events": {
 		"submit": [{
-			"date": "2014-10-13T02:48:46.040Z",
+			"timestamp": 1413168526.040,
 			"value": true
 		}, {
-			"date": "2014-10-13T02:43:19.946Z",
+			"timestamp": 1413168199.946,
 			"value": false
 		}],
 		"warning": [{
-			"date": "2014-10-13T02:43:19.946Z",
+			"timestamp": 1413168199.946,
 			"value": true
 		}],
 		"accept": [{
-			"date": "2014-10-13T02:43:19.946Z",
+			"timestamp": 1413168199.946,
 			"value": false
 		}],
 		"reject": [{
-			"date": "2014-10-13T02:43:19.946Z",
+			"timestamp": 1413168199.946,
 			"value": false
 		}],
 		"report": [{
-			"date": "2014-10-13T02:43:19.946Z",
+			"timestamp": 1413168199.946,
 			"value": false
 		}],
 		"close": [{
-			"date": "2014-10-13T02:43:19.946Z",
+			"timestamp": 1413168199.946,
 			"value": true
 		}],
 		"open": [{
-			"date": "2014-10-13T02:43:19.946Z",
+			"timestamp": 1413168199.946,
 			"value": true
 		}],
 		"archive": [{
-			"date": "2014-10-13T02:43:19.946Z",
+			"timestamp": 1413168199.946,
 			"value": false
 		}]
 	}
@@ -300,38 +300,38 @@
 	"id": "cdd28e4a-9309-454f-a8ed-3f9708d0c10c",
 	"events": {
 		"submit": [{
-			"date": "2014-10-13T05:45:48.949Z",
+			"timestamp": 1413179148.949,
 			"value": true
 		}, {
-			"date": "2014-10-13T05:41:45.465Z",
+			"timestamp": 1413178905.465,
 			"value": false
 		}],
 		"warning": [{
-			"date": "2014-10-13T05:41:45.465Z",
+			"timestamp": 1413178905.465,
 			"value": true
 		}],
 		"accept": [{
-			"date": "2014-10-13T05:41:45.465Z",
+			"timestamp": 1413178905.465,
 			"value": false
 		}],
 		"reject": [{
-			"date": "2014-10-13T05:41:45.465Z",
+			"timestamp": 1413178905.465,
 			"value": false
 		}],
 		"report": [{
-			"date": "2014-10-13T05:41:45.465Z",
+			"timestamp": 1413178905.465,
 			"value": false
 		}],
 		"close": [{
-			"date": "2014-10-13T05:41:45.465Z",
+			"timestamp": 1413178905.465,
 			"value": true
 		}],
 		"open": [{
-			"date": "2014-10-13T05:41:45.465Z",
+			"timestamp": 1413178905.465,
 			"value": true
 		}],
 		"archive": [{
-			"date": "2014-10-13T05:41:45.465Z",
+			"timestamp": 1413178905.465,
 			"value": false
 		}]
 	}
@@ -365,50 +365,26 @@
 	"id": "e264d6f7-d26a-4be3-8365-13416ac41029",
 	"events": {
 		"close": [{
-			"date": {
-				"timezone": "+00:00",
-				"$reql_type$": "TIME",
-				"epoch_time": 1413167504.965
-			},
+			"timestamp": 1413167504.965,
 			"value": true
 		}],
 		"open": [{
-			"date": {
-				"timezone": "+00:00",
-				"$reql_type$": "TIME",
-				"epoch_time": 1413167504.965
-			},
+			"timestamp": 1413167504.965,
 			"value": true
 		}],
 		"accept": [{
-			"date": {
-				"timezone": "+00:00",
-				"$reql_type$": "TIME",
-				"epoch_time": 1413167504.965
-			},
+			"timestamp": 1413167504.965,
 			"value": false
 		}],
 		"submit": [{
-			"date": {
-				"timezone": "+00:00",
-				"$reql_type$": "TIME",
-				"epoch_time": 1413167920.316
-			},
+			"timestamp": 1413167920.316,
 			"value": true
 		}, {
-			"date": {
-				"timezone": "+00:00",
-				"$reql_type$": "TIME",
-				"epoch_time": 1413167504.965
-			},
+			"timestamp": 1413167504.965,
 			"value": false
 		}],
 		"reject": [{
-			"date": {
-				"timezone": "+00:00",
-				"$reql_type$": "TIME",
-				"epoch_time": 1413167504.965
-			},
+			"timestamp": 1413167504.965,
 			"value": false
 		}]
 	}
