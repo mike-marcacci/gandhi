@@ -1,0 +1,18 @@
+<div class="table-responsive">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Role</th>
+				<th style="text-transform: capitalize;" ng-repeat="p in permissions">{{p.title}}</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="role in roles" ng-if="roles[role.id]">
+				<th>{{role.title}}</th>
+				<td ng-repeat="(id, permission) in model" ng-if="permissions[id]">
+					<gandhi-permission edit="edit" ng-model="permission[role.id]" triggers="triggers" role="role"></gandhi-permission>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

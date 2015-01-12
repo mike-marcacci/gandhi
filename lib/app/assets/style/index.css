@@ -5397,6 +5397,12 @@ body {
     height: 200px; }
   body td .ace_editor {
     height: 80px; }
+  body .btn .glyphicon {
+    top: 2px; }
+  body .table + .panel-body,
+  body .table-responsive + .panel-body,
+  body gandhi-permissions + .panel-body {
+    padding-top: 0; }
   body .panel {
     border-width: 0;
     -webkit-box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.1);

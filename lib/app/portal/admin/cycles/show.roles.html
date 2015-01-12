@@ -82,8 +82,8 @@
 								<tr><td ng-repeat="r in roles">
 									<label>
 										<input ng-show="backup[role.id]" ng-disabled="!backup[role.id]" type="checkbox" ng-model="role.assignable[r.id]">
-										<span class="text-success" ng-show="role.assignable[r.id]">Show</span>
-										<span class="text-danger" ng-hide="role.assignable[r.id]">Hide</span>
+										<span class="text-success" ng-show="role.assignable[r.id]">Yes</span>
+										<span class="text-danger" ng-hide="role.assignable[r.id]">No</span>
 									</label>
 								</td></tr>
 							</tbody>

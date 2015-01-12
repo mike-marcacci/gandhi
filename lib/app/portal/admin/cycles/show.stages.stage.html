@@ -9,7 +9,7 @@
 				<span class="panel-title">{{component.title}}</span>
 			</div>
 			<div class="panel-body">
-
+				
 			</div>
 		</div>
 	</div>
@@ -19,8 +19,11 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<span class="panel-title">Visibility</span>
+				<div class="pull-right">
+					<button class="btn btn-xs" ng-show="update" ng-class="{'btn-default': true, 'active': editVisibility}" ng-click="editVisibility = !editVisibility"><i class="glyphicon glyphicon-cog"></i></button>
+				</div>
 			</div>
-			<div class="panel-body">
+			<form ng-submit="updateVisibility()">
 				<table class="table">
 					<thead>
 						<tr>
@@ -32,48 +35,30 @@
 						<tr ng-repeat="role in roles">
 							<th>{{role.title}}</th>
 							<td>
-								{{stage.visible[role.id]}}
+								<gandhi-permission edit="editVisibility" ng-model="stage.visible[role.id]" triggers="triggersById" role="role"></gandhi-permission>
 							</td>
 						</tr>
 					</tbody>
 				</table>
-			</div>
+				<div class="panel-body">
+					<input class="btn btn-sm btn-primary" type="submit" value="Update">
+				</div>
+			</form>
 		</div>
 
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<span class="panel-title">Permissions</span>
+				<div class="pull-right">
+					<button class="btn btn-xs" ng-show="update" ng-class="{'btn-default': true, 'active': editComponentPermissions}" ng-click="editComponentPermissions = !editComponentPermissions"><i class="glyphicon glyphicon-cog"></i></button>
+				</div>
 			</div>
-			<div class="panel-body">
-				<table class="table">
-					<thead>
-						<tr>
-							<th>Role</th>
-							<th ng-repeat="permission in component.permissions">{{permission.title}}</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr ng-repeat="role in roles">
-							<th>{{role.title}}</th>
-							<td ng-repeat="permission in component.permissions">
-								<div ng-show="stage.component.permissions[permission.id][role.id] === true || !stage.component.permissions[permission.id][role.id]">
-									<span class="text-success" ng-show="stage.component.permissions[permission.id][role.id]">Yes</span>
-									<span class="text-danger" ng-hide="stage.component.permissions[permission.id][role.id]">No</span>
-								</div>
-								<div ng-show="stage.component.permissions[permission.id][role.id] &amp;&amp; stage.component.permissions[permission.id][role.id] !== true">
-
-									<table class="table table-condensed small">
-										<tbody>
-											<tr><th>Open</th><td>{{ stage.component.permissions[permission.id][role.id].open }}</td></tr>
-											<tr><th>Close</th><td>{{ stage.component.permissions[permission.id][role.id].close }}</td></tr>
-										</tbody>
-									</table>
-								</div>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
+			<form ng-submit="updateComponentPermissions()">
+				<gandhi-permissions edit="editComponentPermissions" permissions="component.permissions" roles="rolesById" triggers="triggersById" ng-model="stage.component.permissions"></gandhi-permissions>
+				<div class="panel-body">
+					<input class="btn btn-sm btn-primary" type="submit" value="Update">
+				</div>
+			</form>
 		</div>
 	</div>
 

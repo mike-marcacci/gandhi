@@ -83,7 +83,7 @@
 					<tr ng-repeat="stage in stages" ng-class="{active: backup[stage.id]}">
 						<td class="handle"></td>
 						<td>
-							<p class="form-control-static"><strong>{{stage.id}}</strong></p>
+							<p class="form-control-static"><strong><a ui-sref="portal.admin.cycles.show.stages.stage({stage: stage.id})">{{stage.id}}</a></strong></p>
 						</td>
 						<td>
 							<p ng-hide="backup[stage.id]" class="form-control-static">{{stage.title}}</p>

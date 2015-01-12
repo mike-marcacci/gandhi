@@ -121,41 +121,21 @@
 				</div>
 			</div>
 
-
 			<div class="panel panel-default" ng-hide="roleCreate">
 				<div class="panel-heading">
 					<span class="panel-title">Permissions</span>
+					<div class="pull-right">
+						<button class="btn btn-xs" ng-show="update" ng-class="{'btn-default': true, 'active': cyclePermissionsEdit}" ng-click="togglePermissionsEdit()"><i class="glyphicon glyphicon-cog"></i></button>
+					</div>
 				</div>
-				<div class="table-responsive" ng-show="roles.length">
-					<table class="table">
-						<thead>
-							<tr>
-								<th>Role</th>
-								<th style="text-transform: capitalize;" ng-repeat="(k, v) in cycle.permissions">{{k}}</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr ng-repeat="role in roles">
-								<th>{{role.title}}</th>
-								<td ng-repeat="permission in cycle.permissions">
-									<div ng-show="permission[role.id] === true || !permission[role.id]">
-										<span class="text-success" ng-show="permission[role.id]">Yes</span>
-										<span class="text-danger" ng-hide="permission[role.id]">No</span>
-									</div>
-									<div ng-show="permission[role.id] &amp;&amp; permission[role.id] !== true">
-
-										<table class="table table-condensed small">
-											<tbody>
-												<tr><th>Open</th><td>{{ permission[role.id].open }}</td></tr>
-												<tr><th>Close</th><td>{{ permission[role.id].close }}</td></tr>
-											</tbody>
-										</table>
-									</div>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+				<form ng-submit="updatePermissions()">
+					<div ng-show="roles.length">
+						<gandhi-permissions edit="cyclePermissionsEdit" permissions="permissions" roles="rolesById" triggers="triggersById" ng-model="cycle.permissions"></gandhi-permissions>
+						<div ng-if="cyclePermissionsEdit" class="panel-body" style="padding-top: 0;">
+							<input type="submit" class="btn btn-sm btn-primary" value="Update">
+						</div>
+					</div>
+				</form>
 			</div>
 
 		</div>

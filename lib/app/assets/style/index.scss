@@ -40,6 +40,16 @@ body {
 
 	// bootstrap styles
 
+	.btn .glyphicon {
+		top: 2px;
+	}
+
+	.table + .panel-body,
+	.table-responsive + .panel-body,
+	gandhi-permissions + .panel-body {
+		padding-top: 0;
+	}
+
 	.panel {
 		border-width: 0;
 		-webkit-box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.1);
