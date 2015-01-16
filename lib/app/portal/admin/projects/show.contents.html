@@ -1,0 +1,16 @@
+<div class="panel panel-default">
+	<div class="panel-body">
+		<ul class="nav nav-pills">
+			<li ng-class="{active: $state.is('portal.admin.projects.show.contents')}">
+				<a ui-sref="portal.admin.projects.show.contents"><i class="glyphicon glyphicon-list"></i></a>
+			</li>
+			<li ng-class="{active: $state.includes('portal.admin.projects.show.contents.content', {content: stage.id})}" ng-repeat="stage in stages">
+				<a ui-sref="portal.admin.projects.show.contents.content({content: stage.id})" ng-bind-html="stage.title"></a>
+			</li>
+		</ul>
+	</div>
+</div>
+
+<div ui-view>
+
+</div>

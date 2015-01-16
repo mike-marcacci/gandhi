@@ -3,73 +3,9 @@
 	<li class="active">Projects</li>
 </ol>
 
-
 <div class="panel panel-default">
 	<div class="panel-body">
-		<div class="row">
-			<div class="col-xs-6">
-				<div class="form-group">
-					<div class="input-group">
-						<ui-select ng-disabled="disabled" ng-model="constraints.cycle" theme="bootstrap">
-							<ui-select-match placeholder="Choose a cycle...">{{$select.selected.title}}</ui-select-match>
-							<ui-select-choices refresh="constraints.searchCycles($select.search)" refresh-delay="200" repeat="item in constraints.cycles | filter: $select.search">
-								<div ng-bind-html="item.title | highlight: $select.search"></div>
-							</ui-select-choices>
-						</ui-select>
-						<span class="input-group-btn">
-							<button class="btn btn-default" ng-disabled="!constraints.cycle" ng-click="constraints.cycle = null" type="button"><i class="glyphicon glyphicon-remove-circle"></i></button>
-						</span>
-					</div>
-				</div>
-
-				<div class="form-horizontal">
-					<div class="form-group" ng-show="constraints.cycle">
-						<label class="col-sm-2 control-label">Status</label>
-						<div class="col-sm-10">
-							<select class="form-control" ng-model="table.query.filter.status.eq" ng-options="k as v.title for (k, v) in constraints.cycle.statuses">
-								<option value="">-- Any Status --</option>
-							</select>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-xs-6">
-				<div class="form-group">
-					<div class="input-group">
-						<ui-select ng-disabled="disabled" ng-model="constraints.user" theme="bootstrap">
-							<ui-select-match placeholder="Choose a user...">{{$select.selected.name}}</ui-select-match>
-							<ui-select-choices refresh="constraints.searchUsers($select.search)" refresh-delay="200" repeat="item in constraints.users | filter: $select.search">
-								<div ng-bind-html="item.name | highlight: $select.search"></div>
-								<small ng-bind-html="item.email | highlight: $select.search"></small>
-							</ui-select-choices>
-						</ui-select>
-						<span class="input-group-btn">
-							<button class="btn btn-default" ng-disabled="!constraints.user" ng-click="constraints.user = null" type="button"><i class="glyphicon glyphicon-remove-circle"></i></button>
-						</span>
-					</div>
-				</div>
-
-				<div class="form-horizontal">
-					<div class="form-group" ng-show="constraints.cycle && constraints.user">
-						<label class="col-sm-2 control-label">Role</label>
-						<div class="col-sm-10">
-							<select class="form-control" ng-model="table.query.role" ng-options="k as v.title for (k, v) in constraints.cycle.roles">
-								<option value="">-- Any Role --</option>
-							</select>
-						</div>
-					</div>
-					<div class="form-group" ng-show="constraints.user">
-						<div class="col-sm-offset-2 col-sm-10">
-							<div class="checkbox">
-								<label>
-									<input type="checkbox" ng-model="table.query.filter.users[constraints.user.id].present" ng-true-value="'true'" ng-false-value="null"> Ignore cycle assignments.
-								</label>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+		<input type="text" class="form-control" ng-model="table.query.search" ng-model-options="{debounce: 100}" placeholder="Search">
 	</div>
 </div>
 

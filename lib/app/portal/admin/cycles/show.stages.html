@@ -2,7 +2,7 @@
 	<div class="panel-body">
 		<ul class="nav nav-pills">
 			<li ng-class="{active: $state.is('portal.admin.cycles.show.stages')}">
-				<a ui-sref="portal.admin.cycles.show.stages" class="glyphicon glyphicon-list"></a>
+				<a ui-sref="portal.admin.cycles.show.stages"><i class="glyphicon glyphicon-list"></i></a>
 			</li>
 			<li ng-class="{active: $state.includes('portal.admin.cycles.show.stages.stage', {stage: stage.id})}" ng-repeat="stage in stages">
 				<a ui-sref="portal.admin.cycles.show.stages.stage({stage: stage.id})" ng-bind-html="stage.title"></a>

@@ -48,6 +48,10 @@
         "$ref": "#/definitions/invitation"
       }
     },
+    "values": {
+      "type": "object",
+      "additionalProperties": true
+    },
     "updated": {
       "type": "number"
     },

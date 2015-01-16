@@ -1,0 +1,81 @@
+<div class="panel panel-default" ng-show="assignmentCreate">
+	<div class="panel-heading">
+		<span class="panel-title">Create Assignment</span>
+		<div class="pull-right">
+			<button class="btn btn-xs btn-default" ng-class="{active: assignmentCreate}" ng-click="toggleCreate()"><i class="glyphicon glyphicon-plus"></i></button>
+		</div>
+	</div>
+	<div class="panel-body">
+		<form class="form-horizontal" role="form" ng-submit="create()">
+			<div class="form-group">
+				<label for="assignment-id" class="col-sm-2 control-label">User</label>
+				<div class="col-sm-10">
+					<ui-select ng-disabled="disabled" ng-model="assignmentCreate.id" theme="bootstrap" id="assignment-id">
+						<ui-select-match placeholder="Choose a user...">{{$select.selected.name}}</ui-select-match>
+						<ui-select-choices refresh="userSelect.search($select.search)" refresh-delay="200" repeat="item.id as item in userSelect.data | filter: $select.search | filter: userSelect.filter ">
+							<div ng-bind-html="item.name | highlight: $select.search"></div>
+							<small ng-bind-html="item.email | highlight: $select.search"></small>
+						</ui-select-choices>
+					</ui-select>
+
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="assignment-role" class="col-sm-2 control-label">Role</label>
+				<div class="col-sm-10">
+					<select required class="form-control" id="assignment-role" ng-model="assignmentCreate.role" ng-options="role.id as role.title for role in roles"></select>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-10 col-sm-offset-2">
+					<div class="btn btn-sm btn-default" ng-click="toggleCreate()">Cancel</div>
+					<input type="submit" class="btn btn-sm btn-primary" value="Create">
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<div class="panel panel-default" ng-hide="assignmentCreate">
+	<div class="panel-heading">
+		<span class="panel-title">Assignments</span>
+		<div class="pull-right">
+			<button class="btn btn-xs btn-default" ng-class="{active: assignmentCreate}" ng-click="toggleCreate()"><i class="glyphicon glyphicon-plus"></i></button>
+		</div>
+	</div>
+
+	<div class="panel-body" ng-hide="assignments.length">
+		No assignments. <a href ng-click="toggleCreate()">Create one.</a>
+	</div>
+
+	<div class="table-responsive" ng-show="assignments.length">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>User</th>
+					<th>Role</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="assignment in assignments" ng-class="{active: backup[assignment.id]}">
+					<td>
+						<p class="form-control-static">
+							<a ui-sref="portal.admin.users.show({user: assignment.id})"><strong>{{usersById[assignment.id].name}}</strong></a><br />
+							<small>{{usersById[assignment.id].email}}</small>
+						</p>
+					</td>
+					<td>
+						<p ng-hide="backup[assignment.id]" class="form-control-static">{{rolesById[assignment.role].title}}</p>
+						<select ng-show="backup[assignment.id]" required class="form-control" ng-model="assignment.role" ng-options="role.id as role.title for role in roles"></select>
+					</td>
+					<td align="right" width="80">
+						<button ng-click="toggleEdit(assignment)" class="btn btn-block btn-xs btn-default" ng-class="{active: backup[assignment.id]}"><i class="glyphicon glyphicon-cog"></i></button>
+						<button ng-click="save(assignment)" class="btn btn-block btn-xs btn-primary" ng-show="backup[assignment.id]">Save</button>
+						<button ng-click="delete(assignment)" class="btn btn-block btn-xs btn-danger" ng-hide="backup[assignment.id]"><i class="glyphicon glyphicon-trash"></i></button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

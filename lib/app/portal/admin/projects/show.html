@@ -12,62 +12,98 @@
 	<div class="col-md-9">
 		<div class="panel panel-default">
 			<div class="panel-heading">
+				<div class="pull-left" style="margin-right: 10px;">
+					<button class="btn btn-xs btn-default" ng-show="destroy" ng-click="refresh()"><i class="glyphicon glyphicon-refresh"></i></button>
+				</div>
 				<span class="panel-title">{{project.title}}</span>
 				<div class="pull-right">
-					<button ng-show="currentUser.preferences.admin.technical" class="btn btn-xs" ng-show="replace" ng-class="{'btn-default': true, 'active': source}" ng-click="toggleSource()"><i class="glyphicon glyphicon-edit"></i></button>
 					<button class="btn btn-xs btn-default" ng-show="destroy" ng-click="destroy()"><i class="glyphicon glyphicon-trash"></i></button>
 				</div>
 			</div>
-			<div ng-hide="source" class="panel-body">
+			<div class="panel-body">
 				<ul class="nav nav-pills">
 					<li ng-class="{active: $state.is('portal.admin.projects.show')}"><a ui-sref="portal.admin.projects.show">General</a></li>
-					<!-- <li ng-class="{active: $state.includes('portal.admin.projects.show.flow')}"><a ui-sref="portal.admin.projects.show.flow.stage({stage: cycle.defaults.flow})">Stages</a></li> -->
-					<!-- <li ng-class="{active: $state.includes('portal.admin.projects.show.roles')}"><a ui-sref="portal.admin.projects.show.roles">Roles</a></li> -->
-					<li ng-class="{active: $state.includes('portal.admin.projects.show.users')}"><a ui-sref="portal.admin.projects.show.users">Users</a></li>
-					<!-- <li ng-class="{active: $state.includes('portal.admin.projects.show.statuses')}"><a ui-sref="portal.admin.projects.show.statuses">Statuses</a></li> -->
+					<li ng-class="{active: $state.includes('portal.admin.projects.show.contents')}"><a ui-sref="portal.admin.projects.show.contents">Contents</a></li>
+					<li ng-class="{active: $state.includes('portal.admin.projects.show.assignments')}"><a ui-sref="portal.admin.projects.show.assignments">Assignments</a></li>
+					<!-- <li ng-class="{active: $state.includes('portal.admin.projects.show.invitations')}"><a ui-sref="portal.admin.projects.show.invitations">Invitations</a></li> -->
 				</ul>
 			</div>
-			<form ng-show="source" class="form-horizontal" role="form" ng-submit="replace()">
-				<div ui-ace="{mode: 'json'}" style="height: 600px;" ng-model="projectSource"></div>
-				<div class="panel-body">
-					<a class="btn btn-sm btn-default" ng-click="source=false">Cancel</a>
-					<input type="submit" class="btn btn-sm btn-primary" value="Update">
-				</div>
-			</form>
 		</div>
 
-		<div ng-hide="source" ui-view>
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<span class="panel-title">General</span>
-				</div>
-				<div ng-show="!source" class="panel-body">
-					<form ng-submit="update()" class="form-inline" role="form">
-						<div class="form-group">
-							<label>Status</label>
-							<select class="form-control" ng-model="projectEdit.status" ng-options="key as value.title for (key, value) in cycle.statuses"></select>
-						</div>
-						<button class="btn btn-primary">Save</button>
-					</form>
-				</div>
-			</div>
+
+		<div ui-view>
 			
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<span class="panel-title">Project Contents</span>
-				</div>
-				<div ng-show="!source" class="panel-body">
-					<div ng-repeat="stage in cycle.flow" ng-if="stage.summary" gandhi-component="{cycle: cycle, project: project, stage: stage.id, role: role, mode: 'summary'}"></div>
-				</div>
-				<form ng-show="source" class="form-horizontal" role="form" ng-submit="replace()">
-					<div ui-ace="{mode: 'json'}" style="height: 600px;" ng-model="projectSource"></div>
-					<div class="panel-body">
-						<a class="btn btn-sm btn-default" ng-click="source=false">Cancel</a>
-						<input type="submit" class="btn btn-sm btn-primary" value="Update">
+					<span class="panel-title">General Settings</span>
+					<div class="pull-right">
+						<button class="btn btn-xs" ng-show="update" ng-class="{'btn-default': true, 'active': projectEdit}" ng-click="toggleEdit()"><i class="glyphicon glyphicon-cog"></i></button>
+						<button ng-show="currentUser.preferences.admin.technical" class="btn btn-xs" ng-class="{'btn-default': true, 'active': source.project}" ng-click="toggleSource()"><i class="glyphicon glyphicon-edit"></i></button>
 					</div>
-				</form>
+				</div>
+				<div class="body-panel" ng-if="source.project">
+					<form class="form-horizontal" role="form" ng-submit="updateSource()">
+						<div style="height: 400px;" ng-model="source.project" json ui-ace="{mode: 'json'}"></div>
+						<div class="panel-body">
+							<a class="btn btn-sm btn-default" ng-click="toggleSource()">Hide</a>
+							<input class="btn btn-sm btn-primary" type="submit" value="Update">
+						</div>
+					</form>
+				</div>
+				<div class="panel-body" ng-if="!source.project">
+					<form class="form-horizontal" role="form" ng-submit="update()">
+						<div class="form-group">
+							<label class="col-sm-2 control-label">ID</label>
+							<div class="col-sm-10">
+								<p class="form-control-static">{{project.id}}</p>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="project-title" class="col-sm-2 control-label">Title</label>
+							<div class="col-sm-10">
+								<p ng-show="!projectEdit" class="form-control-static">{{project.title}}</p>
+								<input ng-show="projectEdit" type="text" class="form-control" id="project-title" ng-model="projectEdit.title">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="project-cycle" class="col-sm-2 control-label">Cycle</label>
+							<div class="col-sm-10">
+								<p class="form-control-static">{{cycle.title}}</p>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="project-status" class="col-sm-2 control-label">Status</label>
+							<div class="col-sm-10">
+								<p ng-show="!projectEdit" class="form-control-static">{{statusesById[project.status].title || project.status}}</p>
+								<select ng-show="projectEdit" class="form-control" id="project-status" ng-model="projectEdit.status" ng-options="status.id as status.title for status in statuses" required></select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">Created</label>
+							<div class="col-sm-10">
+								<p class="form-control-static">{{project.created * 1000 | date:"yyyy.MM.dd - hh:mm a"}}</p>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">Updated</label>
+							<div class="col-sm-10">
+								<p class="form-control-static">{{project.updated * 1000 | date:"yyyy.MM.dd - hh:mm a"}}</p>
+							</div>
+						</div>
+						<div class="form-group" ng-show="projectEdit">
+							<div class="col-sm-10 col-sm-offset-2">
+								<input type="submit" class="btn btn-sm btn-primary" ng-show="projectEdit" value="Update">
+							</div>
+						</div>
+					</form>
+
+
+
+				</div>
 			</div>
+
 		</div>
 
 	</div>
 </div>
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
