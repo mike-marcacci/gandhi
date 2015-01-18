@@ -5393,6 +5393,10 @@ html {
 body {
   background-color: transparent !important;
   margin: 0; }
+  body .cke_chromeless .cke_chrome {
+    border: 0 none;
+    -webkit-box-shadow: none;
+    box-shadow: none; }
   body .ace_editor {
     height: 200px; }
   body td .ace_editor {

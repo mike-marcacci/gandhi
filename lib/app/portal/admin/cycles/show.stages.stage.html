@@ -4,14 +4,7 @@
 <div class="row">
 
 	<div class="col-sm-7">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<span class="panel-title">{{component.title}}</span>
-			</div>
-			<div class="panel-body">
-				
-			</div>
-		</div>
+		<div gandhi-component="{cycle: cycle, project: project, stage: stage, mode: 'cycleAdmin'}"></div>
 	</div>
 
 	<div class="col-sm-5">
@@ -20,7 +13,7 @@
 			<div class="panel-heading">
 				<span class="panel-title">Visibility</span>
 				<div class="pull-right">
-					<button class="btn btn-xs" ng-show="update" ng-class="{'btn-default': true, 'active': editVisibility}" ng-click="editVisibility = !editVisibility"><i class="glyphicon glyphicon-cog"></i></button>
+					<button class="btn btn-xs" ng-show="update" ng-class="{'btn-default': true, 'active': editVisibility}" ng-click="toggleVisibility()"><i class="glyphicon glyphicon-cog"></i></button>
 				</div>
 			</div>
 			<form ng-submit="updateVisibility()">
@@ -40,7 +33,7 @@
 						</tr>
 					</tbody>
 				</table>
-				<div class="panel-body">
+				<div class="panel-body" ng-show="editVisibility">
 					<input class="btn btn-sm btn-primary" type="submit" value="Update">
 				</div>
 			</form>
@@ -50,12 +43,12 @@
 			<div class="panel-heading">
 				<span class="panel-title">Permissions</span>
 				<div class="pull-right">
-					<button class="btn btn-xs" ng-show="update" ng-class="{'btn-default': true, 'active': editComponentPermissions}" ng-click="editComponentPermissions = !editComponentPermissions"><i class="glyphicon glyphicon-cog"></i></button>
+					<button class="btn btn-xs" ng-show="update" ng-class="{'btn-default': true, 'active': editComponentPermissions}" ng-click="toggleComponentPermissions()"><i class="glyphicon glyphicon-cog"></i></button>
 				</div>
 			</div>
 			<form ng-submit="updateComponentPermissions()">
 				<gandhi-permissions edit="editComponentPermissions" permissions="component.permissions" roles="rolesById" triggers="triggersById" ng-model="stage.component.permissions"></gandhi-permissions>
-				<div class="panel-body">
+				<div class="panel-body" ng-show="editComponentPermissions">
 					<input class="btn btn-sm btn-primary" type="submit" value="Update">
 				</div>
 			</form>

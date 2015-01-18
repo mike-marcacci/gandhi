@@ -1,49 +1,51 @@
-<div class="alert alert-info" role="alert" ng-show="status == 'draft'" sf-decorator-name="'bootstrap-decorator'">
-	This stage is saved as a draft.
-</div>
-
-<div class="alert alert-info" role="alert" ng-show="status == 'complete'" sf-decorator-name="'bootstrap-decorator'">
-	This stage is complete.
-</div>
-
-<div class="alert alert-warning" role="alert" ng-show="!permissions.read" sf-decorator-name="'bootstrap-decorator'">
-	You are not allowed to see the contents of this stage.
-</div>
-
-<div class="alert alert-warning" role="alert" ng-show="!permissions.write && permissions.read" sf-decorator-name="'bootstrap-decorator'">
-	Please note, you are not allowed to make changes to this stage.
-</div>
-
-<div ng-show="permissions.read" class="row" ng-show="permissions.read">
-
-	<div class="col-md-6" ng-show="options.info">
-		<div class="panel panel-default" ng-show="options.info">
-			<div class="panel-heading">
-				<span class="panel-title">{{cycle.title}}</span>
-			</div>
-			<div class="panel-body">
-				<div ng-bind-html="options.info"></div>
-			</div>
-		</div>
+<div ng-if="content.authorizations">
+	<div class="alert alert-info" role="alert" ng-if="content.status == 'draft'">
+		This stage is saved as a draft.
 	</div>
 
-	<div ng-class="{'col-md-6': options.info, 'col-md-12': !options.info}">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<span class="panel-title">{{data.title || 'Start'}}</span>
-			</div>
-			<div class="panel-body">
-				<form role="form" ng-submit="submit()">
-					<div class="form-group">
-						<label for="title">Title</label>
-						<input type="text" class="form-control" id="title" placeholder="Your Project's Title Goes Here" ng-model="data.title" ng-disabled="!permissions.write">
-					</div>
-
-					<input ng-show="permissions.write" type="submit" class="btn btn-sm btn-primary" value="Submit" ng-disabled="!data.title">
-				</form>
-
-			</div>
-		</div>
+	<div class="alert alert-info" role="alert" ng-if="content.status == 'complete'">
+		This stage is complete.
 	</div>
 
+	<div class="alert alert-warning" role="alert" ng-if="!content.authorizations.read">
+		You are not allowed to see the contents of this stage.
+	</div>
+
+	<div class="alert alert-warning" role="alert" ng-if="!content.authorizations.write &amp;&amp; content.authorizations.read">
+		Please note, you are not allowed to make changes to this stage.
+	</div>
+
+	<div ng-show="content.authorizations.read" class="row" ng-show="content.authorizations.read">
+
+		<div class="col-md-6" ng-show="stage.component.options.info">
+			<div class="panel panel-default" ng-show="stage.component.options.info">
+				<div class="panel-heading">
+					<span class="panel-title">{{cycle.title}}</span>
+				</div>
+				<div class="panel-body">
+					<div ng-bind-html="stage.component.options.info"></div>
+				</div>
+			</div>
+		</div>
+
+		<div ng-class="{'col-md-6': stage.component.options.info, 'col-md-12': !stage.component.options.info}">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<span class="panel-title">{{project.title || 'Start'}}</span>
+				</div>
+				<div class="panel-body">
+					<form role="form" ng-submit="update()">
+						<div class="form-group">
+							<label for="title">Title</label>
+							<input type="text" class="form-control" id="title" placeholder="Your Project's Title Goes Here" ng-model="project.title" ng-disabled="!content.authorizations.write">
+						</div>
+
+						<input ng-show="content.authorizations.write" type="submit" class="btn btn-sm btn-primary" value="Submit" ng-disabled="!project.title">
+					</form>
+
+				</div>
+			</div>
+		</div>
+
+	</div>
 </div>

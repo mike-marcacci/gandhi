@@ -34,8 +34,15 @@ body {
 	background-color: transparent !important;
 	margin: 0;
 
-	.ace_editor { height: 200px; }
+	// ckeditor styles
+	.cke_chromeless .cke_chrome {
+		border: 0 none;
+		-webkit-box-shadow: none;
+		box-shadow: none;
+	}
 
+	// ace styles
+	.ace_editor { height: 200px; }
 	td .ace_editor { height: 80px; }
 
 	// bootstrap styles
