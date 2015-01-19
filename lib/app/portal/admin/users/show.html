@@ -34,6 +34,36 @@
 
 		<div class="panel panel-default">
 			<div class="panel-heading">
+				<span class="panel-title">Notifications</span>
+			</div>
+			<div ng-if="!notifications.length" class="panel-body">This user has no notifications.</div>
+			<div ng-if="notifications.length" ng-repeat="notification in notifications">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Subject</th>
+							<th>Status</th>
+							<th>Content</th>
+							<th>Created</th>
+							<th>Updated</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ui-sref-active="active" ng-repeat="notification in notifications">
+							<td>{{notification.subject}}</td>
+							<td>{{notification.status}}</td>
+							<td><div ng-bind-html="notification.content"></div></td>
+							<td>{{notification.created * 1000 | date:"yyyy.MM.dd - hh:mm a"}}</td>
+							<td>{{notification.updated * 1000 | date:"yyyy.MM.dd - hh:mm a"}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
 				<span class="panel-title">Projects</span>
 			</div>
 			<div ng-if="!projects.length" class="panel-body">This user has no projects.</div>

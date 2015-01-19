@@ -3,22 +3,20 @@
 	<li class="active">{{project.title}}</li>
 </ol>
 
+
 <div class="panel panel-default">
-	<div class="panel-heading">
-		<span class="panel-title">{{project.title}} <span style="opacity: .5;" class="pull-right">{{cycle.title}}</span></span>
-	</div>
 	<div class="panel-body">
-		<div ng-if="cycle.config.layout === 'waterfall'" class="waterfall-wrapper"><div class="waterfall-scroller">
-			<div waterfall="waterfallOptions" ng-model="index"></div>
-		</div></div>
-		<ul ng-if="cycle.config.layout === 'pill'" class="nav nav-pills">
-			<li ng-class="{active: stage === node.id}" ng-repeat="node in ordered" ng-show="node.visible"><a ui-sref="portal.projects.show.flow({stage: node.id})" ng-bind-html="node.html"></a></li>
+		<ul class="nav nav-pills">
+			<li ng-class="{active: $state.is('portal.projects.show.contents')}">
+				<a ui-sref="portal.projects.show.contents"><i class="glyphicon glyphicon-list"></i></a>
+			</li>
+			<li ng-class="{active: $state.includes('portal.projects.show.contents.content', {content: stage.id})}" ng-repeat="stage in stages">
+				<a ui-sref="portal.projects.show.contents.content({content: stage.id})" ng-bind-html="stage.title"></a>
+			</li>
 		</ul>
 	</div>
 </div>
 
 <div ui-view>
-	<div gandhi-component="{cycle: cycle, project: project, stage: cycle.defaults.flow, role: role, mode: 'default'}"></div>
-</div>
 
-<style>svg.waterfall div { cursor: pointer; }</style>
+</div>
