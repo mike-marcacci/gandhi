@@ -61,7 +61,7 @@
 				<div ng-if="!(projects | filter : {authorizations:{create:true}}).length">You have no active projects.</div>
 				<div ng-if="(projects | filter : {authorizations:{create:true}}).length" class="list-group">
 					<div ng-repeat="project in projects | filter : {authorizations:{create:true}}" class="list-group-item">
-						<h4 class="list-group-item-heading">{{project.title}}</h4>
+						<a ui-sref="portal.projects.show({project: project.id})">{{project.title}}</a>
 					</div>
 				</div>
 			</div>

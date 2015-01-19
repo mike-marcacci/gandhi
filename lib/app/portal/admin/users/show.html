@@ -35,6 +35,9 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<span class="panel-title">Notifications</span>
+				<div class="pull-right">
+					<!-- <button class="btn btn-xs btn-default" ng-class="{'active': createNotification}" ng-click="toggleCreateNotification()"><i class="glyphicon glyphicon-plus-sign"></i></button> -->
+				</div>
 			</div>
 			<div ng-if="!notifications.length" class="panel-body">This user has no notifications.</div>
 			<div ng-if="notifications.length" ng-repeat="notification in notifications">
@@ -43,7 +46,6 @@
 						<tr>
 							<th>Subject</th>
 							<th>Status</th>
-							<th>Content</th>
 							<th>Created</th>
 							<th>Updated</th>
 						</tr>
@@ -52,7 +54,6 @@
 						<tr ui-sref-active="active" ng-repeat="notification in notifications">
 							<td>{{notification.subject}}</td>
 							<td>{{notification.status}}</td>
-							<td><div ng-bind-html="notification.content"></div></td>
 							<td>{{notification.created * 1000 | date:"yyyy.MM.dd - hh:mm a"}}</td>
 							<td>{{notification.updated * 1000 | date:"yyyy.MM.dd - hh:mm a"}}</td>
 						</tr>
@@ -67,7 +68,7 @@
 				<span class="panel-title">Projects</span>
 			</div>
 			<div ng-if="!projects.length" class="panel-body">This user has no projects.</div>
-			<div ng-if="projects.length" ng-repeat="project in projects">
+			<div ng-if="projects.length">
 				<table class="table table-hover">
 					<thead>
 						<tr>

@@ -22,6 +22,11 @@ r.connect({host: host, db: db}).then(function(conn){
 
   var tasks = [];
 
+  // Notifications
+  // -------------
+
+  tasks.push(r.branch(r.tableList().contains('notifications'), null, tableCreate('notifications').run(conn)));
+
 
   // Cycles
   // ------
@@ -32,30 +37,39 @@ r.connect({host: host, db: db}).then(function(conn){
 
     return cycle.merge({
       assignments: cycle('users').default(cycle('assignments')),
-      stages: cycle('flow').default(cycle('stages')).without({
-        next: true
-      }).merge({
-        order: 0
-      }),
+      stages: cycle('flow').coerceTo('array').map(function(flowKV){
+        return [flowKV.nth(0), flowKV.nth(1).merge({ order: 0 }).without({
+          next: true
+        })];
+      }).coerceTo('object').default(cycle('stages')),
       exports: cycle('exports').default({}),
       open: ['open'],
       close: ['close'],
-      triggers: r.literal(cycle('events').coerceTo('array').map(function(eventKV){
-        return [eventKV.nth(0), eventKV.nth(1).merge({
-          timestamp: eventKV.nth(1)('date')
-        }).without({
-          date: true,
+      triggers: cycle('events').coerceTo('array').map(function(eventKV){
+        return [eventKV.nth(0), eventKV.nth(1).without({
           messages: true
         })];
-      }).coerceTo('object').default(cycle('triggers'))),
+      }).coerceTo('object').default(cycle('triggers')),
       permissions: {
         create: allPermissions,
         read: allPermissions,
         update: allPermissions,
         destroy: {}
       },
-      created: cycle('created').toEpochTime(),
-      updated: cycle('updated').toEpochTime()
+      created: r.branch(cycle('created').default(new Date().toISOString()).typeOf().eq('STRING'),
+        r.ISO8601(cycle('created').default(new Date().toISOString())).toEpochTime(),
+        r.branch(cycle('created').typeOf().eq('NUMBER'),
+          cycle('created'),
+          cycle('created').toEpochTime()
+          )
+        ),
+      updated: r.branch(cycle('updated').default(new Date().toISOString()).typeOf().eq('STRING'),
+        r.ISO8601(cycle('updated').default(new Date().toISOString())).toEpochTime(),
+        r.branch(cycle('updated').typeOf().eq('NUMBER'),
+          cycle('updated'),
+          cycle('updated').toEpochTime()
+          )
+        )
     }).without({
       users: true,
       flow: true,
@@ -70,15 +84,27 @@ r.connect({host: host, db: db}).then(function(conn){
     return project.merge({
       assignments: project('users').default(project('assignments')),
       contents: project('flow').default(project('contents')),
-      events: r.literal(project('events').coerceTo('array').map(function(eventKV){
+      events: r.literal(project('events').default({}).coerceTo('array').map(function(eventKV){
         return [eventKV.nth(0), eventKV.nth(1).merge({
           timestamp: eventKV.nth(1)('date')
         }).without({
           date: true
         })];
-      }).coerceTo('object'),
-      created: project('created').toEpochTime(),
-      updated: project('updated').toEpochTime()
+      }).coerceTo('object')),
+      created: r.branch(project('created').default(new Date().toISOString()).typeOf().eq('STRING'),
+        r.ISO8601(project('created').default(new Date().toISOString())).toEpochTime(),
+        r.branch(project('created').typeOf().eq('NUMBER'),
+          project('created'),
+          project('created').toEpochTime()
+          )
+        ),
+      updated: r.branch(project('updated').default(new Date().toISOString()).typeOf().eq('STRING'),
+        r.ISO8601(project('updated').default(new Date().toISOString())).toEpochTime(),
+        r.branch(project('updated').typeOf().eq('NUMBER'),
+          project('updated'),
+          project('updated').toEpochTime()
+          )
+        )
     }).without({
       users: true,
       flow: true
@@ -90,8 +116,21 @@ r.connect({host: host, db: db}).then(function(conn){
   // -----
   tasks.push(r.table('users').replace(function(user){
     return user.merge({
-      created: user('created').toEpochTime(),
-      updated: user('updated').toEpochTime()
+      admin: user('admin').default(false),
+      created: r.branch(user('created').typeOf().eq('STRING'),
+        r.ISO8601(user('created')).toEpochTime(),
+        r.branch(user('created').typeOf().eq('NUMBER'),
+          user('created'),
+          user('created').toEpochTime()
+          )
+        ),
+      updated: r.branch(user('updated').typeOf().eq('STRING'),
+        r.ISO8601(user('updated')).toEpochTime(),
+        r.branch(user('updated').typeOf().eq('NUMBER'),
+          user('updated'),
+          user('updated').toEpochTime()
+          )
+        )
     });
   }).run(conn));
 
@@ -100,8 +139,20 @@ r.connect({host: host, db: db}).then(function(conn){
   // -----
   tasks.push(r.table('files').replace(function(file){
     return file.merge({
-      created: file('created').toEpochTime(),
-      updated: file('updated').toEpochTime()
+      created: r.branch(file('created').typeOf().eq('STRING'),
+        r.ISO8601(file('created')).toEpochTime(),
+        r.branch(file('created').typeOf().eq('NUMBER'),
+          file('created'),
+          file('created').toEpochTime()
+          )
+        ),
+      updated: r.branch(file('updated').typeOf().eq('STRING'),
+        r.ISO8601(file('updated')).toEpochTime(),
+        r.branch(file('updated').typeOf().eq('NUMBER'),
+          file('updated'),
+          file('updated').toEpochTime()
+          )
+        )
     });
   }).run(conn));
 

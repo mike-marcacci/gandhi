@@ -7,16 +7,51 @@
 <div class="panel panel-default">
 	<div class="panel-body">
 		<ul class="nav nav-pills">
-			<li ng-class="{active: $state.is('portal.projects.show.contents')}">
-				<a ui-sref="portal.projects.show.contents"><i class="glyphicon glyphicon-list"></i></a>
+			<li ng-class="{active: $state.is('portal.projects.show', {project: project.id})}">
+				<a ui-sref="portal.projects.show({project: project.id})"><i class="glyphicon glyphicon-list"></i></a>
 			</li>
-			<li ng-class="{active: $state.includes('portal.projects.show.contents.content', {content: stage.id})}" ng-repeat="stage in stages">
-				<a ui-sref="portal.projects.show.contents.content({content: stage.id})" ng-bind-html="stage.title"></a>
+			<li ng-class="{active: $state.includes('portal.projects.show.contents.content', {content: content.id})}" ng-repeat="content in contents">
+				<a ui-sref="portal.projects.show.contents.content({content: content.id})" ng-bind-html="stagesById[content.id].title"></a>
 			</li>
 		</ul>
 	</div>
 </div>
 
 <div ui-view>
+
+	<div class="row" ng-if="cycle">
+
+		<div class="col-md-6" ng-show="cycle.info">
+			<div class="panel panel-default" ng-show="cycle.info">
+				<div class="panel-heading">
+					<span class="panel-title">{{cycle.title}}</span>
+				</div>
+				<div class="panel-body">
+					<div ng-bind-html="cycle.info"></div>
+				</div>
+			</div>
+		</div>
+
+		<div ng-class="{'col-md-6': cycle.info, 'col-md-12': !cycle.info}">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<span class="panel-title">New Project</span>
+				</div>
+				<div class="panel-body">
+					<div ng-if="!cycle.open" class="alert alert-warning">This cycle is not open.</div>
+					<form ng-if="cycle.open" role="form" ng-submit="createProject()">
+						<div class="form-group">
+							<label for="title">Title</label>
+							<input type="text" class="form-control" id="title" placeholder="Your Project's Title Goes Here" ng-model="project.title">
+						</div>
+
+						<input type="submit" class="btn btn-sm btn-primary" value="Submit" ng-disabled="!project.title">
+					</form>
+
+				</div>
+			</div>
+		</div>
+
+	</div>
 
 </div>
