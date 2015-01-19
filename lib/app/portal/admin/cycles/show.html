@@ -37,6 +37,7 @@
 
 		<div ui-view>
 			
+			<!-- Settings -->
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<span class="panel-title">General Settings</span>
@@ -116,27 +117,26 @@
 						</div>
 					</form>
 
-
-
 				</div>
 			</div>
 
-			<div class="panel panel-default" ng-hide="roleCreate">
+			<!-- Info -->
+			<div class="panel panel-default">
 				<div class="panel-heading">
-					<span class="panel-title">Permissions</span>
+					<span class="panel-title">Info</span>
 					<div class="pull-right">
-						<button class="btn btn-xs" ng-show="update" ng-class="{'btn-default': true, 'active': cyclePermissionsEdit}" ng-click="togglePermissionsEdit()"><i class="glyphicon glyphicon-cog"></i></button>
+						<button class="btn btn-xs" ng-show="update" ng-class="{'btn-default': true, 'active': cycleInfoEdit}" ng-click="toggleInfoEdit()"><i class="glyphicon glyphicon-cog"></i></button>
 					</div>
 				</div>
-				<form ng-submit="updatePermissions()">
-					<div ng-show="roles.length">
-						<gandhi-permissions edit="cyclePermissionsEdit" permissions="permissions" roles="rolesById" triggers="triggersById" ng-model="cycle.permissions"></gandhi-permissions>
-						<div ng-if="cyclePermissionsEdit" class="panel-body" style="padding-top: 0;">
-							<input type="submit" class="btn btn-sm btn-primary" value="Update">
-						</div>
-					</div>
-				</form>
+				<div class="panel-body" ng-if="!cycleInfoEdit" ng-bind-html="cycle.info"></div>
+				<div class="cke_chromeless" ng-if="cycleInfoEdit">
+					<textarea class="form-control" style="height: auto;" ckeditor ng-model="cycle.info"></textarea>
+				</div>
+				<div class="panel-body">
+					<div ng-click="updateInfo()" class="btn btn-sm btn-primary">Update</div>
+				</div>
 			</div>
+
 
 		</div>
 

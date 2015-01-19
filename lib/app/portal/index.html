@@ -19,9 +19,14 @@
 					<li><a ng-class="{active: $state.includes('portal.admin.files')}" ui-sref="portal.admin.files.list">Files</a></li>
 				</ul>
 			</li>
+			<li><a ng-class="{active: $state.includes('portal.cycles')}" ui-sref="portal.cycles.list"><i class="glyphicon glyphicon-calendar"></i>Cycles</a>
+				<ul ng-show="cycles.length">
+					<li ng-repeat="cycle in cycles"><a ng-class="{active: $state.includes('portal.cycles.show') &amp;&amp; $state.params.cycle == cycle.id}" ui-sref="portal.cycles.show({cycle: cycle.id})">{{cycle.title}}</a></li>
+				</ul>
+			</li>
 			<li><a ng-class="{active: $state.includes('portal.projects')}" ui-sref="portal.projects.list"><i class="glyphicon glyphicon-tasks"></i>Projects</a>
 				<ul ng-show="projects.length">
-					<li ng-repeat="project in projects"><a ng-class="{active: $state.includes('portal.projects.show') && $state.params.project == project.id}" ui-sref="portal.projects.show({project: project.id})">{{project.title}}</a></li>
+					<li ng-repeat="project in projects"><a ng-class="{active: $state.includes('portal.projects.show') &amp;&amp; $state.params.project == project.id}" ui-sref="portal.projects.show({project: project.id})">{{project.title}}</a></li>
 				</ul>
 			</li>
 		</ul>

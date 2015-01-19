@@ -2,7 +2,7 @@
 	<div class="panel-heading">
 		<span class="panel-title">Create Role</span>
 		<div class="pull-right">
-			<button class="btn btn-xs btn-default" ng-class="{active: roleCreate}" ng-click="toggleCreate()"><i class="glyphicon glyphicon-plus"></i></button>
+			<button class="btn btn-xs btn-default" ng-class="{active: roleCreate}" ng-click="toggleCreate()"><i class="glyphicon glyphicon-plus-sign"></i></button>
 		</div>
 	</div>
 	<div class="panel-body">
@@ -33,7 +33,7 @@
 	<div class="panel-heading">
 		<span class="panel-title">Roles</span>
 		<div class="pull-right">
-			<button class="btn btn-xs btn-default" ng-class="{active: roleCreate}" ng-click="toggleCreate()"><i class="glyphicon glyphicon-plus"></i></button>
+			<button class="btn btn-xs btn-default" ng-class="{active: roleCreate}" ng-click="toggleCreate()"><i class="glyphicon glyphicon-plus-sign"></i></button>
 		</div>
 	</div>
 
@@ -98,4 +98,21 @@
 			</tbody>
 		</table>
 	</div>
+</div>
+
+<div class="panel panel-default" ng-hide="roleCreate">
+	<div class="panel-heading">
+		<span class="panel-title">Permissions</span>
+		<div class="pull-right">
+			<button class="btn btn-xs" ng-show="update" ng-class="{'btn-default': true, 'active': cyclePermissionsEdit}" ng-click="togglePermissionsEdit()"><i class="glyphicon glyphicon-cog"></i></button>
+		</div>
+	</div>
+	<form ng-submit="updatePermissions()">
+		<div ng-show="roles.length">
+			<gandhi-permissions edit="cyclePermissionsEdit" permissions="permissions" roles="rolesById" triggers="triggersById" ng-model="cycle.permissions"></gandhi-permissions>
+			<div ng-if="cyclePermissionsEdit" class="panel-body" style="padding-top: 0;">
+				<input type="submit" class="btn btn-sm btn-primary" value="Update">
+			</div>
+		</div>
+	</form>
 </div>

@@ -17,6 +17,10 @@
       "type": "string",
       "default": ""
     },
+    "info": {
+      "type": "string",
+      "default": ""
+    },
     "triggers": {
       "type": "object",
       "default": {

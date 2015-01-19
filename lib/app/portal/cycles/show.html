@@ -1,0 +1,72 @@
+<ol class="breadcrumb">
+	<li><a ui-sref="portal.cycles.list">Cycles</a></li>
+	<li class="active">{{cycle.title}}</li>
+</ol>
+
+<ul class="nav nav-tabs">
+	<li ng-class="{active: assignedOnly}" ng-click="setAssignedOnly(true)"><a href>Assigned Projects</a></li>
+	<li ng-class="{active: !assignedOnly}" ng-click="setAssignedOnly(false)"><a href>All Projects</a></li>
+</ul>
+<div class="panel panel-default">
+	<div class="panel-body" ng-if="!projects.length">
+		<span ng-show="assignedOnly">You have no assigned projects in this cycle.</span>
+		<span ng-show="!assignedOnly">There are no projects in this cycle.</span>
+	</div>
+	<table class="table table-hover" ng-if="projects.length">
+		<thead>
+			<tr>
+				<th>Title</th>
+				<th>Role</th>
+				<th>Status</th>
+				<th>Created</th>
+				<th>Updated</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ui-sref-active="active" ng-repeat="project in projects" ui-sref="portal.projects.show({project: project.id})" style="cursor: pointer;">
+				<td>{{project.title}}</td>
+				<td>{{project.role.title}}</td>
+				<td>{{project.statusDetails.title}}</td>
+				<td>{{project.created * 1000 | date:"yyyy.MM.dd - hh:mm a"}}</td>
+				<td>{{project.updated * 1000 | date:"yyyy.MM.dd - hh:mm a"}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+
+
+<div class="row" ng-if="cycle">
+
+	<div class="col-md-6" ng-show="cycle.info">
+		<div class="panel panel-default" ng-show="cycle.info">
+			<div class="panel-heading">
+				<span class="panel-title">{{cycle.title}}</span>
+			</div>
+			<div class="panel-body">
+				<div ng-bind-html="cycle.info"></div>
+			</div>
+		</div>
+	</div>
+
+	<div ng-class="{'col-md-6': cycle.info, 'col-md-12': !cycle.info}">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<span class="panel-title">New Project</span>
+			</div>
+			<div class="panel-body">
+				<div ng-if="!cycle.open" class="alert alert-warning">This cycle is not open.</div>
+				<form ng-if="cycle.open" role="form" ng-submit="createProject()">
+					<div class="form-group">
+						<label for="title">Title</label>
+						<input type="text" class="form-control" id="title" placeholder="Your Project's Title Goes Here" ng-model="project.title">
+					</div>
+
+					<input type="submit" class="btn btn-sm btn-primary" value="Submit" ng-disabled="!project.title">
+				</form>
+
+			</div>
+		</div>
+	</div>
+
+</div>
