@@ -1,55 +1,43 @@
 <h1>Dashboard</h1>
 <p>&nbsp;</p>
-<div class="row">
-	<div class="col-sm-6">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<span class="panel-title">Notifications</span>
-			</div>
-			<div class="panel-body">
-				<div ng-show="projects.length" class="list-group">
-					<a ng-repeat="project in projects" class="list-group-item" ng-class="{active: $state.includes('portal.projects.show') && $state.params.project == project.id}" ui-sref="portal.projects.show({project: project.id})">{{project.title}} <span class="badge">{{project.users[currentUser.id].role}}</span></a>
-				</div>
-			</div>
-		</div>
 
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<span class="panel-title">Invitations</span>
-			</div>
-			<div class="panel-body">
-				<span class="help-block">If you have received an invitation code, paste it below.</span>
-				<form ng-submit="acceptInvitation()">
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Paste Invitation Code Here" ng-model="invitationCode">
-						<span class="input-group-btn">
-							<input type="submit" class="btn btn-primary" type="button" value="Go!">
-						</span>
-					</div>
-				</form>
-			</div>
-		</div>
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<span class="panel-title">Invitations</span>
 	</div>
-
-	<div class="col-sm-6">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<span class="panel-title">Open Cycles</span>
+	<div class="panel-body">
+		<span class="help-block">If you have received an invitation code, paste it below.</span>
+		<form ng-submit="acceptInvitation()">
+			<div class="input-group">
+				<input type="text" class="form-control" placeholder="Paste Invitation Code Here" ng-model="invitationCode">
+				<span class="input-group-btn">
+					<input type="submit" class="btn btn-primary" type="button" value="Go!">
+				</span>
 			</div>
-			<div class="panel-body">
-				<div class="list-group">
-					<div ng-repeat="cycle in cycles" class="list-group-item">
-						<h4 class="list-group-item-heading">{{cycle.title}}</h4>
-						<div class="list-group-item-text" ng-bind-html="cycle.description"></div>
-						<div style="padding: 1em 0 .5em;">
-							<a ui-sref="portal.projects.create({cycle: cycle.id})" class="btn btn-sm btn-primary">Start Application</a>
-						</div>
-					</div>
+		</form>
+	</div>
+</div>
+
+<br>
+
+<div ng-repeat="cycle in cycles" class="panel panel-default" ng-if="cycle.isOpen || projectsByCycleId[cycle.id]">
+	<div class="panel-heading">
+		<span class="panel-title">{{cycle.title}}</span>
+	</div>
+	<div class="panel-body">
+		<div ng-show="projects.length" class="list-group">
+			<a ng-repeat="project in projectsByCycleId[cycle.id]" class="list-group-item" ng-class="{active: $state.includes('portal.projects.show') && $state.params.project == project.id}" ui-sref="portal.projects.show({project: project.id})"><b>{{project.title}}</b> <span class="badge">{{project.users[currentUser.id].role}}</span></a>
+			<div ng-if="cycle.isOpen" class="list-group-item" style="font-size: .9em;">
+				<div class="list-group-item-text" ng-bind-html="cycle.description"></div>
+				<div style="padding: 1em 0 .5em;">
+					<a ui-sref="portal.projects.create({cycle: cycle.id})" class="btn btn-sm btn-primary">Start Application</a>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+
 
 <!-- <div class="panel panel-default">
 	<div class="panel-heading">
