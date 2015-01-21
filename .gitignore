@@ -5,6 +5,7 @@
 /config.json
 /config.js
 /lib/app/assets/bower
+/lib/app/assets/style/.sass-cache
 /rethinkdb_data
 /uploads
 /files

@@ -1,3 +1,29 @@
+$icon-font-path: "../bower/bootstrap-sass-official/assets/fonts/bootstrap/";
+$brand-primary: #428bca;
+// $brand-primary: #993636;
+@import "../bower/bootstrap-sass-official/assets/stylesheets/bootstrap";
+
+.btn {
+	line-height: 1.42857143 !important;
+}
+
+.table > thead > tr > td.active,
+.table > thead > tr > th.active,
+.table > thead > tr.active > td,
+.table > thead > tr.active > th,
+.table > tbody > tr > td.active,
+.table > tbody > tr > th.active,
+.table > tbody > tr.active > td,
+.table > tbody > tr.active > th,
+.table > tfoot > tr > td.active,
+.table > tfoot > tr > th.active,
+.table > tfoot > tr.active > td,
+.table > tfoot > tr.active > th {
+	background-color: scale-color($brand-primary, $lightness: 85%);
+}
+
+
+
 html {
 	min-height: 100%;
 	background-color: rgb(253, 253, 253);
@@ -72,7 +98,7 @@ body {
 	.nav-tabs > li.active > a:focus {
 		border-style: solid;
 		border-width: 2px 0 0 0;
-		border-color: #428bca;
+		border-color: $brand-primary;
 	}
 
 	.nav-tabs > li > a {
@@ -206,7 +232,7 @@ body {
 			border-left: 2px solid transparent;
 			display: block;
 			&.active {
-				border-left-color: #428bca;
+				border-left-color: $brand-primary;
 			}
 			&:hover {
 				background-color: #f5f5f5;
@@ -275,7 +301,7 @@ body {
 					line-height: 1.3em;
 
 					&.active {
-						background-color: rgb(232, 241, 248);
+						background-color: scale-color($brand-primary, $saturation: -70%, $lightness: 85%);
 					}
 				}
 			}
