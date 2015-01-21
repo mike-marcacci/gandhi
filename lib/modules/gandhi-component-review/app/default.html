@@ -5,12 +5,12 @@
 	</div>
 
 	<ul class="nav nav-tabs" role="tablist">
-		<li ng-show="permissions.write" ng-class="{active: tab === 'write'}"><a href ng-click="tab = 'write'">Write a Review</a></li>
+		<li ng-show="permissions.write && !isAdmin" ng-class="{active: tab === 'write'}"><a href ng-click="tab = 'write'">Write a Review</a></li>
 		<li ng-show="permissions['read:public']" ng-class="{active: tab === 'read'}"><a href ng-click="tab = 'read'">Read Reviews</a></li>
 	</ul>
 
 	<div class="panel panel-default">
-		<div class="panel-body" ng-show="permissions.write && tab === 'write'">
+		<div class="panel-body" ng-show="permissions.write && !isAdmin && tab === 'write'">
 			<div class="row">
 				<div class="col-sm-6">
 					<h2>Proposal</h2>
@@ -47,8 +47,8 @@
 
 					<form name="gandhiComponentReview" ng-submit="write.submit(gandhiComponentReview, data)">
 						<div sf-model="write.review.data" sf-form="options.form" sf-schema="options.schema" sf-options="{}"></div>
-						<div ng-show="permissions.write" ng-click="write.save()" class="btn btn-default" ng-bind="options.draftButtonText || 'Save Draft'"></div>
-						<button ng-show="permissions.write" class="btn btn-primary" ng-bind="options.submitButtonText || 'Submit'"></button>
+						<!-- <div ng-show="permissions.write" ng-click="write.save()" class="btn btn-default" ng-bind="options.draftButtonText || 'Save Draft'"></div> -->
+						<button ng-show="permissions.write" class="btn btn-primary" ng-bind="options.submitButtonText || 'Save'"></button>
 					</form>
 				</div>
 			</div>

@@ -5,7 +5,15 @@
 
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<span class="panel-title">{{project.title}} <span style="opacity: .5;" class="pull-right">{{cycle.title}}</span></span>
+		<div class="panel-title"><b>{{project.title}}</b>
+			<!-- HACK for vision grants -->
+			<span ng-if="project.flow.full_proposal.data.investigators[0].name" style="opacity: .5;">(<span ng-repeat="(i, investogator) in project.flow.full_proposal.data.investigators"><span ng-if="i >0">, </span>{{investogator.name}}</span>)</span>
+
+			<!-- HACK for seed grants -->
+			<span ng-if="project.flow.application.data.investigators[0].name" style="opacity: .5;">(<span ng-repeat="(i, investogator) in project.flow.application.data.investigators"><span ng-if="i >0">, </span>{{investogator.name}}</span>)</span>
+
+			<span style="opacity: .5;" class="pull-right">{{cycle.title}}</span>
+		</div>
 	</div>
 	<div class="panel-body">
 		<div ng-if="cycle.config.layout === 'waterfall'" class="waterfall-wrapper"><div class="waterfall-scroller">
