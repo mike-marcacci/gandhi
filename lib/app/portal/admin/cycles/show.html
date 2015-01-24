@@ -132,7 +132,7 @@
 				<div class="cke_chromeless" ng-if="cycleInfoEdit">
 					<textarea class="form-control" style="height: auto;" ckeditor ng-model="cycle.info"></textarea>
 				</div>
-				<div class="panel-body">
+				<div class="panel-body" ng-if="cycleInfoEdit">
 					<div ng-click="updateInfo()" class="btn btn-sm btn-primary">Update</div>
 				</div>
 			</div>

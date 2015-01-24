@@ -73,32 +73,98 @@ body {
 		font-size: 14px;
 	}
 
-	// TODO: apply these tabs to all directions!
 	.nav-tabs {
+		z-index: 1;
+
+		> li > a {
+			border-radius: 0;
+			border-color: transparent;
+		}
+
+		> li.active > a,
+		> li.active > a:hover,
+		> li.active > a:focus {
+			border-style: solid;
+			border-color: $brand-primary;
+			-webkit-box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.1);
+			box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.1);
+			z-index: -1;
+			position: relative;
+		}
+
+		> li > a:hover {
+			background-color: transparent;
+			border-color: transparent;
+		}
+
+	}
+
+	// Top Tabs
+	.nav-tabs:not(.tabs-left):not(.tabs-right) {
 		border-bottom: 1px solid transparent;
+
+		> li > a {
+			border-width: 2px 0 0 0;
+		}
+
+		+ .panel {
+			border-top-left-radius: 0;
+			border-top-right-radius: 0;
+		}
 	}
 
-	.nav-tabs > li.active > a,
-	.nav-tabs > li.active > a:hover,
-	.nav-tabs > li.active > a:focus {
-		border-style: solid;
-		border-width: 2px 0 0 0;
-		border-color: $brand-primary;
+	// Left Tabs
+	.nav-tabs.tabs-left {
+		border-right: 1px solid transparent;
+		padding-right: 0;
+
+		> li > a {
+			border-width: 0 0 0 2px;
+		}
+
+		> li.active::after {
+			content: "";
+			display: block;
+			position: absolute;
+			top: 0;
+			right: -1px;
+			width: 2px;
+			background: #fff;
+			bottom: 0;
+		}
+
+		+ .panel {
+			padding-left: 0;
+			border-top-left-radius: 0;
+		}
 	}
 
-	.nav-tabs > li > a {
-		border-radius: 0;
-		border-width: 2px 0 0 0;
-		border-color: transparent;
+	// Right Tabs
+	.nav-tabs.tabs-right {
+		border-left: 1px solid transparent;
+		padding-left: 0;
+
+		> li > a {
+			border-width: 0 2px 0 0;
+		}
+
+		> li.active::after {
+			content: "";
+			display: block;
+			position: absolute;
+			top: 0;
+			left: -1px;
+			width: 2px;
+			background: #fff;
+			bottom: 0;
+		}
 	}
 
-	.nav-tabs > li > a:hover {
-		background-color: transparent;
-		border-color: transparent;
-	}
-
-	.nav-tabs + .panel {
-		border-top-left-radius: 0;
+	// because there's no way to do look-behind in CSS,
+	// any panel that belongs to a .tabs-right will need
+	// the class "tabs-right-panel"
+	.tabs-right-panel {
+		padding-right: 0;
 		border-top-right-radius: 0;
 	}
 
