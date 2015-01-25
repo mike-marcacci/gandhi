@@ -29,7 +29,7 @@
 			<tr ui-sref-active="active" ng-repeat="project in projects" ui-sref="portal.projects.show({project: project.id})" style="cursor: pointer;">
 				<td>{{project.title}}</td>
 				<td>{{project.role.title}}</td>
-				<td>{{project.statusDetails.title}}</td>
+				<td>{{project.status.title}}</td>
 				<td>{{project.created * 1000 | date:"yyyy.MM.dd - hh:mm a"}}</td>
 				<td>{{project.updated * 1000 | date:"yyyy.MM.dd - hh:mm a"}}</td>
 			</tr>

@@ -39,4 +39,18 @@ describe('Fixtures', function(){
 		})
 	});
 
+	it('should have valid users', function(){
+		require('../fixtures/db/users.json').forEach(function(cycle){
+			var err = validator.validate('http://www.gandhi.io/schema/user', cycle);
+			if(err) throw new Error(JSON.stringify(_.extend(err, {id: cycle.id})));
+		})
+	});
+
+	it('should have valid notifications', function(){
+		require('../fixtures/db/notifications.json').forEach(function(cycle){
+			var err = validator.validate('http://www.gandhi.io/schema/notification', cycle);
+			if(err) throw new Error(JSON.stringify(_.extend(err, {id: cycle.id})));
+		})
+	});
+
 });

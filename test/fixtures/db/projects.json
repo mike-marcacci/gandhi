@@ -1,5 +1,5 @@
 [{
-	"status": "active",
+	"status_id": "active",
 	"cycle_id": "128f2348-99d4-40a1-b5ab-91d9019f272d",
 	"assignments": {
 		"5a3cf444-9d87-4125-8026-2d5ffb834676": {
@@ -17,12 +17,12 @@
 	"created": 1413168199.912,
 	"contents": {
 		"administrative_review": {
-			"status": "none",
+			"status_id": "none",
 			"data": {},
 			"id": "administrative_review"
 		},
 		"application": {
-			"status": "complete",
+			"status_id": "complete",
 			"data": {
 				"abstract": "<p>Vivamus gravida pretium sollicitudin. Fusce ac laoreet enim. Etiam ullamcorper aliquam nisi, ut varius enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque elementum risus massa, eu venenatis justo interdum eget. Morbi id elit ornare, porta massa sit amet, dignissim mauris. Etiam quis pretium erat. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>\n\n<p>Pellentesque imperdiet dui sit amet turpis ornare dapibus. Etiam ut elementum urna, sit amet fermentum enim. Morbi blandit nisi ex, eget ornare sem efficitur non. Integer semper elit eget velit vulputate vulputate. Nam et quam odio. Curabitur condimentum, turpis ut bibendum efficitur, orci lectus sagittis eros, eu suscipit mi tellus quis nisi. Cras et tempor dolor. Aliquam porta tristique risus, in elementum orci faucibus ac. Maecenas eget blandit dui. Vivamus vulputate sollicitudin tincidunt.</p>\n",
 				"budget": "5fac8e78-9f7b-48dd-982d-1f129e411a98",
@@ -43,30 +43,30 @@
 			"id": "application"
 		},
 		"decision": {
-			"status": "none",
+			"status_id": "none",
 			"data": {},
 			"id": "decision"
 		},
 		"acceptance": {
-			"status": "none",
+			"status_id": "none",
 			"data": {},
 			"id": "acceptance"
 		},
 		"start": {
-			"status": "complete",
+			"status_id": "complete",
 			"data": {},
 			"id": "start"
 		},
 		"report": {
-			"status": "none",
+			"status_id": "none",
 			"data": {},
 			"id": "report"
 		},
 		"review": {
-			"status": "none",
+			"status_id": "none",
 			"data": {
 				"5a3cf444-9d87-4125-8026-2d5ffb834676": {
-					"status": "submitted",
+					"status_id": "submitted",
 					"data": {
 						"justification": {
 							"comment": "<p>There&#39;s a voice that keeps on calling me. Down the road, that&#39;s where I&#39;ll always be. Every stop I make, I make a new friend. Can&#39;t stay for long, just turn around and I&#39;m gone again. Maybe tomorrow, I&#39;ll want to settle down, Until tomorrow, I&#39;ll just keep moving on.</p>\n",
@@ -99,7 +99,7 @@
 					}
 				},
 				"f6826282-1ffb-453d-8804-6b2921e6807f": {
-					"status": "submitted",
+					"status_id": "submitted",
 					"ranking": {
 						"comment": ["cdd28e4a-9309-454f-a8ed-3f9708d0c10c", "b37e83a5-d613-4d64-8873-fdcc8df0a009"],
 						"public": false
@@ -187,7 +187,7 @@
 		}]
 	}
 }, {
-	"status": "active",
+	"status_id": "active",
 	"cycle_id": "128f2348-99d4-40a1-b5ab-91d9019f272d",
 	"assignments": {
 		"f6826282-1ffb-453d-8804-6b2921e6807f": {
@@ -205,12 +205,12 @@
 	"created": 1413178905.371,
 	"contents": {
 		"administrative_review": {
-			"status": "none",
+			"status_id": "none",
 			"data": {},
 			"id": "administrative_review"
 		},
 		"application": {
-			"status": "complete",
+			"status_id": "complete",
 			"data": {
 				"abstract": "<p>The repaired scandal transmits an expert. A dialect draws the religious extremist beneath the finger. The teenager chooses the singing deaf. The supporting panic clicks with the committee.</p>\n",
 				"budget": "bd382550-e810-438d-b2b6-a7268bab5d03",
@@ -241,7 +241,7 @@
 		"review": {
 			"data": {
 				"f6826282-1ffb-453d-8804-6b2921e6807f": {
-					"status": "submitted",
+					"status_id": "submitted",
 					"ranking": {
 						"comment": ["b37e83a5-d613-4d64-8873-fdcc8df0a009", "cdd28e4a-9309-454f-a8ed-3f9708d0c10c"],
 						"public": false
@@ -280,17 +280,17 @@
 			"id": "review"
 		},
 		"acceptance": {
-			"status": "none",
+			"status_id": "none",
 			"data": {},
 			"id": "acceptance"
 		},
 		"start": {
-			"status": "complete",
+			"status_id": "complete",
 			"data": {},
 			"id": "start"
 		},
 		"report": {
-			"status": "none",
+			"status_id": "none",
 			"data": {},
 			"id": "report"
 		}
@@ -336,7 +336,7 @@
 		}]
 	}
 }, {
-	"status": "active",
+	"status_id": "active",
 	"cycle_id": "e5f58a2c-2894-40e6-91a9-a110d190e85f",
 	"assignments": {
 		"84fbaa78-54b0-42fc-9754-c9ea7dc24538": {
@@ -348,14 +348,14 @@
 	"created": 1413167504.901,
 	"contents": {
 		"application": {
-			"status": "complete",
+			"status_id": "complete",
 			"data": {
 				"essay": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam lacinia justo in sapien pellentesque aliquet. Morbi aliquam gravida pulvinar. Aliquam erat volutpat. Cras fermentum mi non accumsan tempor. Nunc quis bibendum elit. Praesent commodo diam vel massa vestibulum, eu viverra dolor ornare. In mattis sem vitae lacinia vestibulum. Ut sagittis, justo vitae semper varius, nulla arcu faucibus nibh, quis pulvinar sapien tellus quis magna.</p>\n\n<p>Curabitur at lectus feugiat elit pellentesque molestie in sit amet justo. Suspendisse nec pretium ligula, vitae pellentesque tortor. Pellentesque luctus lacinia nibh, in fermentum augue fermentum ac. Maecenas in libero tellus. In nec nibh risus. Nullam faucibus, ex sed vehicula laoreet, tellus justo blandit orci, nec pellentesque dolor quam vel orci. Duis lacinia turpis felis, lacinia porta turpis mattis tempus. Integer vel sem non tortor fermentum vestibulum vel sed nulla. Fusce ut quam placerat, aliquet eros sit amet, luctus massa. Etiam mi turpis, mattis eget ultricies ut, pretium vel nisl.</p>\n\n<p>Sed lectus neque, iaculis sed porta vitae, bibendum eu eros. Suspendisse lobortis tellus at aliquet aliquam. Pellentesque eget tellus in urna dictum pulvinar. Nam finibus ac eros non consectetur. Pellentesque fermentum dolor et lacus elementum consequat. Proin facilisis mi molestie diam rhoncus, vel aliquet tellus fermentum. Ut in rutrum augue, ac fermentum lectus. Etiam pellentesque fermentum tellus, ac eleifend turpis congue et. Aenean sem dui, posuere eu ex nec, mattis tempus dui. Proin nibh tortor, ultrices nec fringilla quis, porttitor vitae erat. Integer et quam dictum, pretium elit eget, laoreet lorem. In auctor pharetra consequat. Nunc tincidunt arcu libero, in volutpat elit accumsan id.</p>\n\n<p>Duis porta purus vitae ipsum luctus tristique et ut tellus. Nunc lorem turpis, porta eu quam tincidunt, ullamcorper finibus odio. Maecenas cursus pulvinar elit cursus faucibus. Curabitur pulvinar, felis vitae finibus ullamcorper, metus lectus porttitor tortor, at pretium lorem diam sed purus. Pellentesque vehicula, tellus congue dapibus tempor, mauris est luctus orci, dapibus semper turpis nulla quis risus. Curabitur blandit mauris nec mauris pellentesque gravida. Morbi ornare suscipit justo ac efficitur. Nam fermentum maximus nulla, eget dignissim dui sollicitudin sit amet. Proin mi metus, feugiat in velit eget, pharetra condimentum nisl.</p>\n\n<p>Nam consequat pellentesque enim eget sollicitudin. Quisque sollicitudin vehicula nisl, in aliquet orci. Quisque vitae enim et nisi faucibus sagittis. Sed viverra, lectus eget lobortis tincidunt, ligula odio dapibus augue, non condimentum elit enim feugiat sapien. Nunc ac vulputate nulla, id pharetra risus. Nulla tristique vitae lorem sit amet vestibulum. Pellentesque tincidunt ipsum ac suscipit hendrerit. Vestibulum metus metus, fermentum eget porta lacinia, faucibus eget lacus.</p>\n"
 			},
 			"id": "application"
 		},
 		"start": {
-			"status": "complete",
+			"status_id": "complete",
 			"data": {},
 			"id": "start"
 		}

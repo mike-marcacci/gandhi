@@ -17,7 +17,7 @@
     "title": {
       "type": "string"
     },
-    "status": {
+    "status_id": {
       "type": "string"
     },
     "events": {
@@ -96,7 +96,7 @@
           "type": "object",
           "additionalProperties": true
         },
-        "status": {
+        "status_id": {
           "type": "string",
           "default": "none",
           "enum": [

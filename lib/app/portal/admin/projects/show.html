@@ -72,8 +72,8 @@
 						<div class="form-group">
 							<label for="project-status" class="col-sm-2 control-label">Status</label>
 							<div class="col-sm-10">
-								<p ng-show="!projectEdit" class="form-control-static">{{statusesById[project.status].title || project.status}}</p>
-								<select ng-show="projectEdit" class="form-control" id="project-status" ng-model="projectEdit.status" ng-options="status.id as status.title for status in statuses" required></select>
+								<p ng-show="!projectEdit" class="form-control-static">{{statusesById[project.status_id].title || project.status_id}}</p>
+								<select ng-show="projectEdit" class="form-control" id="project-status" ng-model="projectEdit.status_id" ng-options="status.id as status.title for status in statuses" required></select>
 							</div>
 						</div>
 						<div class="form-group">

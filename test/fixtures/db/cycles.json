@@ -12,9 +12,8 @@
 	},
 	"created": 1413166638.466,
 	"defaults": {
-		"stage": "start",
 		"role_id": "applicant",
-		"status": "active"
+		"status_id": "active"
 	},
 	"description": "Submit your essay for a chance to win a $2000 scholarship!",
 	"triggers": {
@@ -23,7 +22,7 @@
 				[{
 					"name": "status",
 					"options": {
-						"regex": "^accepted$"
+						"status_id": "accepted"
 					}
 				}]
 			],
@@ -70,7 +69,7 @@
 				[{
 					"name": "status",
 					"options": {
-						"regex": "^rejected$"
+						"status_id": "rejected"
 					}
 				}]
 			],
@@ -85,8 +84,8 @@
 				[{
 					"name": "content_status",
 					"options": {
-						"id": "application",
-						"regex": "^complete$"
+						"content_id": "application",
+						"status_id": "complete"
 					}
 				}]
 			],
@@ -213,13 +212,8 @@
 		},
 		"decision": {
 			"component": {
-				"name": "status",
-				"options": {
-					"statuses": [
-						"accepted",
-						"rejected"
-					]
-				},
+				"name": "form",
+				"options": {},
 				"permissions": {
 					"read": {
 						"staff": true
@@ -395,7 +389,7 @@
 			}
 		}
 	},
-	"status": "draft",
+	"status_id": "draft",
 	"statuses": {
 		"accepted": {
 			"id": "accepted",
@@ -434,9 +428,8 @@
 	},
 	"created": 1413164112.703,
 	"defaults": {
-		"stage": "start",
 		"role_id": "applicant",
-		"status": "active"
+		"status_id": "active"
 	},
 	"description": "Seed Funds provide flexible resources to explore bold research ideas that might otherwise be too uncertain for researchers to pursue at an early stage. Seed Awards range from $10,000 - $15,000 for a maximum of a six-month period. Seed Awards could lead to Vision proposals but it is not necessary.",
 	"triggers": {
@@ -445,7 +438,7 @@
 				[{
 					"name": "status",
 					"options": {
-						"regex": "^accepted$"
+						"status_id": "accepted"
 					}
 				}]
 			],
@@ -460,7 +453,7 @@
 				[{
 					"name": "status",
 					"options": {
-						"regex": "^archived$"
+						"status_id": "archived"
 					}
 				}]
 			],
@@ -507,7 +500,7 @@
 				[{
 					"name": "status",
 					"options": {
-						"regex": "^rejected$"
+						"status_id": "rejected"
 					}
 				}]
 			],
@@ -522,8 +515,8 @@
 				[{
 					"name": "content_status",
 					"options": {
-						"id": "report",
-						"regex": "^complete$"
+						"content_id": "report",
+						"status_id": "complete"
 					}
 				}]
 			],
@@ -538,8 +531,8 @@
 				[{
 					"name": "content_status",
 					"options": {
-						"id": "application",
-						"regex": "^complete$"
+						"content_id": "application",
+						"status_id": "complete"
 					}
 				}]
 			],
@@ -561,8 +554,8 @@
 					"name": "content_status",
 					"options": {
 						"invert": true,
-						"id": "submission",
-						"regex": "^complete$"
+						"content_id": "submission",
+						"status_id": "complete"
 					}
 				}]
 			],
@@ -948,13 +941,8 @@
 		},
 		"decision": {
 			"component": {
-				"name": "status",
-				"options": {
-					"statuses": [
-						"accepted",
-						"rejected"
-					]
-				},
+				"name": "form",
+				"options": {},
 				"permissions": {
 					"read": {
 						"staff": true
@@ -1274,7 +1262,7 @@
 			"template": "<a ng-show=\"value\" href=\"{{value}}\" target=\"_blank\">Download</a>"
 		}
 	},
-	"status": "active",
+	"status_id": "active",
 	"statuses": {
 		"accepted": {
 			"id": "accepted",

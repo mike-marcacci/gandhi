@@ -58,20 +58,15 @@
     "defaults": {
       "type": "object",
       "default": {
-        "stage": "start",
         "role_id": "applicant",
-        "status": "active"
+        "status_id": "active"
       },
       "properties": {
-        "stage": {
-          "type": "string",
-          "default": "start"
-        },
         "role_id": {
           "type": "string",
           "default": "applicant"
         },
-        "status": {
+        "status_id": {
           "type": "string",
           "default": "active"
         }
@@ -126,7 +121,7 @@
         "$ref": "#/definitions/role"
       }
     },
-    "status": {
+    "status_id": {
       "type": "string",
       "default": "draft",
       "enum": [

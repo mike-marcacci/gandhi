@@ -177,7 +177,7 @@ describe('Contents', function(){
 		it('rejects an anonymous put', function(done){
 			request
 				.put('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/contents/administrative_review')
-				.send({id:'administrative_review',status:'draft',data:{foo:'bar'}})
+				.send({id:'administrative_review',status_id:'draft',data:{foo:'bar'}})
 				.expect(401)
 				.end(done);
 		});
@@ -193,7 +193,7 @@ describe('Contents', function(){
 			request
 				.put('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/contents/application')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({id:'foo',status:'draft',data:{foo:'bar'}})
+				.send({id:'foo',status_id:'draft',data:{foo:'bar'}})
 				.expect(400)
 				.end(done);
 		});
@@ -201,7 +201,7 @@ describe('Contents', function(){
 			request
 				.put('/api/projects/foo/contents/application')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({id:'application',status:'draft',data:{foo:'bar'}})
+				.send({id:'application',status_id:'draft',data:{foo:'bar'}})
 				.expect(404)
 				.end(function(err, res){ console.error(err, res.body.validation); return done(err)});
 		});
@@ -217,7 +217,7 @@ describe('Contents', function(){
 			request
 				.put('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/contents/application')
 				.set('Authorization', 'Bearer ' + applicantToken)
-				.send({id:'application',status:'draft',data:{foo:'bar'}})
+				.send({id:'application',status_id:'draft',data:{foo:'bar'}})
 				.expect(403)
 				.end(done);
 		});
@@ -233,7 +233,7 @@ describe('Contents', function(){
 			request
 				.put('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/contents/administrative_review')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({id:'xxxxxx',status:'draft',data:{foo:'bar'}})
+				.send({id:'xxxxxx',status_id:'draft',data:{foo:'bar'}})
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
@@ -246,7 +246,7 @@ describe('Contents', function(){
 			request
 				.put('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/contents/administrative_review')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({id:'xxxxxx',status:'draft',data:{foo:'bar'}})
+				.send({id:'xxxxxx',status_id:'draft',data:{foo:'bar'}})
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
@@ -271,7 +271,7 @@ describe('Contents', function(){
 			request
 				.put('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/contents/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({id:'xxxxxx',status:'draft',data:{foo:'bar'}})
+				.send({id:'xxxxxx',status_id:'draft',data:{foo:'bar'}})
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
@@ -310,7 +310,7 @@ describe('Contents', function(){
 			request
 				.patch('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/contents/application')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({id:'foo',status:'draft',data:{foo:'bar'}})
+				.send({id:'foo',status_id:'draft',data:{foo:'bar'}})
 				.expect(400)
 				.end(done);
 		});

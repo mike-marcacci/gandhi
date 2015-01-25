@@ -19,7 +19,7 @@
 		<tbody>
 			<tr ui-sref-active="active" ng-repeat="cycle in cycles" ui-sref="portal.cycles.show({cycle: cycle.id})" style="cursor: pointer;">
 				<td>{{cycle.title}}</td>
-				<td style="text-transform: capitalize;">{{cycle.status}}</td>
+				<td style="text-transform: capitalize;">{{cycle.status_id}}</td>
 				<td>{{cycle.open ? 'Yes' : 'No'}}</td>
 				<td>{{cycle.created * 1000 | date:"yyyy.MM.dd - hh:mm a"}}</td>
 				<td>{{cycle.updated * 1000 | date:"yyyy.MM.dd - hh:mm a"}}</td>

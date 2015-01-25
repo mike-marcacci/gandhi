@@ -279,7 +279,7 @@ describe('Projects', function(){
 					assert.equal(res.body.cycle_id, '128f2348-99d4-40a1-b5ab-91d9019f272d')
 					// assert.property(res.body.users, soleneId);
 					// assert.equal(res.body.users[soleneId].role, 'applicant');
-					assert.equal(res.body.status, 'active');
+					assert.equal(res.body.status_id, 'active');
 					ids.push(res.body.id);
 					done();
 				})

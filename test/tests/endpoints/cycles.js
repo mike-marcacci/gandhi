@@ -101,7 +101,7 @@ describe('Cycles', function(){
 					assert.isString(res.body.id);
 					ids.push(res.body.id);
 					assert.equal(res.body.title, 'Awesome Possum');
-					assert.equal(res.body.status, 'draft');
+					assert.equal(res.body.status_id, 'draft');
 					done();
 				});
 		});
