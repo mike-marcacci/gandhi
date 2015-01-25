@@ -17,18 +17,18 @@
 
 	<div ng-show="content.authorizations.read" class="row" ng-show="content.authorizations.read">
 
-		<div class="col-md-6" ng-show="stage.component.options.info">
-			<div class="panel panel-default" ng-show="stage.component.options.info">
+		<div class="col-md-6" ng-show="cycle.info">
+			<div class="panel panel-default" ng-show="cycle.info">
 				<div class="panel-heading">
 					<span class="panel-title">{{cycle.title}}</span>
 				</div>
 				<div class="panel-body">
-					<div ng-bind-html="stage.component.options.info"></div>
+					<div ng-bind-html="cycle.info"></div>
 				</div>
 			</div>
 		</div>
 
-		<div ng-class="{'col-md-6': stage.component.options.info, 'col-md-12': !stage.component.options.info}">
+		<div ng-class="{'col-md-6': cycle.info, 'col-md-12': !cycle.info}">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<span class="panel-title">{{project.title || 'Start'}}</span>

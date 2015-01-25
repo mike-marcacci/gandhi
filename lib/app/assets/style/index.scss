@@ -73,6 +73,13 @@ body {
 		font-size: 14px;
 	}
 
+	// Button area inside a tab bar
+	.tab-bar {
+		padding-top: 10px;
+		padding-right: 10px;
+		float: right;
+	}
+
 	.nav-tabs {
 		z-index: 1;
 

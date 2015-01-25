@@ -5,15 +5,15 @@
 </ol>
 
 <div class="row">
-	<div class="col-md-3 hidden-xs hidden-sm">
+	<div class="hidden-xs hidden-sm" ng-class="{'col-md-3': !fullscreen}" ng-if="!fullscreen">
 		<div gandhi-admin-list="table" base="'portal.admin.cycles'" model="'cycle'" limit="true"></div>
 	</div>
 
-	<div class="col-md-9">
+	<div ng-class="{'col-md-9': !fullscreen, 'col-md-12': fullscreen}">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="pull-left" style="margin-right: 10px;">
-					<button class="btn btn-xs btn-default" ng-show="destroy" ng-click="refresh()"><i class="glyphicon glyphicon-refresh"></i></button>
+					<button class="btn btn-xs btn-default" ng-class="{active: fullscreen}" ng-click="fullscreen = !fullscreen"><i class="glyphicon glyphicon-fullscreen"></i></button>
 				</div>
 				<span class="panel-title">{{cycle.title}}</span>
 				<div class="pull-right">
@@ -42,17 +42,15 @@
 				<div class="panel-heading">
 					<span class="panel-title">General Settings</span>
 					<div class="pull-right">
-						<button class="btn btn-xs" ng-show="update" ng-class="{'btn-default': true, 'active': cycleEdit}" ng-click="toggleEdit()"><i class="glyphicon glyphicon-cog"></i></button>
-						<button ng-show="currentUser.preferences.admin.technical" class="btn btn-xs" ng-class="{'btn-default': true, 'active': source.cycle}" ng-click="toggleSource()"><i class="glyphicon glyphicon-edit"></i></button>
+						<button class="btn btn-xs btn-primary" ng-click="updateSource()" ng-if="source.cycle">Save</button>
+						<button class="btn btn-xs btn-primary" ng-click="update()" ng-if="cycleEdit">Save</button>
+						<button class="btn btn-xs" ng-show="update" ng-class="{'btn-default': true, 'active': cycleEdit}" ng-disabled="source.cycle" ng-click="toggleEdit()"><i class="glyphicon glyphicon-cog"></i></button>
+						<button ng-show="currentUser.preferences.admin.technical" class="btn btn-xs" ng-class="{'btn-default': true, 'active': source.cycle}" ng-disabled="cycleEdit" ng-click="toggleSource()"><i class="glyphicon glyphicon-edit"></i></button>
 					</div>
 				</div>
 				<div class="body-panel" ng-if="source.cycle">
 					<form class="form-horizontal" role="form" ng-submit="updateSource()">
 						<div style="height: 400px;" ng-model="source.cycle" json ui-ace="{mode: 'json'}"></div>
-						<div class="panel-body">
-							<a class="btn btn-sm btn-default" ng-click="toggleSource()">Hide</a>
-							<input class="btn btn-sm btn-primary" type="submit" value="Update">
-						</div>
 					</form>
 				</div>
 				<div class="panel-body" ng-if="!source.cycle">
@@ -110,11 +108,6 @@
 								<p class="form-control-static">{{cycle.updated * 1000 | date:"yyyy.MM.dd - hh:mm a"}}</p>
 							</div>
 						</div>
-						<div class="form-group" ng-show="cycleEdit">
-							<div class="col-sm-10 col-sm-offset-2">
-								<input type="submit" class="btn btn-sm btn-primary" ng-show="cycleEdit" value="Update">
-							</div>
-						</div>
 					</form>
 
 				</div>
@@ -125,15 +118,13 @@
 				<div class="panel-heading">
 					<span class="panel-title">Info</span>
 					<div class="pull-right">
-						<button class="btn btn-xs" ng-show="update" ng-class="{'btn-default': true, 'active': cycleInfoEdit}" ng-click="toggleInfoEdit()"><i class="glyphicon glyphicon-cog"></i></button>
+						<button class="btn btn-xs btn-primary" ng-if="cycleInfoEdit" ng-click="updateInfo()">Save</button>
+						<button class="btn btn-xs btn-default" ng-class="{'active': cycleInfoEdit}" ng-show="update" ng-click="toggleInfoEdit()"><i class="glyphicon glyphicon-cog"></i></button>
 					</div>
 				</div>
 				<div class="panel-body" ng-if="!cycleInfoEdit" ng-bind-html="cycle.info"></div>
 				<div class="cke_chromeless" ng-if="cycleInfoEdit">
 					<textarea class="form-control" style="height: auto;" ckeditor ng-model="cycle.info"></textarea>
-				</div>
-				<div class="panel-body" ng-if="cycleInfoEdit">
-					<div ng-click="updateInfo()" class="btn btn-sm btn-primary">Update</div>
 				</div>
 			</div>
 

@@ -33,7 +33,8 @@
     "lodash": "~2.4.1",
     "ng-file-upload": "~1.6.5",
     "objectpath": "~1.1.0",
-    "restangular": "~1.4.0"
+    "restangular": "~1.4.0",
+    "angular-json-human": "~1.2.1"
   },
   "overrides": {
     "ace-builds": {
@@ -50,7 +51,8 @@
     "ui.ace",
     "ui.router",
     "ui.select",
-    "ui.sortable"
+    "ui.sortable",
+    "yaru22.jsonHuman"
   ],
   "resolutions": {
     "angular": "1.3.x"

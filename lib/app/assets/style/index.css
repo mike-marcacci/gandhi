@@ -5668,6 +5668,10 @@ body {
     font-weight: 300; }
   body .panel-title {
     font-size: 14px; }
+  body .tab-bar {
+    padding-top: 10px;
+    padding-right: 10px;
+    float: right; }
   body .nav-tabs {
     z-index: 1; }
     body .nav-tabs > li > a {

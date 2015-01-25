@@ -13,6 +13,7 @@
 			<div class="panel-heading">
 				<span class="panel-title">Visibility</span>
 				<div class="pull-right">
+					<button class="btn btn-xs btn-primary" ng-click="updateVisibility()" ng-if="editVisibility">Save</button>
 					<button class="btn btn-xs" ng-show="update" ng-class="{'btn-default': true, 'active': editVisibility}" ng-click="toggleVisibility()"><i class="glyphicon glyphicon-cog"></i></button>
 				</div>
 			</div>
@@ -43,14 +44,12 @@
 			<div class="panel-heading">
 				<span class="panel-title">Permissions</span>
 				<div class="pull-right">
+					<button class="btn btn-xs btn-primary" ng-click="updateComponentPermissions()" ng-if="editComponentPermissions">Save</button>
 					<button class="btn btn-xs" ng-show="update" ng-class="{'btn-default': true, 'active': editComponentPermissions}" ng-click="toggleComponentPermissions()"><i class="glyphicon glyphicon-cog"></i></button>
 				</div>
 			</div>
 			<form ng-submit="updateComponentPermissions()">
 				<gandhi-permissions edit="editComponentPermissions" permissions="component.permissions" roles="rolesById" triggers="triggersById" ng-model="stage.component.permissions"></gandhi-permissions>
-				<div class="panel-body" ng-show="editComponentPermissions">
-					<input class="btn btn-sm btn-primary" type="submit" value="Update">
-				</div>
 			</form>
 		</div>
 	</div>

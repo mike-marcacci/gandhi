@@ -2,6 +2,7 @@
 	<div class="panel-heading">
 		<span class="panel-title">Create Assignment</span>
 		<div class="pull-right">
+			<button class="btn btn-xs btn-primary" ng-click="create()">Save</button>
 			<button class="btn btn-xs btn-default" ng-class="{active: assignmentCreate}" ng-click="toggleCreate()"><i class="glyphicon glyphicon-plus-sign"></i></button>
 		</div>
 	</div>
@@ -24,12 +25,6 @@
 				<label for="assignment-role" class="col-sm-2 control-label">Role</label>
 				<div class="col-sm-10">
 					<select required class="form-control" id="assignment-role" ng-model="assignmentCreate.role" ng-options="role.id as role.title for role in roles"></select>
-				</div>
-			</div>
-			<div class="form-group">
-				<div class="col-sm-10 col-sm-offset-2">
-					<div class="btn btn-sm btn-default" ng-click="toggleCreate()">Cancel</div>
-					<input type="submit" class="btn btn-sm btn-primary" value="Create">
 				</div>
 			</div>
 		</form>
