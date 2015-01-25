@@ -148,7 +148,7 @@ describe('Invitations', function(){
 		it('rejects an anonymous put', function(done){
 			request
 				.put('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/invitations/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
-				.send({id:'c7efa7cf-bab2-44a6-862f-7ca5e154b1ae',role:'applicant',name:'Test',email:'test@email.com'})
+				.send({id:'c7efa7cf-bab2-44a6-862f-7ca5e154b1ae',role_id:'applicant',name:'Test',email:'test@email.com'})
 				.expect(401)
 				.end(done);
 		});
@@ -156,7 +156,7 @@ describe('Invitations', function(){
 			request
 				.put('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/invitations/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
 				.set('Authorization', 'Bearer ' + userToken)
-				.send({id:'c7efa7cf-bab2-44a6-862f-7ca5e154b1ae',role:'applicant',name:'Test',email:'test@email.com'})
+				.send({id:'c7efa7cf-bab2-44a6-862f-7ca5e154b1ae',role_id:'applicant',name:'Test',email:'test@email.com'})
 				.expect(403)
 				.end(done);
 		});
@@ -164,7 +164,7 @@ describe('Invitations', function(){
 			request
 				.put('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/invitations/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({id:'57efa7cf-bab2-44a6-862f-7ca5e154b1a9',role:'applicant',name:'Test',email:'test@email.com'})
+				.send({id:'57efa7cf-bab2-44a6-862f-7ca5e154b1a9',role_id:'applicant',name:'Test',email:'test@email.com'})
 				.expect(400)
 				.end(done);
 		});
@@ -180,7 +180,7 @@ describe('Invitations', function(){
 			request
 				.put('/api/projects/foo/invitations/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({id:'c7efa7cf-bab2-44a6-862f-7ca5e154b1ae',role:'applicant',name:'Test',email:'test@email.com'})
+				.send({id:'c7efa7cf-bab2-44a6-862f-7ca5e154b1ae',role_id:'applicant',name:'Test',email:'test@email.com'})
 				.expect(404)
 				.end(done);
 		});
@@ -188,7 +188,7 @@ describe('Invitations', function(){
 			request
 				.put('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/invitations/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({id:'c7efa7cf-bab2-44a6-862f-7ca5e154b1ae',role:'applicant',name:'Test',email:'test@email.com'})
+				.send({id:'c7efa7cf-bab2-44a6-862f-7ca5e154b1ae',role_id:'applicant',name:'Test',email:'test@email.com'})
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
@@ -200,7 +200,7 @@ describe('Invitations', function(){
 			request
 				.put('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/invitations/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({id:'c7efa7cf-bab2-44a6-862f-7ca5e154b1ae',role:'applicant',name:'Test PUT',email:'test@email.com'})
+				.send({id:'c7efa7cf-bab2-44a6-862f-7ca5e154b1ae',role_id:'applicant',name:'Test PUT',email:'test@email.com'})
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
@@ -239,7 +239,7 @@ describe('Invitations', function(){
 			request
 				.patch('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/invitations/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({id:'57efa7cf-bab2-44a6-862f-7ca5e154b1a9',role:'applicant',name:'Test',email:'test@email.com'})
+				.send({id:'57efa7cf-bab2-44a6-862f-7ca5e154b1a9',role_id:'applicant',name:'Test',email:'test@email.com'})
 				.expect(400)
 				.end(done);
 		});

@@ -148,7 +148,7 @@ describe('Invitations', function(){
 		it('rejects an anonymous post', function(done){
 			request
 				.post('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations')
-				.send({role:'applicant',name:'Test',email:'test@email.com'})
+				.send({role_id:'applicant',name:'Test',email:'test@email.com'})
 				.expect(401)
 				.end(done);
 		});
@@ -156,7 +156,7 @@ describe('Invitations', function(){
 			request
 				.post('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations')
 				.set('Authorization', 'Bearer ' + userToken)
-				.send({role:'applicant',name:'Test',email:'test@email.com'})
+				.send({role_id:'applicant',name:'Test',email:'test@email.com'})
 				.expect(403)
 				.end(done);
 		});
@@ -172,7 +172,7 @@ describe('Invitations', function(){
 			request
 				.post('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({id: 'c7efa7cf-bab2-44a6-862f-7ca5e154b1ae', role:'applicant',name:'Test',email:'test@email.com'})
+				.send({id: 'c7efa7cf-bab2-44a6-862f-7ca5e154b1ae', role_id:'applicant',name:'Test',email:'test@email.com'})
 				.expect(400)
 				.end(done);
 		});
@@ -180,7 +180,7 @@ describe('Invitations', function(){
 			request
 				.post('/api/cycles/foo/invitations')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({role:'applicant',name:'Test',email:'test@email.com'})
+				.send({role_id:'applicant',name:'Test',email:'test@email.com'})
 				.expect(404)
 				.end(done);
 		});
@@ -188,7 +188,7 @@ describe('Invitations', function(){
 			request
 				.post('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({role:'applicant',name:'Test',email:'test@email.com'})
+				.send({role_id:'applicant',name:'Test',email:'test@email.com'})
 				.expect(201)
 				.end(function(err, res){
 					if(err) return done(err);
@@ -203,7 +203,7 @@ describe('Invitations', function(){
 		it('rejects an anonymous put', function(done){
 			request
 				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations/' + id)
-				.send({role:'applicant',name:'Test',email:'test@email.com'})
+				.send({role_id:'applicant',name:'Test',email:'test@email.com'})
 				.expect(401)
 				.end(done);
 		});
@@ -211,7 +211,7 @@ describe('Invitations', function(){
 			request
 				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations/' + id)
 				.set('Authorization', 'Bearer ' + userToken)
-				.send({role:'applicant',name:'Test',email:'test@email.com'})
+				.send({role_id:'applicant',name:'Test',email:'test@email.com'})
 				.expect(403)
 				.end(done);
 		});
@@ -227,7 +227,7 @@ describe('Invitations', function(){
 			request
 				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations/' + id)
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({id: '5350caac-84b9-4827-a5e4-c7a413760a09',role:'applicant',name:'Test',email:'test@email.com'})
+				.send({id: '5350caac-84b9-4827-a5e4-c7a413760a09',role_id:'applicant',name:'Test',email:'test@email.com'})
 				.expect(400)
 				.end(done);
 		});
@@ -235,7 +235,7 @@ describe('Invitations', function(){
 			request
 				.put('/api/cycles/foo/invitations/' + id)
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({id: id, role:'applicant',name:'Test',email:'test@email.com'})
+				.send({id: id, role_id:'applicant',name:'Test',email:'test@email.com'})
 				.expect(404)
 				.end(done);
 		});
@@ -243,7 +243,7 @@ describe('Invitations', function(){
 			request
 				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations/5350caac-84b9-4827-a5e4-c7a413760a09')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({id:'5350caac-84b9-4827-a5e4-c7a413760a09',role:'applicant',name:'Test',email:'test@email.com'})
+				.send({id:'5350caac-84b9-4827-a5e4-c7a413760a09',role_id:'applicant',name:'Test',email:'test@email.com'})
 				.expect(404)
 				.end(done);
 		});
@@ -251,7 +251,7 @@ describe('Invitations', function(){
 			request
 				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations/' + id)
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({id: id, role:'applicant',name:'Test PUT',email:'test@email.com'})
+				.send({id: id, role_id:'applicant',name:'Test PUT',email:'test@email.com'})
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
@@ -301,7 +301,7 @@ describe('Invitations', function(){
 			request
 				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations/' + id)
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({id:'57efa7cf-bab2-44a6-862f-7ca5e154b1a9',role:'applicant',name:'Test',email:'test@email.com'})
+				.send({id:'57efa7cf-bab2-44a6-862f-7ca5e154b1a9',role_id:'applicant',name:'Test',email:'test@email.com'})
 				.expect(400)
 				.end(done);
 		});

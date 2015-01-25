@@ -158,7 +158,7 @@ describe('Assignments', function(){
 		it('rejects an anonymous put', function(done){
 			request
 				.put('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
-				.send({id:'3cd2dc98-e280-4e72-a437-9a916d98b636',role:'advisor'})
+				.send({id:'3cd2dc98-e280-4e72-a437-9a916d98b636',role_id:'advisor'})
 				.expect(401)
 				.end(done);
 		});
@@ -166,7 +166,7 @@ describe('Assignments', function(){
 			request
 				.put('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
 				.set('Authorization', 'Bearer ' + soleneToken)
-				.send({id:'3cd2dc98-e280-4e72-a437-9a916d98b636',role:'advisor'})
+				.send({id:'3cd2dc98-e280-4e72-a437-9a916d98b636',role_id:'advisor'})
 				.expect(403)
 				.end(done);
 		});
@@ -182,7 +182,7 @@ describe('Assignments', function(){
 			request
 				.put('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({id:'5cd2dc98-e280-4e72-a437-9a916d98b630',role:'advisor'})
+				.send({id:'5cd2dc98-e280-4e72-a437-9a916d98b630',role_id:'advisor'})
 				.expect(400)
 				.end(done);
 		});
@@ -190,7 +190,7 @@ describe('Assignments', function(){
 			request
 				.put('/api/projects/foo/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({id:'3cd2dc98-e280-4e72-a437-9a916d98b636',role:'advisor'})
+				.send({id:'3cd2dc98-e280-4e72-a437-9a916d98b636',role_id:'advisor'})
 				.expect(404)
 				.end(done);
 		});
@@ -198,7 +198,7 @@ describe('Assignments', function(){
 			request
 				.put('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({id:'3cd2dc98-e280-4e72-a437-9a916d98b636',role:'advisor'})
+				.send({id:'3cd2dc98-e280-4e72-a437-9a916d98b636',role_id:'advisor'})
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
@@ -210,12 +210,12 @@ describe('Assignments', function(){
 			request
 				.put('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({id:'3cd2dc98-e280-4e72-a437-9a916d98b636',role:'applicant'})
+				.send({id:'3cd2dc98-e280-4e72-a437-9a916d98b636',role_id:'applicant'})
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
 					assert.equal(res.body.id, '3cd2dc98-e280-4e72-a437-9a916d98b636');
-					assert.equal(res.body.role, 'applicant');
+					assert.equal(res.body.role_id, 'applicant');
 					done();
 				});
 		});
@@ -223,7 +223,7 @@ describe('Assignments', function(){
 			request
 				.put('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({id:'3cd2dc98-e280-4e72-a437-9a916d98b636',role:'advisor'})
+				.send({id:'3cd2dc98-e280-4e72-a437-9a916d98b636',role_id:'advisor'})
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
@@ -235,12 +235,12 @@ describe('Assignments', function(){
 			request
 				.put('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({id:'3cd2dc98-e280-4e72-a437-9a916d98b636',role:'applicant'})
+				.send({id:'3cd2dc98-e280-4e72-a437-9a916d98b636',role_id:'applicant'})
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
 					assert.equal(res.body.id, '3cd2dc98-e280-4e72-a437-9a916d98b636');
-					assert.equal(res.body.role, 'applicant');
+					assert.equal(res.body.role_id, 'applicant');
 					done();
 				});
 		});
@@ -253,7 +253,7 @@ describe('Assignments', function(){
 		it('rejects an anonymous put', function(done){
 			request
 				.patch('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
-				.send({role:'applicant'})
+				.send({role_id:'applicant'})
 				.expect(401)
 				.end(done);
 		});
@@ -261,7 +261,7 @@ describe('Assignments', function(){
 			request
 				.patch('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
 				.set('Authorization', 'Bearer ' + soleneToken)
-				.send({role:'applicant'})
+				.send({role_id:'applicant'})
 				.expect(403)
 				.end(done);
 		});
@@ -277,7 +277,7 @@ describe('Assignments', function(){
 			request
 				.patch('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({id:'5cd2dc98-e280-4e72-a437-9a916d98b630',role:'advisor'})
+				.send({id:'5cd2dc98-e280-4e72-a437-9a916d98b630',role_id:'advisor'})
 				.expect(400)
 				.end(done);
 		});
@@ -285,7 +285,7 @@ describe('Assignments', function(){
 			request
 				.patch('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/foo')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({role:'applicant'})
+				.send({role_id:'applicant'})
 				.expect(404)
 				.end(function(err, res){
 					if(err) return done(err);
@@ -296,7 +296,7 @@ describe('Assignments', function(){
 			request
 				.patch('/api/projects/foo/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({id:'3cd2dc98-e280-4e72-a437-9a916d98b636',role:'advisor'})
+				.send({id:'3cd2dc98-e280-4e72-a437-9a916d98b636',role_id:'advisor'})
 				.expect(404)
 				.end(done);
 		});
@@ -304,11 +304,11 @@ describe('Assignments', function(){
 			request
 				.patch('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({role:'applicant'})
+				.send({role_id:'applicant'})
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
-					assert.equal(res.body.role, 'applicant');
+					assert.equal(res.body.role_id, 'applicant');
 					done();
 				});
 		});

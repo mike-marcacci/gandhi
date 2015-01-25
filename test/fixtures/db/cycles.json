@@ -4,7 +4,7 @@
 		"72e7f9a1-614d-423e-8273-1194932f8718": {
 			"id": "72e7f9a1-614d-423e-8273-1194932f8718",
 			"invitation_id": null,
-			"role": "staff"
+			"role_id": "staff"
 		}
 	},
 	"config": {
@@ -13,7 +13,7 @@
 	"created": 1413166638.466,
 	"defaults": {
 		"stage": "start",
-		"role": "applicant",
+		"role_id": "applicant",
 		"status": "active"
 	},
 	"description": "Submit your essay for a chance to win a $2000 scholarship!",
@@ -365,11 +365,7 @@
 		"start": {
 			"component": {
 				"name": "start",
-				"options": {
-					"next": "application",
-					"role": "applicant",
-					"status": "active"
-				},
+				"options": {},
 				"permissions": {
 					"read": {
 						"applicant": true,
@@ -425,12 +421,12 @@
 		"5a3cf444-9d87-4125-8026-2d5ffb834676": {
 			"id": "5a3cf444-9d87-4125-8026-2d5ffb834676",
 			"invitation_id": null,
-			"role": "advisor"
+			"role_id": "advisor"
 		},
 		"f6826282-1ffb-453d-8804-6b2921e6807f": {
 			"id": "f6826282-1ffb-453d-8804-6b2921e6807f",
 			"invitation_id": null,
-			"role": "advisor"
+			"role_id": "advisor"
 		}
 	},
 	"config": {
@@ -439,7 +435,7 @@
 	"created": 1413164112.703,
 	"defaults": {
 		"stage": "start",
-		"role": "applicant",
+		"role_id": "applicant",
 		"status": "active"
 	},
 	"description": "Seed Funds provide flexible resources to explore bold research ideas that might otherwise be too uncertain for researchers to pursue at an early stage. Seed Awards range from $10,000 - $15,000 for a maximum of a six-month period. Seed Awards could lead to Vision proposals but it is not necessary.",
@@ -574,7 +570,7 @@
 			"listeners": [{
 				"name": "notify",
 				"options": {
-					"roles": [
+					"role_ids": [
 						"applicant",
 						"advisor"
 					],
@@ -593,7 +589,7 @@
 			"id": "3350caac-84b9-4827-a5e4-c7a413760a0a",
 			"name": "Sarah Powell",
 			"email": "sarah.powell@test.gandhi.io",
-			"role": "advisor"
+			"role_id": "advisor"
 		}
 	},
 	"permissions": {
@@ -669,26 +665,7 @@
 		"acceptance": {
 			"component": {
 				"name": "message",
-				"options": {
-					"close": {
-						"default": "We're sorry, but your application was not accepted.",
-						"roles": {
-
-						}
-					},
-					"default": {
-						"default": "No decision has been made about your application.",
-						"roles": {
-
-						}
-					},
-					"open": {
-						"default": "Congratulations! Your application has been accepted.",
-						"roles": {
-
-						}
-					}
-				},
+				"options": {},
 				"permissions": {
 					"write": {
 						"staff": true
@@ -707,26 +684,7 @@
 		"administrative_review": {
 			"component": {
 				"name": "message",
-				"options": {
-					"close": {
-						"default": "Thank you for submitting your application! A funding decision has been made.",
-						"roles": {
-
-						}
-					},
-					"default": {
-						"default": "You have not yet submitted your application.",
-						"roles": {
-
-						}
-					},
-					"open": {
-						"default": "Thank you for submitting your application! It will be reviewed shortly.",
-						"roles": {
-
-						}
-					}
-				},
+				"options": {},
 				"permissions": {
 					"write": {
 						"staff": true
@@ -1276,11 +1234,7 @@
 		"start": {
 			"component": {
 				"name": "start",
-				"options": {
-					"next": "application",
-					"role": "applicant",
-					"status": "active"
-				},
+				"options": {},
 				"permissions": {
 					"read": {
 						"advisor": true,

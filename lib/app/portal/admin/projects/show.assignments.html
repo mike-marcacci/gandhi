@@ -24,7 +24,7 @@
 			<div class="form-group">
 				<label for="assignment-role" class="col-sm-2 control-label">Role</label>
 				<div class="col-sm-10">
-					<select required class="form-control" id="assignment-role" ng-model="assignmentCreate.role" ng-options="role.id as role.title for role in roles"></select>
+					<select required class="form-control" id="assignment-role" ng-model="assignmentCreate.role_id" ng-options="role.id as role.title for role in roles"></select>
 				</div>
 			</div>
 		</form>
@@ -61,8 +61,8 @@
 						</p>
 					</td>
 					<td>
-						<p ng-hide="backup[assignment.id]" class="form-control-static">{{rolesById[assignment.role].title}}</p>
-						<select ng-show="backup[assignment.id]" required class="form-control" ng-model="assignment.role" ng-options="role.id as role.title for role in roles"></select>
+						<p ng-hide="backup[assignment.id]" class="form-control-static">{{rolesById[assignment.role_id].title}}</p>
+						<select ng-show="backup[assignment.id]" required class="form-control" ng-model="assignment.role_id" ng-options="role.id as role.title for role in roles"></select>
 					</td>
 					<td align="right" width="80">
 						<button ng-click="toggleEdit(assignment)" class="btn btn-block btn-xs btn-default" ng-class="{active: backup[assignment.id]}"><i class="glyphicon glyphicon-cog"></i></button>

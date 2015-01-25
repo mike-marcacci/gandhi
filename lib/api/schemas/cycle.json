@@ -59,7 +59,7 @@
       "type": "object",
       "default": {
         "stage": "start",
-        "role": "applicant",
+        "role_id": "applicant",
         "status": "active"
       },
       "properties": {
@@ -67,7 +67,7 @@
           "type": "string",
           "default": "start"
         },
-        "role": {
+        "role_id": {
           "type": "string",
           "default": "applicant"
         },
@@ -94,10 +94,7 @@
           },
           "component": {
             "name": "start",
-            "options": {
-              "next": null,
-              "role": "applicant"
-            },
+            "options": {},
             "permissions": {
               "write": {
                 "applicant": true
@@ -241,14 +238,14 @@
       "additionalProperties": false,
       "required": [
         "id",
-        "role"
+        "role_id"
       ],
       "properties": {
         "id": {
           "type": "string",
           "constant": {"$data": "0"}
         },
-        "role": {
+        "role_id": {
           "type": "string"
         },
         "invitation_id": {
@@ -262,14 +259,14 @@
       "additionalProperties": false,
       "required": [
         "id",
-        "role"
+        "role_id"
       ],
       "properties": {
         "id": {
           "type": "string",
           "constant": {"$data": "0"}
         },
-        "role": {
+        "role_id": {
           "type": "string"
         },
         "name": {

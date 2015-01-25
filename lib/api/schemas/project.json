@@ -65,14 +65,14 @@
       "additionalProperties": false,
       "required": [
         "id",
-        "role"
+        "role_id"
       ],
       "properties": {
         "id": {
           "type": "string",
           "constant": {"$data": "0"}
         },
-        "role": {
+        "role_id": {
           "type": "string"
         },
         "invitation_id": {
@@ -132,14 +132,14 @@
       "additionalProperties": false,
       "required": [
         "id",
-        "role"
+        "role_id"
       ],
       "properties": {
         "id": {
           "type": "string",
           "constant": {"$data": "0"}
         },
-        "role": {
+        "role_id": {
           "type": "string"
         },
         "name": {
