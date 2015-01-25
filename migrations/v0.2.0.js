@@ -25,7 +25,7 @@ r.connect({host: host, db: db}).then(function(conn){
   // Notifications
   // -------------
 
-  tasks.push(r.branch(r.tableList().contains('notifications'), null, tableCreate('notifications').run(conn)));
+  tasks.push(r.branch(r.tableList().contains('notifications'), null, r.tableCreate('notifications').run(conn)));
 
 
   // Cycles
@@ -36,7 +36,13 @@ r.connect({host: host, db: db}).then(function(conn){
     }).coerceTo('object'));
 
     return cycle.merge({
-      assignments: cycle('users').default(cycle('assignments')),
+      assignments: cycle('users').coerceTo('array').map(function(userKV){
+        return [userKV.nth(0), userKV.nth(1).map(function(user){
+          return user.merge({role_id: user('role')});
+        }).without({
+          role: true
+        })];
+      }).coerceTo('object').default(cycle('assignments')),
       stages: cycle('flow').coerceTo('array').map(function(flowKV){
         return [flowKV.nth(0), flowKV.nth(1).merge({ order: 0 }).without({
           next: true
@@ -82,7 +88,13 @@ r.connect({host: host, db: db}).then(function(conn){
   // --------
   tasks.push(r.table('projects').replace(function(project){
     return project.merge({
-      assignments: project('users').default(project('assignments')),
+      assignments: project('users').coerceTo('array').map(function(userKV){
+        return [userKV.nth(0), userKV.nth(1).map(function(user){
+          return user.merge({role_id: user('role')});
+        }).without({
+          role: true
+        })];
+      }).coerceTo('object').default(project('assignments')),
       contents: project('flow').default(project('contents')),
       events: r.literal(project('events').default({}).coerceTo('array').map(function(eventKV){
         return [eventKV.nth(0), eventKV.nth(1).merge({
