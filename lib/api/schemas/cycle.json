@@ -17,7 +17,7 @@
       "type": "string",
       "default": ""
     },
-    "info": {
+    "instructions": {
       "type": "string",
       "default": ""
     },

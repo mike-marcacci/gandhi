@@ -113,18 +113,21 @@
 				</div>
 			</div>
 
-			<!-- Info -->
+			<!-- Instructions -->
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<span class="panel-title">Info</span>
+					<span class="panel-title">Instructions</span>
 					<div class="pull-right">
-						<button class="btn btn-xs btn-primary" ng-if="cycleInfoEdit" ng-click="updateInfo()">Save</button>
-						<button class="btn btn-xs btn-default" ng-class="{'active': cycleInfoEdit}" ng-show="update" ng-click="toggleInfoEdit()"><i class="glyphicon glyphicon-cog"></i></button>
+						<button class="btn btn-xs btn-primary" ng-if="cycleInstructionsEdit" ng-click="updateInstructions()">Save</button>
+						<button class="btn btn-xs btn-default" ng-class="{'active': cycleInstructionsEdit}" ng-show="update" ng-click="toggleInstructionsEdit()"><i class="glyphicon glyphicon-cog"></i></button>
 					</div>
 				</div>
-				<div class="panel-body" ng-if="!cycleInfoEdit" ng-bind-html="cycle.info"></div>
-				<div class="cke_chromeless" ng-if="cycleInfoEdit">
-					<textarea class="form-control" style="height: auto;" ckeditor ng-model="cycle.info"></textarea>
+				<div class="panel-body" ng-if="!cycleInstructionsEdit">
+					<div ng-if="!cycle.instructions" class="alert alert-info" style="margin-bottom: 0;">You haven't specified any instructions for this cycle.</div>
+					<div ng-if="cycle.instructions" ng-bind-html="cycle.instructions"></div>
+				</div>
+				<div class="cke_chromeless" ng-if="cycleInstructionsEdit">
+					<textarea class="form-control" style="height: auto;" ckeditor ng-model="cycle.instructions"></textarea>
 				</div>
 			</div>
 
