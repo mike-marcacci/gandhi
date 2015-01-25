@@ -40,14 +40,14 @@
 		<table class="table table-hover">
 			<thead>
 				<tr>
-					<th>ID</th>
+					<th ng-if="currentUser.preferences.admin.technical">ID</th>
 					<th>Title</th>
 					<th></th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr ng-repeat="status in statuses" ng-class="{active: backup[status.id]}">
-					<td>
+					<td ng-if="currentUser.preferences.admin.technical">
 						<p class="form-control-static"><strong>{{status.id}}</strong></p>
 					</td>
 					<td>

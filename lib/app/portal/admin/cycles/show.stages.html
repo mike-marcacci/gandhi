@@ -68,7 +68,7 @@
 				<thead>
 					<tr>
 						<th></th>
-						<th>ID</th>
+						<th ng-if="currentUser.preferences.admin.technical">ID</th>
 						<th>Title</th>
 						<th>Description</th>
 						<th></th>
@@ -77,7 +77,7 @@
 				<tbody ui-sortable="sortableOptions" ng-model="stages">
 					<tr ng-repeat="stage in stages" ng-class="{active: backup[stage.id]}">
 						<td class="handle"></td>
-						<td>
+						<td ng-if="currentUser.preferences.admin.technical">
 							<p class="form-control-static"><strong><a ui-sref="portal.admin.cycles.show.stages.stage({stage: stage.id})">{{stage.id}}</a></strong></p>
 						</td>
 						<td>

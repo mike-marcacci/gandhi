@@ -40,7 +40,7 @@
 		<table class="table table-hover">
 			<thead>
 				<tr>
-					<th>ID</th>
+					<th ng-if="currentUser.preferences.admin.technical">ID</th>
 					<th>Title</th>
 					<th>Conditions</th>
 					<th>Listeners</th>
@@ -49,7 +49,7 @@
 			</thead>
 			<tbody>
 				<tr ng-repeat="trigger in triggers" ng-class="{active: backup[trigger.id]}">
-					<td>
+					<td ng-if="currentUser.preferences.admin.technical">
 						<p class="form-control-static"><strong>{{trigger.id}}</strong></p>
 					</td>
 					<td>
