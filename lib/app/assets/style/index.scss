@@ -176,6 +176,14 @@ body {
 	}
 
 	.panel {
+		.nav-tabs {
+			> li.active > a,
+			> li.active > a:hover,
+			> li.active > a:focus {
+				z-index: 0;
+			}
+		}
+		
 		.tabs-left, .tabs-right {
 			border-bottom: none;
 			padding-top: 2px;

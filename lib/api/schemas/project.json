@@ -94,6 +94,7 @@
         },
         "data": {
           "type": "object",
+          "default": {},
           "additionalProperties": true
         },
         "status_id": {

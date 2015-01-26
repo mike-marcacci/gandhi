@@ -5730,6 +5730,10 @@ body {
   body .tabs-right-panel {
     padding-right: 0;
     border-top-right-radius: 0; }
+  body .panel .nav-tabs > li.active > a,
+  body .panel .nav-tabs > li.active > a:hover,
+  body .panel .nav-tabs > li.active > a:focus {
+    z-index: 0; }
   body .panel .tabs-left, body .panel .tabs-right {
     border-bottom: none;
     padding-top: 2px; }

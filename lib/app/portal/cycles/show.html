@@ -41,18 +41,18 @@
 
 <div class="row" ng-if="cycle">
 
-	<div class="col-md-6" ng-show="cycle.info">
-		<div class="panel panel-default" ng-show="cycle.info">
+	<div class="col-md-6" ng-show="cycle.instructions">
+		<div class="panel panel-default" ng-show="cycle.instructions">
 			<div class="panel-heading">
 				<span class="panel-title">{{cycle.title}}</span>
 			</div>
 			<div class="panel-body">
-				<div ng-bind-html="cycle.info"></div>
+				<div ng-bind-html="cycle.instructions"></div>
 			</div>
 		</div>
 	</div>
 
-	<div ng-class="{'col-md-6': cycle.info, 'col-md-12': !cycle.info}">
+	<div ng-class="{'col-md-6': cycle.instructions, 'col-md-12': !cycle.instructions}">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<span class="panel-title">New Project</span>
