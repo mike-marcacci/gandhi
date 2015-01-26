@@ -21,7 +21,7 @@
     "content": {
       "type": "string"
     },
-    "status": {
+    "status_id": {
       "type": "string",
       "enum": [
         "unread",

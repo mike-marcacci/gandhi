@@ -5,13 +5,16 @@
 </ol>
 
 <div class="row">
-	<div class="col-md-3 hidden-xs hidden-sm">
+	<div class="hidden-xs hidden-sm" ng-class="{'col-md-3': !fullscreen}" ng-if="!fullscreen">
 		<div gandhi-admin-list="table" base="'portal.admin.users'" model="'user'" limit="true"></div>
 	</div>
 
-	<div class="col-md-9">
+	<div ng-class="{'col-md-9': !fullscreen, 'col-md-12': fullscreen}">
 		<div class="panel panel-default">
 			<div class="panel-heading">
+				<div class="pull-left" style="margin-right: 10px;">
+					<button class="hidden-xs hidden-sm btn btn-xs btn-default" ng-class="{active: fullscreen}" ng-click="fullscreen = !fullscreen"><i class="glyphicon glyphicon-fullscreen"></i></button>
+				</div>
 				<span class="panel-title">{{user.name}}</span>
 				<div class="pull-right">
 					<button class="btn btn-xs btn-primary" ng-if="edit" ng-click="update()">Save</button>
@@ -37,29 +40,68 @@
 			<div class="panel-heading">
 				<span class="panel-title">Notifications</span>
 				<div class="pull-right">
-					<!-- <button class="btn btn-xs btn-default" ng-class="{'active': createNotification}" ng-click="toggleCreateNotification()"><i class="glyphicon glyphicon-plus-sign"></i></button> -->
+					<button class="btn btn-xs btn-primary" ng-if="notificationCreate" ng-click="createNotification()">Save</button>
+					<button class="btn btn-xs btn-default" ng-class="{'active': notificationCreate}" ng-click="toggleNotificationCreate()"><i class="glyphicon glyphicon-plus-sign"></i></button>
 				</div>
 			</div>
-			<div ng-if="!notifications.length" class="panel-body">This user has no notifications.</div>
-			<div ng-if="notifications.length" ng-repeat="notification in notifications">
-				<table class="table table-hover">
-					<thead>
-						<tr>
-							<th>Subject</th>
-							<th>Status</th>
-							<th>Created</th>
-							<th>Updated</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr ui-sref-active="active" ng-repeat="notification in notifications">
-							<td>{{notification.subject}}</td>
-							<td>{{notification.status}}</td>
-							<td>{{notification.created * 1000 | date:"yyyy.MM.dd - hh:mm a"}}</td>
-							<td>{{notification.updated * 1000 | date:"yyyy.MM.dd - hh:mm a"}}</td>
-						</tr>
-					</tbody>
-				</table>
+			<div class="panel-body" ng-if="notificationCreate">
+				<form class="form-horizontal" role="form" ng-submit="createNotification()">
+					<div class="form-group">
+						<label for="notificationCreate-subject" class="col-sm-2 control-label">Subject</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="notificationCreate-subject" ng-model="notificationCreate.subject">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="notificationCreate-subject" class="col-sm-2 control-label">Status</label>
+						<div class="col-sm-10">
+							<select class="form-control" id="notificationCreate-status_id" ng-model="notificationCreate.status_id" ng-options="id as title for (id, title) in {unread: 'Unread', read: 'Read', archived: 'Archived'}"></select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="notificationCreate-content" class="col-sm-2 control-label">Content</label>
+						<div class="col-sm-10">
+							<div ckeditor ng-model="notificationCreate.content"></div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div ng-if="!notificationCreate">
+				<div ng-if="!notifications.length" class="panel-body">This user has no notifications.</div>
+				<div ng-if="notifications.length">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>Subject</th>
+								<th>Content</th>
+								<th width="120">Created</th>
+								<th width="120">Updated</th>
+								<th width="80"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ui-sref-active="active" ng-repeat="notification in notifications">
+								<td>
+									<p class="form-control-static" ng-if="!backupNotifications[notification.id]"><strong>{{notification.subject}}</strong></p>
+									<input class="form-control" ng-if="backupNotifications[notification.id]" type="text" ng-model="notification.subject">
+									<div class="form-control-static input-sm" ng-if="!backupNotifications[notification.id]" style="text-transform: capitalize;">{{notification.status_id}}</div>
+									<select required style="margin-top: 5px;" class="form-control input-sm" ng-if="backupNotifications[notification.id]" id="assignment-role" ng-model="notification.status_id" ng-options="id as title for (id, title) in {unread: 'Unread', read: 'Read', archived: 'Archived'}"></select>
+								</td>
+								<td>
+									<div ng-if="!backupNotifications[notification.id]" style="max-height: 100px; overflow: auto; border: 1px solid rgb(231, 231, 231); padding: 10px;" ng-bind-html="notification.content"></div>
+									<div ng-if="backupNotifications[notification.id]" ckeditor ng-model="notification.content"></div>
+								</td>
+								<td>{{notification.created * 1000 | date:"yyyy.MM.dd - hh:mm a"}}</td>
+								<td>{{notification.updated * 1000 | date:"yyyy.MM.dd - hh:mm a"}}</td>
+								<td align="right" width="80">
+									<button ng-click="toggleNotificationEdit(notification)" class="btn btn-block btn-xs btn-default" ng-class="{active: backupNotifications[notification.id]}"><i class="glyphicon glyphicon-cog"></i></button>
+									<button ng-click="updateNotification(notification)" class="btn btn-block btn-xs btn-primary" ng-show="backupNotifications[notification.id]">Save</button>
+									<button ng-click="deleteNotification(notification)" class="btn btn-block btn-xs btn-danger" ng-hide="backupNotifications[notification.id]"><i class="glyphicon glyphicon-trash"></i></button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 

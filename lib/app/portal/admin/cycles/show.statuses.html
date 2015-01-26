@@ -51,8 +51,8 @@
 						<p class="form-control-static"><strong>{{status.id}}</strong></p>
 					</td>
 					<td>
-						<p ng-hide="backup[status.id]" class="form-control-static">{{status.title}}</p>
-						<input ng-show="backup[status.id]" class="form-control" type="text" ng-model="status.title">
+						<p ng-if="!backup[status.id]" class="form-control-static">{{status.title}}</p>
+						<input ng-if="backup[status.id]" class="form-control" type="text" ng-model="status.title">
 					</td>
 					<td align="right" width="80">
 						<button ng-click="toggleEdit(status)" class="btn btn-block btn-xs btn-default" ng-class="{active: backup[status.id]}"><i class="glyphicon glyphicon-cog"></i></button>

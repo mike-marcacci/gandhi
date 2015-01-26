@@ -3,7 +3,7 @@
 	"user_id": "3cd2dc98-e280-4e72-a437-9a916d98b636",
 	"subject": "Sample",
 	"content": "This is a sample notification",
-	"status": "unread",
+	"status_id": "unread",
 	"created": 1420401884.663,
 	"updated": 1420401884.663
 }]

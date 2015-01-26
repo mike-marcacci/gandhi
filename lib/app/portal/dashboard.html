@@ -10,7 +10,7 @@
 			<div class="panel-body">
 				<div ng-if="!(notifications | filter: inbox).length">Your inbox is empty!</div>
 				<div class="list-group" ng-if="(notifications | filter: inbox).length">
-					<div class="list-group-item" ng-repeat="n in notifications | filter: inbox | orderBy : 'created' : false" ng-class="{'list-group-item-info': n.status == 'unread'}">
+					<div class="list-group-item" ng-repeat="n in notifications | filter: inbox | orderBy : 'created' : false" ng-class="{'list-group-item-info': n.status_id == 'unread'}">
 						<div ng-class="{'list-group-item-heading': reading == n.id}">
 							<div class="row">
 								<div class="col-sm-9">
@@ -23,7 +23,7 @@
 								</div>
 							</div>
 						</div>
- 						<p class="list-group-item-text" ng-show="reading == n.id">{{n.content}}</p>
+ 						<div class="list-group-item-text" ng-show="reading == n.id" ng-bind-html="n.content"></div>
 					</div>
 				</div>
 			</div>
@@ -32,7 +32,7 @@
 			<div class="panel-body">
 			<div ng-if="!notifications.length">You have no notifications.</div>
 				<div class="list-group" ng-if="notifications.length">
-					<div class="list-group-item" ng-repeat="n in notifications | orderBy : 'created' : false" ng-class="{'list-group-item-info': n.status == 'unread'}">
+					<div class="list-group-item" ng-repeat="n in notifications | orderBy : 'created' : false" ng-class="{'list-group-item-info': n.status_id == 'unread'}">
 						<div ng-class="{'list-group-item-heading': reading == n.id}">
 							<div class="row">
 								<div class="col-sm-9">
@@ -44,7 +44,7 @@
 								</div>
 							</div>
 						</div>
- 						<p class="list-group-item-text" ng-show="reading == n.id">{{n.content}}</p>
+ 						<div class="list-group-item-text" ng-show="reading == n.id" ng-bind-html="n.content"></div>
 					</div>
 				</div>
 			</div>
