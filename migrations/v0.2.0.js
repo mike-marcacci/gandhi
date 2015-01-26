@@ -25,7 +25,7 @@ r.connect({host: host, db: db}).then(function(conn){
 	// Notifications
 	// -------------
 
-	tasks.push(r.branch(r.tableList().contains('notifications'), null, r.tableCreate('notifications').run(conn)));
+	tasks.push(r.branch(r.tableList().contains('notifications'), null, r.tableCreate('notifications')).run(conn));
 
 
 	// Cycles
@@ -37,7 +37,7 @@ r.connect({host: host, db: db}).then(function(conn){
 
 		return cycle.merge({
 			assignments: cycle('users').coerceTo('array').map(function(userKV){
-				return [userKV.nth(0), userKV.nth(1).map(function(user){
+				return [userKV.nth(0), userKV.nth(1).do(function(user){
 					return user.merge({role_id: user('role')});
 				}).without({
 					role: true
@@ -76,7 +76,7 @@ r.connect({host: host, db: db}).then(function(conn){
 					cycle('updated').toEpochTime()
 				)
 			),
-			status_id: cycle('status')
+			status_id: cycle('status').default(cycle('status_id'))
 		}).without([
 			'users',
 			'flow',
@@ -91,19 +91,19 @@ r.connect({host: host, db: db}).then(function(conn){
 	tasks.push(r.table('projects').replace(function(project){
 		return project.merge({
 			assignments: project('users').coerceTo('array').map(function(userKV){
-				return [userKV.nth(0), userKV.nth(1).map(function(user){
+				return [userKV.nth(0), userKV.nth(1).do(function(user){
 					return user.merge({role_id: user('role')});
 				}).without({
 					role: true
 				})];
 			}).coerceTo('object').default(project('assignments')),
 			contents: project('flow').coerceTo('array').map(function(flowKV){
-				return [flowKV.nth(0), flowKV.nth(1).map(function(flow){
+				return [flowKV.nth(0), flowKV.nth(1).do(function(flow){
 					return flow.merge({status_id: flow('status')});
 				}).without({
 					status: true
 				})];
-			}).coerceTo('object').default(project('contents')),
+			}).coerceTo('object').default(project('contents').default({})),
 			events: r.literal(project('events').default({}).coerceTo('array').map(function(eventKV){
 				return [eventKV.nth(0), eventKV.nth(1).merge({
 					timestamp: eventKV.nth(1)('date')
@@ -125,7 +125,7 @@ r.connect({host: host, db: db}).then(function(conn){
 					project('updated').toEpochTime()
 				)
 			),
-			status_id: project('status')
+			status_id: project('status').default(project('status_id'))
 		}).without([
 			'users',
 			'flow',
