@@ -5,7 +5,55 @@
 
 <div class="panel panel-default">
 	<div class="panel-body">
-		<input type="text" class="form-control" ng-model="table.query.search" ng-model-options="{debounce: 100}" placeholder="Search">
+		<div class="row">
+
+			<!-- Cycle -->
+			<div class="col-sm-4">
+				<div class="input-group">
+					<ui-select ng-disabled="disabled" ng-model="table.query.cycle" theme="bootstrap">
+						<ui-select-match placeholder="Choose a cycle...">{{$select.selected.title}}</ui-select-match>
+						<ui-select-choices refresh="cycleSelect.search($select.search)" refresh-delay="200" repeat="item.id as item in cycleSelect.data | filter: $select.search">
+							<div ng-bind-html="item.title | highlight: $select.search"></div>
+							<small ng-bind-html="item.status | highlight: $select.search"></small>
+						</ui-select-choices>
+					</ui-select>
+					<span class="input-group-btn">
+						<button class="btn btn-default" ng-disabled="!table.query.cycle" ng-click="table.query.cycle = null" type="button"><i class="glyphicon glyphicon-remove-circle"></i></button>
+					</span>
+				</div>
+			</div>
+
+			<!-- User -->
+			<div class="col-sm-4">
+				<div class="input-group">
+					<ui-select ng-disabled="disabled" ng-model="table.query.user" theme="bootstrap">
+						<ui-select-match placeholder="Choose a user...">{{$select.selected.name}}</ui-select-match>
+						<ui-select-choices refresh="userSelect.search($select.search)" refresh-delay="200" repeat="item.id as item in userSelect.data | filter: $select.search">
+							<div ng-bind-html="item.name | highlight: $select.search"></div>
+							<small ng-bind-html="item.email | highlight: $select.search"></small>
+						</ui-select-choices>
+					</ui-select>
+					<span class="input-group-btn">
+						<button class="btn btn-default" ng-disabled="!table.query.user" ng-click="table.query.user = null" type="button"><i class="glyphicon glyphicon-remove-circle"></i></button>
+					</span>
+				</div>
+			</div>
+
+			<!-- Search -->
+			<div class="col-sm-4">
+				<input type="text" class="form-control" ng-model="table.query.search" ng-model-options="{debounce: 100}" placeholder="Search">
+			</div>
+		</div>
+
+		<hr>
+
+		<div
+			class="btn btn-xs"
+			style= "margin-right: 6px;"
+			ng-class="{'btn-success': column.active}"
+			ng-click="column.active = !column.active"
+			ng-repeat="column in columns">{{column.title}}</div>
+
 	</div>
 </div>
 
