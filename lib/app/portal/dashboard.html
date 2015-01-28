@@ -1,67 +1,59 @@
 <div class="row">
 	<div class="col-md-6">
 
+		<!-- Notifications -->
+		<div gandhi-notifications></div>
 
-		<ul class="nav nav-tabs">
-			<li role="presentation" ng-class="{active: tab == 'inbox'}"><a href ng-click="tab = 'inbox'">Inbox</a></li>
-			<li role="presentation" ng-class="{active: tab == 'archive'}"><a href ng-click="tab = 'archive'">Archive</a></li>
-		</ul>
-		<div class="panel panel-default" ng-if="tab == 'inbox'">
-			<div class="panel-body">
-				<div ng-if="!(notifications | filter: inbox).length">Your inbox is empty!</div>
-				<div class="list-group" ng-if="(notifications | filter: inbox).length">
-					<div class="list-group-item" ng-repeat="n in notifications | filter: inbox | orderBy : 'created' : false" ng-class="{'list-group-item-info': n.status_id == 'unread'}">
-						<div ng-class="{'list-group-item-heading': reading == n.id}">
-							<div class="row">
-								<div class="col-sm-9">
-									<strong>{{n.subject}}</strong><br />
-									<small>{{n.created * 1000 | date:"yyyy.MM.dd - hh:mm a"}}</small>
-								</div>
-								<div class="col-sm-3">
-									<div class="btn btn-primary btn-xs btn-block" ng-class="{active: reading == n.id}" ng-click="read(n)">Read</div>
-									<div class="btn btn-default btn-xs btn-block" ng-click="archive(n)">Archive</div>
-								</div>
-							</div>
-						</div>
- 						<div class="list-group-item-text" ng-show="reading == n.id" ng-bind-html="n.content"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="panel panel-default" ng-if="tab == 'archive'">
-			<div class="panel-body">
-			<div ng-if="!notifications.length">You have no notifications.</div>
-				<div class="list-group" ng-if="notifications.length">
-					<div class="list-group-item" ng-repeat="n in notifications | orderBy : 'created' : false" ng-class="{'list-group-item-info': n.status_id == 'unread'}">
-						<div ng-class="{'list-group-item-heading': reading == n.id}">
-							<div class="row">
-								<div class="col-sm-9">
-									<strong>{{n.subject}}</strong><br />
-									<small>{{n.created * 1000 | date:"yyyy.MM.dd - hh:mm a"}}</small>
-								</div>
-								<div class="col-sm-3">
-									<div class="btn btn-primary btn-xs btn-block" ng-class="{active: reading == n.id}" ng-click="read(n)">Read</div>
-								</div>
-							</div>
-						</div>
- 						<div class="list-group-item-text" ng-show="reading == n.id" ng-bind-html="n.content"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-
+		<!-- Active Projects -->
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<span class="panel-title">Active Projects</span>
 				<div class="pull-right">
-					<a ui-href="portal.projects" class="btn btn-default btn-xs">All Projects</a>
+					<a ui-sref="portal.projects.list" class="btn btn-default btn-xs">All Projects</a>
 				</div>
 			</div>
+			<div class="panel-body" ng-if="!activeProjectsByCycle">You have no active projects.</div>
+
+
+
+			<table ng-if="activeProjectsByCycle" class="table table-hover">
+				<thead>
+					<tr>
+						<th>Cycle</th>
+						<th>Project</th>
+						<th>Role</th>
+						<th>Status</th>
+					</tr>
+				</thead>
+				<tbody ng-repeat="(cycle_id, group) in activeProjectsByCycle">
+					<tr><th rowspan="{{group.length + 1}}">{{cyclesById[cycle_id].title}}</th></tr>
+					<tr ng-repeat="project in group" ui-sref="portal.projects.show({project: project.id})" style="cursor: pointer;">
+						<td>{{project.title}}</td>
+						<td>{{project.role.title}}</td>
+						<td>{{project.status.title}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+	</div>
+
+	<div class="col-md-6">
+
+		<!-- Open Cycles -->
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<span class="panel-title">Open Cycles</span>
+			</div>
 			<div class="panel-body">
-				<div ng-if="!(projects | filter : {authorizations:{create:true}}).length">You have no active projects.</div>
-				<div ng-if="(projects | filter : {authorizations:{create:true}}).length" class="list-group">
-					<div ng-repeat="project in projects | filter : {authorizations:{create:true}}" class="list-group-item">
-						<a ui-sref="portal.projects.show({project: project.id})">{{project.title}}</a>
+				<div ng-if="!(cycles | filter : {open: true}).length">There are currently no open cycles.</div>
+				<div ng-if="(cycles | filter : {open: true}).length" class="list-group">
+					<div ng-repeat="cycle in cycles | filter : {open: true}" class="list-group-item">
+						<h4 class="list-group-item-heading">{{cycle.title}}</h4>
+						<div class="list-group-item-text" ng-bind-html="cycle.description"></div>
+						<div style="padding: 1em 0 .5em;">
+							<a ui-sref="portal.cycles.show({cycle: cycle.id})" class="btn btn-sm btn-primary">Start Project</a>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -87,34 +79,4 @@
 		-->
 
 	</div>
-
-	<div class="col-md-6">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<span class="panel-title">Open Cycles</span>
-			</div>
-			<div class="panel-body">
-				<div ng-if="!(cycles | filter : {open: true}).length">There are currently no open cycles.</div>
-				<div ng-if="(cycles | filter : {open: true}).length" class="list-group">
-					<div ng-repeat="cycle in cycles | filter : {open: true}" class="list-group-item">
-						<h4 class="list-group-item-heading">{{cycle.title}}</h4>
-						<div class="list-group-item-text" ng-bind-html="cycle.description"></div>
-						<div style="padding: 1em 0 .5em;">
-							<a ui-sref="portal.cycles.show({cycle: cycle.id})" class="btn btn-sm btn-primary">Start Project</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 </div>
-
-<!-- <div class="panel panel-default">
-	<div class="panel-heading">
-		<h3 class="panel-title">Messages</h3>
-	</div>
-	<div class="panel-body">
-
-	</div>
-</div>
- -->

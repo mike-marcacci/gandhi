@@ -1,0 +1,47 @@
+<ul class="nav nav-tabs">
+	<li role="presentation" ng-class="{active: tab == 'inbox'}"><a href ng-click="tab = 'inbox'">Inbox</a></li>
+	<li role="presentation" ng-class="{active: tab == 'archive'}"><a href ng-click="tab = 'archive'">Archive</a></li>
+</ul>
+<div class="panel panel-default" ng-if="tab == 'inbox'">
+	<div class="panel-body">
+		<div ng-if="!(notifications | filter: inbox).length">Your inbox is empty!</div>
+		<div class="list-group" ng-if="(notifications | filter: inbox).length">
+			<div class="list-group-item" ng-repeat="n in notifications | filter: inbox | orderBy : 'created' : false" ng-class="{'list-group-item-info': n.status_id == 'unread'}">
+				<div ng-class="{'list-group-item-heading': reading == n.id}">
+					<div class="row">
+						<div class="col-sm-9">
+							<strong>{{n.subject}}</strong><br />
+							<small>{{n.created * 1000 | date:"yyyy.MM.dd - hh:mm a"}}</small>
+						</div>
+						<div class="col-sm-3">
+							<div class="btn btn-primary btn-xs btn-block" ng-class="{active: reading == n.id}" ng-click="read(n)">Read</div>
+							<div class="btn btn-default btn-xs btn-block" ng-click="archive(n)">Archive</div>
+						</div>
+					</div>
+				</div>
+					<div class="list-group-item-text" ng-show="reading == n.id" ng-bind-html="n.content"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="panel panel-default" ng-if="tab == 'archive'">
+	<div class="panel-body">
+	<div ng-if="!notifications.length">You have no notifications.</div>
+		<div class="list-group" ng-if="notifications.length">
+			<div class="list-group-item" ng-repeat="n in notifications | orderBy : 'created' : false" ng-class="{'list-group-item-info': n.status_id == 'unread'}">
+				<div ng-class="{'list-group-item-heading': reading == n.id}">
+					<div class="row">
+						<div class="col-sm-9">
+							<strong>{{n.subject}}</strong><br />
+							<small>{{n.created * 1000 | date:"yyyy.MM.dd - hh:mm a"}}</small>
+						</div>
+						<div class="col-sm-3">
+							<div class="btn btn-primary btn-xs btn-block" ng-class="{active: reading == n.id}" ng-click="read(n)">Read</div>
+						</div>
+					</div>
+				</div>
+					<div class="list-group-item-text" ng-show="reading == n.id" ng-bind-html="n.content"></div>
+			</div>
+		</div>
+	</div>
+</div>
