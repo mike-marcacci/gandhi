@@ -7,4 +7,4 @@
 	<li ng-class="{active: !assignedOnly}" ng-click="setAssignedOnly(false)"><a href>All Projects</a></li>
 </ul>
 
-<div gandhi-list="table" base="'portal.projects'" model="'project'" limit="false"></div>
+<div gandhi-list="table" sref-base="'portal.projects.show'" sref-param="'project'" limit="false"></div>

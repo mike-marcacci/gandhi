@@ -20,8 +20,8 @@
 			</thead>
 			<tbody>
 				<tr
-					ng-class="{active: $state.includes('{{path('show')}}', {{params(row.id)}})}"
-					ui-sref="{{link('show', row.id)}}"
+					ng-class="{active: $state.includes('{{srefBase}}', {{params(row.id)}})}"
+					ui-sref="{{ srefBase + '(' + params(row.id) + ')' }}"
 					style="cursor: pointer"
 					ng-repeat="row in table.data"
 				>
