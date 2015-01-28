@@ -1,50 +1,8 @@
-<div class="panel panel-default">
+<div gandhi-list="table" base="base" model="model" limit="limit">
 	<div class="panel-heading">
 		<span class="panel-title">List</span>
 		<div class="pull-right">
 			<button class="btn btn-xs btn-default" ui-sref="{{link('create')}}"><i class="glyphicon glyphicon-plus-sign"></i></button>
 		</div>
 	</div>
-	<div style="overflow-x: auto;">
-		<table class="table table-hover" gandhi-admin-table="table" style="margin-bottom: 0;">
-			<thead>
-				<tr>
-					<th
-						ng-if="!limit || column.primary"
-						ng-class="{active: eq(table.query.sort[0].path, column.path)}"
-						style="cursor: pointer;"
-						ng-click="sort(column)"
-						ng-repeat="column in table.columns"
-					>
-						<span ng-bind="column.title || column.key"></span>
-						<span
-							ng-if="eq(table.query.sort[0].path, column.path)"
-							class="pull-right glyphicon"
-							ng-class="{'glyphicon-triangle-top': table.query.sort[0].direction === 'desc', 'glyphicon-triangle-bottom': table.query.sort[0].direction !== 'desc'}"></span>
-					</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr
-					ng-class="{active: $state.includes('{{path('show')}}', {{params(row.id)}})}"
-					ui-sref="{{link('show', row.id)}}"
-					style="cursor: pointer"
-					ng-repeat="row in table.data"
-				>
-					<td ng-if="!limit || column.primary" ng-repeat="column in table.columns">
-						<div ng-if="column.template" compile="column.template"></div>
-						<div ng-if="!column.template" access="column.path" base="row"></div>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
 </div>
-
-<ul class="pagination pagination-sm" ng-show="table.pages.first != table.pages.last">
-	<li ng-click="table.query.page = 1" ng-class="{disabled: !table.query.page || table.query.page === 1}"><a href>&laquo;</a></li>
-	<li ng-click="table.query.page = table.pages.prev" ng-show="table.pages.prev"><a href>{{table.pages.prev}} <span class="sr-only">(prev)</span></a></li>
-	<li class="active"><a href>{{table.query.page || 1}} <span class="sr-only">(current)</span></a></li>
-	<li ng-click="table.query.page = table.pages.next" ng-show="table.pages.next"><a href>{{table.pages.next}} <span class="sr-only">(next)</span></a></li>
-	<li ng-click="table.query.page = table.pages.last" ng-class="{disabled: table.query.page &amp;&amp; table.query.page === table.pages.last}"><a href>&raquo;</a></li>
-</ul>

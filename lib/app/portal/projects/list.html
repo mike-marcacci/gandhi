@@ -2,49 +2,9 @@
 	<li class="active">Projects</li>
 </ol>
 
-<!-- <div class="panel panel-default">
-	<div class="panel-body">
-		Query settings go here
-		- filter
-		- search
-	</div>
-</div> -->
-
 <ul class="nav nav-tabs">
 	<li ng-class="{active: assignedOnly}" ng-click="setAssignedOnly(true)"><a href>Assigned Projects</a></li>
 	<li ng-class="{active: !assignedOnly}" ng-click="setAssignedOnly(false)"><a href>All Projects</a></li>
 </ul>
-<div class="panel panel-default">
-	<table class="table table-hover">
-		<thead>
-			<tr>
-				<th>Title</th>
-				<th>Cycle</th>
-				<th>Role</th>
-				<th>Status</th>
-				<th>Created</th>
-				<th>Updated</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr ui-sref-active="active" ng-repeat="project in projects" ui-sref="portal.projects.show({project: project.id})" style="cursor: pointer;">
-				<td>{{project.title}}</td>
-				<td>{{cyclesById[project.cycle_id].title}}</td>
-				<td>{{project.role.title}}</td>
-				<td>{{project.status.title}}</td>
-				<td>{{project.created * 1000 | date:"yyyy.MM.dd - hh:mm a"}}</td>
-				<td>{{project.updated * 1000 | date:"yyyy.MM.dd - hh:mm a"}}</td>
-			</tr>
-		</tbody>
-	</table>
-</div>
 
-<!-- <ul class="pagination pagination-sm">
-	<li class="disabled"><a href>&laquo;</a></li>
-	<li class="active"><a href>1 <span class="sr-only">(current)</span></a></li>
-	<li><a href>2</a></li>
-
-	<li><a href>&raquo;</a></li>
-</ul>
-
- -->
+<div gandhi-list="table" base="'portal.projects'" model="'project'" limit="false"></div>

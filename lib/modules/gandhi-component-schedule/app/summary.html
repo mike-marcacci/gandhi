@@ -15,7 +15,7 @@
 				<label>Schedule a Time:</label>
 				<div class="help-block" ng-bind-html="description" ng-bind="options.description"></div>
 
-				<div style="overflow-x: auto;">
+				<div class="table-responsive">
 					<table class="table table-bordered">
 						<tr>
 							<th ng-repeat="group in schedule">{{group[0].begin | date:'EEEE, MMMM d'}}</th>

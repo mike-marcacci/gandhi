@@ -2,30 +2,10 @@
 	<li class="active">Cycles</li>
 </ol>
 
-<div class="panel panel-default">
+<div gandhi-list="table" base="'portal.projects'" model="'project'" limit="false">
 	<div class="panel-heading">
 		<span class="panel-title">All Cycles</span>
 	</div>
-	<table class="table table-hover">
-		<thead>
-			<tr>
-				<th>Title</th>
-				<th>Status</th>
-				<th>Open</th>
-				<th>Created</th>
-				<th>Updated</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr ui-sref-active="active" ng-repeat="cycle in cycles" ui-sref="portal.cycles.show({cycle: cycle.id})" style="cursor: pointer;">
-				<td>{{cycle.title}}</td>
-				<td style="text-transform: capitalize;">{{cycle.status_id}}</td>
-				<td>{{cycle.open ? 'Yes' : 'No'}}</td>
-				<td>{{cycle.created * 1000 | date:"yyyy.MM.dd - hh:mm a"}}</td>
-				<td>{{cycle.updated * 1000 | date:"yyyy.MM.dd - hh:mm a"}}</td>
-			</tr>
-		</tbody>
-	</table>
 </div>
 
 <!-- <ul class="pagination pagination-sm">
