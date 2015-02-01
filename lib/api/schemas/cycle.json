@@ -438,6 +438,10 @@
         "title": {
           "type": "string"
         },
+        "single": {
+          "type": "boolean",
+          "default": false
+        },
         "conditions": {
           "type": "array",
           "default": [],

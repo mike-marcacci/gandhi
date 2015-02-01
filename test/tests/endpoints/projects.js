@@ -365,6 +365,7 @@ describe('Projects', function(){
 					done();
 				});
 		});
+		it.skip('only runs a single trigger once');
 		it('hides all embedded collections', function(done){
 			request
 				.get('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009')
