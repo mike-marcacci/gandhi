@@ -21,6 +21,7 @@
 			"conditions": [
 				[{
 					"name": "status",
+					"invert": false,
 					"options": {
 						"status_id": "accepted"
 					}
@@ -37,6 +38,7 @@
 			"conditions": [
 				[{
 					"name": "date",
+					"invert": false,
 					"options": {
 						"timestamp": 4094539199.000,
 						"mode": "after"
@@ -48,12 +50,13 @@
 			"listeners": [
 
 			],
-			"title": "Application Window Closed"
+			"title": "Application Closed"
 		},
 		"open": {
 			"conditions": [
 				[{
 					"name": "date",
+					"invert": false,
 					"options": {
 						"timestamp": 1405203171.364,
 						"mode": "after"
@@ -65,12 +68,13 @@
 			"listeners": [
 
 			],
-			"title": "Application Window Opened"
+			"title": "Application Opened"
 		},
 		"reject": {
 			"conditions": [
 				[{
 					"name": "status",
+					"invert": false,
 					"options": {
 						"status_id": "rejected"
 					}
@@ -87,6 +91,7 @@
 			"conditions": [
 				[{
 					"name": "content_status",
+					"invert": false,
 					"options": {
 						"content_id": "application",
 						"status_id": "complete"
@@ -442,6 +447,7 @@
 			"conditions": [
 				[{
 					"name": "status",
+					"invert": false,
 					"options": {
 						"status_id": "accepted"
 					}
@@ -459,6 +465,7 @@
 			"conditions": [
 				[{
 					"name": "status",
+					"invert": false,
 					"options": {
 						"status_id": "archived"
 					}
@@ -475,6 +482,7 @@
 			"conditions": [
 				[{
 					"name": "date",
+					"invert": false,
 					"options": {
 						"timestamp": 1412164799.999,
 						"mode": "after"
@@ -486,12 +494,13 @@
 			"listeners": [
 
 			],
-			"title": "Application Window Closed"
+			"title": "Application Closed"
 		},
 		"open": {
 			"conditions": [
 				[{
 					"name": "date",
+					"invert": false,
 					"options": {
 						"timestamp": 1405203171.364,
 						"mode": "after"
@@ -503,12 +512,13 @@
 			"listeners": [
 
 			],
-			"title": "Application Window Opened"
+			"title": "Application Opened"
 		},
 		"reject": {
 			"conditions": [
 				[{
 					"name": "status",
+					"invert": false,
 					"options": {
 						"status_id": "rejected"
 					}
@@ -525,6 +535,7 @@
 			"conditions": [
 				[{
 					"name": "content_status",
+					"invert": false,
 					"options": {
 						"content_id": "report",
 						"status_id": "complete"
@@ -542,6 +553,7 @@
 			"conditions": [
 				[{
 					"name": "content_status",
+					"invert": false,
 					"options": {
 						"content_id": "application",
 						"status_id": "complete"

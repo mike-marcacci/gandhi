@@ -5654,6 +5654,12 @@ body {
     height: 80px; }
   body .btn .glyphicon {
     top: 2px; }
+  body .input-xs {
+    height: 22px;
+    padding: 5px 5px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px; }
   body .table + .panel-body,
   body .table-responsive + .panel-body,
   body gandhi-permissions + .panel-body {
@@ -5671,9 +5677,15 @@ body {
   body .tab-bar {
     padding-top: 10px;
     padding-right: 10px;
-    float: right; }
-  body .nav-tabs {
+    position: relative;
+    float: right;
     z-index: 1; }
+  body .nav-tabs {
+    position: relative;
+    z-index: auto; }
+    body .nav-tabs + .panel {
+      position: relative;
+      z-index: auto; }
     body .nav-tabs > li > a {
       border-radius: 0;
       border-color: transparent; }
@@ -5683,9 +5695,7 @@ body {
       border-style: solid;
       border-color: #428bca;
       -webkit-box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.1);
-      box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.1);
-      z-index: -1;
-      position: relative; }
+      box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.1); }
     body .nav-tabs > li > a:hover {
       background-color: transparent;
       border-color: transparent; }
@@ -5730,10 +5740,6 @@ body {
   body .tabs-right-panel {
     padding-right: 0;
     border-top-right-radius: 0; }
-  body .panel .nav-tabs > li.active > a,
-  body .panel .nav-tabs > li.active > a:hover,
-  body .panel .nav-tabs > li.active > a:focus {
-    z-index: 0; }
   body .panel .tabs-left, body .panel .tabs-right {
     border-bottom: none;
     padding-top: 2px; }

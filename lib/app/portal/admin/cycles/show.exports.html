@@ -75,7 +75,7 @@
 						<input ng-show="backup[export.id]" class="form-control" type="text" ng-model="export.path" json-pointer>
 					</td>
 					<td>
-						<pre ng-hide="backup[export.id]" class="form-control-static">{{export.template}}</pre>
+						<pre style="max-width: 400px;" ng-hide="backup[export.id]" class="form-control-static">{{export.template}}</pre>
 						<textarea ng-show="backup[export.id]" class="form-control" ng-model="export.template"></textarea>
 					</td>
 					<td align="right" width="80">

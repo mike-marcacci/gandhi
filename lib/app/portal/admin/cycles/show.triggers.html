@@ -42,8 +42,9 @@
 				<tr>
 					<th ng-if="currentUser.preferences.admin.technical">ID</th>
 					<th>Title</th>
-					<th>Conditions</th>
-					<th>Listeners</th>
+					<th>Single</th>
+					<th style="min-width: 400px;">Conditions</th>
+					<th style="min-width: 400px;">Listeners</th>
 					<th></th>
 				</tr>
 			</thead>
@@ -57,13 +58,101 @@
 						<input ng-show="backup[trigger.id]" class="form-control" type="text" ng-model="trigger.title">
 					</td>
 					<td>
-						<p ng-hide="backup[trigger.id]" class="form-control-static">{{trigger.conditions}}</p>
-						<div ng-if="backup[trigger.id]">
-							<textarea ng-if="backup[trigger.id]" class="form-control" ng-model="trigger.conditions" json ui-ace="{mode: 'json'}"></textarea>
-						</div>
+						<label>
+							<input ng-show="backup[trigger.id]" ng-disabled="!backup[trigger.id]" type="checkbox" ng-model="trigger.single">
+							<span class="text-success" ng-show="trigger.single">Yes</span>
+							<span class="text-danger" ng-hide="trigger.single">No</span>
+						</label>
 					</td>
 					<td>
-						<p ng-hide="backup[trigger.id]" class="form-control-static">{{trigger.listeners}}</p>
+						<div ng-repeat="(iGroup, group) in trigger.conditions" class="panel panel-default">
+							<div style="padding: 15px; white-space: nowrap; overflow-x: auto;">
+								<div class="panel panel-default" style="display: inline-block; margin-right: 15px; margin-bottom: 0;" ng-repeat="(iCondition, condition) in group">
+
+								<!-- Heading -->
+								<div ng-if="!backup[trigger.id]" class="panel-heading" style="display: flex;">
+									<div class="panel-title">{{condition.name | title}}</div>
+								</div>
+								<div ng-if="backup[trigger.id]" class="panel-heading" style="display: flex;">
+									<select class="form-control input-xs" style="flex: 1;" ng-model="condition.name" ng-options="name as title for (name, title) in {date: 'Date', status: 'Status', content_status: 'Content Status', export: 'Export'}" required></select>
+
+									<div style="margin-left: 15px;" ng-click="removeIndex(group, iCondition)" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i></div>
+								</div>
+
+								<div class="panel-body form-horizontal" style="padding-bottom: 0;">
+									<div class="form-group">
+										<label class="col-xs-4">Invert</label>
+										<div class="col-xs-8">
+											<label>
+												<input ng-if="backup[trigger.id]" type="checkbox" ng-model="condition.invert">
+												<span class="text-success" ng-show="condition.invert">Yes</span>
+												<span class="text-danger" ng-hide="condition.invert">No</span>
+											</label>
+										</div>
+									</div>
+
+									<!-- Date -->
+									<div ng-if="condition.name == 'date'">
+										<div class="form-group">
+											<label class="col-xs-4">Mode</label>
+											<div class="col-xs-8">
+												<div ng-if="!backup[trigger.id]">{{condition.options.mode | title}}</div>
+												<select ng-if="backup[trigger.id]" class="form-control input-xs" ng-model="condition.options.mode" ng-options="mode as title for (mode, title) in {before: 'Before', after: 'After'}" required></select>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-xs-4">Timestamp</label>
+											<div class="col-xs-8">
+												<div ng-if="!backup[trigger.id]">{{condition.options.timestamp}}</div>
+												<input ng-if="backup[trigger.id]" class="form-control input-xs" type="text" ng-model="condition.options.timestamp">
+											</div>
+										</div>
+									</div>
+
+
+									<!-- Status -->
+									<div ng-if="condition.name == 'status'">
+										<div class="form-group">
+											<label class="col-xs-4">Status</label>
+											<div class="col-xs-8">
+												<div ng-if="!backup[trigger.id]">{{statusesById[condition.options.status_id].title}}</div>
+												<select ng-if="backup[trigger.id]" class="form-control input-xs" ng-model="condition.options.status_id" ng-options="status.id as status.title for status in statuses" required></select>
+											</div>
+										</div>
+									</div>
+
+
+									<!-- Content Status -->
+									<div ng-if="condition.name == 'content_status'">
+										<div class="form-group">
+											<label class="col-xs-4">Content</label>
+											<div class="col-xs-8">
+												<div ng-if="!backup[trigger.id]">{{stagesById[condition.options.content_id].title}}</div>
+												<select ng-if="backup[trigger.id]" class="form-control input-xs" ng-model="condition.options.content_id" ng-options="stage.id as stage.title for stage in stages" required></select>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-xs-4">Status</label>
+											<div class="col-xs-8">
+												<div ng-if="!backup[trigger.id]">{{condition.options.status_id | title}}</div>
+												<select ng-if="backup[trigger.id]" class="form-control input-xs" ng-model="condition.options.status_id" ng-options="id as status for (id, status) in {none: 'None', draft: 'Draft', complete: 'Complete'}" required></select>
+											</div>
+										</div>
+									</div>
+
+								</div>
+								</div>
+							</div>
+
+							<div ng-if="backup[trigger.id]" class="panel-footer">
+								<div ng-click="removeIndex(trigger.conditions, iGroup)" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i> Remove Group</div>
+								<div ng-click="addCondition(group)" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-plus-sign"></i> Add Condition</div>
+							</div>
+						</div>
+						<div ng-if="backup[trigger.id]" ng-click="addGroup(trigger.conditions)" class="btn btn-xs btn-default"><i class="glyphicon glyphicon-plus-sign"></i> Add Group</div>
+					</td>
+					<td>
+						<p ng-if="!backup[trigger.id]" class="form-control-static well" style="max-width: 400px;">{{trigger.listeners}}</p>
 						<div ng-if="backup[trigger.id]">
 							<textarea class="form-control" ng-model="trigger.listeners" json ui-ace="{mode: 'json'}"></textarea>
 						</div>

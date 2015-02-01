@@ -51,6 +51,14 @@ body {
 		top: 2px;
 	}
 
+	.input-xs {
+		height: 22px;
+		padding: 5px 5px;
+		font-size: 12px;
+		line-height: 1.5;
+		border-radius: 3px;
+	}
+
 	.table + .panel-body,
 	.table-responsive + .panel-body,
 	gandhi-permissions + .panel-body {
@@ -77,11 +85,22 @@ body {
 	.tab-bar {
 		padding-top: 10px;
 		padding-right: 10px;
+		position: relative;
 		float: right;
+		z-index: 1;
 	}
 
+	// Tabs
+	// ----
+
 	.nav-tabs {
-		z-index: 1;
+		position: relative;
+		z-index: auto;
+
+		+ .panel {
+			position: relative;
+			z-index: auto;
+		}
 
 		> li > a {
 			border-radius: 0;
@@ -95,8 +114,6 @@ body {
 			border-color: $brand-primary;
 			-webkit-box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.1);
 			box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.1);
-			z-index: -1;
-			position: relative;
 		}
 
 		> li > a:hover {
@@ -176,13 +193,6 @@ body {
 	}
 
 	.panel {
-		.nav-tabs {
-			> li.active > a,
-			> li.active > a:hover,
-			> li.active > a:focus {
-				z-index: 0;
-			}
-		}
 		
 		.tabs-left, .tabs-right {
 			border-bottom: none;

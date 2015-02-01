@@ -456,6 +456,10 @@
                 "name": {
                   "type": "string"
                 },
+                "invert": {
+                  "type": "boolean",
+                  "default": false
+                },
                 "options": {
                   "type": "object",
                   "additionalProperties": true,
