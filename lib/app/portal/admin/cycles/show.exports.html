@@ -1,4 +1,4 @@
-<div class="panel panel-default" ng-show="exportCreate">
+<div class="panel panel-default" ng-if="exportCreate">
 	<div class="panel-heading">
 		<span class="panel-title">Create Export</span>
 		<div class="pull-right">
@@ -38,7 +38,7 @@
 	</div>
 </div>
 
-<div class="panel panel-default" ng-hide="exportCreate">
+<div class="panel panel-default" ng-if="!exportCreate">
 	<div class="panel-heading">
 		<span class="panel-title">Exports</span>
 		<div class="pull-right">
@@ -46,18 +46,18 @@
 		</div>
 	</div>
 
-	<div class="panel-body" ng-hide="exports.length">
+	<div class="panel-body" ng-if="!exports.length">
 		No exports. <a href ng-click="toggleCreate()">Create one.</a>
 	</div>
 
-	<div class="table-responsive" ng-show="exports.length">
+	<div class="table-responsive" ng-if="exports.length">
 		<table class="table table-hover">
 			<thead>
 				<tr>
 					<th ng-if="currentUser.preferences.admin.technical">ID</th>
 					<th>Title</th>
 					<th>Path</th>
-					<th>Template</th>
+					<th style="min-width: 400px;">Template</th>
 					<th></th>
 				</tr>
 			</thead>
@@ -67,21 +67,21 @@
 						<p class="form-control-static"><strong>{{export.id}}</strong></p>
 					</td>
 					<td>
-						<p ng-hide="backup[export.id]" class="form-control-static">{{export.title}}</p>
-						<input ng-show="backup[export.id]" class="form-control" type="text" ng-model="export.title">
+						<p ng-if="!backup[export.id]" class="form-control-static">{{export.title}}</p>
+						<input ng-if="backup[export.id]" class="form-control" type="text" ng-model="export.title">
 					</td>
 					<td>
-						<p ng-hide="backup[export.id]" class="form-control-static">{{export.path | jsonPointer}}</p>
-						<input ng-show="backup[export.id]" class="form-control" type="text" ng-model="export.path" json-pointer>
+						<p ng-if="!backup[export.id]" class="form-control-static">{{export.path | jsonPointer}}</p>
+						<input ng-if="backup[export.id]" class="form-control" type="text" ng-model="export.path" json-pointer>
 					</td>
 					<td>
-						<pre style="max-width: 400px;" ng-hide="backup[export.id]" class="form-control-static">{{export.template}}</pre>
-						<textarea ng-show="backup[export.id]" class="form-control" ng-model="export.template"></textarea>
+						<pre style="max-width: 400px;" ng-if="!backup[export.id]" class="form-control-static">{{export.template}}</pre>
+						<div ui-ace="{mode: 'handlebars'}" style="height: 250px;" ng-if="backup[export.id]" class="form-control" ng-model="export.template"></div>
 					</td>
 					<td align="right" width="80">
 						<button ng-click="toggleEdit(export)" class="btn btn-block btn-xs btn-default" ng-class="{active: backup[export.id]}"><i class="glyphicon glyphicon-cog"></i></button>
-						<button ng-click="save(export)" class="btn btn-block btn-xs btn-primary" ng-show="backup[export.id]">Save</button>
-						<button ng-click="delete(export)" class="btn btn-block btn-xs btn-danger" ng-hide="backup[export.id]"><i class="glyphicon glyphicon-trash"></i></button>
+						<button ng-click="save(export)" class="btn btn-block btn-xs btn-primary" ng-if="backup[export.id]">Save</button>
+						<button ng-click="delete(export)" class="btn btn-block btn-xs btn-danger" ng-if="!backup[export.id]"><i class="glyphicon glyphicon-trash"></i></button>
 					</td>
 				</tr>
 			</tbody>

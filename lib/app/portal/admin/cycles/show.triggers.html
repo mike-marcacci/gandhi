@@ -74,7 +74,7 @@
 									<div class="panel-title">{{condition.name | title}}</div>
 								</div>
 								<div ng-if="backup[trigger.id]" class="panel-heading" style="display: flex;">
-									<select class="form-control input-xs" style="flex: 1;" ng-model="condition.name" ng-options="name as title for (name, title) in {date: 'Date', status: 'Status', content_status: 'Content Status', export: 'Export'}" required></select>
+									<select class="form-control input-xs" style="flex: 1;" ng-model="condition.name" ng-options="type.name as type.title for type in [{name: 'date', title: 'Date'}, {name: 'status', title: 'Status (Project)'}, {name: 'content_status', title: 'Status (Content)'}, {name: 'value_regex', title: 'Regex (Value)'}]" required></select>
 
 									<div style="margin-left: 15px;" ng-click="removeIndex(group, iCondition)" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i></div>
 								</div>
@@ -140,6 +140,25 @@
 										</div>
 									</div>
 
+
+									<!-- Export Regex -->
+									<div ng-if="condition.name == 'value_regex'">
+										<div class="form-group">
+											<label class="col-xs-4">Export</label>
+											<div class="col-xs-8">
+												<div ng-if="!backup[trigger.id]">{{exportsById[condition.options.value_id].title}}</div>
+												<select ng-if="backup[trigger.id]" class="form-control input-xs" ng-model="condition.options.value_id" ng-options="export.id as export.title for export in exports" required></select>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-xs-4">Regex</label>
+											<div class="col-xs-8">
+												<div ng-if="!backup[trigger.id]">{{condition.options.regex}}</div>
+												<input ng-if="backup[trigger.id]" class="form-control input-xs" type="text" ng-model="condition.options.regex">
+											</div>
+										</div>
+									</div>
+
 								</div>
 								</div>
 							</div>
@@ -154,7 +173,7 @@
 					<td>
 						<p ng-if="!backup[trigger.id]" class="form-control-static well" style="max-width: 400px;">{{trigger.listeners}}</p>
 						<div ng-if="backup[trigger.id]">
-							<textarea class="form-control" ng-model="trigger.listeners" json ui-ace="{mode: 'json'}"></textarea>
+							<div class="form-control" ng-model="trigger.listeners" json ui-ace="{mode: 'json'}" style="height: 250px;"></div>
 						</div>
 					</td>
 					<td align="right" width="80">
