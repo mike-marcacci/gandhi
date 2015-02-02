@@ -191,6 +191,7 @@ describe('Cycles', function(){
 		it('shows a non-draft cycle to an admin user', function(done){
 			request
 				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d')
+				.query({admin: true})
 				.set('Authorization', 'Bearer ' + adminToken)
 				.expect(200)
 				.end(function(err, res){
@@ -202,6 +203,7 @@ describe('Cycles', function(){
 		it('shows a draft cycle to an admin user', function(done){
 			request
 				.get('/api/cycles/e5f58a2c-2894-40e6-91a9-a110d190e85f')
+				.query({admin: true})
 				.set('Authorization', 'Bearer ' + adminToken)
 				.expect(200)
 				.end(function(err, res){
@@ -335,10 +337,10 @@ describe('Cycles', function(){
 		});
 	});
 
-	// test embedded collections
-	['statuses','roles','assignments','invitations','triggers','stages','exports'].forEach(function(c){
-		require('./cycles/' + c);
-	});
+	// // test embedded collections
+	// ['statuses','roles','assignments','invitations','triggers','stages','exports'].forEach(function(c){
+	// 	require('./cycles/' + c);
+	// });
 
 	// remove any cycles we just created
 	after(function(done){
