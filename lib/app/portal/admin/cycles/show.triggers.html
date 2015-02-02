@@ -104,7 +104,7 @@
 											<label class="col-xs-4">Timestamp</label>
 											<div class="col-xs-8">
 												<div ng-if="!backup[trigger.id]">{{condition.options.timestamp}}</div>
-												<input ng-if="backup[trigger.id]" class="form-control input-xs" type="text" ng-model="condition.options.timestamp">
+												<input ng-if="backup[trigger.id]" class="form-control input-xs" json type="text" ng-model="condition.options.timestamp">
 											</div>
 										</div>
 									</div>
