@@ -203,7 +203,7 @@ describe('Contents', function(){
 				.set('Authorization', 'Bearer ' + adminToken)
 				.send({id:'application',status_id:'draft',data:{foo:'bar'}})
 				.expect(404)
-				.end(function(err, res){ console.error(err, res.body.validation); return done(err)});
+				.end(done);
 		});
 		it('returns 404 for nonexistant stage', function(done){
 			request

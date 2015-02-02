@@ -175,7 +175,7 @@
 		}],
 		"close": [{
 			"timestamp": 1413168199.946,
-			"value": true
+			"value": false
 		}],
 		"open": [{
 			"timestamp": 1413168199.946,
@@ -185,6 +185,9 @@
 			"timestamp": 1413168199.946,
 			"value": false
 		}]
+	},
+	"values": {
+		"proposal": "4f406e9f-a1ba-4b7b-9aae-c37b42a0cc03"
 	}
 }, {
 	"status_id": "active",
@@ -324,7 +327,7 @@
 		}],
 		"close": [{
 			"timestamp": 1413178905.465,
-			"value": true
+			"value": false
 		}],
 		"open": [{
 			"timestamp": 1413178905.465,
@@ -334,6 +337,9 @@
 			"timestamp": 1413178905.465,
 			"value": false
 		}]
+	},
+	"values": {
+		"proposal": null
 	}
 }, {
 	"status_id": "active",
@@ -387,5 +393,6 @@
 			"timestamp": 1413167504.965,
 			"value": false
 		}]
-	}
+	},
+	"values": {}
 }]
