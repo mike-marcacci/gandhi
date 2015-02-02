@@ -125,7 +125,7 @@ describe('Triggers', function(){
 		it('rejects an anonymous put', function(done){
 			request
 				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers/test')
-				.send({conditions:[[{name:'date',options:{date:'2014-09-31T11:59:59.999Z',mode:'after'}}]],id:'test',listeners:[],title:'Test Trigger'})
+				.send({conditions:[[{name:'date',invert:false,options:{timestamp:1412164799.999}}]],id:'test',listeners:[],title:'Test Trigger'})
 				.expect(401)
 				.end(done);
 		});
@@ -133,7 +133,7 @@ describe('Triggers', function(){
 			request
 				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers/test')
 				.set('Authorization', 'Bearer ' + userToken)
-				.send({conditions:[[{name:'date',options:{date:'2014-09-31T11:59:59.999Z',mode:'after'}}]],id:'test',listeners:[],title:'Test Trigger'})
+				.send({conditions:[[{name:'date',invert:false,options:{timestamp:1412164799.999}}]],id:'test',listeners:[],title:'Test Trigger'})
 				.expect(403)
 				.end(done);
 		});
@@ -149,7 +149,7 @@ describe('Triggers', function(){
 			request
 				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers/test')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({conditions:[[{name:'date',options:{date:'2014-09-31T11:59:59.999Z',mode:'after'}}]],id:'foo',listeners:[],title:'Test Trigger'})
+				.send({conditions:[[{name:'date',invert:false,options:{timestamp:1412164799.999}}]],id:'foo',listeners:[],title:'Test Trigger'})
 				.expect(400)
 				.end(done);
 		});
@@ -157,7 +157,7 @@ describe('Triggers', function(){
 			request
 				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers/test')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({conditions:[[{name:'date',options:{date:'2014-09-31T11:59:59.999Z',mode:'after'}}]],id:'test',listeners:[],title:'Test Trigger'})
+				.send({conditions:[[{name:'date',invert:false,options:{timestamp:1412164799.999}}]],id:'test',listeners:[],title:'Test Trigger'})
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
@@ -169,7 +169,7 @@ describe('Triggers', function(){
 			request
 				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers/test')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({conditions:[[{name:'date',options:{date:'2014-09-31T11:59:59.999Z',mode:'after'}}]],id:'test',listeners:[],title:'Test Trigger PUT'})
+				.send({conditions:[[{name:'date',invert:false,options:{timestamp:1412164799.999}}]],id:'test',listeners:[],title:'Test Trigger PUT'})
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
@@ -208,7 +208,7 @@ describe('Triggers', function(){
 			request
 				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers/test')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({conditions:[[{name:'date',options:{date:'2014-09-31T11:59:59.999Z',mode:'after'}}]],id:'foo',listeners:[],title:'Test Trigger'})
+				.send({conditions:[[{name:'date',invert:false,options:{timestamp:1412164799.999}}]],id:'foo',listeners:[],title:'Test Trigger'})
 				.expect(400)
 				.end(done);
 		});

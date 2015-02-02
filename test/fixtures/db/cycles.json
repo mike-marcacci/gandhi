@@ -40,8 +40,7 @@
 					"name": "date",
 					"invert": false,
 					"options": {
-						"timestamp": 4094539199.000,
-						"mode": "after"
+						"timestamp": 4094539199.000
 					}
 				}]
 			],
@@ -58,8 +57,7 @@
 					"name": "date",
 					"invert": false,
 					"options": {
-						"timestamp": 1405203171.364,
-						"mode": "after"
+						"timestamp": 1405203171.364
 					}
 				}]
 			],
@@ -484,8 +482,7 @@
 					"name": "date",
 					"invert": false,
 					"options": {
-						"timestamp": 2412164799.999,
-						"mode": "after"
+						"timestamp": 2412164799.999
 					}
 				}]
 			],
@@ -502,8 +499,7 @@
 					"name": "date",
 					"invert": false,
 					"options": {
-						"timestamp": 1405203171.364,
-						"mode": "after"
+						"timestamp": 1405203171.364
 					}
 				}]
 			],
@@ -571,14 +567,14 @@
 			"conditions": [
 				[{
 					"name": "date",
+					"invert": true,
 					"options": {
-						"timestamp": 1405803171364,
-						"mode": "after"
+						"timestamp": 1405803171364
 					}
 				}, {
 					"name": "content_status",
+					"invert": true,
 					"options": {
-						"invert": true,
 						"content_id": "submission",
 						"status_id": "complete"
 					}

@@ -449,23 +449,114 @@
             "type": "array",
             "minItems": 1,
             "items": {
-              "type": "object",
-              "required": ["name"],
-              "additionalProperties": false,
-              "properties": {
-                "name": {
-                  "type": "string"
-                },
-                "invert": {
-                  "type": "boolean",
-                  "default": false
-                },
-                "options": {
+              "anyOf": [
+                {
                   "type": "object",
-                  "additionalProperties": true,
-                  "default": {}
+                  "required": ["name", "options"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "constant": "date"
+                    },
+                    "invert": {
+                      "type": "boolean",
+                      "default": false
+                    },
+                    "options": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": ["timestamp"],
+                      "properties": {
+                        "timestamp": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "required": ["name", "options"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "constant": "status"
+                    },
+                    "invert": {
+                      "type": "boolean",
+                      "default": false
+                    },
+                    "options": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": ["status_id"],
+                      "properties": {
+                        "status_id": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "required": ["name", "options"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "constant": "content_status"
+                    },
+                    "invert": {
+                      "type": "boolean",
+                      "default": false
+                    },
+                    "options": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": ["status_id", "content_id"],
+                      "properties": {
+                        "status_id": {
+                          "type": "string"
+                        },
+                        "content_id": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "required": ["name", "options"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "constant": "value_regex"
+                    },
+                    "invert": {
+                      "type": "boolean",
+                      "default": false
+                    },
+                    "options": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": ["value_id", "regex"],
+                      "properties": {
+                        "value_id": {
+                          "type": "string"
+                        },
+                        "regex": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
                 }
-              }
+              ]
             }
           }
         },

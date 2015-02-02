@@ -94,17 +94,10 @@
 									<!-- Date -->
 									<div ng-if="condition.name == 'date'">
 										<div class="form-group">
-											<label class="col-xs-4">Mode</label>
-											<div class="col-xs-8">
-												<div ng-if="!backup[trigger.id]">{{condition.options.mode | title}}</div>
-												<select ng-if="backup[trigger.id]" class="form-control input-xs" ng-model="condition.options.mode" ng-options="mode as title for (mode, title) in {before: 'Before', after: 'After'}" required></select>
-											</div>
-										</div>
-										<div class="form-group">
 											<label class="col-xs-4">Timestamp</label>
 											<div class="col-xs-8">
-												<div ng-if="!backup[trigger.id]">{{condition.options.timestamp}}</div>
-												<input ng-if="backup[trigger.id]" class="form-control input-xs" json type="text" ng-model="condition.options.timestamp">
+												<div ng-if="!backup[trigger.id]">{{condition.options.timestamp | date:"yyyy.MM.dd - hh:mm a"}}</div>
+												<input ng-if="backup[trigger.id]" class="form-control input-xs" type="datetime-local" timestamp ng-model="condition.options.timestamp">
 											</div>
 										</div>
 									</div>
