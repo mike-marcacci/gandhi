@@ -145,7 +145,7 @@ describe('Stages', function(){
 				.expect(400)
 				.end(done);
 		});
-		it('rejects an invalid put', function(done){
+		it('rejects a put with mismatched ID', function(done){
 			request
 				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/stages/test')
 				.set('Authorization', 'Bearer ' + adminToken)
