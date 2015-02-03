@@ -78,8 +78,8 @@
 						<div class="form-group">
 							<label for="cycle-status" class="col-sm-2 control-label">Status</label>
 							<div class="col-sm-10">
-								<p ng-show="!cycleEdit" class="form-control-static">{{cycle.status_id}}</p>
-								<select ng-show="cycleEdit" class="form-control" id="cycle-status" ng-model="cycleEdit.status_id" ng-options="status for status in ['draft','active','archived']" required></select>
+								<p ng-show="!cycleEdit" class="form-control-static">{{cycle.status_id | title}}</p>
+								<select ng-show="cycleEdit" class="form-control" id="cycle-status" ng-model="cycleEdit.status_id" ng-options="id as title for (id, title) in {draft: 'Draft', active:'Active', archived: 'Archived'}" required></select>
 							</div>
 						</div>
 						<div class="form-group">

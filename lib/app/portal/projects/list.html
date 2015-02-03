@@ -2,9 +2,15 @@
 	<li class="active">Projects</li>
 </ol>
 
+
+
 <ul class="nav nav-tabs">
 	<li ng-class="{active: assignedOnly}" ng-click="setAssignedOnly(true)"><a href>Assigned Projects</a></li>
 	<li ng-class="{active: !assignedOnly}" ng-click="setAssignedOnly(false)"><a href>All Projects</a></li>
 </ul>
 
-<div gandhi-list="table" sref-base="'portal.projects.show'" sref-param="'project'" limit="false"></div>
+<div class="panel" ng-if="!projects.length">
+	<div class="panel-body">You don't have any {{assignedOnly ? 'assigned' : ''}} projects.</div>
+</div>
+
+<div ng-if="projects.length" gandhi-list="table" sref-base="'portal.projects.show'" sref-param="'project'" limit="false"></div>

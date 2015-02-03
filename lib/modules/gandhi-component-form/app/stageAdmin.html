@@ -59,7 +59,8 @@
 	<!-- Form -->
 	<div class="panel-body" ng-if="tab == 'Form' &amp;&amp; !stageFormEdit">
 		<div class="alert alert-warning" ng-if="!stage.component.options.form" style="margin-bottom: 0;">Please specify a form definition for this stage.</div>
-		<div ng-if="stage.component.options.form" sf-schema="stage.component.options.schema" sf-form="stage.component.options.form" ng-model="sample"></div>
+		<div ng-if="stage.component.options.form" sf-schema="stage.component.options.schema" sf-form="copy.component.options.form" sf-options="sfOptions" ng-model="sample"></div>
+		<div class="btn btn-sm btn-default" ng-if="stage.component.options.form" ng-click="validate()">Validate</div>
 	</div>
 	<div class="panel-body" ng-if="tab == 'Form' &amp;&amp; stageFormEdit">
 		<div style="height: 400px;" ui-ace="{mode: 'json'}" json ng-model="stageFormEdit.component.options.form"></div>
@@ -68,7 +69,7 @@
 	<!-- Presentation -->
 	<div class="panel-body" ng-if="tab == 'Presentation' &amp;&amp; !stagePresentationEdit">
 		<div class="alert alert-warning" ng-if="!stage.component.options.presentation" style="margin-bottom: 0;">Please specify a presentation definition for this stage.</div>
-		<div ng-if="stage.component.options.presentation" sf-schema="stage.component.options.schema" sf-form="stage.component.options.presentation" ng-model="sample"></div>
+		<div ng-if="stage.component.options.presentation" sf-schema="stage.component.options.schema" sf-form="copy.component.options.presentation" sf-options="sfOptions" ng-model="sample"></div>
 	</div>
 	<div class="panel-body" ng-if="tab == 'Presentation' &amp;&amp; stagePresentationEdit">
 		<div style="height: 400px;" ui-ace="{mode: 'json'}" json ng-model="stagePresentationEdit.component.options.presentation"></div>
@@ -77,7 +78,7 @@
 	<!-- Summary -->
 	<div class="panel-body" ng-if="tab == 'Summary' &amp;&amp; !stageSummaryEdit">
 		<div class="alert alert-warning" ng-if="!stage.component.options.summary" style="margin-bottom: 0;">Please specify a form definition for this stage.</div>
-		<div ng-if="stage.component.options.summary" sf-schema="stage.component.options.schema" sf-form="stage.component.options.summary" ng-model="sample"></div>
+		<div ng-if="stage.component.options.summary" sf-schema="stage.component.options.schema" sf-form="copy.component.options.summary" sf-options="sfOptions" ng-model="sample"></div>
 	</div>
 	<div class="panel-body" ng-if="tab == 'Summary' &amp;&amp; stageSummaryEdit">
 		<div style="height: 400px;" ui-ace="{mode: 'json'}" json ng-model="stageSummaryEdit.component.options.summary"></div>

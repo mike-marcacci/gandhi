@@ -1,4 +1,6 @@
-<div ng-if="stage &amp;&amp; content">
+<div ng-if="!stage.id || !content.id">Loading...</div>
+
+<div ng-if="stage.id &amp;&amp; content.id">
 	<div class="alert alert-info" role="alert" ng-if="status == 'draft'" sf-decorator-name="'bootstrap-decorator'">
 		This stage is saved as a draft.
 	</div>
@@ -31,15 +33,15 @@
 		<div ng-class="{'col-md-7': stage.component.options.instructions, 'col-md-12': !stage.component.options.instructions}">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<span class="panel-title">{{stage.title}}</span>
+					<span class="panel-title">{{stage.title}} - <b>{{content.status_id | title}}</b></span>
 				</div>
 				<div class="panel-body">
 
-							<form name="gandhiFormComponent" ng-submit="submit(gandhiFormComponent, data)">
-								<div sf-model="content.data" sf-form="stage.component.options.form" sf-schema="stage.component.options.schema" sf-options="{}"></div>
-								<div ng-show="content.authorizations.write &amp;&amp; options.draft !== false" ng-click="save()" class="btn btn-default" ng-bind="options.draftButtonText || 'Save Draft'"></div>
-								<button ng-show="content.authorizations.write" class="btn btn-primary" ng-bind="options.submitButtonText || 'Submit'"></button>
-							</form>
+					<form name="gandhiFormComponent" ng-submit="complete(gandhiFormComponent)">
+						<div ng-if="stage.component.options.schema &amp;&amp; stage.component.options.form" sf-model="content.data" sf-form="stage.component.options.form" sf-schema="stage.component.options.schema" sf-options="sfOptions"></div>
+						<div ng-show="content.authorizations.write &amp;&amp; options.draft !== false" ng-click="draft()" class="btn btn-default" ng-bind="options.draftButtonText || 'Save Draft'"></div>
+						<button ng-show="content.authorizations.write" class="btn btn-primary" ng-bind="options.submitButtonText || 'Submit'"></button>
+					</form>
 
 				</div>
 			</div>

@@ -56,7 +56,7 @@
 					</td>
 					<td align="right" width="80">
 						<button ng-click="toggleEdit(status)" class="btn btn-block btn-xs btn-default" ng-class="{active: backup[status.id]}"><i class="glyphicon glyphicon-cog"></i></button>
-						<button ng-click="save(status)" class="btn btn-block btn-xs btn-primary" ng-show="backup[status.id]">Save</button>
+						<button ng-click="update(status)" class="btn btn-block btn-xs btn-primary" ng-show="backup[status.id]">Save</button>
 						<button ng-click="delete(status)" class="btn btn-block btn-xs btn-danger" ng-hide="backup[status.id]"><i class="glyphicon glyphicon-trash"></i></button>
 					</td>
 				</tr>

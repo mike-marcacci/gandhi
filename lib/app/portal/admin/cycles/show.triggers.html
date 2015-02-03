@@ -96,7 +96,7 @@
 										<div class="form-group">
 											<label class="col-xs-4">Timestamp</label>
 											<div class="col-xs-8">
-												<div ng-if="!backup[trigger.id]">{{condition.options.timestamp | date:"yyyy.MM.dd - hh:mm a"}}</div>
+												<div ng-if="!backup[trigger.id]">{{condition.options.timestamp * 1000 | date:"yyyy.MM.dd - hh:mm a"}}</div>
 												<input ng-if="backup[trigger.id]" class="form-control input-xs" type="datetime-local" timestamp ng-model="condition.options.timestamp">
 											</div>
 										</div>
@@ -171,7 +171,7 @@
 					</td>
 					<td align="right" width="80">
 						<button ng-click="toggleEdit(trigger)" class="btn btn-block btn-xs btn-default" ng-class="{active: backup[trigger.id]}"><i class="glyphicon glyphicon-cog"></i></button>
-						<button ng-click="save(trigger)" class="btn btn-block btn-xs btn-primary" ng-show="backup[trigger.id]">Save</button>
+						<button ng-click="update(trigger)" class="btn btn-block btn-xs btn-primary" ng-show="backup[trigger.id]">Save</button>
 						<button ng-click="delete(trigger)" class="btn btn-block btn-xs btn-danger" ng-hide="backup[trigger.id]"><i class="glyphicon glyphicon-trash"></i></button>
 					</td>
 				</tr>

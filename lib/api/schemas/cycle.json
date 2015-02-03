@@ -26,12 +26,15 @@
       "default": {
         "open": {
           "id": "open",
-          "title": "Application Window Opened",
+          "title": "Application Opens",
           "conditions": [
             [
               {
-                "name": "open",
-                "options": {}
+                "name": "date",
+                "invert": false,
+                "options": {
+                  "timestamp": 0
+                }
               }
             ]
           ],
@@ -39,12 +42,15 @@
         },
         "close": {
           "id": "close",
-          "title": "Application Window Closed",
+          "title": "Application Closes",
           "conditions": [
             [
               {
-                "name": "close",
-                "options": {}
+                "name": "date",
+                "invert": false,
+                "options": {
+                  "timestamp": 0
+                }
               }
             ]
           ],

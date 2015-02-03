@@ -80,7 +80,7 @@
 					</td>
 					<td align="right" width="80">
 						<button ng-click="toggleEdit(export)" class="btn btn-block btn-xs btn-default" ng-class="{active: backup[export.id]}"><i class="glyphicon glyphicon-cog"></i></button>
-						<button ng-click="save(export)" class="btn btn-block btn-xs btn-primary" ng-if="backup[export.id]">Save</button>
+						<button ng-click="update(export)" class="btn btn-block btn-xs btn-primary" ng-if="backup[export.id]">Save</button>
 						<button ng-click="delete(export)" class="btn btn-block btn-xs btn-danger" ng-if="!backup[export.id]"><i class="glyphicon glyphicon-trash"></i></button>
 					</td>
 				</tr>

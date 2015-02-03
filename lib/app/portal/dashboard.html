@@ -12,11 +12,11 @@
 					<a ui-sref="portal.projects.list" class="btn btn-default btn-xs">All Projects</a>
 				</div>
 			</div>
-			<div class="panel-body" ng-if="!activeProjectsByCycle">You have no active projects.</div>
+			<div class="panel-body" ng-if="!activeProjectsByCycle.length">You have no active projects.</div>
 
 
 
-			<table ng-if="activeProjectsByCycle" class="table table-hover">
+			<table ng-if="activeProjectsByCycle.length" class="table table-hover">
 				<thead>
 					<tr>
 						<th>Cycle</th>

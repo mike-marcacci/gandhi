@@ -86,7 +86,7 @@
 					</td>
 					<td align="right" width="80">
 						<button ng-click="toggleEdit(role)" class="btn btn-block btn-xs btn-default" ng-class="{active: backup[role.id]}"><i class="glyphicon glyphicon-cog"></i></button>
-						<button ng-click="save(role)" class="btn btn-block btn-xs btn-primary" ng-show="backup[role.id]">Save</button>
+						<button ng-click="update(role)" class="btn btn-block btn-xs btn-primary" ng-show="backup[role.id]">Save</button>
 						<button ng-click="delete(role)" class="btn btn-block btn-xs btn-danger" ng-hide="backup[role.id]"><i class="glyphicon glyphicon-trash"></i></button>
 					</td>
 				</tr>

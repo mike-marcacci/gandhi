@@ -97,7 +97,7 @@ body {
 		position: relative;
 		z-index: auto;
 
-		+ .panel {
+		+ * {
 			position: relative;
 			z-index: auto;
 		}
