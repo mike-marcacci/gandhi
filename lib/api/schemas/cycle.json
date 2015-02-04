@@ -541,6 +541,32 @@
                   "properties": {
                     "name": {
                       "type": "string",
+                      "constant": "value_equals"
+                    },
+                    "invert": {
+                      "type": "boolean",
+                      "default": false
+                    },
+                    "options": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": ["value_id", "equals"],
+                      "properties": {
+                        "value_id": {
+                          "type": "string"
+                        },
+                        "equals": {}
+                      }
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "required": ["name", "options"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "name": {
+                      "type": "string",
                       "constant": "value_regex"
                     },
                     "invert": {

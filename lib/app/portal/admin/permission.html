@@ -1,69 +1,67 @@
-<div ng-init="tab = model === true || !model ? 'simple' : 'advanced'">
-	<ul ng-show="edit" class="nav nav-tabs" style="display: inline-flex;">
-		<li role="presentation" class="small" ng-class="{active: tab == 'simple'}"><a href ng-click="tab = 'simple'; model = false;">Simple</a></li>
-		<li role="presentation" class="small" ng-class="{active: tab == 'advanced'}"><a href ng-click="tab = 'advanced'; model = {open: false, close: false};">Advanced</a></li>
-	</ul>
-	<div ng-class="{panel: edit, 'panel-default': edit}">
-		<div ng-class="{'panel-body': edit}">
-			
-			<!-- Simple -->
-			<div ng-show="tab == 'simple'">
-				<label>
-					<input ng-show="edit" ng-disabled="!edit" type="checkbox" ng-model="model">
-					<span class="text-success" ng-show="model">Yes</span>
-					<span class="text-danger" ng-hide="model">No</span>
-				</label>
+<ul ng-show="edit" class="nav nav-tabs" style="display: inline-flex;">
+	<li role="presentation" class="small" ng-class="{active: tab == 'simple'}"><a href ng-click="model = false;">Simple</a></li>
+	<li role="presentation" class="small" ng-class="{active: tab == 'advanced'}"><a href ng-click="model = {open: false, close: false};">Advanced</a></li>
+</ul>
+<div ng-class="{panel: edit, 'panel-default': edit}">
+	<div ng-class="{'panel-body': edit}">
+		
+		<!-- Simple -->
+		<div ng-show="tab == 'simple'">
+			<label>
+				<input ng-show="edit" ng-disabled="!edit" type="checkbox" ng-model="model">
+				<span class="text-success" ng-show="model">Yes</span>
+				<span class="text-danger" ng-hide="model">No</span>
+			</label>
+		</div>
+
+		<!-- Advanced -->
+		<div ng-if="tab == 'advanced'">
+
+			<!-- Open -->
+			<div>
+				<div class="btn btn-xs btn-default" style="pointer-events: none; margin: 4px;" ng-if="model.open === true"><span class="text-success"><strong>Always</strong> Open</span></div>
+				<div class="btn btn-xs btn-default" style="pointer-events: none; margin: 4px;" ng-if="!model.open"><span class="text-success"><strong>Never</strong> Opens*</span></div>
+				<div ng-repeat="triggerId in model.open" class="btn-group" role="group" style="display: inline-flex; margin: 4px;">
+					<span type="button" class="btn btn-xs btn-success" style="pointer-events: none;">{{ triggers[triggerId].title || triggerId }}</span>
+					<span ng-if="edit" type="button" class="btn btn-xs btn-success" style="opacity: .7;" ng-click="removeTrigger(model, 'open', triggerId)"><span class="glyphicon glyphicon-remove-sign"></span></span>
+				</div>
+				<div ng-if="edit" class="btn-group" role="group">
+					<button type="button" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+						<span class="glyphicon glyphicon-plus-sign"></span>
+						<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href ng-click="model.open = true"><strong>Always</strong> Open</a></li>
+						<li><a href ng-click="model.open = false"><strong>Never</strong> Opens*</a></li>
+						<li class="divider"></li>
+						<li ng-repeat="trigger in triggers" ng-click="addTrigger(model, 'open', trigger.id)"><a href>Trigger: {{ trigger.title }}</a></li>
+					</ul>
+				</div>
 			</div>
 
-			<!-- Advanced -->
-			<div ng-if="tab == 'advanced'">
-
-				<!-- Open -->
-				<div>
-					<div class="btn btn-xs btn-default" style="pointer-events: none; margin: 4px;" ng-if="model.open === true"><span class="text-success"><strong>Always</strong> Open</span></div>
-					<div class="btn btn-xs btn-default" style="pointer-events: none; margin: 4px;" ng-if="!model.open"><span class="text-success"><strong>Never</strong> Opens*</span></div>
-					<div ng-repeat="triggerId in model.open" class="btn-group" role="group" style="display: inline-flex; margin: 4px;">
-						<span type="button" class="btn btn-xs btn-success" style="pointer-events: none;">{{ triggers[triggerId].title || triggerId }}</span>
-						<span ng-if="edit" type="button" class="btn btn-xs btn-success" style="opacity: .7;" ng-click="removeTrigger(model, 'open', triggerId)"><span class="glyphicon glyphicon-remove-sign"></span></span>
-					</div>
-					<div ng-if="edit" class="btn-group" role="group">
-						<button type="button" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-							<span class="glyphicon glyphicon-plus-sign"></span>
-							<span class="caret"></span>
-						</button>
-						<ul class="dropdown-menu" role="menu">
-							<li><a href ng-click="model.open = true"><strong>Always</strong> Open</a></li>
-							<li><a href ng-click="model.open = false"><strong>Never</strong> Opens*</a></li>
-							<li class="divider"></li>
-							<li ng-repeat="trigger in triggers" ng-click="addTrigger(model, 'open', trigger.id)"><a href>Trigger: {{ trigger.title }}</a></li>
-						</ul>
-					</div>
+			<!-- Close -->
+			<div>
+				<div class="btn btn-xs btn-default" style="pointer-events: none; margin: 4px;" ng-if="model.close === true"><span class="text-danger"><strong>Always</strong> Closed*</span></div>
+				<div class="btn btn-xs btn-default" style="pointer-events: none; margin: 4px;" ng-if="!model.close"><span class="text-danger"><strong>Never</strong> Closes</span></div>
+				<div ng-repeat="triggerId in model.close" class="btn-group" role="group" style="display: inline-flex; margin: 4px;">
+					<span type="button" class="btn btn-xs btn-danger" style="pointer-events: none;">{{ triggers[triggerId].title || triggerId }}</span>
+					<span ng-if="edit" type="button" class="btn btn-xs btn-danger" style="opacity: .7;" ng-click="removeTrigger(model, 'close', triggerId)"><span class="glyphicon glyphicon-remove-sign"></span></span>
 				</div>
-
-				<!-- Close -->
-				<div>
-					<div class="btn btn-xs btn-default" style="pointer-events: none; margin: 4px;" ng-if="model.close === true"><span class="text-danger"><strong>Always</strong> Closed*</span></div>
-					<div class="btn btn-xs btn-default" style="pointer-events: none; margin: 4px;" ng-if="!model.close"><span class="text-danger"><strong>Never</strong> Closes</span></div>
-					<div ng-repeat="triggerId in model.close" class="btn-group" role="group" style="display: inline-flex; margin: 4px;">
-						<span type="button" class="btn btn-xs btn-danger" style="pointer-events: none;">{{ triggers[triggerId].title || triggerId }}</span>
-						<span ng-if="edit" type="button" class="btn btn-xs btn-danger" style="opacity: .7;" ng-click="removeTrigger(model, 'close', triggerId)"><span class="glyphicon glyphicon-remove-sign"></span></span>
-					</div>
-					<div ng-if="edit" class="btn-group" role="group">
-						<button type="button" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-							<span class="glyphicon glyphicon-plus-sign"></span>
-							<span class="caret"></span>
-						</button>
-						<ul class="dropdown-menu" role="menu">
-							<li><a href ng-click="model.close = true"><strong>Always</strong> Closed*</a></li>
-							<li><a href ng-click="model.close = false"><strong>Never</strong> Closes</a></li>
-							<li class="divider"></li>
-							<li ng-repeat="trigger in triggers" ng-click="addTrigger(model, 'close', trigger.id)"><a href>Trigger: {{ trigger.title }}</a></li>
-						</ul>
-					</div>
+				<div ng-if="edit" class="btn-group" role="group">
+					<button type="button" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+						<span class="glyphicon glyphicon-plus-sign"></span>
+						<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href ng-click="model.close = true"><strong>Always</strong> Closed*</a></li>
+						<li><a href ng-click="model.close = false"><strong>Never</strong> Closes</a></li>
+						<li class="divider"></li>
+						<li ng-repeat="trigger in triggers" ng-click="addTrigger(model, 'close', trigger.id)"><a href>Trigger: {{ trigger.title }}</a></li>
+					</ul>
 				</div>
-
 			</div>
 
 		</div>
+
 	</div>
 </div>
