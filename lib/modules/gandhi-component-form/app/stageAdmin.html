@@ -16,25 +16,10 @@
 	<button class="btn btn-xs" ng-class="{'btn-default': true, 'active': stageFormEdit}" ng-click="toggleStageFormEdit()"><i class="glyphicon glyphicon-edit"></i></button>
 </div>
 
-<!-- Presentation -->
-<div class="tab-bar" ng-if="tab == 'Presentation'">
-	<button class="btn btn-xs btn-primary" ng-if="stagePresentationEdit" ng-click="updateStagePresentation()">Save</button>
-	<button class="btn btn-xs" ng-class="{'btn-default': true, 'active': stageFormEdit}" ng-click="toggleStagePresentationEdit()"><i class="glyphicon glyphicon-edit"></i></button>
-</div>
-
-<!-- Summary -->
-<div class="tab-bar" ng-if="tab == 'Summary'">
-	<button class="btn btn-xs btn-primary" ng-if="stageSummaryEdit" ng-click="updateStageSummary()">Save</button>
-	<button class="btn btn-xs" ng-class="{'btn-default': true, 'active': stageFormEdit}" ng-click="toggleStageSummaryEdit()"><i class="glyphicon glyphicon-edit"></i></button>
-</div>
-
-
 <ul class="nav nav-tabs" ng-init="tab = 'Instructions'">
 	<li ng-click="tab = 'Instructions'" ng-class="{active: tab === 'Instructions'}"><a href>Instructions</a></li>
 	<li ng-click="tab = 'Schema'" ng-class="{active: tab === 'Schema'}"><a href>Schema</a></li>
 	<li ng-click="tab = 'Form'" ng-class="{active: tab === 'Form'}"><a href>Form</a></li>
-	<li ng-click="tab = 'Presentation'" ng-class="{active: tab === 'Presentation'}"><a href>Presentation</a></li>
-	<li ng-click="tab = 'Summary'" ng-class="{active: tab === 'Summary'}"><a href>Summary</a></li>
 </ul>
 <div class="panel panel-default">
 
@@ -64,23 +49,5 @@
 	</div>
 	<div class="panel-body" ng-if="tab == 'Form' &amp;&amp; stageFormEdit">
 		<div style="height: 400px;" ui-ace="{mode: 'json'}" json ng-model="stageFormEdit.component.options.form"></div>
-	</div>
-
-	<!-- Presentation -->
-	<div class="panel-body" ng-if="tab == 'Presentation' &amp;&amp; !stagePresentationEdit">
-		<div class="alert alert-warning" ng-if="!stage.component.options.presentation" style="margin-bottom: 0;">Please specify a presentation definition for this stage.</div>
-		<div ng-if="stage.component.options.presentation" sf-schema="stage.component.options.schema" sf-form="copy.component.options.presentation" sf-options="sfOptions" ng-model="sample"></div>
-	</div>
-	<div class="panel-body" ng-if="tab == 'Presentation' &amp;&amp; stagePresentationEdit">
-		<div style="height: 400px;" ui-ace="{mode: 'json'}" json ng-model="stagePresentationEdit.component.options.presentation"></div>
-	</div>
-
-	<!-- Summary -->
-	<div class="panel-body" ng-if="tab == 'Summary' &amp;&amp; !stageSummaryEdit">
-		<div class="alert alert-warning" ng-if="!stage.component.options.summary" style="margin-bottom: 0;">Please specify a form definition for this stage.</div>
-		<div ng-if="stage.component.options.summary" sf-schema="stage.component.options.schema" sf-form="copy.component.options.summary" sf-options="sfOptions" ng-model="sample"></div>
-	</div>
-	<div class="panel-body" ng-if="tab == 'Summary' &amp;&amp; stageSummaryEdit">
-		<div style="height: 400px;" ui-ace="{mode: 'json'}" json ng-model="stageSummaryEdit.component.options.summary"></div>
 	</div>
 </div>
