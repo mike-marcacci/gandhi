@@ -1,6 +1,6 @@
 <div class="panel panel-default">
 	<div class="table-responsive">
-		<table class="table table-hover" gandhi-admin-table="table" style="margin-bottom: 0;">
+		<table class="table table-hover" style="margin-bottom: 0;">
 			<thead>
 				<tr>
 					<th
@@ -25,7 +25,7 @@
 					style="cursor: pointer"
 					ng-repeat="row in table.data"
 				>
-					<td ng-if="!limit || column.primary" ng-repeat="column in table.columns">
+					<td ng-if="!limit || column.primary" ng-repeat="column in table.columns" ng-init="value = (row | access:column.path)">
 						<div ng-if="column.template" compile="column.template"></div>
 						<div ng-if="!column.template" access="column.path" base="'row'"></div>
 					</td>

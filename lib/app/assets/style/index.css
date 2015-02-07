@@ -5683,7 +5683,7 @@ body {
   body .nav-tabs {
     position: relative;
     z-index: auto; }
-    body .nav-tabs + .panel {
+    body .nav-tabs + * {
       position: relative;
       z-index: auto; }
     body .nav-tabs > li > a {

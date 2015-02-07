@@ -23,11 +23,11 @@
 			<div class="panel-body">
 				<ul class="nav nav-pills">
 					<li ng-class="{active: $state.is('portal.admin.cycles.show')}"><a ui-sref="portal.admin.cycles.show">General</a></li>
-					<li ng-class="{active: $state.includes('portal.admin.cycles.show.roles')}"><a ui-sref="portal.admin.cycles.show.roles">Roles</a></li>
-					<li ng-class="{active: $state.includes('portal.admin.cycles.show.statuses')}"><a ui-sref="portal.admin.cycles.show.statuses">Statuses</a></li>
 					<li ng-class="{active: $state.includes('portal.admin.cycles.show.stages')}"><a ui-sref="portal.admin.cycles.show.stages">Stages</a></li>
+					<li ng-class="{active: $state.includes('portal.admin.cycles.show.statuses')}"><a ui-sref="portal.admin.cycles.show.statuses">Statuses</a></li>
 					<li ng-class="{active: $state.includes('portal.admin.cycles.show.exports')}"><a ui-sref="portal.admin.cycles.show.exports">Exports</a></li>
 					<li ng-class="{active: $state.includes('portal.admin.cycles.show.triggers')}"><a ui-sref="portal.admin.cycles.show.triggers">Triggers</a></li>
+					<li ng-class="{active: $state.includes('portal.admin.cycles.show.roles')}"><a ui-sref="portal.admin.cycles.show.roles">Roles</a></li>
 					<li ng-class="{active: $state.includes('portal.admin.cycles.show.assignments')}"><a ui-sref="portal.admin.cycles.show.assignments">Assignments</a></li>
 					<!-- <li ng-class="{active: $state.includes('portal.admin.cycles.show.invitations')}"><a ui-sref="portal.admin.cycles.show.invitations">Invitations</a></li> -->
 				</ul>
@@ -78,8 +78,8 @@
 						<div class="form-group">
 							<label for="cycle-status" class="col-sm-2 control-label">Status</label>
 							<div class="col-sm-10">
-								<p ng-show="!cycleEdit" class="form-control-static">{{cycle.status_id}}</p>
-								<select ng-show="cycleEdit" class="form-control" id="cycle-status" ng-model="cycleEdit.status_id" ng-options="status for status in ['draft','active','archived']" required></select>
+								<p ng-show="!cycleEdit" class="form-control-static">{{cycle.status_id | title}}</p>
+								<select ng-show="cycleEdit" class="form-control" id="cycle-status" ng-model="cycleEdit.status_id" ng-options="id as title for (id, title) in {draft: 'Draft', active:'Active', archived: 'Archived'}" required></select>
 							</div>
 						</div>
 						<div class="form-group">

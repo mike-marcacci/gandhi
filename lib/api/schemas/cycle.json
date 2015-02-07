@@ -26,12 +26,15 @@
       "default": {
         "open": {
           "id": "open",
-          "title": "Application Window Opened",
+          "title": "Application Opens",
           "conditions": [
             [
               {
-                "name": "open",
-                "options": {}
+                "name": "date",
+                "invert": false,
+                "options": {
+                  "timestamp": 0
+                }
               }
             ]
           ],
@@ -39,12 +42,15 @@
         },
         "close": {
           "id": "close",
-          "title": "Application Window Closed",
+          "title": "Application Closes",
           "conditions": [
             [
               {
-                "name": "close",
-                "options": {}
+                "name": "date",
+                "invert": false,
+                "options": {
+                  "timestamp": 0
+                }
               }
             ]
           ],
@@ -524,6 +530,32 @@
                         "content_id": {
                           "type": "string"
                         }
+                      }
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "required": ["name", "options"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "constant": "value_equals"
+                    },
+                    "invert": {
+                      "type": "boolean",
+                      "default": false
+                    },
+                    "options": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": ["value_id", "equals"],
+                      "properties": {
+                        "value_id": {
+                          "type": "string"
+                        },
+                        "equals": {}
                       }
                     }
                   }

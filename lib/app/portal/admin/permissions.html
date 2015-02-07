@@ -9,8 +9,8 @@
 		<tbody>
 			<tr ng-repeat="role in roles" ng-if="roles[role.id]">
 				<th>{{role.title}}</th>
-				<td ng-repeat="(id, permission) in model" ng-if="permissions[id]">
-					<gandhi-permission edit="edit" ng-model="permission[role.id]" triggers="triggers" role="role"></gandhi-permission>
+				<td ng-repeat="(id, permission) in permissions">
+					<gandhi-permission edit="edit" ng-model="model[id][role.id]" triggers="triggers" role="role"></gandhi-permission>
 				</td>
 			</tr>
 		</tbody>
