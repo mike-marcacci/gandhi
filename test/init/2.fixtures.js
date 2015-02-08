@@ -8,7 +8,8 @@ module.exports = {
 			db: {
 				cycles: _.cloneDeep(require('../fixtures/db/cycles.json')),
 				projects: _.cloneDeep(require('../fixtures/db/projects.json')),
-				users: _.cloneDeep(require('../fixtures/db/users.json'))
+				users: _.cloneDeep(require('../fixtures/db/users.json')),
+				notifications: _.cloneDeep(require('../fixtures/db/notifications.json'))
 			}
 		};
 
