@@ -89,6 +89,7 @@ describe('Projects', function(){
 			request
 				.get('/api/projects')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
@@ -144,7 +145,7 @@ describe('Projects', function(){
 					assert.isTrue(res.body[0].authorizations.create);
 					assert.isTrue(res.body[0].authorizations.read);
 					assert.isTrue(res.body[0].authorizations.update);
-					assert.isFalse(res.body[0].authorizations.destroy);
+					assert.isFalse(res.body[0].authorizations.delete);
 					done();
 				});
 		});
@@ -152,6 +153,7 @@ describe('Projects', function(){
 			request
 				.get('/api/projects')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
@@ -165,6 +167,7 @@ describe('Projects', function(){
 			request
 				.get('/api/projects')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
@@ -184,6 +187,7 @@ describe('Projects', function(){
 			request
 				.get('/api/projects')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
@@ -201,6 +205,7 @@ describe('Projects', function(){
 				.get('/api/projects')
 				.query({filter: '[{"path":"/id","op":"eq","value":"e264d6f7-d26a-4be3-8365-13416ac41029"}]'})
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
@@ -214,6 +219,7 @@ describe('Projects', function(){
 				.get('/api/projects')
 				.query({search: 'Tim\'s Character '})
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
@@ -226,6 +232,7 @@ describe('Projects', function(){
 			request
 				.get('/api/projects?per_page=2')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
@@ -241,6 +248,7 @@ describe('Projects', function(){
 			request
 				.get('/api/projects?per_page=2&page=2')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
@@ -297,6 +305,7 @@ describe('Projects', function(){
 			request
 				.get('/api/projects/foo')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(404)
 				.end(done);
 		});
@@ -304,6 +313,7 @@ describe('Projects', function(){
 			request
 				.get('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
@@ -332,7 +342,7 @@ describe('Projects', function(){
 					assert.isTrue(res.body.authorizations.create);
 					assert.isTrue(res.body.authorizations.read);
 					assert.isTrue(res.body.authorizations.update);
-					assert.isFalse(res.body.authorizations.destroy);
+					assert.isFalse(res.body.authorizations.delete);
 					done();
 				});
 		});
@@ -340,6 +350,7 @@ describe('Projects', function(){
 			request
 				.get('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
@@ -352,6 +363,7 @@ describe('Projects', function(){
 			request
 				.get('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
@@ -370,6 +382,7 @@ describe('Projects', function(){
 			request
 				.get('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
@@ -404,6 +417,7 @@ describe('Projects', function(){
 			request
 				.patch('/api/projects/foo')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.send({title: 'Woops!'})
 				.expect(404)
 				.end(done);
@@ -412,12 +426,13 @@ describe('Projects', function(){
 			request
 				.patch('/api/projects/' + ids[0])
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.send({
 					title: 'UPDATED (By Admin)',
 					invitations: {
 						'72d8153e-dc53-4fcc-98c8-febfc4f171ed': {
 						  id: '72d8153e-dc53-4fcc-98c8-febfc4f171ed',
-						  role: 'applicant',
+						  role_id: 'applicant',
 						  name: 'Mark Boerneke',
 						  email: 'mark.boerneke@test.gandhi.io'
 						}
@@ -438,6 +453,7 @@ describe('Projects', function(){
 			request
 				.get('/api/projects/' + ids[0])
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
@@ -467,6 +483,7 @@ describe('Projects', function(){
 			request
 				.put('/api/projects/' + ids[0])
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.send(_.extend({}, project, {
 					title: 'UPDATED'
 				}))
@@ -497,6 +514,7 @@ describe('Projects', function(){
 			request
 				.delete('/api/projects/foo')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(404)
 				.end(done);
 		});
@@ -504,6 +522,7 @@ describe('Projects', function(){
 			request
 				.delete('/api/projects/' + ids[0])
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(200)
 				.end(done);
 		});
