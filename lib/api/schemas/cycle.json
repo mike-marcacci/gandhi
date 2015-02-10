@@ -201,7 +201,7 @@
         "create",
         "read",
         "update",
-        "destroy"
+        "delete"
       ],
       "properties": {
         "create": {
@@ -213,7 +213,7 @@
         "update": {
           "$ref": "#/definitions/permission"
         },
-        "destroy": {
+        "delete": {
           "$ref": "#/definitions/permission"
         }
       },
@@ -227,7 +227,7 @@
         "update": {
           "applicant": true
         },
-        "destroy": {
+        "delete": {
           "applicant": false
         }
       }
