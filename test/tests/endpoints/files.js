@@ -173,6 +173,7 @@ describe('Files', function(){
 			request
 				.patch('/api/files/' + ids[0])
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.send({
 					name: 'UPDATED.png'
 				})
@@ -191,6 +192,7 @@ describe('Files', function(){
 			request
 				.get('/api/files/?filter[id][eq]=' + ids[0])
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
@@ -222,6 +224,7 @@ describe('Files', function(){
 			request
 				.put('/api/files/' + ids[0])
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.send(_.extend({}, file, {
 					name: 'REPLACED.png'
 				}))
@@ -252,6 +255,7 @@ describe('Files', function(){
 			request
 				.delete('/api/files/' + ids[0])
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(200)
 				.end(done);
 		});
