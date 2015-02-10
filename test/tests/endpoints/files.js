@@ -139,16 +139,16 @@ describe('Files', function(){
 		});
 
 		describe('(show) /files/:id', function(){
-			it.skip('rejects an anonymous request', function(done){
+			it('shows a file to an anonymous user', function(done){
 				request
 					.get('/api/files/' + ids[0])
-					.expect(401)
+					.expect(200)
 					.end(done);
 			});
-			it('shows a file to an unaffiliated admin user', function(done){
+			it('shows a file contents to an anonymous user', function(done){
 				request
 					.get('/api/files/' + ids[0])
-					.set('Authorization', 'Bearer ' + adminToken)
+					.query({download: true})
 					.expect(200)
 					.end(function(err, res){
 						if(err) return done(err);
@@ -218,7 +218,7 @@ describe('Files', function(){
 				.expect(403)
 				.end(done);
 		});
-		it('accepts a replace by an unaffiliated admin user', function(done){
+		it.skip('accepts a replace by an unaffiliated admin user', function(done){
 			request
 				.put('/api/files/' + ids[0])
 				.set('Authorization', 'Bearer ' + adminToken)
