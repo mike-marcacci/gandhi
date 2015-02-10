@@ -1,4 +1,4 @@
-<div class="form-group has-feedback {{form.htmlClass}} schema-form-ckeditor" ng-class="{'has-error': hasError(), 'has-success': hasSuccess()}">
+<div ng-if="$$value$$ !== null" class="form-group has-feedback {{form.htmlClass}} schema-form-ckeditor" ng-class="{'has-error': hasError(), 'has-success': hasSuccess()}">
   <label ng-show="showTitle()">{{form.title}}</label>
   <span class="help-block" ng-bind-html="form.description"></span>
   <textarea class="form-control {{form.fieldHtmlClass}}"

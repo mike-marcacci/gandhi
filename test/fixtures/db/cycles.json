@@ -123,7 +123,7 @@
 			"applicant": true,
 			"staff": true
 		},
-		"destroy": {
+		"delete": {
 			"staff": true
 		}
 	},
@@ -622,7 +622,7 @@
 			"applicant": true,
 			"staff": true
 		},
-		"destroy": {
+		"delete": {
 			"staff": true
 		}
 	},
