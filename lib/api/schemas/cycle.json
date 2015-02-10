@@ -213,6 +213,12 @@
         "update": {
           "$ref": "#/definitions/permission"
         },
+        "update:assignments": {
+          "$ref": "#/definitions/permission"
+        },
+        "update:contents": {
+          "$ref": "#/definitions/permission"
+        },
         "delete": {
           "$ref": "#/definitions/permission"
         }
@@ -225,6 +231,12 @@
           "applicant": true
         },
         "update": {
+          "applicant": true
+        },
+        "update:assignments": {
+          "applicant": true
+        },
+        "update:contents": {
           "applicant": true
         },
         "delete": {
