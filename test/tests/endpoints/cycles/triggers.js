@@ -70,6 +70,7 @@ describe('Triggers', function(){
 			request
 				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
@@ -101,6 +102,7 @@ describe('Triggers', function(){
 			request
 				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers/accept')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
@@ -141,7 +143,8 @@ describe('Triggers', function(){
 			request
 				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers/test')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({foo:'bar'})
+				.query({admin: true})
+				.send({title: true})
 				.expect(400)
 				.end(done);
 		});
@@ -149,6 +152,7 @@ describe('Triggers', function(){
 			request
 				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers/test')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.send({conditions:[[{name:'date',invert:false,options:{timestamp:1412164799.999}}]],id:'foo',listeners:[],title:'Test Trigger'})
 				.expect(400)
 				.end(done);
@@ -157,6 +161,7 @@ describe('Triggers', function(){
 			request
 				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers/test')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.send({conditions:[[{name:'date',invert:false,options:{timestamp:1412164799.999}}]],id:'test',listeners:[],title:'Test Trigger'})
 				.expect(200)
 				.end(function(err, res){
@@ -169,6 +174,7 @@ describe('Triggers', function(){
 			request
 				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers/test')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.send({conditions:[[{name:'date',invert:false,options:{timestamp:1412164799.999}}]],id:'test',listeners:[],title:'Test Trigger PUT'})
 				.expect(200)
 				.end(function(err, res){
@@ -200,7 +206,8 @@ describe('Triggers', function(){
 			request
 				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers/test')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({foo:'bar'})
+				.query({admin: true})
+				.send({title: true})
 				.expect(400)
 				.end(done);
 		});
@@ -208,6 +215,7 @@ describe('Triggers', function(){
 			request
 				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers/test')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.send({conditions:[[{name:'date',invert:false,options:{timestamp:1412164799.999}}]],id:'foo',listeners:[],title:'Test Trigger'})
 				.expect(400)
 				.end(done);
@@ -216,6 +224,7 @@ describe('Triggers', function(){
 			request
 				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers/foo')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.send({title:'Oops'})
 				.expect(404)
 				.end(function(err, res){
@@ -227,6 +236,7 @@ describe('Triggers', function(){
 			request
 				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers/test')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.send({title:'Patched'})
 				.expect(200)
 				.end(function(err, res){
@@ -255,6 +265,7 @@ describe('Triggers', function(){
 			request
 				.delete('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers/test')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);

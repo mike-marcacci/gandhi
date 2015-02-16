@@ -17,8 +17,7 @@
   "scripts": {
     "postinstall": "bower install",
     "start": "node server.js",
-    "test": "mocha --reporter spec test/tests/*.js test/tests/**/*.js",
-    "coverage": "mocha --require blanket --reporter html-cov test/tests/*.js test/tests/**/*.js > coverage.html"
+    "test": "mocha test/tests/**/*.js --reporter spec"
   },
   "dependencies": {
     "async": "^0.9.0",
@@ -48,16 +47,10 @@
     "wiredep": "^1.8.6"
   },
   "devDependencies": {
-    "blanket": "^1.1.6",
     "bower": "^1.3.3",
     "chai": "~1.9.1",
     "mocha": "~1.18.2",
     "nodemon": "^1.0.17",
     "supertest": "^0.15.0"
-  },
-  "config": {
-    "blanket": {
-      "pattern": "gandhi/lib/"
-    }
   }
 }

@@ -442,9 +442,7 @@ describe('Users', function(){
 			request
 				.patch('/api/users/' + userId)
 				.set('Authorization', 'Bearer ' + userToken)
-				.send({
-					foo: 'bar'
-				})
+				.send({email: true})
 				.expect(400)
 				.end(done);
 		});

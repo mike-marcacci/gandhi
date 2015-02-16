@@ -35,7 +35,9 @@
 	<!-- Schema -->
 	<div class="panel-body" ng-if="tab == 'Schema' &amp;&amp; !stageSchemaEdit">
 		<div class="alert alert-warning" ng-if="!stage.component.options.schema" style="margin-bottom: 0;">Please specify a schema for this stage.</div>
-		<div ng-if="stage.component.options.schema" json-human="stage.component.options.schema"></div>
+		<div class="table-responsive">
+			<div ng-if="stage.component.options.schema" json-human="stage.component.options.schema"></div>
+		</div>
 	</div>
 	<div class="panel-body" ng-if="tab == 'Schema' &amp;&amp; stageSchemaEdit">
 		<div style="height: 400px;" ui-ace="{mode: 'json'}" json ng-model="stageSchemaEdit.component.options.schema"></div>

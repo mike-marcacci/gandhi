@@ -123,6 +123,14 @@
 			"applicant": true,
 			"staff": true
 		},
+		"update:assignments": {
+			"applicant": true,
+			"staff": true
+		},
+		"update:contents": {
+			"applicant": true,
+			"staff": true
+		},
 		"delete": {
 			"staff": true
 		}
@@ -619,6 +627,14 @@
 			"staff": true
 		},
 		"update": {
+			"applicant": true,
+			"staff": true
+		},
+		"update:assignments": {
+			"applicant": true,
+			"staff": true
+		},
+		"update:contents": {
 			"applicant": true,
 			"staff": true
 		},

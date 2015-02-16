@@ -70,6 +70,7 @@ describe('Exports', function(){
 			request
 				.get('/api/cycles/foo/exports')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(404)
 				.end(done);
 		});
@@ -77,6 +78,7 @@ describe('Exports', function(){
 			request
 				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/exports')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
@@ -108,6 +110,7 @@ describe('Exports', function(){
 			request
 				.get('/api/cycles/foo/exports/proposal')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(404)
 				.end(done);
 		});
@@ -115,6 +118,7 @@ describe('Exports', function(){
 			request
 				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/exports/proposal')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
@@ -155,7 +159,8 @@ describe('Exports', function(){
 			request
 				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/exports/test')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({foo:'bar'})
+				.query({admin: true})
+				.send({title: true})
 				.expect(400)
 				.end(done);
 		});
@@ -163,6 +168,7 @@ describe('Exports', function(){
 			request
 				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/exports/test')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.send({id:'wrong',title:'Oops'})
 				.expect(400)
 				.end(done);
@@ -171,6 +177,7 @@ describe('Exports', function(){
 			request
 				.put('/api/cycles/foo/exports/test')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.send({id:'test',title:'Test',path:['contents','start','status'],template:null})
 				.expect(404)
 				.end(done);
@@ -179,6 +186,7 @@ describe('Exports', function(){
 			request
 				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/exports/test')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.send({id:'test',title:'Test',path:['contents','start','status'],template:null})
 				.expect(200)
 				.end(function(err, res){
@@ -191,6 +199,7 @@ describe('Exports', function(){
 			request
 				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/exports/test')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.send({id:'test',title:'Test PUT',path:['contents','start','status'],template:null})
 				.expect(200)
 				.end(function(err, res){
@@ -222,7 +231,8 @@ describe('Exports', function(){
 			request
 				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/exports/test')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({foo:'bar'})
+				.query({admin: true})
+				.send({id: true})
 				.expect(400)
 				.end(done);
 		});
@@ -230,6 +240,7 @@ describe('Exports', function(){
 			request
 				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/exports/test')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.send({id:'wrong',title:'Oops'})
 				.expect(400)
 				.end(done);
@@ -238,6 +249,7 @@ describe('Exports', function(){
 			request
 				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/exports/foo')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.send({title:'Oops'})
 				.expect(404)
 				.end(function(err, res){
@@ -249,6 +261,7 @@ describe('Exports', function(){
 			request
 				.patch('/api/cycles/foo/exports/proposal')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.send({title:'Oops'})
 				.expect(404)
 				.end(done);
@@ -257,6 +270,7 @@ describe('Exports', function(){
 			request
 				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/exports/test')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.send({title:'Patched'})
 				.expect(200)
 				.end(function(err, res){
@@ -285,6 +299,7 @@ describe('Exports', function(){
 			request
 				.delete('/api/cycles/foo/exports/proposal')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(404)
 				.end(done);
 		});
@@ -292,6 +307,7 @@ describe('Exports', function(){
 			request
 				.delete('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/exports/test')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);

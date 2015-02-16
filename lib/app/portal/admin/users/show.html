@@ -5,15 +5,15 @@
 </ol>
 
 <div class="row">
-	<div class="hidden-xs hidden-sm" ng-class="{'col-md-3': !fullscreen}" ng-if="!fullscreen">
+	<div class="hidden-xs hidden-sm" ng-class="{'col-md-3': displaySettings.showList}" ng-if="displaySettings.showList">
 		<div gandhi-admin-list="table" base="'portal.admin.users'" model="'user'" limit="true"></div>
 	</div>
 
-	<div ng-class="{'col-md-9': !fullscreen, 'col-md-12': fullscreen}">
+	<div ng-class="{'col-md-9': displaySettings.showList, 'col-md-12': !displaySettings.showList}">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="pull-left" style="margin-right: 10px;">
-					<button class="hidden-xs hidden-sm btn btn-xs btn-default" ng-class="{active: fullscreen}" ng-click="fullscreen = !fullscreen"><i class="glyphicon glyphicon-fullscreen"></i></button>
+					<button class="hidden-xs hidden-sm btn btn-xs btn-default" ng-class="{active: displaySettings.showList}" ng-click="displaySettings.showList = !displaySettings.showList"><i class="glyphicon glyphicon-list"></i></button>
 				</div>
 				<span class="panel-title">{{user.name}}</span>
 				<div class="pull-right">
@@ -31,7 +31,63 @@
 				</div>
 			</form>
 			<div ng-show="!source" class="panel-body">
-				<ng-include src="'portal/user/form.html'"></ng-include>
+				<form class="form-horizontal" role="form" ng-submit="update()">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">ID</label>
+						<div class="col-sm-10">
+							<p class="form-control-static">{{user.id}}</p>
+							<div ng-show="currentUser.admin &amp;&amp; !user.admin &amp;&amp; become" ng-click="become()" class="btn btn-xs btn-default">Login As User</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Name</label>
+						<div class="col-sm-10">
+							<p ng-show="!edit" class="form-control-static">{{user.name}}</p>
+							<input ng-show="edit" type="text" class="form-control" id="user-name" placeholder="John Doe" ng-model="userEdit.name">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Email</label>
+						<div class="col-sm-10">
+							<p ng-show="!edit" class="form-control-static"><a href="mailto: {{user.email}}">{{user.email}}</a></p>
+							<input ng-show="edit" type="email" class="form-control" id="user-email" placeholder="email@example.com" ng-model="userEdit.email">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputPassword" class="col-sm-2 control-label">Password</label>
+						<div class="col-sm-10">
+							<p ng-show="!edit" class="form-control-static" style="opacity: .5;">(not shown)</p>
+							<div ng-show="!edit &amp;&amp; currentUser.admin &amp;&amp; recover" ng-click="recover()" class="btn btn-xs btn-default">Send Recovery Token</div>
+							<input ng-show="edit" type="password" class="form-control" id="user-password" placeholder="password" ng-model="userEdit.password">
+						</div>
+					</div>
+					<div class="form-group" ng-show="currentUser.admin">
+						<label for="inputPassword" class="col-sm-2 control-label">Admin</label>
+						<div class="col-sm-10">
+							<p ng-show="!edit" class="form-control-static">{{!!user.admin}}</p>
+							<input ng-show="edit" type="checkbox" if="user-admin" ng-model="userEdit.admin" ng-true-value="true" ng-false-value="false">
+						</div>
+					</div>
+					<div class="form-group" ng-show="currentUser.admin">
+						<label for="inputPassword" class="col-sm-2 control-label">Technical</label>
+						<div class="col-sm-10">
+							<p ng-show="!edit" class="form-control-static">{{!!user.preferences.admin.technical}}</p>
+							<input ng-show="edit" type="checkbox" if="user-admin" ng-model="userEdit.preferences.admin.technical" ng-true-value="true" ng-false-value="false">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Created</label>
+						<div class="col-sm-10">
+							<p class="form-control-static">{{user.created * 1000 | date:"yyyy.MM.dd - hh:mm a"}}</p>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Updated</label>
+						<div class="col-sm-10">
+							<p class="form-control-static">{{user.updated * 1000 | date:"yyyy.MM.dd - hh:mm a"}}</p>
+						</div>
+					</div>
+				</form>
 			</div>
 		</div>
 

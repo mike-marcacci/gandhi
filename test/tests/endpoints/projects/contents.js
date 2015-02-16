@@ -191,7 +191,7 @@ describe('Contents', function(){
 				.put('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/contents/application')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
-				.send({foo:'bar'})
+				.send({data: true})
 				.expect(400)
 				.end(done);
 		});
@@ -316,7 +316,7 @@ describe('Contents', function(){
 				.patch('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/contents/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
-				.send({foo:'bar'})
+				.send({data: true})
 				.expect(400)
 				.end(done);
 		});
