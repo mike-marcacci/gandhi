@@ -68,7 +68,6 @@ describe('Assignments', function(){
 				.get('/api/projects/foo/assignments')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
-				.query({admin: true})
 				.expect(404)
 				.end(done);
 		});
@@ -83,7 +82,6 @@ describe('Assignments', function(){
 			request
 				.get('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.query({admin: true})
 				.query({admin: true})
 				.expect(200)
 				.end(function(err, res){
@@ -118,7 +116,6 @@ describe('Assignments', function(){
 				.get('/api/projects/foo/assignments/5a3cf444-9d87-4125-8026-2d5ffb834676')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
-				.query({admin: true})
 				.expect(404)
 				.end(done);
 		});
@@ -127,7 +124,6 @@ describe('Assignments', function(){
 				.get('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/foo')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
-				.query({admin: true})
 				.expect(404)
 				.end(done);
 		});
@@ -135,7 +131,6 @@ describe('Assignments', function(){
 			request
 				.get('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/5a3cf444-9d87-4125-8026-2d5ffb834676')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.query({admin: true})
 				.query({admin: true})
 				.expect(200)
 				.end(function(err, res){
@@ -185,8 +180,7 @@ describe('Assignments', function(){
 				.put('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
-				.query({admin: true})
-				.send({foo:'bar'})
+				.send({role_id: true})
 				.expect(400)
 				.end(done);
 		});
@@ -194,7 +188,6 @@ describe('Assignments', function(){
 			request
 				.put('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.query({admin: true})
 				.query({admin: true})
 				.send({id:'5cd2dc98-e280-4e72-a437-9a916d98b630',role_id:'advisor'})
 				.expect(400)
@@ -205,7 +198,6 @@ describe('Assignments', function(){
 				.put('/api/projects/foo/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
-				.query({admin: true})
 				.send({id:'3cd2dc98-e280-4e72-a437-9a916d98b636',role_id:'advisor'})
 				.expect(404)
 				.end(done);
@@ -214,7 +206,6 @@ describe('Assignments', function(){
 			request
 				.put('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.query({admin: true})
 				.query({admin: true})
 				.send({id:'3cd2dc98-e280-4e72-a437-9a916d98b636',role_id:'advisor'})
 				.expect(200)
@@ -228,7 +219,6 @@ describe('Assignments', function(){
 			request
 				.put('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.query({admin: true})
 				.query({admin: true})
 				.send({id:'3cd2dc98-e280-4e72-a437-9a916d98b636',role_id:'applicant'})
 				.expect(200)
@@ -244,7 +234,6 @@ describe('Assignments', function(){
 				.put('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
-				.query({admin: true})
 				.send({id:'3cd2dc98-e280-4e72-a437-9a916d98b636',role_id:'advisor'})
 				.expect(200)
 				.end(function(err, res){
@@ -257,7 +246,6 @@ describe('Assignments', function(){
 			request
 				.put('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.query({admin: true})
 				.query({admin: true})
 				.send({id:'3cd2dc98-e280-4e72-a437-9a916d98b636',role_id:'applicant'})
 				.expect(200)
@@ -294,8 +282,7 @@ describe('Assignments', function(){
 				.patch('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
-				.query({admin: true})
-				.send({foo:'bar'})
+				.send({role_id: true})
 				.expect(400)
 				.end(done);
 		});
@@ -303,7 +290,6 @@ describe('Assignments', function(){
 			request
 				.patch('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.query({admin: true})
 				.query({admin: true})
 				.send({id:'5cd2dc98-e280-4e72-a437-9a916d98b630',role_id:'advisor'})
 				.expect(400)
@@ -313,7 +299,6 @@ describe('Assignments', function(){
 			request
 				.patch('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/foo')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.query({admin: true})
 				.query({admin: true})
 				.send({role_id:'applicant'})
 				.expect(404)
@@ -327,7 +312,6 @@ describe('Assignments', function(){
 				.patch('/api/projects/foo/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
-				.query({admin: true})
 				.send({id:'3cd2dc98-e280-4e72-a437-9a916d98b636',role_id:'advisor'})
 				.expect(404)
 				.end(done);
@@ -336,7 +320,6 @@ describe('Assignments', function(){
 			request
 				.patch('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.query({admin: true})
 				.query({admin: true})
 				.send({role_id:'applicant'})
 				.expect(200)
@@ -367,7 +350,6 @@ describe('Assignments', function(){
 				.delete('/api/projects/foo/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
-				.query({admin: true})
 				.expect(404)
 				.end(done);
 		});
@@ -376,7 +358,6 @@ describe('Assignments', function(){
 				.delete('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/foo')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
-				.query({admin: true})
 				.expect(404)
 				.end(done);
 		});
@@ -384,7 +365,6 @@ describe('Assignments', function(){
 			request
 				.delete('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.query({admin: true})
 				.query({admin: true})
 				.expect(200)
 				.end(function(err, res){

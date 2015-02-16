@@ -170,7 +170,7 @@ describe('Invitations', function(){
 				.post('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
-				.send({foo:'bar'})
+				.send({role_id: true})
 				.expect(400)
 				.end(done);
 		});
@@ -229,7 +229,7 @@ describe('Invitations', function(){
 				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations/' + id)
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
-				.send({foo:'bar'})
+				.send({role_id: true})
 				.expect(400)
 				.end(done);
 		});
@@ -297,7 +297,7 @@ describe('Invitations', function(){
 				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations/' + id)
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
-				.send({foo:'bar'})
+				.send({role_id: true})
 				.expect(400)
 				.end(done);
 		});

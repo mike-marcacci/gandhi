@@ -160,7 +160,7 @@ describe('Exports', function(){
 				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/exports/test')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
-				.send({foo:'bar'})
+				.send({title: true})
 				.expect(400)
 				.end(done);
 		});
@@ -232,7 +232,7 @@ describe('Exports', function(){
 				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/exports/test')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
-				.send({foo:'bar'})
+				.send({id: true})
 				.expect(400)
 				.end(done);
 		});

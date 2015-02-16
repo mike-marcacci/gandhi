@@ -169,7 +169,7 @@ describe('Assignments', function(){
 				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
-				.send({foo:'bar'})
+				.send({role_id: true})
 				.expect(400)
 				.end(done);
 		});
@@ -241,7 +241,7 @@ describe('Assignments', function(){
 				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
-				.send({foo:'bar'})
+				.send({role_id: true})
 				.expect(400)
 				.end(done);
 		});
