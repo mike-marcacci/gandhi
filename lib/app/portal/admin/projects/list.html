@@ -47,14 +47,20 @@
 
 		<hr>
 
-		<div
-			class="btn btn-xs"
-			style= "margin-right: 6px;"
-			ng-class="{'btn-success': column.active}"
-			ng-click="column.active = !column.active"
-			ng-repeat="column in columns">{{column.title}}</div>
+		<!-- Column Selection -->
+		<div ng-repeat="(group, cols) in columnsByGroup">
+			<label style="width: 80px; margin-top: 3px;"><small>{{group | title}}</small></label>
+			<div
+				class="btn btn-xs"
+				style= "margin-right: 6px;"
+				ng-class="{'btn-success': column.active}"
+				ng-click="toggleColumn(column)"
+				ng-repeat="column in cols">
+				{{column.title}}
+			</div>
+		</div>
 
 	</div>
 </div>
 
-<div gandhi-admin-list="table" base="'portal.admin.projects'" model="'project'" limit="false"></div>
+<div gandhi-admin-list="table" scope="listScope" base="'portal.admin.projects'" model="'project'" limit="false"></div>
