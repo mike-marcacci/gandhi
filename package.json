@@ -17,8 +17,8 @@
   "scripts": {
     "postinstall": "bower install",
     "start": "node server.js",
-    "test": "mocha --reporter spec test/tests/*.js test/tests/**/*.js",
-    "coverage": "mocha --require blanket --reporter html-cov test/tests/*.js test/tests/**/*.js > coverage.html"
+    "test": "mocha --reporter spec test/tests/**/*.js",
+    "coverage": "mocha --require blanket --reporter html-cov test/tests/**/*.js > coverage.html"
   },
   "dependencies": {
     "async": "^0.9.0",

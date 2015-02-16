@@ -70,6 +70,7 @@ describe('Assignments', function(){
 			request
 				.get('/api/cycles/foo/assignments')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(404)
 				.end(done);
 		});
@@ -77,6 +78,7 @@ describe('Assignments', function(){
 			request
 				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/assignments')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
@@ -108,6 +110,7 @@ describe('Assignments', function(){
 			request
 				.get('/api/cycles/foo/assignments/5a3cf444-9d87-4125-8026-2d5ffb834676')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(404)
 				.end(done);
 		});
@@ -115,6 +118,7 @@ describe('Assignments', function(){
 			request
 				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/assignments/foo')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(404)
 				.end(done);
 		});
@@ -122,6 +126,7 @@ describe('Assignments', function(){
 			request
 				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/assignments/5a3cf444-9d87-4125-8026-2d5ffb834676')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
@@ -163,6 +168,7 @@ describe('Assignments', function(){
 			request
 				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.send({foo:'bar'})
 				.expect(400)
 				.end(done);
@@ -171,6 +177,7 @@ describe('Assignments', function(){
 			request
 				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.send({id:'5cd2dc98-e280-4e72-a437-9a916d98b639',role_id:'advisor'})
 				.expect(400)
 				.end(done);
@@ -179,6 +186,7 @@ describe('Assignments', function(){
 			request
 				.put('/api/cycles/foo/assignments/5a3cf444-9d87-4125-8026-2d5ffb834676')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.send({id:'5a3cf444-9d87-4125-8026-2d5ffb834676',role_id:'advisor'})
 				.expect(404)
 				.end(done);
@@ -187,6 +195,7 @@ describe('Assignments', function(){
 			request
 				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.send({id:'3cd2dc98-e280-4e72-a437-9a916d98b636',role_id:'advisor'})
 				.expect(200)
 				.end(function(err, res){
@@ -199,6 +208,7 @@ describe('Assignments', function(){
 			request
 				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.send({id:'3cd2dc98-e280-4e72-a437-9a916d98b636',role_id:'applicant'})
 				.expect(200)
 				.end(function(err, res){
@@ -230,6 +240,7 @@ describe('Assignments', function(){
 			request
 				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.send({foo:'bar'})
 				.expect(400)
 				.end(done);
@@ -238,6 +249,7 @@ describe('Assignments', function(){
 			request
 				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/assignments/foo')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.send({role_id:'applicant'})
 				.expect(404)
 				.end(function(err, res){
@@ -249,6 +261,7 @@ describe('Assignments', function(){
 			request
 				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.send({id:'5cd2dc98-e280-4e72-a437-9a916d98b639',role_id:'advisor'})
 				.expect(400)
 				.end(done);
@@ -257,6 +270,7 @@ describe('Assignments', function(){
 			request
 				.patch('/api/cycles/foo/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.send({id:'3cd2dc98-e280-4e72-a437-9a916d98b636',role_id:'advisor'})
 				.expect(404)
 				.end(done);
@@ -265,6 +279,7 @@ describe('Assignments', function(){
 			request
 				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.send({role_id:'applicant'})
 				.expect(200)
 				.end(function(err, res){
@@ -293,6 +308,7 @@ describe('Assignments', function(){
 			request
 				.delete('/api/cycles/foo/assignments/5a3cf444-9d87-4125-8026-2d5ffb834676')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(404)
 				.end(done);
 		});
@@ -300,6 +316,7 @@ describe('Assignments', function(){
 			request
 				.delete('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/assignments/foo')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(404)
 				.end(done);
 		});
@@ -307,6 +324,7 @@ describe('Assignments', function(){
 			request
 				.delete('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
