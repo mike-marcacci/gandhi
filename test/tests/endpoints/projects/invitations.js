@@ -70,6 +70,7 @@ describe('Invitations', function(){
 			request
 				.get('/api/projects/foo/invitations')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(404)
 				.end(done);
 		});
@@ -77,6 +78,7 @@ describe('Invitations', function(){
 			request
 				.get('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/invitations')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
@@ -109,6 +111,7 @@ describe('Invitations', function(){
 			request
 				.get('/api/projects/foo/invitations/514d3645-a768-4749-b6da-8b1b4d08cf1c')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(404)
 				.end(done);
 		});
@@ -116,6 +119,7 @@ describe('Invitations', function(){
 			request
 				.get('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/invitations/foo')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(404)
 				.end(done);
 		});
@@ -123,6 +127,7 @@ describe('Invitations', function(){
 			request
 				.get('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/invitations/514d3645-a768-4749-b6da-8b1b4d08cf1c')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
@@ -164,6 +169,7 @@ describe('Invitations', function(){
 			request
 				.put('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/invitations/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.send({id:'57efa7cf-bab2-44a6-862f-7ca5e154b1a9',role_id:'applicant',name:'Test',email:'test@email.com'})
 				.expect(400)
 				.end(done);
@@ -172,7 +178,8 @@ describe('Invitations', function(){
 			request
 				.put('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/invitations/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({foo:'bar'})
+				.query({admin: true})
+				.send({role_id: true})
 				.expect(400)
 				.end(done);
 		});
@@ -180,6 +187,7 @@ describe('Invitations', function(){
 			request
 				.put('/api/projects/foo/invitations/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.send({id:'c7efa7cf-bab2-44a6-862f-7ca5e154b1ae',role_id:'applicant',name:'Test',email:'test@email.com'})
 				.expect(404)
 				.end(done);
@@ -188,6 +196,7 @@ describe('Invitations', function(){
 			request
 				.put('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/invitations/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.send({id:'c7efa7cf-bab2-44a6-862f-7ca5e154b1ae',role_id:'applicant',name:'Test',email:'test@email.com'})
 				.expect(200)
 				.end(function(err, res){
@@ -200,6 +209,7 @@ describe('Invitations', function(){
 			request
 				.put('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/invitations/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.send({id:'c7efa7cf-bab2-44a6-862f-7ca5e154b1ae',role_id:'applicant',name:'Test PUT',email:'test@email.com'})
 				.expect(200)
 				.end(function(err, res){
@@ -231,7 +241,8 @@ describe('Invitations', function(){
 			request
 				.patch('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/invitations/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({foo:'bar'})
+				.query({admin: true})
+				.send({role_id: true})
 				.expect(400)
 				.end(done);
 		});
@@ -239,6 +250,7 @@ describe('Invitations', function(){
 			request
 				.patch('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/invitations/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.send({id:'57efa7cf-bab2-44a6-862f-7ca5e154b1a9',role_id:'applicant',name:'Test',email:'test@email.com'})
 				.expect(400)
 				.end(done);
@@ -247,6 +259,7 @@ describe('Invitations', function(){
 			request
 				.patch('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/invitations/foo')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.send({name:'Oops'})
 				.expect(404)
 				.end(function(err, res){
@@ -258,6 +271,7 @@ describe('Invitations', function(){
 			request
 				.patch('/api/projects/foo/invitations/514d3645-a768-4749-b6da-8b1b4d08cf1c')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.send({name:'Oops'})
 				.expect(404)
 				.end(done);
@@ -266,6 +280,7 @@ describe('Invitations', function(){
 			request
 				.patch('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/invitations/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.send({name:'Patched'})
 				.expect(200)
 				.end(function(err, res){
@@ -294,6 +309,7 @@ describe('Invitations', function(){
 			request
 				.delete('/api/projects/foo/invitations/514d3645-a768-4749-b6da-8b1b4d08cf1c')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(404)
 				.end(done);
 		});
@@ -301,6 +317,7 @@ describe('Invitations', function(){
 			request
 				.delete('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/invitations/foo')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(404)
 				.end(done);
 		});
@@ -308,6 +325,7 @@ describe('Invitations', function(){
 			request
 				.delete('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/invitations/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);

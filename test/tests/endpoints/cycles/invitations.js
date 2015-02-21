@@ -72,6 +72,7 @@ describe('Invitations', function(){
 			request
 				.get('/api/cycles/foo/invitations')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(404)
 				.end(done);
 		});
@@ -79,6 +80,7 @@ describe('Invitations', function(){
 			request
 				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
@@ -110,6 +112,7 @@ describe('Invitations', function(){
 			request
 				.get('/api/cycles/foo/invitations/3350caac-84b9-4827-a5e4-c7a413760a0a')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(404)
 				.end(done);
 		});
@@ -117,6 +120,7 @@ describe('Invitations', function(){
 			request
 				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations/foo')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(404)
 				.end(done);
 		});
@@ -124,6 +128,7 @@ describe('Invitations', function(){
 			request
 				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations/3350caac-84b9-4827-a5e4-c7a413760a0a')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
@@ -164,7 +169,8 @@ describe('Invitations', function(){
 			request
 				.post('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations')
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({foo:'bar'})
+				.query({admin: true})
+				.send({role_id: true})
 				.expect(400)
 				.end(done);
 		});
@@ -172,6 +178,7 @@ describe('Invitations', function(){
 			request
 				.post('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.send({id: 'c7efa7cf-bab2-44a6-862f-7ca5e154b1ae', role_id:'applicant',name:'Test',email:'test@email.com'})
 				.expect(400)
 				.end(done);
@@ -180,6 +187,7 @@ describe('Invitations', function(){
 			request
 				.post('/api/cycles/foo/invitations')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.send({role_id:'applicant',name:'Test',email:'test@email.com'})
 				.expect(404)
 				.end(done);
@@ -188,6 +196,7 @@ describe('Invitations', function(){
 			request
 				.post('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.send({role_id:'applicant',name:'Test',email:'test@email.com'})
 				.expect(201)
 				.end(function(err, res){
@@ -219,7 +228,8 @@ describe('Invitations', function(){
 			request
 				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations/' + id)
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({foo:'bar'})
+				.query({admin: true})
+				.send({role_id: true})
 				.expect(400)
 				.end(done);
 		});
@@ -227,6 +237,7 @@ describe('Invitations', function(){
 			request
 				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations/' + id)
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.send({id: '5350caac-84b9-4827-a5e4-c7a413760a09',role_id:'applicant',name:'Test',email:'test@email.com'})
 				.expect(400)
 				.end(done);
@@ -235,6 +246,7 @@ describe('Invitations', function(){
 			request
 				.put('/api/cycles/foo/invitations/' + id)
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.send({id: id, role_id:'applicant',name:'Test',email:'test@email.com'})
 				.expect(404)
 				.end(done);
@@ -243,6 +255,7 @@ describe('Invitations', function(){
 			request
 				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations/5350caac-84b9-4827-a5e4-c7a413760a09')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.send({id:'5350caac-84b9-4827-a5e4-c7a413760a09',role_id:'applicant',name:'Test',email:'test@email.com'})
 				.expect(404)
 				.end(done);
@@ -251,6 +264,7 @@ describe('Invitations', function(){
 			request
 				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations/' + id)
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.send({id: id, role_id:'applicant',name:'Test PUT',email:'test@email.com'})
 				.expect(200)
 				.end(function(err, res){
@@ -282,7 +296,8 @@ describe('Invitations', function(){
 			request
 				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations/' + id)
 				.set('Authorization', 'Bearer ' + adminToken)
-				.send({foo:'bar'})
+				.query({admin: true})
+				.send({role_id: true})
 				.expect(400)
 				.end(done);
 		});
@@ -290,6 +305,7 @@ describe('Invitations', function(){
 			request
 				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations/foo')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.send({name:'Oops'})
 				.expect(404)
 				.end(function(err, res){
@@ -301,6 +317,7 @@ describe('Invitations', function(){
 			request
 				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations/' + id)
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.send({id:'57efa7cf-bab2-44a6-862f-7ca5e154b1a9',role_id:'applicant',name:'Test',email:'test@email.com'})
 				.expect(400)
 				.end(done);
@@ -309,6 +326,7 @@ describe('Invitations', function(){
 			request
 				.patch('/api/cycles/foo/invitations/' + id)
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.send({name:'Oops'})
 				.expect(404)
 				.end(done);
@@ -317,6 +335,7 @@ describe('Invitations', function(){
 			request
 				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations/' + id)
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.send({name:'Patched'})
 				.expect(200)
 				.end(function(err, res){
@@ -345,6 +364,7 @@ describe('Invitations', function(){
 			request
 				.delete('/api/cycles/foo/invitations/3350caac-84b9-4827-a5e4-c7a413760a0a')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(404)
 				.end(done);
 		});
@@ -352,6 +372,7 @@ describe('Invitations', function(){
 			request
 				.delete('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations/foo')
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(404)
 				.end(done);
 		});
@@ -359,6 +380,7 @@ describe('Invitations', function(){
 			request
 				.delete('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/invitations/' + id)
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);

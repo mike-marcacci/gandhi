@@ -10,7 +10,6 @@
 	<nav>
 		<ul>
 			<li><a ng-class="{active: $state.includes('portal.dashboard')}" ui-sref="portal.dashboard"><i class="glyphicon glyphicon-dashboard"></i>Dashboard</a></li>
-			<li><a ng-class="{active: $state.includes('portal.user')}" ui-sref="portal.user.show"><i class="glyphicon glyphicon-user"></i>Account</a></li>
 			<li ng-show="currentUser.admin"><a ng-class="{active: $state.includes('portal.admin')}" ui-sref="portal.admin.dashboard"><i class="glyphicon glyphicon-cog"></i>Admin</a>
 				<ul>
 					<li><a ng-class="{active: $state.includes('portal.admin.users')}" ui-sref="portal.admin.users.list">Users</a></li>
@@ -19,6 +18,7 @@
 					<!-- <li><a ng-class="{active: $state.includes('portal.admin.files')}" ui-sref="portal.admin.files.list">Files</a></li> -->
 				</ul>
 			</li>
+			<li><a ng-class="{active: $state.includes('portal.user')}" ui-sref="portal.user.show"><i class="glyphicon glyphicon-user"></i>Account</a></li>
 			<li><a ng-class="{active: $state.includes('portal.cycles')}" ui-sref="portal.cycles.list"><i class="glyphicon glyphicon-calendar"></i>Cycles</a>
 				<ul ng-show="cycles.length">
 					<li ng-repeat="cycle in cycles"><a ng-class="{active: $state.includes('portal.cycles.show') &amp;&amp; $state.params.cycle == cycle.id}" ui-sref="portal.cycles.show({cycle: cycle.id})">{{cycle.title}}</a></li>

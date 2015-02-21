@@ -180,7 +180,7 @@ describe('Assignments', function(){
 				.put('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
-				.send({foo:'bar'})
+				.send({role_id: true})
 				.expect(400)
 				.end(done);
 		});
@@ -282,7 +282,7 @@ describe('Assignments', function(){
 				.patch('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/3cd2dc98-e280-4e72-a437-9a916d98b636')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
-				.send({foo:'bar'})
+				.send({role_id: true})
 				.expect(400)
 				.end(done);
 		});

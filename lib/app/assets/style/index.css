@@ -5933,9 +5933,6 @@ body {
   transition: margin-left .5s;
   z-index: 0; }
 
-table[gandhi-admin-table] th, table[gandhi-admin-table] td {
-  max-width: 200px; }
-
 @media (max-width: 767px) {
   html.show-navigation {
     height: 100%;

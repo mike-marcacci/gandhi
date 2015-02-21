@@ -5,15 +5,15 @@
 </ol>
 
 <div class="row">
-	<div class="hidden-xs hidden-sm" ng-class="{'col-md-3': !fullscreen}" ng-if="!fullscreen">
+	<div class="hidden-xs hidden-sm" ng-class="{'col-md-3': displaySettings.showList}" ng-if="displaySettings.showList">
 		<div gandhi-admin-list="table" base="'portal.admin.projects'" model="'project'" limit="true"></div>
 	</div>
 
-	<div ng-class="{'col-md-9': !fullscreen, 'col-md-12': fullscreen}">
+	<div ng-class="{'col-md-9': displaySettings.showList, 'col-md-12': !displaySettings.showList}">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="pull-left" style="margin-right: 10px;">
-					<button class="hidden-xs hidden-sm btn btn-xs btn-default" ng-class="{active: fullscreen}" ng-click="fullscreen = !fullscreen"><i class="glyphicon glyphicon-fullscreen"></i></button>
+					<button class="hidden-xs hidden-sm btn btn-xs btn-default" ng-class="{active: displaySettings.showList}" ng-click="displaySettings.showList = !displaySettings.showList"><i class="glyphicon glyphicon-list"></i></button>
 				</div>
 				<span class="panel-title">{{project.title}}</span>
 				<div class="pull-right">
@@ -89,9 +89,6 @@
 							</div>
 						</div>
 					</form>
-
-
-
 				</div>
 			</div>
 
