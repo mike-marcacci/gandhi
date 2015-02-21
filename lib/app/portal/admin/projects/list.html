@@ -63,4 +63,14 @@
 	</div>
 </div>
 
-<div gandhi-admin-list="table" scope="listScope" base="'portal.admin.projects'" model="'project'" limit="false"></div>
+<!-- The Table -->
+<div id="projects-export-table" gandhi-list="table" scope="listScope" sref-base="'portal.admin.projects.show'" sref-param="'project'" limit="false">
+	<div class="panel-heading">
+		<span class="panel-title">List</span>
+		<div class="pull-right">
+			<button class="btn btn-xs btn-default" ng-click="exportCSV()">Export CSV</button>
+			<button class="btn btn-xs btn-default" ui-sref="portal.admin.projects.create"><i class="glyphicon glyphicon-plus-sign"></i></button>
+		</div>
+	</div>
+</div>
+
