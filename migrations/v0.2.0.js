@@ -57,10 +57,12 @@ r.connect({host: host, db: db}).then(function(conn){
 				})];
 			}).coerceTo('object').default(cycle('triggers')),
 			permissions: {
-				create: allPermissions,
-				read: allPermissions,
-				update: allPermissions,
-				destroy: {}
+				'project:create': allPermissions,
+				'project:read': allPermissions,
+				'project:update': allPermissions,
+				'project:destroy': {},
+				'project:assignments:update': allPermissions,
+				'project:contents:update': allPermissions
 			},
 			created: r.branch(cycle('created').default(new Date().toISOString()).typeOf().eq('STRING'),
 				r.ISO8601(cycle('created').default(new Date().toISOString())).toEpochTime(),
@@ -76,12 +78,17 @@ r.connect({host: host, db: db}).then(function(conn){
 					cycle('updated').toEpochTime()
 				)
 			),
-			status_id: cycle('status').default(cycle('status_id'))
+			status_id: cycle('status').default(cycle('status_id')),
+			options: {
+				open: null,
+				close: null
+			}
 		}).without([
 			'users',
 			'flow',
 			'events',
-			'status'
+			'status',
+			'config'
 		]);
 	}).run(conn));
 
