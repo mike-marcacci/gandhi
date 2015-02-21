@@ -17,6 +17,23 @@
       "type": "string",
       "default": ""
     },
+    "options": {
+      "type": "object",
+      "default": {
+        "open": null,
+        "close": null
+      },
+      "properties": {
+        "open": {
+          "type": ["null", "number"],
+          "default": null
+        },
+        "close": {
+          "type": ["null", "number"],
+          "default": null
+        }
+      }
+    },
     "instructions": {
       "type": "string",
       "default": ""
@@ -181,14 +198,6 @@
         "$ref": "#/definitions/export"
       }
     },
-    "config": {
-      "type": "object",
-      "additionalProperties": true,
-      "default": {}
-    },
-    "visible": {
-      "$ref": "#/definitions/permission"
-    },
     "updated": {
       "type": "number"
     },
@@ -198,49 +207,51 @@
     "permissions": {
       "type": "object",
       "required": [
-        "create",
-        "read",
-        "update",
-        "delete"
+        "project:create",
+        "project:read",
+        "project:update",
+        "project:delete",
+        "project:assignments:update",
+        "project:contents:update"
       ],
       "properties": {
-        "create": {
+        "cproject:reate": {
           "$ref": "#/definitions/permission"
         },
-        "read": {
+        "project:read": {
           "$ref": "#/definitions/permission"
         },
-        "update": {
+        "project:update": {
           "$ref": "#/definitions/permission"
         },
-        "update:assignments": {
+        "project:delete": {
           "$ref": "#/definitions/permission"
         },
-        "update:contents": {
+        "project:assignments:update": {
           "$ref": "#/definitions/permission"
         },
-        "delete": {
+        "project:contents:update": {
           "$ref": "#/definitions/permission"
         }
       },
       "default": {
-        "create": {
+        "project:create": {
           "applicant": true
         },
-        "read": {
+        "project:read": {
           "applicant": true
         },
-        "update": {
+        "project:update": {
           "applicant": true
         },
-        "update:assignments": {
-          "applicant": true
-        },
-        "update:contents": {
-          "applicant": true
-        },
-        "delete": {
+        "project:delete": {
           "applicant": false
+        },
+        "project:assignments:update": {
+          "applicant": true
+        },
+        "project:contents:update": {
+          "applicant": true
         }
       }
     }
