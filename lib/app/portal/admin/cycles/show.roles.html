@@ -104,6 +104,18 @@
 		</div>
 	</div>
 	<form ng-submit="updatePermissions()">
-		<gandhi-permissions edit="cyclePermissionsEdit" permissions="permissions" roles="rolesById" triggers="triggersById" ng-model="cycle.permissions"></gandhi-permissions>
+		<gandhi-permissions edit="cyclePermissionsEdit" permissions="permissions.project" roles="rolesById" triggers="triggersById" ng-model="cycle.permissions"></gandhi-permissions>
+	</form>
+
+	<hr>
+
+	<form ng-submit="updatePermissions()">
+		<gandhi-permissions edit="cyclePermissionsEdit" permissions="permissions.assignments" roles="rolesById" triggers="triggersById" ng-model="cycle.permissions"></gandhi-permissions>
+	</form>
+
+	<hr>
+
+	<form ng-submit="updatePermissions()">
+		<gandhi-permissions edit="cyclePermissionsEdit" permissions="permissions.contents" roles="rolesById" triggers="triggersById" ng-model="cycle.permissions"></gandhi-permissions>
 	</form>
 </div>
