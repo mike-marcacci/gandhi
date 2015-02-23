@@ -36,6 +36,10 @@ r.connect({host: host, db: db}).then(function(conn){
 		}).coerceTo('object'));
 
 		return cycle.merge({
+			defaults: {
+				role_id: cycle('defaults')('role').default(cycle('defaults')('role_id')),
+				status_id: cycle('defaults')('status').default(cycle('defaults')('status_id'))
+			},
 			assignments: cycle('users').coerceTo('array').map(function(userKV){
 				return [userKV.nth(0), userKV.nth(1).do(function(user){
 					return user.merge({role_id: user('role')});
@@ -91,7 +95,9 @@ r.connect({host: host, db: db}).then(function(conn){
 			'events',
 			'status',
 			'config'
-		]);
+		]).without({
+			defaults: ['role','status', 'flow']
+		})
 	}).run(conn));
 
 
