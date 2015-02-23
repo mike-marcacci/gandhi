@@ -9,15 +9,15 @@
 		This stage is complete.
 	</div>
 
-	<div class="alert alert-warning" role="alert" ng-if="!content.authorizations.read" sf-decorator-name="'bootstrap-decorator'">
+	<div class="alert alert-warning" role="alert" ng-if="!content.authorizations['project:read']" sf-decorator-name="'bootstrap-decorator'">
 		You are not allowed to see the contents of this stage.
 	</div>
 
-	<div class="alert alert-warning" role="alert" ng-if="!content.authorizations.write &amp;&amp; content.authorizations.read" sf-decorator-name="'bootstrap-decorator'">
+	<div class="alert alert-warning" role="alert" ng-if="!content.authorizations['project:write'] &amp;&amp; content.authorizations['project:read']" sf-decorator-name="'bootstrap-decorator'">
 		Please note, you are not allowed to make changes to this stage.
 	</div>
 
-	<div class="row" ng-if="content.authorizations.read">
+	<div class="row" ng-if="content.authorizations['project:read']">
 
 		<div class="col-md-5" ng-if="stage.component.options.instructions">
 			<div class="panel panel-default" ng-show="stage.component.options.instructions">
@@ -39,8 +39,8 @@
 
 					<form name="gandhiFormComponent" ng-submit="complete(gandhiFormComponent)">
 						<div ng-if="stage.component.options.schema &amp;&amp; stage.component.options.form" sf-model="content.data" sf-form="stage.component.options.form" sf-schema="stage.component.options.schema" sf-options="sfOptions"></div>
-						<div ng-show="content.authorizations.write &amp;&amp; options.draft !== false" ng-click="draft()" class="btn btn-default" ng-bind="options.draftButtonText || 'Save Draft'"></div>
-						<button ng-show="content.authorizations.write" class="btn btn-primary" ng-bind="options.submitButtonText || 'Submit'"></button>
+						<div ng-show="content.authorizations['project:write'] &amp;&amp; options.draft !== false" ng-click="draft()" class="btn btn-default" ng-bind="options.draftButtonText || 'Save Draft'"></div>
+						<button ng-show="content.authorizations['project:write']" class="btn btn-primary" ng-bind="options.submitButtonText || 'Submit'"></button>
 					</form>
 
 				</div>

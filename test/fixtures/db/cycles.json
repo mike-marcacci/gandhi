@@ -107,31 +107,39 @@
 	"id": "e5f58a2c-2894-40e6-91a9-a110d190e85f",
 	"instructions": "Your essay will be reviewed by several judges, and winning work will be published on our website.",
 	"permissions": {
-		"create": {
+		"project:read": {
+			"applicant": true,
+			"reviewer": true,
+			"staff": true
+		},
+		"project:create": {
 			"applicant": {
 				"open": ["open"],
 				"close": ["close"]
 			},
 			"staff": true
 		},
-		"read": {
-			"applicant": true,
-			"reviewer": true,
-			"staff": true
-		},
-		"update": {
+		"project:update": {
 			"applicant": true,
 			"staff": true
 		},
-		"update:assignments": {
+		"project:delete": {
+			"staff": true
+		},
+		"project:assignments:read": {
 			"applicant": true,
 			"staff": true
 		},
-		"update:contents": {
+		"project:assignments:write": {
 			"applicant": true,
 			"staff": true
 		},
-		"delete": {
+		"project:contents:read": {
+			"applicant": true,
+			"staff": true
+		},
+		"project:contents:write": {
+			"applicant": true,
 			"staff": true
 		}
 	},
@@ -616,29 +624,37 @@
 		}
 	},
 	"permissions": {
-		"create": {
-			"applicant": true,
-			"staff": true
-		},
-		"read": {
+		"project:read": {
 			"applicant": true,
 			"advisor": true,
 			"reviewer": true,
 			"staff": true
 		},
-		"update": {
+		"project:create": {
 			"applicant": true,
 			"staff": true
 		},
-		"update:assignments": {
+		"project:update": {
 			"applicant": true,
 			"staff": true
 		},
-		"update:contents": {
+		"project:delete": {
+			"staff": true
+		},
+		"project:assignments:read": {
 			"applicant": true,
 			"staff": true
 		},
-		"delete": {
+		"project:assignments:write": {
+			"applicant": true,
+			"staff": true
+		},
+		"project:contents:read": {
+			"applicant": true,
+			"staff": true
+		},
+		"project:contents:write": {
+			"applicant": true,
 			"staff": true
 		}
 	},

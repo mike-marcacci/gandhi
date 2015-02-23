@@ -42,4 +42,4 @@
 	<div class="panel-body">You don't have any {{assignedOnly ? 'assigned' : ''}} projects.</div>
 </div>
 
-<div ng-if="projects.length" gandhi-list="table" sref-base="'portal.projects.show'" sref-param="'project'" limit="false"></div>
+<div ng-if="projects.length" gandhi-list="table" scope="listScope" sref-base="'portal.projects.show'" sref-param="'project'" limit="false"></div>

@@ -207,18 +207,20 @@
     "permissions": {
       "type": "object",
       "required": [
-        "project:create",
         "project:read",
+        "project:create",
         "project:update",
         "project:delete",
-        "project:assignments:update",
-        "project:contents:update"
+        "project:assignments:read",
+        "project:assignments:write",
+        "project:contents:read",
+        "project:contents:write"
       ],
       "properties": {
-        "cproject:reate": {
+        "project:read": {
           "$ref": "#/definitions/permission"
         },
-        "project:read": {
+        "project:create": {
           "$ref": "#/definitions/permission"
         },
         "project:update": {
@@ -227,18 +229,24 @@
         "project:delete": {
           "$ref": "#/definitions/permission"
         },
-        "project:assignments:update": {
+        "project:assignments:read": {
           "$ref": "#/definitions/permission"
         },
-        "project:contents:update": {
+        "project:assignments:write": {
+          "$ref": "#/definitions/permission"
+        },
+        "project:contents:read": {
+          "$ref": "#/definitions/permission"
+        },
+        "project:contents:write": {
           "$ref": "#/definitions/permission"
         }
       },
       "default": {
-        "project:create": {
+        "project:read": {
           "applicant": true
         },
-        "project:read": {
+        "project:create": {
           "applicant": true
         },
         "project:update": {
@@ -247,10 +255,16 @@
         "project:delete": {
           "applicant": false
         },
-        "project:assignments:update": {
+        "project:assignments:read": {
           "applicant": true
         },
-        "project:contents:update": {
+        "project:assignments:write": {
+          "applicant": true
+        },
+        "project:contents:read": {
+          "applicant": true
+        },
+        "project:contents:write": {
           "applicant": true
         }
       }

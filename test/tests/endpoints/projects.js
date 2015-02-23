@@ -142,10 +142,14 @@ describe('Projects', function(){
 				.end(function(err, res){
 					if(err) return done(err);
 					assert.isArray(res.body);
-					assert.isTrue(res.body[0].authorizations.create);
-					assert.isTrue(res.body[0].authorizations.read);
-					assert.isTrue(res.body[0].authorizations.update);
-					assert.isFalse(res.body[0].authorizations.delete);
+					assert.isTrue(res.body[0].authorizations['project:read']);
+					assert.isTrue(res.body[0].authorizations['project:create']);
+					assert.isTrue(res.body[0].authorizations['project:update']);
+					assert.isFalse(res.body[0].authorizations['project:delete']);
+					assert.isTrue(res.body[0].authorizations['project:assignments:read']);
+					assert.isTrue(res.body[0].authorizations['project:assignments:write']);
+					assert.isTrue(res.body[0].authorizations['project:contents:read']);
+					assert.isTrue(res.body[0].authorizations['project:contents:write']);
 					done();
 				});
 		});
@@ -339,10 +343,14 @@ describe('Projects', function(){
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
-					assert.isTrue(res.body.authorizations.create);
-					assert.isTrue(res.body.authorizations.read);
-					assert.isTrue(res.body.authorizations.update);
-					assert.isFalse(res.body.authorizations.delete);
+					assert.isTrue(res.body.authorizations['project:read']);
+					assert.isTrue(res.body.authorizations['project:create']);
+					assert.isTrue(res.body.authorizations['project:update']);
+					assert.isFalse(res.body.authorizations['project:delete']);
+					assert.isTrue(res.body.authorizations['project:assignments:read']);
+					assert.isTrue(res.body.authorizations['project:assignments:write']);
+					assert.isTrue(res.body.authorizations['project:contents:read']);
+					assert.isTrue(res.body.authorizations['project:contents:write']);
 					done();
 				});
 		});
