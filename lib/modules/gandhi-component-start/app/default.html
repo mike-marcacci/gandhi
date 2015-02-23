@@ -7,15 +7,15 @@
 		This stage is complete.
 	</div>
 
-	<div class="alert alert-warning" role="alert" ng-if="!content.authorizations['project:read']">
+	<div class="alert alert-warning" role="alert" ng-if="!content.authorizations['read']">
 		You are not allowed to see the contents of this stage.
 	</div>
 
-	<div class="alert alert-warning" role="alert" ng-if="!content.authorizations['project:write'] &amp;&amp; content.authorizations['project:read']">
+	<div class="alert alert-warning" role="alert" ng-if="!content.authorizations['write'] &amp;&amp; content.authorizations['read']">
 		Please note, you are not allowed to make changes to this stage.
 	</div>
 
-	<div class="row" ng-if="content.authorizations['project:read']">
+	<div class="row" ng-if="content.authorizations['read']">
 
 		<div class="col-md-6" ng-show="cycle.instructions">
 			<div class="panel panel-default" ng-show="cycle.instructions">
@@ -37,10 +37,10 @@
 					<form role="form" ng-submit="update()">
 						<div class="form-group">
 							<label for="title">Title</label>
-							<input type="text" class="form-control" id="title" placeholder="Your Project's Title Goes Here" ng-model="project.title" ng-disabled="!content.authorizations['project:write']">
+							<input type="text" class="form-control" id="title" placeholder="Your Project's Title Goes Here" ng-model="project.title" ng-disabled="!content.authorizations['write']">
 						</div>
 
-						<input ng-show="content.authorizations['project:write']" type="submit" class="btn btn-sm btn-primary" value="Submit" ng-disabled="!project.title">
+						<input ng-show="content.authorizations['write']" type="submit" class="btn btn-sm btn-primary" value="Submit" ng-disabled="!project.title">
 					</form>
 
 				</div>
