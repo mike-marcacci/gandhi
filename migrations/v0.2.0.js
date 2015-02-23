@@ -66,7 +66,7 @@ r.connect({host: host, db: db}).then(function(conn){
 				'project:update': allPermissions,
 				'project:destroy': {},
 				'project:assignments:read': allPermissions,
-				'project:assignments:write': allPermissions
+				'project:assignments:write': allPermissions,
 				'project:contents:read': allPermissions,
 				'project:contents:write': allPermissions
 			},
@@ -97,7 +97,7 @@ r.connect({host: host, db: db}).then(function(conn){
 			'config'
 		]).without({
 			defaults: ['role','status', 'flow']
-		})
+		});
 	}).run(conn));
 
 
