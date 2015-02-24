@@ -1,4 +1,4 @@
-<div ng-if="$$value$$ !== null" class="form-group has-feedback {{form.htmlClass}} schema-form-ckeditor" ng-class="{'has-error': hasError(), 'has-success': hasSuccess()}">
+<div class="form-group has-feedback {{form.htmlClass}} schema-form-ckeditor" ng-class="{'has-error': hasError(), 'has-success': hasSuccess()}">
   <label ng-show="showTitle()">{{form.title}}</label>
   <span class="help-block" ng-bind-html="form.description"></span>
   <textarea class="form-control {{form.fieldHtmlClass}}"
@@ -10,5 +10,5 @@
             ng-model-options="form.ngModelOptions"
             schema-validate="form"
             name="{{form.key.slice(-1)[0]}}"></textarea>
-  <span class="help-block">{{ (hasError() && errorMessage(schemaError()))}}</span>
+  <span class="help-block">{{ (hasError() && errorMessage(schemaError())) || '' }}</span>
 </div>

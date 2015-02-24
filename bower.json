@@ -19,7 +19,7 @@
   ],
   "dependencies": {
     "angular": "1.3.x",
-    "angular-ckeditor": "~0.2.0",
+    "angular-ckeditor": "~0.3.2",
     "angular-resource": "1.3.x",
     "angular-sanitize": "1.3.x",
     "angular-schema-form": "0.7.11",

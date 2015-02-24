@@ -1,0 +1,70 @@
+<div ng-if="!stage.id || !content.id">Loading...</div>
+
+<div ng-if="stage.id &amp;&amp; content.id">
+	<div class="alert alert-info" role="alert" ng-if="content.status_id == 'draft'">
+		This stage is saved as a draft.
+	</div>
+
+	<div class="alert alert-info" role="alert" ng-if="content.status_id == 'complete'">
+		This stage is complete.
+	</div>
+
+	<div class="alert alert-warning" role="alert" ng-if="!content.authorizations['read:public']">
+		You are not allowed to see the contents of this stage.
+	</div>
+
+	<div class="alert alert-warning" role="alert" ng-if="!content.authorizations['write'] &amp;&amp; content.authorizations['read:public']">
+		Please note, you are not allowed to make changes to this stage.
+	</div>
+
+	<ul class="nav nav-tabs" role="tablist">
+		<li ng-show="content.authorizations['write']" ng-class="{active: tab === 'write'}"><a href ng-click="tab = 'write'">Write a Review</a></li>
+		<li ng-show="content.authorizations['read:public']" ng-class="{active: tab === 'read'}"><a href ng-click="tab = 'read'">Read Reviews</a></li>
+	</ul>
+
+	<div class="panel panel-default" ng-if="tab === 'write'">
+		<div class="row">
+
+
+			<!-- Preview -->
+			<div class="col-md-6" ng-if="stage.component.options.preview.length">
+				<div class="panel-body">
+					<select ng-if="stage.comment.options.preview.length > 1" class="form-control" ng-model="preview.id" ng-options="id in stage.component.options.preview"></select>
+
+					<h4>{{preview.stage.title}}</h4>
+					<div class="well" ng-if="preview.content.id &amp;&amp; preview.stage.id">
+						<div gandhi-component="{cycle: cycle, project: project, stage: preview.stage, content: preview.content, mode: mode}"></div>
+					</div>
+				</div>
+			</div>
+
+
+			<!-- Form -->
+			<div ng-class="{'col-md-6': stage.component.options.preview.length, 'col-md-12': !stage.component.options.preview.length}">
+				<div class="panel-body">
+					<form name="gandhiReviewComponent" ng-submit="save(gandhiReviewComponent)">
+						<div ng-if="stage.component.options.schema &amp;&amp; stage.component.options.form" sf-model="data" sf-form="stage.component.options.form" sf-schema="stage.component.options.schema" sf-options="sfOptions"></div>
+						<button ng-show="content.authorizations['write']" class="btn btn-primary" ng-bind="options.submitButtonText || 'Submit'"></button>
+					</form>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<div class="panel panel-default" ng-if="tab === 'read'">
+		<div class="panel-body">
+			<fieldset id="comment-{{k}}" ng-repeat="(k,v) in comments" ng-if="stage.component.options.schema.properties[k]">
+				<div class="row">
+					<legend ng-class="{'col-sm-offset-3': content.authorizations['read:authors'], 'col-sm-9': content.authorizations['read:authors'], 'col-sm-12': !content.authorizations['read:authors']}">{{stage.component.options.schema.properties[k].title || k | title}}</legend>
+					<div ng-class="{'col-sm-offset-3': content.authorizations['read:authors'], 'col-sm-9': content.authorizations['read:authors'], 'col-sm-12': !content.authorizations['read:authors']}">{{stage.component.options.schema.properties[k].properties.comment.title}}</div>
+					<br>
+				</div>
+				<div ng-repeat="(userId,c) in v" class="row">
+					<div class="col-sm-3" ng-if="content.authorizations['read:authors']" style="text-align: center;">{{usersById[userId].name}}</div>
+					<div ng-class="{'col-sm-9': content.authorizations['read:authors']}"><div class="well">{{c.comment}}</div></div>
+				</div>
+			</fieldset>
+		</div>
+	</div>
+</div>
