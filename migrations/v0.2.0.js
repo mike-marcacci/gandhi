@@ -31,9 +31,9 @@ r.connect({host: host, db: db}).then(function(conn){
 	// Cycles
 	// ------
 	tasks.push(r.table('cycles').replace(function(cycle){
-		var allPermissions = r.literal(cycle('roles').coerceTo('array').map(function(roleKV){
+		var allPermissions = cycle('roles').coerceTo('array').map(function(roleKV){
 			return [roleKV.nth(0), true];
-		}).coerceTo('object'));
+		}).coerceTo('object');
 
 		return cycle.merge({
 			defaults: {
@@ -61,14 +61,14 @@ r.connect({host: host, db: db}).then(function(conn){
 				})];
 			}).coerceTo('object').default(cycle('triggers')),
 			permissions: {
-				'project:read': allPermissions,
-				'project:create': allPermissions,
-				'project:update': allPermissions,
-				'project:destroy': {},
-				'project/assignments:read': allPermissions,
-				'project/assignments:write': allPermissions,
-				'project/contents:read': allPermissions,
-				'project/contents:write': allPermissions
+				'project:read': cycle('permissions')('project:read').default(allPermissions),
+				'project:create': cycle('permissions')('project:create').default(allPermissions),
+				'project:update': cycle('permissions')('project:update').default(allPermissions),
+				'project:delete': cycle('permissions')('project:delete').default({}),
+				'project/assignments:read': cycle('permissions')('project/assignments:read').default(allPermissions),
+				'project/assignments:write': cycle('permissions')('project/assignments:write').default(allPermissions),
+				'project/contents:read': cycle('permissions')('project/contents:read').default(allPermissions),
+				'project/contents:write': cycle('permissions')('project/contents:write').default(allPermissions)
 			},
 			created: r.branch(cycle('created').default(new Date().toISOString()).typeOf().eq('STRING'),
 				r.ISO8601(cycle('created').default(new Date().toISOString())).toEpochTime(),
@@ -84,17 +84,23 @@ r.connect({host: host, db: db}).then(function(conn){
 					cycle('updated').toEpochTime()
 				)
 			),
-			status_id: cycle('status').default(cycle('status_id')),
+			status_id: r.branch(
+				cycle('status').default(null).typeOf().eq('OBJECT'),
+				cycle('status')('id').default('active'),
+				cycle('status_id').default('active')
+			),
 			options: {
-				open: null,
-				close: null
+				open: cycle('options')('open').default(null),
+				close: cycle('options')('close').default(null)
 			}
 		}).without([
 			'users',
 			'flow',
 			'events',
 			'status',
-			'config'
+			'config',
+			'open',
+			'close'
 		]).without({
 			defaults: ['role','status', 'flow']
 		});
@@ -140,7 +146,11 @@ r.connect({host: host, db: db}).then(function(conn){
 					project('updated').toEpochTime()
 				)
 			),
-			status_id: project('status').default(project('status_id'))
+			status_id: r.branch(
+				project('status').default(null).typeOf().eq('OBJECT'),
+				project('status')('id').default('active'),
+				project('status_id').default('active')
+			),
 		}).without([
 			'users',
 			'flow',
