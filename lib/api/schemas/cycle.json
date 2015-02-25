@@ -211,10 +211,10 @@
         "project:create",
         "project:update",
         "project:delete",
-        "project:assignments:read",
-        "project:assignments:write",
-        "project:contents:read",
-        "project:contents:write"
+        "project/assignments:read",
+        "project/assignments:write",
+        "project/contents:read",
+        "project/contents:write"
       ],
       "properties": {
         "project:read": {
@@ -229,16 +229,16 @@
         "project:delete": {
           "$ref": "#/definitions/permission"
         },
-        "project:assignments:read": {
+        "project/assignments:read": {
           "$ref": "#/definitions/permission"
         },
-        "project:assignments:write": {
+        "project/assignments:write": {
           "$ref": "#/definitions/permission"
         },
-        "project:contents:read": {
+        "project/contents:read": {
           "$ref": "#/definitions/permission"
         },
-        "project:contents:write": {
+        "project/contents:write": {
           "$ref": "#/definitions/permission"
         }
       },
@@ -255,16 +255,16 @@
         "project:delete": {
           "applicant": false
         },
-        "project:assignments:read": {
+        "project/assignments:read": {
           "applicant": true
         },
-        "project:assignments:write": {
+        "project/assignments:write": {
           "applicant": true
         },
-        "project:contents:read": {
+        "project/contents:read": {
           "applicant": true
         },
-        "project:contents:write": {
+        "project/contents:write": {
           "applicant": true
         }
       }

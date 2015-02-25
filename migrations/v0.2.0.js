@@ -65,10 +65,10 @@ r.connect({host: host, db: db}).then(function(conn){
 				'project:create': allPermissions,
 				'project:update': allPermissions,
 				'project:destroy': {},
-				'project:assignments:read': allPermissions,
-				'project:assignments:write': allPermissions,
-				'project:contents:read': allPermissions,
-				'project:contents:write': allPermissions
+				'project/assignments:read': allPermissions,
+				'project/assignments:write': allPermissions,
+				'project/contents:read': allPermissions,
+				'project/contents:write': allPermissions
 			},
 			created: r.branch(cycle('created').default(new Date().toISOString()).typeOf().eq('STRING'),
 				r.ISO8601(cycle('created').default(new Date().toISOString())).toEpochTime(),

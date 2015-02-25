@@ -126,19 +126,19 @@
 		"project:delete": {
 			"staff": true
 		},
-		"project:assignments:read": {
+		"project/assignments:read": {
 			"applicant": true,
 			"staff": true
 		},
-		"project:assignments:write": {
+		"project/assignments:write": {
 			"applicant": true,
 			"staff": true
 		},
-		"project:contents:read": {
+		"project/contents:read": {
 			"applicant": true,
 			"staff": true
 		},
-		"project:contents:write": {
+		"project/contents:write": {
 			"applicant": true,
 			"staff": true
 		}
@@ -641,19 +641,19 @@
 		"project:delete": {
 			"staff": true
 		},
-		"project:assignments:read": {
+		"project/assignments:read": {
 			"applicant": true,
 			"staff": true
 		},
-		"project:assignments:write": {
+		"project/assignments:write": {
 			"applicant": true,
 			"staff": true
 		},
-		"project:contents:read": {
+		"project/contents:read": {
 			"applicant": true,
 			"staff": true
 		},
-		"project:contents:write": {
+		"project/contents:write": {
 			"applicant": true,
 			"staff": true
 		}
