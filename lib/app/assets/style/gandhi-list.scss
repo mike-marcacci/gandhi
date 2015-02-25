@@ -1,0 +1,34 @@
+.gandhi-list {
+
+	table, thead, tbody {
+		display: block;
+
+		tr {
+			display: flex;
+
+			th, td {
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+
+				div {
+					overflow: hidden;
+					text-overflow: ellipsis;
+				}
+			}
+		}
+	}
+
+	thead.floating {
+		display: none;
+		position: fixed;
+		background: white;
+		top: 0;
+		z-index: 1;
+	}
+
+	&.scrolling thead {
+		display: block;
+	}
+
+}

@@ -2,6 +2,7 @@ $icon-font-path: "../bower/bootstrap-sass-official/assets/fonts/bootstrap/";
 $brand-primary: #428bca;
 // $brand-primary: #993636;
 @import "../bower/bootstrap-sass-official/assets/stylesheets/bootstrap";
+@import "gandhi-list";
 
 .btn {
 	line-height: 1.42857143 !important;

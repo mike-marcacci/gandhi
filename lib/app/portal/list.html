@@ -1,15 +1,16 @@
 <div class="panel panel-default">
-	<div class="table-responsive">
+	<div class="table-responsive gandhi-list" ng-class="{scrolling: scrolling}">
 		<table class="table table-hover" style="margin-bottom: 0;">
 			<thead>
 				<tr>
 					<th
+						ng-repeat="column in table.columns"
 						ng-if="!limit || column.primary"
 						ng-class="{active: eq(table.query.sort[0].path, column.path)}"
+						ng-style="{flex: column.flex ? ''+column.flex : column.width ? null : 1, width: column.flex ? null : column.width ? column.width+'px' : column.width}"
 						style="cursor: pointer;"
 						ng-click="sort(column)"
-						ng-repeat="column in table.columns"
-					>
+						>
 						<span ng-bind="column.title || column.key"></span>
 						<span
 							ng-if="eq(table.query.sort[0].path, column.path)"
@@ -24,13 +25,36 @@
 					ui-sref="{{ srefBase + '(' + params(row.id) + ')' }}"
 					style="cursor: pointer"
 					ng-repeat="row in table.data"
-				>
-					<td ng-if="!limit || column.primary" ng-repeat="column in table.columns" ng-init="value = (row | access:column.path)">
+					>
+					<td
+						ng-repeat="column in table.columns"
+						ng-if="!limit || column.primary"
+						ng-style="{flex: column.flex ? ''+column.flex : column.width ? null : 1, width: column.flex ? null : column.width ? column.width+'px' : column.width}"
+						ng-init="value = (row | access:column.path)"
+						>
 						<div ng-if="column.template" compile="column.template"></div>
 						<div ng-if="!column.template" access="column.path" base="'row'"></div>
 					</td>
 				</tr>
 			</tbody>
+			<thead class="floating" style="width: {{width || 0}}px">
+				<tr>
+					<th
+						ng-repeat="column in table.columns"
+						ng-if="!limit || column.primary"
+						ng-class="{active: eq(table.query.sort[0].path, column.path)}"
+						ng-style="{flex: column.flex ? ''+column.flex : column.width ? null : 1, width: column.flex ? null : column.width ? column.width+'px' : column.width}"
+						style="cursor: pointer;"
+						ng-click="sort(column)"
+						>
+						<span ng-bind="column.title || column.key"></span>
+						<span
+							ng-if="eq(table.query.sort[0].path, column.path)"
+							class="pull-right glyphicon"
+							ng-class="{'glyphicon-triangle-top': table.query.sort[0].direction === 'desc', 'glyphicon-triangle-bottom': table.query.sort[0].direction !== 'desc'}"></span>
+					</th>
+				</tr>
+			</thead>
 		</table>
 	</div>
 </div>
