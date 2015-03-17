@@ -49,7 +49,7 @@ module.exports = {
 
 
 						// TEMPORARY
-						require('../../lib/api/utils/cache.js')(conn)
+						require('../../lib/api/utils/cache.js')(conn, true)
 						.finally(function(){ conn.close(); })
 						.then(function(){ done(); })
 						.catch(function(err){ done(err); })
