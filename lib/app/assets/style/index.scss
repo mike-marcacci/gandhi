@@ -560,6 +560,22 @@ body {
 				opacity: 0;
 			}
 
+			nav > ul > li > ul {
+				transition: all 0.8s;
+				max-height: 400px;
+				overflow-y: auto;
+			}
+
+			&:not(:hover) {
+				nav > ul > li > ul {
+					border-width: 0;
+					margin: 0;
+					max-height: 0;
+					overflow-y: hidden;
+					padding: 0;
+				}
+			}
+
 			&:hover {
 				left: 0px;
 

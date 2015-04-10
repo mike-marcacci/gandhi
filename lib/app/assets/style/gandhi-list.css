@@ -1,0 +1,24 @@
+.gandhi-list table, .gandhi-list thead, .gandhi-list tbody {
+  display: block; }
+  .gandhi-list table tr, .gandhi-list thead tr, .gandhi-list tbody tr {
+    display: flex;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex; }
+    .gandhi-list table tr th, .gandhi-list table tr td, .gandhi-list thead tr th, .gandhi-list thead tr td, .gandhi-list tbody tr th, .gandhi-list tbody tr td {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis; }
+      .gandhi-list table tr th div, .gandhi-list table tr td div, .gandhi-list thead tr th div, .gandhi-list thead tr td div, .gandhi-list tbody tr th div, .gandhi-list tbody tr td div {
+        overflow: hidden;
+        text-overflow: ellipsis; }
+.gandhi-list thead.floating {
+  display: none;
+  position: fixed;
+  background: white;
+  top: 0;
+  z-index: 1; }
+.gandhi-list.scrolling thead {
+  display: block; }
+
+/*# sourceMappingURL=gandhi-list.css.map */
