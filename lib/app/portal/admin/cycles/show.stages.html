@@ -81,7 +81,7 @@
 							<p class="form-control-static"><strong><a ui-sref="portal.admin.cycles.show.stages.stage({stage: stage.id})">{{stage.id}}</a></strong></p>
 						</td>
 						<td>
-							<a ng-if="!backup[stage.id]" ui-sref="portal.admin.cycles.show.stages.stage({stage: stage.id})"><p class="form-control-static">{{stage.title}} - {{ stage.order }}</p></a>
+							<a ng-if="!backup[stage.id]" ui-sref="portal.admin.cycles.show.stages.stage({stage: stage.id})"><p class="form-control-static">{{stage.title}}</p></a>
 							<input ng-if="backup[stage.id]" class="form-control" type="text" ng-model="stage.title">
 						</td>
 						<td>
