@@ -139,6 +139,8 @@ describe('Exports', function(){
 		});
 	});
 
+	describe.skip('#post', function(){});
+
 	describe('#put', function(){
 		it('rejects an anonymous put', function(done){
 			request
