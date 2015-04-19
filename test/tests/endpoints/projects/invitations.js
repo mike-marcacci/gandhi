@@ -18,7 +18,7 @@ before(function(){
 	fixtures = global.setup.fixtures.db.projects;
 });
 
-describe('Invitations', function(){
+describe.skip('Invitations', function(){
 	var adminToken, adminId, userToken, userId;
 
 	before(function(done){
