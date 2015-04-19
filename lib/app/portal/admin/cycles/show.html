@@ -36,8 +36,29 @@
 
 
 		<div ui-view>
+
+			<!-- Instructions -->
+			<div class="col-md-5">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<span class="panel-title">Instructions</span>
+					<div class="pull-right">
+						<button class="btn btn-xs btn-primary" ng-if="cycleInstructionsEdit" ng-click="updateInstructions()">Save</button>
+						<button class="btn btn-xs btn-default" ng-class="{'active': cycleInstructionsEdit}" ng-show="update" ng-click="toggleInstructionsEdit()"><i class="glyphicon glyphicon-cog"></i></button>
+					</div>
+				</div>
+				<div class="panel-body" ng-if="!cycleInstructionsEdit">
+					<div ng-if="!cycle.instructions" class="alert alert-info" style="margin-bottom: 0;">You haven't specified any instructions for this cycle.</div>
+					<div ng-if="cycle.instructions" ng-bind-html="cycle.instructions"></div>
+				</div>
+				<div class="cke_chromeless" ng-if="cycleInstructionsEdit">
+					<textarea class="form-control" style="height: auto;" ckeditor ng-model="cycle.instructions"></textarea>
+				</div>
+			</div>
+			</div>
 			
 			<!-- Settings -->
+			<div class="col-md-7">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<span class="panel-title">General Settings</span>
@@ -76,14 +97,14 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="cycle-default-role" class="col-sm-2 control-label">Default Project Role</label>
+							<label for="cycle-default-role" class="col-sm-2 control-label">Default Role</label>
 							<div class="col-sm-10">
 								<p ng-show="!cycleEdit" class="form-control-static">{{rolesById[cycle.defaults.role_id].title}}</p>
 								<select ng-show="cycleEdit" class="form-control" id="cycle-default-role" ng-model="cycleEdit.defaults.role_id" ng-options="role.id as role.title for role in roles" required></select>
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="cycle-default-status" class="col-sm-2 control-label">Default Project Status</label>
+							<label for="cycle-default-status" class="col-sm-2 control-label">Default Status</label>
 							<div class="col-sm-10">
 								<p ng-show="!cycleEdit" class="form-control-static">{{statusesById[cycle.defaults.status_id].title}}</p>
 								<select ng-show="cycleEdit" class="form-control" id="cycle-default-status" ng-model="cycleEdit.defaults.status_id" ng-options="status.id as status.title for status in statuses" required></select>
@@ -126,23 +147,6 @@
 
 				</div>
 			</div>
-
-			<!-- Instructions -->
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<span class="panel-title">Instructions</span>
-					<div class="pull-right">
-						<button class="btn btn-xs btn-primary" ng-if="cycleInstructionsEdit" ng-click="updateInstructions()">Save</button>
-						<button class="btn btn-xs btn-default" ng-class="{'active': cycleInstructionsEdit}" ng-show="update" ng-click="toggleInstructionsEdit()"><i class="glyphicon glyphicon-cog"></i></button>
-					</div>
-				</div>
-				<div class="panel-body" ng-if="!cycleInstructionsEdit">
-					<div ng-if="!cycle.instructions" class="alert alert-info" style="margin-bottom: 0;">You haven't specified any instructions for this cycle.</div>
-					<div ng-if="cycle.instructions" ng-bind-html="cycle.instructions"></div>
-				</div>
-				<div class="cke_chromeless" ng-if="cycleInstructionsEdit">
-					<textarea class="form-control" style="height: auto;" ckeditor ng-model="cycle.instructions"></textarea>
-				</div>
 			</div>
 
 
