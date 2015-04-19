@@ -241,11 +241,19 @@ describe('Notifications', function(){
 				.expect(401)
 				.end(done);
 		});
-		it('rejects an update by a non-admin user', function(done){
+		it('rejects a non-status update of a user\'s own notification by a non-admin user', function(done){
 			request
 				.patch('/api/notifications/' + ids[0])
 				.set('Authorization', 'Bearer ' + userToken)
 				.send({subject: 'Woops!'})
+				.expect(403)
+				.end(done);
+		});
+		it('rejects a status-only update of another user\'s notification by a non-admin user', function(done){
+			request
+				.patch('/api/notifications/2df77fb9-6fe0-448f-ad06-a4d145ca8c46')
+				.set('Authorization', 'Bearer ' + userToken)
+				.send({status_id: 'read'})
 				.expect(403)
 				.end(done);
 		});
@@ -258,6 +266,19 @@ describe('Notifications', function(){
 				.expect(404)
 				.end(done);
 		});
+		it('allows a status-only update by an admin user', function(done){
+			request
+				.patch('/api/notifications/' + ids[0])
+				.set('Authorization', 'Bearer ' + userToken)
+				.send({status_id: 'read'})
+				.expect(200)
+				.end(function(err, res){
+					if(err) return done(err);
+					assert.equal(res.body.id, ids[0]);
+					assert.equal(res.body.status_id, 'read');
+					done();
+				});
+		});
 		it('allows an update by an admin user', function(done){
 			request
 				.patch('/api/notifications/' + ids[0])
@@ -268,6 +289,7 @@ describe('Notifications', function(){
 				.end(function(err, res){
 					if(err) return done(err);
 					assert.equal(res.body.id, ids[0]);
+					assert.equal(res.body.subject, 'UPDATED');
 					done();
 				});
 		});
