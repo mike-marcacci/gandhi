@@ -6,7 +6,7 @@ var crypto = require('crypto');
 module.exports = {
 	root: '',
 	db: {
-		host: process.env.WERCKER_RETHINKDB_HOST || '127.0.0.1',
+		host: process.env.TEST_RETHINKDB || '127.0.0.1',
 		db: 'gandhi'
 	},
 	pool: {

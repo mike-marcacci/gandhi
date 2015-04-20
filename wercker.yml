@@ -1,6 +1,7 @@
 box: wercker/nodejs
-services:
-  - id: neumino/box-thinky@2.0.0
+# Build definition
+# services:
+#   - mies/rethinkdb@0.3.0
 build:
   steps:
     - npm-install
