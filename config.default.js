@@ -14,6 +14,9 @@ module.exports = {
 		min: 1,
 		timeout: 30000
 	},
+	redis: {
+		host: '127.0.0.1'
+	},
 	auth: {
 		secret: ''
 	},
