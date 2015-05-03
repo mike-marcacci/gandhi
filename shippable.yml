@@ -1,15 +1,11 @@
-# Language setting
 language: node_js
 
-# Version number
 node_js:
   - 0.12.2
 
-# RethinkDB binds to 127.0.0.1 by default
 services:
   - rethinkdb
   - redis
 
-# Running the tests with grunt
 script:
   - npm test
