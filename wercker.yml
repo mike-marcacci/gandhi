@@ -1,7 +1,7 @@
 box: wercker/nodejs
 # Build definition
 services:
-  - redis
+  # - redis
   # - mies/rethinkdb@0.3.0
 build:
   steps:
