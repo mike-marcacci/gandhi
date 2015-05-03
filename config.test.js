@@ -15,7 +15,7 @@ module.exports = {
 		timeout: 30000
 	},
 	redis: {
-		host: process.env.TEST_REDIS || '127.0.0.1',
+		host: '127.0.0.1',
 		port: 6379
 	},
 	lock: {
