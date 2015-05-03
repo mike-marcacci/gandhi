@@ -17,6 +17,10 @@ module.exports = {
 	redis: {
 		host: process.env.TEST_REDIS || '127.0.0.1'
 	},
+	lock: {
+		retry: 50,
+		timeout: 30000
+	},
 	auth: {
 		secret: 'rubber bunny'
 	},
