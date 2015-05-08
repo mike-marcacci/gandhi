@@ -6,7 +6,7 @@ var crypto = require('crypto');
 module.exports = {
 	root: '',
 	db: {
-		host: process.env.TEST_RETHINKDB || '127.0.0.1',
+		host: 'localhost',
 		db: 'gandhi'
 	},
 	pool: {
@@ -15,8 +15,8 @@ module.exports = {
 		timeout: 30000
 	},
 	redis: {
-		host: process.env.TEST_REDIS || '127.0.0.1',
-		port: 6379
+		host: process.env.REDIS_PORT_6379_TCP_ADDR || '127.0.0.1',
+		port: process.env.REDIS_PORT_6379_TCP_PORT || 6379
 	},
 	lock: {
 		retry: 50,

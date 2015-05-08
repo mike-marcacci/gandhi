@@ -771,7 +771,7 @@
 							"style": {
 								"remove": "btn-danger"
 							},
-							"title": "value.name || 'Investigator #'+($index+1)",
+							"title": "{{ value.name || 'Investigator #'+($index+1) }}",
 							"type": "tabarray"
 						}],
 						"title": "Investigators",

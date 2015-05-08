@@ -1,15 +1,14 @@
-box: wercker/nodejs
-# Build definition
-# services:
-  # - redis
-  # - mies/rethinkdb@0.3.0
+box:
+  id: node
+
+services:
+  - redis:3
+  - rethinkdb:2
+
 build:
   steps:
     - npm-install
     - npm-test
-
-    # A custom script step, name value is used in the UI
-    # and the code value contains the command that get executed
     - script:
         name: echo nodejs information
         code: |
