@@ -4,7 +4,7 @@ var fs = require('fs');
 var crypto = require('crypto');
 
 module.exports = {
-	// This is the he root path for the portal, without trailing slash. It
+	// This is the root path for the portal, without trailing slash. It
 	// might be used to host your system at www.example.com/portal.
 	root: '',
 
