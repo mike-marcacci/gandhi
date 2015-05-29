@@ -1,6 +1,6 @@
 {
-  "name": "gandhi-component-form",
-  "description": "Gandhi Component: Form",
+  "name": "gandhi-component-schedule",
+  "description": "Gandhi Component: Schedule",
   "version": "0.0.1",
   "license": "MIT",
   "private": true,
@@ -9,5 +9,5 @@
     "angular": "*",
     "gandhi-component": "*"
   },
-  "module": "gandhi-component-form"
+  "module": "gandhi-component-schedule"
 }
