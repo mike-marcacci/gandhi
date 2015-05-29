@@ -1,0 +1,21 @@
+<!-- Message -->
+<div class="tab-bar" ng-if="tab == 'Message'">
+	<button class="btn btn-xs btn-primary" ng-if="stageMessageEdit" ng-click="updateStageMessage()">Save</button>
+	<button class="btn btn-xs" ng-class="{'btn-default': true, 'active': stageMessageEdit}" ng-click="toggleStageMessageEdit()"><i class="glyphicon glyphicon-cog"></i></button>
+</div>
+
+<ul class="nav nav-tabs" ng-init="tab = 'Message'">
+	<li ng-click="tab = 'Message'" ng-class="{active: tab === 'Message'}"><a href>Message</a></li>
+</ul>
+<div class="panel panel-default">
+
+	<!-- Message -->
+	<div class="panel-body" ng-if="tab == 'Message' &amp;&amp; !stageMessageEdit">
+		<div class="alert alert-info" ng-if="!stage.component.options.message" style="margin-bottom: 0;">You haven't specified any message for this stage.</div>
+		<div ng-bind-html="stage.component.options.message"></div>
+	</div>
+	<div ng-if="tab == 'Message' &amp;&amp; stageMessageEdit" class="cke_chromeless">
+		<textarea style="height: auto;" ckeditor ng-model="stageMessageEdit.component.options.message"></textarea>
+	</div>
+
+</div>
