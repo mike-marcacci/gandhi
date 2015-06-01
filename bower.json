@@ -32,7 +32,8 @@
     "lodash": "~2.4.1",
     "ng-file-upload": "~1.6.5",
     "objectpath": "~1.1.0",
-    "angular-json-human": "~1.2.1"
+    "angular-json-human": "~1.2.1",
+    "angular-schema-form-datepicker": "~0.4.0"
   },
   "overrides": {
     "ace-builds": {
