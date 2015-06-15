@@ -421,6 +421,31 @@
         "visible": {
           "$ref": "#/definitions/permission"
         },
+        "exports": {
+          "type": "object",
+          "default": {},
+          "additionalProperties": {
+            "type": "object",
+            "required": ["id", "title"],
+            "properties": {
+              "id": {
+                "type": "string",
+                "constant": {"$data": "0"}
+              },
+              "title": {
+                "type": "string"
+              },
+              "template": {
+                "type": "string",
+                "default": "{{ value }}"
+              },
+              "options": {
+                "type": "object",
+                "default": {}
+              }
+            }
+          }
+        },
         "component": {
           "type": "object",
           "required": ["name"],

@@ -92,6 +92,10 @@
           "type": "string",
           "constant": {"$data": "0"}
         },
+        "exports": {
+          "type": "object",
+          "default": {}
+        },
         "data": {
           "type": "object",
           "default": {},
