@@ -983,6 +983,9 @@
 					"proposal": {
 						"id": "proposal",
 						"title": "Proposal",
+						"schema": {
+							"type": "string"
+						},
 						"template": "<a ng-show=\"value\" href=\"{{value}}\" target=\"_blank\">Download</a>"
 					}
 				}

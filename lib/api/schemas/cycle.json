@@ -439,7 +439,7 @@
               "default": {},
               "additionalProperties": {
                 "type": "object",
-                "required": ["id", "title"],
+                "required": ["id", "title", "schema"],
                 "properties": {
                   "id": {
                     "type": "string",
@@ -447,6 +447,9 @@
                   },
                   "title": {
                     "type": "string"
+                  },
+                  "schema": {
+                    "type": "object"
                   },
                   "template": {
                     "type": "string",
@@ -605,17 +608,18 @@
                     "options": {
                       "type": "object",
                       "additionalProperties": false,
-                      "required": ["content_id", "export_id", "regex"],
+                      "required": ["content_id", "export_id", "value"],
                       "properties": {
                         "content_id": {
                           "type": "string"
                         },
-                        "value_id": {
+                        "export_id": {
                           "type": "string"
                         },
-                        "regex": {
+                        "op": {
                           "type": "string"
-                        }
+                        },
+                        "value": {}
                       }
                     }
                   }

@@ -68,7 +68,7 @@
 									<div class="panel-title">{{condition.name | title}}</div>
 								</div>
 								<div ng-if="backup[trigger.id]" class="panel-heading" style="display: flex;">
-									<select class="form-control input-xs" style="flex: 1;" ng-model="condition.name" ng-options="type.name as type.title for type in [{name: 'date', title: 'Date'}, {name: 'status', title: 'Status (Project)'}, {name: 'content_status', title: 'Status (Content)'}, {name: 'value_equals', title: 'Equals (Value)'}, {name: 'value_regex', title: 'Regex (Value)'}]" required></select>
+									<select class="form-control input-xs" style="flex: 1;" ng-model="condition.name" ng-options="type.name as type.title for type in [{name: 'date', title: 'Date'}, {name: 'project_status', title: 'Project Status'}, {name: 'content_status', title: 'Content Status'}, {name: 'export', title: 'Export'}]" required></select>
 
 									<div style="margin-left: 15px;" ng-click="removeIndex(group, iCondition)" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i></div>
 								</div>
@@ -97,8 +97,8 @@
 									</div>
 
 
-									<!-- Status -->
-									<div ng-if="condition.name == 'status'">
+									<!-- Project Status -->
+									<div ng-if="condition.name == 'project_status'">
 										<div class="form-group">
 											<label class="col-xs-4">Status</label>
 											<div class="col-xs-8">
@@ -128,39 +128,35 @@
 									</div>
 
 
-									<!-- Value Regex -->
-									<div ng-if="condition.name == 'value_equals'">
+									<!-- Export -->
+									<div ng-if="condition.name == 'export'">
+										<div class="form-group">
+											<label class="col-xs-4">Content</label>
+											<div class="col-xs-8">
+												<div ng-if="!backup[trigger.id]">{{stagesById[condition.options.content_id].title}}</div>
+												<select ng-if="backup[trigger.id]" class="form-control input-xs" ng-model="condition.options.content_id" ng-options="stage.id as stage.title for stage in stages" required></select>
+											</div>
+										</div>
 										<div class="form-group">
 											<label class="col-xs-4">Export</label>
 											<div class="col-xs-8">
-												<div ng-if="!backup[trigger.id]">{{exportsById[condition.options.value_id].title}}</div>
-												<select ng-if="backup[trigger.id]" class="form-control input-xs" ng-model="condition.options.value_id" ng-options="export.id as export.title for export in exports" required></select>
+												<div ng-if="!backup[trigger.id]">{{stagesById[condition.options.content_id].component.manifest[condition.options.export_id].title}}</div>
+												<select ng-if="backup[trigger.id]" class="form-control input-xs" ng-model="condition.options.export_id" ng-options="export.id as export.title for (id,export) in stagesById[condition.options.content_id].component.manifest" ng-disabled="!condition.options.content_id" required></select>
 											</div>
 										</div>
 										<div class="form-group">
-											<label class="col-xs-4">Equals</label>
+											<label class="col-xs-4">
+												<div ng-if="!backup[trigger.id]">{{condition.options.op}}</div>
+												<select ng-if="backup[trigger.id]" class="form-control input-xs" ng-model="condition.options.op" ng-disabled="!condition.options.export_id" required>
+													<option value="eq">eq</option>
+													<option value="gt">gt</option>
+													<option ng-if="stagesById[condition.options.content_id].component.manifest[condition.options.export_id].schema.type == 'string'" value="matches">matches</option>
+													<option ng-if="stagesById[condition.options.content_id].component.manifest[condition.options.export_id].schema.type == 'array'" value="contains">contains</option>
+												</select>
+											</label>
 											<div class="col-xs-8">
-												<div ng-if="!backup[trigger.id]">{{condition.options.equals}}</div>
-												<input ng-if="backup[trigger.id]" class="form-control input-xs" type="text" json ng-model="condition.options.equals">
-											</div>
-										</div>
-									</div>
-
-
-									<!-- Value Regex -->
-									<div ng-if="condition.name == 'value_regex'">
-										<div class="form-group">
-											<label class="col-xs-4">Export</label>
-											<div class="col-xs-8">
-												<div ng-if="!backup[trigger.id]">{{exportsById[condition.options.value_id].title}}</div>
-												<select ng-if="backup[trigger.id]" class="form-control input-xs" ng-model="condition.options.value_id" ng-options="export.id as export.title for export in exports" required></select>
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-xs-4">Regex</label>
-											<div class="col-xs-8">
-												<div ng-if="!backup[trigger.id]">{{condition.options.regex}}</div>
-												<input ng-if="backup[trigger.id]" class="form-control input-xs" type="text" ng-model="condition.options.regex">
+												<div ng-if="!backup[trigger.id]">{{condition.options.value}}</div>
+												<input ng-if="backup[trigger.id]" class="form-control input-xs" type="text" ng-model="condition.options.value" json>
 											</div>
 										</div>
 									</div>
