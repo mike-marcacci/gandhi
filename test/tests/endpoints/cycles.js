@@ -338,7 +338,7 @@ describe('Cycles', function(){
 				.delete('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
-				.expect(400)
+				.expect(423)
 				.end(done);
 		});
 		it('returns 404 for nonexistant cycle', function(done){
