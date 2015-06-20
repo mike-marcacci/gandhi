@@ -16,7 +16,7 @@
 		"accept": {
 			"conditions": [
 				[{
-					"name": "status",
+					"name": "project_status",
 					"invert": false,
 					"options": {
 						"status_id": "accepted"
@@ -67,7 +67,7 @@
 		"reject": {
 			"conditions": [
 				[{
-					"name": "status",
+					"name": "project_status",
 					"invert": false,
 					"options": {
 						"status_id": "rejected"
@@ -457,7 +457,7 @@
 		"accept": {
 			"conditions": [
 				[{
-					"name": "status",
+					"name": "project_status",
 					"invert": false,
 					"options": {
 						"status_id": "accepted"
@@ -475,7 +475,7 @@
 		"archive": {
 			"conditions": [
 				[{
-					"name": "status",
+					"name": "project_status",
 					"invert": false,
 					"options": {
 						"status_id": "archived"
@@ -526,7 +526,7 @@
 		"reject": {
 			"conditions": [
 				[{
-					"name": "status",
+					"name": "project_status",
 					"invert": false,
 					"options": {
 						"status_id": "rejected"
