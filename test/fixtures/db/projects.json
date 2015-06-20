@@ -19,7 +19,8 @@
 		"administrative_review": {
 			"status_id": "none",
 			"data": {},
-			"id": "administrative_review"
+			"id": "administrative_review",
+			"exports": {}
 		},
 		"application": {
 			"status_id": "complete",
@@ -40,27 +41,34 @@
 					"email": "solene.clavel@test.gandhi.io"
 				}]
 			},
-			"id": "application"
+			"id": "application",
+			"exports": {
+				"proposal": "4f406e9f-a1ba-4b7b-9aae-c37b42a0cc03"
+			}
 		},
 		"decision": {
 			"status_id": "none",
 			"data": {},
-			"id": "decision"
+			"id": "decision",
+			"exports": {}
 		},
 		"acceptance": {
 			"status_id": "none",
 			"data": {},
-			"id": "acceptance"
+			"id": "acceptance",
+			"exports": {}
 		},
 		"start": {
 			"status_id": "complete",
 			"data": {},
-			"id": "start"
+			"id": "start",
+			"exports": {}
 		},
 		"report": {
 			"status_id": "none",
 			"data": {},
-			"id": "report"
+			"id": "report",
+			"exports": {}
 		},
 		"review": {
 			"status_id": "none",
@@ -136,7 +144,8 @@
 					}
 				}
 			},
-			"id": "review"
+			"id": "review",
+			"exports": {}
 		}
 	},
 	"updated": 1413262289.045,
@@ -185,9 +194,6 @@
 			"timestamp": 1413168199.946,
 			"value": false
 		}]
-	},
-	"values": {
-		"proposal": "4f406e9f-a1ba-4b7b-9aae-c37b42a0cc03"
 	}
 }, {
 	"status_id": "active",
@@ -210,7 +216,8 @@
 		"administrative_review": {
 			"status_id": "none",
 			"data": {},
-			"id": "administrative_review"
+			"id": "administrative_review",
+			"exports": {}
 		},
 		"application": {
 			"status_id": "complete",
@@ -239,7 +246,8 @@
 					"email": "somebody.else@test.gandhi.io"
 				}]
 			},
-			"id": "application"
+			"id": "application",
+			"exports": {}
 		},
 		"review": {
 			"data": {
@@ -280,22 +288,26 @@
 					}
 				}
 			},
-			"id": "review"
+			"id": "review",
+			"exports": {}
 		},
 		"acceptance": {
 			"status_id": "none",
 			"data": {},
-			"id": "acceptance"
+			"id": "acceptance",
+			"exports": {}
 		},
 		"start": {
 			"status_id": "complete",
 			"data": {},
-			"id": "start"
+			"id": "start",
+			"exports": {}
 		},
 		"report": {
 			"status_id": "none",
 			"data": {},
-			"id": "report"
+			"id": "report",
+			"exports": {}
 		}
 	},
 	"updated": 1413264955.333,
@@ -337,9 +349,6 @@
 			"timestamp": 1413178905.465,
 			"value": false
 		}]
-	},
-	"values": {
-		"proposal": null
 	}
 }, {
 	"status_id": "active",
@@ -358,12 +367,14 @@
 			"data": {
 				"essay": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam lacinia justo in sapien pellentesque aliquet. Morbi aliquam gravida pulvinar. Aliquam erat volutpat. Cras fermentum mi non accumsan tempor. Nunc quis bibendum elit. Praesent commodo diam vel massa vestibulum, eu viverra dolor ornare. In mattis sem vitae lacinia vestibulum. Ut sagittis, justo vitae semper varius, nulla arcu faucibus nibh, quis pulvinar sapien tellus quis magna.</p>\n\n<p>Curabitur at lectus feugiat elit pellentesque molestie in sit amet justo. Suspendisse nec pretium ligula, vitae pellentesque tortor. Pellentesque luctus lacinia nibh, in fermentum augue fermentum ac. Maecenas in libero tellus. In nec nibh risus. Nullam faucibus, ex sed vehicula laoreet, tellus justo blandit orci, nec pellentesque dolor quam vel orci. Duis lacinia turpis felis, lacinia porta turpis mattis tempus. Integer vel sem non tortor fermentum vestibulum vel sed nulla. Fusce ut quam placerat, aliquet eros sit amet, luctus massa. Etiam mi turpis, mattis eget ultricies ut, pretium vel nisl.</p>\n\n<p>Sed lectus neque, iaculis sed porta vitae, bibendum eu eros. Suspendisse lobortis tellus at aliquet aliquam. Pellentesque eget tellus in urna dictum pulvinar. Nam finibus ac eros non consectetur. Pellentesque fermentum dolor et lacus elementum consequat. Proin facilisis mi molestie diam rhoncus, vel aliquet tellus fermentum. Ut in rutrum augue, ac fermentum lectus. Etiam pellentesque fermentum tellus, ac eleifend turpis congue et. Aenean sem dui, posuere eu ex nec, mattis tempus dui. Proin nibh tortor, ultrices nec fringilla quis, porttitor vitae erat. Integer et quam dictum, pretium elit eget, laoreet lorem. In auctor pharetra consequat. Nunc tincidunt arcu libero, in volutpat elit accumsan id.</p>\n\n<p>Duis porta purus vitae ipsum luctus tristique et ut tellus. Nunc lorem turpis, porta eu quam tincidunt, ullamcorper finibus odio. Maecenas cursus pulvinar elit cursus faucibus. Curabitur pulvinar, felis vitae finibus ullamcorper, metus lectus porttitor tortor, at pretium lorem diam sed purus. Pellentesque vehicula, tellus congue dapibus tempor, mauris est luctus orci, dapibus semper turpis nulla quis risus. Curabitur blandit mauris nec mauris pellentesque gravida. Morbi ornare suscipit justo ac efficitur. Nam fermentum maximus nulla, eget dignissim dui sollicitudin sit amet. Proin mi metus, feugiat in velit eget, pharetra condimentum nisl.</p>\n\n<p>Nam consequat pellentesque enim eget sollicitudin. Quisque sollicitudin vehicula nisl, in aliquet orci. Quisque vitae enim et nisi faucibus sagittis. Sed viverra, lectus eget lobortis tincidunt, ligula odio dapibus augue, non condimentum elit enim feugiat sapien. Nunc ac vulputate nulla, id pharetra risus. Nulla tristique vitae lorem sit amet vestibulum. Pellentesque tincidunt ipsum ac suscipit hendrerit. Vestibulum metus metus, fermentum eget porta lacinia, faucibus eget lacus.</p>\n"
 			},
-			"id": "application"
+			"id": "application",
+			"exports": {}
 		},
 		"start": {
 			"status_id": "complete",
 			"data": {},
-			"id": "start"
+			"id": "start",
+			"exports": {}
 		}
 	},
 	"updated": 1413167920.268,
@@ -393,6 +404,5 @@
 			"timestamp": 1413167504.965,
 			"value": false
 		}]
-	},
-	"values": {}
+	}
 }]

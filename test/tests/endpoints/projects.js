@@ -162,7 +162,7 @@ describe('Projects', function(){
 				.end(function(err, res){
 					if(err) return done(err);
 					assert.isArray(res.body);
-					assert.equal(_.find(res.body, {id: 'b37e83a5-d613-4d64-8873-fdcc8df0a009'}).values.proposal, '4f406e9f-a1ba-4b7b-9aae-c37b42a0cc03');
+					assert.equal(_.find(res.body, {id: 'b37e83a5-d613-4d64-8873-fdcc8df0a009'}).exports.application.proposal, '4f406e9f-a1ba-4b7b-9aae-c37b42a0cc03');
 					done();
 				});
 		});
@@ -362,7 +362,7 @@ describe('Projects', function(){
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
-					assert.equal(res.body.values.proposal, '4f406e9f-a1ba-4b7b-9aae-c37b42a0cc03');
+					assert.equal(res.body.exports.application.proposal, '4f406e9f-a1ba-4b7b-9aae-c37b42a0cc03');
 					done();
 				});
 		});

@@ -1,14 +1,10 @@
 [{
-	"exports": {},
 	"assignments": {
 		"72e7f9a1-614d-423e-8273-1194932f8718": {
 			"id": "72e7f9a1-614d-423e-8273-1194932f8718",
 			"invitation_id": null,
 			"role_id": "staff"
 		}
-	},
-	"config": {
-		"layout": "pill"
 	},
 	"created": 1413166638.466,
 	"defaults": {
@@ -221,7 +217,8 @@
 						},
 						"staff": true
 					}
-				}
+				},
+				"manifest": {}
 			},
 			"description": "Submit your essay right here.",
 			"id": "application",
@@ -245,7 +242,8 @@
 					"write": {
 						"staff": true
 					}
-				}
+				},
+				"manifest": {}
 			},
 			"description": "Decide to fund the project or not.",
 			"id": "decision",
@@ -368,7 +366,8 @@
 					"write": {
 						"reviewer": true
 					}
-				}
+				},
+				"manifest": {}
 			},
 			"description": "The project will be reviewed by assigned reviewers.",
 			"id": "review",
@@ -399,7 +398,8 @@
 						},
 						"staff": true
 					}
-				}
+				},
+				"manifest": {}
 			},
 			"description": "Begin the application process.",
 			"id": "start",
@@ -446,9 +446,6 @@
 			"invitation_id": null,
 			"role_id": "advisor"
 		}
-	},
-	"config": {
-		"layout": "pill"
 	},
 	"created": 1413164112.703,
 	"defaults": {
@@ -717,7 +714,8 @@
 					"write": {
 						"staff": true
 					}
-				}
+				},
+				"manifest": {}
 			},
 			"description": "This project has been accepted.",
 			"id": "acceptance",
@@ -736,7 +734,8 @@
 					"write": {
 						"staff": true
 					}
-				}
+				},
+				"manifest": {}
 			},
 			"description": "This page acknowledges that the application was received.",
 			"id": "administrative_review",
@@ -979,6 +978,13 @@
 						},
 						"staff": true
 					}
+				},
+				"manifest": {
+					"proposal": {
+						"id": "proposal",
+						"title": "Proposal",
+						"template": "<a ng-show=\"value\" href=\"{{value}}\" target=\"_blank\">Download</a>"
+					}
 				}
 			},
 			"description": "Fill out our online application form.",
@@ -1004,7 +1010,8 @@
 					"write": {
 						"staff": true
 					}
-				}
+				},
+				"manifest": {}
 			},
 			"description": "Decide to fund the project or not.",
 			"id": "decision",
@@ -1031,7 +1038,8 @@
 						"applicant": true,
 						"staff": true
 					}
-				}
+				},
+				"manifest": {}
 			},
 			"description": "The project's final report.",
 			"id": "report",
@@ -1260,7 +1268,8 @@
 					"write": {
 						"reviewer": true
 					}
-				}
+				},
+				"manifest": {}
 			},
 			"description": "The project will be reviewed by assigned reviewers.",
 			"id": "review",
@@ -1293,7 +1302,8 @@
 						},
 						"staff": true
 					}
-				}
+				},
+				"manifest": {}
 			},
 			"description": "Begin the application process.",
 			"id": "start",
@@ -1306,14 +1316,6 @@
 				"reviewer": true,
 				"staff": true
 			}
-		}
-	},
-	"exports": {
-		"proposal": {
-			"id": "proposal",
-			"title": "Proposal",
-			"path": ["contents", "application", "data", "proposal"],
-			"template": "<a ng-show=\"value\" href=\"{{value}}\" target=\"_blank\">Download</a>"
 		}
 	},
 	"status_id": "active",

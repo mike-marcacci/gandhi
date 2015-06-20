@@ -360,7 +360,7 @@ describe('Cycles', function(){
 	});
 
 	// test embedded collections
-	['statuses','roles','assignments','invitations','triggers','stages','exports'].forEach(function(c){
+	['statuses','roles','assignments','invitations','triggers','stages'].forEach(function(c){
 		require('./cycles/' + c);
 	});
 

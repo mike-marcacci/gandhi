@@ -191,13 +191,6 @@
         "$ref": "#/definitions/invitation"
       }
     },
-    "exports": {
-      "type": "object",
-      "default": {},
-      "additionalProperties": {
-        "$ref": "#/definitions/export"
-      }
-    },
     "updated": {
       "type": "number"
     },
@@ -421,31 +414,6 @@
         "visible": {
           "$ref": "#/definitions/permission"
         },
-        "exports": {
-          "type": "object",
-          "default": {},
-          "additionalProperties": {
-            "type": "object",
-            "required": ["id", "title"],
-            "properties": {
-              "id": {
-                "type": "string",
-                "constant": {"$data": "0"}
-              },
-              "title": {
-                "type": "string"
-              },
-              "template": {
-                "type": "string",
-                "default": "{{ value }}"
-              },
-              "options": {
-                "type": "object",
-                "default": {}
-              }
-            }
-          }
-        },
         "component": {
           "type": "object",
           "required": ["name"],
@@ -464,6 +432,31 @@
               "default": {},
               "additionalProperties": {
                 "$ref": "#/definitions/permission"
+              }
+            },
+            "manifest": {
+              "type": "object",
+              "default": {},
+              "additionalProperties": {
+                "type": "object",
+                "required": ["id", "title"],
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "constant": {"$data": "0"}
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "template": {
+                    "type": "string",
+                    "default": "{{ value }}"
+                  },
+                  "options": {
+                    "type": "object",
+                    "default": {}
+                  }
+                }
               }
             }
           }
@@ -672,30 +665,6 @@
               }
             }
           }
-        }
-      }
-    },
-    "export": {
-      "type": "object",
-      "required": ["id", "title", "path"],
-      "additionalProperties": false,
-      "properties": {
-        "id": {
-          "type": "string",
-          "constant": {"$data": "0"}
-        },
-        "title": {
-          "type": "string"
-        },
-        "path": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "template": {
-          "type": ["string", "null"],
-          "default": null
         }
       }
     }

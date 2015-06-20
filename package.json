@@ -17,7 +17,7 @@
   "scripts": {
     "postinstall": "bower install",
     "start": "node server.js",
-    "test": "node_modules/mocha/bin/mocha test/tests/**/*.js --reporter spec"
+    "test": "node_modules/mocha/bin/mocha test/tests/*.js test/tests/**/*.js --reporter spec"
   },
   "dependencies": {
     "async": "^1.2.1",
