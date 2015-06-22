@@ -466,10 +466,6 @@
         },
         "order": {
           "type": "number"
-        },
-        "summary": {
-          "type": "boolean",
-          "default": false
         }
       }
     },
