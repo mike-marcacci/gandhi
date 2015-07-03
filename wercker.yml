@@ -1,14 +1,17 @@
-box:
-  id: node
+box: 'nodesource/trusty:0.12'
 
 services:
-  - redis:3
-  - rethinkdb:2
+  - 'rethinkdb:2.0'
+  - 'redis:3.0'
 
 build:
   steps:
-    - npm-install
-    - npm-test
+    - script:
+        name: installing dependencies
+        code: npm install
+    - script:
+        name: running tests
+        code: npm test
     - script:
         name: echo nodejs information
         code: |

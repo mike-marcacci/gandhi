@@ -160,14 +160,6 @@
           "id": "active",
           "title": "Active"
         },
-        "accepted": {
-          "id": "accepted",
-          "title": "Accepted"
-        },
-        "rejected": {
-          "id": "rejected",
-          "title": "Rejected"
-        },
         "archived": {
           "id": "archived",
           "title": "Archived"
