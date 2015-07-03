@@ -6,7 +6,8 @@ var crypto = require('crypto');
 module.exports = {
 	root: '',
 	db: {
-		host: 'localhost',
+		host: process.env.RETHINKDB_PORT_29015_TCP_ADDR,
+		port: process.env.RETHINKDB_PORT_28015_TCP_PORT,
 		db: 'gandhi'
 	},
 	pool: {
