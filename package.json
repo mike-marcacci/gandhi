@@ -1,9 +1,10 @@
 {
   "name": "gandhi",
   "version": "0.0.2",
-  "main": "lib/index.js",
   "description": "The open source, online grant management system.",
   "homepage": "http://gandhi.io",
+  "license": "AGPL-3.0",
+  "main": "lib/index.js",
   "engines": {
     "node": "^0.10.3"
   },
@@ -17,7 +18,7 @@
   "scripts": {
     "postinstall": "bower install",
     "start": "node server.js",
-    "test": "node_modules/mocha/bin/mocha test/tests/*.js test/tests/**/*.js --reporter spec"
+    "test": "mocha test/tests/*.js test/tests/**/*.js --reporter spec"
   },
   "dependencies": {
     "async": "^1.2.1",
