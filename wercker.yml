@@ -6,12 +6,8 @@ services:
 
 build:
   steps:
-    - script:
-        name: installing dependencies
-        code: npm install
-    - script:
-        name: running tests
-        code: npm test
+    - npm-install
+    - npm-test
     - script:
         name: echo nodejs information
         code: |
