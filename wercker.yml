@@ -4,6 +4,18 @@ services:
   - 'rethinkdb:2.0'
   - 'redis:3.0'
 
+dev:
+  steps:
+    - script:
+        name: running tests
+        code: npm test
+    - script:
+        name: echo nodejs information
+        code: |
+          echo "node version $(node -v) running"
+          echo "npm version $(npm -v) running"
+
+
 build:
   steps:
     - script:
