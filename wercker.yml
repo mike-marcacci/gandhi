@@ -10,6 +10,9 @@ build:
         name: set NODE_ENV to development
         code: export NODE_ENV=development
     - script:
+        name: env
+        code: env
+    - script:
         name: npm install
         code: npm install
     - script:
