@@ -153,7 +153,7 @@ describe('Projects', function(){
 					done();
 				});
 		});
-		it.skip('shows exported values for each project to an admin user', function(done){
+		it('shows exported values for each project to an admin user', function(done){
 			request
 				.get('/api/projects')
 				.set('Authorization', 'Bearer ' + adminToken)
@@ -162,7 +162,7 @@ describe('Projects', function(){
 				.end(function(err, res){
 					if(err) return done(err);
 					assert.isArray(res.body);
-					assert.equal(_.find(res.body, {id: 'b37e83a5-d613-4d64-8873-fdcc8df0a009'}).stages.application.proposal, '4f406e9f-a1ba-4b7b-9aae-c37b42a0cc03');
+					assert.equal(_.find(res.body, {id: 'b37e83a5-d613-4d64-8873-fdcc8df0a009'}).exports.application.proposal, '4f406e9f-a1ba-4b7b-9aae-c37b42a0cc03');
 					done();
 				});
 		});
@@ -354,7 +354,7 @@ describe('Projects', function(){
 					done();
 				});
 		});
-		it.skip('shows exported values for the project to an admin user', function(done){
+		it('shows exported values for the project to an admin user', function(done){
 			request
 				.get('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009')
 				.set('Authorization', 'Bearer ' + adminToken)
