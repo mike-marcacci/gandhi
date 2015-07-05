@@ -7,8 +7,8 @@ services:
 build:
   steps:
     - script:
-        name: install mocha globally
-        code: npm install -g mocha
+        name: set NODE_ENV to development
+        code: export NODE_ENV=development
     - npm-install
     - npm-test
     - script:
