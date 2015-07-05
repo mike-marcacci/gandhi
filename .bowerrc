@@ -1,3 +1,4 @@
 {
-  "directory" : "lib/app/assets/bower"
+  "directory" : "lib/app/assets/bower",
+  "allow_root": true
 }
