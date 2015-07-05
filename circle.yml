@@ -8,5 +8,5 @@ dependencies:
     - wget -qO- http://download.rethinkdb.com/apt/pubkey.gpg | sudo apt-key add -
     - sudo apt-get update
     - sudo apt-get install rethinkdb
-    - sudo sh -c 'echo "cache-size=3072" >> /etc/rethinkdb/instances.d/default.conf'
+    - sudo cp /etc/rethinkdb/default.conf.sample /etc/rethinkdb/instances.d/default.conf
     - sudo service rethinkdb start

@@ -28,9 +28,9 @@ if (cluster.isMaster) {
 	require('./setup/index.js')(config)
 
 	// begin TEMPORARY cache invalidation
-	.then(function(){
-		gandhi.purgeCache();
-	});
+	// .then(function(){
+	// 	gandhi.purgeCache();
+	// });
 
 	// spawn child processes
 	for (var i = 0; i < require('os').cpus().length; i++) {
