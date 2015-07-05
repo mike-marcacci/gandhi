@@ -9,8 +9,18 @@ build:
     - script:
         name: set NODE_ENV to development
         code: export NODE_ENV=development
-    - npm-install
-    - npm-test
+    - script:
+        name: env
+        code: env
+    - script:
+        name: npm install
+        code: npm install
+    - script:
+        name: bower install 
+        code: node_modules/bower/bin/bower install --allow-root
+    - script:
+        name: npm test
+        code: npm test
     - script:
         name: echo nodejs information
         code: |
