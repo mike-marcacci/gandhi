@@ -13,7 +13,7 @@ build:
         name: npm install
         code: npm install
     - script:
-        name: bower install
+        name: bower install --allow-root
         code: node_modules/bower/bin/bower install
     - script:
         name: npm test
