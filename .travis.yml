@@ -7,5 +7,5 @@ services:
 
 before_script:
   - sudo add-apt-repository ppa:rethinkdb/ppa -y
-  - sudo apt-get update -q
-  - sudo apt-get install rethinkdb
+  - sudo apt-get update
+  - sudo apt-get install rethinkdb -y

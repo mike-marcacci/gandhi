@@ -1,0 +1,9 @@
+machine:
+  node:
+    version: 0.12.0
+
+dependencies:
+  pre:
+    - sudo add-apt-repository ppa:rethinkdb/ppa -y
+    - sudo apt-get update
+    - sudo apt-get install rethinkdb -y
