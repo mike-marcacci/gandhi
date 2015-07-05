@@ -10,3 +10,4 @@ before_script:
   - wget -qO- http://download.rethinkdb.com/apt/pubkey.gpg | sudo apt-key add -
   - sudo apt-get update
   - sudo apt-get install rethinkdb
+  - sudo service rethinkdb start
