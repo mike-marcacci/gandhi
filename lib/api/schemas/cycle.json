@@ -160,14 +160,6 @@
           "id": "active",
           "title": "Active"
         },
-        "accepted": {
-          "id": "accepted",
-          "title": "Accepted"
-        },
-        "rejected": {
-          "id": "rejected",
-          "title": "Rejected"
-        },
         "archived": {
           "id": "archived",
           "title": "Archived"
@@ -189,13 +181,6 @@
       "default": {},
       "additionalProperties": {
         "$ref": "#/definitions/invitation"
-      }
-    },
-    "exports": {
-      "type": "object",
-      "default": {},
-      "additionalProperties": {
-        "$ref": "#/definitions/export"
       }
     },
     "updated": {
@@ -440,15 +425,39 @@
               "additionalProperties": {
                 "$ref": "#/definitions/permission"
               }
+            },
+            "manifest": {
+              "type": "object",
+              "default": {},
+              "additionalProperties": {
+                "type": "object",
+                "required": ["id", "title", "schema"],
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "constant": {"$data": "0"}
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "schema": {
+                    "type": "object"
+                  },
+                  "template": {
+                    "type": "string",
+                    "default": "{{ value }}"
+                  },
+                  "options": {
+                    "type": "object",
+                    "default": {}
+                  }
+                }
+              }
             }
           }
         },
         "order": {
           "type": "number"
-        },
-        "summary": {
-          "type": "boolean",
-          "default": false
         }
       }
     },
@@ -525,7 +534,7 @@
                   "properties": {
                     "name": {
                       "type": "string",
-                      "constant": "status"
+                      "constant": "project_status"
                     },
                     "invert": {
                       "type": "boolean",
@@ -578,7 +587,7 @@
                   "properties": {
                     "name": {
                       "type": "string",
-                      "constant": "value_equals"
+                      "constant": "export"
                     },
                     "invert": {
                       "type": "boolean",
@@ -587,40 +596,18 @@
                     "options": {
                       "type": "object",
                       "additionalProperties": false,
-                      "required": ["value_id", "equals"],
+                      "required": ["content_id", "export_id", "value"],
                       "properties": {
-                        "value_id": {
+                        "content_id": {
                           "type": "string"
                         },
-                        "equals": {}
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "required": ["name", "options"],
-                  "additionalProperties": false,
-                  "properties": {
-                    "name": {
-                      "type": "string",
-                      "constant": "value_regex"
-                    },
-                    "invert": {
-                      "type": "boolean",
-                      "default": false
-                    },
-                    "options": {
-                      "type": "object",
-                      "additionalProperties": false,
-                      "required": ["value_id", "regex"],
-                      "properties": {
-                        "value_id": {
+                        "export_id": {
                           "type": "string"
                         },
-                        "regex": {
+                        "op": {
                           "type": "string"
-                        }
+                        },
+                        "value": {}
                       }
                     }
                   }
@@ -647,30 +634,6 @@
               }
             }
           }
-        }
-      }
-    },
-    "export": {
-      "type": "object",
-      "required": ["id", "title", "path"],
-      "additionalProperties": false,
-      "properties": {
-        "id": {
-          "type": "string",
-          "constant": {"$data": "0"}
-        },
-        "title": {
-          "type": "string"
-        },
-        "path": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "template": {
-          "type": ["string", "null"],
-          "default": null
         }
       }
     }

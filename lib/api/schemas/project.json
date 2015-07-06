@@ -48,10 +48,6 @@
         "$ref": "#/definitions/invitation"
       }
     },
-    "values": {
-      "type": "object",
-      "additionalProperties": true
-    },
     "updated": {
       "type": "number"
     },
@@ -91,6 +87,10 @@
         "id": {
           "type": "string",
           "constant": {"$data": "0"}
+        },
+        "exports": {
+          "type": "object",
+          "default": {}
         },
         "data": {
           "type": "object",

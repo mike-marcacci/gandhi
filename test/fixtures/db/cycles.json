@@ -1,14 +1,10 @@
 [{
-	"exports": {},
 	"assignments": {
 		"72e7f9a1-614d-423e-8273-1194932f8718": {
 			"id": "72e7f9a1-614d-423e-8273-1194932f8718",
 			"invitation_id": null,
 			"role_id": "staff"
 		}
-	},
-	"config": {
-		"layout": "pill"
 	},
 	"created": 1413166638.466,
 	"defaults": {
@@ -20,7 +16,7 @@
 		"accept": {
 			"conditions": [
 				[{
-					"name": "status",
+					"name": "project_status",
 					"invert": false,
 					"options": {
 						"status_id": "accepted"
@@ -71,7 +67,7 @@
 		"reject": {
 			"conditions": [
 				[{
-					"name": "status",
+					"name": "project_status",
 					"invert": false,
 					"options": {
 						"status_id": "rejected"
@@ -221,12 +217,12 @@
 						},
 						"staff": true
 					}
-				}
+				},
+				"manifest": {}
 			},
 			"description": "Submit your essay right here.",
 			"id": "application",
 			"order": 1,
-			"summary": true,
 			"title": "Essay Submission",
 			"visible": {
 				"applicant": true,
@@ -245,12 +241,12 @@
 					"write": {
 						"staff": true
 					}
-				}
+				},
+				"manifest": {}
 			},
 			"description": "Decide to fund the project or not.",
 			"id": "decision",
 			"order": 3,
-			"summary": false,
 			"title": "Funding Decision",
 			"visible": {
 				"staff": true
@@ -368,12 +364,12 @@
 					"write": {
 						"reviewer": true
 					}
-				}
+				},
+				"manifest": {}
 			},
 			"description": "The project will be reviewed by assigned reviewers.",
 			"id": "review",
 			"order": 2,
-			"summary": false,
 			"title": "Review",
 			"visible": {
 				"reviewer": true,
@@ -399,12 +395,12 @@
 						},
 						"staff": true
 					}
-				}
+				},
+				"manifest": {}
 			},
 			"description": "Begin the application process.",
 			"id": "start",
 			"order": 0,
-			"summary": false,
 			"title": "Start",
 			"visible": {
 				"applicant": true,
@@ -447,9 +443,6 @@
 			"role_id": "advisor"
 		}
 	},
-	"config": {
-		"layout": "pill"
-	},
 	"created": 1413164112.703,
 	"defaults": {
 		"role_id": "applicant",
@@ -460,7 +453,7 @@
 		"accept": {
 			"conditions": [
 				[{
-					"name": "status",
+					"name": "project_status",
 					"invert": false,
 					"options": {
 						"status_id": "accepted"
@@ -478,7 +471,7 @@
 		"archive": {
 			"conditions": [
 				[{
-					"name": "status",
+					"name": "project_status",
 					"invert": false,
 					"options": {
 						"status_id": "archived"
@@ -529,7 +522,7 @@
 		"reject": {
 			"conditions": [
 				[{
-					"name": "status",
+					"name": "project_status",
 					"invert": false,
 					"options": {
 						"status_id": "rejected"
@@ -717,12 +710,12 @@
 					"write": {
 						"staff": true
 					}
-				}
+				},
+				"manifest": {}
 			},
 			"description": "This project has been accepted.",
 			"id": "acceptance",
 			"order": 5,
-			"summary": false,
 			"title": "Acceptance",
 			"visible": {
 				"staff": true
@@ -736,12 +729,12 @@
 					"write": {
 						"staff": true
 					}
-				}
+				},
+				"manifest": {}
 			},
 			"description": "This page acknowledges that the application was received.",
 			"id": "administrative_review",
 			"order": 2,
-			"summary": false,
 			"title": "Administrative Review",
 			"visible": {
 
@@ -979,12 +972,21 @@
 						},
 						"staff": true
 					}
+				},
+				"manifest": {
+					"proposal": {
+						"id": "proposal",
+						"title": "Proposal",
+						"schema": {
+							"type": "string"
+						},
+						"template": "<a ng-show=\"value\" href=\"{{value}}\" target=\"_blank\">Download</a>"
+					}
 				}
 			},
 			"description": "Fill out our online application form.",
 			"id": "application",
 			"order": 1,
-			"summary": true,
 			"title": "Application",
 			"visible": {
 				"advisor": true,
@@ -1004,12 +1006,12 @@
 					"write": {
 						"staff": true
 					}
-				}
+				},
+				"manifest": {}
 			},
 			"description": "Decide to fund the project or not.",
 			"id": "decision",
 			"order": 4,
-			"summary": false,
 			"title": "Funding Decision",
 			"visible": {
 				"staff": true
@@ -1031,12 +1033,12 @@
 						"applicant": true,
 						"staff": true
 					}
-				}
+				},
+				"manifest": {}
 			},
 			"description": "The project's final report.",
 			"id": "report",
 			"order": 6,
-			"summary": false,
 			"title": "Report",
 			"visible": {
 				"advisor": true,
@@ -1260,12 +1262,12 @@
 					"write": {
 						"reviewer": true
 					}
-				}
+				},
+				"manifest": {}
 			},
 			"description": "The project will be reviewed by assigned reviewers.",
 			"id": "review",
 			"order": 3,
-			"summary": false,
 			"title": "Review",
 			"visible": {
 				"advisor": true,
@@ -1293,12 +1295,12 @@
 						},
 						"staff": true
 					}
-				}
+				},
+				"manifest": {}
 			},
 			"description": "Begin the application process.",
 			"id": "start",
 			"order": 0,
-			"summary": false,
 			"title": "Start",
 			"visible": {
 				"advisor": true,
@@ -1306,14 +1308,6 @@
 				"reviewer": true,
 				"staff": true
 			}
-		}
-	},
-	"exports": {
-		"proposal": {
-			"id": "proposal",
-			"title": "Proposal",
-			"path": ["contents", "application", "data", "proposal"],
-			"template": "<a ng-show=\"value\" href=\"{{value}}\" target=\"_blank\">Download</a>"
 		}
 	},
 	"status_id": "active",

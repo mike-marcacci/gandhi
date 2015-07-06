@@ -19,13 +19,13 @@
 
 	<div class="row" ng-if="content.authorizations['read']">
 
-		<div class="col-md-5" ng-if="stage.component.options.instructions">
+		<div class="col-md-5" ng-if="content.data.instructions">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<span class="panel-title">{{cycle.title}}</span>
 				</div>
 				<div class="panel-body">
-					<div compile="stage.component.options.instructions"></div>
+					<div ng-bind-html="content.data.instructions"></div>
 				</div>
 			</div>
 		</div>
@@ -38,7 +38,7 @@
 				<div class="panel-body">
 
 					<form name="gandhiFormComponent" ng-submit="complete(gandhiFormComponent)">
-						<div ng-if="stage.component.options.schema &amp;&amp; stage.component.options.form" sf-model="content.data" sf-form="stage.component.options.form" sf-schema="stage.component.options.schema" sf-options="sfOptions"></div>
+						<div ng-if="stage.component.options.schema &amp;&amp; stage.component.options.form" sf-model="content.data.form" sf-form="stage.component.options.form" sf-schema="stage.component.options.schema" sf-options="sfOptions"></div>
 						<div ng-if="content.authorizations['write'] &amp;&amp; options.draft !== false" ng-click="draft()" class="btn btn-default" ng-bind="options.draftButtonText || 'Save Draft'"></div>
 						<button ng-if="content.authorizations['write']" class="btn btn-primary" ng-bind="options.submitButtonText || 'Submit'"></button>
 					</form>
