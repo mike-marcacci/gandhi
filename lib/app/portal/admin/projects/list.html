@@ -47,18 +47,38 @@
 
 		<hr>
 
-		<!-- Column Selection -->
-		<div ng-repeat="(group, cols) in columnsByGroup">
-			<label style="width: 80px; margin-top: 3px;"><small>{{group | title}}</small></label>
+		<!-- Default Column Group -->
+		<div>
+			<label style="width: 80px; margin-top: 3px;"><small>Default</small></label>
 			<div
 				class="btn btn-xs"
 				style= "margin-right: 6px;"
 				ng-class="{'btn-success': column.active}"
 				ng-click="toggleColumn(column)"
-				ng-repeat="column in cols">
+				ng-repeat="column in defaultColumnGroup">
 				{{column.title}}
 			</div>
 		</div>
+
+		<!-- Contents Column Group -->
+		<div ng-if="contentsColumnGroup">
+			<label style="width: 80px; margin-top: 3px;"><small>Contents</small></label>
+			<div style="margin-right: 6px; display: inline-block; position: relative;" ng-repeat="stage in stages">
+				<button type="button" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+					{{ stage.title }}
+					<span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu" role="menu">
+					<li ng-repeat="column in contentsColumnGroup[stage.id]" ng-click="toggleColumn(column)" style="cursor: pointer; white-space: nowrap; text-overflow: ellipsis; padding: 0 10px;">
+						<input type="checkbox" ng-checked="column.active">
+						<span>{{ column.title }}</span>
+					</li>
+				</ul>
+
+			</div>
+		</div>
+
+		<!-- TODO: Events Column Group -->
 
 	</div>
 </div>
