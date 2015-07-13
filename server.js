@@ -20,17 +20,12 @@ var config = process.argv.length > 2 ?
 
 var gandhi = require('./lib/index.js')(config);
 
-
+/*
 // the master
 if (cluster.isMaster) {
 
 	// setup the environment
 	require('./setup/index.js')(config)
-
-	// begin TEMPORARY cache invalidation
-	// .then(function(){
-	// 	gandhi.purgeCache();
-	// });
 
 	// spawn child processes
 	for (var i = 0; i < require('os').cpus().length; i++) {
@@ -49,7 +44,7 @@ if (cluster.isMaster) {
 
 // the child processes
 else {
-
+*/
 	var app = require('express')();
 
 	// bring in gandhi
@@ -60,6 +55,6 @@ else {
 	app.set('query parser', 'simple');
 
 	app.listen(config.port);
-
+/*
 }
-
+*/

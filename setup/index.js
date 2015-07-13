@@ -4,7 +4,6 @@ var r = require('rethinkdb');
 var _ = require('lodash');
 var fs = require('fs');
 var Q = require('q');
-var cache = require('../lib/api/utils/cache.js');
 
 module.exports = function(config, callback) {
 
@@ -38,12 +37,6 @@ module.exports = function(config, callback) {
 					.then(function(){ return r.db(config.db.db).table(fixture.info.name).insert(fixture.data).run(conn); });
 				}));
 			})
-
-			// build caches
-			.then(function(){
-				return cache(conn, true);
-			});
-
 		})
 		.finally(function(){
 			conn.close();
