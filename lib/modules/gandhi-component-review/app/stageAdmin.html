@@ -1,7 +1,7 @@
-<!-- Instructions -->
-<div class="tab-bar" ng-if="tab == 'Instructions'">
-	<button class="btn btn-xs btn-primary" ng-if="stageInstructionsEdit" ng-click="updateStageInstructions()">Save</button>
-	<button class="btn btn-xs" ng-class="{'btn-default': true, 'active': stageInstructionsEdit}" ng-click="toggleStageInstructionsEdit()"><i class="glyphicon glyphicon-cog"></i></button>
+<!-- Options -->
+<div class="tab-bar" ng-if="tab == 'Options'">
+	<button class="btn btn-xs btn-primary" ng-if="stageOptionsEdit" ng-click="updateStageOptions()">Save</button>
+	<button class="btn btn-xs" ng-class="{'btn-default': true, 'active': stageOptionsEdit}" ng-click="toggleStageOptionsEdit()"><i class="glyphicon glyphicon-cog"></i></button>
 </div>
 
 <!-- Schema -->
@@ -16,20 +16,28 @@
 	<button class="btn btn-xs" ng-class="{'btn-default': true, 'active': stageFormEdit}" ng-click="toggleStageFormEdit()"><i class="glyphicon glyphicon-edit"></i></button>
 </div>
 
-<ul class="nav nav-tabs" ng-init="tab = 'Instructions'">
-	<li ng-click="tab = 'Instructions'" ng-class="{active: tab === 'Instructions'}"><a href>Instructions</a></li>
+<ul class="nav nav-tabs" ng-init="tab = 'Options'">
+	<li ng-click="tab = 'Options'" ng-class="{active: tab === 'Options'}"><a href>Options</a></li>
 	<li ng-click="tab = 'Schema'" ng-class="{active: tab === 'Schema'}"><a href>Schema</a></li>
 	<li ng-click="tab = 'Form'" ng-class="{active: tab === 'Form'}"><a href>Form</a></li>
 </ul>
 <div class="panel panel-default">
 
-	<!-- Instructions -->
-	<div class="panel-body" ng-if="tab == 'Instructions' &amp;&amp; !stageInstructionsEdit">
-		<div class="alert alert-info" ng-if="!stage.component.options.instructions" style="margin-bottom: 0;">You haven't specified any instructions for this stage.</div>
-		<div ng-bind-html="stage.component.options.instructions"></div>
+	<!-- Options -->
+	<div class="panel-body" ng-if="tab == 'Options' &amp;&amp; !stageOptionsEdit">
+		<h4>Preview Pane</h4>
+		<p class="help-block">Optionally select stages to show side-by-side with the review.</p>
+		<div class="alert alert-info" ng-if="!stage.component.options.preview" style="margin-bottom: 0;">You haven't specified any stages in the preview pane.</div>
+		<div class="checkbox" ng-repeat="stage_id in stage.component.options.preview">
+			<label><input type="checkbox" checked="checked" disabled="disabled"> {{stagesById[stage_id].title}}</label>
+		</div>
 	</div>
-	<div ng-if="tab == 'Instructions' &amp;&amp; stageInstructionsEdit" class="cke_chromeless">
-		<textarea style="height: auto;" ckeditor ng-model="stageInstructionsEdit.component.options.instructions"></textarea>
+	<div ng-if="tab == 'Options' &amp;&amp; stageOptionsEdit" class="panel-body">
+		<h4>Preview Pane</h4>
+		<p class="help-block">Optionally select stages to show side-by-side with the review.</p>
+		<div class="checkbox" ng-repeat="stage in stages">
+			<label><input type="checkbox" checklist-model="stageOptionsEdit.component.options.preview" checklist-value="stage.id"> {{stage.title}}</label>
+		</div>
 	</div>
 
 	<!-- Schema -->
