@@ -348,6 +348,15 @@ body {
 	width: 100%;
 	z-index: 10;
 
+	display: -ms-flex;
+	display: -moz-flex;
+	display: -webkit-flex;
+	display: flex;
+	-ms-flex-direction: column;
+	-moz-flex-direction: column;
+	-webkit-flex-direction: column;
+	flex-direction: column;
+
 	> .control {
 		display: none;
 	}
@@ -356,6 +365,15 @@ body {
 		line-height: 1.4em;
 		transition: visibility 0s 0.5s;
 		visibility: hidden;
+
+		display: -ms-flex;
+		display: -moz-flex;
+		display: -webkit-flex;
+		display: flex;
+		-ms-flex-direction: column;
+		-moz-flex-direction: column;
+		-webkit-flex-direction: column;
+		flex-direction: column;
 
 		a {
 			border-left: 2px solid transparent;
@@ -413,6 +431,11 @@ body {
 			right: 0;
 			top: 0;
 
+			-ms-flex: 1;
+			-moz-flex: 1;
+			-webkit-flex: 1;
+			flex: 1;
+
 			> li > ul {
 				background: rgb(250, 250, 250);
 				border-bottom: 1px solid #f5f5f5;
@@ -437,6 +460,7 @@ body {
 
 	.navbar-default {
 		text-align: right;
+		min-height: 40px;
 
 		.navbar-toggle {
 			float: none;
@@ -462,11 +486,6 @@ body {
 
 
 @media (max-width: 767px) {
-
-	#sidebar > nav > ul > li.branding {
-		display: none;
-	}
-
 	html.show-navigation {
 		height: 100%;
 		overflow: hidden;
@@ -508,10 +527,7 @@ body {
 		bottom: 0;
 		box-shadow: 2px 0px 1px rgba(0, 0, 0, 0.1);
 		max-height: 100%;
-		position: fixed;
 		width: 210px;
-		display: flex;
-		flex-direction: column;
 
 		> .control {
 			background: rgb(219, 219, 219);
@@ -539,13 +555,11 @@ body {
 		nav {
 			transition: visibility 0s 0s;
 			visibility: visible;
-			display: flex;
-			flex-direction: column;
+			
+			-ms-flex: 1;
+			-moz-flex: 1;
+			-webkit-flex: 1;
 			flex: 1;
-
-			> ul {
-				flex: 1;
-			}
 		}
 	}
 
