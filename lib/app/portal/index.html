@@ -9,30 +9,31 @@
 	</div>
 	<nav>
 		<ul>
-			<li><a ng-class="{active: $state.includes('portal.dashboard')}" ui-sref="portal.dashboard"><i class="glyphicon glyphicon-dashboard"></i>Dashboard</a></li>
-			<li ng-show="currentUser.admin"><a ng-class="{active: $state.includes('portal.admin')}" ui-sref="portal.admin.dashboard"><i class="glyphicon glyphicon-cog"></i>Admin</a>
+			<!-- <li class="branding"><a href="http://www.example.com"><img src="//www.example.com/logo.svg"></a></li> -->
+			<li><a lng-class="{active: $state.includes('portal.dashboard')}" ui-sref="portal.dashboard"><i class="glyphicon glyphicon-dashboard"></i>Dashboard</a></li>
+			<li ng-show="currentUser.admin"><a lng-class="{active: $state.includes('portal.admin')}" ui-sref="portal.admin.dashboard"><i class="glyphicon glyphicon-cog"></i>Admin</a>
 				<ul>
-					<li><a ng-class="{active: $state.includes('portal.admin.users')}" ui-sref="portal.admin.users.list">Users</a></li>
-					<li><a ng-class="{active: $state.includes('portal.admin.cycles')}" ui-sref="portal.admin.cycles.list">Cycles</a></li>
-					<li><a ng-class="{active: $state.includes('portal.admin.projects')}" ui-sref="portal.admin.projects.list">Projects</a></li>
-					<!-- <li><a ng-class="{active: $state.includes('portal.admin.files')}" ui-sref="portal.admin.files.list">Files</a></li> -->
+					<li><a lng-class="{active: $state.includes('portal.admin.users')}" ui-sref="portal.admin.users.list">Users</a></li>
+					<li><a lng-class="{active: $state.includes('portal.admin.cycles')}" ui-sref="portal.admin.cycles.list">Cycles</a></li>
+					<li><a lng-class="{active: $state.includes('portal.admin.projects')}" ui-sref="portal.admin.projects.list">Projects</a></li>
+					<!-- <li><a lng-class="{active: $state.includes('portal.admin.files')}" ui-sref="portal.admin.files.list">Files</a></li> -->
 				</ul>
 			</li>
-			<li><a ng-class="{active: $state.includes('portal.user')}" ui-sref="portal.user.show"><i class="glyphicon glyphicon-user"></i>Account</a></li>
-			<li><a ng-class="{active: $state.includes('portal.cycles')}" ui-sref="portal.cycles.list"><i class="glyphicon glyphicon-calendar"></i>Cycles</a>
+			<li><a lng-class="{active: $state.includes('portal.user')}" ui-sref="portal.user.show"><i class="glyphicon glyphicon-user"></i>Account</a></li>
+			<li><a lng-class="{active: $state.includes('portal.cycles')}" ui-sref="portal.cycles.list"><i class="glyphicon glyphicon-calendar"></i>Cycles</a>
 				<ul ng-show="cycles.length">
-					<li ng-repeat="cycle in cycles"><a ng-class="{active: $state.includes('portal.cycles.show') &amp;&amp; $state.params.cycle == cycle.id}" ui-sref="portal.cycles.show({cycle: cycle.id})">{{cycle.title}}</a></li>
+					<li ng-repeat="cycle in cycles"><a lng-class="{active: $state.includes('portal.cycles.show') &amp;&amp; $state.params.cycle == cycle.id}" ui-sref="portal.cycles.show({cycle: cycle.id})">{{cycle.title}}</a></li>
 				</ul>
 			</li>
-			<li><a ng-class="{active: $state.includes('portal.projects')}" ui-sref="portal.projects.list"><i class="glyphicon glyphicon-tasks"></i>Projects</a>
+			<li><a lng-class="{active: $state.includes('portal.projects')}" ui-sref="portal.projects.list"><i class="glyphicon glyphicon-tasks"></i>Projects</a>
 				<ul ng-show="projects.length">
-					<li ng-repeat="project in projects"><a ng-class="{active: $state.includes('portal.projects.show') &amp;&amp; $state.params.project == project.id}" ui-sref="portal.projects.show({project: project.id})">{{project.title}}</a></li>
+					<li ng-repeat="project in projects"><a lng-class="{active: $state.includes('portal.projects.show') &amp;&amp; $state.params.project == project.id}" ui-sref="portal.projects.show({project: project.id})">{{project.title}}</a></li>
 				</ul>
 			</li>
 		</ul>
-		<a href ng-click="logout()"><i class="glyphicon glyphicon-off"></i>Log Out</a>
+		<a href lng-click="logout()"><i class="glyphicon glyphicon-off"></i>Log Out</a>
 	</nav>
-	<span ng-hide="collapseSidebar" class="control" ng-click="toggleSidebar()">&#xe079;</span>
-	<span ng-hide="!collapseSidebar" class="control" ng-click="toggleSidebar()">&#xe080;</span>
+	<span ng-hide="collapseSidebar" class="control" lng-click="toggleSidebar()">&#xe079;</span>
+	<span ng-hide="!collapseSidebar" class="control" lng-click="toggleSidebar()">&#xe080;</span>
 </div>
 <div id="body" ui-view></div>

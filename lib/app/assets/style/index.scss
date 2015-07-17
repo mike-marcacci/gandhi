@@ -374,7 +374,6 @@ body {
 			bottom: 0;
 			left: 0;
 			padding: 0.8em 1.8em 0.8em 1em;
-			position: relative;
 			right: 0;
 		}
 
@@ -411,7 +410,6 @@ body {
 			overflow-x: hidden;
 			overflow-y: auto;
 			padding: 0;
-			position: relative;
 			right: 0;
 			top: 0;
 
@@ -464,10 +462,14 @@ body {
 
 
 @media (max-width: 767px) {
+
+	#sidebar > nav > ul > li.branding {
+		display: none;
+	}
+
 	html.show-navigation {
 		height: 100%;
 		overflow: hidden;
-		position: absolute;
 		width: 100%;
 
 		body {
@@ -508,6 +510,8 @@ body {
 		max-height: 100%;
 		position: fixed;
 		width: 210px;
+		display: flex;
+		flex-direction: column;
 
 		> .control {
 			background: rgb(219, 219, 219);
@@ -535,14 +539,12 @@ body {
 		nav {
 			transition: visibility 0s 0s;
 			visibility: visible;
-
-			> a:last-child {
-				position: absolute;
-			}
+			display: flex;
+			flex-direction: column;
+			flex: 1;
 
 			> ul {
-				bottom: 3em;
-				position: absolute;
+				flex: 1;
 			}
 		}
 	}
