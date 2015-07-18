@@ -22,7 +22,7 @@
     "angular-ckeditor": "~0.3.2",
     "angular-resource": "1.3.x",
     "angular-sanitize": "1.3.x",
-    "angular-schema-form": "~0.8.2",
+    "angular-schema-form": "~0.8.4",
     "angular-ui-ace": "~0.1.1",
     "angular-ui-router": "0.2.x",
     "angular-ui-select": "~0.6.0",
@@ -32,7 +32,8 @@
     "lodash": "~2.4.1",
     "ng-file-upload": "~1.6.5",
     "objectpath": "~1.1.0",
-    "angular-json-human": "~1.2.1"
+    "angular-json-human": "~1.2.1",
+    "checklist-model": "~0.2.4"
   },
   "overrides": {
     "ace-builds": {
@@ -41,6 +42,7 @@
   },
   "modules": [
     "angularFileUpload",
+    "checklist-model",
     "ckeditor",
     "ngResource",
     "ngSanitize",

@@ -27,7 +27,7 @@
 
 
 			<!-- Preview -->
-			<div class="col-md-6" ng-if="stage.component.options.preview.length">
+			<div class="col-md-7" ng-if="stage.component.options.preview.length">
 				<div class="panel-body">
 					<select ng-if="stage.comment.options.preview.length > 1" class="form-control" ng-model="preview.id" ng-options="id in stage.component.options.preview"></select>
 
@@ -40,7 +40,7 @@
 
 
 			<!-- Form -->
-			<div ng-class="{'col-md-6': stage.component.options.preview.length, 'col-md-12': !stage.component.options.preview.length}">
+			<div ng-class="{'col-md-5': stage.component.options.preview.length, 'col-md-12': !stage.component.options.preview.length}">
 				<div class="panel-body">
 					<form name="gandhiReviewComponent" ng-submit="save(gandhiReviewComponent)">
 						<div ng-if="stage.component.options.schema &amp;&amp; stage.component.options.form" sf-model="data" sf-form="stage.component.options.form" sf-schema="stage.component.options.schema" sf-options="sfOptions"></div>

@@ -348,6 +348,15 @@ body {
 	width: 100%;
 	z-index: 10;
 
+	display: -ms-flex;
+	display: -moz-flex;
+	display: -webkit-flex;
+	display: flex;
+	-ms-flex-direction: column;
+	-moz-flex-direction: column;
+	-webkit-flex-direction: column;
+	flex-direction: column;
+
 	> .control {
 		display: none;
 	}
@@ -356,6 +365,15 @@ body {
 		line-height: 1.4em;
 		transition: visibility 0s 0.5s;
 		visibility: hidden;
+
+		display: -ms-flex;
+		display: -moz-flex;
+		display: -webkit-flex;
+		display: flex;
+		-ms-flex-direction: column;
+		-moz-flex-direction: column;
+		-webkit-flex-direction: column;
+		flex-direction: column;
 
 		a {
 			border-left: 2px solid transparent;
@@ -374,7 +392,6 @@ body {
 			bottom: 0;
 			left: 0;
 			padding: 0.8em 1.8em 0.8em 1em;
-			position: relative;
 			right: 0;
 		}
 
@@ -411,9 +428,13 @@ body {
 			overflow-x: hidden;
 			overflow-y: auto;
 			padding: 0;
-			position: relative;
 			right: 0;
 			top: 0;
+
+			-ms-flex: 1;
+			-moz-flex: 1;
+			-webkit-flex: 1;
+			flex: 1;
 
 			> li > ul {
 				background: rgb(250, 250, 250);
@@ -439,6 +460,7 @@ body {
 
 	.navbar-default {
 		text-align: right;
+		min-height: 40px;
 
 		.navbar-toggle {
 			float: none;
@@ -467,7 +489,6 @@ body {
 	html.show-navigation {
 		height: 100%;
 		overflow: hidden;
-		position: absolute;
 		width: 100%;
 
 		body {
@@ -506,7 +527,6 @@ body {
 		bottom: 0;
 		box-shadow: 2px 0px 1px rgba(0, 0, 0, 0.1);
 		max-height: 100%;
-		position: fixed;
 		width: 210px;
 
 		> .control {
@@ -535,15 +555,11 @@ body {
 		nav {
 			transition: visibility 0s 0s;
 			visibility: visible;
-
-			> a:last-child {
-				position: absolute;
-			}
-
-			> ul {
-				bottom: 3em;
-				position: absolute;
-			}
+			
+			-ms-flex: 1;
+			-moz-flex: 1;
+			-webkit-flex: 1;
+			flex: 1;
 		}
 	}
 

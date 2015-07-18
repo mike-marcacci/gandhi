@@ -9,6 +9,7 @@
 	</div>
 	<nav>
 		<ul>
+			<!-- <li class="hidden-xs"><a href="http://www.example.com" style="padding: 10px;"><img style="width: 100%;" src="//www.example.com/logo.svg"></a></li> -->
 			<li><a ng-class="{active: $state.includes('portal.dashboard')}" ui-sref="portal.dashboard"><i class="glyphicon glyphicon-dashboard"></i>Dashboard</a></li>
 			<li ng-show="currentUser.admin"><a ng-class="{active: $state.includes('portal.admin')}" ui-sref="portal.admin.dashboard"><i class="glyphicon glyphicon-cog"></i>Admin</a>
 				<ul>
