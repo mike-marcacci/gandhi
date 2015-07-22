@@ -1,8 +1,8 @@
-box: 'nodesource/trusty:0.12'
+box: nodesource/trusty:0.12
 
 services:
-  - 'rethinkdb:2.0'
-  - 'redis:3.0'
+  - rethinkdb:2.0
+  - redis:3.0
 
 build:
   steps:
@@ -16,7 +16,7 @@ build:
         name: npm install
         code: npm install
     - script:
-        name: bower install 
+        name: bower install
         code: node_modules/bower/bin/bower install --allow-root
     - script:
         name: npm test
