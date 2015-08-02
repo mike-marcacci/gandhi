@@ -24,7 +24,8 @@ module.exports = {
 
 	// These are the connection details for Redis.
 	redis: {
-		host: '127.0.0.1'
+		host: '127.0.0.1',
+		port: 6379
 	},
 
 	// When gandhi can't use an atomic operation to alter a document in
