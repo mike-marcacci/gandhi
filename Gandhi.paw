@@ -175,7 +175,7 @@
     </object>
     <object type="LMREQUEST" id="z109">
         <attribute name="uuid" type="string">CE4A28FD-CF37-45D6-81A2-8D5953F8CC17</attribute>
-        <attribute name="url" type="string">["http:\\/\\/",{"data":{"environmentVariable":"5A183A12-96AB-45CA-B260-3812F77737A2"},"identifier":"com.luckymarmot.EnvironmentVariableDynamicValue"},"\\/api\\/users\\/",{"data":{"request":"133A6BF6-16AD-4EAB-A0B2-537DAC02DA24","format":1},"identifier":"com.luckymarmot.ResponseBodyPathDynamicValue"},"\\/projects?admin=",{"data":{"environmentVariable":"7AB4BC3D-4220-4813-ADF7-786461FF7009"},"identifier":"com.luckymarmot.EnvironmentVariableDynamicValue"}]</attribute>
+        <attribute name="url" type="string">["http:\\/\\/",{"data":{"environmentVariable":"5A183A12-96AB-45CA-B260-3812F77737A2"},"identifier":"com.luckymarmot.EnvironmentVariableDynamicValue"},"\\/api\\/users\\/",{"data":{"request":"133A6BF6-16AD-4EAB-A0B2-537DAC02DA24","keyPath":["[0].id"],"format":1},"identifier":"com.luckymarmot.ResponseBodyPathDynamicValue"},"\\/projects?admin=",{"data":{"environmentVariable":"7AB4BC3D-4220-4813-ADF7-786461FF7009"},"identifier":"com.luckymarmot.EnvironmentVariableDynamicValue"}]</attribute>
         <attribute name="timeoutinterval" type="float">30</attribute>
         <attribute name="storecookies" type="bool">1</attribute>
         <attribute name="sendcookies" type="bool">1</attribute>
@@ -187,7 +187,7 @@
         <attribute name="name" type="string">~ List Projects</attribute>
         <relationship name="parent" type="0/1" destination="LMREQUESTTREEITEM" idrefs="z350"></relationship>
         <relationship name="children" type="0/0" destination="LMREQUESTTREEITEM"></relationship>
-        <relationship name="headers" type="0/0" destination="LMKEYVALUE" idrefs="z187 z311 z232"></relationship>
+        <relationship name="headers" type="0/0" destination="LMKEYVALUE" idrefs="z232 z187 z311"></relationship>
     </object>
     <object type="LMREQUEST" id="z110">
         <attribute name="uuid" type="string">1D8D8473-2D78-4013-A630-4176D760BB0D</attribute>
@@ -322,7 +322,7 @@
     </object>
     <object type="LMREQUEST" id="z118">
         <attribute name="uuid" type="string">9CB978CC-EC8E-4C71-8893-04004D87CADB</attribute>
-        <attribute name="url" type="string">["http:\\/\\/",{"data":{"environmentVariable":"5A183A12-96AB-45CA-B260-3812F77737A2"},"identifier":"com.luckymarmot.EnvironmentVariableDynamicValue"},"\\/api\\/users\\/",{"data":{"request":"133A6BF6-16AD-4EAB-A0B2-537DAC02DA24","format":1},"identifier":"com.luckymarmot.ResponseBodyPathDynamicValue"},"?admin=",{"data":{"environmentVariable":"7AB4BC3D-4220-4813-ADF7-786461FF7009"},"identifier":"com.luckymarmot.EnvironmentVariableDynamicValue"}]</attribute>
+        <attribute name="url" type="string">["http:\\/\\/",{"data":{"environmentVariable":"5A183A12-96AB-45CA-B260-3812F77737A2"},"identifier":"com.luckymarmot.EnvironmentVariableDynamicValue"},"\\/api\\/users\\/",{"data":{"request":"133A6BF6-16AD-4EAB-A0B2-537DAC02DA24","keyPath":["[0].id"],"format":1},"identifier":"com.luckymarmot.ResponseBodyPathDynamicValue"},"?admin=",{"data":{"environmentVariable":"7AB4BC3D-4220-4813-ADF7-786461FF7009"},"identifier":"com.luckymarmot.EnvironmentVariableDynamicValue"}]</attribute>
         <attribute name="timeoutinterval" type="float">30</attribute>
         <attribute name="storecookies" type="bool">1</attribute>
         <attribute name="sendcookies" type="bool">1</attribute>
@@ -335,7 +335,7 @@
         <attribute name="name" type="string">Patch User</attribute>
         <relationship name="parent" type="0/1" destination="LMREQUESTTREEITEM" idrefs="z350"></relationship>
         <relationship name="children" type="0/0" destination="LMREQUESTTREEITEM"></relationship>
-        <relationship name="headers" type="0/0" destination="LMKEYVALUE" idrefs="z210 z299 z237"></relationship>
+        <relationship name="headers" type="0/0" destination="LMKEYVALUE" idrefs="z299 z237 z210"></relationship>
     </object>
     <object type="LMREQUEST" id="z119">
         <attribute name="uuid" type="string">DB3AFB97-D9F8-493E-A598-340B8642BBC5</attribute>
@@ -945,7 +945,7 @@
     </object>
     <object type="LMREQUEST" id="z158">
         <attribute name="uuid" type="string">0FFFBC9F-9DF5-4E7E-891D-3B12950D8B83</attribute>
-        <attribute name="url" type="string">["http:\\/\\/",{"data":{"environmentVariable":"5A183A12-96AB-45CA-B260-3812F77737A2"},"identifier":"com.luckymarmot.EnvironmentVariableDynamicValue"},"\\/api\\/users\\/",{"data":{"request":"133A6BF6-16AD-4EAB-A0B2-537DAC02DA24","format":1},"identifier":"com.luckymarmot.ResponseBodyPathDynamicValue"},"\\/files?admin=",{"data":{"environmentVariable":"7AB4BC3D-4220-4813-ADF7-786461FF7009"},"identifier":"com.luckymarmot.EnvironmentVariableDynamicValue"}]</attribute>
+        <attribute name="url" type="string">["http:\\/\\/",{"data":{"environmentVariable":"5A183A12-96AB-45CA-B260-3812F77737A2"},"identifier":"com.luckymarmot.EnvironmentVariableDynamicValue"},"\\/api\\/users\\/",{"data":{"request":"133A6BF6-16AD-4EAB-A0B2-537DAC02DA24","keyPath":["[0].id"],"format":1},"identifier":"com.luckymarmot.ResponseBodyPathDynamicValue"},"\\/files?admin=",{"data":{"environmentVariable":"7AB4BC3D-4220-4813-ADF7-786461FF7009"},"identifier":"com.luckymarmot.EnvironmentVariableDynamicValue"}]</attribute>
         <attribute name="timeoutinterval" type="float">30</attribute>
         <attribute name="storecookies" type="bool">1</attribute>
         <attribute name="sendcookies" type="bool">1</attribute>
@@ -957,7 +957,7 @@
         <attribute name="name" type="string">~ List Files</attribute>
         <relationship name="parent" type="0/1" destination="LMREQUESTTREEITEM" idrefs="z350"></relationship>
         <relationship name="children" type="0/0" destination="LMREQUESTTREEITEM"></relationship>
-        <relationship name="headers" type="0/0" destination="LMKEYVALUE" idrefs="z261 z316 z186"></relationship>
+        <relationship name="headers" type="0/0" destination="LMKEYVALUE" idrefs="z186 z316 z261"></relationship>
     </object>
     <object type="LMREQUEST" id="z159">
         <attribute name="uuid" type="string">46BD30AC-7F34-4254-85EF-3518D4F7B780</attribute>
@@ -1905,7 +1905,7 @@
         <relationship name="request" type="0/1" destination="LMREQUEST" idrefs="z112"></relationship>
     </object>
     <object type="LMKEYVALUE" id="z256">
-        <attribute name="value" type="string">["Bearer ",{"name":"com.luckymarmot.Paw.DynamicValue","data":"62706C6973743030D40102030405062526582476657273696F6E58246F626A65637473592461726368697665725424746F7012000186A0A7070811151C1F2055246E756C6CD4090A0B0C0D0E0F105624636C617373576B657950617468577265717565737456666F726D61748006800480028005D209121314594E532E737472696E6780035F102435443142463039332D444130442D343130432D393633342D313837304444313546374533D2161718195A24636C6173736E616D655824636C61737365735F100F4E534D757461626C65537472696E67A3181A1B584E53537472696E67584E534F626A656374D20912131E800355746F6B656E1001D2161721225F101E4C4D526573706F6E7365426F64795061746844796E616D696356616C7565A323241B5F101E4C4D526573706F6E7365426F64795061746844796E616D696356616C75655E4C4D44796E616D696356616C75655F100F4E534B657965644172636869766572D1272854726F6F74800100080011001A0023002D00320037003F0045004E0055005D0065006C006E00700072007400790083008500AC00B100BC00C500D700DB00E400ED00F200F400FA00FC010101220126014701560168016B01700000000000000201000000000000002900000000000000000000000000000172"}]</attribute>
+        <attribute name="value" type="string">["Bearer ",{"data":{"request":"5D1BF093-DA0D-410C-9634-1870DD15F7E3","keyPath":["token"],"format":1},"identifier":"com.luckymarmot.ResponseBodyPathDynamicValue"}]</attribute>
         <attribute name="order" type="int64">1</attribute>
         <attribute name="name" type="string">Authorization</attribute>
         <attribute name="enabled" type="bool">1</attribute>
