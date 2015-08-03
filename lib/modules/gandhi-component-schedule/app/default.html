@@ -37,8 +37,26 @@
 				</div>
 				<div class="panel-body">
 
+					<div style="overflow-x: auto;">
+						<table class="table table-bordered">
+							<tr>
+								<th ng-repeat="group in schedule">{{group[0].begin | date:'EEEE, MMMM d'}}</th>
+							</tr>
+							<tr>
+								<td ng-repeat="group in schedule">
+									<ul class="nav nav-pills nav-stacked">
+										<li ng-repeat="slot in group" ng-class="{active: slot.id == selected.id, disabled: slot.project_id &amp;&amp; slot.project_id !== content.project_id }">
+											<a href ng-click="selectSlot(slot)">
+												{{slot.begin | date:'h:mm a':timezone}} - {{slot.end | date:'h:mm a':timezone}}
+											</a>
+										</li> 
+									</ul>
+								</td>
+							</tr>
+						</table>
+					</div>
+
 					<form name="gandhiFormComponent" ng-submit="complete(gandhiFormComponent)">
-						<div ng-if="stage.component.options.schema &amp;&amp; stage.component.options.form" sf-model="content.data" sf-form="stage.component.options.form" sf-schema="stage.component.options.schema" sf-options="sfOptions"></div>
 						<div ng-if="content.authorizations['write'] &amp;&amp; options.draft !== false" ng-click="draft()" class="btn btn-default" ng-bind="options.draftButtonText || 'Save Draft'"></div>
 						<button ng-if="content.authorizations['write']" class="btn btn-primary" ng-bind="options.submitButtonText || 'Submit'"></button>
 					</form>

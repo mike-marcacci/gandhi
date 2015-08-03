@@ -4,22 +4,16 @@
 	<button class="btn btn-xs" ng-class="{'btn-default': true, 'active': stageInstructionsEdit}" ng-click="toggleStageInstructionsEdit()"><i class="glyphicon glyphicon-cog"></i></button>
 </div>
 
-<!-- Schema -->
-<div class="tab-bar" ng-if="tab == 'Schema'">
-	<button class="btn btn-xs btn-primary" ng-if="stageSchemaEdit" ng-click="updateStageSchema()">Save</button>
-	<button class="btn btn-xs" ng-class="{'btn-default': true, 'active': stageSchemaEdit}" ng-click="toggleStageSchemaEdit()"><i class="glyphicon glyphicon-edit"></i></button>
-</div>
-
-<!-- Form -->
-<div class="tab-bar" ng-if="tab == 'Form'">
-	<button class="btn btn-xs btn-primary" ng-if="stageFormEdit" ng-click="updateStageForm()">Save</button>
-	<button class="btn btn-xs" ng-class="{'btn-default': true, 'active': stageFormEdit}" ng-click="toggleStageFormEdit()"><i class="glyphicon glyphicon-edit"></i></button>
+<!-- Schedule -->
+<div class="tab-bar" ng-if="tab == 'Schedule'">
+	<button class="btn btn-xs btn-primary" ng-click="updateSlots()">Save</button>
+	<button class="btn btn-xs btn-default" ng-click="resetSlots()">Reset</button>
+	<button class="btn btn-xs btn-default" ng-click="addSlot()"><i class="glyphicon glyphicon-plus-sign"></i></button>
 </div>
 
 <ul class="nav nav-tabs" ng-init="tab = 'Instructions'">
 	<li ng-click="tab = 'Instructions'" ng-class="{active: tab === 'Instructions'}"><a href>Instructions</a></li>
-	<li ng-click="tab = 'Schema'" ng-class="{active: tab === 'Schema'}"><a href>Schema</a></li>
-	<li ng-click="tab = 'Form'" ng-class="{active: tab === 'Form'}"><a href>Form</a></li>
+	<li ng-click="tab = 'Schedule'" ng-class="{active: tab === 'Schedule'}"><a href>Schedule</a></li>
 </ul>
 <div class="panel panel-default">
 
@@ -32,24 +26,55 @@
 		<textarea style="height: auto;" ckeditor ng-model="stageInstructionsEdit.component.options.instructions"></textarea>
 	</div>
 
-	<!-- Schema -->
-	<div class="panel-body" ng-if="tab == 'Schema' &amp;&amp; !stageSchemaEdit">
-		<div class="alert alert-warning" ng-if="!stage.component.options.schema" style="margin-bottom: 0;">Please specify a schema for this stage.</div>
-		<div class="table-responsive">
-			<div ng-if="stage.component.options.schema" json-human="stage.component.options.schema"></div>
-		</div>
-	</div>
-	<div class="panel-body" ng-if="tab == 'Schema' &amp;&amp; stageSchemaEdit">
-		<div style="height: 400px;" ui-ace="{mode: 'json'}" json ng-model="stageSchemaEdit.component.options.schema"></div>
-	</div>
+	<!-- Schedule -->
+	<div class="panel-body" ng-if="tab == 'Schedule'">
 
-	<!-- Form -->
-	<div class="panel-body" ng-if="tab == 'Form' &amp;&amp; !stageFormEdit">
-		<div class="alert alert-warning" ng-if="!stage.component.options.form" style="margin-bottom: 0;">Please specify a form definition for this stage.</div>
-		<div ng-if="stage.component.options.form" sf-schema="stage.component.options.schema" sf-form="copy.component.options.form" sf-options="sfOptions" ng-model="sample"></div>
-		<div class="btn btn-sm btn-default" ng-if="stage.component.options.form" ng-click="validate()">Validate</div>
-	</div>
-	<div class="panel-body" ng-if="tab == 'Form' &amp;&amp; stageFormEdit">
-		<div style="height: 400px;" ui-ace="{mode: 'json'}" json ng-model="stageFormEdit.component.options.form"></div>
+		<!-- List -->
+		<div style="overflow-x: auto;">
+			<table class="table table-bordered">
+				<tr>
+					<th ng-repeat="group in schedule">{{group[0].begin | date:'EEEE, MMMM d'}}</th>
+				</tr>
+				<tr>
+					<td ng-repeat="group in schedule">
+						<ul class="nav nav-pills nav-stacked">
+							<li ng-repeat="slot in group" ng-class="{active: slot.id == selected.id}">
+								<a href ng-click="selectSlot(slot)">
+									{{slot.begin | date:'h:mm a':timezone}} - {{slot.end | date:'h:mm a':timezone}}
+									<span class="btn btn-xs btn-default pull-right" ng-click="nextSlot($event, slot)"><i class="glyphicon glyphicon-plus-sign"></i></span>
+								</a>
+							</li> 
+						</ul>
+					</td>
+				</tr>
+			</table>
+		</div>
+
+		<!-- Details -->
+		<div ng-if="selected">
+			<table class="table table-bordered">
+				<tr>
+					<th>Time Slot</th>
+					<th>Reservation</th>
+				</tr>
+				<tr>
+					<td>
+						<div class="form-group">
+							<label class="control-label" for="begin">Begins</label>
+							<input type="datetime-local" class="form-control" id="begin" ng-model="selected.begin">
+						</div>
+						<div class="form-group">
+							<label class="control-label" for="begin">Ends</label>
+							<input type="datetime-local" class="form-control" id="end" ng-model="selected.end">
+						</div>
+						<button class="btn btn-sm btn-default" ng-click="removeSlot(selected)"><i class="glyphicon glyphicon-trash"></i></button>
+					</td>
+					<td>
+						<span ng-if="!selected.project_id">Not Reserved</span>
+						<a ng-if="selected.project_id" ui-sref="portal.admin.projects.show({project: selected.project_id})">View Project</a>
+					</td>
+				</tr>
+			</table>
+		</div>
 	</div>
 </div>
