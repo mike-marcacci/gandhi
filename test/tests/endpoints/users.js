@@ -348,7 +348,6 @@ describe('Users', function(){
 				})
 				// .expect(201)
 				.expect(function(res){
-					console.log(res.body)
 					assert.isString(res.body.token);
 					userToken = res.body.token;
 					userId = jwt.decode(userToken).sub;
@@ -422,10 +421,17 @@ describe('Users', function(){
 				.expect(400)
 				.end(done);
 		});
-		it.skip('rejects an update to blacklisted properties', function(){});
+		it('rejects a duplicate email address', function(done){
+			request
+				.patch('/api/users/' + userId)
+				.set('Authorization', 'Bearer ' + userToken)
+				.send({email: 'mike.marcacci@test.gandhi.io'})
+				.expect(409)
+				.end(done);
+		});
 	});
 
-	describe('#replace', function(){
+	describe('#save', function(){
 		var userToken, userId, user;
 		before(function(done){
 			request
@@ -442,81 +448,18 @@ describe('Users', function(){
 				})
 				.end(done);
 		});
-		before(function(done){
-			request
-				.get('/api/users/' + userId)
-				.set('Authorization', 'Bearer ' + userToken)
-				.expect(200)
-				.expect(function(res){
-					user = res.body;
-				})
-				.end(done);
-		});
 
-		it('rejects an anonymous replace', function(done){
-			request
-				.put('/api/users/' + userId)
-				.send(_.extend({}, user, {
-					name: 'Woops!'
-				}))
-				.expect(401)
-				.end(done);
-		});
-		it('rejects a replace from an unaffiliated, non-admin user', function(done){
-			request
-				.put('/api/users/' + adminId)
-				.set('Authorization', 'Bearer ' + userToken)
-				.send(_.extend({}, user, {
-					name: 'Woops!'
-				}))
-				.expect(403)
-				.end(done);
-		});
-		it('processes a replace from self', function(done){
-			request
-				.put('/api/users/' + userId)
-				.set('Authorization', 'Bearer ' + userToken)
-				.send(_.extend({}, user, {
-					name: 'Emily Martha Shafer Marcacci',
-					password: 'heather1234'
-				}))
-				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
-					assert.equal(res.body.id, userId);
-					assert.equal(res.body.name, 'Emily Martha Shafer Marcacci');
-					done();
-				});
-		});
-		it('processes a replace from an admin user', function(done){
+		it('is not implemented', function(done){
 			request
 				.put('/api/users/' + userId)
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
-				.send(_.extend({}, user, {
-					name: 'Emily Marcacci',
-					password: 'heather1234'
-				}))
-				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
-					assert.equal(res.body.id, userId);
-					assert.equal(res.body.name, 'Emily Marcacci');
-					done();
-				});
-		});
-		it.skip('rejects a misformatted replace', function(done){
-			request
-				.put('/api/users/' + userId)
-				.set('Authorization', 'Bearer ' + adminToken)
-				.query({admin: true})
-				.send(_.extend({}, user, {
-					foo: 'bar'
-				}))
-				.expect(400)
+				.send({
+					name: 'Woops!'
+				})
+				.expect(405)
 				.end(done);
 		});
-		it.skip('rejects a replace of blacklisted properties', function(){});
 	});
 
 	describe('#delete', function(){
@@ -546,7 +489,7 @@ describe('Users', function(){
 		});
 		it('rejects a delete by a non-admin user', function(done){
 			request
-				.delete('/api/users/' + userToken)
+				.delete('/api/users/' + userId)
 				.set('Authorization', 'Bearer ' + userToken)
 				.expect(403)
 				.end(done);
