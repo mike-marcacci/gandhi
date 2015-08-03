@@ -570,7 +570,7 @@
     </object>
     <object type="LMREQUEST" id="z134">
         <attribute name="uuid" type="string">20F1C808-B40F-4AA7-96C8-B2326294D490</attribute>
-        <attribute name="url" type="string">["http:\\/\\/",{"data":{"environmentVariable":"5A183A12-96AB-45CA-B260-3812F77737A2"},"identifier":"com.luckymarmot.EnvironmentVariableDynamicValue"},"\\/api\\/cycles\\/",{"data":{"request":"7BBB78A9-684A-47AB-96B5-1423592DBD76","keyPath":["[0].id"],"format":1},"identifier":"com.luckymarmot.ResponseBodyPathDynamicValue"},"\\/assignments?admin=",{"data":{"environmentVariable":"7AB4BC3D-4220-4813-ADF7-786461FF7009"},"identifier":"com.luckymarmot.EnvironmentVariableDynamicValue"}]</attribute>
+        <attribute name="url" type="string">["http:\\/\\/",{"data":{"environmentVariable":"5A183A12-96AB-45CA-B260-3812F77737A2"},"identifier":"com.luckymarmot.EnvironmentVariableDynamicValue"},"\\/api\\/cycles\\/",{"data":{"request":"448B2EFD-5F33-4BFF-A589-D368D3D47D7D","keyPath":["id"],"format":1},"identifier":"com.luckymarmot.ResponseBodyPathDynamicValue"},"\\/assignments?admin=",{"data":{"environmentVariable":"7AB4BC3D-4220-4813-ADF7-786461FF7009"},"identifier":"com.luckymarmot.EnvironmentVariableDynamicValue"}]</attribute>
         <attribute name="timeoutinterval" type="float">30</attribute>
         <attribute name="storecookies" type="bool">1</attribute>
         <attribute name="sendcookies" type="bool">1</attribute>
