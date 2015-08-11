@@ -10,7 +10,7 @@
 			<!-- Cycle -->
 			<div class="col-sm-4">
 				<div class="input-group">
-					<ui-select ng-disabled="disabled" ng-model="table.query.cycle" theme="bootstrap">
+					<ui-select ng-disabled="disabled" ng-model="selected.cycle" theme="bootstrap">
 						<ui-select-match placeholder="Choose a cycle...">{{$select.selected.title}}</ui-select-match>
 						<ui-select-choices refresh="cycleSelect.search($select.search)" refresh-delay="200" repeat="item.id as item in cycleSelect.data | filter: $select.search">
 							<div ng-bind-html="item.title | highlight: $select.search"></div>
@@ -18,7 +18,7 @@
 						</ui-select-choices>
 					</ui-select>
 					<span class="input-group-btn">
-						<button class="btn btn-default" ng-disabled="!table.query.cycle" ng-click="table.query.cycle = null" type="button"><i class="glyphicon glyphicon-remove-circle"></i></button>
+						<button class="btn btn-default" ng-disabled="!selected.cycle" ng-click="selected.cycle = null" type="button"><i class="glyphicon glyphicon-remove-circle"></i></button>
 					</span>
 				</div>
 			</div>
@@ -45,6 +45,44 @@
 			</div>
 		</div>
 
+
+		<!-- Filters -->
+		<div ng-if="columnsByGroup.contents">
+			<hr>
+
+			<div ng-repeat="filter in filters">
+				<div class="form-inline" style="
+					display: inline-block;
+					background-color: whitesmoke;
+					border-radius: 4px;
+					padding: 3px 6px;
+					margin: 2px 0;
+				">
+					<div class="form-group">
+						<select ng-options="export.path as export.title for export in columnsByGroup.contents" ng-model="filter.path"></select>
+					</div>
+					<div class="form-group">
+						<select ng-model="filter.op">
+							<option value="eq">is equal to</option>
+							<option value="ne">is not equal to</option>
+							<option value="gt">is greater than</option>
+							<option value="lt">is less than</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control input-xs" placeholder="JSON value" ng-model="filter.value" json>
+					</div>
+					<div class="form-group">
+						<button class="btn btn-xs btn-default" ng-click="removeFilter(filter)"><i class="glyphicon glyphicon-trash"></i></button>
+					</div>
+				</div>
+			</div>
+			<div class="checkbox">
+				<div class="btn btn-xs btn-default" ng-click="addFilter()">Add Filter</div>
+				<label><input type="checkbox" ng-model="selected.restrictToCycle"> Restrict to cycle</label>
+			</div>
+		</div>
+
 		<hr>
 
 		<!-- Default Column Group -->
@@ -55,7 +93,7 @@
 				style= "margin-right: 6px;"
 				ng-class="{'btn-success': column.active}"
 				ng-click="toggleColumn(column)"
-				ng-repeat="column in defaultColumnGroup">
+				ng-repeat="column in columnsByGroup.default">
 				{{column.title}}
 			</div>
 		</div>

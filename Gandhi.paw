@@ -781,7 +781,7 @@
     </object>
     <object type="LMREQUEST" id="z146">
         <attribute name="uuid" type="string">A12D852D-83EE-42C6-9317-14AAD0A9D04A</attribute>
-        <attribute name="url" type="string">["http:\\/\\/",{"data":{"environmentVariable":"5A183A12-96AB-45CA-B260-3812F77737A2"},"identifier":"com.luckymarmot.EnvironmentVariableDynamicValue"},"\\/api\\/projects?filter=[{\\"op\\": \\"eq\\", \\"path\\": \\"\\/authorizations\\/update\\", \\"value\\": true}]"]</attribute>
+        <attribute name="url" type="string">["http:\\/\\/",{"data":{"environmentVariable":"5A183A12-96AB-45CA-B260-3812F77737A2"},"identifier":"com.luckymarmot.EnvironmentVariableDynamicValue"},"\\/api\\/projects?filter=[{\\"op\\": \\"eq\\", \\"path\\": [\\"exports\\",\\"application\\",\\"collaboration\\",\\"new\\", \\"value\\": false}]\u2600admin=true"]</attribute>
         <attribute name="timeoutinterval" type="float">30</attribute>
         <attribute name="storecookies" type="bool">1</attribute>
         <attribute name="sendcookies" type="bool">1</attribute>
@@ -793,7 +793,7 @@
         <attribute name="name" type="string">List Projects (filter)</attribute>
         <relationship name="parent" type="0/1" destination="LMREQUESTTREEITEM" idrefs="z347"></relationship>
         <relationship name="children" type="0/0" destination="LMREQUESTTREEITEM"></relationship>
-        <relationship name="headers" type="0/0" destination="LMKEYVALUE" idrefs="z247 z241 z287"></relationship>
+        <relationship name="headers" type="0/0" destination="LMKEYVALUE" idrefs="z287 z241 z247"></relationship>
     </object>
     <object type="LMREQUEST" id="z147">
         <attribute name="uuid" type="string">275FA186-DC1D-4638-B969-067F91AEDF88</attribute>
