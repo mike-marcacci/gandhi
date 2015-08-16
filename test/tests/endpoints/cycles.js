@@ -4,7 +4,6 @@ require('../../init.js');
 
 var li = require('li');
 var r = require('rethinkdb');
-var _ = require('lodash');
 var jwt = require('jsonwebtoken');
 
 var assert = require('chai').assert;
@@ -84,10 +83,9 @@ describe('Cycles', function(){
 					cool: 'beans'
 				})
 				.expect(400)
-				.end(function(err, res){
-					if(err) return done(err);
-					done();
-				});
+				.expect(function(res){
+				})
+				.end(done);
 		});
 		it('allows creation of minimal cycle', function(done){
 			request
@@ -98,14 +96,13 @@ describe('Cycles', function(){
 					title: 'Awesome Possum'
 				})
 				.expect(201)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.isString(res.body.id);
 					ids.push(res.body.id);
 					assert.equal(res.body.title, 'Awesome Possum');
 					assert.equal(res.body.status_id, 'draft');
-					done();
-				});
+				})
+				.end(done);
 		});
 	});
 
@@ -114,11 +111,10 @@ describe('Cycles', function(){
 			request
 				.get('/api/cycles')
 				.expect(401)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.isNotArray(res.body);
-					done();
-				});
+				})
+				.end(done);
 		});
 		it('shows all cycles to an admin user', function(done){
 			request
@@ -126,24 +122,22 @@ describe('Cycles', function(){
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
 				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.isArray(res.body);
 					assert.lengthOf(res.body, fixtures.length + ids.length);
-					done();
-				});
+				})
+				.end(done);
 		});
 		it('hides draft cycles from a non-admin user', function(done){
 			request
 				.get('/api/cycles')
 				.set('Authorization', 'Bearer ' + userToken)
 				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.isArray(res.body);
 					assert.lengthOf(res.body, 1);
-					done();
-				});
+				})
+				.end(done);
 		});
 		it('accepts per_page parameters', function(done){
 			request
@@ -154,15 +148,14 @@ describe('Cycles', function(){
 					admin: true
 				})
 				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.isArray(res.body);
 					assert.lengthOf(res.body, 2);
-					var links = li.parse(res.headers.link);
+					// var links = li.parse(res.headers.link);
 					// assert.equal(links.next, '/api/cycles?per_page=2&page=2&admin=true');
 					// assert.equal(links.last, '/api/cycles?per_page=2&page=2&admin=true');
-					done();
-				});
+				})
+				.end(done);
 		});
 		it('accepts page parameters', function(done){
 			request
@@ -174,15 +167,14 @@ describe('Cycles', function(){
 					admin: true
 				})
 				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.isArray(res.body);
 					assert.lengthOf(res.body, 1);
-					var links = li.parse(res.headers.link);
+					// var links = li.parse(res.headers.link);
 					// assert.equal(links.first, '/api/cycles?per_page=2&page=1&admin=true');
 					// assert.equal(links.prev, '/api/cycles?per_page=2&page=1&admin=true');
-					done();
-				});
+				})
+				.end(done);
 		});
 	});
 
@@ -208,11 +200,10 @@ describe('Cycles', function(){
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
 				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.equal(res.body.id, '128f2348-99d4-40a1-b5ab-91d9019f272d');
-					done();
-				});
+				})
+				.end(done);
 		});
 		it('shows a draft cycle to an admin user', function(done){
 			request
@@ -221,22 +212,20 @@ describe('Cycles', function(){
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
 				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.equal(res.body.id, 'e5f58a2c-2894-40e6-91a9-a110d190e85f');
-					done();
-				});
+				})
+				.end(done);
 		});
 		it('shows a non-draft cycle to a non-admin user', function(done){
 			request
 				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d')
 				.set('Authorization', 'Bearer ' + userToken)
 				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.equal(res.body.id, '128f2348-99d4-40a1-b5ab-91d9019f272d');
-					done();
-				});
+				})
+				.end(done);
 		});
 		it('hides a draft cycle from a non-admin user', function(done){
 			request
@@ -272,18 +261,17 @@ describe('Cycles', function(){
 				.expect(404)
 				.end(done);
 		});
-		it('allows an updates by an admin user', function(done){
+		it('allows an update by an admin user', function(done){
 			request
 				.patch('/api/cycles/' + ids[0])
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
 				.send({title: 'UPDATED'})
 				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.equal(res.body.id, ids[0]);
-					done();
-				});
+				})
+				.end(done);
 		});
 	});
 
@@ -310,11 +298,10 @@ describe('Cycles', function(){
 				.query({admin: true})
 				.send({title: 'REPLACED', id: ids[0]})
 				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.equal(res.body.id, ids[0]);
-					done();
-				});
+				})
+				.end(done);
 		});
 	});
 

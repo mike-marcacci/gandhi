@@ -227,6 +227,12 @@
         },
         "project/contents:write": {
           "$ref": "#/definitions/permission"
+        },
+        "project/invitations:read": {
+          "$ref": "#/definitions/permission"
+        },
+        "project/invitations:write": {
+          "$ref": "#/definitions/permission"
         }
       },
       "default": {
@@ -252,6 +258,12 @@
           "applicant": true
         },
         "project/contents:write": {
+          "applicant": true
+        },
+        "project/invitations:read": {
+          "applicant": true
+        },
+        "project/invitations:write": {
           "applicant": true
         }
       }

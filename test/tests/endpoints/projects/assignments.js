@@ -154,7 +154,7 @@ describe('Assignments', function(){
 			request
 				.get('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/5a3cf444-9d87-4125-8026-2d5ffb834676')
 				.set('Authorization', 'Bearer ' + soleneToken)
-				.expect(404)
+				.expect(403)
 				.end(done);
 		});
 	});
@@ -342,7 +342,7 @@ describe('Assignments', function(){
 			request
 				.delete('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments/5a3cf444-9d87-4125-8026-2d5ffb834676')
 				.set('Authorization', 'Bearer ' + soleneToken)
-				.expect(404)
+				.expect(403)
 				.end(done);
 		});
 		it('returns 404 for nonexistant project', function(done){
