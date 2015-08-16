@@ -20,7 +20,7 @@ var config = process.argv.length > 2 ?
 
 var gandhi = require('./lib/index.js')(config);
 
-/*
+
 // the master
 if (cluster.isMaster) {
 
@@ -44,7 +44,7 @@ if (cluster.isMaster) {
 
 // the child processes
 else {
-*/
+
 	var app = require('express')();
 
 	// bring in gandhi
@@ -55,6 +55,6 @@ else {
 	app.set('query parser', 'simple');
 
 	app.listen(config.port);
-/*
+
 }
-*/
+

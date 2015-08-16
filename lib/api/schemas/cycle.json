@@ -198,6 +198,8 @@
         "project:delete",
         "project/assignments:read",
         "project/assignments:write",
+        "project/invitations:read",
+        "project/invitations:write",
         "project/contents:read",
         "project/contents:write"
       ],

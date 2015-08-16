@@ -289,8 +289,8 @@ describe('Projects', function(){
 					if(err) return done(err);
 					assert.equal(res.body.title, 'CREATE - Minimal Project')
 					assert.equal(res.body.cycle_id, '128f2348-99d4-40a1-b5ab-91d9019f272d')
-					// assert.property(res.body.users, soleneId);
-					// assert.equal(res.body.users[soleneId].role, 'applicant');
+					// assert.property(res.body.assignments, soleneId);
+					// assert.equal(res.body.assignments[soleneId].role, 'applicant');
 					assert.equal(res.body.status_id, 'active');
 					ids.push(res.body.id);
 					done();
@@ -536,10 +536,10 @@ describe('Projects', function(){
 		});
 	});
 
-	// // test embedded collections
-	// ['assignments', 'invitations', 'contents'].forEach(function(c){
-	// 	require('./projects/' + c);
-	// });
+	// test embedded collections
+	['assignments', 'invitations', 'contents'].forEach(function(c){
+		require('./projects/' + c);
+	});
 
 	// remove any projects we just created
 	after(function(done){
