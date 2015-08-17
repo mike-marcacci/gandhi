@@ -3,6 +3,7 @@
 var _ = require('lodash');
 var fs = require('fs');
 var assert = require('chai').assert;
+var uuid = require('../../lib/api/utils/uuid');
 
 var validator = require('jjv')();
 
@@ -27,6 +28,7 @@ describe('Schemas', function(){
 
 	it('should create a valid default cycle', function(){
 		var cycle = {
+			id: uuid(),
 			title: 'Test Cycle'
 		};
 
@@ -41,6 +43,7 @@ describe('Schemas', function(){
 
 	it('should create a valid default project', function(){
 		var project = {
+			id: uuid(),
 			title: 'Test Project',
 			cycle_id: '127cbea9-e03b-4b6e-8332-bb893fd26fd1'
 		};
@@ -56,6 +59,7 @@ describe('Schemas', function(){
 
 	it('should create a valid default user', function(){
 		var user = {
+			id: uuid(),
 			email: 'test@example.com'
 		};
 
@@ -70,6 +74,7 @@ describe('Schemas', function(){
 
 	it('should create a valid default notification', function(){
 		var notification = {
+			id: uuid(),
 			user_id: 'b8d2ddb0-d2e0-49ed-a559-cdca930ed48d',
 			subject: 'Test',
 			content: 'This is a test.'

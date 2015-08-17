@@ -29,13 +29,12 @@ describe('Notifications', function(){
 				password: 'mike1234'
 			})
 			.expect(201)
-			.end(function(err, res){
-				if(err) return done(err);
+			.expect(function(res){
 				assert.isString(res.body.token);
 				adminToken = res.body.token;
 				adminId = jwt.decode(adminToken).sub;
-				done();
-			});
+			})
+			.end(done);
 	});
 
 	before(function(done){
@@ -46,13 +45,12 @@ describe('Notifications', function(){
 				password: 'tim1234'
 			})
 			.expect(201)
-			.end(function(err, res){
-				if(err) return done(err);
+			.expect(function(res){
 				assert.isString(res.body.token);
 				userToken = res.body.token;
 				userId = jwt.decode(userToken).sub;
-				done();
-			});
+			})
+			.end(done);
 	});
 
 	describe('#post', function(){
@@ -88,10 +86,9 @@ describe('Notifications', function(){
 					cool: 'beans'
 				})
 				.expect(400)
-				.end(function(err, res){
-					if(err) return done(err);
-					done();
-				});
+				.expect(function(res){
+				})
+				.end(done);
 		});
 		it('allows creation of minimal notification', function(done){
 			request
@@ -104,14 +101,13 @@ describe('Notifications', function(){
 					content: 'Test notification',
 				})
 				.expect(201)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.isString(res.body.id);
 					ids.push(res.body.id);
 					assert.equal(res.body.subject, 'Test');
 					assert.equal(res.body.status_id, 'unread');
-					done();
-				});
+				})
+				.end(done);
 		});
 	});
 
@@ -120,11 +116,10 @@ describe('Notifications', function(){
 			request
 				.get('/api/notifications')
 				.expect(401)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.isNotArray(res.body);
-					done();
-				});
+				})
+				.end(done);
 		});
 		it('shows all notifications to an admin user', function(done){
 			request
@@ -132,24 +127,22 @@ describe('Notifications', function(){
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
 				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.isArray(res.body);
 					assert.lengthOf(res.body, fixtures.length + ids.length);
-					done();
-				});
+				})
+				.end(done);
 		});
 		it('hides others\' notifications from a non-admin user', function(done){
 			request
 				.get('/api/notifications')
 				.set('Authorization', 'Bearer ' + userToken)
 				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.isArray(res.body);
 					assert.lengthOf(res.body, 2);
-					done();
-				});
+				})
+				.end(done);
 		});
 		it('accepts per_page parameters', function(done){
 			request
@@ -157,15 +150,14 @@ describe('Notifications', function(){
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
 				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.isArray(res.body);
 					assert.lengthOf(res.body, 2);
 					var links = li.parse(res.headers.link);
 					// assert.equal(links.next, '/api/notifications?per_page=2&page=2');
 					// assert.equal(links.last, '/api/notifications?per_page=2&page=2');
-					done();
-				});
+				})
+				.end(done);
 		});
 		it('accepts page parameters', function(done){
 			request
@@ -173,15 +165,14 @@ describe('Notifications', function(){
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
 				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.isArray(res.body);
 					assert.lengthOf(res.body, 1);
 					var links = li.parse(res.headers.link);
 					// assert.equal(links.first, '/api/notifications?per_page=2&page=1');
 					// assert.equal(links.prev, '/api/notifications?per_page=2&page=1');
-					done();
-				});
+				})
+				.end(done);
 		});
 	});
 
@@ -207,22 +198,20 @@ describe('Notifications', function(){
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
 				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.equal(res.body.id, '2df77fb9-6fe0-448f-ad06-a4d145ca8c46');
-					done();
-				});
+				})
+				.end(done);
 		});
 		it('shows notification to the recipiant non-admin user', function(done){
 			request
 				.get('/api/notifications/df973a3b-99d2-420c-800b-6463778dedf2')
 				.set('Authorization', 'Bearer ' + userToken)
 				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.equal(res.body.id, 'df973a3b-99d2-420c-800b-6463778dedf2');
-					done();
-				});
+				})
+				.end(done);
 		});
 		it('hides another user\'s notification from a non-admin user', function(done){
 			request
@@ -266,18 +255,17 @@ describe('Notifications', function(){
 				.expect(404)
 				.end(done);
 		});
-		it('allows a status-only update by an admin user', function(done){
+		it('allows a status-only update by a non-admin user', function(done){
 			request
 				.patch('/api/notifications/' + ids[0])
 				.set('Authorization', 'Bearer ' + userToken)
 				.send({status_id: 'read'})
 				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.equal(res.body.id, ids[0]);
 					assert.equal(res.body.status_id, 'read');
-					done();
-				});
+				})
+				.end(done);
 		});
 		it('allows an update by an admin user', function(done){
 			request
@@ -286,12 +274,11 @@ describe('Notifications', function(){
 				.query({admin: true})
 				.send({subject: 'UPDATED'})
 				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.equal(res.body.id, ids[0]);
 					assert.equal(res.body.subject, 'UPDATED');
-					done();
-				});
+				})
+				.end(done);
 		});
 	});
 
@@ -333,11 +320,10 @@ describe('Notifications', function(){
 					id: ids[0]
 				})
 				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.equal(res.body.id, ids[0]);
-					done();
-				});
+				})
+				.end(done);
 		});
 	});
 
@@ -364,7 +350,7 @@ describe('Notifications', function(){
 				.expect(404)
 				.end(done);
 		});
-		it('deletes a notification without projects', function(done){
+		it('allows a delete by an admin', function(done){
 			request
 				.delete('/api/notifications/' + ids[0])
 				.set('Authorization', 'Bearer ' + adminToken)

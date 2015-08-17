@@ -2,6 +2,7 @@
   "id": "http://www.gandhi.io/schema/cycle",
   "$schema": "http://json-schema.org/draft-04/schema",
   "required": [
+    "id",
     "title"
   ],
   "type":"object",
