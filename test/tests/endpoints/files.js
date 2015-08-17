@@ -20,7 +20,7 @@ before(function(){
 	fixtures = global.setup.fixtures.db.files;
 });
 
-describe.skip('Files', function(){
+describe('Files', function(){
 	var adminToken, adminId, userToken, userId, ids = [];
 
 	before(function(done){
