@@ -29,13 +29,12 @@ describe('Assignments', function() {
 				password: 'mike1234'
 			})
 			.expect(201)
-			.end(function(err, res) {
-				if(err) return done(err);
+			.expect(function(res) {
 				assert.isString(res.body.token);
 				adminToken = res.body.token;
 				adminId = jwt.decode(adminToken).sub;
-				done();
-			});
+			})
+			.end(done);
 	});
 
 	before(function(done) {
@@ -46,13 +45,12 @@ describe('Assignments', function() {
 				password: 'tim1234'
 			})
 			.expect(201)
-			.end(function(err, res) {
-				if(err) return done(err);
+			.expect(function(res) {
 				assert.isString(res.body.token);
 				userToken = res.body.token;
 				userId = jwt.decode(userToken).sub;
-				done();
-			});
+			})
+			.end(done);
 	});
 
 	describe('#list', function() {
@@ -60,11 +58,10 @@ describe('Assignments', function() {
 			request
 				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/assignments')
 				.expect(401)
-				.end(function(err, res) {
-					if(err) return done(err);
+				.expect(function(res) {
 					assert.isNotArray(res.body);
-					done();
-				});
+				})
+				.end(done);
 		});
 		it('returns 404 for nonexistant cycle', function(done) {
 			request
@@ -80,22 +77,20 @@ describe('Assignments', function() {
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
 				.expect(200)
-				.end(function(err, res) {
-					if(err) return done(err);
+				.expect(function(res) {
 					assert.lengthOf(Object.keys(res.body), 2);
-					done();
-				});
+				})
+				.end(done);
 		});
 		it('shows all assignments to a non-admin user', function(done) {
 			request
 				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/assignments')
 				.set('Authorization', 'Bearer ' + userToken)
 				.expect(200)
-				.end(function(err, res) {
-					if(err) return done(err);
+				.expect(function(res) {
 					assert.lengthOf(Object.keys(res.body), 2);
-					done();
-				});
+				})
+				.end(done);
 		});
 	});
 
@@ -128,22 +123,20 @@ describe('Assignments', function() {
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
 				.expect(200)
-				.end(function(err, res) {
-					if(err) return done(err);
+				.expect(function(res) {
 					assert.equal(res.body.id, '5a3cf444-9d87-4125-8026-2d5ffb834676');
-					done();
-				});
+				})
+				.end(done);
 		});
 		it('shows an assignment to a non-admin user', function(done) {
 			request
 				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/assignments/5a3cf444-9d87-4125-8026-2d5ffb834676')
 				.set('Authorization', 'Bearer ' + userToken)
 				.expect(200)
-				.end(function(err, res) {
-					if(err) return done(err);
+				.expect(function(res) {
 					assert.equal(res.body.id, '5a3cf444-9d87-4125-8026-2d5ffb834676');
-					done();
-				});
+				})
+				.end(done);
 		});
 	});
 
@@ -198,11 +191,10 @@ describe('Assignments', function() {
 				.query({admin: true})
 				.send({id:'3cd2dc98-e280-4e72-a437-9a916d98b636',role_id:'advisor'})
 				.expect(200)
-				.end(function(err, res) {
-					if(err) return done(err);
+				.expect(function(res) {
 					assert.equal(res.body.id, '3cd2dc98-e280-4e72-a437-9a916d98b636');
-					done();
-				});
+				})
+				.end(done);
 		});
 		it('allows an existing put by an admin user', function(done) {
 			request
@@ -211,12 +203,11 @@ describe('Assignments', function() {
 				.query({admin: true})
 				.send({id:'3cd2dc98-e280-4e72-a437-9a916d98b636',role_id:'applicant'})
 				.expect(200)
-				.end(function(err, res) {
-					if(err) return done(err);
+				.expect(function(res) {
 					assert.equal(res.body.id, '3cd2dc98-e280-4e72-a437-9a916d98b636');
 					assert.equal(res.body.role_id, 'applicant');
-					done();
-				});
+				})
+				.end(done);
 		});
 	});
 
@@ -252,10 +243,9 @@ describe('Assignments', function() {
 				.query({admin: true})
 				.send({role_id:'applicant'})
 				.expect(404)
-				.end(function(err, res) {
-					if(err) return done(err);
-					done();
-				});
+				.expect(function(res) {
+				})
+				.end(done);
 		});
 		it('rejects a mismatched id', function(done) {
 			request
@@ -282,11 +272,10 @@ describe('Assignments', function() {
 				.query({admin: true})
 				.send({role_id:'applicant'})
 				.expect(200)
-				.end(function(err, res) {
-					if(err) return done(err);
+				.expect(function(res) {
 					assert.equal(res.body.role_id, 'applicant');
-					done();
-				});
+				})
+				.end(done);
 		});
 	});
 
@@ -326,11 +315,10 @@ describe('Assignments', function() {
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
 				.expect(200)
-				.end(function(err, res) {
-					if(err) return done(err);
+				.expect(function(res) {
 					assert.equal(res.body.id, '3cd2dc98-e280-4e72-a437-9a916d98b636');
-					done();
-				});
+				})
+				.end(done);
 		});
 	});
 

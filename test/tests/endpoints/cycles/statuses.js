@@ -19,7 +19,7 @@ before(function(){
 });
 
 describe('Statuses', function(){
-	var adminToken, adminId, userToken, userId;
+	var adminToken, adminId, userToken, userId, statusId;
 
 	before(function(done){
 		request
@@ -29,13 +29,12 @@ describe('Statuses', function(){
 				password: 'mike1234'
 			})
 			.expect(201)
-			.end(function(err, res){
-				if(err) return done(err);
+			.expect(function(res){
 				assert.isString(res.body.token);
 				adminToken = res.body.token;
 				adminId = jwt.decode(adminToken).sub;
-				done();
-			});
+			})
+			.end(done);
 	});
 
 	before(function(done){
@@ -46,13 +45,12 @@ describe('Statuses', function(){
 				password: 'tim1234'
 			})
 			.expect(201)
-			.end(function(err, res){
-				if(err) return done(err);
+			.expect(function(res){
 				assert.isString(res.body.token);
 				userToken = res.body.token;
 				userId = jwt.decode(userToken).sub;
-				done();
-			});
+			})
+			.end(done);
 	});
 
 	describe('#list', function(){
@@ -60,11 +58,10 @@ describe('Statuses', function(){
 			request
 				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/statuses')
 				.expect(401)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.isNotArray(res.body);
-					done();
-				});
+				})
+				.end(done);
 		});
 		it('shows all statuses to an admin user', function(done){
 			request
@@ -72,22 +69,20 @@ describe('Statuses', function(){
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
 				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.lengthOf(Object.keys(res.body), 4);
-					done();
-				});
+				})
+				.end(done);
 		});
 		it('shows all statuses to a non-admin user', function(done){
 			request
 				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/statuses')
 				.set('Authorization', 'Bearer ' + userToken)
 				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.lengthOf(Object.keys(res.body), 4);
-					done();
-				});
+				})
+				.end(done);
 		});
 	});
 
@@ -104,46 +99,42 @@ describe('Statuses', function(){
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
 				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.equal(res.body.id, 'archived');
-					done();
-				});
+				})
+				.end(done);
 		});
 		it('shows a status to a non-admin user', function(done){
 			request
 				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/statuses/archived')
 				.set('Authorization', 'Bearer ' + userToken)
 				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.equal(res.body.id, 'archived');
-					done();
-				});
+				})
+				.end(done);
 		});
 	});
 
-	describe.skip('#post', function(){});
-
-	describe('#put', function(){
-		it('rejects an anonymous put', function(done){
+	describe('#post', function(){
+		it('rejects an anonymous post', function(done){
 			request
-				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/statuses/test')
-				.send({id:'test',title:'Test'})
+				.post('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/statuses')
+				.send({title:'Test'})
 				.expect(401)
 				.end(done);
 		});
-		it('rejects a put by a non-admin user', function(done){
+		it('rejects a post by a non-admin user', function(done){
 			request
-				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/statuses/test')
+				.post('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/statuses')
 				.set('Authorization', 'Bearer ' + userToken)
-				.send({id:'test',title:'Test'})
+				.send({title:'Test'})
 				.expect(403)
 				.end(done);
 		});
-		it('rejects an invalid put', function(done){
+		it('rejects an invalid post', function(done){
 			request
-				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/statuses/test')
+				.post('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/statuses')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
 				.send({title: true})
@@ -152,53 +143,39 @@ describe('Statuses', function(){
 		});
 		it('rejects mismatched ids', function(done){
 			request
-				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/statuses/test')
+				.post('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/statuses')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
 				.send({id:'foo',title:'Test'})
 				.expect(400)
 				.end(done);
 		});
-		it('allows a new put by an admin user', function(done){
+		it('allows a post by an admin user', function(done){
 			request
-				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/statuses/test')
+				.post('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/statuses')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
-				.send({id:'test',title:'Test'})
+				.send({title:'Test'})
 				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
-					assert.equal(res.body.id, 'test');
-					done();
-				});
-		});
-		it('allows an existing put by an admin user', function(done){
-			request
-				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/statuses/test')
-				.set('Authorization', 'Bearer ' + adminToken)
-				.query({admin: true})
-				.send({id:'test',title:'Test PUT'})
-				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
-					assert.equal(res.body.id, 'test');
-					assert.equal(res.body.title, 'Test PUT');
-					done();
-				});
+				.expect(function(res){
+					assert.isString(res.body.id);
+					statusId = res.body.id;
+				})
+				.end(done);
 		});
 	});
 
 	describe('#patch', function(){
-		it('rejects an anonymous put', function(done){
+		it('rejects an anonymous post', function(done){
 			request
-				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/statuses/test')
+				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/statuses/' + statusId)
 				.send({title:'Oops'})
 				.expect(401)
 				.end(done);
 		});
 		it('rejects a patch by a non-admin user', function(done){
 			request
-				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/statuses/test')
+				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/statuses/' + statusId)
 				.set('Authorization', 'Bearer ' + userToken)
 				.send({title:'Oops'})
 				.expect(403)
@@ -206,7 +183,7 @@ describe('Statuses', function(){
 		});
 		it('rejects an invalid patch', function(done){
 			request
-				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/statuses/test')
+				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/statuses/' + statusId)
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
 				.send({title: true})
@@ -215,7 +192,7 @@ describe('Statuses', function(){
 		});
 		it('rejects mismatched ids', function(done){
 			request
-				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/statuses/test')
+				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/statuses/' + statusId)
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
 				.send({id:'foo',title:'Test'})
@@ -229,51 +206,48 @@ describe('Statuses', function(){
 				.query({admin: true})
 				.send({title:'Oops'})
 				.expect(404)
-				.end(function(err, res){
-					if(err) return done(err);
-					done();
-				});
+				.expect(function(res){
+				})
+				.end(done);
 		});
 		it('allows an existing patch by an admin user', function(done){
 			request
-				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/statuses/test')
+				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/statuses/' + statusId)
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
 				.send({title:'Patched'})
 				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.equal(res.body.title, 'Patched');
-					done();
-				});
+				})
+				.end(done);
 		});
 	});
 
 	describe('#delete', function(){
 		it('rejects an anonymous delete', function(done){
 			request
-				.delete('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/statuses/test')
+				.delete('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/statuses/' + statusId)
 				.expect(401)
 				.end(done);
 		});
 		it('rejects a delete by a non-admin user', function(done){
 			request
-				.delete('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/statuses/test')
+				.delete('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/statuses/' + statusId)
 				.set('Authorization', 'Bearer ' + userToken)
 				.expect(403)
 				.end(done);
 		});
 		it('deletes a status for an admin user', function(done){
 			request
-				.delete('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/statuses/test')
+				.delete('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/statuses/' + statusId)
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
 				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
-					assert.equal(res.body.id, 'test');
-					done();
-				});
+				.expect(function(res){
+					assert.equal(res.body.id, statusId);
+				})
+				.end(done);
 		});
 	});
 
