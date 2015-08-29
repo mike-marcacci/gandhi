@@ -247,6 +247,14 @@ describe('Stages', function(){
 				})
 				.end(done);
 		});
+		it('no longer shows deleted stage', function(done){
+			request
+				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/stages/' + stageId)
+				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
+				.expect(404)
+				.end(done);
+		});
 	});
 
 });
