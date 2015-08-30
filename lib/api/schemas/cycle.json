@@ -206,34 +206,44 @@
       ],
       "properties": {
         "project:read": {
-          "$ref": "#/definitions/permission"
+          "$ref": "#/definitions/permission",
+          "default": {}
         },
         "project:create": {
-          "$ref": "#/definitions/permission"
+          "$ref": "#/definitions/permission",
+          "default": {}
         },
         "project:update": {
-          "$ref": "#/definitions/permission"
+          "$ref": "#/definitions/permission",
+          "default": {}
         },
         "project:delete": {
-          "$ref": "#/definitions/permission"
+          "$ref": "#/definitions/permission",
+          "default": {}
         },
         "project/assignments:read": {
-          "$ref": "#/definitions/permission"
+          "$ref": "#/definitions/permission",
+          "default": {}
         },
         "project/assignments:write": {
-          "$ref": "#/definitions/permission"
+          "$ref": "#/definitions/permission",
+          "default": {}
         },
         "project/contents:read": {
-          "$ref": "#/definitions/permission"
+          "$ref": "#/definitions/permission",
+          "default": {}
         },
         "project/contents:write": {
-          "$ref": "#/definitions/permission"
+          "$ref": "#/definitions/permission",
+          "default": {}
         },
         "project/invitations:read": {
-          "$ref": "#/definitions/permission"
+          "$ref": "#/definitions/permission",
+          "default": {}
         },
         "project/invitations:write": {
-          "$ref": "#/definitions/permission"
+          "$ref": "#/definitions/permission",
+          "default": {}
         }
       },
       "default": {
@@ -395,10 +405,12 @@
           "type": "string"
         },
         "visible": {
-          "$ref": "#/definitions/permission"
+          "$ref": "#/definitions/permission",
+          "default": {}
         },
         "assignable": {
-          "$ref": "#/definitions/permission"
+          "$ref": "#/definitions/permission",
+          "default": {}
         }
       }
     },
@@ -419,7 +431,8 @@
           "default": ""
         },
         "visible": {
-          "$ref": "#/definitions/permission"
+          "$ref": "#/definitions/permission",
+          "default": {}
         },
         "component": {
           "type": "object",
@@ -472,7 +485,8 @@
           }
         },
         "order": {
-          "type": "number"
+          "type": "number",
+          "default": 0
         }
       }
     },
