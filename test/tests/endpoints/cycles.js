@@ -347,9 +347,9 @@ describe('Cycles', function(){
 	});
 
 	// test embedded collections
-	['statuses','roles','assignments','invitations','triggers','stages'].forEach(function(c){
-		require('./cycles/' + c);
-	});
+	// ['statuses','roles','assignments','invitations','triggers','stages'].forEach(function(c){
+	// 	require('./cycles/' + c);
+	// });
 
 	// remove any cycles we just created
 	after(function(done){

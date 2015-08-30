@@ -92,11 +92,11 @@ describe('Assignments', function(){
 				.get('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/assignments')
 				.set('Authorization', 'Bearer ' + soleneToken)
 				.expect(200)
-				.end(function(err, res){
+				.expect(function(res){
 					assert.isArray(res.body);
 					assert.lengthOf(res.body, 1);
-					done();
-				});
+				})
+				.end(done);
 		});
 	});
 

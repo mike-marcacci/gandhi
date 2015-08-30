@@ -1,3 +1,3 @@
-Gandhi Component: Form
-======================
+Gandhi Component: Schedule
+==========================
 
