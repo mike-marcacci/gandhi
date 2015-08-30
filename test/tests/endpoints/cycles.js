@@ -308,19 +308,19 @@ describe('Cycles', function(){
 	describe('#delete', function(){
 		it('rejects an anonymous delete', function(done){
 			request
-				.delete('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d')
+				.delete('/api/cycles/' + ids[0])
 				.expect(401)
 				.end(done);
 		});
 		it('rejects a delete by a non-admin user', function(done){
 			request
-				.delete('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d')
+				.delete('/api/cycles/' + ids[0])
 				.set('Authorization', 'Bearer ' + userToken)
 				.query({admin: true})
 				.expect(403)
 				.end(done);
 		});
-		it.skip('refuses to delete a cycle that has projects', function(done){
+		it('refuses to delete a cycle that has projects', function(done){
 			request
 				.delete('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d')
 				.set('Authorization', 'Bearer ' + adminToken)
@@ -345,11 +345,6 @@ describe('Cycles', function(){
 				.end(done);
 		});
 	});
-
-	// test embedded collections
-	// ['statuses','roles','assignments','invitations','triggers','stages'].forEach(function(c){
-	// 	require('./cycles/' + c);
-	// });
 
 	// remove any cycles we just created
 	after(function(done){

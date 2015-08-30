@@ -536,11 +536,6 @@ describe('Projects', function(){
 		});
 	});
 
-	// test embedded collections
-	// ['assignments', 'invitations', 'contents'].forEach(function(c){
-	// 	require('./projects/' + c);
-	// });
-
 	// remove any projects we just created
 	after(function(done){
 		if(!ids.length)
