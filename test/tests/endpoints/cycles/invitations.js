@@ -20,7 +20,7 @@ before(function(){
 	fixtures = global.setup.fixtures.db.cycles;
 });
 
-describe('Invitations', function(){
+describe.skip('Invitations', function(){
 	var adminToken, adminId, userToken, userId;
 
 	before(function(done){

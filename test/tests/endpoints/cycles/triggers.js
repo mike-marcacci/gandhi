@@ -19,7 +19,7 @@ before(function(){
 });
 
 describe('Triggers', function(){
-	var adminToken, adminId, userToken, userId;
+	var adminToken, adminId, userToken, userId, triggerId;
 
 	before(function(done){
 		request
@@ -29,13 +29,12 @@ describe('Triggers', function(){
 				password: 'mike1234'
 			})
 			.expect(201)
-			.end(function(err, res){
-				if(err) return done(err);
+			.expect(function(res){
 				assert.isString(res.body.token);
 				adminToken = res.body.token;
 				adminId = jwt.decode(adminToken).sub;
-				done();
-			});
+			})
+			.end(done);
 	});
 
 	before(function(done){
@@ -46,13 +45,12 @@ describe('Triggers', function(){
 				password: 'tim1234'
 			})
 			.expect(201)
-			.end(function(err, res){
-				if(err) return done(err);
+			.expect(function(res){
 				assert.isString(res.body.token);
 				userToken = res.body.token;
 				userId = jwt.decode(userToken).sub;
-				done();
-			});
+			})
+			.end(done);
 	});
 
 	describe('#list', function(){
@@ -60,11 +58,10 @@ describe('Triggers', function(){
 			request
 				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers')
 				.expect(401)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.isNotArray(res.body);
-					done();
-				});
+				})
+				.end(done);
 		});
 		it('shows all triggers to an admin user', function(done){
 			request
@@ -72,22 +69,20 @@ describe('Triggers', function(){
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
 				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.lengthOf(Object.keys(res.body), 8);
-					done();
-				});
+				})
+				.end(done);
 		});
 		it('shows all triggers to a non-admin user', function(done){
 			request
 				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers')
 				.set('Authorization', 'Bearer ' + userToken)
 				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.lengthOf(Object.keys(res.body), 8);
-					done();
-				});
+				})
+				.end(done);
 		});
 	});
 
@@ -104,46 +99,44 @@ describe('Triggers', function(){
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
 				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.equal(res.body.id, 'accept');
-					done();
-				});
+				})
+				.end(done);
 		});
 		it('shows a trigger to a non-admin user', function(done){
 			request
 				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers/accept')
 				.set('Authorization', 'Bearer ' + userToken)
 				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.equal(res.body.id, 'accept');
-					done();
-				});
+				})
+				.end(done);
 		});
 	});
 
 	describe.skip('#post', function(){});
 
-	describe('#put', function(){
-		it('rejects an anonymous put', function(done){
+	describe('#post', function(){
+		it('rejects an anonymous post', function(done){
 			request
-				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers/test')
-				.send({conditions:[[{name:'date',invert:false,options:{timestamp:1412164799.999}}]],id:'test',listeners:[],title:'Test Trigger'})
+				.post('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers')
+				.send({conditions:[[{name:'date',invert:false,options:{timestamp:1412164799.999}}]],listeners:[],title:'Test Trigger'})
 				.expect(401)
 				.end(done);
 		});
-		it('rejects a put by a non-admin user', function(done){
+		it('rejects a post by a non-admin user', function(done){
 			request
-				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers/test')
+				.post('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers')
 				.set('Authorization', 'Bearer ' + userToken)
-				.send({conditions:[[{name:'date',invert:false,options:{timestamp:1412164799.999}}]],id:'test',listeners:[],title:'Test Trigger'})
+				.send({conditions:[[{name:'date',invert:false,options:{timestamp:1412164799.999}}]],listeners:[],title:'Test Trigger'})
 				.expect(403)
 				.end(done);
 		});
-		it('rejects an invalid put', function(done){
+		it('rejects an invalid post', function(done){
 			request
-				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers/test')
+				.post('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
 				.send({title: true})
@@ -152,53 +145,39 @@ describe('Triggers', function(){
 		});
 		it('rejects mismatched ids', function(done){
 			request
-				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers/test')
+				.post('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
 				.send({conditions:[[{name:'date',invert:false,options:{timestamp:1412164799.999}}]],id:'foo',listeners:[],title:'Test Trigger'})
 				.expect(400)
 				.end(done);
 		});
-		it('allows a new put by an admin user', function(done){
+		it('allows a post by an admin user', function(done){
 			request
-				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers/test')
+				.post('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
-				.send({conditions:[[{name:'date',invert:false,options:{timestamp:1412164799.999}}]],id:'test',listeners:[],title:'Test Trigger'})
+				.send({conditions:[[{name:'date',invert:false,options:{timestamp:1412164799.999}}]],listeners:[],title:'Test Trigger'})
 				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
-					assert.equal(res.body.id, 'test');
-					done();
-				});
-		});
-		it('allows an existing put by an admin user', function(done){
-			request
-				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers/test')
-				.set('Authorization', 'Bearer ' + adminToken)
-				.query({admin: true})
-				.send({conditions:[[{name:'date',invert:false,options:{timestamp:1412164799.999}}]],id:'test',listeners:[],title:'Test Trigger PUT'})
-				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
-					assert.equal(res.body.id, 'test');
-					assert.equal(res.body.title, 'Test Trigger PUT');
-					done();
-				});
+				.expect(function(res){
+					assert.isString(res.body.id);
+					triggerId = res.body.id;
+				})
+				.end(done);
 		});
 	});
 
 	describe('#patch', function(){
-		it('rejects an anonymous put', function(done){
+		it('rejects an anonymous post', function(done){
 			request
-				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers/test')
+				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers/' + triggerId)
 				.send({title:'Oops'})
 				.expect(401)
 				.end(done);
 		});
 		it('rejects a patch by a non-admin user', function(done){
 			request
-				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers/test')
+				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers/' + triggerId)
 				.set('Authorization', 'Bearer ' + userToken)
 				.send({title:'Oops'})
 				.expect(403)
@@ -206,7 +185,7 @@ describe('Triggers', function(){
 		});
 		it('rejects an invalid patch', function(done){
 			request
-				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers/test')
+				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers/' + triggerId)
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
 				.send({title: true})
@@ -215,7 +194,7 @@ describe('Triggers', function(){
 		});
 		it('rejects mismatched ids', function(done){
 			request
-				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers/test')
+				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers/' + triggerId)
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
 				.send({conditions:[[{name:'date',invert:false,options:{timestamp:1412164799.999}}]],id:'foo',listeners:[],title:'Test Trigger'})
@@ -229,51 +208,48 @@ describe('Triggers', function(){
 				.query({admin: true})
 				.send({title:'Oops'})
 				.expect(404)
-				.end(function(err, res){
-					if(err) return done(err);
-					done();
-				});
+				.expect(function(res){
+				})
+				.end(done);
 		});
 		it('allows an existing patch by an admin user', function(done){
 			request
-				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers/test')
+				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers/' + triggerId)
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
 				.send({title:'Patched'})
 				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.equal(res.body.title, 'Patched');
-					done();
-				});
+				})
+				.end(done);
 		});
 	});
 
 	describe('#delete', function(){
 		it('rejects an anonymous delete', function(done){
 			request
-				.delete('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers/test')
+				.delete('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers/' + triggerId)
 				.expect(401)
 				.end(done);
 		});
 		it('rejects a delete by a non-admin user', function(done){
 			request
-				.delete('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers/test')
+				.delete('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers/' + triggerId)
 				.set('Authorization', 'Bearer ' + userToken)
 				.expect(403)
 				.end(done);
 		});
 		it('deletes a trigger for an admin user', function(done){
 			request
-				.delete('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers/test')
+				.delete('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers/' + triggerId)
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
 				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
-					assert.equal(res.body.id, 'test');
-					done();
-				});
+				.expect(function(res){
+					assert.equal(res.body.id, triggerId);
+				})
+				.end(done);
 		});
 	});
 

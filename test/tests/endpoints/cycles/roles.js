@@ -19,7 +19,7 @@ before(function(){
 });
 
 describe('Roles', function(){
-	var adminToken, adminId, userToken, userId;
+	var adminToken, adminId, userToken, userId, roleId;
 
 	before(function(done){
 		request
@@ -29,13 +29,12 @@ describe('Roles', function(){
 				password: 'mike1234'
 			})
 			.expect(201)
-			.end(function(err, res){
-				if(err) return done(err);
+			.expect(function(res){
 				assert.isString(res.body.token);
 				adminToken = res.body.token;
 				adminId = jwt.decode(adminToken).sub;
-				done();
-			});
+			})
+			.end(done);
 	});
 
 	before(function(done){
@@ -46,13 +45,12 @@ describe('Roles', function(){
 				password: 'tim1234'
 			})
 			.expect(201)
-			.end(function(err, res){
-				if(err) return done(err);
+			.expect(function(res){
 				assert.isString(res.body.token);
 				userToken = res.body.token;
 				userId = jwt.decode(userToken).sub;
-				done();
-			});
+			})
+			.end(done);
 	});
 
 	describe('#list', function(){
@@ -60,11 +58,10 @@ describe('Roles', function(){
 			request
 				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/roles')
 				.expect(401)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.isNotArray(res.body);
-					done();
-				});
+				})
+				.end(done);
 		});
 		it('shows all roles to an admin user', function(done){
 			request
@@ -72,22 +69,20 @@ describe('Roles', function(){
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
 				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.lengthOf(Object.keys(res.body), 4);
-					done();
-				});
+				})
+				.end(done);
 		});
 		it('shows all roles to a non-admin user', function(done){
 			request
 				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/roles')
 				.set('Authorization', 'Bearer ' + userToken)
 				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.lengthOf(Object.keys(res.body), 4);
-					done();
-				});
+				})
+				.end(done);
 		});
 	});
 
@@ -104,101 +99,74 @@ describe('Roles', function(){
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
 				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.equal(res.body.id, 'advisor');
-					done();
-				});
+				})
+				.end(done);
 		});
 		it('shows a role to a non-admin user', function(done){
 			request
 				.get('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/roles/advisor')
 				.set('Authorization', 'Bearer ' + userToken)
 				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.equal(res.body.id, 'advisor');
-					done();
-				});
+				})
+				.end(done);
 		});
 	});
 
-	describe.skip('#post', function(){});
-
-	describe('#put', function(){
-		it('rejects an anonymous put', function(done){
+	describe('#post', function(){
+		it('rejects an anonymous post', function(done){
 			request
-				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/roles/test')
-				.send({assignable:{staff:true},id:'test',title:'Test',visible:{advisor:true,reviewer:true,staff:true,test:true}})
+				.post('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/roles')
+				.send({assignable:{staff:true},title:'Test',visible:{advisor:true,reviewer:true,staff:true,test:true}})
 				.expect(401)
 				.end(done);
 		});
-		it('rejects a put by a non-admin user', function(done){
+		it.skip('rejects a post by a non-admin user', function(done){
 			request
-				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/roles/test')
+				.post('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/roles')
 				.set('Authorization', 'Bearer ' + userToken)
-				.send({assignable:{staff:true},id:'test',title:'Test',visible:{advisor:true,reviewer:true,staff:true,test:true}})
+				.send({assignable:{staff:true},title:'Test',visible:{advisor:true,reviewer:true,staff:true,test:true}})
 				.expect(403)
 				.end(done);
 		});
-		it('rejects an invalid put', function(done){
+		it('rejects an invalid post', function(done){
 			request
-				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/roles/test')
+				.post('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/roles')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
 				.send({title: true})
 				.expect(400)
 				.end(done);
 		});
-		it('rejects mismatched ids', function(done){
+		it('allows a post by an admin user', function(done){
 			request
-				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/roles/test')
+				.post('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/roles')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
-				.send({assignable:{staff:true},id:'foo',title:'Test',visible:{advisor:true,reviewer:true,staff:true,test:true}})
-				.expect(400)
+				.send({assignable:{staff:true},title:'Test',visible:{advisor:true,reviewer:true,staff:true,test:true}})
+				.expect(200)
+				.expect(function(res){
+					assert.isString(res.body.id);
+					roleId = res.body.id;
+				})
 				.end(done);
-		});
-		it('allows a new put by an admin user', function(done){
-			request
-				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/roles/test')
-				.set('Authorization', 'Bearer ' + adminToken)
-				.query({admin: true})
-				.send({assignable:{staff:true},id:'test',title:'Test',visible:{advisor:true,reviewer:true,staff:true,test:true}})
-				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
-					assert.equal(res.body.id, 'test');
-					done();
-				});
-		});
-		it('allows an existing put by an admin user', function(done){
-			request
-				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/roles/test')
-				.set('Authorization', 'Bearer ' + adminToken)
-				.query({admin: true})
-				.send({assignable:{staff:true},id:'test',title:'Test',visible:{advisor:true,reviewer:true,staff:true,test:false}})
-				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
-					assert.equal(res.body.id, 'test');
-					assert.equal(res.body.visible.test, false);
-					done();
-				});
 		});
 	});
 
 	describe('#patch', function(){
-		it('rejects an anonymous put', function(done){
+		it('rejects an anonymous post', function(done){
 			request
-				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/roles/test')
+				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/roles/' + roleId)
 				.send({title:'Oops'})
 				.expect(401)
 				.end(done);
 		});
 		it('rejects a patch by a non-admin user', function(done){
 			request
-				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/roles/test')
+				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/roles/' + roleId)
 				.set('Authorization', 'Bearer ' + userToken)
 				.send({title:'Oops'})
 				.expect(403)
@@ -206,7 +174,7 @@ describe('Roles', function(){
 		});
 		it('rejects an invalid patch', function(done){
 			request
-				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/roles/test')
+				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/roles/' + roleId)
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
 				.send({title: true})
@@ -215,7 +183,7 @@ describe('Roles', function(){
 		});
 		it('rejects mismatched ids', function(done){
 			request
-				.put('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/roles/test')
+				.post('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/roles')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
 				.send({assignable:{staff:true},id:'foo',title:'Test',visible:{advisor:true,reviewer:true,staff:true,test:true}})
@@ -229,51 +197,48 @@ describe('Roles', function(){
 				.query({admin: true})
 				.send({title:'Oops'})
 				.expect(404)
-				.end(function(err, res){
-					if(err) return done(err);
-					done();
-				});
+				.expect(function(res){
+				})
+				.end(done);
 		});
 		it('allows an existing patch by an admin user', function(done){
 			request
-				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/roles/test')
+				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/roles/' + roleId)
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
 				.send({title:'Patched'})
 				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.equal(res.body.title, 'Patched');
-					done();
-				});
+				})
+				.end(done);
 		});
 	});
 
 	describe('#delete', function(){
 		it('rejects an anonymous delete', function(done){
 			request
-				.delete('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/roles/test')
+				.delete('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/roles/' + roleId)
 				.expect(401)
 				.end(done);
 		});
 		it('rejects a delete by a non-admin user', function(done){
 			request
-				.delete('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/roles/test')
+				.delete('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/roles/' + roleId)
 				.set('Authorization', 'Bearer ' + userToken)
 				.expect(403)
 				.end(done);
 		});
 		it('deletes a role for an admin user', function(done){
 			request
-				.delete('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/roles/test')
+				.delete('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/roles/' + roleId)
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
 				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
-					assert.equal(res.body.id, 'test');
-					done();
-				});
+				.expect(function(res){
+					assert.equal(res.body.id, roleId);
+				})
+				.end(done);
 		});
 	});
 

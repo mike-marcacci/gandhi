@@ -2,6 +2,7 @@
   "id": "http://www.gandhi.io/schema/cycle",
   "$schema": "http://json-schema.org/draft-04/schema",
   "required": [
+    "id",
     "title"
   ],
   "type":"object",
@@ -198,6 +199,8 @@
         "project:delete",
         "project/assignments:read",
         "project/assignments:write",
+        "project/invitations:read",
+        "project/invitations:write",
         "project/contents:read",
         "project/contents:write"
       ],
@@ -225,6 +228,12 @@
         },
         "project/contents:write": {
           "$ref": "#/definitions/permission"
+        },
+        "project/invitations:read": {
+          "$ref": "#/definitions/permission"
+        },
+        "project/invitations:write": {
+          "$ref": "#/definitions/permission"
         }
       },
       "default": {
@@ -250,6 +259,12 @@
           "applicant": true
         },
         "project/contents:write": {
+          "applicant": true
+        },
+        "project/invitations:read": {
+          "applicant": true
+        },
+        "project/invitations:write": {
           "applicant": true
         }
       }

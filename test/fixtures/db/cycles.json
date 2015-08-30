@@ -130,6 +130,14 @@
 			"applicant": true,
 			"staff": true
 		},
+		"project/invitations:read": {
+			"applicant": true,
+			"staff": true
+		},
+		"project/invitations:write": {
+			"applicant": true,
+			"staff": true
+		},
 		"project/contents:read": {
 			"applicant": true,
 			"staff": true
@@ -639,6 +647,14 @@
 			"staff": true
 		},
 		"project/assignments:write": {
+			"applicant": true,
+			"staff": true
+		},
+		"project/invitations:read": {
+			"applicant": true,
+			"staff": true
+		},
+		"project/invitations:write": {
 			"applicant": true,
 			"staff": true
 		},

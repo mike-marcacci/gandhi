@@ -45,16 +45,7 @@ module.exports = {
 
 							r.db(config.db.db).table(fixture.info.name).insert(fixture.data).run(conn, loop);
 						});
-					}, function(err, res){
-
-
-						// TEMPORARY
-						require('../../lib/api/utils/cache.js')(conn, true)
-						.finally(function(){ conn.close(); })
-						.then(function(){ done(); })
-						.catch(function(err){ done(err); })
-						
-					});
+					}, done);
 				});
 			});
 		});

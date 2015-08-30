@@ -29,13 +29,12 @@ describe('Contents', function(){
 				password: 'mike1234'
 			})
 			.expect(201)
-			.end(function(err, res){
-				if(err) return done(err);
+			.expect(function(res){
 				assert.isString(res.body.token);
 				adminToken = res.body.token;
 				adminId = jwt.decode(adminToken).sub;
-				done();
-			});
+			})
+			.end(done);
 	});
 
 	before(function(done){
@@ -46,13 +45,12 @@ describe('Contents', function(){
 				password: 'tim1234'
 			})
 			.expect(201)
-			.end(function(err, res){
-				if(err) return done(err);
+			.expect(function(res){
 				assert.isString(res.body.token);
 				applicantToken = res.body.token;
 				applicantId = jwt.decode(applicantToken).sub;
-				done();
-			});
+			})
+			.end(done);
 	});
 
 	describe('#list', function(){
@@ -60,11 +58,10 @@ describe('Contents', function(){
 			request
 				.get('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/contents')
 				.expect(401)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.isNotArray(res.body);
-					done();
-				});
+				})
+				.end(done);
 		});
 		it('returns 404 for nonexistant project', function(done){
 			request
@@ -80,11 +77,10 @@ describe('Contents', function(){
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
 				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.lengthOf(Object.keys(res.body), 7);
-					done();
-				});
+				})
+				.end(done);
 		});
 		it.skip('returns default values for a nonexistant content');
 		it.skip('returns the correct content permissions for an admin user');
@@ -94,22 +90,20 @@ describe('Contents', function(){
 				.get('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/contents')
 				.set('Authorization', 'Bearer ' + applicantToken)
 				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.lengthOf(Object.keys(res.body), 1);
-					done();
-				});
+				})
+				.end(done);
 		});
 		it.skip('shows limited contents to a non-admin user according to content permission', function(done){
 			request
 				.get('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/contents')
 				.set('Authorization', 'Bearer ' + applicantToken)
 				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.lengthOf(Object.keys(res.body), 1);
-					done();
-				});
+				})
+				.end(done);
 		});
 	});
 
@@ -147,11 +141,10 @@ describe('Contents', function(){
 				.get('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/contents/administrative_review')
 				.set('Authorization', 'Bearer ' + applicantToken)
 				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.equal(res.body.id, '514d3645-a768-4749-b6da-8b1b4d08cf1c');
-					done();
-				});
+				})
+				.end(done);
 		});
 		it('shows a content to an admin user', function(done){
 			request
@@ -159,22 +152,20 @@ describe('Contents', function(){
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
 				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.equal(res.body.id, 'administrative_review');
-					done();
-				});
+				})
+				.end(done);
 		});
 		it.skip('shows limited content to a non-admin user with content permission', function(done){
 			request
 				.get('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/contents/514d3645-a768-4749-b6da-8b1b4d08cf1c')
 				.set('Authorization', 'Bearer ' + applicantToken)
 				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.equal(res.body.id, '514d3645-a768-4749-b6da-8b1b4d08cf1c');
-					done();
-				});
+				})
+				.end(done);
 		});
 	});
 
@@ -245,12 +236,11 @@ describe('Contents', function(){
 				.query({admin: true})
 				.send({id:'xxxxxx',status_id:'draft',data:{foo:'bar'}})
 				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.equal(res.body.id, 'c7efa7cf-bab2-44a6-862f-7ca5e154b1ae');
 					assert.equal(res.body.name, 'Test PUT');
-					done();
-				});
+				})
+				.end(done);
 		});
 		it.skip('allows an existing put by an admin user', function(done){
 			request
@@ -259,12 +249,11 @@ describe('Contents', function(){
 				.query({admin: true})
 				.send({id:'xxxxxx',status_id:'draft',data:{foo:'bar'}})
 				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.equal(res.body.id, 'c7efa7cf-bab2-44a6-862f-7ca5e154b1ae');
 					assert.equal(res.body.name, 'Test PUT');
-					done();
-				});
+				})
+				.end(done);
 		});
 		it.skip('allows a new put by a non-admin user with permission', function(done){
 			request
@@ -273,11 +262,10 @@ describe('Contents', function(){
 				.query({admin: true})
 				.send({id:'c7efa7cf-bab2-44a6-862f-7ca5e154b1ae',role:'applicant',name:'Test',email:'test@email.com'})
 				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.equal(res.body.id, 'c7efa7cf-bab2-44a6-862f-7ca5e154b1ae');
-					done();
-				});
+				})
+				.end(done);
 		});
 		it.skip('allows an existing put by a non-admin user with permission', function(done){
 			request
@@ -286,12 +274,11 @@ describe('Contents', function(){
 				.query({admin: true})
 				.send({id:'xxxxxx',status_id:'draft',data:{foo:'bar'}})
 				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.equal(res.body.id, 'c7efa7cf-bab2-44a6-862f-7ca5e154b1ae');
 					assert.equal(res.body.name, 'Test PUT');
-					done();
-				});
+				})
+				.end(done);
 		});
 	});
 
@@ -336,10 +323,9 @@ describe('Contents', function(){
 				.query({admin: true})
 				.send({name:'Oops'})
 				.expect(404)
-				.end(function(err, res){
-					if(err) return done(err);
-					done();
-				});
+				.expect(function(res){
+				})
+				.end(done);
 		});
 		it('returns 404 for nonexistant project', function(done){
 			request
@@ -357,11 +343,10 @@ describe('Contents', function(){
 				.query({admin: true})
 				.send({name:'Patched'})
 				.expect(200)
-				.end(function(err, res){
-					if(err) return done(err);
+				.expect(function(res){
 					assert.equal(res.body.name, 'Patched');
-					done();
-				});
+				})
+				.end(done);
 		});
 	});
 
