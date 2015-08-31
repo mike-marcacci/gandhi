@@ -8,9 +8,11 @@
 <div class="panel panel-default">
 	<div class="panel-body">
 		<ul class="nav nav-pills">
+			<!--
 			<li ng-class="{active: $state.is('portal.projects.show', {project: project.id})}">
 				<a ui-sref="portal.projects.show({project: project.id})"><i class="glyphicon glyphicon-list"></i></a>
 			</li>
+			-->
 			<li ng-class="{active: $state.includes('portal.projects.show.contents.content', {content: content.id})}" ng-repeat="content in contents">
 				<a ui-sref="portal.projects.show.contents.content({content: content.id})" ng-bind-html="stagesById[content.id].title"></a>
 			</li>

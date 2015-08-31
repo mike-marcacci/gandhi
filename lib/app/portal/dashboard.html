@@ -41,7 +41,7 @@
 		<!-- Open Cycles -->
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<span class="panel-title">Open Cycles</span>
+				<span class="panel-title">Open Call for Proposals</span>
 			</div>
 			<div class="panel-body">
 				<div ng-if="!(cycles | filter : {open: true}).length">There are currently no open cycles.</div>
@@ -50,7 +50,7 @@
 						<h4 class="list-group-item-heading">{{cycle.title}}</h4>
 						<div class="list-group-item-text" ng-bind-html="cycle.description"></div>
 						<div style="padding: 1em 0 .5em;">
-							<a ui-sref="portal.cycles.show({cycle: cycle.id})" class="btn btn-sm btn-primary">Start Project</a>
+							<a ui-sref="portal.cycles.show({cycle: cycle.id})" class="btn btn-sm btn-primary">Begin Application</a>
 						</div>
 					</div>
 				</div>
