@@ -23,16 +23,16 @@
 	</ul>
 
 	<div class="panel panel-default" ng-if="tab === 'write'">
-		<div class="row">
+		<div style="display:-moz-flex;display:-webkit-flex;display:flex;max-height:100vh;">
 
 
 			<!-- Preview -->
-			<div class="col-md-7" ng-if="stage.component.options.preview.length">
-				<div class="panel-body">
+			<div style="display:-moz-flex;display:-webkit-flex;display:flex;flex:1;" ng-if="stage.component.options.preview.length">
+				<div class="panel-body" style="display:-moz-flex;display:-webkit-flex;display:flex;-moz-flex-direction:column;-webkit-flex-direction:column;flex-direction:column;">
 					<select ng-if="stage.comment.options.preview.length > 1" class="form-control" ng-model="preview.id" ng-options="id in stage.component.options.preview"></select>
 
 					<h4>{{preview.stage.title}}</h4>
-					<div class="well" ng-if="preview.content.id &amp;&amp; preview.stage.id">
+					<div style="overflow-y: auto;" class="well" ng-if="preview.content.id &amp;&amp; preview.stage.id">
 						<div gandhi-component="{cycle: cycle, project: project, stage: preview.stage, content: preview.content, mode: mode}"></div>
 					</div>
 				</div>
@@ -40,8 +40,8 @@
 
 
 			<!-- Form -->
-			<div ng-class="{'col-md-5': stage.component.options.preview.length, 'col-md-12': !stage.component.options.preview.length}">
-				<div class="panel-body">
+			<div style="display:-moz-flex;display:-webkit-flex;display:flex;flex:1;">
+				<div style="overflow-y: auto;" class="panel-body">
 					<form name="gandhiReviewComponent" ng-submit="save(gandhiReviewComponent)">
 						<div ng-if="stage.component.options.schema &amp;&amp; stage.component.options.form" sf-model="data" sf-form="stage.component.options.form" sf-schema="stage.component.options.schema" sf-options="sfOptions"></div>
 						<button ng-show="content.authorizations['write']" class="btn btn-primary" ng-bind="options.submitButtonText || 'Submit'"></button>

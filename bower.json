@@ -20,6 +20,8 @@
   "dependencies": {
     "angular": "1.x.x",
     "angular-ckeditor": "1.x.x",
+    "angular-elastic": "~2.5.0",
+    "angular-json-human": "1.x.x",
     "angular-resource": "1.x.x",
     "angular-sanitize": "1.x.x",
     "angular-schema-form": "0.8.x",
@@ -29,11 +31,10 @@
     "angular-ui-sortable": "0.13.x",
     "bootstrap-sass-official": "3.x.x",
     "bootstrap-vertical-tabs": "1.x.x",
+    "checklist-model": "0.5.x",
     "lodash": "3.x.x",
     "ng-file-upload": "~1.6.5",
-    "objectpath": "1.x.x",
-    "angular-json-human": "1.x.x",
-    "checklist-model": "0.5.x"
+    "objectpath": "1.x.x"
   },
   "overrides": {
     "ace-builds": {
@@ -51,7 +52,8 @@
     "ui.router",
     "ui.select",
     "ui.sortable",
-    "yaru22.jsonHuman"
+    "yaru22.jsonHuman",
+    "monospaced.elastic"
   ],
   "resolutions": {
     "lodash": "3.x.x"

@@ -1,0 +1,17 @@
+{
+  "name": "gandhi-decorator-elastic-textarea",
+  "description": "Gandhi Decorator: Elastic Textarea",
+  "version": "0.0.1",
+  "license": "MIT",
+  "private": true,
+  "main": [
+    "index.js",
+    "index.html"
+  ],
+  "dependencies": {
+    "angular": "*",
+    "angular-schema-form": "*",
+    "angular-elastic": "*"
+  },
+  "module": "gandhi-decorator-elastic-textarea"
+}
