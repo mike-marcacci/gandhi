@@ -26,12 +26,12 @@
       },
       "properties": {
         "open": {
-          "type": ["null", "number"],
-          "default": null
+          "type": ["boolean", "number"],
+          "default": true
         },
         "close": {
-          "type": ["null", "number"],
-          "default": null
+          "type": ["boolean", "number"],
+          "default": false
         }
       }
     },

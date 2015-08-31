@@ -29,6 +29,14 @@
 		<div ng-bind-html="stage.component.options.instructions"></div>
 	</div>
 	<div ng-if="tab == 'Instructions' &amp;&amp; stageInstructionsEdit" class="cke_chromeless">
+
+		<div class="panel-body">
+			<label>
+				Instruction Columns (1-12):
+				<input type="number" ng-model="stageInstructionsEdit.component.options.instructionsCols" min="1" max="12" step="1">
+			</label>
+		</div>
+
 		<textarea style="height: auto;" ckeditor ng-model="stageInstructionsEdit.component.options.instructions"></textarea>
 	</div>
 
