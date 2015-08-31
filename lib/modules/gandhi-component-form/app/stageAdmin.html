@@ -31,10 +31,35 @@
 	<div ng-if="tab == 'Instructions' &amp;&amp; stageInstructionsEdit" class="cke_chromeless">
 
 		<div class="panel-body">
-			<label>
-				Instruction Columns (1-12):
-				<input type="number" ng-model="stageInstructionsEdit.component.options.instructionsCols" min="1" max="12" step="1">
-			</label>
+			<form class="form-horizontal">
+				<div class="form-group">
+					<label for="instructionsCols" class="col-sm-3 control-label">Instruction Columns</label>
+					<div class="col-sm-9">
+						<input type="number" class="form-control" id="instructionsCols" ng-model="stageInstructionsEdit.component.options.instructionsCols" min="1" max="12" step="1">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-3 col-sm-9">
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" ng-model="stageInstructionsEdit.component.options.draftButton"> Show Draft Button
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="draftButtonText" class="col-sm-3 control-label">Draft Button Text</label>
+					<div class="col-sm-9">
+						<input type="text" class="form-control" id="draftButtonText" ng-model="stageInstructionsEdit.component.options.draftButtonText" min="1" max="12" step="1">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="submitButtonText" class="col-sm-3 control-label">Submit Button Text</label>
+					<div class="col-sm-9">
+						<input type="text" class="form-control" id="submitButtonText" ng-model="stageInstructionsEdit.component.options.submitButtonText" min="1" max="12" step="1">
+					</div>
+				</div>
+			</form>
 		</div>
 
 		<textarea style="height: auto;" ckeditor ng-model="stageInstructionsEdit.component.options.instructions"></textarea>

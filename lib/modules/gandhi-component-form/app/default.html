@@ -39,8 +39,8 @@
 
 					<form name="gandhiFormComponent" ng-submit="complete(gandhiFormComponent)">
 						<div ng-if="stage.component.options.schema &amp;&amp; stage.component.options.form" sf-model="content.data.form" sf-form="stage.component.options.form" sf-schema="stage.component.options.schema" sf-options="sfOptions"></div>
-						<div ng-if="content.authorizations['write'] &amp;&amp; options.draft !== false" ng-click="draft()" class="btn btn-default" ng-bind="options.draftButtonText || 'Save Draft'"></div>
-						<button ng-if="content.authorizations['write']" class="btn btn-primary" ng-bind="options.submitButtonText || 'Submit'"></button>
+						<div ng-if="content.authorizations['write'] &amp;&amp; stage.component.options.draftButton !== false" ng-click="draft()" class="btn btn-default" ng-bind="stage.component.options.draftButtonText || 'Save Draft'"></div>
+						<button ng-if="content.authorizations['write']" class="btn btn-primary" ng-bind="stage.component.options.submitButtonText || 'Submit'"></button>
 					</form>
 
 				</div>

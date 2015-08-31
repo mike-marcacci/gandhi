@@ -19,18 +19,18 @@
 
 	<div class="row" ng-if="content.authorizations['read']">
 
-		<div class="col-md-5" ng-if="stage.component.options.instructions">
+		<div class="col-md-5" ng-if="content.data.instructions">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<span class="panel-title">{{cycle.title}}</span>
 				</div>
 				<div class="panel-body">
-					<div ng-bind-html="content.data.message"></div>
+					<div ng-bind-html="content.data.instructions"></div>
 				</div>
 			</div>
 		</div>
 
-		<div ng-class="{'col-md-7': stage.component.options.instructions, 'col-md-12': !stage.component.options.instructions}">
+		<div ng-class="{'col-md-7': content.data.instructions, 'col-md-12': !content.data.instructions}">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<span class="panel-title">{{stage.title}} - <b>{{content.status_id | title}}</b></span>
