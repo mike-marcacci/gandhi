@@ -21,8 +21,8 @@
     "options": {
       "type": "object",
       "default": {
-        "open": null,
-        "close": null
+        "open": true,
+        "close": false
       },
       "properties": {
         "open": {
