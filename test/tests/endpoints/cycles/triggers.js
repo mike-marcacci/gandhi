@@ -122,7 +122,7 @@ describe('Triggers', function(){
 		it('rejects an anonymous post', function(done){
 			request
 				.post('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers')
-				.send({conditions:[[{name:'date',invert:false,options:{timestamp:1412164799.999}}]],listeners:[],title:'Test Trigger'})
+				.send({conditions:[[{name:'date',invert:false,options:{timestamp:1412164799.999}}]],actions:[],title:'Test Trigger'})
 				.expect(401)
 				.end(done);
 		});
@@ -130,7 +130,7 @@ describe('Triggers', function(){
 			request
 				.post('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers')
 				.set('Authorization', 'Bearer ' + userToken)
-				.send({conditions:[[{name:'date',invert:false,options:{timestamp:1412164799.999}}]],listeners:[],title:'Test Trigger'})
+				.send({conditions:[[{name:'date',invert:false,options:{timestamp:1412164799.999}}]],actions:[],title:'Test Trigger'})
 				.expect(403)
 				.end(done);
 		});
@@ -148,7 +148,7 @@ describe('Triggers', function(){
 				.post('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
-				.send({conditions:[[{name:'date',invert:false,options:{timestamp:1412164799.999}}]],id:'foo',listeners:[],title:'Test Trigger'})
+				.send({conditions:[[{name:'date',invert:false,options:{timestamp:1412164799.999}}]],id:'foo',actions:[],title:'Test Trigger'})
 				.expect(400)
 				.end(done);
 		});
@@ -157,7 +157,7 @@ describe('Triggers', function(){
 				.post('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
-				.send({conditions:[[{name:'date',invert:false,options:{timestamp:1412164799.999}}]],listeners:[],title:'Test Trigger'})
+				.send({conditions:[[{name:'date',invert:false,options:{timestamp:1412164799.999}}]],actions:[],title:'Test Trigger'})
 				.expect(200)
 				.expect(function(res){
 					assert.isString(res.body.id);
@@ -197,7 +197,7 @@ describe('Triggers', function(){
 				.patch('/api/cycles/128f2348-99d4-40a1-b5ab-91d9019f272d/triggers/' + triggerId)
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
-				.send({conditions:[[{name:'date',invert:false,options:{timestamp:1412164799.999}}]],id:'foo',listeners:[],title:'Test Trigger'})
+				.send({conditions:[[{name:'date',invert:false,options:{timestamp:1412164799.999}}]],id:'foo',actions:[],title:'Test Trigger'})
 				.expect(400)
 				.end(done);
 		});

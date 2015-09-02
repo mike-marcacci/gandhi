@@ -25,7 +25,7 @@
 			],
 			"id": "accept",
 			"single": false,
-			"listeners": [
+			"actions": [
 
 			],
 			"title": "Accepted"
@@ -42,7 +42,7 @@
 			],
 			"id": "close",
 			"single": false,
-			"listeners": [
+			"actions": [
 
 			],
 			"title": "Application Closed"
@@ -59,7 +59,7 @@
 			],
 			"id": "open",
 			"single": false,
-			"listeners": [
+			"actions": [
 
 			],
 			"title": "Application Opened"
@@ -76,7 +76,7 @@
 			],
 			"id": "reject",
 			"single": false,
-			"listeners": [
+			"actions": [
 
 			],
 			"title": "Rejected"
@@ -94,7 +94,7 @@
 			],
 			"id": "submit",
 			"single": false,
-			"listeners": [
+			"actions": [
 
 			],
 			"title": "Officially Submitted"
@@ -471,7 +471,7 @@
 			"id": "accept",
 			"single": false,
 			"single": false,
-			"listeners": [
+			"actions": [
 
 			],
 			"title": "Accepted"
@@ -488,7 +488,7 @@
 			],
 			"id": "archive",
 			"single": false,
-			"listeners": [
+			"actions": [
 
 			],
 			"title": "Archived"
@@ -505,7 +505,7 @@
 			],
 			"id": "close",
 			"single": false,
-			"listeners": [
+			"actions": [
 
 			],
 			"title": "Application Closed"
@@ -522,7 +522,7 @@
 			],
 			"id": "open",
 			"single": false,
-			"listeners": [
+			"actions": [
 
 			],
 			"title": "Application Opened"
@@ -539,7 +539,7 @@
 			],
 			"id": "reject",
 			"single": false,
-			"listeners": [
+			"actions": [
 
 			],
 			"title": "Rejected"
@@ -557,7 +557,7 @@
 			],
 			"id": "report",
 			"single": false,
-			"listeners": [
+			"actions": [
 
 			],
 			"title": "Report Submitted"
@@ -575,7 +575,7 @@
 			],
 			"id": "submit",
 			"single": false,
-			"listeners": [
+			"actions": [
 
 			],
 			"title": "Officially Submitted"
@@ -599,7 +599,7 @@
 			],
 			"id": "warning",
 			"single": false,
-			"listeners": [{
+			"actions": [{
 				"name": "notify",
 				"options": {
 					"role_ids": [
@@ -607,7 +607,7 @@
 						"advisor"
 					],
 					"subject": "Don't get left behind!",
-					"content": "You're about to miss the submission deadline.",
+					"template": "You're about to miss the submission deadline.",
 					"value": true
 				}
 			}],

@@ -92,6 +92,15 @@
 				</div>
 			</div>
 
+			<div class="panel panel-default">
+				<div class="panel-heading">Events</div>
+				<div class="panel-body">
+					<div ng-repeat="(id, group) in project.events">
+						<h4>{{id}}</h4>
+						<div ng-repeat="event in group">{{ event.timestamp | date:"yyyy.MM.dd - hh:mm a" }}</div>
+					</div>
+				</div>
+			</div>
 		</div>
 
 	</div>
