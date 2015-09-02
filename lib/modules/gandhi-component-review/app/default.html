@@ -8,7 +8,8 @@
 	<div class="alert alert-info" role="alert" ng-if="content.status_id == 'complete'">
 		This stage is complete.
 	</div>
-
+	
+	<!--
 	<div class="alert alert-warning" role="alert" ng-if="!content.authorizations['read:public']">
 		You are not allowed to see the contents of this stage.
 	</div>
@@ -16,6 +17,7 @@
 	<div class="alert alert-warning" role="alert" ng-if="!content.authorizations['write'] &amp;&amp; content.authorizations['read:public']">
 		Please note, you are not allowed to make changes to this stage.
 	</div>
+	-->
 
 	<ul class="nav nav-tabs" role="tablist">
 		<li ng-show="content.authorizations['write']" ng-class="{active: tab === 'write'}"><a href ng-click="tab = 'write'">Write a Review</a></li>
@@ -42,8 +44,9 @@
 			<!-- Form -->
 			<div style="display:-moz-flex;display:-webkit-flex;display:flex;flex:1;">
 				<div style="overflow-y: auto;" class="panel-body">
-					<form name="gandhiReviewComponent" ng-submit="save(gandhiReviewComponent)">
+					<form name="gandhiReviewComponent" ng-submit="submit(gandhiReviewComponent)">
 						<div ng-if="stage.component.options.schema &amp;&amp; stage.component.options.form" sf-model="data" sf-form="stage.component.options.form" sf-schema="stage.component.options.schema" sf-options="sfOptions"></div>
+						<div ng-click="save(gandhiReviewComponent)" ng-show="content.authorizations['write']" class="btn btn-primary" ng-bind="options.draftButtonText || 'Save Draft'"></div>
 						<button ng-show="content.authorizations['write']" class="btn btn-primary" ng-bind="options.submitButtonText || 'Submit'"></button>
 					</form>
 				</div>
