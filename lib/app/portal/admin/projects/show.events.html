@@ -1,0 +1,16 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<span class="panel-title">Events</span>
+	</div>
+	<div class="panel-body">
+		<div ng-repeat="(id, group) in project.events">
+			<h5>{{ triggersById[id].title }}</h5>
+			<p class="help-block">{{ triggersById[id].description }}</p>
+			<table class="table">
+				<thead><tr><th>Timestamp</th><th>Value</th></tr></thead>
+				<tbody><tr ng-repeat="event in group"><td>{{ event.timestamp | date:"yyyy.MM.dd - hh:mm a" }}</td><td>{{ event.value ? 'TRUE' : 'FALSE' }}</td></tr></tbody>
+			</table>
+			<br>
+		</div>
+	</div>
+</div>

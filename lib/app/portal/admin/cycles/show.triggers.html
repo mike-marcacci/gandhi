@@ -1,190 +1,68 @@
-<div class="panel panel-default" ng-if="triggerCreate">
-	<div class="panel-heading">
-		<span class="panel-title">Create Trigger</span>
-		<div class="pull-right">
-			<button class="btn btn-xs btn-primary" ng-click="create()">Save</button>
-			<button class="btn btn-xs btn-default" ng-class="{active: triggerCreate}" ng-click="toggleCreate()"><i class="glyphicon glyphicon-plus-sign"></i></button>
-		</div>
-	</div>
-	<div class="panel-body">
-		<form class="form-horizontal" role="form" ng-submit="create()">
-			<div class="form-group">
-				<label for="trigger-title" class="col-sm-2 control-label">Title</label>
-				<div class="col-sm-10">
-					<input type="text" class="form-control" id="trigger-title" ng-model="triggerCreate.title">
-				</div>
+<div ui-view>
+
+	<div class="panel panel-default" ng-if="triggerCreate">
+		<div class="panel-heading">
+			<span class="panel-title">Create Trigger</span>
+			<div class="pull-right">
+				<button class="btn btn-xs btn-primary" ng-click="create()">Save</button>
+				<button class="btn btn-xs btn-default" ng-class="{active: triggerCreate}" ng-click="toggleCreate()"><i class="glyphicon glyphicon-plus-sign"></i></button>
 			</div>
-		</form>
-	</div>
-</div>
-
-<div class="panel panel-default" ng-if="!triggerCreate">
-	<div class="panel-heading">
-		<span class="panel-title">Triggers</span>
-		<div class="pull-right">
-			<button class="btn btn-xs btn-default" ng-class="{active: triggerCreate}" ng-click="toggleCreate()"><i class="glyphicon glyphicon-plus-sign"></i></button>
+		</div>
+		<div class="panel-body">
+			<form class="form-horizontal" role="form" ng-submit="create()">
+				<div class="form-group">
+					<label for="trigger-title" class="col-sm-2 control-label">Title</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="trigger-title" ng-model="triggerCreate.title">
+					</div>
+				</div>
+			</form>
 		</div>
 	</div>
 
-	<div class="panel-body" ng-if="!triggers.length">
-		No triggers. <a href ng-click="toggleCreate()">Create one.</a>
-	</div>
+	<div class="panel panel-default" ng-if="!triggerCreate">
+		<div class="panel-heading">
+			<span class="panel-title">Triggers</span>
+			<div class="pull-right">
+				<button class="btn btn-xs btn-default" ng-class="{active: triggerCreate}" ng-click="toggleCreate()"><i class="glyphicon glyphicon-plus-sign"></i></button>
+			</div>
+		</div>
 
-	<div class="table-responsive" ng-if="triggers.length">
-		<table class="table table-hover">
-			<thead>
-				<tr>
-					<th ng-if="currentUser.preferences.admin.technical">ID</th>
-					<th>Title</th>
-					<th>Single</th>
-					<th style="min-width: 400px;">Conditions</th>
-					<th ng-if="false" style="min-width: 400px;">Listeners</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr ng-repeat="trigger in triggers" ng-class="{active: backup[trigger.id]}">
-					<td ng-if="currentUser.preferences.admin.technical">
-						<p class="form-control-static"><strong>{{trigger.id}}</strong></p>
-					</td>
-					<td>
-						<p ng-hide="backup[trigger.id]" class="form-control-static">{{trigger.title}}</p>
-						<input ng-show="backup[trigger.id]" class="form-control" type="text" ng-model="trigger.title">
-					</td>
-					<td>
-						<label>
-							<input ng-show="backup[trigger.id]" ng-disabled="!backup[trigger.id]" type="checkbox" ng-model="trigger.single">
-							<span class="text-success" ng-show="trigger.single">Yes</span>
-							<span class="text-danger" ng-hide="trigger.single">No</span>
-						</label>
-					</td>
-					<td>
-						<div ng-repeat="(iGroup, group) in trigger.conditions" class="panel panel-default">
-							<div style="padding: 15px; white-space: nowrap; overflow-x: auto;">
-								<div class="panel panel-default" style="display: inline-block; margin-right: 15px; margin-bottom: 0;" ng-repeat="(iCondition, condition) in group">
+		<div class="panel-body" ng-if="!triggers.length">
+			No triggers. <a href ng-click="toggleCreate()">Create one.</a>
+		</div>
 
-								<!-- Heading -->
-								<div ng-if="!backup[trigger.id]" class="panel-heading" style="display: flex;">
-									<div class="panel-title">{{condition.name | title}}</div>
-								</div>
-								<div ng-if="backup[trigger.id]" class="panel-heading" style="display: flex;">
-									<select class="form-control input-xs" style="flex: 1;" ng-model="condition.name" ng-options="type.name as type.title for type in [{name: 'date', title: 'Date'}, {name: 'project_status', title: 'Project Status'}, {name: 'content_status', title: 'Content Status'}, {name: 'export', title: 'Export'}]" required></select>
-
-									<div style="margin-left: 15px;" ng-click="removeIndex(group, iCondition)" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i></div>
-								</div>
-
-								<div class="panel-body form-horizontal" style="padding-bottom: 0;">
-									<div class="form-group">
-										<label class="col-xs-4">Invert</label>
-										<div class="col-xs-8">
-											<label>
-												<input ng-if="backup[trigger.id]" type="checkbox" ng-model="condition.invert">
-												<span class="text-success" ng-show="condition.invert">Yes</span>
-												<span class="text-danger" ng-hide="condition.invert">No</span>
-											</label>
-										</div>
-									</div>
-
-									<!-- Date -->
-									<div ng-if="condition.name == 'date'">
-										<div class="form-group">
-											<label class="col-xs-4">Timestamp</label>
-											<div class="col-xs-8">
-												<div ng-if="!backup[trigger.id]">{{condition.options.timestamp * 1000 | date:"yyyy.MM.dd - hh:mm a"}}</div>
-												<input ng-if="backup[trigger.id]" class="form-control input-xs" type="datetime-local" timestamp ng-model="condition.options.timestamp">
-											</div>
-										</div>
-									</div>
-
-
-									<!-- Project Status -->
-									<div ng-if="condition.name == 'project_status'">
-										<div class="form-group">
-											<label class="col-xs-4">Status</label>
-											<div class="col-xs-8">
-												<div ng-if="!backup[trigger.id]">{{statusesById[condition.options.status_id].title}}</div>
-												<select ng-if="backup[trigger.id]" class="form-control input-xs" ng-model="condition.options.status_id" ng-options="status.id as status.title for status in statuses" required></select>
-											</div>
-										</div>
-									</div>
-
-
-									<!-- Content Status -->
-									<div ng-if="condition.name == 'content_status'">
-										<div class="form-group">
-											<label class="col-xs-4">Content</label>
-											<div class="col-xs-8">
-												<div ng-if="!backup[trigger.id]">{{stagesById[condition.options.content_id].title}}</div>
-												<select ng-if="backup[trigger.id]" class="form-control input-xs" ng-model="condition.options.content_id" ng-options="stage.id as stage.title for stage in stages" required></select>
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-xs-4">Status</label>
-											<div class="col-xs-8">
-												<div ng-if="!backup[trigger.id]">{{condition.options.status_id | title}}</div>
-												<select ng-if="backup[trigger.id]" class="form-control input-xs" ng-model="condition.options.status_id" ng-options="id as status for (id, status) in {none: 'None', draft: 'Draft', complete: 'Complete'}" required></select>
-											</div>
-										</div>
-									</div>
-
-
-									<!-- Export -->
-									<div ng-if="condition.name == 'export'">
-										<div class="form-group">
-											<label class="col-xs-4">Content</label>
-											<div class="col-xs-8">
-												<div ng-if="!backup[trigger.id]">{{stagesById[condition.options.content_id].title}}</div>
-												<select ng-if="backup[trigger.id]" class="form-control input-xs" ng-model="condition.options.content_id" ng-options="stage.id as stage.title for stage in stages" required></select>
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-xs-4">Export</label>
-											<div class="col-xs-8">
-												<div ng-if="!backup[trigger.id]">{{stagesById[condition.options.content_id].component.manifest[condition.options.export_id].title}}</div>
-												<select ng-if="backup[trigger.id]" class="form-control input-xs" ng-model="condition.options.export_id" ng-options="export.id as export.title for (id,export) in stagesById[condition.options.content_id].component.manifest" ng-disabled="!condition.options.content_id" required></select>
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-xs-4">
-												<div ng-if="!backup[trigger.id]">{{condition.options.op}}</div>
-												<select ng-if="backup[trigger.id]" class="form-control input-xs" ng-model="condition.options.op" ng-disabled="!condition.options.export_id" required>
-													<option value="eq">eq</option>
-													<option value="gt">gt</option>
-													<option ng-if="stagesById[condition.options.content_id].component.manifest[condition.options.export_id].schema.type == 'string'" value="matches">matches</option>
-													<option ng-if="stagesById[condition.options.content_id].component.manifest[condition.options.export_id].schema.type == 'array'" value="contains">contains</option>
-												</select>
-											</label>
-											<div class="col-xs-8">
-												<div ng-if="!backup[trigger.id]">{{condition.options.value}}</div>
-												<input ng-if="backup[trigger.id]" class="form-control input-xs" type="text" ng-model="condition.options.value" json>
-											</div>
-										</div>
-									</div>
-
-								</div>
-								</div>
-							</div>
-
-							<div ng-if="backup[trigger.id]" class="panel-footer">
-								<div ng-click="removeIndex(trigger.conditions, iGroup)" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i> Remove Group</div>
-								<div ng-click="addCondition(group)" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-plus-sign"></i> Add Condition</div>
-							</div>
-						</div>
-						<div ng-if="backup[trigger.id]" ng-click="addGroup(trigger.conditions)" class="btn btn-xs btn-default"><i class="glyphicon glyphicon-plus-sign"></i> Add Group</div>
-					</td>
-					<td ng-if="false">
-						<p ng-if="!backup[trigger.id]" class="form-control-static well" style="max-width: 400px;">{{trigger.listeners}}</p>
-						<div ng-if="backup[trigger.id]">
-							<div class="form-control" ng-model="trigger.listeners" json ui-ace="{mode: 'json'}" style="height: 250px;"></div>
-						</div>
-					</td>
-					<td align="right" width="80">
-						<button ng-click="toggleEdit(trigger)" class="btn btn-block btn-xs btn-default" ng-class="{active: backup[trigger.id]}"><i class="glyphicon glyphicon-cog"></i></button>
-						<button ng-click="update(trigger)" class="btn btn-block btn-xs btn-primary" ng-show="backup[trigger.id]">Save</button>
-						<button ng-click="delete(trigger)" class="btn btn-block btn-xs btn-danger" ng-hide="backup[trigger.id]"><i class="glyphicon glyphicon-trash"></i></button>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+		<div class="table-responsive" ng-if="triggers.length">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th ng-if="currentUser.preferences.admin.technical">ID</th>
+						<th>Title</th>
+						<th>Description</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="trigger in triggers" ng-class="{active: backup[trigger.id]}">
+						<td ng-if="currentUser.preferences.admin.technical">
+							<p class="form-control-static"><strong><a ui-sref="portal.admin.cycles.show.triggers.trigger({trigger: trigger.id})">{{trigger.id}}</a></strong></p>
+						</td>
+						<td>
+							<a ng-if="!backup[trigger.id]" ui-sref="portal.admin.cycles.show.triggers.trigger({trigger: trigger.id})"><p class="form-control-static">{{trigger.title}}</p></a>
+							<input ng-if="backup[trigger.id]" class="form-control" type="text" ng-model="trigger.title">
+						</td>
+						<td>
+							<p ng-if="!backup[trigger.id]" class="form-control-static">{{trigger.description}}</p>
+							<textarea ng-if="backup[trigger.id]" class="form-control" ng-model="trigger.description"></textarea>
+						</td>
+						<td align="right" width="80">
+							<button ng-click="toggleEdit(trigger)" class="btn btn-block btn-xs btn-default" ng-class="{active: backup[trigger.id]}"><i class="glyphicon glyphicon-cog"></i></button>
+							<button ng-click="update(trigger)" class="btn btn-block btn-xs btn-primary" ng-show="backup[trigger.id]">Save</button>
+							<button ng-click="delete(trigger)" class="btn btn-block btn-xs btn-danger" ng-hide="backup[trigger.id]"><i class="glyphicon glyphicon-trash"></i></button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
 </div>

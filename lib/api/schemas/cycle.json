@@ -519,9 +519,9 @@
         "title": {
           "type": "string"
         },
-        "single": {
-          "type": "boolean",
-          "default": false
+        "description": {
+          "type": "string",
+          "default": ""
         },
         "conditions": {
           "type": "array",

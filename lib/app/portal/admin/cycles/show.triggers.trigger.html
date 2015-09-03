@@ -1,0 +1,216 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<span class="panel-title">Conditions</span>
+		<div class="pull-right">
+			<button ng-click="toggleEdit(trigger)" class="btn btn-xs btn-default" ng-class="{active: backup[trigger.id]}"><i class="glyphicon glyphicon-cog"></i></button>
+			<button ng-click="update(trigger)" class="btn btn-xs btn-primary" ng-show="backup[trigger.id]">Save</button>
+			<button ng-click="delete(trigger)" class="btn btn-xs btn-danger" ng-hide="backup[trigger.id]"><i class="glyphicon glyphicon-trash"></i></button>
+		</div>
+	</div>
+
+	<div class="panel-body">
+		<div class="gandhi-conditions">
+			<div ng-repeat="(iGroup, group) in trigger.conditions" class="panel panel-default">
+				<div class="panel-body">
+					<div class="panel panel-default" ng-repeat="(iCondition, condition) in group">
+
+						<!-- Heading -->
+						<div ng-if="!backup[trigger.id]" class="panel-heading" style="display: flex;">
+							<div class="panel-title">{{condition.name | title}}</div>
+						</div>
+						<div ng-if="backup[trigger.id]" class="panel-heading" style="display: flex;">
+							<select class="form-control input-xs" style="flex: 1;" ng-model="condition.name" ng-options="type.name as type.title for type in [{name: 'date', title: 'Date'}, {name: 'project_status', title: 'Project Status'}, {name: 'content_status', title: 'Content Status'}, {name: 'export', title: 'Export'}]" required></select>
+
+							<div style="margin-left: 15px;" ng-click="removeIndex(group, iCondition)" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i></div>
+						</div>
+
+						<div class="panel-body form-horizontal" style="padding-bottom: 0;">
+							<div class="form-group">
+								<label class="col-xs-4">Invert</label>
+								<div class="col-xs-8">
+									<label>
+										<input ng-if="backup[trigger.id]" type="checkbox" ng-model="condition.invert">
+										<span class="text-success" ng-show="condition.invert">Yes</span>
+										<span class="text-danger" ng-hide="condition.invert">No</span>
+									</label>
+								</div>
+							</div>
+
+							<!-- Date -->
+							<div ng-if="condition.name == 'date'">
+								<div class="form-group">
+									<label class="col-xs-4">Timestamp</label>
+									<div class="col-xs-8">
+										<div ng-if="!backup[trigger.id]">{{condition.options.timestamp * 1000 | date:"yyyy.MM.dd - hh:mm a"}}</div>
+										<input ng-if="backup[trigger.id]" class="form-control input-xs" type="datetime-local" timestamp ng-model="condition.options.timestamp">
+									</div>
+								</div>
+							</div>
+
+
+							<!-- Project Status -->
+							<div ng-if="condition.name == 'project_status'">
+								<div class="form-group">
+									<label class="col-xs-4">Status</label>
+									<div class="col-xs-8">
+										<div ng-if="!backup[trigger.id]">{{statusesById[condition.options.status_id].title}}</div>
+										<select ng-if="backup[trigger.id]" class="form-control input-xs" ng-model="condition.options.status_id" ng-options="status.id as status.title for status in statuses" required></select>
+									</div>
+								</div>
+							</div>
+
+
+							<!-- Content Status -->
+							<div ng-if="condition.name == 'content_status'">
+								<div class="form-group">
+									<label class="col-xs-4">Content</label>
+									<div class="col-xs-8">
+										<div ng-if="!backup[trigger.id]">{{stagesById[condition.options.content_id].title}}</div>
+										<select ng-if="backup[trigger.id]" class="form-control input-xs" ng-model="condition.options.content_id" ng-options="stage.id as stage.title for stage in stages" required></select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-xs-4">Status</label>
+									<div class="col-xs-8">
+										<div ng-if="!backup[trigger.id]">{{condition.options.status_id | title}}</div>
+										<select ng-if="backup[trigger.id]" class="form-control input-xs" ng-model="condition.options.status_id" ng-options="id as status for (id, status) in {none: 'None', draft: 'Draft', complete: 'Complete'}" required></select>
+									</div>
+								</div>
+							</div>
+
+
+							<!-- Export -->
+							<div ng-if="condition.name == 'export'">
+								<div class="form-group">
+									<label class="col-xs-4">Content</label>
+									<div class="col-xs-8">
+										<div ng-if="!backup[trigger.id]">{{stagesById[condition.options.content_id].title}}</div>
+										<select ng-if="backup[trigger.id]" class="form-control input-xs" ng-model="condition.options.content_id" ng-options="stage.id as stage.title for stage in stages" required></select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-xs-4">Export</label>
+									<div class="col-xs-8">
+										<div ng-if="!backup[trigger.id]">{{stagesById[condition.options.content_id].component.manifest[condition.options.export_id].title}}</div>
+										<select ng-if="backup[trigger.id]" class="form-control input-xs" ng-model="condition.options.export_id" ng-options="export.id as export.title for (id,export) in stagesById[condition.options.content_id].component.manifest" ng-disabled="!condition.options.content_id" required></select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-xs-4">
+										<div ng-if="!backup[trigger.id]">{{condition.options.op}}</div>
+										<select ng-if="backup[trigger.id]" class="form-control input-xs" ng-model="condition.options.op" ng-disabled="!condition.options.export_id" required>
+											<option value="eq">eq</option>
+											<option value="gt">gt</option>
+											<option ng-if="stagesById[condition.options.content_id].component.manifest[condition.options.export_id].schema.type == 'string'" value="matches">matches</option>
+											<option ng-if="stagesById[condition.options.content_id].component.manifest[condition.options.export_id].schema.type == 'array'" value="contains">contains</option>
+										</select>
+									</label>
+									<div class="col-xs-8">
+										<div ng-if="!backup[trigger.id]">{{condition.options.value}}</div>
+										<input ng-if="backup[trigger.id]" class="form-control input-xs" type="text" ng-model="condition.options.value" json>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+					<div ng-show="backup[trigger.id]" ng-click="addCondition(group)" class="panel panel-default">New<br />Condition</div>
+				</div>
+
+				<div ng-if="backup[trigger.id]" ng-click="removeIndex(trigger.conditions, iGroup)" class="panel-footer">
+					Remove Group
+				</div>
+			</div>
+			<div ng-show="backup[trigger.id]" ng-click="addGroup(trigger.conditions)" class="panel panel-default">New Group</div>
+		</div>
+	</div>
+</div>
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<span class="panel-title">Actions</span>
+	</div>
+
+	<div class="panel-body">
+		<textarea ng-readonly="!backup[trigger.id]" json ui-ace ng-model="trigger.actions"></textarea>
+	</div>
+</div>
+
+<style>
+.gandhi-conditions > .panel {
+	box-shadow: none;
+	position: relative;
+	background-color: #F7F7F7;
+	margin-bottom: 40px;
+}
+
+.gandhi-conditions > .panel:not(:first-child):not(:last-child)::before {
+	background-color: #E8E8E8;
+	border-radius: 16px;
+	color: #717171;
+	content: "or";
+	font-size: 12px;
+	height: 32px;
+	top: -36px;
+	line-height: 32px;
+	margin-left: -16px;
+	position: absolute;
+	text-align: center;
+	left: 50%;
+	width: 32px;
+}
+
+.gandhi-conditions > .panel > div.panel-body {
+	display: flex;
+}
+
+.gandhi-conditions > .panel > div.panel-footer {
+	text-align: center;
+	background-color: #DDDDDD;
+	color: #6B6B6B;
+	padding: 3px;
+	cursor: pointer;
+	font-size: 12px;
+}
+
+.gandhi-conditions > .panel > div.panel-footer:hover {
+	color: #000;
+}
+
+.gandhi-conditions > .panel > div.panel-body .panel {
+	box-shadow: none;
+	position: relative;
+	margin: 0 44px 0 0;
+}
+
+.gandhi-conditions > .panel > div.panel-body .panel:not(:first-child):not(:last-child)::before {
+	background-color: #FFFFFF;
+	border-radius: 16px;
+	color: #717171;
+	content: "and";
+	font-size: 12px;
+	height: 32px;
+	left: -38px;
+	line-height: 30px;
+	margin-top: -16px;
+	position: absolute;
+	text-align: center;
+	top: 50%;
+	width: 32px;
+}
+
+.gandhi-conditions > .panel > div.panel-body .panel:last-child,
+.gandhi-conditions > .panel:last-child {
+	border: 1px solid #EAEAEA;
+	background-color: rgb(253, 253, 253);
+	box-shadow: none;
+	color: #C3C3C3;
+	padding: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	cursor: pointer;
+}
+</style>

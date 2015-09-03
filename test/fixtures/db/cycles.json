@@ -24,7 +24,6 @@
 				}]
 			],
 			"id": "accept",
-			"single": false,
 			"actions": [
 
 			],
@@ -41,7 +40,6 @@
 				}]
 			],
 			"id": "close",
-			"single": false,
 			"actions": [
 
 			],
@@ -58,7 +56,6 @@
 				}]
 			],
 			"id": "open",
-			"single": false,
 			"actions": [
 
 			],
@@ -75,7 +72,6 @@
 				}]
 			],
 			"id": "reject",
-			"single": false,
 			"actions": [
 
 			],
@@ -93,7 +89,6 @@
 				}]
 			],
 			"id": "submit",
-			"single": false,
 			"actions": [
 
 			],
@@ -469,8 +464,6 @@
 				}]
 			],
 			"id": "accept",
-			"single": false,
-			"single": false,
 			"actions": [
 
 			],
@@ -487,7 +480,6 @@
 				}]
 			],
 			"id": "archive",
-			"single": false,
 			"actions": [
 
 			],
@@ -504,7 +496,6 @@
 				}]
 			],
 			"id": "close",
-			"single": false,
 			"actions": [
 
 			],
@@ -521,7 +512,6 @@
 				}]
 			],
 			"id": "open",
-			"single": false,
 			"actions": [
 
 			],
@@ -538,7 +528,6 @@
 				}]
 			],
 			"id": "reject",
-			"single": false,
 			"actions": [
 
 			],
@@ -556,7 +545,6 @@
 				}]
 			],
 			"id": "report",
-			"single": false,
 			"actions": [
 
 			],
@@ -574,7 +562,6 @@
 				}]
 			],
 			"id": "submit",
-			"single": false,
 			"actions": [
 
 			],
@@ -598,7 +585,6 @@
 				}]
 			],
 			"id": "warning",
-			"single": false,
 			"actions": [{
 				"name": "notify",
 				"options": {
