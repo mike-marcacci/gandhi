@@ -133,7 +133,7 @@
 	</div>
 
 	<div class="panel-body">
-		<textarea ng-readonly="!backup[trigger.id]" json ui-ace ng-model="trigger.actions"></textarea>
+		<textarea ng-readonly="!backup[trigger.id]" json ui-ace="{mode: 'json'}" ng-model="trigger.actions"></textarea>
 	</div>
 </div>
 
