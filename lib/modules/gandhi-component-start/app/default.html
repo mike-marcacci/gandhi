@@ -1,11 +1,4 @@
 <div ng-if="content.authorizations">
-	<div class="alert alert-info" role="alert" ng-if="content.status == 'draft'">
-		This stage is saved as a draft.
-	</div>
-
-	<div class="alert alert-info" role="alert" ng-if="content.status == 'complete'">
-		This stage is complete.
-	</div>
 
 	<div class="alert alert-warning" role="alert" ng-if="!content.authorizations['read']">
 		You are not allowed to see the contents of this stage.

@@ -1,13 +1,6 @@
 <div ng-if="!stage.id || !content.id">Loading...</div>
 
 <div ng-if="stage.id &amp;&amp; content.id">
-	<div class="alert alert-info" role="alert" ng-if="content.status_id == 'draft'">
-		This stage is saved as a draft.
-	</div>
-
-	<div class="alert alert-info" role="alert" ng-if="content.status_id == 'complete'">
-		This stage is complete.
-	</div>
 	
 	<!--
 	<div class="alert alert-warning" role="alert" ng-if="!content.authorizations['read:public']">

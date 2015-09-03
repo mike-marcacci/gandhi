@@ -12,5 +12,38 @@
 </div>
 
 <div ui-view>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<span class="panel-title">Contents</span>
+		</div>
 
+		<div class="table-responsive" ng-show="contents.length">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Title</th>
+						<th>Description</th>
+						<th>Status</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="content in contents" ng-class="{active: backup[content.id]}">
+						<td>
+							<a ui-sref="portal.admin.projects.show.contents.content({content: content.id})">{{ stagesById[content.id].title }}</a>
+						</td>
+						<td>{{ stagesById[content.id].description }}</td>
+						<td>
+							<p ng-hide="backup[content.id]" class="form-control-static">{{ content.status_id }}</p>
+							<select ng-show="backup[content.id]" required class="form-control" ng-model="content.status_id" ng-options="item.id as item.title for item in [{id:'none',title:'None'},{id:'draft',title:'Draft'},{id:'complete',title:'Complete'}]"></select>
+						</td>
+						<td align="right" width="80">
+							<button ng-click="toggleEdit(content)" class="btn btn-block btn-xs btn-default" ng-class="{active: backup[content.id]}"><i class="glyphicon glyphicon-cog"></i></button>
+							<button ng-click="update(content)" class="btn btn-block btn-xs btn-primary" ng-show="backup[content.id]">Save</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 </div>
