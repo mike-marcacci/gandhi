@@ -10,15 +10,14 @@ var jwt = require('jsonwebtoken');
 var assert = require('chai').assert;
 var request, fixtures;
 
-var blacklist = ['password', 'recovery_token'];
-var whitelist = ['id', 'email', 'name', 'href', 'admin', 'created','updated'];
+var ids = [];
 
 before(function(){
 	request = global.setup.api;
 	fixtures = global.setup.fixtures.db.projects;
 });
 
-describe.skip('Invitations', function(){
+describe('Invitations', function(){
 	var adminToken, adminId, userToken, userId;
 
 	before(function(done){
@@ -42,8 +41,8 @@ describe.skip('Invitations', function(){
 		request
 			.post('/api/tokens')
 			.send({
-				email: 'tim.marcacci@test.gandhi.io',
-				password: 'tim1234'
+				email: 'solene.clavel@test.gandhi.io',
+				password: 'solene1234'
 			})
 			.expect(201)
 			.end(function(err, res){
@@ -149,73 +148,57 @@ describe.skip('Invitations', function(){
 		it.skip('hides a non-allowed invitation from a non-admin user');
 	});
 
-	describe('#put', function(){
-		it('rejects an anonymous put', function(done){
+	describe('#post', function(){
+		it('rejects an anonymous post', function(done){
 			request
-				.put('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/invitations/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
-				.send({id:'c7efa7cf-bab2-44a6-862f-7ca5e154b1ae',role_id:'applicant',name:'Test',email:'test@email.com'})
+				.post('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/invitations')
+				.send({role_id:'applicant',name:'Test',email:'test@email.com'})
 				.expect(401)
 				.end(done);
 		});
-		it('rejects a put by a non-admin user', function(done){
+		it('rejects an invalid post', function(done){
 			request
-				.put('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/invitations/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
-				.set('Authorization', 'Bearer ' + userToken)
-				.send({id:'c7efa7cf-bab2-44a6-862f-7ca5e154b1ae',role_id:'applicant',name:'Test',email:'test@email.com'})
-				.expect(403)
-				.end(done);
-		});
-		it('rejects an invalid put', function(done){
-			request
-				.put('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/invitations/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
-				.set('Authorization', 'Bearer ' + adminToken)
-				.query({admin: true})
-				.send({id:'57efa7cf-bab2-44a6-862f-7ca5e154b1a9',role_id:'applicant',name:'Test',email:'test@email.com'})
-				.expect(400)
-				.end(done);
-		});
-		it('rejects mismatched ids', function(done){
-			request
-				.put('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/invitations/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
+				.post('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/invitations')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
 				.send({role_id: true})
 				.expect(400)
 				.end(done);
 		});
-		it('returns 404 for nonexistant project', function(done){
+		it.skip('ignores an id in a post', function(){});
+		it('returns 404 for nonexistant cycle', function(done){
 			request
-				.put('/api/projects/foo/invitations/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
+				.post('/api/projects/foo/invitations')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
-				.send({id:'c7efa7cf-bab2-44a6-862f-7ca5e154b1ae',role_id:'applicant',name:'Test',email:'test@email.com'})
+				.send({role_id:'applicant',name:'Test',email:'test@email.com'})
 				.expect(404)
 				.end(done);
 		});
-		it('allows a new put by an admin user', function(done){
+		it('accepts a post by an admin user', function(done){
 			request
-				.put('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/invitations/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
+				.post('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/invitations')
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
-				.send({id:'c7efa7cf-bab2-44a6-862f-7ca5e154b1ae',role_id:'applicant',name:'Test',email:'test@email.com'})
-				.expect(200)
+				.send({role_id:'applicant',name:'Test',email:'test@email.com'})
+				.expect(201)
 				.end(function(err, res){
 					if(err) return done(err);
-					assert.equal(res.body.id, 'c7efa7cf-bab2-44a6-862f-7ca5e154b1ae');
+					assert.isDefined(res.body.id);
+					ids.push(res.body.id);
 					done();
 				});
 		});
-		it('allows an existing put by an admin user', function(done){
+		it('rejects a post by a non-admin user', function(done){
 			request
-				.put('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/invitations/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
-				.set('Authorization', 'Bearer ' + adminToken)
-				.query({admin: true})
-				.send({id:'c7efa7cf-bab2-44a6-862f-7ca5e154b1ae',role_id:'applicant',name:'Test PUT',email:'test@email.com'})
-				.expect(200)
+				.post('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/invitations')
+				.set('Authorization', 'Bearer ' + userToken)
+				.send({role_id:'applicant',name:'Test',email:'test@email.com'})
+				.expect(201)
 				.end(function(err, res){
 					if(err) return done(err);
-					assert.equal(res.body.id, 'c7efa7cf-bab2-44a6-862f-7ca5e154b1ae');
-					assert.equal(res.body.name, 'Test PUT');
+					assert.isDefined(res.body.id);
+					ids.push(res.body.id);
 					done();
 				});
 		});
@@ -224,22 +207,14 @@ describe.skip('Invitations', function(){
 	describe('#patch', function(){
 		it('rejects an anonymous put', function(done){
 			request
-				.patch('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/invitations/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
+				.patch('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/invitations/' + ids[0])
 				.send({name:'Oops'})
 				.expect(401)
 				.end(done);
 		});
-		it('rejects a patch by a non-admin user', function(done){
-			request
-				.patch('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/invitations/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
-				.set('Authorization', 'Bearer ' + userToken)
-				.send({name:'Oops'})
-				.expect(403)
-				.end(done);
-		});
 		it('rejects an invalid patch', function(done){
 			request
-				.patch('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/invitations/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
+				.patch('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/invitations/' + ids[0])
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
 				.send({role_id: true})
@@ -248,7 +223,7 @@ describe.skip('Invitations', function(){
 		});
 		it('rejects an invalid put', function(done){
 			request
-				.patch('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/invitations/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
+				.patch('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/invitations/' + ids[0])
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
 				.send({id:'57efa7cf-bab2-44a6-862f-7ca5e154b1a9',role_id:'applicant',name:'Test',email:'test@email.com'})
@@ -278,8 +253,21 @@ describe.skip('Invitations', function(){
 		});
 		it('allows an existing patch by an admin user', function(done){
 			request
-				.patch('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/invitations/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
+				.patch('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/invitations/' + ids[0])
 				.set('Authorization', 'Bearer ' + adminToken)
+				.query({admin: true})
+				.send({name:'Patched'})
+				.expect(200)
+				.end(function(err, res){
+					if(err) return done(err);
+					assert.equal(res.body.name, 'Patched');
+					done();
+				});
+		});
+		it('allows an existing patch by an non-admin user', function(done){
+			request
+				.patch('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/invitations/' + ids[1])
+				.set('Authorization', 'Bearer ' + userToken)
 				.query({admin: true})
 				.send({name:'Patched'})
 				.expect(200)
@@ -294,15 +282,8 @@ describe.skip('Invitations', function(){
 	describe('#delete', function(){
 		it('rejects an anonymous delete', function(done){
 			request
-				.delete('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/invitations/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
+				.delete('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/invitations/' + ids[0])
 				.expect(401)
-				.end(done);
-		});
-		it('rejects a delete by a non-admin user', function(done){
-			request
-				.delete('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/invitations/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
-				.set('Authorization', 'Bearer ' + userToken)
-				.expect(403)
 				.end(done);
 		});
 		it('returns 404 for nonexistant project', function(done){
@@ -323,13 +304,25 @@ describe.skip('Invitations', function(){
 		});
 		it('deletes an invitation for an admin user', function(done){
 			request
-				.delete('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/invitations/c7efa7cf-bab2-44a6-862f-7ca5e154b1ae')
+				.delete('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/invitations/' + ids[0])
 				.set('Authorization', 'Bearer ' + adminToken)
 				.query({admin: true})
 				.expect(200)
 				.end(function(err, res){
 					if(err) return done(err);
-					assert.equal(res.body.id, 'c7efa7cf-bab2-44a6-862f-7ca5e154b1ae');
+					assert.equal(res.body.id, ids[0]);
+					done();
+				});
+		});
+		it('deletes an invitation for a non-admin user', function(done){
+			request
+				.delete('/api/projects/b37e83a5-d613-4d64-8873-fdcc8df0a009/invitations/' + ids[1])
+				.set('Authorization', 'Bearer ' + userToken)
+				.query({admin: true})
+				.expect(200)
+				.end(function(err, res){
+					if(err) return done(err);
+					assert.equal(res.body.id, ids[1]);
 					done();
 				});
 		});
