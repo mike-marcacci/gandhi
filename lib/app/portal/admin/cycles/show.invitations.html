@@ -1,0 +1,78 @@
+<div class="panel panel-default" ng-if="invitationCreate">
+	<div class="panel-heading">
+		<span class="panel-title">Create Invitation</span>
+		<div class="pull-right">
+			<button class="btn btn-xs btn-primary" ng-click="create()">Save</button>
+			<button class="btn btn-xs btn-default" ng-class="{active: invitationCreate}" ng-click="toggleCreate()"><i class="glyphicon glyphicon-plus-sign"></i></button>
+		</div>
+	</div>
+	<div class="panel-body">
+		<form class="form-horizontal" role="form" ng-submit="create()">
+			<div class="form-group">
+				<label for="invitation-name" class="col-sm-2 control-label">Name</label>
+				<div class="col-sm-10">
+					<input class="form-control" type="text" required ng-model="invitationCreate.name">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="invitation-email" class="col-sm-2 control-label">Email</label>
+				<div class="col-sm-10">
+					<input class="form-control" type="email" required ng-model="invitationCreate.email">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="invitation-role" class="col-sm-2 control-label">Role</label>
+				<div class="col-sm-10">
+					<select required class="form-control" id="invitation-role" ng-model="invitationCreate.role_id" ng-options="role.id as role.title for role in roles"></select>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<div class="panel panel-default" ng-if="!invitationCreate">
+	<div class="panel-heading">
+		<span class="panel-title">Invitations</span>
+		<div class="pull-right">
+			<button class="btn btn-xs btn-default" ng-class="{active: invitationCreate}" ng-click="toggleCreate()"><i class="glyphicon glyphicon-plus-sign"></i></button>
+		</div>
+	</div>
+
+	<div class="panel-body" ng-if="!invitations.length">
+		No invitations. <a href ng-click="toggleCreate()">Create one.</a>
+	</div>
+
+	<div class="table-responsive" ng-if="invitations.length">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Email</th>
+					<th>Role</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="invitation in invitations" ng-class="{active: backup[invitation.id]}">
+					<td>
+						<p ng-if="!backup[invitation.id]" class="form-control-static">{{invitation.name}}</p>
+						<input ng-if="backup[invitation.id]" class="form-control" type="text" required ng-model="invitation.name">
+					</td>
+					<td>
+						<p ng-if="!backup[invitation.id]" class="form-control-static">{{invitation.email}}</p>
+						<input ng-if="backup[invitation.id]" class="form-control" type="email" required ng-model="invitation.email">
+					</td>
+					<td>
+						<p ng-hide="backup[invitation.id]" class="form-control-static">{{rolesById[invitation.role_id].title}}</p>
+						<select ng-show="backup[invitation.id]" required class="form-control" ng-model="invitation.role_id" ng-options="role.id as role.title for role in roles"></select>
+					</td>
+					<td align="right" width="80">
+						<button ng-click="toggleEdit(invitation)" class="btn btn-block btn-xs btn-default" ng-class="{active: backup[invitation.id]}"><i class="glyphicon glyphicon-cog"></i></button>
+						<button ng-click="update(invitation)" class="btn btn-block btn-xs btn-primary" ng-show="backup[invitation.id]">Save</button>
+						<button ng-click="delete(invitation)" class="btn btn-block btn-xs btn-danger" ng-hide="backup[invitation.id]"><i class="glyphicon glyphicon-trash"></i></button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

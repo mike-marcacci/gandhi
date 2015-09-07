@@ -25,7 +25,7 @@
 					<li ng-class="{active: $state.is('portal.admin.projects.show')}"><a ui-sref="portal.admin.projects.show">General</a></li>
 					<li ng-class="{active: $state.includes('portal.admin.projects.show.contents')}"><a ui-sref="portal.admin.projects.show.contents">Contents</a></li>
 					<li ng-class="{active: $state.includes('portal.admin.projects.show.assignments')}"><a ui-sref="portal.admin.projects.show.assignments">Assignments</a></li>
-					<!-- <li ng-class="{active: $state.includes('portal.admin.projects.show.invitations')}"><a ui-sref="portal.admin.projects.show.invitations">Invitations</a></li> -->
+					<li ng-class="{active: $state.includes('portal.admin.projects.show.invitations')}"><a ui-sref="portal.admin.projects.show.invitations">Invitations</a></li>
 					<li ng-class="{active: $state.includes('portal.admin.projects.show.events')}"><a ui-sref="portal.admin.projects.show.events">Events</a></li>
 				</ul>
 			</div>
@@ -33,7 +33,7 @@
 
 
 		<div ui-view>
-			
+
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<span class="panel-title">General Settings</span>
