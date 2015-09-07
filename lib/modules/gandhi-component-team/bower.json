@@ -1,0 +1,13 @@
+{
+  "name": "gandhi-component-team",
+  "description": "Gandhi Component: Team",
+  "version": "0.0.1",
+  "license": "MIT",
+  "private": true,
+  "main": "./app/index.js",
+  "dependencies": {
+    "angular": "*",
+    "gandhi-component": "*"
+  },
+  "module": "gandhi-component-team"
+}

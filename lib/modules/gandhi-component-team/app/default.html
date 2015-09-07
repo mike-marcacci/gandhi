@@ -1,0 +1,169 @@
+<div class="panel panel-default" ng-show="assignmentCreate">
+	<div class="panel-heading">
+		<span class="panel-title">Create Assignment</span>
+		<div class="pull-right">
+			<button class="btn btn-xs btn-primary" ng-click="create()">Save</button>
+			<button class="btn btn-xs btn-default" ng-class="{active: assignmentCreate}" ng-click="toggleCreate()"><i class="glyphicon glyphicon-plus-sign"></i></button>
+		</div>
+	</div>
+	<div class="panel-body">
+		<form class="form-horizontal" role="form" ng-submit="create()">
+			<div class="form-group">
+				<label for="assignment-id" class="col-sm-2 control-label">User</label>
+				<div class="col-sm-10">
+					<ui-select ng-disabled="disabled" ng-model="assignmentCreate.id" theme="bootstrap" id="assignment-id">
+						<ui-select-match placeholder="Choose a user...">{{$select.selected.name}}</ui-select-match>
+						<ui-select-choices refresh="userSelect.search($select.search)" refresh-delay="200" repeat="item.id as item in userSelect.data | filter: $select.search | filter: userSelect.filter ">
+							<div ng-bind-html="item.name | highlight: $select.search"></div>
+							<small ng-bind-html="item.email | highlight: $select.search"></small>
+						</ui-select-choices>
+					</ui-select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="assignment-role" class="col-sm-2 control-label">Role</label>
+				<div class="col-sm-10">
+					<select required class="form-control" id="assignment-role" ng-model="assignmentCreate.role_id" ng-options="role.id as role.title for role in assignableRoles"></select>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<div class="panel panel-default" ng-hide="assignmentCreate">
+	<div class="panel-heading">
+		<span class="panel-title">Assignments</span>
+		<!--
+		<div class="pull-right">
+			<button class="btn btn-xs btn-default" ng-class="{active: assignmentCreate}" ng-click="toggleCreate()"><i class="glyphicon glyphicon-plus-sign"></i></button>
+		</div>
+		-->
+	</div>
+	<!--
+	<div class="panel-body" ng-hide="assignments.length">
+		No assignments. <a href ng-click="toggleCreate()">Create one.</a>
+	</div>
+	-->
+
+	<div class="table-responsive" ng-show="assignments.length">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>User</th>
+					<th>Role</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="assignment in assignments" ng-class="{active: backup[assignment.id]}">
+					<td>
+						<p class="form-control-static">
+							<a ui-sref="portal.admin.users.show({user: assignment.id})"><strong>{{usersById[assignment.id].name}}</strong></a><br />
+							<small>{{usersById[assignment.id].email}}</small>
+						</p>
+					</td>
+					<td>
+						<p ng-hide="backup[assignment.id]" class="form-control-static">{{rolesById[assignment.role_id].title}}</p>
+						<select ng-show="backup[assignment.id]" required class="form-control" ng-model="assignment.role_id" ng-options="role.id as role.title for role in assignableRoles"></select>
+					</td>
+					<td align="right" width="80">
+						<button ng-if="assignableRoles[assignment.role_id]" ng-click="toggleEdit(assignment)" class="btn btn-block btn-xs btn-default" ng-class="{active: backup[assignment.id]}"><i class="glyphicon glyphicon-cog"></i></button>
+						<button ng-if="assignableRoles[assignment.role_id]" ng-click="save(assignment)" class="btn btn-block btn-xs btn-primary" ng-show="backup[assignment.id]">Save</button>
+						<button ng-if="assignableRoles[assignment.role_id]" ng-click="delete(assignment)" class="btn btn-block btn-xs btn-danger" ng-hide="backup[assignment.id]"><i class="glyphicon glyphicon-trash"></i></button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+
+
+
+<div class="panel panel-default" ng-if="invitationCreate">
+	<div class="panel-heading">
+		<span class="panel-title">Create Invitation</span>
+		<div class="pull-right">
+			<button class="btn btn-xs btn-primary" ng-click="create()">Save</button>
+			<button class="btn btn-xs btn-default" ng-class="{active: invitationCreate}" ng-click="toggleCreate()"><i class="glyphicon glyphicon-plus-sign"></i></button>
+		</div>
+	</div>
+	<div class="panel-body">
+		<form class="form-horizontal" role="form" ng-submit="create()">
+			<div class="form-group">
+				<label for="invitation-name" class="col-sm-2 control-label">Name</label>
+				<div class="col-sm-10">
+					<input class="form-control" type="text" required ng-model="invitationCreate.name">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="invitation-email" class="col-sm-2 control-label">Email</label>
+				<div class="col-sm-10">
+					<input class="form-control" type="email" required ng-model="invitationCreate.email">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="invitation-role" class="col-sm-2 control-label">Role</label>
+				<div class="col-sm-10">
+					<select required class="form-control" id="invitation-role" ng-model="invitationCreate.role_id" ng-options="role.id as role.title for role in assignableRoles"></select>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<div class="panel panel-default" ng-if="!invitationCreate">
+	<div class="panel-heading">
+		<span class="panel-title">Invitations</span>
+		<div class="pull-right">
+			<button class="btn btn-xs btn-default" ng-class="{active: invitationCreate}" ng-click="toggleCreate()"><i class="glyphicon glyphicon-plus-sign"></i></button>
+		</div>
+	</div>
+
+	<div class="panel-body" ng-if="!invitations.length">
+		No invitations. <a href ng-click="toggleCreate()">Create one.</a>
+	</div>
+
+	<div class="table-responsive" ng-if="invitations.length">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Token</th>
+					<th>Name</th>
+					<th>Email</th>
+					<th>Role</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="invitation in invitations" ng-class="{active: backup[invitation.id]}">
+					<td style="width: 200px;">
+						<div class="input-group">
+							<input id="invitation-token-{{ invitation.id }}" type="text" class="form-control" readonly value="{{ 'project/' + project.id + '/' + invitation.id }}">
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="button" ng-click="copyToClipboard('invitation-token-' + invitation.id)"><i class="glyphicon glyphicon-copy"></i></button>
+							</span>
+						</div>
+					</td>
+					<td>
+						<p ng-if="!backup[invitation.id]" class="form-control-static">{{invitation.name}}</p>
+						<input ng-if="backup[invitation.id]" class="form-control" type="text" required ng-model="invitation.name">
+					</td>
+					<td>
+						<p ng-if="!backup[invitation.id]" class="form-control-static">{{invitation.email}}</p>
+						<input ng-if="backup[invitation.id]" class="form-control" type="email" required ng-model="invitation.email">
+					</td>
+					<td>
+						<p ng-hide="backup[invitation.id]" class="form-control-static">{{rolesById[invitation.role_id].title}}</p>
+						<select ng-show="backup[invitation.id]" required class="form-control" ng-model="invitation.role_id" ng-options="role.id as role.title for role in assignableRoles"></select>
+					</td>
+					<td align="right" width="80">
+						<button ng-if="assignableRoles[invitation.role_id]" ng-click="toggleEdit(invitation)" class="btn btn-block btn-xs btn-default" ng-class="{active: backup[invitation.id]}"><i class="glyphicon glyphicon-cog"></i></button>
+						<button ng-if="assignableRoles[invitation.role_id]" ng-click="update(invitation)" class="btn btn-block btn-xs btn-primary" ng-show="backup[invitation.id]">Save</button>
+						<button ng-if="assignableRoles[invitation.role_id]" ng-click="delete(invitation)" class="btn btn-block btn-xs btn-danger" ng-hide="backup[invitation.id]"><i class="glyphicon glyphicon-trash"></i></button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
