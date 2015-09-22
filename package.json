@@ -47,7 +47,7 @@
     "redlock": "^0.4.0",
     "res-error": "^0.3.1",
     "rethinkdb": "^2.0.0",
-    "scrypt": "^4.0.7",
+    "scrypt": "^5.1.1",
     "wiredep": "^2.2.2"
   },
   "devDependencies": {
