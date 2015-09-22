@@ -104,6 +104,7 @@ describe('Cycles', function(){
 				})
 				.end(done);
 		});
+		it.skip('copies and merges a cycle specified with the `copy` param', function(){});
 	});
 
 	describe('#list', function(){
