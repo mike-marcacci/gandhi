@@ -4,13 +4,19 @@
 	<br />
 
 	<ul class="nav nav-tabs" role="tablist">
-		<li ng-class="{active: tab == 'login' || tab == null}"><a href ng-click="tab = 'login'">Log In</a></li>
+		<li ng-class="{active: tab == 'cnetid' || tab == null}"><a href ng-click="tab = 'cnetid'">CNetID</a></li>
+		<li ng-class="{active: tab == 'login'}"><a href ng-click="tab = 'login'">Log In</a></li>
 		<li ng-class="{active: tab == 'signup'}"><a href ng-click="tab = 'signup'">Sign Up</a></li>
 	</ul>
 
 	<div class="panel panel-default">
 		<div class="panel-body">
-			<div ng-show="tab == 'login' || tab == null">
+			<div ng-show="tab == 'cnetid' || tab == null">
+				<p class="help-block">If you have a CNet ID, click the button below. Otherwise, sign up or log in using your email address.</p>
+				<a href="/sso"><div type="submit" class="btn btn-block btn-primary">Connect CNetID</div></a>
+			</div>
+
+			<div ng-show="tab == 'login'">
 				<form ng-controller="LoginController" ng-submit="submit()">
 					<div class="form-group">
 						<input name="email" ng-model="email" type="email" class="form-control" placeholder="Email">
