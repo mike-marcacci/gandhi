@@ -1,3 +1,47 @@
-<div class="alert alert-info">There are no configuration options for this component.</div>
+<div class="alert alert-warning" role="alert">Please note that assignment permissions are controlled globally under "roles."</div>
 
-<p>Please note that assignment permissions are controlled globally under "roles."</p>
+<div class="panel panel-default">
+
+	<div class="panel-heading">
+		<div class="pull-right">
+			<button class="btn btn-xs btn-primary" ng-if="stageInstructionsEdit" ng-click="updateStageInstructions()">Save</button>
+			<button class="btn btn-xs" ng-class="{'btn-default': true, 'active': stageInstructionsEdit}" ng-click="toggleStageInstructionsEdit()"><i class="glyphicon glyphicon-cog"></i></button>
+		</div>
+		<div class="panel-title">Instructions</div>
+	</div>
+
+	<div class="panel-body" ng-if="!stageInstructionsEdit">
+		<div class="alert alert-info" ng-if="!stage.component.options.instructions" style="margin-bottom: 0;">You haven't specified any instructions for this stage.</div>
+		<div ng-bind-html="stage.component.options.instructions"></div>
+	</div>
+	<div ng-if="stageInstructionsEdit" class="cke_chromeless">
+
+		<div class="panel-body">
+			<form class="form-horizontal">
+				<div class="form-group">
+					<label for="instructionsCols" class="col-sm-3 control-label">Instruction Columns</label>
+					<div class="col-sm-9">
+						<input type="number" class="form-control" id="instructionsCols" ng-model="stageInstructionsEdit.component.options.instructionsCols" min="1" max="12" step="1">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-3 col-sm-9">
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" ng-model="stageInstructionsEdit.component.options.submitButton"> Show Submit Button
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="submitButtonText" class="col-sm-3 control-label">Submit Button Text</label>
+					<div class="col-sm-9">
+						<input type="text" class="form-control" id="submitButtonText" ng-model="stageInstructionsEdit.component.options.submitButtonText" min="1" max="12" step="1">
+					</div>
+				</div>
+			</form>
+		</div>
+
+		<textarea style="height: auto;" ckeditor ng-model="stageInstructionsEdit.component.options.instructions"></textarea>
+	</div>
+</div>
