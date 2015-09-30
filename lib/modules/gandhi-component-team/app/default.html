@@ -76,7 +76,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr ng-repeat="assignment in assignments" ng-class="{active: backup[assignment.id]}">
+						<tr ng-repeat="assignment in assignments" ng-class="{active: backupAssignments[assignment.id]}">
 							<td>
 								<p class="form-control-static">
 									<a ui-sref="portal.admin.users.show({user: assignment.id})"><strong>{{usersById[assignment.id].name}}</strong></a><br />
@@ -84,13 +84,13 @@
 								</p>
 							</td>
 							<td>
-								<p ng-hide="backup[assignment.id]" class="form-control-static">{{rolesById[assignment.role_id].title}}</p>
-								<select ng-show="backup[assignment.id]" required class="form-control" ng-model="assignment.role_id" ng-options="role.id as role.title for role in assignableRoles"></select>
+								<p ng-hide="backupAssignments[assignment.id]" class="form-control-static">{{rolesById[assignment.role_id].title}}</p>
+								<select ng-show="backupAssignments[assignment.id]" required class="form-control" ng-model="assignment.role_id" ng-options="role.id as role.title for role in assignableRoles"></select>
 							</td>
 							<td align="right" width="80">
-								<button ng-if="assignableRoles[assignment.role_id]" ng-click="toggleEditAssignment(assignment)" class="btn btn-block btn-xs btn-default" ng-class="{active: backup[assignment.id]}"><i class="glyphicon glyphicon-cog"></i></button>
-								<button ng-if="assignableRoles[assignment.role_id]" ng-click="saveAssignment(assignment)" class="btn btn-block btn-xs btn-primary" ng-show="backup[assignment.id]">Save</button>
-								<button ng-if="assignableRoles[assignment.role_id]" ng-click="deleteAssignment(assignment)" class="btn btn-block btn-xs btn-danger" ng-hide="backup[assignment.id]"><i class="glyphicon glyphicon-trash"></i></button>
+								<button ng-if="assignableRoles[assignment.role_id]" ng-click="toggleEditAssignment(assignment)" class="btn btn-block btn-xs btn-default" ng-class="{active: backupAssignments[assignment.id]}"><i class="glyphicon glyphicon-cog"></i></button>
+								<button ng-if="assignableRoles[assignment.role_id]" ng-click="saveAssignment(assignment)" class="btn btn-block btn-xs btn-primary" ng-show="backupAssignments[assignment.id]">Save</button>
+								<button ng-if="assignableRoles[assignment.role_id]" ng-click="deleteAssignment(assignment)" class="btn btn-block btn-xs btn-danger" ng-hide="backupAssignments[assignment.id]"><i class="glyphicon glyphicon-trash"></i></button>
 							</td>
 						</tr>
 					</tbody>
@@ -143,7 +143,7 @@
 			</div>
 
 			<div class="panel-body" ng-if="!invitations.length">
-				No invitations. <a href ng-click="toggleCreateInvitation()">Create one.</a>
+				No invitations. <br /><a class="btn btn-xs btn-default" href ng-click="toggleCreateInvitation()">Create one.</a>
 			</div>
 
 			<div class="table-responsive" ng-if="invitations.length">
@@ -158,7 +158,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr ng-repeat="invitation in invitations" ng-class="{active: backup[invitation.id]}">
+						<tr ng-repeat="invitation in invitations" ng-class="{active: backupInvitations[invitation.id]}">
 							<td style="width: 200px;">
 								<div class="input-group">
 									<input id="invitation-token-{{ invitation.id }}" type="text" class="form-control" readonly value="{{ 'project/' + project.id + '/' + invitation.id }}">
@@ -168,21 +168,21 @@
 								</div>
 							</td>
 							<td>
-								<p ng-if="!backup[invitation.id]" class="form-control-static">{{invitation.name}}</p>
-								<input ng-if="backup[invitation.id]" class="form-control" type="text" required ng-model="invitation.name">
+								<p ng-if="!backupInvitations[invitation.id]" class="form-control-static">{{invitation.name}}</p>
+								<input ng-if="backupInvitations[invitation.id]" class="form-control" type="text" required ng-model="invitation.name">
 							</td>
 							<td>
-								<p ng-if="!backup[invitation.id]" class="form-control-static">{{invitation.email}}</p>
-								<input ng-if="backup[invitation.id]" class="form-control" type="email" required ng-model="invitation.email">
+								<p ng-if="!backupInvitations[invitation.id]" class="form-control-static">{{invitation.email}}</p>
+								<input ng-if="backupInvitations[invitation.id]" class="form-control" type="email" required ng-model="invitation.email">
 							</td>
 							<td>
-								<p ng-hide="backup[invitation.id]" class="form-control-static">{{rolesById[invitation.role_id].title}}</p>
-								<select ng-show="backup[invitation.id]" required class="form-control" ng-model="invitation.role_id" ng-options="role.id as role.title for role in assignableRoles"></select>
+								<p ng-hide="backupInvitations[invitation.id]" class="form-control-static">{{rolesById[invitation.role_id].title}}</p>
+								<select ng-show="backupInvitations[invitation.id]" required class="form-control" ng-model="invitation.role_id" ng-options="role.id as role.title for role in assignableRoles"></select>
 							</td>
 							<td align="right" width="80">
-								<button ng-if="assignableRoles[invitation.role_id]" ng-click="toggleEditInvitation(invitation)" class="btn btn-block btn-xs btn-default" ng-class="{active: backup[invitation.id]}"><i class="glyphicon glyphicon-cog"></i></button>
-								<button ng-if="assignableRoles[invitation.role_id]" ng-click="updateInvitation(invitation)" class="btn btn-block btn-xs btn-primary" ng-show="backup[invitation.id]">Save</button>
-								<button ng-if="assignableRoles[invitation.role_id]" ng-click="deleteInvitation(invitation)" class="btn btn-block btn-xs btn-danger" ng-hide="backup[invitation.id]"><i class="glyphicon glyphicon-trash"></i></button>
+								<button ng-if="assignableRoles[invitation.role_id]" ng-click="toggleEditInvitation(invitation)" class="btn btn-block btn-xs btn-default" ng-class="{active: backupInvitations[invitation.id]}"><i class="glyphicon glyphicon-cog"></i></button>
+								<button ng-if="assignableRoles[invitation.role_id]" ng-click="updateInvitation(invitation)" class="btn btn-block btn-xs btn-primary" ng-show="backupInvitations[invitation.id]">Save</button>
+								<button ng-if="assignableRoles[invitation.role_id]" ng-click="deleteInvitation(invitation)" class="btn btn-block btn-xs btn-danger" ng-hide="backupInvitations[invitation.id]"><i class="glyphicon glyphicon-trash"></i></button>
 							</td>
 						</tr>
 					</tbody>
