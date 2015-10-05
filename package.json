@@ -29,7 +29,6 @@
     "generic-pool": "^2.2.0",
     "glob": "^5.0.10",
     "handlebars": "^3.0.3",
-    "handlebars-intl": "^1.1.1",
     "ioredis": "^1.7.2",
     "jjv": "^1.0.2",
     "json-pointer": "^0.3.0",
