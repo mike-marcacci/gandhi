@@ -36,6 +36,7 @@
     "li": "^1.0.1",
     "lodash": "^3.9.3",
     "method-override": "^2.3.3",
+    "moment-timezone": "^0.4.0",
     "multer": "^0.1.8",
     "nodemailer": "^1.3.4",
     "objectpath": "^1.2.1",
