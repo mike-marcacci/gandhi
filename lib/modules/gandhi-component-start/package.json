@@ -1,6 +1,6 @@
 {
-  "name": "gandhi-component-message",
-  "description": "Gandhi Component: Message",
+  "name": "gandhi-component-start",
+  "description": "Gandhi Component: Start",
   "version": "0.0.1",
   "license": "MIT",
   "private": true,
