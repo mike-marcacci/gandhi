@@ -10,7 +10,7 @@
 	</div>
 
 	<div ng-class="{'col-md-9': displaySettings.showList, 'col-md-12': !displaySettings.showList}">
-		<div class="panel panel-default">
+		<div class="panel panel-default hidden-print">
 			<div class="panel-heading">
 				<div class="pull-left" style="margin-right: 10px;">
 					<button class="hidden-xs hidden-sm btn btn-xs btn-default" ng-class="{active: displaySettings.showList}" ng-click="displaySettings.showList = !displaySettings.showList"><i class="glyphicon glyphicon-list"></i></button>
