@@ -3,7 +3,7 @@
 
   <textarea ng-if="!form.fieldAddonLeft && !form.fieldAddonRight"
             msd-elastic
-            class="form-control {{form.fieldHtmlClass}}"
+            class="form-control hidden-print {{form.fieldHtmlClass}}"
             id="{{form.key.slice(-1)[0]}}"
             sf-changed="form"
             placeholder="{{form.placeholder}}"
@@ -12,13 +12,14 @@
             ng-model-options="form.ngModelOptions"
             schema-validate="form"
             name="{{form.key.slice(-1)[0]}}"></textarea>
+  <div class="form-control visible-print-block {{form.fieldHtmlClass}}" ng-bind="$$value$$" style="height: auto;"></div>
 
   <div ng-if="form.fieldAddonLeft || form.fieldAddonRight"
        ng-class="{'input-group': (form.fieldAddonLeft || form.fieldAddonRight)}">
     <span ng-if="form.fieldAddonLeft"
           class="input-group-addon"
           ng-bind-html="form.fieldAddonLeft"></span>
-    <textarea class="form-control {{form.fieldHtmlClass}}"
+    <textarea class="form-control hidden-print {{form.fieldHtmlClass}}"
               msd-elastic
               id="{{form.key.slice(-1)[0]}}"
               sf-changed="form"
@@ -28,6 +29,7 @@
               ng-model-options="form.ngModelOptions"
               schema-validate="form"
               name="{{form.key.slice(-1)[0]}}"></textarea>
+    <div class="form-control visible-print-block {{form.fieldHtmlClass}}" ng-bind="$$value$$" style="height: auto;"></div>
     <span ng-if="form.fieldAddonRight"
           class="input-group-addon"
           ng-bind-html="form.fieldAddonRight"></span>
