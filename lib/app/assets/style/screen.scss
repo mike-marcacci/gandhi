@@ -1,0 +1,122 @@
+
+@media (max-width: 767px) {
+	html.show-navigation {
+		height: 100%;
+		overflow: hidden;
+		width: 100%;
+
+		body {
+			height: 100%;
+			overflow-y: hidden;
+		}
+
+		#sidebar {
+			box-shadow: 0 0 20px rgba(0, 0, 0, 1);
+			max-height: 100%;
+			overflow-y: auto;
+
+			> nav {
+				transition: visibility 0s 0s;
+				visibility: visible;
+			}
+		}
+
+		#main::after {
+			opacity: 1;
+			transition-delay: 0s;
+			visibility: visible;
+		}
+
+	}
+}
+
+
+@media (min-width: 768px) {
+
+	#main {
+		margin-top: 0;
+	}
+
+	#sidebar {
+		bottom: 0;
+		box-shadow: 2px 0px 1px rgba(0, 0, 0, 0.1);
+		max-height: 100%;
+		width: 210px;
+
+		> .control {
+			background: rgb(219, 219, 219);
+			border-radius: 3px 0 0 3px;
+			color: rgb(126, 126, 126);
+			cursor: pointer;
+			display: block;
+			font-family: "Glyphicons Halflings";
+			font-size: 8px;
+			line-height: 40px;
+			margin-top: -20px;
+			opacity: .5;
+			padding-left: 1px;
+			position: absolute;
+			right: 0;
+			top: 50%;
+			transition: opacity .2s;
+			vertical-align: middle;
+
+			&:hover {
+				opacity: 1;
+			}
+		}
+
+		nav {
+			transition: visibility 0s 0s;
+			visibility: visible;
+			
+			-ms-flex: 1;
+			-moz-flex: 1;
+			-webkit-flex: 1;
+			flex: 1;
+		}
+	}
+
+	#body {
+		margin-left: 210px;
+	}
+
+	.collapse-sidebar {
+
+		#sidebar {
+			left: -180px;
+
+			> .control {
+				opacity: 0;
+			}
+
+			nav > ul > li > ul {
+				transition: all 0.8s;
+				max-height: 400px;
+				overflow-y: auto;
+			}
+
+			&:not(:hover) {
+				nav > ul > li > ul {
+					border-width: 0;
+					margin: 0;
+					max-height: 0;
+					overflow-y: hidden;
+					padding: 0;
+				}
+			}
+
+			&:hover {
+				left: 0px;
+
+				> .control {
+					opacity: 1;
+				}
+			}
+		}
+
+		#body {
+			margin-left: 30px;
+		}
+	}
+}
