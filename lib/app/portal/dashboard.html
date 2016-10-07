@@ -34,6 +34,28 @@
 			</table>
 		</div>
 
+		<!-- Pending Reviews -->
+		<div ng-if="pendingReviews" class="panel panel-default">
+			<div class="panel-heading">
+				<span class="panel-title">Pending Reviews</span>
+			</div>
+
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Project</th>
+						<th>Stage</th>
+					</tr>
+				</thead>
+				<tbody ng-repeat="(projectId, group) in pendingReviews">
+					<tr><th rowspan="{{group.length + 1}}">{{group[0].project.title}}</th></tr>
+					<tr ng-repeat="row in group" ui-sref="portal.projects.show.contents.content({project: row.project.id, content: row.content.id})" style="cursor: pointer;">
+						<td>{{row.stage.title}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
 	</div>
 
 	<div class="col-md-6">
