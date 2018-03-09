@@ -28,7 +28,7 @@
     "express": "^4.12.4",
     "generic-pool": "^2.2.0",
     "glob": "^5.0.10",
-    "handlebars": "^3.0.3",
+    "handlebars": "^4.0.0",
     "ioredis": "^1.7.2",
     "jjv": "^1.0.2",
     "json-pointer": "^0.3.0",
