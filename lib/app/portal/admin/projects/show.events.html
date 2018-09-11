@@ -8,7 +8,7 @@
 			<p class="help-block">{{ triggersById[id].description }}</p>
 			<table class="table">
 				<thead><tr><th>Timestamp</th><th>Value</th></tr></thead>
-				<tbody><tr ng-repeat="event in group"><td>{{ event.timestamp | date:"yyyy.MM.dd - hh:mm a" }}</td><td>{{ event.value ? 'TRUE' : 'FALSE' }}</td></tr></tbody>
+				<tbody><tr ng-repeat="event in group"><td>{{ event.timestamp * 1000 | date:"yyyy.MM.dd - hh:mm a" }}</td><td>{{ event.value ? 'TRUE' : 'FALSE' }}</td></tr></tbody>
 			</table>
 			<br>
 		</div>
