@@ -24,7 +24,7 @@
     "async": "^1.2.1",
     "bluebird": "^2.9.34",
     "body-parser": "^1.13.1",
-    "bower": "^1.4.1",
+    "bower": "1.5.2",
     "express": "^4.12.4",
     "generic-pool": "^2.2.0",
     "glob": "^5.0.10",

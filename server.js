@@ -23,6 +23,7 @@ var gandhi = require('./lib/index.js')(config);
 
 // the master
 if (cluster.isMaster) {
+	console.log("Master process started.")
 
 	// setup the environment
 	require('./setup/index.js')(config)
@@ -44,6 +45,7 @@ if (cluster.isMaster) {
 
 // the child processes
 else {
+	console.log("Child process started.")
 
 	var app = require('express')();
 
