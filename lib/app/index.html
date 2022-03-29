@@ -1,108 +1,96 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="gandhi" ng-class="{'collapse-sidebar': collapseSidebar, 'show-navigation': showNavigation}">
-	<head>
+<head>
 
-		<!-- mobile settings -->
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-status-bar-style" content="black">
-		<meta name="viewport" content="width=device-width, maximum-scale=1">
+    <!-- mobile settings -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="viewport" content="width=device-width, maximum-scale=1">
 
-		<!-- app icon -->
-		<link rel="apple-touch-icon" href="assets/icons/appicon-60.png" sizes="60x60" />
-		<link rel="apple-touch-icon" href="assets/icons/appicon-60@2x.png" sizes="120x120" />
-		<link rel="apple-touch-icon" href="assets/icons/appicon-60@3x.png" sizes="180x180" />
-		<link rel="apple-touch-icon" href="assets/icons/appicon-72.png" sizes="72x72" />
-		<link rel="apple-touch-icon" href="assets/icons/appicon-72@2x.png" sizes="144x144" />
-		<link rel="apple-touch-icon" href="assets/icons/appicon-76.png" sizes="76x76" />
-		<link rel="apple-touch-icon" href="assets/icons/appicon-76@2x.png" sizes="152x152" />
+    <!-- app icon -->
+    <link rel="apple-touch-icon" href="assets/icons/appicon-60.png" sizes="60x60"/>
+    <link rel="apple-touch-icon" href="assets/icons/appicon-60@2x.png" sizes="120x120"/>
+    <link rel="apple-touch-icon" href="assets/icons/appicon-60@3x.png" sizes="180x180"/>
+    <link rel="apple-touch-icon" href="assets/icons/appicon-72.png" sizes="72x72"/>
+    <link rel="apple-touch-icon" href="assets/icons/appicon-72@2x.png" sizes="144x144"/>
+    <link rel="apple-touch-icon" href="assets/icons/appicon-76.png" sizes="76x76"/>
+    <link rel="apple-touch-icon" href="assets/icons/appicon-76@2x.png" sizes="152x152"/>
 
 
-		<!-- load all the styles -->
-		<link rel="stylesheet" media="all" href="assets/style/index.css" type="text/css">
-		<link rel="stylesheet" media="print" href="assets/style/print.css" type="text/css">
-		<link rel="stylesheet" media="screen" href="assets/style/screen.css" type="text/css">
-		<script type="text/javascript" src="styles.js"></script>
+    <!-- load all the styles -->
+    <link rel="stylesheet" media="all" href="assets/style/index.css" type="text/css">
+    <link rel="stylesheet" media="print" href="assets/style/print.css" type="text/css">
+    <link rel="stylesheet" media="screen" href="assets/style/screen.css" type="text/css">
+    <script type="text/javascript" src="styles.js"></script>
 
-		<!-- the "loading" animation -->
-		<style type="text/css">
-			@-webkit-keyframes pulsate {
-				0% {
-					-webkit-transform:scale(.1);
-					opacity: 0.0;
-				}
-				50% {
-					opacity:1;
-				}
-				100% {
-					-webkit-transform:scale(1.2);
-					opacity:0;
-				}
-			}
+    <!-- the "loading" animation -->
+    <style type="text/css">
+        @-webkit-keyframes pulsate {
+            0% {
+                -webkit-transform: scale(.1);
+                opacity: 0.0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                -webkit-transform: scale(1.2);
+                opacity: 0;
+            }
+        }
 
-			@keyframes pulsate {
-				0% {
-					transform:scale(.1);
-					opacity: 0.0;
-				}
-				50% {
-					opacity:1;
-				}
-				100% {
-					transform:scale(1.2);
-					opacity:0;
-				}
-			}
+        @keyframes pulsate {
+            0% {
+                transform: scale(.1);
+                opacity: 0.0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.2);
+                opacity: 0;
+            }
+        }
 
-			[ng-cloak] {
-				display: none;
-			}
+        [ng-cloak] {
+            display: none;
+        }
 
-			.loader {
-				border:3px solid #428CD6;
-				border-radius:30px;
-				height:30px;
-				left:50%;
-				margin:-15px 0 0 -15px;
-				opacity:0;
-				position:absolute;
-				top:50%;
-				width:30px;
-			
-				-webkit-animation: pulsate 1s infinite ease-out;
-				animation: pulsate 1s infinite ease-out;
-			}
-		</style>
+        .loader {
+            border: 3px solid #428CD6;
+            border-radius: 30px;
+            height: 30px;
+            left: 50%;
+            margin: -15px 0 0 -15px;
+            opacity: 0;
+            position: absolute;
+            top: 50%;
+            width: 30px;
 
-		<title>Gandhi</title>
-	</head>
-	<body>
-		<script>
-		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+            -webkit-animation: pulsate 1s infinite ease-out;
+            animation: pulsate 1s infinite ease-out;
+        }
+    </style>
 
-		  ga('create', 'UA-54266418-1', 'auto');
-		  ga('require', 'displayfeatures');
-		  
-		  // ga('send', 'pageview');
+    <title>Gandhi</title>
+</head>
+<body>
 
-		</script>
+<!-- loader -->
+<div ng-hide="true" class="loader"></div>
 
-		<!-- loader -->
-		<div ng-hide="true" class="loader"></div>
+<!-- the portal lives here -->
+<div id="main" ng-if="currentUser" ng-cloak ui-view></div>
 
-		<!-- the portal lives here -->
-		<div id="main" ng-if="currentUser" ng-cloak ui-view></div>
+<!-- login form shown instead of portal if not logged in -->
+<div ng-if="!currentUser" ng-include="'auth.html'"></div>
 
-		<!-- login form shown instead of portal if not logged in -->
-		<div ng-if="!currentUser" ng-include="'auth.html'"></div>
+<!-- load all the javascript and dependentcies -->
+<script type="text/javascript" src="main.js"></script>
+<script type="text/javascript" src="assets/ckeditor/ckeditor.js"></script>
 
-		<!-- load all the javascript and dependentcies -->
-		<script type="text/javascript" src="assets/ckeditor/ckeditor.js"></script>
-		<script type="text/javascript" src="main.js"></script>
-
-		<!-- invisible frame for file downloads in older browsers -->
-		<iframe style="visibility: hidden;" width="0" height="0" id="downloads" src=""></iframe>
-	</body>
+<!-- invisible frame for file downloads in older browsers -->
+<iframe style="visibility: hidden;" width="0" height="0" id="downloads" src=""></iframe>
+</body>
 </html>

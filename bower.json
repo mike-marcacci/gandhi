@@ -2,8 +2,6 @@
   "name": "gandhi",
   "description": "The Gandhi Grant Management System",
   "version": "0.0.0",
-  "homepage": "",
-  "repository": "",
   "license": "MIT",
   "private": true,
   "main": [
@@ -18,21 +16,20 @@
     "portal/user/index.js"
   ],
   "dependencies": {
-    "angular": "1.x.x",
-    "angular-ckeditor": "1.x.x",
+    "angular": "^1.8.2",
     "angular-elastic": "~2.5.0",
     "angular-json-human": "1.x.x",
-    "angular-resource": "1.x.x",
+    "angular-resource": "^1.8.2",
     "angular-sanitize": "1.x.x",
     "angular-schema-form": "0.8.x",
     "angular-ui-ace": "0.2.3",
-    "angular-ui-router": "0.2.x",
+    "angular-ui-router": "^1.0.30",
     "angular-ui-select": "0.19.x",
     "angular-ui-sortable": "0.19.x",
     "bootstrap-sass-official": "3.x.x",
     "bootstrap-vertical-tabs": "1.x.x",
     "checklist-model": "0.5.x",
-    "lodash": "3.x.x",
+    "lodash": "^4.17.21",
     "ng-file-upload": "~1.6.5",
     "objectpath": "1.x.x"
   },
@@ -44,7 +41,6 @@
   "modules": [
     "angularFileUpload",
     "checklist-model",
-    "ckeditor",
     "ngResource",
     "ngSanitize",
     "schemaForm",
@@ -56,7 +52,8 @@
     "monospaced.elastic"
   ],
   "resolutions": {
-    "lodash": "3.x.x"
+    "lodash": "^4.17.21",
+    "angular-ui-router": "^1.0.30"
   },
   "exclude": [
     "bower/bootstrap/"

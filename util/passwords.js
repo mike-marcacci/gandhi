@@ -1,4 +1,4 @@
-var scrypt = require('scrypt');
+var scrypt = require('@gbradley/scrypt');
 	scrypt.hash.config.keyEncoding = scrypt.verify.config.keyEncoding = 'utf8';
 	scrypt.hash.config.outputEncoding = scrypt.verify.config.outputEncoding = 'base64';
 
