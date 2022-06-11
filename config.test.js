@@ -1,7 +1,6 @@
 'use strict';
 
-var fs = require('fs');
-var crypto = require('crypto');
+const fs = require('fs')
 
 module.exports = {
 	root: '',
