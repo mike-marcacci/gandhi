@@ -1,0 +1,40 @@
+version: "3.9"
+
+services:
+
+  gandhi:
+    depends_on:
+      - redis
+      - rethinkdb
+    image: node:16
+    tty: true
+    working_dir: /gandhi
+    command: yarn start
+    environment:
+      NODE_ENV: development
+    volumes: &volumes
+      - type: bind
+        source: .
+        target: /gandhi
+    ports:
+      - target: 3000
+        published: 3000
+        protocol: tcp
+        mode: host
+
+  redis:
+    image: redis:7
+    tty: true
+
+  rethinkdb:
+    image: rethinkdb:2
+    tty: true
+    volumes:
+      - type: bind
+        source: ./rethinkdb_data
+        target: /data/rethinkdb_data
+    ports:
+      - target: 8080
+        published: 8080
+        protocol: tcp
+        mode: host

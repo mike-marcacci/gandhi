@@ -10,8 +10,8 @@ module.exports = {
 
   // These are the connection details for RethinkDB.
   db: {
-    host: '127.0.0.1',
-    db: 'gandshi',
+    host: 'rethinkdb',
+    db: 'gandhi',
   },
 
   // To make things run faster, we keep a pool of Rethinkdb connections
@@ -24,7 +24,7 @@ module.exports = {
 
   // These are the connection details for Redis.
   redis: {
-    host: '127.0.0.1',
+    host: 'redis',
   },
 
   // When gandhi can't use an atomic operation to alter a document in

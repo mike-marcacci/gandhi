@@ -22,40 +22,16 @@ const config = process.argv.length > 2 ?
 
 const gandhi = require('./lib/index.js')(config)
 
-// the master
-if (cluster.isMaster) {
-  console.log('Master process started.')
+require('./setup/index.js')(config)
 
-  // setup the environment
-  require('./setup/index.js')(config)
+const app = require('express')()
 
-  // spawn child processes
-  for (let i = 0; i < require('os').cpus().length; i++) {
-    cluster.fork()
-  }
+// bring in gandhi
+app.use(config.root, gandhi)
 
-  // replace a dead child
-  cluster.on('exit', function (child, code) {
-    console.error(
-      'Child process ' + child.process.pid + ' died with code ' + code +
-      '. Restarting...')
-    cluster.fork()
-  })
-}
+// this needs to be here because Angular is stupid, and fails to use any sensible query string
+// format... we need to find a better way to fix this, probably on the client side.
+app.set('query parser', 'simple')
 
-// the child processes
-else {
-  console.log('Child process started.')
+app.listen(config.port)
 
-  const app = require('express')()
-
-  // bring in gandhi
-  app.use(config.root, gandhi)
-
-  // this needs to be here because Angular is stupid, and fails to use any sensible query string
-  // format... we need to find a better way to fix this, probably on the client side.
-  app.set('query parser', 'simple')
-
-  app.listen(config.port)
-
-}
