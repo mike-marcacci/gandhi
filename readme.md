@@ -6,7 +6,9 @@ Gandhi is an open source, online grant management system. It is built with [node
 Installation
 ------------
 
-### Install Dependencies
+### External Dependencies
+
+This app has three primary external dependencies:
 
 1. [node](http://nodejs.org/)
 2. [rethinkdb](http://rethinkdb.com/docs/install/)
@@ -17,10 +19,21 @@ Installation
 Gandhi can be run as a stand-alone app. Make sure RethinkDB and redis are running on your machine. Simply clone Gandhi and start it:
 
 ```bash
+# Clone the repository.
 git clone https://github.com/mike-marcacci/gandhi.git
-cd gandhi
-yarn install
-yarn start
+
+# Create local data directories (these are ignored by git).
+mkdir rethinkdb_data
+mkdir uploads
+
+# Use docker compose to install npm and bower dependencies.
+docker compose run --rm gandhi yarn
+
+# Choose a host port to bind.
+export GANDHI_PORT=3000
+
+# Run gandhi, rethinkdb, and redis in a docker container.
+docker compose up -d
 ```
 
 

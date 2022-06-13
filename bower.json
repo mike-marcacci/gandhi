@@ -17,6 +17,7 @@
   ],
   "dependencies": {
     "angular": "^1.8.2",
+    "angular-ckeditor": "^1.0.3",
     "angular-elastic": "~2.5.0",
     "angular-json-human": "1.x.x",
     "angular-resource": "^1.8.2",
@@ -36,11 +37,18 @@
   "overrides": {
     "ace-builds": {
       "main": "src-min-noconflict/ace.js"
+    },
+    "angular": {
+      "main": "./angular.js",
+      "dependencies": {
+        "jquery": "^3.6.0"
+      }
     }
   },
   "modules": [
     "angularFileUpload",
     "checklist-model",
+    "ckeditor",
     "ngResource",
     "ngSanitize",
     "schemaForm",
@@ -52,8 +60,8 @@
     "monospaced.elastic"
   ],
   "resolutions": {
-    "lodash": "^4.17.21",
-    "angular-ui-router": "^1.0.30"
+    "angular": "1.8.2",
+    "lodash": "^4.17.21"
   },
   "exclude": [
     "bower/bootstrap/"

@@ -5,9 +5,8 @@ const fs = require('fs')
 module.exports = {
 	root: '',
 	db: {
-		host: process.env.RETHINKDB_PORT_28015_TCP_ADDR,
-		port: process.env.RETHINKDB_PORT_28015_TCP_PORT,
-		db: 'gandhi'
+		host: 'rethinkdb',
+		db: `gandhi_${(Math.random() + 1).toString(36).substring(7)}`
 	},
 	pool: {
 		max: 1,
@@ -15,8 +14,8 @@ module.exports = {
 		timeout: 30000
 	},
 	redis: {
-		host: process.env.REDIS_PORT_6379_TCP_ADDR || '127.0.0.1',
-		port: process.env.REDIS_PORT_6379_TCP_PORT || 6379
+		host: 'redis',
+		port: 6379
 	},
 	lock: {
 		retry: 50,
