@@ -9,7 +9,7 @@
 			<!-- Cycle -->
 			<div class="col-sm-6">
 				<div class="input-group">
-					<ui-select ng-disabled="disabled" ng-model="table.query.cycle" theme="bootstrap">
+					<ui-select ng-disabled="disabled" ng-model="controls.cycle" theme="bootstrap">
 						<ui-select-match placeholder="Choose a cycle...">{{$select.selected.title}}</ui-select-match>
 						<ui-select-choices refresh="cycleSelect.search($select.search)" refresh-delay="200" repeat="item.id as item in cycleSelect.data | filter: $select.search">
 							<div ng-bind-html="item.title | highlight: $select.search"></div>
@@ -17,7 +17,7 @@
 						</ui-select-choices>
 					</ui-select>
 					<span class="input-group-btn">
-						<button class="btn btn-default" ng-disabled="!table.query.cycle" ng-click="table.query.cycle = null" type="button"><i class="glyphicon glyphicon-remove-circle"></i></button>
+						<button class="btn btn-default" ng-disabled="!controls.cycle" ng-click="controls.cycle = null" type="button"><i class="glyphicon glyphicon-remove-circle"></i></button>
 					</span>
 				</div>
 			</div>
