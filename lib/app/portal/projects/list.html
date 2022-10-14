@@ -38,7 +38,11 @@
 	<li ng-class="{active: !assignedOnly}" ng-click="setAssignedOnly(false)"><a href>All Projects</a></li>
 </ul>
 
-<div class="panel" ng-if="!projects.length">
+<div class="panel" ng-if="!projects.length && table.loading">
+	<div class="panel-body">Loading...</div>
+</div>
+
+<div class="panel" ng-if="!projects.length && !table.loading">
 	<div class="panel-body">You don't have any {{assignedOnly ? 'assigned' : ''}} projects.</div>
 </div>
 
